@@ -1,0 +1,227 @@
+2016-05-08
+- Fixed armlet Unholy Strength active not giving armor.
+
+2016-05-06
+- Added 6.87 items
+
+2016-05-05
+- Updated HP per strength and mana per int.
+- Updated level 8 and 9 experience values.
+
+2016-03-20
+- Fix Enchantress attack range with Aghanim's Scepter.
+
+2016-03-17
+- Fixed Lycan Shapeshift crit multiplier.
+- Fixed Veil of Discord stats not being applied.
+
+2016-03-15
+- Added 6.86 items: Faerie Fire, Aether Lens, Iron Talon, and Dragon Lance.
+
+2015-12-10
+- Added Legion Commander Duel.
+
+2015-08-13
+- Added Radiance Burn Miss Chance debuff.
+- EHP Physical calculation now accounts for enemy miss chance.
+
+2015-07-15
+- Fixed Outworld Devourer Essence Aura not giving bonus mana.
+- Added Solar Crest Shine buff/debuff.
+
+2015-05-26
+- Fixed Vengeful Spirit Vengeance Aura.
+
+2015-05-24
+- Added Silver Edge passives to debuff section.
+
+2015-05-23
+- Fixed Vladmir's Offering not giving mana regen from aura.
+- Added Butterfly Flutter active.
+- Added Boots of Travel level 2.
+- Added consumed Moon Shard by activating it.
+
+2015-05-09
+- Fixed negative armor damage increase calculation.
+
+2015-05-04
+- Fixed Invoker stat gains from orbs not applying when ability is not toggled on.
+
+2015-04-30
+- Updated to patch 6.84
+
+2015-04-06
+- Fixed Medusa Mana Shield damage reduction.
+
+2015-03-18
+- Fixed Clinkz Death Pact damage increase not calculating.
+- Added Veil of Discord to debuffs section.
+- Added Bloodseeker Bloodrage.
+
+2015-02-22
+- Fixed delta value colors for stats where a lower value is better (attack time and BAT).
+
+2015-02-20
+- Added Vengeful Spirit Vengeance Aura debuff.
+
+2015-02-12
+- Added Winter Wyvern
+
+2015-01-29
+- Build Explorer data now included in saved builds.
+
+2015-01-25
+- Added Build Explorer feature.
+	Input a skill and item build and generate a dataset for levels 1 to 25 using the hero calculator.
+	All datasets displayed in a table and chart.
+- Added copy (CTRL+C) and paste (CTRL+V) when hovering over item inventories.
+	Can also be used in Build Explorer item build section.
+- Added option to dock shop panel to right side of screen.
+
+2014-12-28
+- Added Sven God's Strength scepter aura to buffs.
+
+2014-12-26
+- Fixed Troll Warlord Berserker's Rage breaking health and EHP when activated.
+
+2014-12-21
+- Maximum Attack Speed increased from 500 to 600
+
+2014-12-15
+- Fixed Windranger Focus Fire not reducing damage.
+- Fixed Magic Resistance not stacking according to the patch 6.82 change.
+
+2014-12-05
+- Added Riki Backstab.
+
+2014-11-13
+- Added Troll Warlord Battle Trance to buffs.
+
+2014-11-12
+- Updated values to match 6.82c.
+- Fixed Homing Missile giving max attack speed.
+
+2014-10-24
+- Added Abaddon Curse of Avernus as debuff.
+- Fixed Curse of Avernus attack speed slow not applying.
+- Curse of Avernus can now be toggled on and off.
+- Fixed Spectre Dispersion not affecting EHP.
+
+2014-10-23
+- Fixed Physical EHP calculation for negative armor values.
+- Fixed Ogre Magi Unrefined Fireblast being skillable.
+- Fixed Power Treads attack speed stacking when it should not.
+- Fixed bug where unskilling buffs would add to available skill points.
+
+2014-09-23
+- Added item abbreviations to item search box input, e.g. entering "gg" or "gg branch" will show Iron Branch as a result.
+
+2014-09-22
+- Movement speed cannot go below minimum of 100.
+- Added Scythe of Vyse active.
+- Damage Amplification & Reduction section usable.
+
+2014-09-21
+- Added Medusa Mana Shield
+- Added Spectre Desolate
+- Faceless Void Backtrack now affects magical EHP.
+
+2014-09-20
+- Added Undying Flesh Golem
+- Added Visage Familiar
+
+2014-09-19
+- Added Medallion of Courage to debuffs section.
+- Added Undying Decay.
+- Added Bristleback Bristleback.
+
+2014-09-18
+- Added Heart of Tarrasque passive health regen.
+- Fixed enemies not being set to the correct tab.
+- Fixed unit enemy tab not being set.
+- Fixed Invoker Alacrity not working.
+
+2014-09-14
+- Small ui tweaks and ui code refactored.
+- Fixed padding and margins when in side by side view (now called Fullscreen).
+- Added panel highlight effect when hovering over tabs to show which tab panels are active.
+- Each hero tab now has a corresponding unit tab that can be shown or hidden using a checkbox option.
+- Illusion tabs can also be added for each hero tab. Previously only the main hero tabs had unit and illusion tabs.
+
+2014-09-11
+- Fixed armor reduction abilities in debuffs section not being taken into account.
+
+2014-09-10
+- Fixed saved builds not loading.
+
+2014-09-08
+- Added damage calculator for Techies' abilities.
+
+2014-09-07
+- Fixed ability details calculator not working.
+
+2014-08-30
+- Fixed dps calculation error.
+
+2014-08-27
+- Added Techies.
+
+2014-08-26
+- Added Weaver Geminate Attack.
+
+2014-08-08
+- Added Clinkz Death Pact.
+
+2014-08-07
+- Items added to buff and debuff sections.
+- Started implementing logic for non-stacking auras and things that should/shouldn't stack, e.g. bonus armor auras.
+
+2014-08-06
+- Added Lone Druid Battle Cry.
+
+2014-08-04
+- Ring of Basilius mana regen.
+
+2014-07-31
+- Fixed Power Treads description.
+
+2014-07-30
+- Fixed physical resistance calculation for negative armor.
+- Fixed magic resistance calculation.
+
+2014-07-29
+- Added Wisp Overcharge buff.
+- Added Slark Shadow Dance calculations.
+- Added Earthshaker enchant totem calculation.
+- Crystal Maiden Freezing Field Aghanim's effect now taken into account.
+
+2014-07-28
+- Medusa split shot damage reduction now taken into account.
+
+2014-07-26
+- Reworked side by side view tab selection. It will now display the last two tabs you select.
+- Detachable shop window popout.
+
+2014-07-24
+- Added two new hero tabs. Use with the new comparison/delta value feature.
+- Added comparison/delta value feature. Delta values are calculated from the difference between the new hero tab and the old one.
+- Beta version of save feature added. Not stable yet, current save links may not work in the future due to changes.
+- Fixed Silencer Glaives of Wisdom.
+- Added intelligence steal for Silencer.
+
+2014-07-20
+- Fixed Silencer's Curse of the Silent.
+- Mask of Madness now affects EHP magical.
+- Eye of Skadi attack and movespeed slow now taken into account.
+- Shiva's Guard active movement speed reduction now taken into account.
+- Shiva's Guard Freezing Aura now taken into account for enemy's attack speed.
+- Fixed helm of iron will not giving +3 hp regen.
+
+2014-06-08
+- Fixed Lycan ult not affecting MS.
+- Fixed attribute stats not rounded in calculations.
+
+2014-05-29
+- Fixed bug where leveling up Keeper of the Light ultimate spent 3 skill points instead of 1.
+- Calculations now allow for Eul's speed bonus to stack to match the fact that they stack in-game.
+- Rather than reset all your skill points when you decrease your hero level, it will now just take away skill points based on which abilities you levelled last.

@@ -1,0 +1,292 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+
+    <title>Dota 2 Hero Calculator</title>
+    <meta name="description" content="Dota 2 Hero Calculator. A hero calculator that takes into account level, items, skills, and stats. Choose hero level, items, and skills and see detailed information about a hero's stats.">
+    <meta name="author" content="devilesk">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="/media/favicon.png">
+  
+    <link rel="stylesheet" href="/media/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/media/css/site.css" id="theme-css">
+    <!-- @if NODE_ENV='development' -->
+    <link rel="stylesheet" type="text/css" href="css/jquery-ui.css" />
+    <link rel="stylesheet" type="text/css" href="css/hero-calculator.items.css" />
+    <link rel="stylesheet" type="text/css" href="css/hero-calculator.common.css" />
+    <!-- @endif -->
+    <!-- @if NODE_ENV='production' -->
+    <link rel="stylesheet" type="text/css" href="css/hero-calculator.min.css" />
+    <!-- @endif -->
+    <link id="hero-css" rel="stylesheet" type="text/css" href="css/hero-calculator.theme.dark.css" />
+    <script data-main="js/main" src="js/lib/require.js"></script>
+</head>
+<body id="index" class="page-webapps">
+<div class="wrapper">
+                    <div class="navbar navbar-default main_nav" data-bind="visible: !sideView()">
+	<div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/dota2" style="width:220px;"><div></div></a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="top-nav-menu nav navbar-nav">
+			<li class="dropdown li-community">
+                  <a href="/dota2/community" class="dropdown-toggle" data-toggle="dropdown">COMMUNITY <b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li class="mobile-only"><a href="/dota2/community">Community Home</a></li>
+                    <li class="divider mobile-only"></li>
+                    <li><a href="/dota2/international">The International</a></li>
+                                            <li><a href="/dota2/dac/2015">Asia Championships</a></li>
+                                            <li class="divider"></li><li class="dropdown-header">Community</li>
+                    <li><a href="/dota2/community/streams">Live Streams</a></li>
+                                            <li class="divider"></li><li><a href="/dota2/patches">Patches</a></li>
+                                            <li><a href="/dota2/all-hero-challenge-list">All Hero Challenge List</a></li>
+                                                              </ul>
+                </li>
+                <li class="dropdown li-webapps">
+                  <a href="/dota2/apps" class="dropdown-toggle" data-toggle="dropdown">WEB APPS <b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li class="mobile-only"><a href="/dota2/apps">Web Apps Home</a></li>
+                    <li class="divider mobile-only"></li>
+                    <li class="dropdown-header">Trivia</li>
+                    <li><a href="/dota2/apps/abilitymatching">Ability Matching</a></li>
+                                            <li><a href="/dota2/apps/ability-trivia">Ability Trivia</a></li>
+                                            <li><a href="/dota2/apps/ability-name-trivia">Ability Name Trivia</a></li>
+                                            <li><a href="/dota2/apps/hero-name-trivia">Hero Name Trivia</a></li>
+                                            <li><a href="/dota2/apps/item-cost-trivia">Item Cost Trivia</a></li>
+                                            <li><a href="/dota2/apps/item-name-trivia">Item Name Trivia</a></li>
+                                            <li class="divider"></li><li class="dropdown-header">Maps</li>
+                    <li><a href="/dota2/apps/drawablemap">Drawable Map</a></li>
+                                            <li><a href="/dota2/apps/interactivemap">Interactive Map</a></li>
+                                            <li><a href="/dota2/apps/interactivemap2">Interactive Map 2</a></li>
+                                            <li class="divider"></li><li class="dropdown-header">Other</li>
+                    <li><a href="/dota2/apps/hero-calculator">Hero Calculator</a></li>
+                                            <li><a href="/dota2/apps/hero-selection-trainer">Hero Selection Trainer</a></li>
+                                            <li><a href="/dota2/apps/item-scramble">Item Scramble</a></li>
+                                            <li><a href="/dota2/apps/layout-editor">Layout Editor</a></li>
+                                            <li><a href="/dota2/apps/replay/viewer">Replay Viewer</a></li>
+                                            <li><a href="/dota2/apps/tread-switch-trainer">Tread Switch Trainer</a></li>
+                                                              </ul>
+                </li>
+                <li class="dropdown li-heroes">
+                  <a href="/dota2/heroes" class="dropdown-toggle" data-toggle="dropdown">HEROES <b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li class="mobile-only"><a href="/dota2/heroes">Heroes Home</a></li>
+                    <li class="divider mobile-only"></li>
+                    <li><a href="/dota2/heroes/herodata">Hero Data</a></li>
+                                            <li><a href="/dota2/heroes/lore">Lore</a></li>
+                                            <li><a href="/dota2/heroes/patchhistory">Patch History</a></li>
+                                                              </ul>
+                </li>
+                                <li class="li-items"><a href="/dota2/items">ITEMS</a></li><li class="dropdown li-guides">
+                  <a href="/dota2/guides" class="dropdown-toggle" data-toggle="dropdown">GUIDES <b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li class="mobile-only"><a href="/dota2/guides">Guides Home</a></li>
+                    <li class="divider mobile-only"></li>
+                    <li><a href="http://steamcommunity.com/sharedfiles/filedetails/?id=123364976">Comprehensive Dota 2 Guide</a></li>
+                                            <li><a href="http://steamcommunity.com/sharedfiles/filedetails/?id=126386524">Basic Advice to Improve Your Games</a></li>
+                                            <li><a href="http://steamcommunity.com/sharedfiles/filedetails/?id=125563122">Beginner's Guide to Items</a></li>
+                                                              </ul>
+                </li>
+                                <li class="li-blog"><a href="/blog">BLOG</a></li>            
+<li class="li-forums"><a href="/dota2/forums/index.php">FORUMS</a></li>
+		  </ul>
+		</div>
+	</div>
+</div>
+<div class="container" data-bind="css: { container: !(sideView()), 'col-md-12': sideView() }">
+    <header class="banner clearfix" data-bind="visible: !(sideView())">
+        <h2 style="display:inline-block">Hero Calculator</h2>
+        <div class="pull-right initial-hidden" style="display:none;margin-top:15px;">
+            <div class="checkbox pull-right" style="margin-left:15px;margin-top:5px;"><label><input type="checkbox" data-bind="checked: sideView"><span class="glyphicon glyphicon-fullscreen"></span> Fullscreen</label></div>
+            <button class="btn btn-default btn-xs shop-button glyphicon glyphicon-plus pull-right" data-bind="toggle: displayShop, visible: !displayShop() && !shopPopout()" title="Maximize shop"></button>
+            <button class="btn btn-default btn-xs shop-button glyphicon glyphicon-new-window pull-right hidden-xs" data-bind="click: shopPopout, visible: !displayShop() && !shopPopout()" title="Popout shop"></button>
+            <strong style="cursor:pointer" class="pull-right shop-button" data-bind="toggle: displayShop, visible: !displayShop() && !shopPopout()">Shop</strong>
+        </div>
+    </header>
+        <h4 id="spinner">Loading...</h4>
+        <div id="hero-calc-wrapper" class="initial-hidden" style="display:none;width:100%;">
+            <ul class="nav nav-tabs">
+            <!-- ko foreach: tabs() -->
+                <li class="popHero" data-trigger="manual" data-toggle="popover" data-placement="bottom" data-bind="css: 'player-color-' + $index(), attr: { id: 'popHero' + $index() }, secondTab: hero.id">
+                    <a data-toggle="tab" data-bind="click: $root.clickTab, attr: { id: hero.id, href: '#' + hero.href }, style: { color: hero.color }, text: hero.data.hero().displayname(), hoverTab: hero.id"></a>
+                </li>
+                <li data-bind="visible: hero.data.showUnitTab, secondTab: unit.id">
+                    <a data-toggle="tab" data-bind="click: $root.clickTab, attr: { id: unit.id, href: '#' + unit.href }, style: { color: unit.color }, text: unit.data.hero().displayname(), hoverTab: unit.id"></a>
+                </li>
+                <li data-bind="visible: hero.data.selectedHero().heroName == 'meepo', secondTab: clone.id">
+                    <a data-toggle="tab" data-bind="click: $root.clickTab, attr: { id: clone.id, href: '#' + clone.href }, style: { color: clone.color }, hoverTab: clone.id">Meepo Clone</a>
+                </li>
+                <!-- ko foreach: illusions -->
+                    <li data-bind="secondTab: id">
+                        <a data-toggle="tab" data-bind="click: $root.clickTab, attr: { id: id, href: '#' + href }, style: { color: color }, hoverTab: id">Illusion<button class="close" data-bind="click: function(data, event) { $root.removeTab($index, data, event, $parentContext.$index());}" style="margin-left: 5px;">&times;</button></a>
+                    </li>      
+                <!-- /ko -->
+            <!-- /ko -->
+                <li data-bind="secondTab: 'settingsTab'"><a id="settingsTab" href="#settings" data-toggle="tab" data-bind="click: clickTab"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
+                <li data-bind="visible: sideView"><div class="checkbox" style="margin-left:15px"><label><input type="checkbox" data-bind="checked: sideView"><span class="glyphicon glyphicon-fullscreen"></span> Fullscreen</label></div></li>
+                <div data-bind="visible: sideView">
+                    <button class="btn btn-default btn-xs shop-button glyphicon glyphicon-plus pull-right" data-bind="toggle: displayShop, visible: !displayShop() && !shopPopout()" title="Maximize shop"></button>
+                    <button class="btn btn-default btn-xs shop-button glyphicon glyphicon-new-window pull-right hidden-xs" data-bind="click: shopPopout, visible: !displayShop() && !shopPopout()" title="Popout shop"></button>
+                    <strong style="cursor:pointer" class="pull-right shop-button" data-bind="toggle: displayShop, visible: !displayShop() && !shopPopout()">Shop</strong>
+                </div>
+            </ul>
+            <div class="col-md-12 col-lg-8" data-bind="css: { 'col-lg-8': displayShop() && !shopPopout(), 'col-lg-12': !displayShop() || shopPopout()}">
+                <div class="tab-content" style="display:inline-block;width:100%;">
+                    <!-- ko foreach: tabs() -->
+                        <!-- ko lazyBinding: $data.hero.data.bound -->
+                            <div class="tab-pane" data-bind="hoverPaneStyle: $data.hero.id, css: { sideView: $root.showSideTabId($data.hero.id) }, attr: { id: $data.hero.href }, component: { name: $data.hero.template, params: $data.hero.data }"></div>
+                        <!-- /ko -->
+                        <!-- ko lazyBinding: $data.unit.data.bound -->
+                            <div class="tab-pane" data-bind="hoverPaneStyle: $data.unit.id, css: { sideView: $root.showSideTabId($data.unit.id) }, attr: { id: $data.unit.href }, component: { name: $data.unit.template, params: $data.unit.data }"></div>
+                        <!-- /ko -->
+                        <!-- ko lazyBinding: $data.clone.data.bound -->
+                            <div class="tab-pane" data-bind="hoverPaneStyle: $data.clone.id, css: { sideView: $root.showSideTabId($data.clone.id) }, attr: { id: $data.clone.href }, component: { name: $data.clone.template, params: $data.clone.data }"></div>
+                        <!-- /ko -->
+                        <!-- ko foreach: illusions -->
+                            <div class="tab-pane" data-bind="hoverPaneStyle: $data.id, css: { sideView: $root.showSideTabId($data.id) }, attr: { id: $data.href }, component: { name: $data.template, params: $data.data }"></div>    
+                        <!-- /ko -->
+                    <!-- /ko -->
+                    
+                    <!-- SETTINGS TAB -->
+                    <div class="tab-pane" id="settings" data-bind="css: { sideView: $root.showSideTabId('settingsTab') }">
+                        <div data-bind="lazyBinding: $root.boundSettings">
+                            <h3>Settings</h3>
+                            <label>Display the stat section as a column or in a row.</label>
+                            <div class="form-group">
+                                <div class="radio">
+                                  <label>
+                                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="0" data-bind="value: '0', checked: $root.layout">
+                                    Column Layout
+                                  </label>
+                                </div>
+                                <div class="radio">
+                                  <label>
+                                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="1" data-bind="value: '1', checked: $root.layout">
+                                    Row Layout
+                                  </label>
+                                </div>
+                            </div>
+                            <label>Change how the stat groups are ordered.</label>
+                            <div class="form-horizontal">
+                                <div class="form-group">
+                                    <div class="col-md-8">
+                                        <select class="form-control" multiple="multiple" height="4" data-bind="options: $root.allItems , optionsText: 'name', selectedOptions: $root.selectedItems"> </select>
+                                    </div>
+                                    <div class="col-md-4 btn-group-vertical">
+                                        <button class="btn btn-default" data-bind="click: $root.moveUp, enable: $root.allItems().length > 1">Move Up</button>
+                                        <button class="btn btn-default" data-bind="click: $root.moveDown, enable: $root.allItems().length > 1">Move Down</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- SHOP PANEL -->
+            <div id="shop-dialog" data-bind="component: { name: 'shop', params: $root}, css: {'popped-out': shopPopout()}"></div>
+            
+            <div class="col-md-12"><p><hr></p></div>
+            
+            <!-- BOTTOM FEATURES -->
+            <div class="form" data-bind="css: { 'col-md-12': !shopDock() || !displayShop() || shopPopout(), 'col-md-8': shopDock() && displayShop() && !shopPopout()}">
+                <div>
+                    <div class="form-group text-right">
+                        <button class="btn btn-default" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-envelope"></span> Report a bug</button>
+                    </div>
+                    <div class="form-group text-right">
+                        <button class="btn btn-default" data-bind="click: save"><span class="glyphicon glyphicon-floppy-disk"></span> Save build</button>
+                    </div>
+                    <div class="form-group text-right col-md-6 col-md-offset-6" style="padding:0" data-bind="visible: saveLink">
+                        <div class="input-group">
+                            <div class="input-group-addon"><div class="glyphicon glyphicon-link"></div></div>
+                            <input type="text" id="savelink" class="form-control text-right" data-bind="value: saveLink" onClick="this.select()"></input>
+                        </div>
+                    </div>
+                </div>
+                <div class="pull-right" style="font-size:10pt">
+                    <div class="text-right"><a href="changelog.txt" target="_blank">Changelog</a></div>
+                    <div class="text-right">Last updated</div>
+                    <div id="last-update" class="text-right"></div>
+                </div>
+            </div>
+			<div style="display:none" class="row col-md-12 alert alert-info" role="alert">Note:
+			<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+			</div>
+        </div>
+    
+        <!-- REPORT DIALOG -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Report a bug</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form role="form">
+                            <div class="form-group">
+                                <label for="BugReportFormName">Name</label>
+                                <input type="text" class="form-control" id="BugReportFormName" placeholder="(Optional)">
+                            </div>
+                            <div class="form-group">
+                                <label for="BugReportFormEmail">Email address</label>
+                                <input type="email" class="form-control" id="BugReportFormEmail" placeholder="(Optional)">
+                            </div>
+                            <div class="form-group">
+                                <label for="BugReportFormText">Message</label>
+                                <textarea class="form-control" rows="5" id="BugReportFormText"></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="submitBugReport" data-bind="click: sendReport">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- /container -->
+
+    <div class="push"></div>
+    </div>
+    
+</div>
+
+    <footer>
+      <img src="/media/images/footer.png">
+      <p><a href="mailto:admin@devilesk.com">admin@devilesk.com</a></p>
+      <p>Copyright &copy; 2016 <a href="http://devilesk.com">devilesk.com</a></p>
+      <p>Theme 
+        <select id="theme-select" class="form-control" style="display: inline;width: auto;height: auto;padding: 0;font-size: inherit;">
+          <option value="dark">dark</option>
+          <option value="light">light</option>
+        </select>
+      </p>
+    </footer>
+  
+
+  <!--[if lt IE 7 ]>
+    <script src="js/libs/dd_belatedpng.js"></script>
+    <script>DD_belatedPNG.fix('img, .png_bg'); // Fix any <img> or .png_bg bg-images. Also, please read goo.gl/mZiyb </script>
+  <![endif]-->
+
+<script type="text/javascript">
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-39435120-1', 'devilesk.com');
+	ga('send', 'pageview');
+</script>
+  
+  </body>
+</html>

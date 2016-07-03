@@ -1,0 +1,1 @@
+define(["herocalc_knockout","text!./stats1.html"],function(t,e){return{template:e}});

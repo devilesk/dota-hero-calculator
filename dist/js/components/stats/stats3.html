@@ -1,0 +1,26 @@
+<div class="col-md-12 stats3" data-bind="css: {'col-md-12': $root.layout() == 0, 'col-md-3': $root.layout() == 1}">
+    <table class="table table-condensed">
+    <tbody>
+    <tr>
+        <td>Damage:</td>
+        <td class="text-right">
+            <span data-bind="html: baseDamage()[0].toFixed(0)"></span>
+            <span data-bind="html: $root.getDiffText(diff['baseDamage']()[0]), css: {'diffPos': diff['baseDamage']()[0] > 0, 'diffNeg': diff['baseDamage']()[0] < 0}, visible: showDiff"></span>
+            <span>&ndash;</span>
+            <span data-bind="html: baseDamage()[1].toFixed(0)"></span>
+            <span data-bind="html: $root.getDiffText(diff['baseDamage']()[1]), css: {'diffPos': diff['baseDamage']()[1] > 0, 'diffNeg': diff['baseDamage']()[1] < 0}, visible: showDiff"></span>
+            <span style="color:green" data-bind="visible: bonusDamage() > 0, html: ' + ' + bonusDamage().toFixed(0)"></span>
+            <span data-bind="html: $root.getDiffText(diff['bonusDamage']()), css: {'diffPos': diff['bonusDamage']() > 0, 'diffNeg': diff['bonusDamage']() < 0}, visible: showDiff"></span>
+            <span style="color:red" data-bind="visible: bonusDamageReduction() != 0, html: ' - ' + bonusDamageReduction().toFixed(0)"></span>
+            <span data-bind="html: $root.getDiffText(diff['bonusDamageReduction']()), css: {'diffPos': diff['bonusDamageReduction']() > 0, 'diffNeg': diff['bonusDamageReduction']() < 0}, visible: showDiff"></span>
+        </td>
+    </tr>
+    <tr><td><abbr title="Increased Attack Speed">IAS</abbr>:</td><td class="text-right" data-bind="component: { name: 'stat', params: {'hero': $data, 'stat': 'ias' } }"></td></tr>
+    <tr><td><abbr title="Base Attack Time">BAT</abbr>:</td><td class="text-right" data-bind="component: { name: 'stat', params: {'hero': $data, 'stat': 'bat' } }"></td></tr>
+    <tr><td>Attack Time:</td><td class="text-right" data-bind="component: { name: 'stat', params: {'hero': $data, 'stat': 'attackTime' } }"></td></tr>
+    <tr><td>Attack &frasl; Sec:</td><td class="text-right" data-bind="component: { name: 'stat', params: {'hero': $data, 'stat': 'attacksPerSecond' } }"></td></tr>
+    <tr><td>Attack Range:</td><td class="text-right" data-bind="component: { name: 'stat', params: {'hero': $data, 'stat': 'totalattackrange' } }"></td></tr>
+    <tr><td colspan=2><a class="btn btn-default btn-block btn-xs" data-bind="toggle: showDamageDetails, css: {'toggled': showDamageDetails}">Damage Details</a></td></tr>
+    </tbody>
+    </table>
+</div>

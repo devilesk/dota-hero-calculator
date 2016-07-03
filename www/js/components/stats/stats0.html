@@ -1,0 +1,12 @@
+<div class="col-md-12 stats0" data-bind="css: {'col-md-12': $root.layout() == 0, 'col-md-3': $root.layout() == 1}">
+    <table class="table table-condensed">
+    <tbody>
+    <tr><td>Strength:</td><td class="text-right" data-bind="component: { name: 'stat', params: {'hero': $data, 'stat': 'totalStr' } }"></td></tr>
+    <tr><td>Agility:</td><td class="text-right" data-bind="component: { name: 'stat', params: {'hero': $data, 'stat': 'totalAgi' } }"></td></tr>
+    <tr><td>Intelligence:</td><td class="text-right" data-bind="component: { name: 'stat', params: {'hero': $data, 'stat': 'totalInt' } }"></td></tr>
+    <tr><td><abbr title="Movement Speed">MS</abbr>:</td><td class="text-right" data-bind="component: { name: 'stat', params: {'hero': $data, 'stat': 'totalMovementSpeed' } }"></td></tr>
+    <tr><td>Turn Rate:</td><td class="text-right" data-bind="component: { name: 'stat', params: {'hero': $data, 'stat': 'totalTurnRate' } }"></td></tr>
+    <tr><td>Sight Range:</td><td class="text-right"><span data-bind="html: '<abbr title=\'Day\'>' + visionrangeday() + '</abbr>/<abbr title=\'Night\'>' + visionrangenight() + '</abbr>'"></span></td></tr>
+    </tbody>
+    </table>
+</div>

@@ -1,0 +1,30 @@
+<div data-bind="if: $data.displayname() != 'Empty' &&  ($data.behavior().indexOf('DOTA_ABILITY_BEHAVIOR_HIDDEN') == -1 || $data.name().indexOf('invoker_') != -1),
+style: {clear: $data.name() == 'invoker_cold_snap' || $data.name() == 'invoker_chaos_meteor' ? 'both' : ''},
+css: {row: $data.isDetail() || ($index() < $parents[1].ability().abilities().length-1 && $parents[1].ability().abilities()[$index()+1].isDetail()), row3: $data.isDetail() || ($index() < $parents[1].ability().abilities().length-1 && $parents[1].ability().abilities()[$index()+1].isDetail()) }">
+    <div class="col-md-3 text-center bottom-buffer row2" data-bind="css: {'col-md-3': $root.layout() == 0, 'col-md-2': $root.layout() == 1}">
+        <img style="padding:0px;margin-bottom:1px;" class="img-rounded ability" data-bind="css: { ability_active: $data.isActive() || $data.behavior().indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1, ability_inactive: !$data.isActive() && $data.behavior().indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') == -1, btn: $data.behavior().indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') == -1, 'btn-default': $data.behavior().indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') == -1}, attr:{src: '/media/images/spellicons/' + $data.name() + '.png'}, click: function(data, event) { $parents[1].ability().toggleAbility($index, data, event); }"/>
+        <div class="progress" style="position:relative">
+            <div style="position:absolute;width:100%;color:white;" class="text-center" data-bind="visible: $parents[1].getAbilityLevelMax($data) > 0, text: $data.level() + '/' + $parents[1].getAbilityLevelMax($data)"></div>
+            <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;" data-bind="attr: { 'aria-valuenow': ($parents[1].getAbilityLevelMax($data) > 0 ? $data.level()/$parents[1].getAbilityLevelMax($data)*100 : 0) }, style: { width: ($parents[1].getAbilityLevelMax($data) > 0 ? $data.level()/$parents[1].getAbilityLevelMax($data)*100 : 0) + '%' }"></div>
+        </div>
+        <div class="btn-group btn-group-justified" data-bind="if: $data.behavior().indexOf('DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE') == -1">
+            <a class="btn btn-default btn-sm" data-bind="click: function(data, event) { $parents[1].ability().levelDownAbility($index, data, event, $parents[1]); }">-</a>
+            <a class="btn btn-default btn-sm" data-bind="click: function(data, event) { $parents[1].ability().levelUpAbility($index, data, event, $parents[1]); }">+</a>
+        </div>
+        <div class="btn-group btn-group-justified">
+            <a class="btn btn-default btn-sm" data-bind="click: function(data, event) { $parents[1].ability().toggleAbilityDetail($index, data, event); }, css: {'toggled': $data.isDetail}">Details</a>
+        </div>
+        <div class="btn-group btn-group-justified" data-bind="if: $data.behavior().indexOf('DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE') != -1">
+            <a class="btn btn-default btn-sm btn-block" style="visibility:hidden;">&mdash;</a>
+        </div>
+    </div>
+    <div class="col-md-9 bottom-buffer2" data-bind="visible: $data.isDetail()">
+        <button type="button" class="close" data-bind="click: function(data, event) { $parents[1].ability().toggleAbilityDetail($index, data, event); }">&times;</button>
+        <div data-bind="html: $parents[1].ability().getAbilityTooltipData($parents[1].hero().name(), $data.name())"></div>
+        <div data-bind="if: $data.name() in $parents[1].ability().abilityData && $parents[1].ability().abilities()[$index()].level() > 0">
+            <div class="col-md-12" style="margin-top: 10px" >
+                <div data-bind="template: { name: 'ability-settings-template', data: $parents[1].ability().abilitySettingsData($data.name(), $parents[1], $index()) }"></div>
+            </div>
+        </div>
+    </div>
+</div>

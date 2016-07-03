@@ -1,0 +1,16 @@
+{
+  "name": "hero-calculator",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Dota 2 Hero Calculator",
+  "author": "devilesk",
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^2.0.10",
+    "gulp-concat": "^2.6.0",
+    "gulp-preprocess": "^2.0.0",
+    "gulp-rename": "^1.2.2",
+    "requirejs": "^2.2.0"
+  }
+}

@@ -1,0 +1,368 @@
+<div class="row">
+    <div class="col-md-4">
+        <img class="img-rounded" data-bind="attr:{src: selectedUnit().image}"/>
+    </div>
+    <div class="col-md-4">
+        <label for="unitselect">Unit</label>
+        <select id="unitselect" class="form-control" data-bind="options: availableUnits , optionsText: 'heroDisplayName', value: selectedUnit"></select>
+    </div>
+    <div class="col-md-4">
+        <label for="unitlevel">Level</label>
+        <p class="form-control-static" data-bind="visible: selectedUnit().levels == 0, text: hero().level"></p>
+        <select id="herolevel" class="form-control" data-bind="visible: selectedUnit().levels > 0, value: selectedUnitLevel, foreach: new Array(selectedUnit().levels)">
+            <option data-bind="text: $index()+1"></option>
+        </select>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4" data-bind="css: {'col-md-4': $root.layout() == 0, 'col-md-12': $root.layout() == 1}">
+        <div class="row">
+            <h3 class="col-md-12">Stats <a class="btn btn-default btn-xs" data-bind="toggle: showStatDetails, text: !showStatDetails() ? 'Show more' : 'Show less', attr: {title: !showStatDetails() ? 'Click to show base stats' : 'Click to hide base stats'}"></a></h3>
+
+            <div class="col-md-3" data-bind="visible: showStatDetails(), component: {name: 'stats-additional', params: $data}"></div>
+            
+            <div class="col-md-12" data-bind="css: {'col-md-12': $root.layout() == 0, 'col-md-3': $root.layout() == 1}">
+                <table class="table table-condensed">
+                <tbody>
+                <tr><td>Gold:</td><td class="text-right"><span data-bind="text: hero().bountygoldmin() == hero().bountygoldmax() ? hero().bountygoldmax() : hero().bountygoldmin() + '-' + hero().bountygoldmax()"></span></td></tr>
+                <tr><td>Experience:</td><td class="text-right"><span data-bind="text: hero().bountyxp()"></span></td></tr>
+                <tr><td>Level:</td><td class="text-right"><span data-bind="text: hero().level()"></span></td></tr>
+                <tr><td><abbr title="Movement Speed">MS</abbr>:</td><td class="text-right"><span data-bind="text: totalMovementSpeed"></span></td></tr>
+                <tr><td>Turn Rate:</td><td class="text-right"><span data-bind="text: totalTurnRate"></span></td></tr>
+                <tr><td>Sight Range:</td><td class="text-right"><span data-bind="html: '<abbr title=\'Day\'>' + visionrangeday() + '</abbr>/<abbr title=\'Night\'>' + visionrangenight() + '</abbr>'"></span></td></tr>
+                </tbody>
+                </table>
+            </div>
+
+
+            <div class="col-md-12" data-bind="css: {'col-md-12': $root.layout() == 0, 'col-md-3': $root.layout() == 1}">
+                <table class="table table-condensed">
+                <tbody>
+                <tr><td>Health:</td><td class="text-right"><span data-bind="text: health"></span></td></tr>
+                <tr><td>Health Regen:</td><td class="text-right"><span data-bind="text: healthregen"></span></td></tr>
+                <tr><td>Mana:</td><td class="text-right"><span data-bind="text: mana"></span></td></tr>
+                <tr><td>Mana Regen:</td><td class="text-right"><span data-bind="text: manaregen"></span></td></tr>
+                <tr><td>Physical <abbr title="Effective Hit Points">EHP</abbr>:</td><td class="text-right"><span data-bind="text: ehpPhysical"></span></td></tr>
+                <tr><td>Magical <abbr title="Effective Hit Points">EHP</abbr>:</td><td class="text-right"><span data-bind="text: ehpMagical"></span></td></tr>
+                </tbody>
+                </table>
+            </div>
+
+            <div class="col-md-12" data-bind="css: {'col-md-12': $root.layout() == 0, 'col-md-3': $root.layout() == 1}">
+                <table class="table table-condensed">
+                <tbody>
+                <tr><td>Armor:</td><td class="text-right"><span data-bind="text: totalArmorPhysical"></span></td></tr>
+                <tr><td>Magic Res:</td><td class="text-right"><span data-bind="html: totalMagicResistance().toFixed(2) + '%'"></span></td></tr>
+                <tr><td>Lifesteal:</td><td class="text-right"><span data-bind="text: lifesteal"></span></td></tr>
+                <tr><td>Evasion:</td><td class="text-right"><span data-bind="text: evasion"></span></td></tr>
+                <tr><td>Bash:</td><td class="text-right"><span data-bind="text: bash"></span></td></tr>
+                <tr><td>Miss Chance:</td><td class="text-right"><span data-bind="text: missChance"></span></td></tr>
+                <tr><td colspan=2><a class="btn btn-default btn-block btn-xs" data-bind="css: {disabled: critInfo().sources.length == 0 ? 'disabled' : '', 'toggled': showCriticalStrikeDetails}, toggle: showCriticalStrikeDetails">Critical Strike Details</a></td></tr>
+                </tbody>
+                <tbody class="tabledropdown" style="border-top:0" data-bind="visible: showCriticalStrikeDetails(),foreach: critInfo().sources">
+                <tr><td colspan=2><strong data-bind="text: $data.name"></strong></td></tr>
+                <tr><td>Crit Chance:</td><td class="text-right"><span data-bind="text: ($data.totalchance * 100).toFixed(2) + '%'"></span></td></tr>
+                <tr><td>Crit Multiplier:</td><td class="text-right"><span data-bind="text: ($data.multiplier * 100).toFixed(2) + '%'"></span></td></tr>
+                </tbody>
+                </table>
+            </div>
+
+            <div class="col-md-12" data-bind="css: {'col-md-12': $root.layout() == 0, 'col-md-3': $root.layout() == 1}">
+                <table class="table table-condensed">
+                <tbody>
+                <tr>
+                    <td>Damage:</td>
+                    <td class="text-right">
+                        <span data-bind="html: baseDamage()[0] + '-' + baseDamage()[1]"></span>
+                        <span style="color:green" data-bind="visible: bonusDamage() > 0, text: ' + ' + bonusDamage()"></span>
+                        <span style="color:red" data-bind="visible: bonusDamageReduction() != 0, text: ' - ' + bonusDamageReduction()"></span>
+                    </td>
+                </tr>
+                <tr><td><abbr title="Increased Attack Speed">IAS</abbr>:</td><td class="text-right"><span data-bind="text: ias"></span></td></tr>
+                <tr><td><abbr title="Base Attack Time">BAT</abbr>:</td><td class="text-right"><span data-bind="text: bat"></span></td></tr>
+                <tr><td>Attack Time:</td><td class="text-right"><span data-bind="text: attackTime"></span></td></tr>
+                <tr><td>Attack / Sec:</td><td class="text-right"><span data-bind="text: attacksPerSecond().toFixed(2)"></span></td></tr>
+                <tr><td>Attack Range:</td><td class="text-right"><span data-bind="text: totalattackrange"></span></td></tr>
+                <tr><td colspan=2><a class="btn btn-default btn-block btn-xs" data-bind="toggle: showDamageDetails, css: {'toggled': showDamageDetails}">Damage Details</a></td></tr>
+                </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="row" data-bind="visible: showDamageDetails()">
+            <div class="col-md-12">
+                <h3 style="display:block;" class="section_header" data-bind="toggle: showDamageDetails, css: { section_disabled: !showDamageDetails() }">Damage Details
+                    <span class="pull-right">
+                        <small style="text-align:center" data-bind="style: {color: getDamageTypeColor('physical')}">Physical</small>
+                        <small style="text-align:center" data-bind="style: {color: getDamageTypeColor('magic')}">Magical</small>
+                        <small style="text-align:center" data-bind="style: {color: getDamageTypeColor('pure')}">Pure</small>
+                    </span>
+                </h3>
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td class="text-right"><strong>Unmitigated</strong></td>
+                            <td class="text-right"><strong><abbr data-bind="attr: {title: 'After reductions from ' + enemy().hero().displayname()}">After Reductions</abbr></strong></td>
+                        </tr>
+                        <tr>
+                            <td><abbr title="Sum of damage sources">Damage Per Attack:</abbr></td>
+                            <td class="text-right">
+                                <span data-bind="html: damageTotalInfo().total.toFixed(2)"></span>
+                                <span data-bind="html: $root.getDiffTextWrapper($data, 'total'), diffStyle: $root.getDiffMagnitude($data, 'total'), visible: showDiff"></span>
+                            </td>
+                            <td class="text-right">
+                                <span data-bind="html: damageTotalInfo().totalReduced.toFixed(2)"></span>
+                                <span data-bind="html: $root.getDiffTextWrapper($data, 'totalReduced'), diffStyle: $root.getDiffMagnitude($data, 'totalReduced'), visible: showDiff"></span>
+                            </td>
+                        </tr>
+                        <tr data-bind="visible: damageTotalInfo().geminateAttack.active">
+                            <td class="indent"><abbr title="Sum of damage sources + geminate attack damage">with Geminate Attack:</abbr></td>
+                            <td class="text-right">
+                                <span data-bind="html: damageTotalInfo().totalGeminateAttack.toFixed(2)"></span>
+                                <span data-bind="html: $root.getDiffTextWrapper($data, 'totalGeminateAttack'), diffStyle: $root.getDiffMagnitude($data, 'totalGeminateAttack'), visible: showDiff"></span>
+                            </td>
+                            <td class="text-right">
+                                <span data-bind="html: damageTotalInfo().totalGeminateAttackReduced.toFixed(2)"></span>
+                                <span data-bind="html: $root.getDiffTextWrapper($data, 'totalGeminateAttackReduced'), diffStyle: $root.getDiffMagnitude($data, 'totalGeminateAttackReduced'), visible: showDiff"></span>
+                            </td>
+                        </tr>
+                        <tr data-bind="visible: damageTotalInfo().sourcesCrit.length > 0">
+                            <td class="indent"><abbr title="Sum of damage sources + average crit damage per attack">with Crit:</abbr></td>
+                            <td class="text-right"><span data-bind="html: damageTotalInfo().sumTotal.toFixed(2)"></span></td>
+                            <td class="text-right"><span data-bind="html: damageTotalInfo().sumTotalReduced.toFixed(2)"></span></td>
+                        </tr>
+                        <tr>
+                            <td><abbr title="Damage per attack * attacks per second">DPS:</abbr></td>
+                            <td class="text-right">
+                                <span data-bind="html: damageTotalInfo().dps.base.toFixed(2)"></span>
+                                <span data-bind="html: $root.getDiffTextWrapper($data, 'dps.base'), diffStyle: $root.getDiffMagnitude($data, 'dps.base'), visible: showDiff"></span>
+                            </td>
+                            <td class="text-right">
+                                <span data-bind="html: damageTotalInfo().dps.reduced.base.toFixed(2)"></span>
+                                <span data-bind="html: $root.getDiffTextWrapper($data, 'dps.reduced.base'), diffStyle: $root.getDiffMagnitude($data, 'dps.reduced.base'), visible: showDiff"></span>
+                            </td>
+                        </tr>
+                        <tr data-bind="visible: damageTotalInfo().geminateAttack.active">
+                            <td class="indent"><abbr title="(Damage per attack * attacks per second) + average geminate attack dps">with Geminate Attack:</abbr></td>
+                            <td class="text-right">
+                                <span data-bind="html: damageTotalInfo().dps.geminateAttack.toFixed(2)"></span>
+                                <span data-bind="html: $root.getDiffTextWrapper($data, 'dps.geminateAttack'), diffStyle: $root.getDiffMagnitude($data, 'dps.geminateAttack'), visible: showDiff"></span>
+                            </td>
+                            <td class="text-right">
+                                <span data-bind="html: damageTotalInfo().dps.reduced.geminateAttack.toFixed(2)"></span>
+                                <span data-bind="html: $root.getDiffTextWrapper($data, 'dps.reduced.geminateAttack'), diffStyle: $root.getDiffMagnitude($data, 'dps.reduced.geminateAttack'), visible: showDiff"></span>
+                            </td>
+                        </tr>
+                        <tr data-bind="visible: damageTotalInfo().sourcesCrit.length > 0">
+                            <td class="indent"><abbr data-bind="attr: { title: damageTotalInfo().geminateAttack.active ? 'Damage per attack (including crit) * attacks per second + average geminate attack dps' : 'Damage per attack (including crit) * attacks per second' }, text: damageTotalInfo().geminateAttack.active ? 'with Crit and Geminate Attack' : 'with Crit:' "></abbr></td>
+                            <td class="text-right"><span data-bind="html: damageTotalInfo().dps.total.toFixed(2)"></span></td>
+                            <td class="text-right"><span data-bind="html: damageTotalInfo().dps.reduced.total.toFixed(2)"></span></td>
+                        </tr>
+                        <tr><td colspan=3><strong><abbr title="with %chance taken into account">Damage Sources</abbr></strong></td></tr>
+                        <tr>
+                            <td>Base Damage</td>
+                            <td class="text-right">
+                                <span data-bind="html: ((baseDamage()[0] + baseDamage()[1])/2).toFixed(2)"></span>
+                                <span data-bind="html: $root.getDiffText(((baseDamage()[0] + baseDamage()[1])/2).toFixed(2) - ((heroCompare().baseDamage()[0] + heroCompare().baseDamage()[1])/2).toFixed(2)), diffStyle: (((baseDamage()[0] + baseDamage()[1])/2).toFixed(2) - ((heroCompare().baseDamage()[0] + heroCompare().baseDamage()[1])/2).toFixed(2)), visible: showDiff"></span>
+                            </td>
+                            <td class="text-right">
+                                <span data-bind="html: getReducedDamage((baseDamage()[0] + baseDamage()[1])/2, 'physical').toFixed(2)"></span>
+                                <span data-bind="html: $root.getDiffText(getReducedDamage((baseDamage()[0] + baseDamage()[1])/2, 'physical').toFixed(2) - getReducedDamage((heroCompare().baseDamage()[0] + heroCompare().baseDamage()[1])/2, 'physical').toFixed(2)), diffStyle: (getReducedDamage((baseDamage()[0] + baseDamage()[1])/2, 'physical').toFixed(2) - getReducedDamage((heroCompare().baseDamage()[0] + heroCompare().baseDamage()[1])/2, 'physical').toFixed(2)), visible: showDiff"></span>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody data-bind="foreach: damageTotalInfo().sources">
+                        <tr>
+                            <td><span data-bind="text: $data.name"></span></td>
+                            <td class="text-right"><span data-bind="html: $data.damage.toFixed(2), style: {color: $parent.getDamageTypeColor($data.damageType)}"></span></td>
+                            <td class="text-right"><span data-bind="html: $data.damageReduced.toFixed(2), style: {color: $parent.getDamageTypeColor($data.damageType)}"></span></td>
+                        </tr>
+                    </tbody>
+
+                    <tr data-bind="visible: damageTotalInfo().sourcesCrit.length > 0">
+                        <td colspan=2><strong>Critical Strike</strong></td>
+                    </tr>
+                    
+                    <tbody data-bind="foreach: damageTotalInfo().sourcesCrit">
+                        <tr>
+                            <td><span data-bind="text: $data.name"></span></td>
+                            <td class="text-right"><span data-bind="html: $data.damage.toFixed(2), style: {color: $parent.getDamageTypeColor($data.damageType)}"></span></td>
+                            <td class="text-right"><span data-bind="html: $data.damageReduced.toFixed(2), style: {color: $parent.getDamageTypeColor($data.damageType)}"></span></td>
+                        </tr>
+                    </tbody>
+                
+                    <tbody>
+                        <tr data-bind="visible: cleaveInfo().length > 0">
+                            <td colspan=3><strong>Cleave</strong></td>
+                        </tr>
+                    </tbody>    
+                    <tbody data-bind="foreach: cleaveInfo()">
+                        <tr><td>Radius:</td><td class="text-right"><span data-bind="html: $data.radius"></span></td></tr>
+                        <tr><td>Magnitude:</td><td class="text-right"><span data-bind="html: ($data.magnitude * 100).toFixed(2) + '%'"></span></td></tr>
+                        <tr>
+                            <td>Cleave Damage:</td>
+                            <td class="text-right"><span data-bind="html: ($data.magnitude * $parent.damageTotalInfo().total).toFixed(2)"></span></td>
+                        </tr>
+                    </tbody>
+                
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8" data-bind="css: {'col-md-8': $root.layout() == 0, 'col-md-12': $root.layout() == 1}">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="section_header" data-bind="toggle: sectionDisplay().inventory, css: { section_disabled: !sectionDisplay().inventory() }">Inventory <small style="color:goldenrod" data-bind="html: inventory.totalCost() ? '<img src=\'http://cdn.dota2.com/apps/dota2/images/tooltips/gold.png\'/> ' + inventory.totalCost() : '' "></small></h3>
+                <div id="inventory" class="inventory hover-cursor" data-bind="click: function (data, event) { buildExplorer.selectInventory(-1); }, css: {'row-highlight': selectedInventory() == -1}, template: { name: 'item-template', foreach: inventory.items }, visible: sectionDisplay().inventory()"></div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="section_header" data-bind="toggle: sectionDisplay().ability, css: { section_disabled: !sectionDisplay().ability() }">Abilities <small style="color:inherit" data-bind="text: availableSkillPoints() ? (availableSkillPoints() == 1 ? '1 unspent skillpoint' : availableSkillPoints() + ' unspent skillpoints') : ''"></small></h3>
+                <div class="row" data-bind="visible: sectionDisplay().ability(), foreach: ability().abilities">
+                    <div data-bind="component: { name: 'ability', params: $data }"></div>
+                </div>
+                <div class="form-horizontal" data-bind="if: selectedHero().heroName == 'silencer', visible: sectionDisplay().ability()">
+                    <div class="form-group">
+                            <div class="col-md-2 control-label">
+                                <label for="intelligencestolen">Intelligence Stolen</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input class="form-control" id="intelligencestolen" data-bind="value: intStolen" />
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="section_header" data-bind="toggle: sectionDisplay().buff, css: { section_disabled: !sectionDisplay().buff() }">Buffs</h3>
+                <div class="form-horizontal" data-bind="visible: sectionDisplay().buff()">
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            <select id="buffselect" class="form-control" data-bind="options: buffs.availableBuffs , optionsText: 'buffDisplayName', value: buffs.selectedBuff"></select>
+                        </div>
+                        <div class="col-md-6">
+                            <button class="btn btn-default" data-bind="click: buffs.addBuff">Add</button>
+                            <button class="btn btn-default" data-bind="click: function(data,event) { buffs.removeBuff(data, event, buffs.selectedBuff().buffName) }">Remove</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" data-bind="foreach: buffs.buffs, visible: sectionDisplay().buff()">
+                    <div data-bind="css: {row: $data.data.isDetail() || ($index() < $parent.buffs.buffs().length-1 && $parent.buffs.buffs()[$index()+1].data.isDetail()), row2: $data.data.isDetail() || ($index() < $parent.buffs.buffs().length-1 && $parent.buffs.buffs()[$index()+1].data.isDetail()) }">
+                        <div class="col-md-3 text-center bottom-buffer2" data-bind="css: {'col-md-3': $root.layout() == 0, 'col-md-2': $root.layout() == 1}">
+                            <img style="padding:0px;margin-bottom:1px;" class="img-rounded ability" data-bind="css: { ability_active: $data.data.isActive() || $data.data.behavior().indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1, ability_inactive: !$data.data.isActive() && $data.data.behavior().indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') == -1, btn: $data.data.behavior().indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') == -1, 'btn-default': $data.data.behavior().indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') == -1}, attr:{src: '/media/images/spellicons/' + $data.data.name() + '.png'}, click: function(data, event) { $parent.buffs.toggleBuff($index, data.data, event); }, event: { dblclick: function(data,event) { $parent.buffs.removeBuff(data, event, $data.data.name()) } }"/>
+                            <div class="progress" style="position:relative">
+                                <div style="position:absolute;width:100%;color:white;" class="text-center" data-bind="visible: $parent.getAbilityLevelMax($data.data) > 0, text: $data.data.level() + '/' + $parent.getAbilityLevelMax($data.data)"></div>
+                                <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;" data-bind="attr: { 'aria-valuenow': ($parent.getAbilityLevelMax($data.data) > 0 ? $data.data.level()/$parent.getAbilityLevelMax($data.data)*100 : 0) }, style: { width: ($parent.getAbilityLevelMax($data.data) > 0 ? $data.data.level()/$parent.getAbilityLevelMax($data.data)*100 : 0) + '%' }"></div>
+                            </div>
+                            <div class="btn-group btn-group-justified" data-bind="if: $data.data.behavior().indexOf('DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE') == -1">
+                                <a class="btn btn-default btn-sm" data-bind="click: function(data, event) { $parent.buffs.levelDownAbility($index, data.data, event, $parent); }">-</a>
+                                <a class="btn btn-default btn-sm" data-bind="click: function(data, event) { $parent.buffs.levelUpAbility($index, data.data, event, $parent); }">+</a>
+                            </div>
+                            <div class="btn-group btn-group-justified">
+                                <a class="btn btn-default btn-sm" data-bind="click: function(data, event) { $parent.buffs.toggleBuffDetail($index, data, event); }, css: {'toggled': $data.data.isDetail}">Details</a>
+                            </div>
+                        </div>
+                        <div class="col-md-9 bottom-buffer" data-bind="visible: $data.data.isDetail()">
+                            <button type="button" class="close" data-bind="click: function(data, event) { $parent.buffs.toggleBuffDetail($index, data.data, event); }">&times;</button>
+                            <div data-bind="html: $parent.ability().getAbilityTooltipData($data.hero, $data.data.name())"></div>
+                            <div data-bind="if: $data.data.name() in $parent.buffs.abilityData && $parent.buffs.buffs()[$index()].data.level() > 0">
+                                <div class="col-md-8">
+                                    <div data-bind="component: { name: 'buff-settings', params: $parent.buffs.abilitySettingsData($data.data.name(), $parent, $index()) }"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-horizontal" data-bind="visible: sectionDisplay().buff()">
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <input class="form-control" id="auto2" data-bind="attr: {id: id() + '-auto2' }, jqAuto: { autoFocus: true, html: true }, jqAutoSource: buffs.itemBuffs.itemBuffOptions, jqAutoValue: buffs.itemBuffs.selectedItemBuff, jqAutoSourceLabel: 'displayname', jqAutoSourceInputValue: 'name', jqAutoSourceValue: 'value'" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" data-bind="jqAutoCombo: id() + '-auto2'"><span class="glyphicon glyphicon-search"></span></button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <button class="btn btn-default" data-bind="click: buffs.itemBuffs.addItemBuff">Add</button>
+                        </div>
+                    </div>
+                </div>
+                <div data-bind="foreach: buffs.itemBuffs.items, visible: sectionDisplay().buff()">
+                    <div class="pull-left" style="margin-right:10px" data-bind="component: { name: 'item-buff', params: $data}"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="section_header" data-bind="toggle: sectionDisplay().debuff, css: { section_disabled: !sectionDisplay().debuff() }">Debuffs</h3>
+                <div class="form-horizontal" data-bind="visible: sectionDisplay().debuff()">
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            <select id="buffselect" class="form-control" data-bind="options: debuffs.availableDebuffs , optionsText: 'buffDisplayName', value: debuffs.selectedBuff"></select>
+                        </div>
+                        <div class="col-md-6">
+                            <button class="btn btn-default" data-bind="click: debuffs.addBuff">Add</button>
+                            <button class="btn btn-default" data-bind="click: function(data,event) { debuffs.removeBuff(data, event, debuffs.selectedBuff().buffName) }">Remove</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" data-bind="foreach: debuffs.buffs, visible: sectionDisplay().debuff()">
+                    <div data-bind="css: {row: $data.data.isDetail() || ($index() < $parent.debuffs.buffs().length-1 && $parent.debuffs.buffs()[$index()+1].data.isDetail()), row2: $data.data.isDetail() || ($index() < $parent.debuffs.buffs().length-1 && $parent.debuffs.buffs()[$index()+1].data.isDetail()) }">
+                        <div class="col-md-3 text-center bottom-buffer2" data-bind="css: {'col-md-3': $root.layout() == 0, 'col-md-2': $root.layout() == 1}">
+                            <img style="padding:0px;margin-bottom:1px;" class="img-rounded ability" data-bind="css: { ability_active: $data.data.isActive() || $data.data.behavior().indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1, ability_inactive: !$data.data.isActive() && $data.data.behavior().indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') == -1, btn: $data.data.behavior().indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') == -1, 'btn-default': $data.data.behavior().indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') == -1}, attr:{src: '/media/images/spellicons/' + $data.data.name() + '.png'}, click: function(data, event) { $parent.debuffs.toggleBuff($index, data.data, event); }, event: { dblclick: function(data,event) { $parent.debuffs.removeBuff(data, event, $data.data.name()) } }"/>
+                            <div class="progress" style="position:relative">
+                                <div style="position:absolute;width:100%;color:white;" class="text-center" data-bind="visible: $parent.getAbilityLevelMax($data.data) > 0, text: $data.data.level() + '/' + $parent.getAbilityLevelMax($data.data)"></div>
+                                <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;" data-bind="attr: { 'aria-valuenow': ($parent.getAbilityLevelMax($data.data) > 0 ? $data.data.level()/$parent.getAbilityLevelMax($data.data)*100 : 0) }, style: { width: ($parent.getAbilityLevelMax($data.data) > 0 ? $data.data.level()/$parent.getAbilityLevelMax($data.data)*100 : 0) + '%' }"></div>
+                            </div>
+                            <div class="btn-group btn-group-justified" data-bind="if: $data.data.behavior().indexOf('DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE') == -1">
+                                <a class="btn btn-default btn-sm" data-bind="click: function(data, event) { $parent.debuffs.levelDownAbility($index, data.data, event, $parent); }">-</a>
+                                <a class="btn btn-default btn-sm" data-bind="click: function(data, event) { $parent.debuffs.levelUpAbility($index, data.data, event, $parent); }">+</a>
+                            </div>
+                            <div class="btn-group btn-group-justified">
+                                <a class="btn btn-default btn-sm" data-bind="click: function(data, event) { $parent.debuffs.toggleBuffDetail($index, data, event); }, css: {'toggled': $data.data.isDetail}">Details</a>
+                            </div>
+                        </div>
+                        <div class="col-md-9 bottom-buffer" data-bind="visible: $data.data.isDetail()">
+                            <button type="button" class="close" data-bind="click: function(data, event) { $parent.debuffs.toggleBuffDetail($index, data.data, event); }">&times;</button>
+                            <div data-bind="html: $parent.ability().getAbilityTooltipData($data.hero, $data.data.name())"></div>
+                            <div data-bind="if: $data.data.name() in $parent.debuffs.abilityData && $parent.debuffs.buffs()[$index()].data.level() > 0">
+                                <div class="col-md-8">
+                                    <div data-bind="component: { name: 'buff-settings', params: $parent.debuffs.abilitySettingsData($data.data.name(), $parent, $index()) }"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-horizontal" data-bind="visible: sectionDisplay().debuff()">
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <input class="form-control" id="auto3" data-bind="attr: {id: id() + '-auto3' }, jqAuto: { autoFocus: true, html: true }, jqAutoSource: debuffs.itemBuffs.itemDebuffOptions, jqAutoValue: debuffs.itemBuffs.selectedItemDebuff, jqAutoSourceLabel: 'displayname', jqAutoSourceInputValue: 'name', jqAutoSourceValue: 'value'" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" data-bind="jqAutoCombo: id() + '-auto3'"><span class="glyphicon glyphicon-search"></span></button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <button class="btn btn-default" data-bind="click: debuffs.itemBuffs.addItemDebuff">Add</button>
+                        </div>
+                    </div>
+                </div>
+                <div data-bind="foreach: debuffs.itemBuffs.items, visible: sectionDisplay().debuff()">
+                    <div class="pull-left" style="margin-right:10px" data-bind="component: { name: 'item-debuff', params: $data}"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
