@@ -12,6 +12,232 @@ define(function (require, exports, module) {
     }
     
     my.prototype.HeroDamageMixin = function (self) {
+        self.critInfo = ko.pureComputed(function () {
+            var critSources = self.inventory.getCritSource();
+            $.extend(critSources, self.ability().getCritSource());
+            $.extend(critSources, self.buffs.getCritSource());
+            var critSourcesArray = [];
+            for (var prop in critSources) {
+                var el = critSources[prop];
+                el.name = prop
+                critSourcesArray.push(el);
+            }
+            function compareByMultiplier(a,b) {
+                if (a.multiplier < b.multiplier)
+                    return 1;
+                if (a.multiplier > b.multiplier)
+                    return -1;
+                return 0;
+            }
+
+            critSourcesArray.sort(compareByMultiplier);
+            
+            var result = [];
+            var critTotal = 0;
+            for (var i = 0; i < critSourcesArray.length; i++) {
+                var total = 1;
+                for (var j = 0; j < i; j++) {
+                    for (var k = 0; k <critSourcesArray[j].count; k++) {
+                        total *= (1 - critSourcesArray[j].chance);
+                    }
+                }
+                var total2 = 1;
+                for (var k = 0; k < critSourcesArray[i].count; k++) {
+                    total2 *= (1 - critSourcesArray[i].chance);
+                }
+                total *= (1 - total2);
+                critTotal += total;
+                if (critSourcesArray[i].count > 1) {
+                    result.push({
+                        'name':critSourcesArray[i].displayname + ' x' + critSourcesArray[i].count,
+                        'chance':critSourcesArray[i].chance,
+                        'multiplier':critSourcesArray[i].multiplier,
+                        'count':critSourcesArray[i].count,
+                        'totalchance':total
+                    });
+                }
+                else {
+                    result.push({
+                        'name':critSourcesArray[i].displayname,
+                        'chance':critSourcesArray[i].chance,
+                        'multiplier':critSourcesArray[i].multiplier,
+                        'count':critSourcesArray[i].count,
+                        'totalchance':total
+                    });
+                }
+            }
+            return { sources: result, total: critTotal };
+        });
+
+        self.cleaveInfo = ko.pureComputed(function () {
+            var cleaveSources = self.inventory.getCleaveSource();
+            $.extend(cleaveSources, self.ability().getCleaveSource());
+            $.extend(cleaveSources, self.buffs.getCleaveSource());
+            var cleaveSourcesArray = [];
+            for (var prop in cleaveSources) {
+                var el = cleaveSources[prop];
+                el.name = prop
+                cleaveSourcesArray.push(el);
+            }
+            function compareByRadius(a,b) {
+                if (a.radius < b.radius)
+                    return 1;
+                if (a.radius > b.radius)
+                    return -1;
+                return 0;
+            }
+
+            cleaveSourcesArray.sort(compareByRadius);
+            var cleaveSourcesByRadius = {};
+            for (var i = 0; i < cleaveSourcesArray.length; i++) {
+                var total = 0;
+                for (var j = 0; j <cleaveSourcesArray.length; j++) {
+                    if (cleaveSourcesArray[j].radius >= cleaveSourcesArray[i].radius) {
+                        total += cleaveSourcesArray[j].magnitude * cleaveSourcesArray[j].count;
+                    }
+                }
+                cleaveSourcesByRadius[cleaveSourcesArray[i].radius] = total;
+            }
+            var result = [];
+            for (var prop in cleaveSourcesByRadius) {
+                result.push({
+                    'radius':prop,
+                    'magnitude':cleaveSourcesByRadius[prop]
+                });
+            }
+            return result;
+        });
+        
+        self.bashInfo = ko.pureComputed(function () {
+            var attacktype = self.heroData().attacktype;
+            var bashSources = self.inventory.getBashSource(attacktype);
+            $.extend(bashSources, self.ability().getBashSource());
+            var bashSourcesArray = [];
+            for (var prop in bashSources) {
+                var el = bashSources[prop];
+                el.name = prop
+                bashSourcesArray.push(el);
+            }
+            function compareByDuration(a, b) {
+                if (a.duration < b.duration)
+                    return 1;
+                if (a.duration > b.duration)
+                    return -1;
+                return 0;
+            }
+
+            //bashSourcesArray.sort(compareByDuration);
+            
+            var result = [];
+            var bashTotal = 0;
+            for (var i = 0;i < bashSourcesArray.length; i++) {
+                var total = 1;
+                for (var j = 0; j < i; j++) {
+                    for (var k = 0; k < bashSourcesArray[j].count; k++) {
+                        total *= (1 - bashSourcesArray[j].chance);
+                    }
+                }
+                var total2 = 1;
+                for (var k = 0; k < bashSourcesArray[i].count; k++) {
+                    total2 *= (1 - bashSourcesArray[i].chance);
+                }
+                total *= (1 - total2);
+                bashTotal += total;
+                if (bashSourcesArray[i].name === 'spirit_breaker_greater_bash') {
+                    var d = bashSourcesArray[i].damage * self.totalMovementSpeed();
+                }
+                else {
+                    var d = bashSourcesArray[i].damage;
+                }
+                if (bashSourcesArray[i].count > 1) {
+                    result.push({
+                        'name':bashSourcesArray[i].displayname + ' x' + bashSourcesArray[i].count,
+                        'chance':bashSourcesArray[i].chance,
+                        'damage':d,
+                        'count':bashSourcesArray[i].count,
+                        'damageType':bashSourcesArray[i].damageType,
+                        'totalchance':total
+                    });
+                }
+                else {
+                    result.push({
+                        'name':bashSourcesArray[i].displayname,
+                        'chance':bashSourcesArray[i].chance,
+                        'damage':d,
+                        'count':bashSourcesArray[i].count,
+                        'damageType':bashSourcesArray[i].damageType,
+                        'totalchance':total
+                    });
+                }
+
+            }
+            return { sources: result, total: bashTotal };
+        });
+        
+        self.orbProcInfo = ko.pureComputed(function () {
+            var attacktype = self.heroData().attacktype;
+            var damageSources = self.inventory.getOrbProcSource();
+            var damageSourcesArray = [];
+            for (var prop in damageSources) {
+                var el = damageSources[prop];
+                el.name = prop
+                damageSourcesArray.push(el);
+            }
+            function compareByDamage(a, b) {
+                if (a.priority > b.priority) {
+                    return 1;
+                }
+                if (a.priority < b.priority) {
+                    return -1;
+                }
+                if (a.damage < b.damage)
+                    return 1;
+                if (a.damage > b.damage)
+                    return -1;
+                return 0;
+            }
+
+            damageSourcesArray.sort(compareByDamage);
+            
+            var result = [];
+            var damageTotal = 0;
+            for (var i=0 ; i < damageSourcesArray.length; i++) {
+                var total = 1;
+                for (var j = 0; j < i; j++) {
+                    for (var k = 0; k < damageSourcesArray[j].count; k++) {
+                        total *= (1 - damageSourcesArray[j].chance);
+                    }
+                }
+                var total2 = 1;
+                for (var k = 0; k < damageSourcesArray[i].count; k++) {
+                    total2 *= (1 - damageSourcesArray[i].chance);
+                }
+                total *= (1 - total2);
+                damageTotal += total;
+                if (damageSourcesArray[i].count > 1) {
+                    result.push({
+                        'name':damageSourcesArray[i].displayname + ' x' + damageSourcesArray[i].count,
+                        'chance':damageSourcesArray[i].chance,
+                        'damage':damageSourcesArray[i].damage,
+                        'count':damageSourcesArray[i].count,
+                        'damageType':damageSourcesArray[i].damageType,
+                        'totalchance':total
+                    });
+                }
+                else {
+                    result.push({
+                        'name':damageSourcesArray[i].displayname,
+                        'chance':damageSourcesArray[i].chance,
+                        'damage':damageSourcesArray[i].damage,
+                        'count':damageSourcesArray[i].count,
+                        'damageType':damageSourcesArray[i].damageType,
+                        'totalchance':total
+                    });
+                }
+            }
+            return { sources: result, total: damageTotal };
+        });
+        
         self.getReducedDamage = function (value, type) {
             var result = value;
             switch (type) {
