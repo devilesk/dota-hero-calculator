@@ -7,6 +7,8 @@ define(function (require, exports, module) {
     require("./buff-settings");
     require("./item-buff");
     require("./item-debuff");
+    require("./buff-section");
+    require("./damage-details");
     require("./damage-amp");
     require("./ability");
     require("./shop");

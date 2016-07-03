@@ -845,6 +845,7 @@ define(function (require, exports, module) {
             totalCritableDamage = baseDamage,
             totalCrit = 0,
             geminateAttack = { damage: 0, damageReduced: 0, cooldown: 6, active: false },
+            echoSabreAttack = { damage: 0, damageReduced: 0, cooldown: my.prototype.itemData['item_echo_sabre'].cooldown[0], active: false },
             damage = {
                 pure: 0,
                 physical: baseDamage,
@@ -990,6 +991,41 @@ define(function (require, exports, module) {
                     }
                 }
             }
+            
+            // echo_sabre
+            var item = self.inventory.items().find(function (o) { return o.item === "echo_sabre" && o.enabled(); });
+            if (item && self.hero().attacktype() === 'DOTA_UNIT_CAP_MELEE_ATTACK') {
+                var item_echo_sabre = my.prototype.itemData['item_echo_sabre'],
+                    d = damage.physical;
+                result.push({
+                    name: item_echo_sabre.displayname + ' every ' + item_echo_sabre.cooldown + ' seconds',
+                    damage: damage.physical,
+                    damageType: 'physical',
+                    damageReduced: self.getReducedDamage(d, 'physical')
+                });
+                echoSabreAttack.damage += d;
+                echoSabreAttack.damageReduced += self.getReducedDamage(d, 'physical');
+                echoSabreAttack.active = true;
+            }
+            /*var a = self.ability().abilities().find(function (ability) {
+                return ability.name() === 'weaver_geminate_attack';
+            });
+            if (a) {
+                if (a.level() > 0) {
+                    var cd = a.cooldown()[a.level() - 1],
+                        d = damage.physical;
+                    result.push({
+                        name: a.displayname() + ' every ' + cd + ' seconds',
+                        damage: d,
+                        damageType: 'physical',
+                        damageReduced: self.getReducedDamage(d, 'physical')
+                    });
+                    geminateAttack.damage += d;
+                    geminateAttack.damageReduced += self.getReducedDamage(d, 'physical');
+                    geminateAttack.cooldown = cd;
+                    geminateAttack.active = true;
+                }
+            }*/
             
             // bash damage
             for (var i = 0; i < bashSources.sources.length; i++) {

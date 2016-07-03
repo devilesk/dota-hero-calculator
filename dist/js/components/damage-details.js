@@ -1,0 +1,1 @@
+define(["herocalc_knockout","text!./damage-details.html"],function(e,t){return{template:t}});

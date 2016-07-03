@@ -3,10 +3,11 @@ var concat = require('gulp-concat');
 var minifyCSS = require('gulp-clean-css');
 var rename = require('gulp-rename');
 var preprocess = require('gulp-preprocess');
+var imagemin = require('gulp-imagemin');
 var rjs = require('requirejs');
 var fs = require('fs');
 
-gulp.task('default', ['build', 'css', 'html']);
+gulp.task('default', ['build', 'css', 'html', 'image']);
 
 gulp.task('css', ['build'], function (){
     gulp.src([
@@ -21,9 +22,15 @@ gulp.task('css', ['build'], function (){
 });
 
 gulp.task('html', ['build'], function () {
-  gulp.src('www/index.html')
-    .pipe(preprocess({context: { NODE_ENV: 'production'}})) //To set environment variables in-line 
-    .pipe(gulp.dest('dist/'))
+    gulp.src('www/index.html')
+        .pipe(preprocess({context: { NODE_ENV: 'production'}})) //To set environment variables in-line 
+        .pipe(gulp.dest('dist/'))
+});
+
+gulp.task('image', ['build'], function () {
+    gulp.src('www/img/*')
+        .pipe(imagemin())
+        .pipe(gulp.dest('dist/img'))
 });
 
 gulp.task('build', function (cb) {

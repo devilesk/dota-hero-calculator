@@ -52,6 +52,10 @@ text!components/item-buff.html
 js/components/item-buff.js
 text!components/item-debuff.html
 js/components/item-debuff.js
+text!components/buff-section.html
+js/components/buff-section.js
+text!components/damage-details.html
+js/components/damage-details.js
 text!components/damage-amp.html
 js/components/damage-amp.js
 text!components/ability.html

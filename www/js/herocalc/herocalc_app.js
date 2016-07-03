@@ -15,6 +15,8 @@ define(function (require, exports, module) {
     ko.components.register('buff-settings', { require: 'components/buff-settings' });
     ko.components.register('item-buff', { require: 'components/item-buff' });
     ko.components.register('item-debuff', { require: 'components/item-debuff' });
+    ko.components.register('buff-section', { require: 'components/buff-section' });
+    ko.components.register('damage-details', { require: 'components/damage-details' });
     ko.components.register('damage-amp', { require: 'components/damage-amp' });
     ko.components.register('ability', { require: 'components/ability' });
     ko.components.register('shop', { require: 'components/shop' });

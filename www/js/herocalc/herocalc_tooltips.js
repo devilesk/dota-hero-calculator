@@ -56,7 +56,6 @@ define(function (require, exports, module) {
 
     my.prototype.getTooltipItemAttributes = function (item) {
         var a = '';
-        console.log('getTooltip', item);
         for (var i = 0; i < item.attributes.length; i++) {
             if (item.attributes[i].tooltip != null) {
                 var attributeTooltip = item.attributes[i].tooltip;
