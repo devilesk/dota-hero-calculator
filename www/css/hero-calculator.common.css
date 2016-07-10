@@ -1,3 +1,13 @@
+.crit {
+    color: #d9534f;
+}
+.damage-details input[type='checkbox'] {
+    float: left;
+    margin-left: -20px;
+}
+.damage-details tr.inactive {
+    opacity: .5;
+}
 .tooltip-underline {
 	cursor: help;
 	border-bottom: 1px dotted #999;
@@ -107,6 +117,12 @@ img {
 }
 .indent {
     text-indent: 10px;
+}
+.indent .indent {
+    text-indent: 20px;
+}
+.indent .indent .indent {
+    text-indent: 30px;
 }
 .diffPos {
     color: #5cb85c;

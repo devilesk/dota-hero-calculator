@@ -606,7 +606,7 @@ define(function (require, exports, module) {
                                 'count': 1,
                                 'chance': self.getItemAttributeValue(my.prototype.itemData['item_' + item].attributes, 'bonus_chance', 1) / 100,
                                 'displayname': my.prototype.itemData['item_' + item].displayname + ' Pierce'
-                            }                            
+                            }
                         }
                         else {
                             sources[item].count += 1;
@@ -621,7 +621,7 @@ define(function (require, exports, module) {
                                 'duration': self.getItemAttributeValue(my.prototype.itemData['item_' + item].attributes, 'bash_stun', 0),
                                 'count': 1,
                                 'damageType': 'magic',
-                                'displayname': my.prototype.itemData['item_' + item].displayname
+                                'displayname': 'Mini-Bash' //my.prototype.itemData['item_' + item].displayname
                             }
                         }
                         else {
@@ -630,34 +630,19 @@ define(function (require, exports, module) {
                     break;
                     case 'abyssal_blade':
                     case 'basher':
-                        if (sources[item] == undefined) {
-                            if (attacktype == 'DOTA_UNIT_CAP_MELEE_ATTACK') {
-                                sources[item] = {
-                                    'item': item,
-                                    'chance': self.getItemAttributeValue(my.prototype.itemData['item_' + item].attributes, 'bash_chance_melee', 0) / 100,
-                                    'damage': 0,
-                                    'duration': self.getItemAttributeValue(my.prototype.itemData['item_' + item].attributes, 'bash_duration', 0),
-                                    'count': 1,
-                                    'damageType': 'physical',
-                                    'displayname': my.prototype.itemData['item_' + item].displayname
-                                }                            
+                        if (!sources.hasOwnProperty('bash')) {
+                            sources['bash'] = {
+                                'item': item,
+                                'chance': self.getItemAttributeValue(my.prototype.itemData['item_' + item].attributes, (attacktype == 'DOTA_UNIT_CAP_MELEE_ATTACK') ?'bash_chance_melee' : 'bash_chance_ranged', 0) / 100,
+                                'damage': self.getItemAttributeValue(my.prototype.itemData['item_' + item].attributes, 'bonus_chance_damage', 0),
+                                'duration': self.getItemAttributeValue(my.prototype.itemData['item_' + item].attributes, 'bash_duration', 0),
+                                'count': 1,
+                                'damageType': 'physical',
+                                'displayname': 'Bash' //my.prototype.itemData['item_' + item].displayname
                             }
-                            else {
-                                sources[item] = {
-                                    'item': item,
-                                    'chance': self.getItemAttributeValue(my.prototype.itemData['item_' + item].attributes, 'bash_chance_ranged', 0) / 100,
-                                    'damage': 0,
-                                    'duration': self.getItemAttributeValue(my.prototype.itemData['item_' + item].attributes, 'bash_duration', 0),
-                                    'count': 1,
-                                    'damageType': 'physical',
-                                    'displayname': my.prototype.itemData['item_' + item].displayname
-                                }                            
-
-                            }
-
                         }
                         else {
-                            sources[item].count += 1;
+                            //sources[item].count += 1;
                         }
                     break;
                 }
