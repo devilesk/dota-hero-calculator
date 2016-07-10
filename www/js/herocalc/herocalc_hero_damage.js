@@ -289,8 +289,7 @@ define(function (require, exports, module) {
             
             attackSources.push({
                 name: 'Base Attack',
-                cooldown: 1,
-                enabled: ko.observable(true)
+                cooldown: 1
             });
             
             // weaver_geminate_attack
@@ -303,7 +302,6 @@ define(function (require, exports, module) {
                         var cd = a.cooldown()[a.level() - 1];
                         attackSources.push({
                             name: a.displayname(),
-                            enabled: ko.observable(true),
                             cooldown: (1/cd)
                         });
                     }
@@ -316,7 +314,6 @@ define(function (require, exports, module) {
                 var item_echo_sabre = my.prototype.itemData['item_echo_sabre'];
                 attackSources.push({
                     name: item_echo_sabre.displayname,
-                    enabled: ko.observable(true),
                     cooldown: (1/item_echo_sabre.cooldown)
                 });
             }
@@ -622,7 +619,8 @@ define(function (require, exports, module) {
                 return {
                     name: a.name + ' Subtotal',
                     cooldown: a.cooldown,
-                    enabled: a.enabled,
+                    enabled: ko.observable(true),
+                    visible: ko.observable(true),
                     totalCritChance: totalCritChance,
                     totalCritRow: totalCritRow,
                     totalRow: totalRow,

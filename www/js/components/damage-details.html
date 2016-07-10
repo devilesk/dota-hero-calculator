@@ -31,15 +31,18 @@
             </thead>
             <!-- ko foreach: damageTotalInfo().attacks -->
             <tbody>
-                <tr class="indent">
-                    <td><strong><span data-bind="text: $data.name"></span></strong></td>
+                <tr class="indent" data-bind="toggle: $data.enabled, css: { 'inactive': !$data.enabled() }">
+                    <td>
+                        <button class="btn btn-default btn-xs glyphicon pull-right" data-bind="toggle: $data.visible, css: {'glyphicon-minus': $data.visible(), 'glyphicon-plus': !$data.visible()}, preventBubble: 'click'"></button>
+                        <strong><span data-bind="text: $data.name"></span></strong>
+                    </td>
                     <td class="text-right" data-bind="text: $data.totalRow[0]().toFixed(2)"></td>
                     <td class="text-right" data-bind="text: $data.totalRow[1]().toFixed(2)"></td>
                     <td class="text-right" data-bind="text: $data.totalRow[2]().toFixed(2)"></td>
                     <td class="text-right" data-bind="text: $data.totalRow[3]().toFixed(2)"></td>
                 </tr>
             </tbody>
-            <tbody class="indent" data-bind="foreach: $data.sources">
+            <tbody class="indent" data-bind="foreach: $data.sources, visible: $data.visible">
                 <tr data-bind="toggle: $data.enabled, css: { 'inactive': !$data.enabled() }">
                     <td class="indent"><span data-bind="text: $data.name"></span></td>
                     <td class="text-right"><span data-bind="html: $data.damage.toFixed(2), style: {color: $parents[1].getDamageTypeColor($data.damageType)}"></span></td>
@@ -48,14 +51,14 @@
                     <td class="text-right"><span data-bind="html: $data.dpsReduced.toFixed(2), style: {color: $parents[1].getDamageTypeColor($data.damageType)}"></span></td>
                 </tr>
             </tbody>
-            <tr class="indent crit" data-bind="visible: $data.sourcesCrit.length > 0">
+            <tr class="indent crit" data-bind="visible: $data.visible() && $data.sourcesCrit.length > 0">
                 <td class="indent">Critical Strike Proc, <span data-bind="text: $data.totalCritChance.toFixed(2) + '%'"></span></td>
                 <td class="text-right" data-bind="text: $data.totalCritRow[0]().toFixed(2)"></td>
                 <td class="text-right" data-bind="text: $data.totalCritRow[1]().toFixed(2)"></td>
                 <td class="text-right" data-bind="text: $data.totalCritRow[2]().toFixed(2)"></td>
                 <td class="text-right" data-bind="text: $data.totalCritRow[3]().toFixed(2)"></td>
             </tr>
-            <tbody class="indent" data-bind="foreach: $data.sourcesCrit">
+            <tbody class="indent" data-bind="visible: $data.visible, foreach: $data.sourcesCrit">
                 <tr class="indent crit" data-bind="toggle: $data.enabled, css: { 'inactive': !$data.enabled() }">
                     <td class="indent"><span data-bind="text: $data.name"></span></td>
                     <td class="text-right"><span data-bind="html: $data.damage.toFixed(2)"></span></td>
