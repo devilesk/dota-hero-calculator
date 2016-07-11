@@ -1,13 +1,13 @@
-<div class="row" data-bind="visible: showDamageDetails()">
+<div class="row">
     <div class="col-md-12">
         <h3 style="display:block;" class="section_header" data-bind="toggle: showDamageDetails, css: { section_disabled: !showDamageDetails() }">Damage Details
-            <span class="pull-right">
+            <span class="pull-right" data-bind="visible: showDamageDetails()">
                 <small style="text-align:center" data-bind="style: {color: getDamageTypeColor('physical')}">Physical</small>
                 <small style="text-align:center" data-bind="style: {color: getDamageTypeColor('magic')}">Magical</small>
                 <small style="text-align:center" data-bind="style: {color: getDamageTypeColor('pure')}">Pure</small>
             </span>
         </h3>
-        <table class="table damage-details">
+        <table class="table damage-details" data-bind="visible: showDamageDetails()">
             <thead>
                 <tr>
                     <td></td>
