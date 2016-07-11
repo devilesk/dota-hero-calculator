@@ -15,10 +15,10 @@
                 <div data-bind="component: { name: $data.value, params: $root.heroes[$parentContext.$index()].clone()}"></div>
             </div>
         </div>
-        
-        <div class="row" data-bind="component: { name: 'damage-details', params: $data}"></div>
     </div>
     <div class="col-md-8" data-bind="css: {'col-md-8': $root.layout() == 0, 'col-md-12': $root.layout() == 1}">
+        <div data-bind="component: { name: 'damage-details', params: $data}"></div>
+        
         <div class="row">
             <div class="col-md-12">
                 <h3 class="section_header" data-bind="toggle: sectionDisplay().inventory, css: { section_disabled: !sectionDisplay().inventory() }">Inventory <small style="color:goldenrod" data-bind="html: inventory.totalCost() ? '<img src=\'http://cdn.dota2.com/apps/dota2/images/tooltips/gold.png\'/> ' + inventory.totalCost() : '' "></small></h3>
