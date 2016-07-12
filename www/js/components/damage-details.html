@@ -9,19 +9,12 @@
         </h3>
         <table class="table damage-details" data-bind="visible: showDamageDetails()">
             <thead>
-                <tr>
+                <tr class="damage-details-header-row">
                     <td></td>
-                    <td class="text-center" colspan="2"><strong>Attack Damage</strong></td>
-                    <td class="text-center" colspan="2"><strong>DPS</strong></td>
+                    <td class="text-center" colspan="2"><strong>Attack Damage</strong><img src="img/reduc_icon.png" class="pull-right" data-bind="attr: {title: 'After reductions from ' + enemy().hero().displayname()}"></td>
+                    <td class="text-center" colspan="2"><strong>DPS</strong><img src="img/reduc_icon.png" class="pull-right" data-bind="attr: {title: 'After reductions from ' + enemy().hero().displayname()}"></td>
                 </tr>
-                <tr>
-                    <td></td>
-                    <td class="text-right"><strong>Unmitigated</strong></td>
-                    <td class="text-right"><strong><abbr data-bind="attr: {title: 'After reductions from ' + enemy().hero().displayname()}">After Reductions</abbr></strong></td>
-                    <td class="text-right"><strong>Unmitigated</strong></td>
-                    <td class="text-right"><strong><abbr data-bind="attr: {title: 'After reductions from ' + enemy().hero().displayname()}">After Reductions</abbr></strong></td>
-                </tr>
-                <tr>
+                <tr class="damage-details-header-row-2">
                     <td><strong>Total</strong></td>
                     <td class="text-right" data-bind="text: damageTotalInfo().totalRow[0]().toFixed(2)"></td>
                     <td class="text-right" data-bind="text: damageTotalInfo().totalRow[1]().toFixed(2)"></td>
@@ -33,6 +26,7 @@
             <tbody>
                 <tr class="indent" data-bind="toggle: $data.enabled, css: { 'inactive': !$data.enabled() }">
                     <td>
+                        <button class="btn btn-default btn-xs glyphicon pull-left" data-bind="toggle: $data.enabled, css: {'glyphicon-eye-open': $data.enabled(), 'glyphicon-eye-close': !$data.enabled()}, preventBubble: 'click'"></button>
                         <button class="btn btn-default btn-xs glyphicon pull-right" data-bind="toggle: $data.visible, css: {'glyphicon-minus': $data.visible(), 'glyphicon-plus': !$data.visible()}, preventBubble: 'click'"></button>
                         <strong><span data-bind="text: $data.name"></span></strong>
                     </td>
@@ -44,7 +38,10 @@
             </tbody>
             <tbody class="indent" data-bind="foreach: $data.sources, visible: $data.visible">
                 <tr data-bind="toggle: $data.enabled, css: { 'inactive': !$data.enabled() }">
-                    <td class="indent"><span data-bind="text: $data.name"></span></td>
+                    <td class="indent">
+                        <span data-bind="text: $data.name"></span>
+                        <button class="btn btn-default btn-xs glyphicon pull-left" data-bind="toggle: $data.enabled, css: {'glyphicon-eye-open': $data.enabled(), 'glyphicon-eye-close': !$data.enabled()}, preventBubble: 'click'"></button>
+                    </td>
                     <td class="text-right"><span data-bind="html: $data.damage.toFixed(2), style: {color: $parents[1].getDamageTypeColor($data.damageType)}"></span></td>
                     <td class="text-right"><span data-bind="html: $data.damageReduced.toFixed(2), style: {color: $parents[1].getDamageTypeColor($data.damageType)}"></span></td>
                     <td class="text-right"><span data-bind="html: $data.dps.toFixed(2), style: {color: $parents[1].getDamageTypeColor($data.damageType)}"></span></td>
@@ -60,7 +57,10 @@
             </tr>
             <tbody class="indent" data-bind="visible: $data.visible, foreach: $data.sourcesCrit">
                 <tr class="indent crit" data-bind="toggle: $data.enabled, css: { 'inactive': !$data.enabled() }">
-                    <td class="indent"><span data-bind="text: $data.name"></span></td>
+                    <td class="indent">
+                        <span data-bind="text: $data.name"></span>
+                        <button class="btn btn-default btn-xs glyphicon pull-left" data-bind="toggle: $data.enabled, css: {'glyphicon-eye-open': $data.enabled(), 'glyphicon-eye-close': !$data.enabled()}, preventBubble: 'click'"></button>
+                    </td>
                     <td class="text-right"><span data-bind="html: $data.damage.toFixed(2)"></span></td>
                     <td class="text-right"><span data-bind="html: $data.damageReduced.toFixed(2)"></span></td>
                     <td class="text-right"><span data-bind="html: $data.dps.toFixed(2)"></span></td>

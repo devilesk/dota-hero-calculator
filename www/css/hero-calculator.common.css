@@ -1,3 +1,12 @@
+.damage-details tbody td:nth-child(3), .damage-details-header-row-2 td:nth-child(3) {
+    border-right: 1px solid #202125;
+}
+.damage-details-header-row-2 td:first-child {
+    text-indent: 34px;
+}
+.damage-details-header-row td:nth-child(2) {
+    border-right: 1px solid #202125;
+}
 .crit {
     color: #d9534f;
 }
@@ -123,6 +132,9 @@ img {
 }
 .indent .indent .indent {
     text-indent: 30px;
+}
+.crit .indent {
+    text-indent: 44px;
 }
 .diffPos {
     color: #5cb85c;
