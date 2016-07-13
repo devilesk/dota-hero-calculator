@@ -14,7 +14,7 @@
                     <td class="text-center" colspan="2"><strong>Attack Damage</strong><img src="img/reduc_icon.png" class="pull-right" data-bind="attr: {title: 'After reductions from ' + enemy().hero().displayname()}"></td>
                     <td class="text-center" colspan="2"><strong>DPS</strong><img src="img/reduc_icon.png" class="pull-right" data-bind="attr: {title: 'After reductions from ' + enemy().hero().displayname()}"></td>
                 </tr>
-                <tr class="damage-details-header-row-2">
+                <tr class="damage-details-header-row-2 total-row">
                     <td><strong>Total</strong></td>
                     <td class="text-right" data-bind="text: damageTotalInfo().totalRow[0]().toFixed(2)"></td>
                     <td class="text-right" data-bind="text: damageTotalInfo().totalRow[1]().toFixed(2)"></td>
@@ -24,7 +24,7 @@
             </thead>
             <!-- ko foreach: damageTotalInfo().attacks -->
             <tbody>
-                <tr class="indent" data-bind="toggle: $data.enabled, css: { 'inactive': !$data.enabled() }">
+                <tr class="indent subtotal-row" data-bind="toggle: $data.enabled, css: { 'inactive': !$data.enabled() }">
                     <td>
                         <button class="btn btn-default btn-xs glyphicon pull-left" data-bind="toggle: $data.enabled, css: {'glyphicon-eye-open': $data.enabled(), 'glyphicon-eye-close': !$data.enabled()}, preventBubble: 'click'"></button>
                         <button class="btn btn-default btn-xs glyphicon pull-right" data-bind="toggle: $data.visible, css: {'glyphicon-minus': $data.visible(), 'glyphicon-plus': !$data.visible()}, preventBubble: 'click'"></button>
