@@ -539,7 +539,7 @@ define(function (require, exports, module) {
                     var d = totalCritableDamage * (critSources.sources[i].multiplier - 1);// * critSources.sources[i].totalChance;
                     console.log(totalCritableDamage, critSources.sources[i].multiplier, critSources.sources[i].totalChance);
                     crits.push({
-                        name: critSources.sources[i].name + ', ' + critSources.sources[i].multiplier + 'x, ' + critSources.sources[i].totalChance.toFixed(2) + '%',
+                        name: critSources.sources[i].name + ', ' + critSources.sources[i].multiplier + 'x, ' + (critSources.sources[i].totalChance * 100).toFixed(1) + '%',
                         damage: d,
                         damageType: 'physical',
                         damageReduced: self.getReducedDamage(d, 'physical'),

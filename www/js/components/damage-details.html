@@ -49,7 +49,7 @@
                 </tr>
             </tbody>
             <tr class="indent crit" data-bind="visible: $data.visible() && $data.sourcesCrit.length > 0">
-                <td class="indent">Critical Strike Proc, <span data-bind="text: $data.totalCritChance.toFixed(2) + '%'"></span></td>
+                <td class="indent">Critical Strike Proc, <span data-bind="text: ($data.totalCritChance * 100).toFixed(1) + '%'"></span></td>
                 <td class="text-right" data-bind="text: $data.totalCritRow[0]().toFixed(2)"></td>
                 <td class="text-right" data-bind="text: $data.totalCritRow[1]().toFixed(2)"></td>
                 <td class="text-right" data-bind="text: $data.totalCritRow[2]().toFixed(2)"></td>
