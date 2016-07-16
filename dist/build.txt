@@ -30,6 +30,8 @@ js/herocalc/herocalc_abilities.js
 js/herocalc/herocalc_buffs.js
 js/herocalc/herocalc_buffs.amplification.reduction.js
 js/herocalc/herocalc_buildexplorer.js
+js/herocalc/herocalc_hero_damage.js
+js/herocalc/herocalc_hero_damageamp.js
 js/herocalc/herocalc_hero.js
 js/herocalc/herocalc_hero.illusion.js
 js/herocalc/herocalc_hero.meepo.js

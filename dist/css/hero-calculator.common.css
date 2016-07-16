@@ -1,3 +1,22 @@
+.damage-details tbody td:nth-child(3), .damage-details-header-row-2 td:nth-child(3) {
+    border-right: 1px solid #202125;
+}
+.damage-details-header-row-2 td:first-child {
+    text-indent: 34px;
+}
+.damage-details-header-row td:nth-child(2) {
+    border-right: 1px solid #202125;
+}
+.crit {
+    color: #d9534f;
+}
+.damage-details input[type='checkbox'] {
+    float: left;
+    margin-left: -20px;
+}
+.damage-details tr.inactive {
+    opacity: .5;
+}
 .tooltip-underline {
 	cursor: help;
 	border-bottom: 1px dotted #999;
@@ -104,6 +123,15 @@ img {
 }
 .indent {
     text-indent: 10px;
+}
+.indent .indent {
+    text-indent: 20px;
+}
+.indent .indent .indent {
+    text-indent: 30px;
+}
+.crit .indent {
+    text-indent: 44px;
 }
 .diffPos {
     color: #5cb85c;

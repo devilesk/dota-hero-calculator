@@ -1,106 +1,73 @@
-<div class="row" data-bind="visible: showDamageDetails()">
+<div class="row">
     <div class="col-md-12">
         <h3 style="display:block;" class="section_header" data-bind="toggle: showDamageDetails, css: { section_disabled: !showDamageDetails() }">Damage Details
-            <span class="pull-right">
+            <span class="pull-right" data-bind="visible: showDamageDetails()">
                 <small style="text-align:center" data-bind="style: {color: getDamageTypeColor('physical')}">Physical</small>
                 <small style="text-align:center" data-bind="style: {color: getDamageTypeColor('magic')}">Magical</small>
                 <small style="text-align:center" data-bind="style: {color: getDamageTypeColor('pure')}">Pure</small>
             </span>
         </h3>
-        <table class="table">
-            <tbody>
-                <tr>
+        <table class="table damage-details" data-bind="visible: showDamageDetails()">
+            <thead>
+                <tr class="damage-details-header-row">
                     <td></td>
-                    <td class="text-right"><strong>Unmitigated</strong></td>
-                    <td class="text-right"><strong><abbr data-bind="attr: {title: 'After reductions from ' + enemy().hero().displayname()}">After Reductions</abbr></strong></td>
+                    <td class="text-center" colspan="2"><strong>Attack Damage</strong><img src="img/reduc_icon.png" class="pull-right" data-bind="attr: {title: 'After reductions from ' + enemy().hero().displayname()}"></td>
+                    <td class="text-center" colspan="2"><strong>DPS</strong><img src="img/reduc_icon.png" class="pull-right" data-bind="attr: {title: 'After reductions from ' + enemy().hero().displayname()}"></td>
                 </tr>
-                <tr>
-                    <td><abbr title="Sum of damage sources">Damage Per Attack:</abbr></td>
-                    <td class="text-right">
-                        <span data-bind="html: damageTotalInfo().total.toFixed(2)"></span>
-                        <span data-bind="html: $root.getDiffTextWrapper($data, 'total'), diffStyle: $root.getDiffMagnitude($data, 'total'), visible: showDiff"></span>
-                    </td>
-                    <td class="text-right">
-                        <span data-bind="html: damageTotalInfo().totalReduced.toFixed(2)"></span>
-                        <span data-bind="html: $root.getDiffTextWrapper($data, 'totalReduced'), diffStyle: $root.getDiffMagnitude($data, 'totalReduced'), visible: showDiff"></span>
-                    </td>
+                <tr class="damage-details-header-row-2 total-row">
+                    <td><strong>Total</strong></td>
+                    <td class="text-right" data-bind="text: damageTotalInfo().totalRow[0]().toFixed(2)"></td>
+                    <td class="text-right" data-bind="text: damageTotalInfo().totalRow[1]().toFixed(2)"></td>
+                    <td class="text-right" data-bind="text: damageTotalInfo().totalRow[2]().toFixed(2)"></td>
+                    <td class="text-right" data-bind="text: damageTotalInfo().totalRow[3]().toFixed(2)"></td>
                 </tr>
-                <tr data-bind="visible: damageTotalInfo().geminateAttack.active">
-                    <td class="indent"><abbr title="Sum of damage sources + geminate attack damage">with Geminate Attack:</abbr></td>
-                    <td class="text-right">
-                        <span data-bind="html: damageTotalInfo().totalGeminateAttack.toFixed(2)"></span>
-                        <span data-bind="html: $root.getDiffTextWrapper($data, 'totalGeminateAttack'), diffStyle: $root.getDiffMagnitude($data, 'totalGeminateAttack'), visible: showDiff"></span>
+            </thead>
+            <!-- ko foreach: damageTotalInfo().attacks -->
+            <tbody>
+                <tr class="indent subtotal-row" data-bind="toggle: $data.enabled, css: { 'inactive': !$data.enabled() }">
+                    <td>
+                        <button class="btn btn-default btn-xs glyphicon pull-left" data-bind="toggle: $data.enabled, css: {'glyphicon-eye-open': $data.enabled(), 'glyphicon-eye-close': !$data.enabled()}, preventBubble: 'click'"></button>
+                        <button class="btn btn-default btn-xs glyphicon pull-right" data-bind="toggle: $data.visible, css: {'glyphicon-minus': $data.visible(), 'glyphicon-plus': !$data.visible()}, preventBubble: 'click'"></button>
+                        <strong><span data-bind="text: $data.name"></span></strong>
                     </td>
-                    <td class="text-right">
-                        <span data-bind="html: damageTotalInfo().totalGeminateAttackReduced.toFixed(2)"></span>
-                        <span data-bind="html: $root.getDiffTextWrapper($data, 'totalGeminateAttackReduced'), diffStyle: $root.getDiffMagnitude($data, 'totalGeminateAttackReduced'), visible: showDiff"></span>
-                    </td>
-                </tr>
-                <tr data-bind="visible: damageTotalInfo().sourcesCrit.length > 0">
-                    <td class="indent"><abbr title="Sum of damage sources + average crit damage per attack">with Crit:</abbr></td>
-                    <td class="text-right"><span data-bind="html: damageTotalInfo().sumTotal.toFixed(2)"></span></td>
-                    <td class="text-right"><span data-bind="html: damageTotalInfo().sumTotalReduced.toFixed(2)"></span></td>
-                </tr>
-                <tr>
-                    <td><abbr title="Damage per attack * attacks per second">DPS:</abbr></td>
-                    <td class="text-right">
-                        <span data-bind="html: damageTotalInfo().dps.base.toFixed(2)"></span>
-                        <span data-bind="html: $root.getDiffTextWrapper($data, 'dps.base'), diffStyle: $root.getDiffMagnitude($data, 'dps.base'), visible: showDiff"></span>
-                    </td>
-                    <td class="text-right">
-                        <span data-bind="html: damageTotalInfo().dps.reduced.base.toFixed(2)"></span>
-                        <span data-bind="html: $root.getDiffTextWrapper($data, 'dps.reduced.base'), diffStyle: $root.getDiffMagnitude($data, 'dps.reduced.base'), visible: showDiff"></span>
-                    </td>
-                </tr>
-                <tr data-bind="visible: damageTotalInfo().geminateAttack.active">
-                    <td class="indent"><abbr title="(Damage per attack * attacks per second) + average geminate attack dps">with Geminate Attack:</abbr></td>
-                    <td class="text-right">
-                        <span data-bind="html: damageTotalInfo().dps.geminateAttack.toFixed(2)"></span>
-                        <span data-bind="html: $root.getDiffTextWrapper($data, 'dps.geminateAttack'), diffStyle: $root.getDiffMagnitude($data, 'dps.geminateAttack'), visible: showDiff"></span>
-                    </td>
-                    <td class="text-right">
-                        <span data-bind="html: damageTotalInfo().dps.reduced.geminateAttack.toFixed(2)"></span>
-                        <span data-bind="html: $root.getDiffTextWrapper($data, 'dps.reduced.geminateAttack'), diffStyle: $root.getDiffMagnitude($data, 'dps.reduced.geminateAttack'), visible: showDiff"></span>
-                    </td>
-                </tr>
-                <tr data-bind="visible: damageTotalInfo().sourcesCrit.length > 0">
-                    <td class="indent"><abbr data-bind="attr: { title: damageTotalInfo().geminateAttack.active ? 'Damage per attack (including crit) * attacks per second + average geminate attack dps' : 'Damage per attack (including crit) * attacks per second' }, text: damageTotalInfo().geminateAttack.active ? 'with Crit and Geminate Attack' : 'with Crit:' "></abbr></td>
-                    <td class="text-right"><span data-bind="html: damageTotalInfo().dps.total.toFixed(2)"></span></td>
-                    <td class="text-right"><span data-bind="html: damageTotalInfo().dps.reduced.total.toFixed(2)"></span></td>
-                </tr>
-                <tr><td colspan=3><strong><abbr title="with %chance taken into account">Damage Sources</abbr></strong></td></tr>
-                <tr>
-                    <td>Base Damage</td>
-                    <td class="text-right">
-                        <span data-bind="html: ((baseDamage()[0] + baseDamage()[1])/2).toFixed(2)"></span>
-                        <span data-bind="html: $root.getDiffText(((baseDamage()[0] + baseDamage()[1])/2).toFixed(2) - ((heroCompare().baseDamage()[0] + heroCompare().baseDamage()[1])/2).toFixed(2)), diffStyle: (((baseDamage()[0] + baseDamage()[1])/2).toFixed(2) - ((heroCompare().baseDamage()[0] + heroCompare().baseDamage()[1])/2).toFixed(2)), visible: showDiff"></span>
-                    </td>
-                    <td class="text-right">
-                        <span data-bind="html: getReducedDamage((baseDamage()[0] + baseDamage()[1])/2, 'physical').toFixed(2)"></span>
-                        <span data-bind="html: $root.getDiffText(getReducedDamage((baseDamage()[0] + baseDamage()[1])/2, 'physical').toFixed(2) - getReducedDamage((heroCompare().baseDamage()[0] + heroCompare().baseDamage()[1])/2, 'physical').toFixed(2)), diffStyle: (getReducedDamage((baseDamage()[0] + baseDamage()[1])/2, 'physical').toFixed(2) - getReducedDamage((heroCompare().baseDamage()[0] + heroCompare().baseDamage()[1])/2, 'physical').toFixed(2)), visible: showDiff"></span>
-                    </td>
+                    <td class="text-right" data-bind="text: $data.totalRow[0]().toFixed(2)"></td>
+                    <td class="text-right" data-bind="text: $data.totalRow[1]().toFixed(2)"></td>
+                    <td class="text-right" data-bind="text: $data.totalRow[2]().toFixed(2)"></td>
+                    <td class="text-right" data-bind="text: $data.totalRow[3]().toFixed(2)"></td>
                 </tr>
             </tbody>
-            <tbody data-bind="foreach: damageTotalInfo().sources">
-                <tr>
-                    <td><span data-bind="text: $data.name"></span></td>
-                    <td class="text-right"><span data-bind="html: $data.damage.toFixed(2), style: {color: $parent.getDamageTypeColor($data.damageType)}"></span></td>
-                    <td class="text-right"><span data-bind="html: $data.damageReduced.toFixed(2), style: {color: $parent.getDamageTypeColor($data.damageType)}"></span></td>
+            <tbody class="indent" data-bind="foreach: $data.sources, visible: $data.visible">
+                <tr data-bind="toggle: $data.enabled, css: { 'inactive': !$data.enabled() }">
+                    <td class="indent">
+                        <span data-bind="text: $data.name"></span>
+                        <button class="btn btn-default btn-xs glyphicon pull-left" data-bind="toggle: $data.enabled, css: {'glyphicon-eye-open': $data.enabled(), 'glyphicon-eye-close': !$data.enabled()}, preventBubble: 'click'"></button>
+                    </td>
+                    <td class="text-right"><span data-bind="html: $data.damage.toFixed(2), style: {color: $parents[1].getDamageTypeColor($data.damageType)}"></span></td>
+                    <td class="text-right"><span data-bind="html: $data.damageReduced.toFixed(2), style: {color: $parents[1].getDamageTypeColor($data.damageType)}"></span></td>
+                    <td class="text-right"><span data-bind="html: $data.dps.toFixed(2), style: {color: $parents[1].getDamageTypeColor($data.damageType)}"></span></td>
+                    <td class="text-right"><span data-bind="html: $data.dpsReduced.toFixed(2), style: {color: $parents[1].getDamageTypeColor($data.damageType)}"></span></td>
                 </tr>
             </tbody>
-
-            <tr data-bind="visible: damageTotalInfo().sourcesCrit.length > 0">
-                <td colspan=2><strong>Critical Strike</strong></td>
+            <tr class="indent crit" data-bind="visible: $data.visible() && $data.sourcesCrit.length > 0">
+                <td class="indent">Critical Strike Proc, <span data-bind="text: ($data.totalCritChance * 100).toFixed(1) + '%'"></span></td>
+                <td class="text-right" data-bind="text: $data.totalCritRow[0]().toFixed(2)"></td>
+                <td class="text-right" data-bind="text: $data.totalCritRow[1]().toFixed(2)"></td>
+                <td class="text-right" data-bind="text: $data.totalCritRow[2]().toFixed(2)"></td>
+                <td class="text-right" data-bind="text: $data.totalCritRow[3]().toFixed(2)"></td>
             </tr>
-            
-            <tbody data-bind="foreach: damageTotalInfo().sourcesCrit">
-                <tr>
-                    <td><span data-bind="text: $data.name"></span></td>
-                    <td class="text-right"><span data-bind="html: $data.damage.toFixed(2), style: {color: $parent.getDamageTypeColor($data.damageType)}"></span></td>
-                    <td class="text-right"><span data-bind="html: $data.damageReduced.toFixed(2), style: {color: $parent.getDamageTypeColor($data.damageType)}"></span></td>
+            <tbody class="indent" data-bind="visible: $data.visible, foreach: $data.sourcesCrit">
+                <tr class="indent crit" data-bind="toggle: $data.enabled, css: { 'inactive': !$data.enabled() }">
+                    <td class="indent">
+                        <span data-bind="text: $data.name"></span>
+                        <button class="btn btn-default btn-xs glyphicon pull-left" data-bind="toggle: $data.enabled, css: {'glyphicon-eye-open': $data.enabled(), 'glyphicon-eye-close': !$data.enabled()}, preventBubble: 'click'"></button>
+                    </td>
+                    <td class="text-right"><span data-bind="html: $data.damage.toFixed(2)"></span></td>
+                    <td class="text-right"><span data-bind="html: $data.damageReduced.toFixed(2)"></span></td>
+                    <td class="text-right"><span data-bind="html: $data.dps.toFixed(2)"></span></td>
+                    <td class="text-right"><span data-bind="html: $data.dpsReduced.toFixed(2)"></span></td>
                 </tr>
             </tbody>
-        
+            <!-- /ko -->
             <tbody>
                 <tr data-bind="visible: cleaveInfo().length > 0">
                     <td colspan=3><strong>Cleave</strong></td>
