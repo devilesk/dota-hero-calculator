@@ -58,7 +58,6 @@
                 <tr><td>Evasion:</td><td class="text-right"><span data-bind="text: evasion"></span></td></tr>
                 <tr><td>Bash:</td><td class="text-right"><span data-bind="text: bash"></span></td></tr>
                 <tr><td>Miss Chance:</td><td class="text-right"><span data-bind="text: missChance"></span></td></tr>
-                <tr><td colspan=2><a class="btn btn-default btn-block btn-xs" data-bind="css: {disabled: critInfo().sources.length == 0 ? 'disabled' : '', 'toggled': showCriticalStrikeDetails}, toggle: showCriticalStrikeDetails">Critical Strike Details</a></td></tr>
                 </tbody>
                 <tbody class="tabledropdown" style="border-top:0" data-bind="visible: showCriticalStrikeDetails(),foreach: critInfo().sources">
                 <tr><td colspan=2><strong data-bind="text: $data.name"></strong></td></tr>
@@ -84,7 +83,6 @@
                 <tr><td>Attack Time:</td><td class="text-right"><span data-bind="text: attackTime"></span></td></tr>
                 <tr><td>Attack / Sec:</td><td class="text-right"><span data-bind="text: attacksPerSecond().toFixed(2)"></span></td></tr>
                 <tr><td>Attack Range:</td><td class="text-right"><span data-bind="text: totalattackrange"></span></td></tr>
-                <tr><td colspan=2><a class="btn btn-default btn-block btn-xs" data-bind="toggle: showDamageDetails, css: {'toggled': showDamageDetails}">Damage Details</a></td></tr>
                 </tbody>
                 </table>
             </div>
