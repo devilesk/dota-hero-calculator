@@ -505,7 +505,7 @@ define(function (require, exports, module) {
                 }
                 
                 // ability orbs
-                for (orb in abilityOrbSources) {
+                for (var orb in abilityOrbSources) {
                     var d = abilityOrbSources[orb].damage * (1 - itemProcOrbSources.total);
                     result.push({
                         name: abilityOrbSources[orb].displayname,
@@ -520,7 +520,7 @@ define(function (require, exports, module) {
                 
                 // item orbs
                 if (Object.keys(abilityOrbSources).length === 0) {
-                    for (orb in itemOrbSources) {
+                    for (var orb in itemOrbSources) {
                         var d = itemOrbSources[orb].damage * (1 - itemProcOrbSources.total);
                         result.push({
                             name: itemOrbSources[orb].displayname,
