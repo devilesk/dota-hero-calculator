@@ -615,7 +615,7 @@ define(function (require, exports, module) {
                         if (sources[item] == undefined) {
                             sources[item] = {
                                 'damage': self.getItemAttributeValue(my.prototype.itemData['item_' + item].attributes, 'bonus_chance_damage', 1),
-                                'damageType': 'physical',
+                                'damageType': 'magic',
                                 'count': 1,
                                 'chance': self.getItemAttributeValue(my.prototype.itemData['item_' + item].attributes, 'bonus_chance', 1) / 100,
                                 'displayname': my.prototype.itemData['item_' + item].displayname + ' Pierce'
