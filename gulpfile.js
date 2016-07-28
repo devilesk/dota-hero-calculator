@@ -46,7 +46,8 @@ gulp.task('build', function (cb) {
                 // output the original source contents
                 console.log(contents);
                 // perform transformations on the original source
-                contents = contents.replace(/#Development/i, new Date().toString());
+                contents = contents.replace(/#DEV_BUILD/, new Date().toString());
+                contents = contents.replace(/development/, 'production');
                 // output the processed contents
                 console.log(contents);
             }
