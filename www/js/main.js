@@ -79,7 +79,7 @@ require(['rollbar'], function (Rollbar) {
         }
         
         hc = new HEROCALCULATOR.HEROCALCULATOR();
-        var lastUpdate = "#Development";
+        var lastUpdate = "#DEV_BUILD";
         $('#last-update').text(lastUpdate);
         
         hc.init("/media/js/herodata.json","/media/js/itemdata.json","/media/js/unitdata.json");
