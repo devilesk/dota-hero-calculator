@@ -26,6 +26,15 @@ var rollbarConfig = {
   captureUncaught: true,
   payload: {
     environment: 'development',
+    client: {
+      javascript: {
+        source_map_enabled: true,
+        code_version: "#code_version",
+        // Optionally have Rollbar guess which frames the error was thrown from
+        // when the browser does not provide line and column numbers.
+        guess_uncaught_frames: true
+      }
+    }
   }
 };
 
