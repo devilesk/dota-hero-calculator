@@ -12,6 +12,7 @@ var sourcemaps = require('gulp-sourcemaps');
 var del = require('del');
 var gulpSequence = require('gulp-sequence');
 var request = require('request');
+var config = require('./config.json');
 
 gulp.task('default', ['full-build']);
 
@@ -81,7 +82,7 @@ gulp.task('rollbar', ['build'], function () {
     return gulp.src('dist/**/*.js')
         .pipe(sourcemaps.init({loadMaps: true}))
         .pipe(rollbar({
-          accessToken: '4b77d2c423ef4108aef6497271684439',
+          accessToken: config.access_token,
           version: git.long(),
           sourceMappingURLPrefix: 'http://devilesk.com/dota2/apps/hero-calculator/js'
         }))
@@ -91,7 +92,7 @@ gulp.task('rollbar-deploy-tracking', function (cb) {
     request.post({
         url:'https://api.rollbar.com/api/1/deploy/',
         form: {
-            access_token:'4b77d2c423ef4108aef6497271684439',
+            access_token:config.access_token,
             environment: 'production',
             revision: git.long(),
             local_username: 'devilesk',
