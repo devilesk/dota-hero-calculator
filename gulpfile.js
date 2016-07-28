@@ -40,6 +40,11 @@ gulp.task('build', function (cb) {
         dir: "dist",
         packages: ["herocalc", "components"],
         mainConfigFile: "www/js/main.js",
+        optimize: "uglify2",
+        findNestedDependencies: true,
+        generateSourceMaps: true,
+        preserveLicenseComments: false,
+        useSourceUrl: false,
         onBuildWrite   : function(name, path, contents) {
             console.log('Writing: ' + name);
             if (name === 'main') {

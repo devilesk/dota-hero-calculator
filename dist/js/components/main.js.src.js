@@ -1,0 +1,21 @@
+define(['require','exports','module','./hero-pane','./unit-pane','./clone-pane','./illusion-pane','./buff-settings','./item-buff','./item-debuff','./buff-section','./damage-details','./damage-amp','./ability','./shop','./stats/stat','./stats/stats0','./stats/stats1','./stats/stats2','./stats/stats3','./stats/stats-additional'],function (require, exports, module) {
+    'use strict';
+    require("./hero-pane");
+    require("./unit-pane");
+    require("./clone-pane");
+    require("./illusion-pane");
+    require("./buff-settings");
+    require("./item-buff");
+    require("./item-debuff");
+    require("./buff-section");
+    require("./damage-details");
+    require("./damage-amp");
+    require("./ability");
+    require("./shop");
+    require("./stats/stat");
+    require("./stats/stats0");
+    require("./stats/stats1");
+    require("./stats/stats2");
+    require("./stats/stats3");
+    require("./stats/stats-additional");
+});
