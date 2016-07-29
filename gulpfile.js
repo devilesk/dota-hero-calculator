@@ -15,7 +15,7 @@ var chmod = require('gulp-chmod');
 var request = require('request');
 var config = require('./config.json');
 
-gulp.task('css', function (){
+gulp.task('css', function () {
     return gulp.src([
           '!www/css/hero-calculator.theme.light.css',
           '!www/css/hero-calculator.theme.dark.css',
@@ -24,6 +24,15 @@ gulp.task('css', function (){
         .pipe(concat('hero-calculator.css'))
         .pipe(minifyCSS())
         .pipe(rename('hero-calculator.min.css'))
+        .pipe(gulp.dest('dist/css'))
+});
+
+gulp.task('css-themes', function () {
+    return gulp.src([
+          'www/css/hero-calculator.theme.light.css',
+          'www/css/hero-calculator.theme.dark.css'
+        ])
+        .pipe(minifyCSS())
         .pipe(gulp.dest('dist/css'))
 });
 
@@ -55,13 +64,13 @@ gulp.task('build', function (cb) {
             console.log('Writing: ' + name);
             if (name === 'main') {
                 // output the original source contents
-                console.log(contents);
+                //console.log(contents);
                 // perform transformations on the original source
                 contents = contents.replace(/#DEV_BUILD/, new Date().toString());
                 contents = contents.replace(/development/, 'production');
                 contents = contents.replace(/#code_version/, git.long());
                 // output the processed contents
-                console.log(contents);
+                //console.log(contents);
             }
             // return contents
             return contents;
@@ -105,7 +114,11 @@ gulp.task('rollbar-deploy-tracking', function (cb) {
 
 gulp.task('purge-cache', function (cb) {
     var files = [
-            'http://devilesk.com/dota2/apps/hero-calculator/js/main.js', //'http://devilesk.com/dota2/apps/hero-calculator/css/hero-calculator.min.css',
+            'http://devilesk.com/dota2/apps/hero-calculator/js/main.js',
+            'http://devilesk.com/dota2/apps/hero-calculator/css/hero-calculator.min.css',
+            'http://devilesk.com/dota2/apps/hero-calculator/css/hero-calculator.theme.dark.css',
+            'http://devilesk.com/dota2/apps/hero-calculator/css/hero-calculator.theme.light.css',
+            'http://devilesk.com/dota2/apps/hero-calculator/img/hero-calculator.items.png'
         ],
         counter = 0;
     files.forEach(function (f) {
@@ -116,11 +129,12 @@ gulp.task('purge-cache', function (cb) {
                 tkn: config.cloudflare_token,
                 email: 'devilesk@gmail.com',
                 z: 'devilesk.com',
-                url: ''
+                url: f
             }
         },
         function (err, httpResponse, body){
             counter++;
+            console.log(body);
             if (counter >= files.length) cb();
         });
     });
@@ -144,4 +158,4 @@ gulp.task('deploy', function () {
         .pipe(gulp.dest('/srv/www/devilesk.com/dota2/apps/hero-calculator'));
 });
 
-gulp.task('full-deploy', gulpSequence('build', 'css', 'html', 'image', 'rollbar', 'deploy', 'rollbar-deploy-tracking'));
+gulp.task('full-deploy', gulpSequence('build', ['css', 'css-themes', 'html', 'image', 'rollbar'], 'deploy', 'rollbar-deploy-tracking', 'purge-cache'));
