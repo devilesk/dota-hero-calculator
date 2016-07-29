@@ -111,19 +111,13 @@ define(function (require, exports, module) {
                             }
                             var g = attributeValue(args[i].attributeName)
                             var r = self.getComputedFunction(v, g.fn, args[i].fn, parent, index, self, args[i].returnProperty, undefined, data);
-                            if (tooltip == '' || args[i].ignoreTooltip) {
-                                var tooltip = args[i].label;
+                            if (args[i].ignoreTooltip) {
+                                var tooltip = args[i].label || args[i].attributeName;
                             }
                             else {
-                                try {
-                                    var tooltip = self.getAbilityAttributeTooltip(self.abilities()[index].attributes(), args[i].attributeName);
-                                }
-                                catch (e) {
-                                    window.Rollbar.error("getAbilityAttributeTooltip failed", {args: [ko.toJS(self.abilities()[index].attributes()), args[i].attributeName]})
-                                    throw e;
-                                }
+                                var tooltip = self.getAbilityAttributeTooltip(self.abilities()[index].attributes(), args[i].attributeName) || args[i].label || args[i].attributeName;
                             }
-                            result.data.push({ labelName: tooltip, controlVal: r, controlType: args[i].controlType, display: args[i].display, clean: g.fn });
+                            result.data.push({ labelName: tooltip.toUpperCase(), controlVal: r, controlType: args[i].controlType, display: args[i].display, clean: g.fn });
                         }
                         // multi input abilities
                         else {
@@ -143,13 +137,13 @@ define(function (require, exports, module) {
                             }
                             var g = attributeValue(args[i].attributeName)
                             var r = self.getComputedFunction(v_list, g.fn, args[i].fn, parent, index, self, args[i].returnProperty, args[i].controls, data);
-                            if (tooltip == '' || args[i].ignoreTooltip) {
-                                var tooltip = args[i].label;
+                            if (args[i].ignoreTooltip) {
+                                var tooltip = args[i].label || args[i].attributeName;
                             }
                             else {
-                                var tooltip = self.getAbilityAttributeTooltip(self.abilities()[index].attributes(), args[i].attributeName);
+                                var tooltip = self.getAbilityAttributeTooltip(self.abilities()[index].attributes(), args[i].attributeName) || args[i].label || args[i].attributeName;
                             }
-                            result.data.push({ labelName: tooltip, controlVal: r, controlType: args[i].controlType, display: args[i].display, clean: g.fn });
+                            result.data.push({ labelName: tooltip.toUpperCase(), controlVal: r, controlType: args[i].controlType, display: args[i].display, clean: g.fn });
                         }
                     break;
                 }
@@ -227,8 +221,13 @@ define(function (require, exports, module) {
         self.getAbilityAttributeTooltip = function (attributes, attributeName) {
             for (var i=0; i<attributes.length; i++) {
                 if (attributes[i].name() == attributeName) {
+                    if (attributes[i].hasOwnProperty('tooltip')) {
                         var d = attributes[i].tooltip().replace(/\\n/g, '');
                         return d;
+                    }
+                    else {
+                        return '';
+                    }
                 }
             }
             return '';
