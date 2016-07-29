@@ -107,7 +107,8 @@ gulp.task('rollbar-deploy-tracking', function (cb) {
 gulp.task('clean', function () {
     return del([
         '/srv/www/devilesk.com/dota2/apps/hero-calculator/**/*',
-        '!/srv/www/devilesk.com/dota2/apps/hero-calculator/save'
+        '!/srv/www/devilesk.com/dota2/apps/hero-calculator/save',
+        '!/srv/www/devilesk.com/dota2/apps/hero-calculator/save/*'
     ], {force: true});
 });
 
@@ -118,4 +119,4 @@ gulp.task('deploy', ['clean'], function () {
 
 gulp.task('full-build', ['build', 'css', 'html', 'image']);
 
-gulp.task('full-deploy', gulpSequence('full-build', 'rollbar', 'deploy', 'rollbar-deploy-tracking'));
+gulp.task('full-deploy', gulpSequence('build', 'css', 'html', 'image', 'rollbar', 'deploy', 'rollbar-deploy-tracking'));
