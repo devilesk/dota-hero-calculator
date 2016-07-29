@@ -11,6 +11,7 @@ require.config({
         'chartjs-scatter': 'lib/Chart.scatter',
         'text': 'lib/text',
         'polyfill': 'herocalc/polyfill',
+        'errorTracker': 'errorTracker',
         'herocalc_knockout': 'herocalc/herocalc_knockout',
         'jquery-ui.custom': 'herocalc/jquery-ui.custom',
         'rollbar': 'lib/rollbar.umd.nojson.min'
@@ -22,25 +23,8 @@ require.config({
     }
 });
 
-var rollbarConfig = {
-  accessToken: 'de1980fcab4849d6a7a066cf098a6521',
-  captureUncaught: true,
-  payload: {
-    environment: 'development',
-    client: {
-      javascript: {
-        source_map_enabled: true,
-        code_version: "#code_version",
-        // Optionally have Rollbar guess which frames the error was thrown from
-        // when the browser does not provide line and column numbers.
-        guess_uncaught_frames: true
-      }
-    }
-  }
-};
-
-require(['rollbar', 'polyfill'], function (Rollbar) {
-    var rollbar = Rollbar.init(rollbarConfig);
+require(['errorTracker'], function (errorTracker) {
+    var rollbar = errorTracker.rollbar;
     require(['jquery', 'herocalc'], function ($, HEROCALCULATOR) {
         $('.top-nav-menu .dropdown-toggle').click(function() {
           if ($('.mobile-only').css('display') == 'none') {
@@ -92,10 +76,50 @@ require(['rollbar', 'polyfill'], function (Rollbar) {
         var lastUpdate = "#DEV_BUILD";
         $('#last-update').text(lastUpdate);
         hc.init("/media/js/herodata.json","/media/js/itemdata.json","/media/js/unitdata.json");
-        
+   
+        $('.error-warning-view, .error-warning-close').click(function () {
+            $('.error-warning').fadeOut(200);
+        });
+
         window.onerror = (function (old) {
             return function () {
-                var payload = {}
+                try {
+                    var log = document.querySelector('#log');
+                    var msg = arguments[0];
+                    var el = document.createElement('div');
+                    el.classList.add('alert');
+                    el.classList.add('alert-danger');
+                    el.classList.add('error-log');
+                    el.classList.add('col-md-12');
+                    el.textContent = 'error: ' + msg;
+                    
+                    var closeBtn = document.createElement('div');
+                    closeBtn.classList.add('error-log-close');
+                    closeBtn.innerHTML = "&times;";
+                    closeBtn.onclick = function () {
+                        log.removeChild(el);
+                    }
+                    el.appendChild(closeBtn);
+                    
+                    var reportEl = document.createElement('a');
+                    reportEl.classList.add('error-log-link');
+                    reportEl.innerHTML = "Send error report";
+                    reportEl.href = "#"
+                    reportEl.onclick = function () {
+                        $('#myModal').modal('show');
+                        $('#BugReportFormText').text('error: ' + msg + '\n\nDescribe what you were doing. Try to be as detailed as possible.');
+                    }
+                    el.appendChild(reportEl);
+                    
+                    log.appendChild(el);
+                    
+                    $('.error-warning').fadeOut(200).fadeIn(100);
+                }
+                catch (e) {
+                    rollbar.error("window.onerror create error log failed.", e);
+                }
+                
+                var payload = {};
                 try {
                     payload.heroCalcState = hc.heroCalculator.getSaveData();
                 }
@@ -104,14 +128,15 @@ require(['rollbar', 'polyfill'], function (Rollbar) {
                 }
                 try {
                     payload.appState = hc.heroCalculator.getAppState();
-                    console.log(payload.appState);
                 }
                 catch (e) {
                     rollbar.error("window.onerror getAppState failed.", e);
                 }
+                payload.userActions = errorTracker.userActions;
                 rollbar.configure({
                   payload: {custom: payload}
                 });
+                
                 return old.apply(this, arguments);
             }
         })(window.onerror);
