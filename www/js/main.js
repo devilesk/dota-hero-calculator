@@ -1,12 +1,12 @@
 require.config({
     packages: ["herocalc", "components"],
     paths: {
-        'knockout': '//cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min',
-        'underscore': '//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min',
-        'jquery': '//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min',
-        'knockout-mapping': '//cdnjs.cloudflare.com/ajax/libs/knockout.mapping/2.4.1/knockout.mapping',
-        'chartjs': '//cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.1/Chart.min',
-        'bootstrap': '//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min',
+        'knockout': 'lib/knockout-min',
+        //'underscore': '//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min',
+        'jquery': 'lib/jquery.min',
+        'knockout-mapping': 'lib/knockout.mapping',
+        'chartjs': 'lib/Chart.min',
+        'bootstrap': 'lib/bootstrap.min',
         'jquery-ui': 'lib/jquery-ui',
         'chartjs-scatter': 'lib/Chart.scatter',
         'text': 'lib/text',
