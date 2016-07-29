@@ -82,7 +82,7 @@ gulp.task('rollbar', ['build'], function () {
     return gulp.src('dist/**/*.js')
         .pipe(sourcemaps.init({loadMaps: true}))
         .pipe(rollbar({
-          accessToken: config.access_token,
+          accessToken: config.rollbar_token,
           version: git.long(),
           sourceMappingURLPrefix: 'http://devilesk.com/dota2/apps/hero-calculator/js'
         }))
@@ -92,7 +92,7 @@ gulp.task('rollbar-deploy-tracking', function (cb) {
     request.post({
         url:'https://api.rollbar.com/api/1/deploy/',
         form: {
-            access_token:config.access_token,
+            access_token: config.rollbar_token,
             environment: 'production',
             revision: git.long(),
             local_username: 'devilesk',
@@ -101,7 +101,30 @@ gulp.task('rollbar-deploy-tracking', function (cb) {
     },
     function (err, httpResponse, body){
         cb();
-    })
+    });
+});
+
+gulp.task('purge-cache', function (cb) {
+    var files = [
+            'http://devilesk.com/dota2/apps/hero-calculator/js/main.js', //'http://devilesk.com/dota2/apps/hero-calculator/css/hero-calculator.min.css',
+        ],
+        counter = 0;
+    files.forEach(function (f) {
+        request.post({
+            url:'https://www.cloudflare.com/api_json.html',
+            form: {
+                a: 'zone_file_purge',
+                tkn: config.cloudflare_token,
+                email: 'devilesk@gmail.com',
+                z: 'devilesk.com',
+                url: ''
+            }
+        },
+        function (err, httpResponse, body){
+            counter++;
+            if (counter >= files.length) cb();
+        });
+    });
 });
 
 gulp.task('clean', function () {
