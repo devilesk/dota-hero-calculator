@@ -11,12 +11,11 @@ var git = require('git-rev-sync');
 var sourcemaps = require('gulp-sourcemaps');
 var del = require('del');
 var gulpSequence = require('gulp-sequence');
+var chmod = require('gulp-chmod');
 var request = require('request');
 var config = require('./config.json');
 
-gulp.task('default', ['full-build']);
-
-gulp.task('css', ['build'], function (){
+gulp.task('css', function (){
     return gulp.src([
           '!www/css/hero-calculator.theme.light.css',
           '!www/css/hero-calculator.theme.dark.css',
@@ -28,13 +27,13 @@ gulp.task('css', ['build'], function (){
         .pipe(gulp.dest('dist/css'))
 });
 
-gulp.task('html', ['build'], function () {
+gulp.task('html', function () {
     return gulp.src('www/index.html')
         .pipe(preprocess({context: { NODE_ENV: 'production'}})) //To set environment variables in-line 
         .pipe(gulp.dest('dist/'))
 });
 
-gulp.task('image', ['build'], function () {
+gulp.task('image', function () {
     return gulp.src('www/img/*')
         .pipe(imagemin())
         .pipe(gulp.dest('dist/img'))
@@ -78,7 +77,7 @@ gulp.task('build', function (cb) {
     }, cb);
 });
 
-gulp.task('rollbar', ['build'], function () {
+gulp.task('rollbar', function () {
     return gulp.src('dist/**/*.js')
         .pipe(sourcemaps.init({loadMaps: true}))
         .pipe(rollbar({
@@ -135,11 +134,14 @@ gulp.task('clean', function () {
     ], {force: true});
 });
 
-gulp.task('deploy', ['clean'], function () {
-    return gulp.src('dist/**/*')
+gulp.task('deploy', function () {
+    return gulp.src([
+            'dist/**/*',
+            '!dist/save',
+            '!dist/save/*'
+        ])
+        .pipe(chmod(755))
         .pipe(gulp.dest('/srv/www/devilesk.com/dota2/apps/hero-calculator'));
 });
-
-gulp.task('full-build', ['build', 'css', 'html', 'image']);
 
 gulp.task('full-deploy', gulpSequence('build', 'css', 'html', 'image', 'rollbar', 'deploy', 'rollbar-deploy-tracking'));
