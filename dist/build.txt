@@ -22,7 +22,11 @@ css/jquery-ui.css
 js/main.js
 ----------------
 js/lib/rollbar.umd.nojson.min.js
+js/lib/jquery.min.js
+js/errorTracker.js
 js/herocalc/herocalc_core.js
+js/lib/knockout-min.js
+js/lib/knockout.mapping.js
 js/herocalc/herocalc_knockout.js
 js/herocalc/herocalc_inventory.js
 js/herocalc/herocalc_tooltips.js
@@ -37,8 +41,10 @@ js/herocalc/herocalc_hero.js
 js/herocalc/herocalc_hero.illusion.js
 js/herocalc/herocalc_hero.meepo.js
 js/herocalc/herocalc_unit.js
+js/lib/bootstrap.min.js
 js/lib/jquery-ui.js
 js/herocalc/jquery-ui.custom.js
+js/lib/Chart.min.js
 js/lib/Chart.scatter.js
 js/lib/text.js
 text!components/hero-pane.html

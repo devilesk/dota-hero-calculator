@@ -1,3 +1,35 @@
+.error-warning-view {
+    padding: 0px 5px 0px 0px;
+}
+.error-warning {
+    margin: 0;
+    margin-left: 20px;
+    padding: 5px 10px;
+    margin-top: 20px;
+    float:left;
+}
+.error-log-close, .error-warning-close {
+    float: right;
+    font-weight: bold;
+    padding-left: 10px;
+    font-size: 20px;
+}
+.error-log-close:hover, .error-warning-close:hover {
+    cursor: pointer;
+}
+.error-log-link {
+    float: right;
+}
+.error-log {
+    font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
+    padding: 2px 4px;
+    font-size: 90%;
+    color: #c7254e;
+    background-color: #f9f2f4;
+    white-space: nowrap;
+    border-radius: 4px;
+    margin-bottom: 0;
+}
 .damage-details tbody td:nth-child(3), .damage-details-header-row-2 td:nth-child(3) {
     border-right: 1px solid #202125;
 }

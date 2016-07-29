@@ -53,6 +53,15 @@ define(['require','exports','module','herocalc_knockout','jquery','bootstrap','j
         self.template = template;
         return self;
     }
+    my.prototype.Tab.prototype.toJS = function () {
+        return {
+            id: this.id,
+            href: this.href,
+            color: this.color,
+            text: this.text,
+            template: this.template
+        }
+    }
     
     my.prototype.TabGroup = function (hero, unit, clone) {
         var self = this;
@@ -61,6 +70,14 @@ define(['require','exports','module','herocalc_knockout','jquery','bootstrap','j
         self.clone = clone;
         self.illusions = ko.observableArray([]);
         return self;
+    }
+    my.prototype.TabGroup.prototype.toJS = function () {
+        return {
+            hero: this.hero.toJS(),
+            unit: this.unit.toJS(),
+            clone: this.clone.toJS(),
+            illusions: this.illusions().map(function (illusion) { return illusion.toJS(); })
+        }
     }
     
     my.prototype.HeroCalculatorViewModel = function () {
@@ -166,7 +183,7 @@ define(['require','exports','module','herocalc_knockout','jquery','bootstrap','j
             if (end < self.allItems().length - 1) {
                 var e = self.allItems.splice(end + 1, 1);
                 self.allItems.splice(start, 0, e[0]);
-            }    
+            }
         };
         self.selectedTabId = ko.observable('heroTab0');
         self.getSelectedTab = function (tabId) {
@@ -334,7 +351,29 @@ define(['require','exports','module','herocalc_knockout','jquery','bootstrap','j
         }, this);
         self.itemInputValue = ko.observable(1);
         self.saveLink = ko.observable();
-        self.save = function () {
+        self.getAppState = function () {
+            var data = {
+                selectedItem: self.selectedItem,
+                layout: self.layout,
+                displayShop: self.displayShop,
+                displayShopItemTooltip: self.displayShopItemTooltip,
+                allItems: self.allItems,
+                selectedItems: self.selectedItems,
+                selectedTabId: self.selectedTabId,
+                selectedTabs: self.selectedTabs,
+                boundSettings: self.boundSettings,
+                sideView: self.sideView,
+                windowWidth: self.windowWidth,
+                windowHeight: self.windowHeight,
+                shopDock: self.shopDock,
+                shopPopout: self.shopPopout,
+                itemInputValue: self.itemInputValue,
+                saveLink: self.saveLink
+            }
+            data.tabs = self.tabs().map(function (tab) { return tab.toJS() });
+            return ko.toJS(data);
+        }
+        self.getSaveData = function () {
             var data = {
                 version: "1.3.0",
                 heroes: []
@@ -399,6 +438,10 @@ define(['require','exports','module','herocalc_knockout','jquery','bootstrap','j
                 
                 data.heroes.push(d);
             }
+            return data;
+        }
+        self.save = function () {
+            var data = self.getSaveData();
             var serialized = JSON.stringify(data);
             $.ajax({
                 type: "POST",

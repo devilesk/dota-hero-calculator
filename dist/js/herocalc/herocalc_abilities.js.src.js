@@ -115,7 +115,13 @@ define(['require','exports','module','herocalc_knockout','./herocalc_core'],func
                                 var tooltip = args[i].label;
                             }
                             else {
-                                var tooltip = self.getAbilityAttributeTooltip(self.abilities()[index].attributes(), args[i].attributeName);
+                                try {
+                                    var tooltip = self.getAbilityAttributeTooltip(self.abilities()[index].attributes(), args[i].attributeName);
+                                }
+                                catch (e) {
+                                    window.Rollbar.error("getAbilityAttributeTooltip failed", {args: [ko.toJS(self.abilities()[index].attributes()), args[i].attributeName]})
+                                    throw e;
+                                }
                             }
                             result.data.push({ labelName: tooltip, controlVal: r, controlType: args[i].controlType, display: args[i].display, clean: g.fn });
                         }
