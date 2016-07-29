@@ -183,8 +183,7 @@ define(function (require, exports, module) {
             if (end < self.allItems().length - 1) {
                 var e = self.allItems.splice(end + 1, 1);
                 self.allItems.splice(start, 0, e[0]);
-            }    
-            asdf;
+            }
         };
         self.selectedTabId = ko.observable('heroTab0');
         self.getSelectedTab = function (tabId) {
