@@ -10,6 +10,7 @@ require.config({
         'jquery-ui': 'lib/jquery-ui',
         'chartjs-scatter': 'lib/Chart.scatter',
         'text': 'lib/text',
+        'polyfill': 'herocalc/polyfill',
         'herocalc_knockout': 'herocalc/herocalc_knockout',
         'jquery-ui.custom': 'herocalc/jquery-ui.custom',
         'rollbar': 'lib/rollbar.umd.nojson.min'
@@ -38,7 +39,7 @@ var rollbarConfig = {
   }
 };
 
-require(['rollbar'], function (Rollbar) {
+require(['rollbar', 'polyfill'], function (Rollbar) {
     var rollbar = Rollbar.init(rollbarConfig);
     require(['jquery', 'herocalc'], function ($, HEROCALCULATOR) {
         $('.top-nav-menu .dropdown-toggle').click(function() {
@@ -90,7 +91,29 @@ require(['rollbar'], function (Rollbar) {
         hc = new HEROCALCULATOR.HEROCALCULATOR();
         var lastUpdate = "#DEV_BUILD";
         $('#last-update').text(lastUpdate);
-        
         hc.init("/media/js/herodata.json","/media/js/itemdata.json","/media/js/unitdata.json");
+        
+        window.onerror = (function (old) {
+            return function () {
+                var payload = {}
+                try {
+                    payload.heroCalcState = hc.heroCalculator.getSaveData();
+                }
+                catch (e) {
+                    rollbar.error("window.onerror getSaveData failed.", e);
+                }
+                try {
+                    payload.appState = hc.heroCalculator.getAppState();
+                    console.log(payload.appState);
+                }
+                catch (e) {
+                    rollbar.error("window.onerror getAppState failed.", e);
+                }
+                rollbar.configure({
+                  payload: {custom: payload}
+                });
+                return old.apply(this, arguments);
+            }
+        })(window.onerror);
     });
 });
