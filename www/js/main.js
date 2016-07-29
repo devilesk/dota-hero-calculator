@@ -50,13 +50,13 @@ require(['rollbar'], function (Rollbar) {
         });
         var cssPath = "css/hero-calculator.theme";
         if (readCookie('theme') == 'light') {
-            $('#theme-css').attr('href','/media/css/site-light.css');
-            $('#hero-css').attr('href', cssPath + '.light.css');
+            if ($('#theme-css').attr('href') !== '/media/css/site-light.css') $('#theme-css').attr('href','/media/css/site-light.css');
+            if ($('#hero-css').attr('href') !== cssPath + '.light.css') $('#hero-css').attr('href', cssPath + '.light.css');
             $("#theme-select").val('light');
         }
         else {
-            $('#theme-css').attr('href','/media/css/site.css');
-            $('#hero-css').attr('href', cssPath + '.dark.css');
+            if ($('#theme-css').attr('href') !== '/media/css/site.css') $('#theme-css').attr('href','/media/css/site.css');
+            if ($('#hero-css').attr('href') !== cssPath + '.dark.css') $('#hero-css').attr('href', cssPath + '.dark.css');
             $("#theme-select").val('dark');
         }
         $('#theme-select').change( function() {
