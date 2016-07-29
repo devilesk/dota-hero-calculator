@@ -68,9 +68,11 @@ gulp.task('build', function (cb) {
                 // perform transformations on the original source
                 contents = contents.replace(/#DEV_BUILD/, new Date().toString());
                 contents = contents.replace(/development/, 'production');
-                contents = contents.replace(/#code_version/, git.long());
                 // output the processed contents
                 //console.log(contents);
+            }
+            if (name === 'js/errorTracker') {
+                contents = contents.replace(/#code_version/, git.long());
             }
             // return contents
             return contents;
@@ -157,5 +159,7 @@ gulp.task('deploy', function () {
         .pipe(chmod(755))
         .pipe(gulp.dest('/srv/www/devilesk.com/dota2/apps/hero-calculator'));
 });
+
+gulp.task('staging', gulpSequence('build', ['css', 'css-themes', 'html', 'image']));
 
 gulp.task('full-deploy', gulpSequence('build', ['css', 'css-themes', 'html', 'image', 'rollbar'], 'deploy', 'rollbar-deploy-tracking', 'purge-cache'));
