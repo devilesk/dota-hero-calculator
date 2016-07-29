@@ -1,3 +1,6 @@
+2016-07-29
+- Added more error tracking and reporting.
+
 2016-07-23
 - Fix Diffusal Blade not adding correctly.
 - Fix Javelin Pierce damage type.
