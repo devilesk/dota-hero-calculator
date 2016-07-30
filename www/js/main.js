@@ -145,43 +145,49 @@ require(['rollbar', 'polyfill'], function (errorTracker) {
 
         window.onerror = (function (old) {
             return function () {
-                try {
-                    var log = document.querySelector('#log');
-                    var msg = arguments[0];
-                    var el = document.createElement('div');
-                    el.classList.add('alert');
-                    el.classList.add('alert-danger');
-                    el.classList.add('error-log');
-                    el.classList.add('col-md-12');
-                    el.textContent = 'error: ' + msg;
-                    
-                    var closeBtn = document.createElement('div');
-                    closeBtn.classList.add('error-log-close');
-                    closeBtn.innerHTML = "&times;";
-                    closeBtn.onclick = function () {
-                        log.removeChild(el);
-                    }
-                    el.appendChild(closeBtn);
-                    
-                    var reportEl = document.createElement('a');
-                    reportEl.classList.add('error-log-link');
-                    reportEl.innerHTML = "Send error report";
-                    reportEl.href = "#"
-                    reportEl.onclick = function () {
-                        $('#myModal').modal('show');
-                        $('#BugReportFormText').text('error: ' + msg + '\n\nDescribe what you were doing. Try to be as detailed as possible.');
-                    }
-                    el.appendChild(reportEl);
-                    
-                    log.appendChild(el);
-                    
-                    $('.error-warning').fadeOut(200).fadeIn(100);
-                }
-                catch (e) {
-                    rollbar.error("window.onerror create error log failed.", e);
-                }
-                
                 var payload = {};
+                var logEl = document.querySelector('#log');
+
+                if (logEl) {
+                    try {
+                        var msg = arguments[0];
+                        var el = document.createElement('div');
+                        el.classList.add('alert');
+                        el.classList.add('alert-danger');
+                        el.classList.add('error-log');
+                        el.classList.add('col-md-12');
+                        el.textContent = 'error: ' + msg;
+                        
+                        var closeBtn = document.createElement('div');
+                        closeBtn.classList.add('error-log-close');
+                        closeBtn.innerHTML = "&times;";
+                        closeBtn.onclick = function () {
+                            logEl.removeChild(el);
+                        }
+                        el.appendChild(closeBtn);
+                        
+                        var reportEl = document.createElement('a');
+                        reportEl.classList.add('error-log-link');
+                        reportEl.innerHTML = "Send error report";
+                        reportEl.href = "#"
+                        reportEl.onclick = function () {
+                            $('#myModal').modal('show');
+                            $('#BugReportFormText').text('error: ' + msg + '\n\nDescribe what you were doing. Try to be as detailed as possible.');
+                        }
+                        el.appendChild(reportEl);
+                        
+                        logEl.appendChild(el);
+                        
+                        $('.error-warning').fadeOut(200).fadeIn(100);
+                    }
+                    catch (e) {
+                        rollbar.error("window.onerror create error log failed.", e);
+                    }
+                }
+                else {
+                    payload.clientLogCreated = false;
+                }
+
                 if (hc && hc.heroCalculator) {
                     try {
                         payload.heroCalcState = hc.heroCalculator.getSaveData();
