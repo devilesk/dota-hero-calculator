@@ -261,6 +261,140 @@
         <div id="log" class="col-md-12"></div>
     </div>
     
+    <!-- KO TEMPLATES -->
+    <div style="display:none">
+<script type="text/html" id="popover-graphData-template">
+	<label>Skill Build</label>
+    <div data-bind="foreach: $data.skillBuild">
+        <div class="pull-left" style="width:50px;height:50px;position:relative;border:1px solid black;">
+            <div style="position:absolute;bottom:0;right:0;background-color:white;color:black;opacity:.8" data-bind="text: $index() + 1"></div>
+            <!-- ko if: $data != -1 -->
+            <img class="img-rounded" data-bind="attr:{src: '/media/images/spellicons/' + $parents[3].ability().abilities()[$data].name() + '.png'}"/>
+            <!-- /ko -->
+            <!-- ko if: $data == -1 -->
+            
+            <!-- /ko -->
+        </div>
+    </div>
+</script>
+
+<script type="text/html" id="item-template">
+    <div class="pull-left" style="margin-right:10px">
+        <div class="btn-group">
+            <img class="img-rounded" data-bind="css: { item_disabled: !enabled(), item_active: $parent.inventory.getActiveBorder($data) == 1, item_inactive: $parent.inventory.getActiveBorder($data) == 0 }, attr:{ src: $parent.inventory.getItemImage($data) }, click: function(data, event) { $parent.inventory.toggleItem($index, data, event); }, event: { dblclick: $parent.inventory.removeItem }"/>
+            <div style="float:left" data-bind="visible: $parent.inventory.getItemSizeLabel($data) != ''">
+                <div data-bind="html: $parent.inventory.getItemSizeLabel($data)" style="position:absolute;left:0;bottom:0;color:white;opacity:.5;background-color:black;padding:0px 2px"></div>
+                <div data-bind="html: $parent.inventory.getItemSizeLabel($data)" style="position:absolute;left:0;bottom:0;color:white;padding:0px 2px"></div>
+            </div>
+            <div class="btn-group-vertical">
+                <button class="btn btn-default btn-xs" title="Remove Item" data-bind="click: $parent.inventory.removeItem">&times;</button>
+                <button class="btn btn-default btn-xs" title="Disable/Enable Item" data-bind="click: $parent.inventory.toggleMuteItem, html: enabled() ? 'o' : '-', attr: {title: enabled() ? 'Disable Item' : 'Enable Item'}">o</button>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/html" id="itemBuild-item-template">
+    <div class="pull-left" style="margin-right:10px">
+        <div class="btn-group">
+            <img class="img-rounded" data-bind="css: { item_disabled: !enabled(), item_active: $parents[1].buildExplorer.itemBuild()[$index()].getActiveBorder($data) == 1, item_inactive: $parents[1].buildExplorer.itemBuild()[$index()].getActiveBorder($data) == 0 }, attr:{ src: $parents[1].buildExplorer.itemBuild()[$index()].getItemImage($data) }, click: function(data, event) { $parents[1].buildExplorer.itemBuild()[$index()].toggleItem($index, data, event); }, event: { dblclick: $parents[1].buildExplorer.itemBuild()[$index()].removeItem }, clickBubble: false"/>
+            <div style="float:left" data-bind="visible: $parents[1].buildExplorer.itemBuild()[$index()].getItemSizeLabel($data) != ''">
+                <div data-bind="html: $parents[1].buildExplorer.itemBuild()[$index()].getItemSizeLabel($data)" style="position:absolute;left:0;bottom:0;color:white;opacity:.5;background-color:black;padding:0px 2px"></div>
+                <div data-bind="html: $parents[1].buildExplorer.itemBuild()[$index()].getItemSizeLabel($data)" style="position:absolute;left:0;bottom:0;color:white;padding:0px 2px"></div>
+            </div>
+            <div class="btn-group-vertical">
+                <button class="btn btn-default btn-xs" title="Remove Item" data-bind="click: $parents[1].buildExplorer.itemBuild()[$index()].removeItem, clickBubble: false">&times;</button>
+                <button class="btn btn-default btn-xs" title="Disable/Enable Item" data-bind="click: $parents[1].buildExplorer.itemBuild()[$index()].toggleMuteItem, html: enabled() ? 'o' : '-', attr: {title: enabled() ? 'Disable Item' : 'Enable Item'}, clickBubble: false">o</button>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/html" id="ability-2-template">
+    <div data-bind="if: $data.displayname() != 'Empty' &&  ($data.behavior().indexOf('DOTA_ABILITY_BEHAVIOR_HIDDEN') == -1 || $data.name().indexOf('invoker_') != -1),
+        style: {clear: $data.name() == 'invoker_cold_snap' || $data.name() == 'invoker_chaos_meteor' ? 'both' : ''}, css: {row: $data.isDetail() || ($index() < $parent.ability().abilities().length-1 && $parent.ability().abilities()[$index()+1].isDetail()), row3: $data.isDetail() || ($index() < $parent.ability().abilities().length-1 && $parent.ability().abilities()[$index()+1].isDetail()) }">
+        <div class="col-md-2 text-center bottom-buffer row2">
+            <img style="padding:0px;margin-bottom:1px;" class="img-rounded ability" data-bind="css: { ability_active: $data.isActive() || $data.behavior().indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1, ability_inactive: !$data.isActive() && $data.behavior().indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') == -1, btn: $data.behavior().indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') == -1, 'btn-default': $data.behavior().indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') == -1}, attr:{src: '/media/images/spellicons/' + $data.name() + '.png'}, click: function(data, event) { $parent.ability().toggleAbility($index, data, event); }"/>
+            <div class="progress" style="position:relative">
+                <div style="position:absolute;width:100%;color:white;" class="text-center" data-bind="visible: $parent.getAbilityLevelMax($data) > 0, text: $data.level() + '/' + $parent.getAbilityLevelMax($data)"></div>
+                <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;" data-bind="attr: { 'aria-valuenow': ($parent.getAbilityLevelMax($data) > 0 ? $data.level()/$parent.getAbilityLevelMax($data)*100 : 0) }, style: { width: ($parent.getAbilityLevelMax($data) > 0 ? $data.level()/$parent.getAbilityLevelMax($data)*100 : 0) + '%' }"></div>
+            </div>
+            <div class="btn-group btn-group-justified" data-bind="if: $data.behavior().indexOf('DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE') == -1">
+                <a class="btn btn-default btn-sm" data-bind="click: function(data, event) { $parent.ability().levelDownAbility($index, data, event, $parent); }">-</a>
+                <a class="btn btn-default btn-sm" data-bind="click: function(data, event) { $parent.ability().levelUpAbility($index, data, event, $parent); }">+</a>
+            </div>
+            <div class="btn-group btn-group-justified">
+            <a class="btn btn-default btn-sm" data-bind="click: function(data, event) { $parent.ability().toggleAbilityDetail($index, data, event); }, css: {'toggled': $data.isDetail}">Details</a>
+            </div>
+        </div>
+        <div class="col-md-10 bottom-buffer" data-bind="visible: $data.isDetail()">
+            <button type="button" class="close" data-bind="click: function(data, event) { $parent.ability().toggleAbilityDetail($index, data, event); }">&times;</button>
+            <div data-bind="html: $parent.ability().getAbilityTooltipData($parent.hero().name(), $data.name())"></div>
+            <div data-bind="if: $data.name() in $parent.ability().abilityData && $parent.ability().abilities()[$index()].level() > 0">
+                <div class="col-md-8">
+                    <div data-bind="template: { name: 'ability-settings-template', data: $parent.ability().abilitySettingsData($data.name(), $parent, $index()) }"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/html" id="ability-3-template">
+    <tr class="row row3" data-bind="if: $data.displayname() != 'Empty' &&  ($data.behavior().indexOf('DOTA_ABILITY_BEHAVIOR_HIDDEN') == -1 || $data.name().indexOf('invoker_') != -1) && $data.behavior().indexOf('DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE') == -1,
+    style: {clear: $data.name() == 'invoker_cold_snap' || $data.name() == 'invoker_chaos_meteor' ? 'both' : ''}">
+        <td style="padding-bottom:10px;">
+            <div style="width:80px;">
+                <img style="padding:0px;margin-bottom:1px;" class="img-rounded" data-bind="attr:{src: '/media/images/spellicons/' + $data.name() + '.png'}"/>
+                <div class="progress" style="position:relative">
+                    <div style="position:absolute;width:100%;color:white;" class="text-center" data-bind="visible: $parent.getAbilityLevelMax($data) > 0, text: $parent.buildExplorer.getSkillBuildAbilityLevel($index()) + '/' + $parent.getAbilityLevelMax($data)"></div>
+                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;" data-bind="attr: { 'aria-valuenow': ($parent.getAbilityLevelMax($data) > 0 ? $parent.buildExplorer.getSkillBuildAbilityLevel($index())/$parent.getAbilityLevelMax($data)*100 : 0) }, style: { width: ($parent.getAbilityLevelMax($data) > 0 ? $parent.buildExplorer.getSkillBuildAbilityLevel($index())/$parent.getAbilityLevelMax($data)*100 : 0) + '%' }"></div>
+                </div>
+            </div>
+        </td>
+    <!-- ko foreach: new Array(25) -->
+        <td style="padding-bottom:10px;vertical-align:top">
+            <div class="pull-left btn btn-default btn-sm" style="line-height:78px;padding:0px;width:20px;" data-bind="text: $index()+1, css: {'toggled': $parents[1].buildExplorer.skillBuild()[$index()]() == $parentContext.$index(), 'disabled allow-events': $parents[1].buildExplorer.skillBuild()[$index()]() != -1 && $parents[1].buildExplorer.skillBuild()[$index()]() != $parentContext.$index()}, click: function(data, event) { $parents[1].buildExplorer.toggleAbilitySkillBuild($index(), $parentContext.$index(), $parentContext.$data, event); }"></div>
+        </td>
+    <!-- /ko -->
+    </tr>
+</script>
+
+<script type="text/html" id="ability-settings-template">
+<div class="form-horizontal">
+<div data-bind="foreach: data">
+<div class="form-group">
+    <label class="col-md-6 control-label" data-bind="css: {'checkbox-label': controlType == 'checkbox'}, visible: (display == undefined || display != 'buff'), attr: {'for': labelName}, html: labelName"></label>
+    <div data-bind="if: controlType == 'input' && (display == undefined || display != 'buff')">
+        <div class="col-md-6"><input class="form-control" data-bind="attr: {'id': labelName}, value: controlVal"></div>
+    </div>
+    <div data-bind="if: controlType == 'checkbox' && (display == undefined || display != 'buff')">
+        <div class="col-md-6">
+            <div class="checkbox">
+                <input type="checkbox" data-bind="attr: {'id': labelName}, checked: controlVal">
+            </div>
+        </div>
+    </div>
+    <div data-bind="if: controlType == 'text' && (display == undefined || display != 'buff')">
+        <div class="col-md-6"><p class="form-control-static" data-bind="html: controlVal"></p></div>
+    </div>
+    <div data-bind="if: controlType == 'radio' && (display == undefined || display != 'buff')">
+        <div class="col-md-6">
+            <!-- ko foreach: controlOptions -->
+            <div class="radio">
+                <label>
+                    <input type="radio" data-bind="attr: {'id': $parent.labelName + value, value: value}, checked: $parent.controlVal">
+                    <span data-bind="text: text"></span>
+                </label>
+            </div>
+            <!-- /ko -->
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</script>
+    </div>
+    
     <div class="push"></div>
     </div>
     
