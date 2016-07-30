@@ -1,2 +1,0 @@
-define(["require","exports","module","./herocalc_core"],function(e,o,r){"use strict";var c=e("./herocalc_core").HEROCALCULATOR;c.prototype.init=function(){}});
-//# sourceMappingURL=herocalc_init.js.map

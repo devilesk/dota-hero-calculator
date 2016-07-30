@@ -1,7 +1,6 @@
 define(['require','exports','module','herocalc_knockout','./herocalc_core'],function (require, exports, module) {
     'use strict';
     var ko = require('herocalc_knockout');
-        
     var my = require("./herocalc_core").HEROCALCULATOR;
     
     my.prototype.stackableItems = ['clarity','flask','dust','ward_observer','ward_sentry','tango','tpscroll','smoke_of_deceit'],

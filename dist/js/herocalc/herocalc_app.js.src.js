@@ -1,7 +1,7 @@
 define(['require','exports','module','herocalc_knockout','jquery','bootstrap','jquery-ui.custom','chartjs','chartjs-scatter','components','./herocalc_core'],function (require, exports, module) {
     'use strict';
     var ko = require('herocalc_knockout');
-        var $ = require('jquery');
+    var $ = require('jquery');
     require('bootstrap');
     require('jquery-ui.custom');
     require('chartjs');
@@ -621,12 +621,7 @@ define(['require','exports','module','herocalc_knockout','jquery','bootstrap','j
     my.prototype.theme = ko.observable($('#theme-select').val());
     
     my.prototype.init = function (HERODATA_PATH,ITEMDATA_PATH,UNITDATA_PATH) {
-        var loadedFiles = 0;
-        var loadedFilesMax = 4;
         $.when(
-            $.get('templates.html', function (templates) {
-                $('body').append('<div style="display:none">' + templates + '<\/div>');
-            }),
             $.getJSON(HERODATA_PATH, function (data) {
                 my.prototype.heroData = data;
                 my.prototype.heroData['npc_dota_hero_chen'].abilities[2].behavior.push('DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE');

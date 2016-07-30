@@ -22,6 +22,7 @@ css/jquery-ui.css
 js/main.js
 ----------------
 js/lib/rollbar.umd.nojson.min.js
+js/herocalc/polyfill.js
 js/lib/jquery.min.js
 js/herocalc/herocalc_core.js
 js/lib/knockout-min.js
@@ -85,4 +86,6 @@ js/components/stats/stats-additional.js
 js/components/main.js
 js/herocalc/herocalc_app.js
 js/herocalc/main.js
+js/lib/domReady.js
+domReady!
 js/main.js
