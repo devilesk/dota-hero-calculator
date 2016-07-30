@@ -182,17 +182,22 @@ require(['rollbar', 'polyfill'], function (errorTracker) {
                 }
                 
                 var payload = {};
-                try {
-                    payload.heroCalcState = hc.heroCalculator.getSaveData();
+                if (hc && hc.heroCalculator) {
+                    try {
+                        payload.heroCalcState = hc.heroCalculator.getSaveData();
+                    }
+                    catch (e) {
+                        rollbar.error("window.onerror getSaveData failed.", e);
+                    }
+                    try {
+                        payload.appState = hc.heroCalculator.getAppState();
+                    }
+                    catch (e) {
+                        rollbar.error("window.onerror getAppState failed.", e);
+                    }
                 }
-                catch (e) {
-                    rollbar.error("window.onerror getSaveData failed.", e);
-                }
-                try {
-                    payload.appState = hc.heroCalculator.getAppState();
-                }
-                catch (e) {
-                    rollbar.error("window.onerror getAppState failed.", e);
+                else {
+                    payload.appState = "load failed"
                 }
                 payload.userActions = userActions;
                 rollbar.configure({
