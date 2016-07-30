@@ -8,6 +8,7 @@ require.config({
         'chartjs': 'lib/Chart.min',
         'bootstrap': 'lib/bootstrap.min',
         'jquery-ui': 'lib/jquery-ui',
+        'domReady': 'lib/domReady',
         'chartjs-scatter': 'lib/Chart.scatter',
         'text': 'lib/text',
         'polyfill': 'herocalc/polyfill',
@@ -41,46 +42,52 @@ require(['rollbar', 'polyfill'], function (errorTracker) {
     };
     
     var rollbar = Rollbar.init(rollbarConfig);
-    
-    var userActions = [];
-    function addUserAction(o) {
-        if (userActions.length > 10) {
-            userActions.shift();
-        }
-        userActions.push(o);
-    }
-    
-    function actionTrackWrapper(func, eventName) {
-        return function() {
-            var el = this;
-            var data = {
-                eventName: eventName
-            };
-            if (el.id) data.id = el.id;
-            if (el.src) data.src = el.src;
-            if (el.className) data.className = el.className;
-            if (el.textContent) data.textContent = el.textContent;
-            if (el.nodeName) data.nodeName = el.nodeName;
-            if (el.getAttribute('data-bind')) data['data-bind'] = el.getAttribute('data-bind');
-            addUserAction(data);
-            return func.apply(this, arguments);
-        }
-    }
-    
-    function callbackWrap(object, property, argumentIndex, wrapperFactory, eventFilter) {
-        var original = object[property];
-        object[property] = function() {
-            if (eventFilter.indexOf(arguments[0]) != -1) {
-                arguments[argumentIndex] = wrapperFactory(arguments[argumentIndex], arguments[0]);
+
+    require(['jquery', 'herocalc', 'domReady!'], function ($, HEROCALCULATOR) {
+        var userActions = [];
+        function addUserAction(o) {
+            if (userActions.length > 10) {
+                userActions.shift();
             }
-            return original.apply(this, arguments);
+            userActions.push(o);
         }
-        return original;
-    }
-    
-    callbackWrap(Element.prototype, "addEventListener", 1, actionTrackWrapper, ['click', 'focus', 'blur', 'change', 'dblclick']);
-    
-    require(['jquery', 'herocalc'], function ($, HEROCALCULATOR) {
+        
+        function actionTrackWrapper(func, eventName) {
+            return function() {
+                var el = this;
+                var data = {
+                    eventName: eventName
+                };
+                if (el.id) data.id = el.id;
+                if (el.src) data.src = el.src;
+                if (el.className) data.className = el.className;
+                if (el.textContent) data.textContent = el.textContent;
+                if (el.nodeName) data.nodeName = el.nodeName;
+                if (el.getAttribute('data-bind')) data['data-bind'] = el.getAttribute('data-bind');
+                
+                for (var property in data) {
+                    if (data.hasOwnProperty(property)) {
+                        data[property] = data[property].substring(0, Math.min(200, data[property].length));
+                    }
+                }
+                addUserAction(data);
+                return func.apply(this, arguments);
+            }
+        }
+        
+        function callbackWrap(object, property, argumentIndex, wrapperFactory, eventFilter) {
+            var original = object[property];
+            object[property] = function() {
+                if (eventFilter.indexOf(arguments[0]) != -1) {
+                    arguments[argumentIndex] = wrapperFactory(arguments[argumentIndex], arguments[0]);
+                }
+                return original.apply(this, arguments);
+            }
+            return original;
+        }
+        
+        callbackWrap(Element.prototype, "addEventListener", 1, actionTrackWrapper, ['click', 'focus', 'blur', 'change', 'dblclick']);
+
         $('.top-nav-menu .dropdown-toggle').click(function() {
           if ($('.mobile-only').css('display') == 'none') {
             var location = $(this).attr('href');
