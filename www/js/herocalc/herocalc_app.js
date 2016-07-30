@@ -1,7 +1,7 @@
 define(function (require, exports, module) {
     'use strict';
     var ko = require('herocalc_knockout');
-        var $ = require('jquery');
+    var $ = require('jquery');
     require('bootstrap');
     require('jquery-ui.custom');
     require('chartjs');

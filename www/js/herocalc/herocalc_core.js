@@ -1,6 +1,7 @@
 define(function (require, exports, module) {
     'use strict';
-
+    require('polyfill');
+    
     function HEROCALCULATOR () {
        // ...
     }
@@ -38,8 +39,6 @@ define(function (require, exports, module) {
         var arr = a.concat(b);
         return my.prototype.uniques(arr);
     }
-    
-    //HEROCALCULATOR.prototype.bar = function () {};
 
     exports.HEROCALCULATOR = HEROCALCULATOR
 });

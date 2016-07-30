@@ -22,7 +22,7 @@ require.config({
     }
 });
 
-require(['rollbar'], function (errorTracker) {
+require(['rollbar', 'polyfill'], function (errorTracker) {
     var rollbarConfig = {
       accessToken: 'de1980fcab4849d6a7a066cf098a6521',
       captureUncaught: true,
