@@ -3,11 +3,11 @@ define(['rollbar', 'jquery'], function (Rollbar, $) {
       accessToken: 'de1980fcab4849d6a7a066cf098a6521',
       captureUncaught: true,
       payload: {
-        environment: 'development',
+        environment: 'production',
         client: {
           javascript: {
             source_map_enabled: true,
-            code_version: "03431f9351ad5ca285a5fb9280bfcd9cfb2d0b1f",
+            code_version: "8909b8916390c6caed7d1472e90f9c5fd405eb60",
             // Optionally have Rollbar guess which frames the error was thrown from
             // when the browser does not provide line and column numbers.
             guess_uncaught_frames: true
