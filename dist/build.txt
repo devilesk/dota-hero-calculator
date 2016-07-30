@@ -23,7 +23,6 @@ js/main.js
 ----------------
 js/lib/rollbar.umd.nojson.min.js
 js/lib/jquery.min.js
-js/errorTracker.js
 js/herocalc/herocalc_core.js
 js/lib/knockout-min.js
 js/lib/knockout.mapping.js
