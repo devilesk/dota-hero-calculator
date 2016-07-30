@@ -7,7 +7,7 @@ define(['rollbar', 'jquery'], function (Rollbar, $) {
         client: {
           javascript: {
             source_map_enabled: true,
-            code_version: "8909b8916390c6caed7d1472e90f9c5fd405eb60",
+            code_version: "d453c09f6cb82dd4814ca358a52153c995f23414",
             // Optionally have Rollbar guess which frames the error was thrown from
             // when the browser does not provide line and column numbers.
             guess_uncaught_frames: true

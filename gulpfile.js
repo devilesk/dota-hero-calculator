@@ -67,12 +67,10 @@ gulp.task('build', function (cb) {
                 //console.log(contents);
                 // perform transformations on the original source
                 contents = contents.replace(/#DEV_BUILD/, new Date().toString());
-                // output the processed contents
-                //console.log(contents);
-            }
-            if (name === 'js/errorTracker') {
                 contents = contents.replace(/#code_version/, git.long());
                 contents = contents.replace(/development/, 'production');
+                // output the processed contents
+                //console.log(contents);
             }
             // return contents
             return contents;
