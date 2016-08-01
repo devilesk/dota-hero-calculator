@@ -69,6 +69,7 @@ gulp.task('build', function (cb) {
                 contents = contents.replace(/#DEV_BUILD/, new Date().toString());
                 contents = contents.replace(/#code_version/, git.long());
                 contents = contents.replace(/development/, 'production');
+                contents = contents.replace(/waitSeconds: 7/, 'waitSeconds: 0');
                 // output the processed contents
                 //console.log(contents);
             }

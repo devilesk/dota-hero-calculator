@@ -20,7 +20,8 @@ require.config({
         'bootstrap': {
             deps: ['jquery']
         }
-    }
+    },
+    waitSeconds: 7
 });
 
 require(['rollbar', 'polyfill'], function (errorTracker) {
