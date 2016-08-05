@@ -196,10 +196,10 @@ define(['require','exports','module','herocalc_knockout','./herocalc_core'],func
                     var prop = self.graphProperties()[j];
                     switch (prop.id) {
                         case 'dps':
-                            dataObj[prop.id] = self.parent['damageTotalInfo']().dps.total.toFixed(2);
+                            dataObj[prop.id] = self.parent['damageTotalInfo']().totalRow[2]().toFixed(2);
                             break;
                         case 'damage':
-                            dataObj[prop.id] = self.parent['damageTotalInfo']().total.toFixed(2);
+                            dataObj[prop.id] = self.parent['damageTotalInfo']().totalRow[0]().toFixed(2);
                             break;
                         default:
                             dataObj[prop.id] = self.parent[prop.id]();
