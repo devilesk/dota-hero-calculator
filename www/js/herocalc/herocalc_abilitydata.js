@@ -1788,20 +1788,6 @@ define(function (require, exports, module) {
                 }
             }
         ],
-        'furion_force_of_nature': [
-            {
-                label: 'Duration',
-                controlType: 'input'
-            },
-            {
-                attributeName: 'damage',
-                label: 'Total Damage',
-                controlType: 'text',
-                fn: function(v,a) {
-                    return v*a;
-                }
-            }
-        ],
         'furion_wrath_of_nature': [
             {
                 label: 'Duration',
