@@ -19,6 +19,7 @@ gulp.task('css', function () {
     return gulp.src([
           '!www/css/hero-calculator.theme.light.css',
           '!www/css/hero-calculator.theme.dark.css',
+          '!www/css/qunit-2.0.1.css',
           'www/css/*.css'
         ])
         .pipe(concat('hero-calculator.css'))
