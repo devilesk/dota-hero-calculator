@@ -1860,7 +1860,7 @@ define(function (require, exports, module) {
                 controlType: 'checkbox'
             },
             {
-                attributeName: 'bonus_attack_speed_night',
+                attributeName: 'miss_rate_night',
                 label: '%CHANCE TO MISS:',
                 ignoreTooltip: true,
                 controlType: 'text',
