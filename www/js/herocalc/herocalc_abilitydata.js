@@ -2074,15 +2074,38 @@ define(function (require, exports, module) {
         ],
         'razor_plasma_field': [
             {
-                label: 'Duration',
+                label: 'Distance',
                 controlType: 'input'
             },
             {
-                attributeName: 'damage',
-                label: 'Total Damage',
+                attributeName: 'radius',
+                label: 'MIN DISTANCE:',
+                ignoreTooltip: true,
                 controlType: 'text',
                 fn: function(v,a) {
-                    return v*a;
+                    return 200;
+                }
+            },
+            {
+                attributeName: 'radius',
+                label: 'MAX DISTANCE:',
+                ignoreTooltip: true,
+                controlType: 'text',
+                fn: function(v,a) {
+                    return 200 + a;
+                }
+            },
+            {
+                attributeName: 'radius',
+                label: 'Instance Damage',
+                ignoreTooltip: true,
+                controlType: 'text',
+                fn: function(v,a,parent,index,abilityModel,ability) {
+                    var max_radius = a + 200;
+                    var scale = (Math.min(Math.max(v, 200), max_radius) - 200) / (max_radius - 200);
+                    var damage_min = abilityModel.getAbilityAttributeValue(ability.attributes(), 'damage_min',ability.level());
+                    var damage_max = abilityModel.getAbilityAttributeValue(ability.attributes(), 'damage_max',ability.level());
+                    return damage_min + (damage_max - damage_min) * scale;
                 }
             }
         ],
