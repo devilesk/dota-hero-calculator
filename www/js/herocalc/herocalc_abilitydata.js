@@ -1824,16 +1824,34 @@ define(function (require, exports, module) {
         ],
         'necrolyte_sadist': [
             {
-                label: 'Duration',
+                label: 'Unit Kills',
                 controlType: 'input'
             },
             {
-                attributeName: 'damage',
+                label: 'Hero Kills',
+                controlType: 'input'
+            },
+            {
+                attributeName: 'health_regen',
                 label: 'Total Damage',
                 controlType: 'text',
-                fn: function(v,a) {
-                    return v*a;
-                }
+                controls: [0,1],
+                fn: function(v,a,parent,index,abilityModel,ability) {
+                    var hero_multiplier = abilityModel.getAbilityAttributeValue(ability.attributes(), 'hero_multiplier',0)
+                    return (v[0]+v[1]*hero_multiplier)*a;
+                },
+                returnProperty: 'healthregen'
+            },
+            {
+                attributeName: 'mana_regen',
+                label: 'Total Damage',
+                controlType: 'text',
+                controls: [0,1],
+                fn: function(v,a,parent,index,abilityModel,ability) {
+                    var hero_multiplier = abilityModel.getAbilityAttributeValue(ability.attributes(), 'hero_multiplier',0)
+                    return (v[0]+v[1]*hero_multiplier)*a;
+                },
+                returnProperty: 'manaregen'
             }
         ],
         'night_stalker_crippling_fear': [

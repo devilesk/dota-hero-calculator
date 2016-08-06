@@ -584,7 +584,7 @@ define(function (require, exports, module) {
                 }
                 else if (ability.healthregen != undefined) {
                     if (ability.level() > 0 && (ability.isActive() || (ability.behavior().indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
-                        // shredder_reactive_armor,invoker_quas
+                        // shredder_reactive_armor,invoker_quas,necrolyte_sadist
                         totalAttribute+=ability.healthregen();
                     }
                 }
@@ -632,7 +632,7 @@ define(function (require, exports, module) {
                 }
                 else if (ability.manaregen != undefined) {
                     if (ability.level() > 0 && (ability.isActive() || (ability.behavior().indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
-                        // 
+                        // necrolyte_sadist
                         totalAttribute+=ability.manaregen();
                     }
                 }
@@ -810,7 +810,7 @@ define(function (require, exports, module) {
                 }
                 else if (ability.attackspeed != undefined) {
                     if (ability.level() > 0 && (ability.isActive() || (ability.behavior().indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
-                        // troll_warlord_fervor,wisp_overcharge,lina_fiery_soul,invoker_alacrity,invoker_wex
+                        // troll_warlord_fervor,wisp_overcharge,lina_fiery_soul,invoker_alacrity,invoker_wex,huskar_berserkers_blood
                         totalAttribute+=ability.attackspeed();
                     }
                 }
