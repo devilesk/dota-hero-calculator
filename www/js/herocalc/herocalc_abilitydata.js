@@ -899,24 +899,55 @@ define(function (require, exports, module) {
         ],
         'huskar_berserkers_blood': [
             {
-                label: 'Stacks',
+                label: '%HP',
                 controlType: 'input'
             },
             {
-                attributeName: 'resistance_per_stack',
+                attributeName: 'hp_threshold_max',
+                label: 'Health at given %HP:',
+                ignoreTooltip: true,
+                controlType: 'text',
+                fn: function(v,a,parent,index,abilityList) {
+                    return parent.health()*v/100;
+                }
+            },
+            {
+                attributeName: 'hp_threshold_max',
                 label: 'Total Damage',
                 controlType: 'text',
                 fn: function(v,a) {
-                    return v*a;
+                    return a;
+                }
+            },
+            {
+                attributeName: 'maximum_resistance',
+                label: 'MAGIC RESISTANCE BONUS:',
+                ignoreTooltip: true,
+                controlType: 'text',
+                fn: function(v,a,parent,index,abilityList) {
+                    var v = Math.min(v, 100);
+                    v = Math.max(v, 10);
+                    var hp_threshold_max = abilityList.getAbilityAttributeValue(abilityList.abilities()[index].attributes(), 'hp_threshold_max',0);
+                    var d = 100 - hp_threshold_max;
+                    var c = (v - hp_threshold_max) / d;
+                    c = 1 - c;
+                    return c*a;
                 },
                 returnProperty: 'magicResist'
             },
             {
-                attributeName: 'attack_speed_bonus_per_stack',
-                label: 'Total Damage',
+                attributeName: 'maximum_attack_speed',
+                label: 'ATTACK SPEED BONUS:',
+                ignoreTooltip: true,
                 controlType: 'text',
-                fn: function(v,a) {
-                    return v*a;
+                fn: function(v,a,parent,index,abilityList) {
+                    var v = Math.min(v, 100);
+                    v = Math.max(v, 10);
+                    var hp_threshold_max = abilityList.getAbilityAttributeValue(abilityList.abilities()[index].attributes(), 'hp_threshold_max',0);
+                    var d = 100 - hp_threshold_max;
+                    var c = (v - hp_threshold_max) / d;
+                    c = 1 - c;
+                    return c*a;
                 },
                 returnProperty: 'attackspeed'
             }
