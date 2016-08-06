@@ -1653,15 +1653,33 @@ define(function (require, exports, module) {
         ],
         'mirana_arrow': [
             {
-                label: 'Duration',
+                label: 'Arrow Travel Distance',
                 controlType: 'input'
             },
             {
-                attributeName: 'damage',
-                label: 'Total Damage',
+                attributeName: 'arrow_max_stun',
+                label: 'STUN DURATION:',
+                ignoreTooltip: true,
                 controlType: 'text',
-                fn: function(v,a) {
-                    return v*a;
+                fn: function(v,a,parent,index,abilityList) {
+                    var arrow_min_stun = abilityList.getAbilityAttributeValue(abilityList.abilities()[index].attributes(), 'arrow_min_stun',0);
+                    var arrow_max_stunrange = abilityList.getAbilityAttributeValue(abilityList.abilities()[index].attributes(), 'arrow_max_stunrange',0);
+                    var scale = Math.min(v, arrow_max_stunrange) / arrow_max_stunrange;
+                    return Math.max(arrow_min_stun, Math.floor(a * scale / 0.1) * 0.1);
+                }
+            },
+            {
+                attributeName: 'arrow_bonus_damage',
+                label: 'TOTAL DAMAGE:',
+                ignoreTooltip: true,
+                controlType: 'text',
+                fn: function(v,a,parent,index,abilityList) {
+                    var ability = abilityList.abilities()[index];
+                    var damage = ability.damage()[ability.level()-1];
+                    var arrow_max_stunrange = abilityList.getAbilityAttributeValue(abilityList.abilities()[index].attributes(), 'arrow_max_stunrange',0);
+                    var scale = Math.min(v, arrow_max_stunrange) / arrow_max_stunrange;
+                    var bonus_damage = Math.floor(a * scale / 2.8) * 2.8;
+                    return damage + ' + ' + bonus_damage + ' = ' + (damage + bonus_damage);
                 }
             }
         ],
