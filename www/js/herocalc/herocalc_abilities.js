@@ -86,6 +86,7 @@ define(function (require, exports, module) {
                         v_list.push(v);
                         result.data.push({ labelName: args[i].label.toUpperCase() + '?', controlVal: v, controlType: args[i].controlType, display: args[i].display, controlOptions: args[i].controlOptions });
                     break;
+                    case 'method':
                     case 'text':
                         // single input abilities
                         if (args[i].controls == undefined) {
@@ -145,6 +146,10 @@ define(function (require, exports, module) {
                             }
                             result.data.push({ labelName: tooltip.toUpperCase(), controlVal: r, controlType: args[i].controlType, display: args[i].display, clean: g.fn });
                         }
+                        
+                        if (args[i].controlType == 'method') {
+                            v_list.push(r);
+                        }
                     break;
                 }
             }
@@ -183,11 +188,14 @@ define(function (require, exports, module) {
                 else {
                     var v_list = [];
                     for (var i=0;i<controls.length;i++) {
-                        if (typeof v[controls[i]]() == 'boolean') {
-                            v_list.push(v[controls[i]]());
-                        }
-                        else {
-                            v_list.push(parseFloat(v[controls[i]]()));
+                        switch (typeof v[controls[i]]()) {
+                            case 'boolean':
+                            case 'object':
+                                v_list.push(v[controls[i]]());
+                            break;
+                            default:
+                                v_list.push(parseFloat(v[controls[i]]()));
+                            break;
                         }
                     }
                     var returnVal = fn.call(this, v_list, attributeValue(), parent, index, abilityList);

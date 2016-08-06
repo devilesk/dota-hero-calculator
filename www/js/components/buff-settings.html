@@ -1,7 +1,7 @@
 <div class="form-horizontal">
     <div data-bind="foreach: data">
-        <div class="form-group">
-            <label class="col-md-6 control-label" data-bind="css: {'checkbox-label': controlType == 'checkbox'}, visible: (display == undefined || display == 'buff'), attr: {'for': labelName}, html: labelName"></label>
+        <div class="form-group" data-bind="visible: (display == undefined || display == 'buff')">
+            <label class="col-md-6 control-label" data-bind="css: {'checkbox-label': controlType == 'checkbox'}, attr: {'for': labelName}, html: labelName"></label>
             <div data-bind="if: controlType == 'input' && (display == undefined || display == 'buff')">
                 <div class="col-md-6"><input class="form-control" data-bind="attr: {'id': labelName}, value: controlVal"></div>
             </div>
