@@ -1111,7 +1111,7 @@ define(function (require, exports, module) {
                 }
                 else if (ability.bonusDamage != undefined && ability.bonusDamage() != 0) {
                     if (ability.level() > 0 && (ability.isActive() || (ability.behavior().indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
-                        // nevermore_necromastery,ursa_fury_swipes,ursa_enrage,invoker_alacrity,invoker_exort,elder_titan_ancestral_spirit,spectre_desolate
+                        // nevermore_necromastery,ursa_fury_swipes,ursa_enrage,invoker_alacrity,invoker_exort,elder_titan_ancestral_spirit,spectre_desolate,razor_static_link
                         totalAttribute+=ability.bonusDamage();
                         sources[ability.name()] = {
                             'damage': ability.bonusDamage(),
@@ -1291,7 +1291,7 @@ define(function (require, exports, module) {
                 }
                 else if (ability.bonusDamageReduction != undefined) {
                     if (ability.level() > 0 && (ability.isActive() || (ability.behavior().indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
-                        // rubick_fade_bolt
+                        // rubick_fade_bolt,razor_static_link
                         totalAttribute+=ability.bonusDamageReduction();
                     }
                 }

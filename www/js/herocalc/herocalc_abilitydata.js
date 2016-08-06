@@ -2115,12 +2115,31 @@ define(function (require, exports, module) {
                 controlType: 'input'
             },
             {
-                attributeName: 'damage',
-                label: 'Total Damage',
+                attributeName: 'drain_length',
+                label: 'Damage Drained:',
+                ignoreTooltip: true,
                 controlType: 'text',
-                fn: function(v,a) {
-                    return v*a;
-                }
+                fn: function(v,a,parent,index,abilityModel,ability) {
+                    var tick_duration = Math.floor(v * 4) + 1;
+                    var ticks = Math.min(a * 4 + 1, tick_duration);
+                    var drain_rate = abilityModel.getAbilityAttributeValue(ability.attributes(), 'drain_rate',ability.level());
+                    return ticks * drain_rate/4;
+                },
+                returnProperty: 'bonusDamage'
+            },
+            {
+                attributeName: 'drain_length',
+                label: 'Enemy Damage Lost:',
+                ignoreTooltip: true,
+                controlType: 'text',
+                display: 'hidden',
+                fn: function(v,a,parent,index,abilityModel,ability) {
+                    var tick_duration = Math.floor(v * 4) + 1;
+                    var ticks = Math.min(a * 4 + 1, tick_duration);
+                    var drain_rate = abilityModel.getAbilityAttributeValue(ability.attributes(), 'drain_rate',ability.level());
+                    return ticks * drain_rate/4;
+                },
+                returnProperty: 'bonusDamageReduction'
             }
         ],
         'razor_eye_of_the_storm': [
