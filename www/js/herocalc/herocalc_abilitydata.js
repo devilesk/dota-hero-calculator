@@ -619,20 +619,6 @@ define(function (require, exports, module) {
                     }
                 },
                 returnProperty: 'movementSpeedPctReduction'
-            },
-            {
-                attributeName: 'attack_slow',
-                label: 'Total Damage',
-                controlType: 'text',
-                fn: function(v,a,parent,index,abilityList) {
-                    if (v) {
-                        return -a;
-                    }
-                    else {
-                        return 0;
-                    }
-                },
-                returnProperty: 'attackspeedreduction'
             }
         ],
         'earthshaker_enchant_totem': [
