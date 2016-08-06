@@ -138,7 +138,7 @@ require(['rollbar', 'polyfill'], function (errorTracker) {
         hc = new HEROCALCULATOR.HEROCALCULATOR();
         var lastUpdate = "#DEV_BUILD";
         $('#last-update').text(lastUpdate);
-        hc.init("/media/js/herodata.json","/media/js/itemdata.json","/media/js/unitdata.json");
+        hc.init("/media/js/herodata.json","/media/js/itemdata.json","/media/js/unitdata.json", hc.run);
    
         $('.error-warning-view, .error-warning-close').click(function () {
             $('.error-warning').fadeOut(200);
