@@ -258,8 +258,8 @@ define(function (require, exports, module) {
                 label: '%SLOW:',
                 ignoreTooltip: true,
                 controlType: 'text',
-                fn: function(v,a,parent,index,abilityList) {
-                    return -(abilityList.getAbilityAttributeValue(abilityList.abilities()[index].attributes(), 'base_move_slow',0)+v*a);
+                fn: function(v,a,parent,index,abilityModel,ability) {
+                    return -(abilityModel.getAbilityAttributeValue(ability.attributes(), 'base_move_slow',0)+v*a);
                 },
                 returnProperty: 'movementSpeedPctReduction'
             }
@@ -610,7 +610,7 @@ define(function (require, exports, module) {
                 attributeName: 'move_slow',
                 label: 'Total Damage',
                 controlType: 'text',
-                fn: function(v,a,parent,index,abilityList) {
+                fn: function(v,a) {
                     if (v) {
                         return -a;
                     }
@@ -907,7 +907,7 @@ define(function (require, exports, module) {
                 label: 'Health at given %HP:',
                 ignoreTooltip: true,
                 controlType: 'text',
-                fn: function(v,a,parent,index,abilityList) {
+                fn: function(v,a,parent) {
                     return parent.health()*v/100;
                 }
             },
@@ -924,10 +924,10 @@ define(function (require, exports, module) {
                 label: 'MAGIC RESISTANCE BONUS:',
                 ignoreTooltip: true,
                 controlType: 'text',
-                fn: function(v,a,parent,index,abilityList) {
+                fn: function(v,a,parent,index,abilityModel,ability) {
                     var v = Math.min(v, 100);
                     v = Math.max(v, 10);
-                    var hp_threshold_max = abilityList.getAbilityAttributeValue(abilityList.abilities()[index].attributes(), 'hp_threshold_max',0);
+                    var hp_threshold_max = abilityModel.getAbilityAttributeValue(ability.attributes(), 'hp_threshold_max',0);
                     var d = 100 - hp_threshold_max;
                     var c = (v - hp_threshold_max) / d;
                     c = 1 - c;
@@ -940,10 +940,10 @@ define(function (require, exports, module) {
                 label: 'ATTACK SPEED BONUS:',
                 ignoreTooltip: true,
                 controlType: 'text',
-                fn: function(v,a,parent,index,abilityList) {
+                fn: function(v,a,parent,index,abilityModel,ability) {
                     var v = Math.min(v, 100);
                     v = Math.max(v, 10);
-                    var hp_threshold_max = abilityList.getAbilityAttributeValue(abilityList.abilities()[index].attributes(), 'hp_threshold_max',0);
+                    var hp_threshold_max = abilityModel.getAbilityAttributeValue(ability.attributes(), 'hp_threshold_max',0);
                     var d = 100 - hp_threshold_max;
                     var c = (v - hp_threshold_max) / d;
                     c = 1 - c;
@@ -1083,11 +1083,11 @@ define(function (require, exports, module) {
                 attributeName: 'enemy_slow',
                 label: 'Total Damage',
                 controlType: 'text',
-                fn: function(v,a,parent,index,abilityList) {
+                fn: function(v,a,parent,index,abilityModel,ability) {
                     if (v == 0) {
                         return 0;
                     }
-                    return abilityList.getAbilityAttributeValue(abilityList.abilities()[index].attributes(), 'enemy_slow',v);
+                    return abilityModel.getAbilityAttributeValue(ability.attributes(), 'enemy_slow',v);
                 },
                 returnProperty: 'movementSpeedPctReduction'
             },
@@ -1101,11 +1101,11 @@ define(function (require, exports, module) {
                 label: 'Total Damage',
                 controlType: 'text',
                 display: 'ability',
-                fn: function(v,a,parent,index,abilityList) {
+                fn: function(v,a,parent,index,abilityModel,ability) {
                     if (v == 0) {
                         return 0;
                     }
-                    return abilityList.getAbilityAttributeValue(abilityList.abilities()[index].attributes(), 'self_slow',v);
+                    return abilityModel.getAbilityAttributeValue(ability.attributes(), 'self_slow',v);
                 },
                 returnProperty: 'movementSpeedPct'
             }
@@ -1119,11 +1119,11 @@ define(function (require, exports, module) {
                 attributeName: 'bonus_attack_speed',
                 label: 'Total Damage',
                 controlType: 'text',
-                fn: function(v,a,parent,index,abilityList) {
+                fn: function(v,a,parent,index,abilityModel,ability) {
                     if (v == 0) {
                         return 0;
                     }
-                    return abilityList.getAbilityAttributeValue(abilityList.abilities()[index].attributes(), 'bonus_attack_speed',v);
+                    return abilityModel.getAbilityAttributeValue(ability.attributes(), 'bonus_attack_speed',v);
                 },
                 returnProperty: 'attackspeed'
             },
@@ -1135,11 +1135,11 @@ define(function (require, exports, module) {
                 attributeName: 'bonus_damage',
                 label: 'Total Damage',
                 controlType: 'text',
-                fn: function(v,a,parent,index,abilityList) {
+                fn: function(v,a,parent,index,abilityModel,ability) {
                     if (v == 0) {
                         return 0;
                     }
-                    return abilityList.getAbilityAttributeValue(abilityList.abilities()[index].attributes(), 'bonus_damage',v);
+                    return abilityModel.getAbilityAttributeValue(ability.attributes(), 'bonus_damage',v);
                 },
                 returnProperty: 'bonusDamage'
             }
@@ -1153,11 +1153,11 @@ define(function (require, exports, module) {
                 attributeName: 'slow',
                 label: 'Total Damage',
                 controlType: 'text',
-                fn: function(v,a,parent,index,abilityList) {
+                fn: function(v,a,parent,index,abilityModel,ability) {
                     if (v == 0) {
                         return 0;
                     }
-                    return abilityList.getAbilityAttributeValue(abilityList.abilities()[index].attributes(), 'slow',v);
+                    return abilityModel.getAbilityAttributeValue(ability.attributes(), 'slow',v);
                 },
                 returnProperty: 'movementSpeedPctReduction'
             },
@@ -1178,11 +1178,11 @@ define(function (require, exports, module) {
                 controlType: 'text',
                 display: 'ability',
                 controls: [1,2],
-                fn: function(v,a,parent,index,abilityList) {
+                fn: function(v,a,parent,index,abilityModel,ability) {
                     if (v[0] == 0) {
                         return 0;
                     }
-                    return abilityList.getAbilityAttributeValue(abilityList.abilities()[index].attributes(), 'damage_per_second',v[0])*v[1];
+                    return abilityModel.getAbilityAttributeValue(ability.attributes(), 'damage_per_second',v[0])*v[1];
                 }
             }
         ],
@@ -1452,8 +1452,8 @@ define(function (require, exports, module) {
                 ignoreTooltip: true,
                 controlType: 'text',
                 noLevel: true,
-                fn: function(v,a,parent,index,abilityList) {
-                    return abilityList.getAbilityAttributeValue(abilityList.abilities()[index].attributes(), 'slow_steps',v+1);
+                fn: function(v,a,parent,index,abilityModel,ability) {
+                    return abilityModel.getAbilityAttributeValue(ability.attributes(), 'slow_steps',v+1);
                 },
                 returnProperty: 'movementSpeedPctReduction'
             }
@@ -1525,8 +1525,8 @@ define(function (require, exports, module) {
                 attributeName: 'beams',
                 label: 'Total Damage',
                 controlType: 'text',
-                fn: function(v,a,parent,index,abilityList) {
-                    var lucentBeamAbility = parent.ability().abilities().find(function(b) {
+                fn: function(v,a,parent,index,abilityModel) {
+                    var lucentBeamAbility = abilityModel.find(function(b) {
                         return b.name() == 'luna_lucent_beam';
                     });
                     if (lucentBeamAbility.level() == 0) return 0;
@@ -1546,10 +1546,9 @@ define(function (require, exports, module) {
                 ignoreTooltip: true,
                 controlType: 'method',
                 display: 'none',
-                fn: function(v,a,parent,index,abilityList) {
-                    var ability = abilityList.abilities()[index];
-                    var snake_jumps = abilityList.getAbilityAttributeValue(ability.attributes(), 'snake_jumps',ability.level());
-                    var snake_scale = abilityList.getAbilityAttributeValue(ability.attributes(), 'snake_scale',0);
+                fn: function(v,a,parent,index,abilityModel,ability) {
+                    var snake_jumps = abilityModel.getAbilityAttributeValue(ability.attributes(), 'snake_jumps',ability.level());
+                    var snake_scale = abilityModel.getAbilityAttributeValue(ability.attributes(), 'snake_scale',0);
                     var damage = [];
                     for (var i = 0; i < snake_jumps; i++) {
                         damage.push(a + a * i * snake_scale/100);
@@ -1563,7 +1562,7 @@ define(function (require, exports, module) {
                 ignoreTooltip: true,
                 controlType: 'text',
                 controls: [0,1],
-                fn: function(v,a,parent,index,abilityList) {
+                fn: function(v) {
                     return v[1].join(' / ');
                 }
             },
@@ -1573,7 +1572,7 @@ define(function (require, exports, module) {
                 ignoreTooltip: true,
                 controlType: 'text',
                 controls: [0,1],
-                fn: function(v,a,parent,index,abilityList) {
+                fn: function(v) {
                     return v[1].slice(0, v[0]).reduce(function (memo, o) { return memo + o }, 0);
                 }
             },
@@ -1583,7 +1582,7 @@ define(function (require, exports, module) {
                 ignoreTooltip: true,
                 controlType: 'text',
                 controls: [0,1],
-                fn: function(v,a,parent,index,abilityList) {
+                fn: function(v) {
                     return v[1].reduce(function (memo, o) { return memo + o }, 0);
                 }
             }
@@ -1635,8 +1634,8 @@ define(function (require, exports, module) {
                 label: 'DAMAGE:',
                 ignoreTooltip: true,
                 controlType: 'text',
-                fn: function(v,a,parent,index,abilityList) {
-                    return abilityList.getAbilityPropertyValue(abilityList.abilities()[index], 'damage')*v;
+                fn: function(v,a,parent,index,abilityModel,ability) {
+                    return abilityModel.getAbilityPropertyValue(ability, 'damage')*v;
                 }
             },
             {
@@ -1645,8 +1644,8 @@ define(function (require, exports, module) {
                 ignoreTooltip: true,
                 controlType: 'text',
                 noLevel: true,
-                fn: function(v,a,parent,index,abilityList) {
-                    return abilityList.getAbilityAttributeValue(abilityList.abilities()[index].attributes(), 'slow',abilityList.abilities()[index].level())*v;
+                fn: function(v,a,parent,index,abilityModel,ability) {
+                    return abilityModel.getAbilityAttributeValue(ability.attributes(), 'slow',ability.level())*v;
                 },
                 returnProperty: 'movementSpeedPctReduction'
             }
@@ -1661,9 +1660,9 @@ define(function (require, exports, module) {
                 label: 'STUN DURATION:',
                 ignoreTooltip: true,
                 controlType: 'text',
-                fn: function(v,a,parent,index,abilityList) {
-                    var arrow_min_stun = abilityList.getAbilityAttributeValue(abilityList.abilities()[index].attributes(), 'arrow_min_stun',0);
-                    var arrow_max_stunrange = abilityList.getAbilityAttributeValue(abilityList.abilities()[index].attributes(), 'arrow_max_stunrange',0);
+                fn: function(v,a,parent,index,abilityModel,ability) {
+                    var arrow_min_stun = abilityModel.getAbilityAttributeValue(ability.attributes(), 'arrow_min_stun',0);
+                    var arrow_max_stunrange = abilityModel.getAbilityAttributeValue(ability.attributes(), 'arrow_max_stunrange',0);
                     var scale = Math.min(v, arrow_max_stunrange) / arrow_max_stunrange;
                     return Math.max(arrow_min_stun, Math.floor(a * scale / 0.1) * 0.1);
                 }
@@ -1673,10 +1672,10 @@ define(function (require, exports, module) {
                 label: 'TOTAL DAMAGE:',
                 ignoreTooltip: true,
                 controlType: 'text',
-                fn: function(v,a,parent,index,abilityList) {
-                    var ability = abilityList.abilities()[index];
+                fn: function(v,a,parent,index,abilityModel,ability) {
+                    var ability = ability;
                     var damage = ability.damage()[ability.level()-1];
-                    var arrow_max_stunrange = abilityList.getAbilityAttributeValue(abilityList.abilities()[index].attributes(), 'arrow_max_stunrange',0);
+                    var arrow_max_stunrange = abilityModel.getAbilityAttributeValue(ability.attributes(), 'arrow_max_stunrange',0);
                     var scale = Math.min(v, arrow_max_stunrange) / arrow_max_stunrange;
                     var bonus_damage = Math.floor(a * scale / 2.8) * 2.8;
                     return damage + ' + ' + bonus_damage + ' = ' + (damage + bonus_damage);
@@ -1855,12 +1854,12 @@ define(function (require, exports, module) {
                 label: '%CHANCE TO MISS:',
                 ignoreTooltip: true,
                 controlType: 'text',
-                fn: function(v,a,parent,index,abilityList) {
+                fn: function(v,a,parent,index,abilityModel,ability) {
                     if (v) {
-                        return abilityList.getAbilityAttributeValue(abilityList.abilities()[index].attributes(), 'miss_rate_night',abilityList.abilities()[index].level());
+                        return abilityModel.getAbilityAttributeValue(ability.attributes(), 'miss_rate_night',ability.level());
                     }
                     else {
-                        return abilityList.getAbilityAttributeValue(abilityList.abilities()[index].attributes(), 'miss_rate_day',abilityList.abilities()[index].level());
+                        return abilityModel.getAbilityAttributeValue(ability.attributes(), 'miss_rate_day',ability.level());
                     }
                 },
                 returnProperty: 'missChance'
@@ -1946,8 +1945,8 @@ define(function (require, exports, module) {
             {
                 label: 'DAMAGE:',
                 controlType: 'text',
-                fn: function(v,a,parent,index,abilityList) {
-                    return abilityList.getAbilityPropertyValue(abilityList.abilities()[index], 'damage')*v;
+                fn: function(v,a,parent,index,abilityModel,ability) {
+                    return abilityModel.getAbilityPropertyValue(ability, 'damage')*v;
                 }
             },
             {
@@ -2102,8 +2101,8 @@ define(function (require, exports, module) {
                 attributeName: 'damage',
                 label: 'Total Damage',
                 controlType: 'text',
-                fn: function(v,a,parent,index,abilityList) {
-                    return a * (1 - v*abilityList.getAbilityAttributeValue(abilityList.abilities()[index].attributes(), 'jump_damage_reduction_pct',abilityList.abilities()[index].level())/100);
+                fn: function(v,a,parent,index,abilityModel,ability) {
+                    return a * (1 - v*abilityModel.getAbilityAttributeValue(ability.attributes(), 'jump_damage_reduction_pct',ability.level())/100);
                 }
             },
             {
@@ -2380,7 +2379,7 @@ define(function (require, exports, module) {
                 attributeName: 'bonus_damage',
                 label: 'Total Damage',
                 controlType: 'text',
-                fn: function(v,a,parent,index,abilityList) {
+                fn: function(v,a) {
                     if (v) {
                         return a;
                     }

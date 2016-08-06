@@ -157,33 +157,28 @@ define(function (require, exports, module) {
             return result;
         }
 
-        self.getComputedFunction = function (v, attributeValue, fn, parent, index, abilityList, returnProperty, controls, abilityName) {
-            return ko.pureComputed(function () {
+        self.getComputedFunction = function (v, attributeValue, fn, parent, index, abilityModel, returnProperty, controls, abilityName) {
+            var _ability = abilityModel.abilities().find(function(b) {
+                return b.name() == abilityName;
+            });
+            return ko.pureComputed(function () {                
+                var inputValue;
                 if (controls == undefined) {
                     if (v == undefined) {
-                        var returnVal = fn.call(this, v, attributeValue(), parent, index, abilityList);
+                        inputValue = v;
                     }
                     else if (typeof v() == 'boolean') {
-                        var returnVal = fn.call(this, v(), attributeValue(), parent, index, abilityList);
+                        inputValue = v();
+                    }
+                    else if (v.controlValueType == undefined) {
+                        inputValue = parseFloat(v());
+                    }
+                    else if (v.controlValueType == 'string') {
+                        inputValue = v();
                     }
                     else {
-                        if (v.controlValueType == undefined) {
-                            var returnVal = fn.call(this, parseFloat(v()), attributeValue(), parent, index, abilityList);
-                        }
-                        else if (v.controlValueType == 'string') {
-                            var returnVal = fn.call(this, v(), attributeValue(), parent, index, abilityList);
-                        }
-                        else {
-                            var returnVal = fn.call(this, parseFloat(v()), attributeValue(), parent, index, abilityList);
-                        }
+                        inputValue = parseFloat(v());
                     }
-                    if (returnProperty != undefined) {
-                        var _ability = self.abilities().find(function(b) {
-                            return b.name() == abilityName;
-                        });
-                        _ability[returnProperty](returnVal);
-                    }
-                    return returnVal;
                 }
                 else {
                     var v_list = [];
@@ -198,15 +193,14 @@ define(function (require, exports, module) {
                             break;
                         }
                     }
-                    var returnVal = fn.call(this, v_list, attributeValue(), parent, index, abilityList);
-                    if (returnProperty != undefined) {
-                        var _ability = self.abilities().find(function(b) {
-                            return b.name() == abilityName;
-                        });
-                        _ability[returnProperty](returnVal);
-                    }
-                    return returnVal;
+                    inputValue = v_list;
                 }
+                
+                var returnVal = fn.call(this, inputValue, attributeValue(), parent, index, abilityModel, _ability);
+                if (returnProperty != undefined) {
+                    _ability[returnProperty](returnVal);
+                }
+                return returnVal;
             }, this);
         }
 
