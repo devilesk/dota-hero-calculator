@@ -1808,11 +1808,17 @@ define(function (require, exports, module) {
                 controlType: 'input'
             },
             {
-                attributeName: 'damage',
-                label: 'Total Damage',
+                label: 'Enemy Max Health',
+                controlType: 'input'
+            },
+            {
+                attributeName: 'aura_damage',
+                label: 'HEALTH LOST:',
+                ignoreTooltip: true,
                 controlType: 'text',
+                controls: [0,1],
                 fn: function(v,a) {
-                    return v*a;
+                    return v[0]*v[1]*a/100;
                 }
             }
         ],
