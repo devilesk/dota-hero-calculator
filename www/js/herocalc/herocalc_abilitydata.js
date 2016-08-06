@@ -3010,11 +3010,19 @@ define(function (require, exports, module) {
         ],
         'wisp_spirits': [
             {
-                label: 'Duration',
+                label: 'Collision Count',
                 controlType: 'input'
             },
             {
-                attributeName: 'damage',
+                attributeName: 'hero_damage',
+                label: 'Total Damage',
+                controlType: 'text',
+                fn: function(v,a) {
+                    return v*a;
+                }
+            },
+            {
+                attributeName: 'creep_damage',
                 label: 'Total Damage',
                 controlType: 'text',
                 fn: function(v,a) {
