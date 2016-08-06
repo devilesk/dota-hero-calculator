@@ -153,7 +153,7 @@ define(function (require, exports, module) {
         }
 
         self.getComputedFunction = function (v, attributeValue, fn, parent, index, abilityList, returnProperty, controls, abilityName) {
-            return ko.computed(function () {
+            return ko.pureComputed(function () {
                 if (controls == undefined) {
                     if (v == undefined) {
                         var returnVal = fn.call(this, v, attributeValue(), parent, index, abilityList);
