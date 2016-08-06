@@ -1522,10 +1522,10 @@ define(function (require, exports, module) {
                 controlType: 'input'
             },
             {
-                attributeName: 'damage',
+                attributeName: 'beams',
                 label: 'Total Damage',
                 controlType: 'text',
-                fn: function(v,a,parent,index) {
+                fn: function(v,a,parent,index,abilityList) {
                     var lucentBeamAbility = parent.ability().abilities().find(function(b) {
                         return b.name() == 'luna_lucent_beam';
                     });
