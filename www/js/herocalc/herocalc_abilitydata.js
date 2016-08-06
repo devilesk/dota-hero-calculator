@@ -1518,15 +1518,20 @@ define(function (require, exports, module) {
         ],
         'luna_eclipse': [
             {
-                label: 'Duration',
+                label: 'Beam Count',
                 controlType: 'input'
             },
             {
                 attributeName: 'damage',
                 label: 'Total Damage',
                 controlType: 'text',
-                fn: function(v,a) {
-                    return v*a;
+                fn: function(v,a,parent,index) {
+                    var lucentBeamAbility = parent.ability().abilities().find(function(b) {
+                        return b.name() == 'luna_lucent_beam';
+                    });
+                    if (lucentBeamAbility.level() == 0) return 0;
+                    var damage = lucentBeamAbility.damage()[lucentBeamAbility.level()-1];
+                    return v*damage;
                 }
             }
         ],
