@@ -2052,11 +2052,23 @@ define(function (require, exports, module) {
                 controlType: 'input'
             },
             {
-                attributeName: 'damage',
+                attributeName: 'movement_slow',
                 label: 'Total Damage',
                 controlType: 'text',
                 fn: function(v,a) {
-                    return v*a;
+                    return a;
+                },
+                returnProperty: 'movementSpeedPctReduction'
+            },
+            {
+                attributeName: 'strike_damage',
+                label: 'Total Damage:',
+                ignoreTooltip: true,
+                controlType: 'text',
+                fn: function(v,a,parent,index,abilityModel,ability) {
+                    var duration_damage = abilityModel.getAbilityAttributeValue(ability.attributes(), 'duration_damage',ability.level());
+                    var ticks = Math.floor(v/3);
+                    return a + duration_damage * ticks;
                 }
             }
         ],
