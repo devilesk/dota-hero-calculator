@@ -1537,15 +1537,54 @@ define(function (require, exports, module) {
         ],
         'medusa_mystic_snake': [
             {
-                label: 'Duration',
+                label: 'Jump Count',
                 controlType: 'input'
             },
             {
-                attributeName: 'damage',
-                label: 'Total Damage',
+                attributeName: 'snake_damage',
+                label: 'Damage Per Jump:',
+                ignoreTooltip: true,
+                controlType: 'method',
+                display: 'none',
+                fn: function(v,a,parent,index,abilityList) {
+                    var ability = abilityList.abilities()[index];
+                    var snake_jumps = abilityList.getAbilityAttributeValue(ability.attributes(), 'snake_jumps',ability.level());
+                    var snake_scale = abilityList.getAbilityAttributeValue(ability.attributes(), 'snake_scale',0);
+                    var damage = [];
+                    for (var i = 0; i < snake_jumps; i++) {
+                        damage.push(a + a * i * snake_scale/100);
+                    }
+                    return damage;
+                }
+            },
+            {
+                attributeName: 'snake_damage',
+                label: 'Damage Per Jump:',
+                ignoreTooltip: true,
                 controlType: 'text',
-                fn: function(v,a) {
-                    return v*a;
+                controls: [0,1],
+                fn: function(v,a,parent,index,abilityList) {
+                    return v[1].join(' / ');
+                }
+            },
+            {
+                attributeName: 'snake_damage',
+                label: 'Total Damage:',
+                ignoreTooltip: true,
+                controlType: 'text',
+                controls: [0,1],
+                fn: function(v,a,parent,index,abilityList) {
+                    return v[1].slice(0, v[0]).reduce(function (memo, o) { return memo + o }, 0);
+                }
+            },
+            {
+                attributeName: 'snake_damage',
+                label: 'Max Damage:',
+                ignoreTooltip: true,
+                controlType: 'text',
+                controls: [0,1],
+                fn: function(v,a,parent,index,abilityList) {
+                    return v[1].reduce(function (memo, o) { return memo + o }, 0);
                 }
             }
         ],
