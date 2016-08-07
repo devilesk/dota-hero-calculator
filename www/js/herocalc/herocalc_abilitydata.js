@@ -2525,15 +2525,55 @@ define(function (require, exports, module) {
         ],
         'storm_spirit_ball_lightning': [
             {
-                label: 'Duration',
+                label: 'MAX MANA',
                 controlType: 'input'
             },
             {
-                attributeName: 'damage',
-                label: 'Total Damage',
+                label: 'Distance',
+                controlType: 'input'
+            },
+            {
+                attributeName: 'ball_lightning_initial_mana_base',
+                label: 'Total Damage:',
+                ignoreTooltip: true,
                 controlType: 'text',
-                fn: function(v,a) {
-                    return v*a;
+                controls: [0, 1],
+                fn: function(v,a,parent,index,abilityModel,ability) {
+                    return abilityModel.getAbilityPropertyValue(ability, 'damage')/100*v[1];
+                }
+            },
+            {
+                attributeName: 'ball_lightning_initial_mana_base',
+                label: 'FLAT MANA COST:',
+                ignoreTooltip: true,
+                controlType: 'method',
+                controls: [0, 1],
+                fn: function(v,a,parent,index,abilityModel,ability) {
+                    var distance_intervals = Math.floor(v[1]/100);
+                    var travel_cost_base = abilityModel.getAbilityAttributeValue(ability.attributes(), 'ball_lightning_travel_cost_base',0);
+                    return a + distance_intervals * travel_cost_base;
+                }
+            },
+            {
+                attributeName: 'ball_lightning_initial_mana_percentage',
+                label: '%MAX MANA COST:',
+                ignoreTooltip: true,
+                controlType: 'method',
+                controls: [0, 1],
+                fn: function(v,a,parent,index,abilityModel,ability) {
+                    var distance_intervals = Math.floor(v[1]/100);
+                    var travel_cost_percent = abilityModel.getAbilityAttributeValue(ability.attributes(), 'ball_lightning_travel_cost_percent',0);
+                    return a + distance_intervals * travel_cost_percent;
+                }
+            },
+            {
+                attributeName: 'ball_lightning_initial_mana_base',
+                label: 'TOTAL MANA COST:',
+                ignoreTooltip: true,
+                controlType: 'text',
+                controls: [0, 1, 2, 3],
+                fn: function(v) {
+                    return v[2] + ' + ' + (v[3]/100 * v[0]) + ' (' + v[3] + '% of max) = ' + (v[2] + v[3]/100 * v[0]);
                 }
             }
         ],
