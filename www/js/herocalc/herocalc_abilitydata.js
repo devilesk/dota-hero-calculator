@@ -2577,18 +2577,22 @@ define(function (require, exports, module) {
                 }
             }
         ],
-        'templar_assassin_trap': [
+        'templar_assassin_psionic_trap': [
             {
-                label: 'Duration',
+                label: 'Charge Time',
                 controlType: 'input'
             },
             {
-                attributeName: 'damage',
-                label: 'Total Damage',
+                attributeName: 'movement_speed_min_tooltip',
+                label: '%MOVE SLOW:',
+                ignoreTooltip: true,
                 controlType: 'text',
-                fn: function(v,a) {
-                    return v*a;
-                }
+                fn: function(v,a,parent,index,abilityModel,ability) {
+                    var max_slow = abilityModel.getAbilityAttributeValue(ability.attributes(), 'movement_speed_max_tooltip',0);
+                    var slow_per_tick = (max_slow - a)/40;
+                    return -(a + slow_per_tick * Math.min(Math.max(0, v), 4) * 10);
+                },
+                returnProperty: 'movementSpeedPctReduction'
             }
         ],
         'shredder_reactive_armor': [
