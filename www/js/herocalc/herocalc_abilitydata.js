@@ -80,8 +80,8 @@ define(function (require, exports, module) {
                 attributeName: 'dot_damage',
                 label: 'Total Damage',
                 controlType: 'text',
-                fn: function(v,a,parent,index) {
-                    return parent.ability().getAbilityPropertyValue(parent.ability().abilities()[index], 'damage')+v*a;
+                fn: function(v,a,parent,index,abilityModel,ability) {
+                    return abilityModel.getAbilityPropertyValue(ability, 'damage')+v*a;
                 }
             }
         ],
@@ -133,8 +133,8 @@ define(function (require, exports, module) {
             {
                 label: 'DAMAGE:',
                 controlType: 'text',
-                fn: function(v,a,parent,index) {
-                    return parent.ability().getAbilityPropertyValue(parent.ability().abilities()[index], 'damage')*v;
+                fn: function(v,a,parent,index,abilityModel,ability) {
+                    return abilityModel.getAbilityPropertyValue(ability, 'damage')*v;
                 }
             }
         ],
@@ -234,8 +234,8 @@ define(function (require, exports, module) {
                 label: 'DAMAGE:',
                 ignoreTooltip: true,
                 controlType: 'text',
-                fn: function(v,a,parent,index) {
-                    return parent.ability().getAbilityPropertyValue(parent.ability().abilities()[index], 'damage') + v*a/100;
+                fn: function(v,a,parent,index,abilityModel,ability) {
+                    return abilityModel.getAbilityPropertyValue(ability, 'damage') + v*a/100;
                 }
             }
         ],
@@ -420,8 +420,8 @@ define(function (require, exports, module) {
             {
                 label: 'DAMAGE:',
                 controlType: 'text',
-                fn: function(v,a,parent,index) {
-                    return parent.ability().getAbilityPropertyValue(parent.ability().abilities()[index], 'damage')*v;
+                fn: function(v,a,parent,index,abilityModel,ability) {
+                    return abilityModel.getAbilityPropertyValue(ability, 'damage')*v;
                 }
             }
         ],
@@ -447,8 +447,8 @@ define(function (require, exports, module) {
             {
                 label: 'DAMAGE:',
                 controlType: 'text',
-                fn: function(v,a,parent,index) {
-                    return parent.ability().getAbilityPropertyValue(parent.ability().abilities()[index], 'damage')*v;
+                fn: function(v,a,parent,index,abilityModel,ability) {
+                    return abilityModel.getAbilityPropertyValue(ability, 'damage')*v;
                 }
             }
         ],
@@ -843,8 +843,8 @@ define(function (require, exports, module) {
             {
                 label: 'DAMAGE:',
                 controlType: 'text',
-                fn: function(v,a,parent,index) {
-                    return parent.ability().getAbilityPropertyValue(parent.ability().abilities()[index], 'damage')*v;
+                fn: function(v,a,parent,index,abilityModel,ability) {
+                    return abilityModel.getAbilityPropertyValue(ability, 'damage')*v;
                 }
             }
         ],
@@ -892,8 +892,8 @@ define(function (require, exports, module) {
             {
                 label: 'DAMAGE:',
                 controlType: 'text',
-                fn: function(v,a,parent,index) {
-                    return parent.ability().getAbilityPropertyValue(parent.ability().abilities()[index], 'damage')*v;
+                fn: function(v,a,parent,index,abilityModel,ability) {
+                    return abilityModel.getAbilityPropertyValue(ability, 'damage')*v;
                 }
             }
         ],
@@ -1194,9 +1194,9 @@ define(function (require, exports, module) {
             {
                 label: 'DAMAGE:',
                 controlType: 'text',
-                fn: function(v,a,parent,index) {
-                    return parent.ability().getAbilityPropertyValue(parent.ability().abilities()[index], 'damage')*2 + 
-                    parent.ability().getAbilityAttributeValue(parent.ability().abilities()[index].attributes(), 'burn_damage',parent.ability().abilities()[index].level())*v;
+                fn: function(v,a,parent,index,abilityModel,ability) {
+                    return abilityModel.getAbilityPropertyValue(ability, 'damage')*2 + 
+                    abilityModel.getAbilityAttributeValue(ability.attributes(), 'burn_damage',ability.level())*v;
                 }
             },
             {
@@ -1264,8 +1264,8 @@ define(function (require, exports, module) {
             {
                 label: 'DAMAGE:',
                 controlType: 'text',
-                fn: function(v,a,parent,index) {
-                    return parent.ability().getAbilityPropertyValue(parent.ability().abilities()[index], 'damage')*v;
+                fn: function(v,a,parent,index,abilityModel,ability) {
+                    return abilityModel.getAbilityPropertyValue(ability, 'damage')*v;
                 }
             }
         ],
@@ -1620,8 +1620,8 @@ define(function (require, exports, module) {
             {
                 label: 'DAMAGE:',
                 controlType: 'text',
-                fn: function(v,a,parent,index) {
-                    return parent.ability().getAbilityPropertyValue(parent.ability().abilities()[index], 'damage')*v;
+                fn: function(v,a,parent,index,abilityModel,ability) {
+                    return abilityModel.getAbilityPropertyValue(ability, 'damage')*v;
                 }
             }
         ],
@@ -2187,8 +2187,8 @@ define(function (require, exports, module) {
             {
                 label: 'DAMAGE:',
                 controlType: 'text',
-                fn: function(v,a,parent,index) {
-                    return parent.ability().getAbilityPropertyValue(parent.ability().abilities()[index], 'damage')*v;
+                fn: function(v,a,parent,index,abilityModel,ability) {
+                    return abilityModel.getAbilityPropertyValue(ability, 'damage')*v;
                 }
             }
         ],
@@ -2287,8 +2287,8 @@ define(function (require, exports, module) {
             {
                 label: 'DAMAGE:',
                 controlType: 'text',
-                fn: function(v,a,parent,index) {
-                    return parent.ability().getAbilityPropertyValue(parent.ability().abilities()[index], 'damage')*v;
+                fn: function(v,a,parent,index,abilityModel,ability) {
+                    return abilityModel.getAbilityPropertyValue(ability, 'damage')*v;
                 }
             }
         ],
@@ -2411,8 +2411,8 @@ define(function (require, exports, module) {
                 label: 'DAMAGE:',
                 ignoreTooltip: true,
                 controlType: 'text',
-                fn: function(v,a,parent,index) {
-                    return parent.ability().getAbilityPropertyValue(parent.ability().abilities()[index], 'damage')*v;
+                fn: function(v,a,parent,index,abilityModel,ability) {
+                    return abilityModel.getAbilityPropertyValue(ability, 'damage')*v;
                 }
             },
             {
@@ -3055,8 +3055,8 @@ define(function (require, exports, module) {
                 label: 'DAMAGE:',
                 ignoreTooltip: true,
                 controlType: 'text',
-                fn: function(v,a,parent,index) {
-                    return parent.ability().getAbilityPropertyValue(parent.ability().abilities()[index], 'damage')*v;
+                fn: function(v,a,parent,index,abilityModel,ability) {
+                    return abilityModel.getAbilityPropertyValue(ability, 'damage')*v;
                 }
             }
         ],
@@ -3107,8 +3107,8 @@ define(function (require, exports, module) {
                 label: 'DAMAGE:',
                 ignoreTooltip: true,
                 controlType: 'text',
-                fn: function(v,a,parent,index) {
-                    return parent.ability().getAbilityPropertyValue(parent.ability().abilities()[index], 'damage')*v;
+                fn: function(v,a,parent,index,abilityModel,ability) {
+                    return abilityModel.getAbilityPropertyValue(ability, 'damage')*v;
                 }
             }
         ],
