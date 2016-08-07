@@ -2342,20 +2342,21 @@ define(function (require, exports, module) {
                 controlType: 'input'
             },
             {
-                attributeName: 'health_damage',
+                attributeName: 'damage',
                 label: 'Total Damage',
                 controlType: 'text',
                 fn: function(v,a) {
-                    return v*a;
+                    return Math.floor(v)*a;
                 }
             },
             {
-                attributeName: 'mana_damage',
-                label: 'Mana Loss',
+                attributeName: 'movespeed',
+                label: 'Total Damage',
                 controlType: 'text',
                 fn: function(v,a) {
-                    return v*a;
-                }
+                    return a;
+                },
+                returnProperty: 'movementSpeedPctReduction'
             }
         ],
 /*        'silencer_glaives_of_wisdom': [
