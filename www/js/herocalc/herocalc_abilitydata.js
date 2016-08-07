@@ -2967,7 +2967,14 @@ define(function (require, exports, module) {
                 attributeName: 'damage_per_stack',
                 label: 'Total Damage',
                 controlType: 'text',
-                fn: function(v,a) {
+                fn: function(v,a,parent,index,abilityModel,ability) {
+                    var enrageAbility = abilityModel.abilities().find(function(b) {
+                        return b.name() == 'ursa_enrage';
+                    });
+                    if (enrageAbility.isActive() && enrageAbility.level() > 0) {
+                        var enrage_multiplier = abilityModel.getAbilityAttributeValue(enrageAbility.attributes(), 'enrage_multiplier', enrageAbility.level());
+                        return v*a*enrage_multiplier;
+                    }
                     return v*a;
                 },
                 returnProperty: 'bonusDamage'
@@ -2975,17 +2982,13 @@ define(function (require, exports, module) {
         ],
         'ursa_enrage': [
             {
-                label: 'Current HP',
-                controlType: 'input'
-            },
-            {
-                attributeName: 'life_damage_bonus_percent',
+                attributeName: 'damage_reduction',
                 label: 'Total Damage',
                 controlType: 'text',
                 fn: function(v,a) {
-                    return v*a/100;
+                    return -a;
                 },
-                returnProperty: 'bonusDamage'
+                returnProperty: 'damageReduction'
             }
         ],
         'venomancer_venomous_gale': [
