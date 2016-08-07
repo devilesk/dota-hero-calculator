@@ -298,15 +298,15 @@ define(function (require, exports, module) {
                 label: '%DAMAGE REDUCTION:',
                 ignoreTooltip: true,
                 controlType: 'text',
-                fn: function(v,a,parent,index) {
-                    var ability = this.abilities().find(function(b) {
+                fn: function(v,a,parent,index,abilityModel,ability) {
+                    var ability = abilityModel.abilities().find(function(b) {
                         return b.name() == 'bristleback_bristleback';
                     });
                     if (v == 'back') {
-                        var total = this.getAbilityAttributeValue(ability.attributes(), 'back_damage_reduction', ability.level());
+                        var total = abilityModel.getAbilityAttributeValue(ability.attributes(), 'back_damage_reduction', ability.level());
                     }
                     else {
-                        var total = this.getAbilityAttributeValue(ability.attributes(), 'side_damage_reduction', ability.level());
+                        var total = abilityModel.getAbilityAttributeValue(ability.attributes(), 'side_damage_reduction', ability.level());
                     }
                     return -total;
                 },
@@ -2886,11 +2886,17 @@ define(function (require, exports, module) {
                 controlType: 'input'
             },
             {
-                attributeName: 'speed_slow',
-                label: 'DAMAGE/HEAL:',
+                attributeName: 'max_speed_slow',
+                label: '%MOVE SLOW:',
+                ignoreTooltip: true,
                 controlType: 'text',
-                fn: function(v,a) {
-                    return -a;
+                fn: function(v,a,parent,index,abilityModel,ability) {
+                    var min_speed_slow = abilityModel.getAbilityAttributeValue(ability.attributes(), 'min_speed_slow', 0);
+                    var radius = abilityModel.getAbilityAttributeValue(ability.attributes(), 'radius', 0);
+                    var full_power_radius = abilityModel.getAbilityAttributeValue(ability.attributes(), 'full_power_radius', 0);
+                    var distance = Math.min(Math.max(v, full_power_radius), radius);
+                    var scale = 1 - (distance - full_power_radius) / (radius - full_power_radius);
+                    return -Math.max(scale * a, min_speed_slow);
                 },
                 returnProperty: 'movementSpeedPctReduction'
             },
@@ -2899,26 +2905,57 @@ define(function (require, exports, module) {
                 label: '%DAMAGE AMP:',
                 ignoreTooltip: true,
                 controlType: 'text',
-                fn: function(v,a,parent,index) {
-                    var ability = this.abilities().find(function(b) {
-                        return b.name() == 'undying_flesh_golem';
-                    });
-                    var minRadius = this.getAbilityAttributeValue(ability.attributes(), 'full_power_radius', ability.level());
-                    var maxRadius = this.getAbilityAttributeValue(ability.attributes(), 'radius', ability.level());
-                    var value = Math.min(Math.max(v, minRadius), maxRadius);
-                    if (parent.inventory.hasScepter()) {
-                        var maxAmp = this.getAbilityAttributeValue(ability.attributes(), 'max_damage_amp_scepter', ability.level());
-                        var minAmp = this.getAbilityAttributeValue(ability.attributes(), 'min_damage_amp_scepter', ability.level());
-                    }
-                    else {
-                        var maxAmp = this.getAbilityAttributeValue(ability.attributes(), 'max_damage_amp', ability.level());
-                        var minAmp = this.getAbilityAttributeValue(ability.attributes(), 'min_damage_amp', ability.level());
-                    }
-                    var scale = 1 - ((value - minRadius) / (maxRadius - minRadius));
-                    var mult = (maxAmp - minAmp) * scale + minAmp;
-                    return mult.toFixed(2);
+                fn: function(v,a,parent,index,abilityModel,ability) {
+                    var min_damage_amp = abilityModel.getAbilityAttributeValue(ability.attributes(), 'min_damage_amp', 0);
+                    var radius = abilityModel.getAbilityAttributeValue(ability.attributes(), 'radius', 0);
+                    var full_power_radius = abilityModel.getAbilityAttributeValue(ability.attributes(), 'full_power_radius', 0);
+                    var distance = Math.min(Math.max(v, full_power_radius), radius);
+                    var scale = 1 - (distance - full_power_radius) / (radius - full_power_radius);
+                    return Math.max(scale * a, min_damage_amp);
                 },
                 returnProperty: 'damageAmplification'
+            },
+            {
+                label: 'MAX HP',
+                controlType: 'input'
+            },
+            {
+                label: 'Hero Death Count',
+                controlType: 'input'
+            },
+            {
+                label: 'Creep Death Count',
+                controlType: 'input'
+            },
+            {
+                attributeName: 'death_heal',
+                label: 'DEATH HEAL (HEROES):',
+                ignoreTooltip: true,
+                controlType: 'method',
+                controls: [1, 2],
+                fn: function(v,a) {
+                    return v[0]*v[1]*a/100;
+                }
+            },
+            {
+                attributeName: 'death_heal_creep',
+                label: 'DEATH HEAL (CREEPS):',
+                ignoreTooltip: true,
+                controlType: 'method',
+                controls: [1, 3],
+                fn: function(v,a) {
+                    return v[0]*v[1]*a/100;
+                }
+            },
+            {
+                attributeName: 'death_heal_creep',
+                label: 'TOTAL DEATH HEAL:',
+                ignoreTooltip: true,
+                controlType: 'text',
+                controls: [4, 5],
+                fn: function(v,a) {
+                    return v[0]+v[1];
+                }
             }
         ],
         'ursa_fury_swipes': [
