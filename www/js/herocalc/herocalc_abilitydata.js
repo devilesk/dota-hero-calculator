@@ -1526,11 +1526,11 @@ define(function (require, exports, module) {
                 label: 'Total Damage',
                 controlType: 'text',
                 fn: function(v,a,parent,index,abilityModel) {
-                    var lucentBeamAbility = abilityModel.find(function(b) {
+                    var lucentBeamAbility = abilityModel.abilities().find(function(b) {
                         return b.name() == 'luna_lucent_beam';
                     });
                     if (lucentBeamAbility.level() == 0) return 0;
-                    var damage = lucentBeamAbility.damage()[lucentBeamAbility.level()-1];
+                    var damage = abilityModel.getAbilityPropertyValue(lucentBeamAbility, 'damage');
                     return v*damage;
                 }
             }
