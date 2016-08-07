@@ -2627,12 +2627,40 @@ define(function (require, exports, module) {
                 controlType: 'input'
             },
             {
-                attributeName: 'damage',
-                label: 'Total Damage',
+                attributeName: 'damage_per_second',
+                label: 'DAMAGE:',
+                ignoreTooltip: true,
                 controlType: 'text',
-                fn: function(v,a) {
-                    return v*a;
+                fn: function(v,a,parent,index,abilityModel,ability) {
+                    var interval = abilityModel.getAbilityAttributeValue(ability.attributes(), 'damage_interval',0);
+                    var ticks = Math.floor(v / interval);
+                    return a*interval*ticks;
                 }
+            },
+            {
+                attributeName: 'mana_per_second',
+                label: 'MANA COST:',
+                ignoreTooltip: true,
+                controlType: 'text',
+                fn: function(v,a,parent,index,abilityModel,ability) {
+                    var interval = abilityModel.getAbilityAttributeValue(ability.attributes(), 'damage_interval',0);
+                    var ticks = Math.floor(v / interval);
+                    return a*interval*ticks;
+                }
+            },
+            {
+                label: 'ENEMY %HP',
+                controlType: 'input'
+            },
+            {
+                attributeName: 'slow',
+                label: 'MANA COST:',
+                controlType: 'text',
+                fn: function(v,a,parent,index,abilityModel,ability) {
+                    var ticks = 20 - Math.floor(Math.min(Math.max(v-1, 0), 99) / 5);
+                    return -a*ticks;
+                },
+                returnProperty: 'movementSpeedPctReduction'
             }
         ],
         'spirit_breaker_greater_bash': [
