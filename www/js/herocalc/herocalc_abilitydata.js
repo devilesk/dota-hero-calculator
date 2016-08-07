@@ -2790,15 +2790,16 @@ define(function (require, exports, module) {
         ],
         'tinker_march_of_the_machines': [
             {
-                label: 'Duration',
+                label: 'Robot Explosions',
                 controlType: 'input'
             },
             {
-                attributeName: 'damage',
-                label: 'Total Damage',
+                attributeName: 'machines_per_sec',
+                label: 'TOTAL DAMAGE:',
+                ignoreTooltip: true,
                 controlType: 'text',
-                fn: function(v,a) {
-                    return v*a;
+                fn: function(v,a,parent,index,abilityModel,ability) {
+                    return abilityModel.getAbilityPropertyValue(ability, 'damage')*v;
                 }
             }
         ],
