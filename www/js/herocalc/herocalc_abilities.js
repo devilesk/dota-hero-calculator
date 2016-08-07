@@ -15,6 +15,7 @@ define(function (require, exports, module) {
             self.abilities()[i].isActive = ko.observable(false);
             self.abilities()[i].isDetail = ko.observable(false);
             self.abilities()[i].baseDamage = ko.observable(0);
+            self.abilities()[i].baseDamageReductionPct = ko.observable(0);
             self.abilities()[i].baseDamageMultiplier = ko.observable(0);
             self.abilities()[i].bash = ko.observable(0);
             self.abilities()[i].bashBonusDamage = ko.observable(0);
@@ -1039,6 +1040,12 @@ define(function (require, exports, module) {
                                 break;
                             }
                         }
+                    }
+                }
+                else if (ability.baseDamageReductionPct != undefined) {
+                    if (ability.level() > 0 && (ability.isActive() || (ability.behavior().indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
+                        // nevermore_requiem
+                        totalAttribute *= (1 + ability.baseDamageReductionPct()/100);
                     }
                 }
             }

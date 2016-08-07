@@ -2267,16 +2267,60 @@ define(function (require, exports, module) {
         ],
         'nevermore_requiem': [
             {
-                label: 'Duration',
+                label: 'Line Hit Count',
                 controlType: 'input'
             },
             {
-                attributeName: 'damage',
-                label: 'Total Damage',
+                attributeName: 'requiem_reduction_damage',
+                label: 'Damage:',
+                ignoreTooltip: true,
+                controlType: 'text',
+                fn: function(v,a,parent,index,abilityModel,ability) {
+                    return abilityModel.getAbilityPropertyValue(ability, 'damage')*v;
+                }
+            },
+            {
+                label: 'Return Line Hit Count (Scepter)',
+                controlType: 'input'
+            },
+            {
+                attributeName: 'requiem_damage_pct_scepter',
+                label: 'Damage/Heal:',
+                ignoreTooltip: true,
+                controlType: 'text',
+                fn: function(v,a,parent,index,abilityModel,ability) {
+                    return abilityModel.getAbilityPropertyValue(ability, 'damage')*v*a/100;
+                }
+            },
+            {
+                attributeName: 'requiem_damage_pct_scepter',
+                label: 'Total Damage:',
+                ignoreTooltip: true,
+                controlType: 'text',
+                controls: [0,1],
+                fn: function(v,a,parent,index,abilityModel,ability) {
+                    var damage = abilityModel.getAbilityPropertyValue(ability, 'damage');
+                    return damage*v[0] + damage*v[1]*a/100;
+                }
+            },
+            {
+                attributeName: 'requiem_reduction_damage',
+                label: '%DAMAGE REDUCTION:',
+                ignoreTooltip: true,
                 controlType: 'text',
                 fn: function(v,a) {
-                    return v*a;
-                }
+                    return a;
+                },
+                returnProperty: 'baseDamageReductionPct'
+            },
+            {
+                attributeName: 'requiem_reduction_ms',
+                label: '%DAMAGE REDUCTION:',
+                controlType: 'text',
+                fn: function(v,a) {
+                    return a;
+                },
+                returnProperty: 'movementSpeedPctReduction'
             }
         ],
         'shadow_shaman_shackles': [
