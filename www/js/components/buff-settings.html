@@ -12,7 +12,7 @@
                     </div>
                 </div>
             </div>
-            <div data-bind="if: controlType == 'text' && (display == undefined || display == 'buff' || display == 'hidden')">
+            <div data-bind="if: (controlType == 'text' || controlType == 'method') && (display == undefined || display == 'buff' || display == 'hidden')">
                 <div class="col-md-6"><p class="form-control-static" data-bind="html: controlVal"></p></div>
             </div>
             <div data-bind="if: controlType == 'radio' && (display == undefined || display == 'buff' || display == 'hidden')">
