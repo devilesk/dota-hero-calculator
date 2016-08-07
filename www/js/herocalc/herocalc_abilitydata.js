@@ -2853,8 +2853,14 @@ define(function (require, exports, module) {
                 label: 'STRENGTH STOLEN:',
                 ignoreTooltip: true,
                 controlType: 'text',
-                fn: function(v,a) {
-                    return v*a;
+                fn: function(v,a,parent,index,abilityModel,ability) {
+                    if (parent.inventory.hasScepter()) {
+                        var str_steal_scepter = abilityModel.getAbilityAttributeValue(ability.attributes(), 'str_steal_scepter',0);
+                        return v*str_steal_scepter;
+                    }
+                    else {
+                        return v*a;
+                    }
                 },
                 returnProperty: 'bonusStrength'
             },
