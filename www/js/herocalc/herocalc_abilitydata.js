@@ -3524,7 +3524,7 @@ define(function (require, exports, module) {
                 controlType: 'input'
             },
             {
-                attributeName: 'damage',
+                attributeName: 'bonus_damage',
                 label: 'DOT Damage',
                 controlType: 'text',
                 fn: function (v, a, parent, index, abilityModel, ability) {
