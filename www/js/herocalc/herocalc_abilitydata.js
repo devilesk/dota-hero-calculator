@@ -3037,20 +3037,6 @@ define(function (require, exports, module) {
                 returnProperty: 'movementSpeedPctReduction'
             }
         ],
-        'venomancer_plague_ward': [
-            {
-                label: 'Duration',
-                controlType: 'input'
-            },
-            {
-                attributeName: 'damage',
-                label: 'Total Damage',
-                controlType: 'text',
-                fn: function (v, a, parent, index, abilityModel, ability) {
-                    return v*a;
-                }
-            }
-        ],
         'venomancer_poison_nova': [
             {
                 label: 'Duration',
