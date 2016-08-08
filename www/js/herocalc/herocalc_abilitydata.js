@@ -3361,15 +3361,31 @@ define(function (require, exports, module) {
         ],
         'witch_doctor_paralyzing_cask': [
             {
-                label: 'Duration',
+                label: 'Hero Bounce Count',
                 controlType: 'input'
             },
             {
-                attributeName: 'damage',
+                attributeName: 'hero_damage',
                 label: 'Total Damage',
                 controlType: 'text',
                 fn: function (v, a, parent, index, abilityModel, ability) {
-                    return v*a;
+                    var bounces = abilityModel.getAbilityAttributeValue(ability.attributes(), 'bounces',ability.level());
+                    return Math.min(Math.max(v, 0), bounces)*a;
+                }
+            },
+            {
+                label: 'Creep Bounce Count',
+                controlType: 'input'
+            },
+            {
+                attributeName: 'hero_damage',
+                label: 'CREEP DAMAGE:',
+                ignoreTooltip: true,
+                controlType: 'text',
+                fn: function (v, a, parent, index, abilityModel, ability) {
+                    var bounces = abilityModel.getAbilityAttributeValue(ability.attributes(), 'bounces',ability.level());
+                    var damage = abilityModel.getAbilityPropertyValue(ability, 'damage');
+                    return Math.min(Math.max(v, 0), bounces)*damage;
                 }
             }
         ],
