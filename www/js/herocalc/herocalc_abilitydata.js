@@ -3216,15 +3216,19 @@ define(function (require, exports, module) {
         ],
         'warlock_upheaval': [
             {
-                label: 'Duration',
+                label: 'Channel Duration',
                 controlType: 'input'
             },
             {
-                attributeName: 'slow_rate',
-                label: 'DAMAGE:',
+                attributeName: 'slow_rate_duration',
+                label: '%MOVE SLOW:',
+                ignoreTooltip: true,
                 controlType: 'text',
                 fn: function (v, a, parent, index, abilityModel, ability) {
-                    return -v*a;
+                    var max_slow = abilityModel.getAbilityAttributeValue(ability.attributes(), 'max_slow',0);
+                    var slow_per_tick = max_slow / (a - 0.5) / 2;
+                    var ticks = Math.max(Math.floor(v * 2) - 1, 0);
+                    return -Math.min(ticks * slow_per_tick, max_slow);
                 },
                 returnProperty: 'movementSpeedPctReduction'
             }
