@@ -3395,11 +3395,26 @@ define(function (require, exports, module) {
                 controlType: 'input'
             },
             {
-                attributeName: 'damage',
+                attributeName: 'heal',
                 label: 'Total Damage',
                 controlType: 'text',
                 fn: function (v, a, parent, index, abilityModel, ability) {
-                    return v*a;
+                    var interval = abilityModel.getAbilityAttributeValue(ability.attributes(), 'heal_interval',ability.level());
+                    var heal_per_tick = a * interval;
+                    var ticks = Math.max(Math.floor(v / interval) - 1, 0);
+                    return heal_per_tick * ticks;
+                }
+            },
+            {
+                attributeName: 'mana_per_second',
+                label: 'MANA COST:',
+                ignoreTooltip: true,
+                controlType: 'text',
+                fn: function (v, a, parent, index, abilityModel, ability) {
+                    var interval = abilityModel.getAbilityAttributeValue(ability.attributes(), 'heal_interval',ability.level());
+                    var mana_per_tick = a * interval;
+                    var ticks = Math.max(Math.floor(v / interval) - 1, 0);
+                    return mana_per_tick * ticks;
                 }
             }
         ],
