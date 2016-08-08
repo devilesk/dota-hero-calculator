@@ -15,6 +15,7 @@ define(['require','exports','module','herocalc_knockout','./herocalc_core'],func
             self.abilities()[i].isActive = ko.observable(false);
             self.abilities()[i].isDetail = ko.observable(false);
             self.abilities()[i].baseDamage = ko.observable(0);
+            self.abilities()[i].baseDamageReductionPct = ko.observable(0);
             self.abilities()[i].baseDamageMultiplier = ko.observable(0);
             self.abilities()[i].bash = ko.observable(0);
             self.abilities()[i].bashBonusDamage = ko.observable(0);
@@ -86,6 +87,7 @@ define(['require','exports','module','herocalc_knockout','./herocalc_core'],func
                         v_list.push(v);
                         result.data.push({ labelName: args[i].label.toUpperCase() + '?', controlVal: v, controlType: args[i].controlType, display: args[i].display, controlOptions: args[i].controlOptions });
                     break;
+                    case 'method':
                     case 'text':
                         // single input abilities
                         if (args[i].controls == undefined) {
@@ -145,6 +147,10 @@ define(['require','exports','module','herocalc_knockout','./herocalc_core'],func
                             }
                             result.data.push({ labelName: tooltip.toUpperCase(), controlVal: r, controlType: args[i].controlType, display: args[i].display, clean: g.fn });
                         }
+                        
+                        if (args[i].controlType == 'method') {
+                            v_list.push(r);
+                        }
                     break;
                 }
             }
@@ -152,53 +158,50 @@ define(['require','exports','module','herocalc_knockout','./herocalc_core'],func
             return result;
         }
 
-        self.getComputedFunction = function (v, attributeValue, fn, parent, index, abilityList, returnProperty, controls, abilityName) {
-            return ko.computed(function () {
+        self.getComputedFunction = function (v, attributeValue, fn, parent, index, abilityModel, returnProperty, controls, abilityName) {
+            var _ability = abilityModel.abilities().find(function(b) {
+                return b.name() == abilityName;
+            });
+            return ko.pureComputed(function () {                
+                var inputValue;
                 if (controls == undefined) {
                     if (v == undefined) {
-                        var returnVal = fn.call(this, v, attributeValue(), parent, index, abilityList);
+                        inputValue = v;
                     }
                     else if (typeof v() == 'boolean') {
-                        var returnVal = fn.call(this, v(), attributeValue(), parent, index, abilityList);
+                        inputValue = v();
+                    }
+                    else if (v.controlValueType == undefined) {
+                        inputValue = parseFloat(v());
+                    }
+                    else if (v.controlValueType == 'string') {
+                        inputValue = v();
                     }
                     else {
-                        if (v.controlValueType == undefined) {
-                            var returnVal = fn.call(this, parseFloat(v()), attributeValue(), parent, index, abilityList);
-                        }
-                        else if (v.controlValueType == 'string') {
-                            var returnVal = fn.call(this, v(), attributeValue(), parent, index, abilityList);
-                        }
-                        else {
-                            var returnVal = fn.call(this, parseFloat(v()), attributeValue(), parent, index, abilityList);
-                        }
+                        inputValue = parseFloat(v());
                     }
-                    if (returnProperty != undefined) {
-                        var _ability = self.abilities().find(function(b) {
-                            return b.name() == abilityName;
-                        });
-                        _ability[returnProperty](returnVal);
-                    }
-                    return returnVal;
                 }
                 else {
                     var v_list = [];
                     for (var i=0;i<controls.length;i++) {
-                        if (typeof v[controls[i]]() == 'boolean') {
-                            v_list.push(v[controls[i]]());
-                        }
-                        else {
-                            v_list.push(parseFloat(v[controls[i]]()));
+                        switch (typeof v[controls[i]]()) {
+                            case 'boolean':
+                            case 'object':
+                                v_list.push(v[controls[i]]());
+                            break;
+                            default:
+                                v_list.push(parseFloat(v[controls[i]]()));
+                            break;
                         }
                     }
-                    var returnVal = fn.call(this, v_list, attributeValue(), parent, index, abilityList);
-                    if (returnProperty != undefined) {
-                        var _ability = self.abilities().find(function(b) {
-                            return b.name() == abilityName;
-                        });
-                        _ability[returnProperty](returnVal);
-                    }
-                    return returnVal;
+                    inputValue = v_list;
                 }
+                
+                var returnVal = fn.call(this, inputValue, attributeValue(), parent, index, abilityModel, _ability);
+                if (returnProperty != undefined) {
+                    _ability[returnProperty](returnVal);
+                }
+                return returnVal;
             }, this);
         }
 
@@ -582,7 +585,7 @@ define(['require','exports','module','herocalc_knockout','./herocalc_core'],func
                 }
                 else if (ability.healthregen != undefined) {
                     if (ability.level() > 0 && (ability.isActive() || (ability.behavior().indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
-                        // shredder_reactive_armor,invoker_quas
+                        // shredder_reactive_armor,invoker_quas,necrolyte_sadist
                         totalAttribute+=ability.healthregen();
                     }
                 }
@@ -630,7 +633,7 @@ define(['require','exports','module','herocalc_knockout','./herocalc_core'],func
                 }
                 else if (ability.manaregen != undefined) {
                     if (ability.level() > 0 && (ability.isActive() || (ability.behavior().indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
-                        // 
+                        // necrolyte_sadist
                         totalAttribute+=ability.manaregen();
                     }
                 }
@@ -808,7 +811,7 @@ define(['require','exports','module','herocalc_knockout','./herocalc_core'],func
                 }
                 else if (ability.attackspeed != undefined) {
                     if (ability.level() > 0 && (ability.isActive() || (ability.behavior().indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
-                        // troll_warlord_fervor,wisp_overcharge,lina_fiery_soul,invoker_alacrity,invoker_wex
+                        // troll_warlord_fervor,wisp_overcharge,lina_fiery_soul,invoker_alacrity,invoker_wex,huskar_berserkers_blood
                         totalAttribute+=ability.attackspeed();
                     }
                 }
@@ -1039,6 +1042,12 @@ define(['require','exports','module','herocalc_knockout','./herocalc_core'],func
                         }
                     }
                 }
+                else if (ability.baseDamageReductionPct != undefined) {
+                    if (ability.level() > 0 && (ability.isActive() || (ability.behavior().indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
+                        // nevermore_requiem
+                        totalAttribute *= (1 + ability.baseDamageReductionPct()/100);
+                    }
+                }
             }
             return totalAttribute;
         });
@@ -1109,7 +1118,7 @@ define(['require','exports','module','herocalc_knockout','./herocalc_core'],func
                 }
                 else if (ability.bonusDamage != undefined && ability.bonusDamage() != 0) {
                     if (ability.level() > 0 && (ability.isActive() || (ability.behavior().indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
-                        // nevermore_necromastery,ursa_fury_swipes,ursa_enrage,invoker_alacrity,invoker_exort,elder_titan_ancestral_spirit,spectre_desolate
+                        // nevermore_necromastery,ursa_fury_swipes,ursa_enrage,invoker_alacrity,invoker_exort,elder_titan_ancestral_spirit,spectre_desolate,razor_static_link
                         totalAttribute+=ability.bonusDamage();
                         sources[ability.name()] = {
                             'damage': ability.bonusDamage(),
@@ -1289,7 +1298,7 @@ define(['require','exports','module','herocalc_knockout','./herocalc_core'],func
                 }
                 else if (ability.bonusDamageReduction != undefined) {
                     if (ability.level() > 0 && (ability.isActive() || (ability.behavior().indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
-                        // rubick_fade_bolt
+                        // rubick_fade_bolt,razor_static_link
                         totalAttribute+=ability.bonusDamageReduction();
                     }
                 }
@@ -1381,7 +1390,7 @@ define(['require','exports','module','herocalc_knockout','./herocalc_core'],func
                 }
                 else if (ability.damageReduction != undefined) {
                     if (ability.level() > 0 && (ability.isActive() || (ability.behavior().indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
-                        // wisp_overcharge,bristleback_bristleback,spectre_dispersion,medusa_mana_shield
+                        // wisp_overcharge,bristleback_bristleback,spectre_dispersion,medusa_mana_shield,ursa_enrage
                         totalAttribute *= (1 + ability.damageReduction()/100);
                     }
                 }
@@ -2029,7 +2038,7 @@ define(['require','exports','module','herocalc_knockout','./herocalc_core'],func
                         // venomancer_poison_sting,viper_viper_strike,viper_corrosive_skin,viper_poison_attack,venomancer_venomous_gale,treant_leech_seed
                         // lich_chain_frost,sniper_shrapnel,centaur_stampede,huskar_life_break,jakiro_dual_breath,meepo_geostrike,sandking_epicenter
                         // earth_spirit_rolling_boulder,invoker_ghost_walk,invoker_ice_wall,elder_titan_earth_splitter
-                        // undying_flesh_golem
+                        // undying_flesh_golem,templar_assassin_psionic_trap,nevermore_requiem,queenofpain_shadow_strike
                         totalAttribute+=ability.movementSpeedPctReduction()/100;
                     }
                 }

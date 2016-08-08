@@ -1,21 +1,21 @@
 <div class="form-horizontal">
     <div data-bind="foreach: data">
-        <div class="form-group">
-            <label class="col-md-6 control-label" data-bind="css: {'checkbox-label': controlType == 'checkbox'}, visible: (display == undefined || display == 'buff'), attr: {'for': labelName}, html: labelName"></label>
-            <div data-bind="if: controlType == 'input' && (display == undefined || display == 'buff')">
+        <div class="form-group" data-bind="visible: (display == undefined || display == 'buff')">
+            <label class="col-md-6 control-label" data-bind="css: {'checkbox-label': controlType == 'checkbox'}, attr: {'for': labelName}, html: labelName"></label>
+            <div data-bind="if: controlType == 'input' && (display == undefined || display == 'buff' || display == 'hidden')">
                 <div class="col-md-6"><input class="form-control" data-bind="attr: {'id': labelName}, value: controlVal"></div>
             </div>
-            <div data-bind="if: controlType == 'checkbox' && (display == undefined || display == 'buff')">
+            <div data-bind="if: controlType == 'checkbox' && (display == undefined || display == 'buff' || display == 'hidden')">
                 <div class="col-md-6">
                     <div class="checkbox">
                         <input type="checkbox" data-bind="attr: {'id': labelName}, checked: controlVal">
                     </div>
                 </div>
             </div>
-            <div data-bind="if: controlType == 'text' && (display == undefined || display == 'buff')">
+            <div data-bind="if: (controlType == 'text' || controlType == 'method') && (display == undefined || display == 'buff' || display == 'hidden')">
                 <div class="col-md-6"><p class="form-control-static" data-bind="html: controlVal"></p></div>
             </div>
-            <div data-bind="if: controlType == 'radio' && (display == undefined || display == 'buff')">
+            <div data-bind="if: controlType == 'radio' && (display == undefined || display == 'buff' || display == 'hidden')">
                 <div class="col-md-6">
                     <!-- ko foreach: controlOptions -->
                     <div class="radio">

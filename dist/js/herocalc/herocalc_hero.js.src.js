@@ -1,7 +1,6 @@
-define(['require','exports','module','herocalc_knockout','jquery','./herocalc_core','./herocalc_hero_damage','./herocalc_hero_damageamp'],function (require, exports, module) {
+define(['require','exports','module','herocalc_knockout','./herocalc_core','./herocalc_hero_damage','./herocalc_hero_damageamp'],function (require, exports, module) {
     'use strict';
     var ko = require('herocalc_knockout');
-        var $ = require('jquery');
     
     var my = require("./herocalc_core").HEROCALCULATOR;
     require("./herocalc_hero_damage").HEROCALCULATOR;

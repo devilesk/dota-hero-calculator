@@ -19,6 +19,10 @@ css/jquery-ui.css
 ----------------
 css/jquery-ui.css
 
+css/qunit-2.0.1.css
+----------------
+css/qunit-2.0.1.css
+
 js/main.js
 ----------------
 js/lib/rollbar.umd.nojson.min.js
