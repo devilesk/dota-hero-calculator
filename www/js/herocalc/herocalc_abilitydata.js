@@ -3420,15 +3420,116 @@ define(function (require, exports, module) {
         ],
         'witch_doctor_maledict': [
             {
+                label: 'damage 0-4s',
+                controlType: 'input'
+            },
+            {
+                label: 'damage 4-8s',
+                controlType: 'input'
+            },
+            {
+                label: 'damage 8-12s',
+                controlType: 'input'
+            },
+            {
+                attributeName: 'bonus_damage',
+                label: 'Dot Damage after 3s:',
+                ignoreTooltip: true,
+                controlType: 'method',
+                fn: function (v, a, parent, index, abilityModel, ability) {
+                    var damage = abilityModel.getAbilityPropertyValue(ability, 'damage');
+                    return 3*damage;
+                }
+            },
+            {
+                attributeName: 'bonus_damage',
+                label: 'Burst Damage at 4s:',
+                ignoreTooltip: true,
+                controlType: 'method',
+                controls: [0, 3],
+                fn: function (v, a, parent, index, abilityModel, ability) {
+                    var damage = abilityModel.getAbilityPropertyValue(ability, 'damage');
+                    var d = v.reduce(function (memo, o) { return memo + o }, 0);
+                    return Math.max(d, 0) * a/100;
+                }
+            },
+            {
+                attributeName: 'bonus_damage',
+                label: 'Dot Damage after 7s:',
+                ignoreTooltip: true,
+                controlType: 'method',
+                fn: function (v, a, parent, index, abilityModel, ability) {
+                    var damage = abilityModel.getAbilityPropertyValue(ability, 'damage');
+                    return 7*damage;
+                }
+            },
+            {
+                attributeName: 'bonus_damage',
+                label: 'Burst Damage at 8s:',
+                ignoreTooltip: true,
+                controlType: 'method',
+                controls: [0, 1, 4, 5],
+                fn: function (v, a, parent, index, abilityModel, ability) {
+                    var damage = abilityModel.getAbilityPropertyValue(ability, 'damage');
+                    var d = v.reduce(function (memo, o) { return memo + o }, 0);
+                    return Math.max(d, 0) * a/100;
+                }
+            },
+            {
+                attributeName: 'bonus_damage',
+                label: 'Dot Damage after 11s:',
+                ignoreTooltip: true,
+                controlType: 'method',
+                fn: function (v, a, parent, index, abilityModel, ability) {
+                    var damage = abilityModel.getAbilityPropertyValue(ability, 'damage');
+                    return 11*damage;
+                }
+            },
+            {
+                attributeName: 'bonus_damage',
+                label: 'Burst Damage at 12s:',
+                ignoreTooltip: true,
+                controlType: 'method',
+                controls: [0, 1, 2, 4, 6, 7],
+                fn: function (v, a, parent, index, abilityModel, ability) {
+                    var damage = abilityModel.getAbilityPropertyValue(ability, 'damage');
+                    var d = v.reduce(function (memo, o) { return memo + o }, 0);
+                    return Math.max(d, 0) * a/100;
+                }
+            },
+            {
+                attributeName: 'bonus_damage',
+                label: 'Total Burst Damage:',
+                ignoreTooltip: true,
+                controlType: 'method',
+                controls: [4, 6, 8],
+                fn: function (v, a, parent, index, abilityModel, ability) {
+                    return v.reduce(function (memo, o) { return memo + o }, 0);
+                }
+            },
+            {
+                attributeName: 'bonus_damage',
+                label: 'Total Maledict Damage:',
+                ignoreTooltip: true,
+                controlType: 'method',
+                controls: [9],
+                fn: function (v, a, parent, index, abilityModel, ability) {
+                    var duration = abilityModel.getAbilityAttributeValue(ability.attributes(), 'duration_tooltip',0);
+                    var damage = abilityModel.getAbilityPropertyValue(ability, 'damage');
+                    return damage * duration + v[0];
+                }
+            },
+            {
                 label: 'Duration',
                 controlType: 'input'
             },
             {
                 attributeName: 'damage',
-                label: 'Total Damage',
+                label: 'DOT Damage',
                 controlType: 'text',
                 fn: function (v, a, parent, index, abilityModel, ability) {
-                    return v*a;
+                    var duration = abilityModel.getAbilityAttributeValue(ability.attributes(), 'duration_tooltip',0);
+                    return abilityModel.getAbilityPropertyValue(ability, 'damage')*Math.min(Math.max(v, 0), duration);
                 }
             }
         ],
