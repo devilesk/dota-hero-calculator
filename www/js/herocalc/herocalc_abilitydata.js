@@ -3158,15 +3158,19 @@ define(function (require, exports, module) {
         ],
         'visage_soul_assumption': [
             {
-                label: 'Duration',
+                label: 'Charges',
                 controlType: 'input'
             },
             {
-                attributeName: 'damage',
-                label: 'Total Damage',
+                attributeName: 'soul_charge_damage',
+                label: 'Total Damage:',
+                ignoreTooltip: true,
                 controlType: 'text',
                 fn: function (v, a, parent, index, abilityModel, ability) {
-                    return v*a;
+                    var soul_base_damage = abilityModel.getAbilityAttributeValue(ability.attributes(), 'soul_base_damage',0);
+                    var stack_limit = abilityModel.getAbilityAttributeValue(ability.attributes(), 'stack_limit', ability.level());
+                    stack_limit = Math.max(Math.min(v, stack_limit), 0);
+                    return soul_base_damage + stack_limit*a;
                 }
             }
         ],
