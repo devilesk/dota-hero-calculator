@@ -1,3 +1,27 @@
+2016-08-08
+- Added/Fixed the following abilities:
+    Huskar Berserker's Blood
+    Earth Spirit Rolling Boulder
+    Wisp Spirits
+    Luna Eclipse
+    Medusa Mystic Snake
+    Mirana Sacred Arrow
+    Necrophos Heartstopper Aura, Sadist
+    Night Stalker Crippling Fear
+    Queen of Pain Shadow Strike
+    Razor Plasma Field, Static Link
+    Shadow Fiend Requiem
+    Silencer Arcane Curse
+    Storm Spirit Ball Lightning
+    Templar Assassin Psionic Trap
+    Timbersaw Chakram
+    Tinker March of the Machines
+    Undying Decay, Flesh Golem
+    Ursa Fury Swipes, Enrage
+    Visage Soul Assumption
+    Warlock Upheaval
+    Witch Doctor Paralyzing Cask, Voodoo Restoration, Maledict
+
 2016-07-29
 - Added more error tracking and reporting.
 
