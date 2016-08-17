@@ -449,7 +449,7 @@ define(['require','exports','module','herocalc_knockout','jquery','bootstrap','j
                 data: {'data': serialized},
                 dataType: "json",
                 success: function (data){
-                    self.saveLink("http://devilesk.com/dota2/apps/hero-calculator?id=" + data.file);
+                    self.saveLink([location.protocol, '//', location.host, location.pathname].join('') + '?id=' + data.file);
                 },
                 failure: function (errMsg) {
                     alert("Save request failed.");
