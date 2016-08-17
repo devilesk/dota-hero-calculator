@@ -1,10 +1,18 @@
 {
-  "name": "hero-calculator",
+  "name": "dota-hero-calculator",
   "version": "1.0.0",
   "private": true,
   "description": "Dota 2 Hero Calculator",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devilesk/dota-hero-calculator.git"
+  },
   "author": "devilesk",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/devilesk/dota-hero-calculator/issues"
+  },
+  "homepage": "https://github.com/devilesk/dota-hero-calculator#readme",
   "devDependencies": {
     "del": "^2.2.1",
     "git-rev-sync": "^1.6.0",
