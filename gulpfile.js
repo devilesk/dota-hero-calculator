@@ -3,6 +3,7 @@ var concat = require('gulp-concat');
 var minifyCSS = require('gulp-clean-css');
 var rename = require('gulp-rename');
 var preprocess = require('gulp-preprocess');
+var replace = require('gulp-replace');
 var imagemin = require('gulp-imagemin');
 var rjs = require('requirejs');
 var fs = require('fs');
@@ -37,9 +38,16 @@ gulp.task('css-themes', function () {
         .pipe(gulp.dest('dist/css'))
 });
 
-gulp.task('html', function () {
+gulp.task('copy-navbar', function () {
+    return gulp.src('/srv/www/dev.devilesk.com/dota2/.navbar.html')
+        .pipe(replace('<div class="navbar navbar-default main_nav">', '<div class="navbar navbar-default main_nav" data-bind="visible: !sideView()">'))
+        .pipe(gulp.dest('www/'))
+});
+
+gulp.task('html', ['copy-navbar'], function () {
     return gulp.src('www/index.html')
         .pipe(preprocess({context: { NODE_ENV: 'production'}})) //To set environment variables in-line 
+        .pipe(replace('bootstrap.css', 'bootstrap.min.css'))
         .pipe(gulp.dest('dist/'))
 });
 

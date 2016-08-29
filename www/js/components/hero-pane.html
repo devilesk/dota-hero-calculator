@@ -34,7 +34,7 @@
     <div class="col-md-4" data-bind="css: {'col-md-4': $root.layout() == 0, 'col-md-12': $root.layout() == 1}">
         <div class="row">
             <h3 class="col-md-12">Stats <a class="btn btn-default btn-xs" data-bind="toggle: showStatDetails, text: !showStatDetails() ? 'Show more' : 'Show less', attr: {title: !showStatDetails() ? 'Click to show base stats' : 'Click to hide base stats'}"></a>
-                <div class="checkbox" style="margin-left:15px;display:inline;" data-bind="style: {'display': $root.layout() == 1 ? 'inline' : 'none'}">
+                <div style="margin-left:15px;display:inline;" data-bind="style: {'display': $root.layout() == 1 ? 'inline' : 'none'}">
                     <label><input type="checkbox" style="float:none;margin-right:5px;" data-bind="checked: showDiff"><span style="font-size:12px">Show <abbr title="The difference between two adjacent hero tabs shown next to each stat.">delta values</abbr>. <span data-bind="visible: showDiff">Comparing level <span data-bind="text: selectedHeroLevel"></span> <span data-bind="text: hero().displayname, css: playerColorCss"></span> to level <span data-bind="text: heroCompare().selectedHeroLevel"></span> <span data-bind="text: heroCompare().hero().displayname, css: heroCompare().playerColorCss"></span>.</span></span></label>
                     <label style="margin-left:25px;font-size:12px;"><input type="checkbox" style="float:none;margin-right:5px;" data-bind="checked: showUnitTab">Show unit tab</label>
                 </div>

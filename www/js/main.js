@@ -89,7 +89,7 @@ require(['rollbar', 'polyfill'], function (errorTracker) {
         
         callbackWrap(Element.prototype, "addEventListener", 1, actionTrackWrapper, ['click', 'focus', 'blur', 'change', 'dblclick']);
 
-        $('.top-nav-menu .dropdown-toggle').click(function() {
+        /*$('.top-nav-menu .dropdown-toggle').click(function() {
           if ($('.mobile-only').css('display') == 'none') {
             var location = $(this).attr('href');
             window.location.href = location;
@@ -133,7 +133,7 @@ require(['rollbar', 'polyfill'], function (errorTracker) {
                 if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
             }
             return null;
-        }
+        }*/
         
         hc = new HEROCALCULATOR.HEROCALCULATOR();
         var lastUpdate = "#DEV_BUILD";

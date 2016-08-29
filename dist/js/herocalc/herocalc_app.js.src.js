@@ -617,15 +617,15 @@ define(['require','exports','module','herocalc_knockout','jquery','bootstrap','j
         }
     }
 
-    my.prototype.theme = ko.observable($('#theme-select').val());
+    my.prototype.theme = ko.observable('dark'); //ko.observable($('#theme-select').val());
     my.prototype.heroCalculator = {};
     
     my.prototype.run = function () {
         my.prototype.heroCalculator = new my.prototype.HeroCalculatorViewModel();
         ko.applyBindings(my.prototype.heroCalculator);
-        $('#theme-select').change(function () {
+        /*$('#theme-select').change(function () {
             my.prototype.theme($(this).val());
-        });
+        });*/
         $('#spinner').hide();
         $('.initial-hidden').css('display', 'inline-block');
         $('#popHero0').addClass('active');

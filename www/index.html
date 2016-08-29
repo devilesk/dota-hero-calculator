@@ -10,8 +10,7 @@
 
     <link rel="shortcut icon" href="/media/favicon.png">
   
-    <link rel="stylesheet" href="/media/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/media/css/site.css" id="theme-css">
+    <link rel="stylesheet" href="/media/bootstrap/css/bootstrap.css">
     <!-- @if NODE_ENV='development' -->
     <link rel="stylesheet" type="text/css" href="css/jquery-ui.css" />
     <link rel="stylesheet" type="text/css" href="css/hero-calculator.items.css" />
@@ -25,7 +24,8 @@
 </head>
 <body id="index" class="page-webapps">
 <div class="wrapper">
-                    <div class="navbar navbar-default main_nav" data-bind="visible: !sideView()">
+<!-- @if NODE_ENV='development' -->
+<div class="navbar navbar-default main_nav" data-bind="visible: !sideView()">
 	<div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -33,11 +33,11 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/dota2" style="width:220px;"><div></div></a>
+          <a class="navbar-brand" href="/dota2"></a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="top-nav-menu nav navbar-nav">
-			<li class="dropdown li-community">
+			<li class="dropdown ">
                   <a href="/dota2/community" class="dropdown-toggle" data-toggle="dropdown">COMMUNITY <b class="caret"></b></a>
                   <ul class="dropdown-menu">
                     <li class="mobile-only"><a href="/dota2/community">Community Home</a></li>
@@ -50,7 +50,7 @@
                                             <li><a href="/dota2/all-hero-challenge-list">All Hero Challenge List</a></li>
                                                               </ul>
                 </li>
-                <li class="dropdown li-webapps">
+                <li class="dropdown ">
                   <a href="/dota2/apps" class="dropdown-toggle" data-toggle="dropdown">WEB APPS <b class="caret"></b></a>
                   <ul class="dropdown-menu">
                     <li class="mobile-only"><a href="/dota2/apps">Web Apps Home</a></li>
@@ -74,7 +74,7 @@
                                             <li><a href="/dota2/apps/tread-switch-trainer">Tread Switch Trainer</a></li>
                                                               </ul>
                 </li>
-                <li class="dropdown li-heroes">
+                <li class="dropdown ">
                   <a href="/dota2/heroes" class="dropdown-toggle" data-toggle="dropdown">HEROES <b class="caret"></b></a>
                   <ul class="dropdown-menu">
                     <li class="mobile-only"><a href="/dota2/heroes">Heroes Home</a></li>
@@ -86,7 +86,7 @@
                                             <li><a href="/dota2/heroes/unitdata">Unit Stat Table</a></li>
                                                               </ul>
                 </li>
-                                <li class="li-items"><a href="/dota2/items">ITEMS</a></li><li class="dropdown li-guides">
+                                <li class=""><a href="/dota2/items">ITEMS</a></li><li class="dropdown ">
                   <a href="/dota2/guides" class="dropdown-toggle" data-toggle="dropdown">GUIDES <b class="caret"></b></a>
                   <ul class="dropdown-menu">
                     <li class="mobile-only"><a href="/dota2/guides">Guides Home</a></li>
@@ -96,12 +96,15 @@
                                             <li><a href="http://steamcommunity.com/sharedfiles/filedetails/?id=125563122">Beginner's Guide to Items</a></li>
                                                               </ul>
                 </li>
-                                <li class="li-blog"><a href="/blog">BLOG</a></li>            
-<li class="li-forums"><a href="/dota2/forums/index.php">FORUMS</a></li>
+                                <li class=""><a href="/blog">BLOG</a></li>                <li class="li-forums"><a href="/dota2/forums/index.php">FORUMS</a></li>
 		  </ul>
 		</div>
 	</div>
 </div>
+<!-- @endif -->
+<!-- @if NODE_ENV='production' -->
+<!-- @include .navbar.html -->
+<!-- @endif -->
 <div class="container" data-bind="css: { container: !(sideView()), 'col-md-12': sideView() }">
     <header class="banner clearfix" data-bind="visible: !(sideView())">
         <h2 class="pull-left">Hero Calculator</h2>
@@ -404,12 +407,6 @@
       <img src="/media/images/footer.png">
       <p><a href="mailto:admin@devilesk.com">admin@devilesk.com</a></p>
       <p>Copyright &copy; 2016 <a href="http://devilesk.com">devilesk.com</a></p>
-      <p>Theme 
-        <select id="theme-select" class="form-control" style="display: inline;width: auto;height: auto;padding: 0;font-size: inherit;">
-          <option value="dark">dark</option>
-          <option value="light">light</option>
-        </select>
-      </p>
     </footer>
   
 
