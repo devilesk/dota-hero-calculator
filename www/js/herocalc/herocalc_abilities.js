@@ -2314,10 +2314,6 @@ define(function (require, exports, module) {
                 self.abilities()[index()].isDetail(true);
             }
         }.bind(this);
-        
-        self.getAbilityTooltipData = function (hero, el) {
-            return my.prototype.getAbilityTooltipData(hero, el);
-        }
 
         self.levelUpAbility = function (index, data, event, hero) {
             if (self.abilities()[index()].level() < hero.getAbilityLevelMax(data) && hero.availableSkillPoints() > 0 ) {

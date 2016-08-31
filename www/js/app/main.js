@@ -29,6 +29,7 @@ define(function (require, exports, module) {
 
     // The app extends the herocalc library, provides a frontend
     var my = require("herocalc").HEROCALCULATOR;
+    require("./herocalc_tooltips");
     console.log('app/main', my);
     
     my.prototype.PlayerColors = [

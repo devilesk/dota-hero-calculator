@@ -3,7 +3,6 @@ define(function (require, exports, module) {
 
     var core = require("./herocalc_core");
     require("./herocalc_inventory");
-    require("./herocalc_tooltips");
     require("./herocalc_abilitydata");
     require("./herocalc_abilities");
     require("./herocalc_buffs");

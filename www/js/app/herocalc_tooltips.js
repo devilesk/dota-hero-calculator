@@ -2,7 +2,7 @@ define(function (require, exports, module) {
     'use strict';
         var $ = require('jquery');
     
-    var my = require("./herocalc_core").HEROCALCULATOR;
+    var my = require("herocalc").HEROCALCULATOR;
     
     my.prototype.itemtooltipdata = {};
     my.prototype.ability_vars = {
@@ -231,6 +231,7 @@ define(function (require, exports, module) {
     }
         
     my.prototype.getAbilityTooltipData = function(hero, el) {
+        console.log('getAbilityTooltipData');
         if (my.prototype.abilityTooltipData[el] == undefined) {
             var abilityName = el
             var ability = {};
@@ -283,5 +284,7 @@ define(function (require, exports, module) {
             return my.prototype.abilityTooltipData[el];
         }
     }
+
+    my.prototype.AbilityModel.prototype.getAbilityTooltipData = my.prototype.getAbilityTooltipData;
 
 });
