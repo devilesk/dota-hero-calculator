@@ -253,7 +253,8 @@ define(function (require, exports, module) {
         self.selectedGraphProperty = ko.observable(self.graphProperties()[0].id);
         
         self.graphChartOptions = ko.computed(function () {
-            var color = my.prototype.theme() == 'dark' ? 'rgb(151, 154, 162)' : 'rgb(51, 51, 51)';
+            //var color = my.prototype.theme() == 'dark' ? 'rgb(151, 154, 162)' : 'rgb(51, 51, 51)';
+            var color = 'rgb(151, 154, 162)';
             return {
                 responsive: true,
                 datasetStroke: false,
