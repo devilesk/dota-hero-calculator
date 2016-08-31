@@ -72,8 +72,8 @@ define(function (require, exports, module) {
                 sources = {},
                 sourcesAmp = self.damageReduction.getDamageMultiplierSources(),
                 sourcesReduc = self.damageAmplification.getDamageMultiplierSources();
-            $.extend(sources, sourcesAmp);
-            $.extend(sources, sourcesReduc);
+            my.prototype.extend(sources, sourcesAmp);
+            my.prototype.extend(sources, sourcesReduc);
             // Initial damage instance
             instances.push(self.getDamageAmpReducInstance(sources, initialDamage, 'initial', 'physical'));
             
