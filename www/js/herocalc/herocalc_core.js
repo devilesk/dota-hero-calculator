@@ -39,39 +39,49 @@ define(function (require, exports, module) {
         var arr = a.concat(b);
         return my.prototype.uniques(arr);
     }
+    
+    my.prototype.totalResources = 3;
+    my.prototype.numResourcesLoaded = 0;
+    my.prototype.onResourceLoaded = function (callback) {
+        my.prototype.numResourcesLoaded++;
+        if (my.prototype.numResourcesLoaded == my.prototype.totalResources) {
+            if (callback) callback();
+        }
+    }
 
     my.prototype.init = function (HERODATA_PATH,ITEMDATA_PATH,UNITDATA_PATH, callback) {
-        $.when(
-            $.getJSON(HERODATA_PATH, function (data) {
-                my.prototype.heroData = data;
-                my.prototype.heroData['npc_dota_hero_chen'].abilities[2].behavior.push('DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE');
-                my.prototype.heroData['npc_dota_hero_nevermore'].abilities[1].behavior.push('DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE');
-                my.prototype.heroData['npc_dota_hero_nevermore'].abilities[2].behavior.push('DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE');
-                my.prototype.heroData['npc_dota_hero_morphling'].abilities[3].behavior.push('DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE');
-                my.prototype.heroData['npc_dota_hero_ogre_magi'].abilities[3].behavior.push('DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE');
-                my.prototype.heroData['npc_dota_hero_techies'].abilities[4].behavior.push('DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE');
-                my.prototype.heroData['npc_dota_hero_beastmaster'].abilities[2].behavior.push('DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE');
-                var index = my.prototype.heroData['npc_dota_hero_lone_druid'].abilities[3].behavior.indexOf('DOTA_ABILITY_BEHAVIOR_HIDDEN');
-                my.prototype.heroData['npc_dota_hero_lone_druid'].abilities[3].behavior.splice(index, 1);
+        my.prototype.numResourcesLoaded = 0;
+        my.prototype.getJSON(HERODATA_PATH, function (data) {
+            my.prototype.heroData = data;
+            my.prototype.heroData['npc_dota_hero_chen'].abilities[2].behavior.push('DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE');
+            my.prototype.heroData['npc_dota_hero_nevermore'].abilities[1].behavior.push('DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE');
+            my.prototype.heroData['npc_dota_hero_nevermore'].abilities[2].behavior.push('DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE');
+            my.prototype.heroData['npc_dota_hero_morphling'].abilities[3].behavior.push('DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE');
+            my.prototype.heroData['npc_dota_hero_ogre_magi'].abilities[3].behavior.push('DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE');
+            my.prototype.heroData['npc_dota_hero_techies'].abilities[4].behavior.push('DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE');
+            my.prototype.heroData['npc_dota_hero_beastmaster'].abilities[2].behavior.push('DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE');
+            var index = my.prototype.heroData['npc_dota_hero_lone_druid'].abilities[3].behavior.indexOf('DOTA_ABILITY_BEHAVIOR_HIDDEN');
+            my.prototype.heroData['npc_dota_hero_lone_druid'].abilities[3].behavior.splice(index, 1);
+            
+            index = my.prototype.heroData['npc_dota_hero_abaddon'].abilities[2].behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE');
+            my.prototype.heroData['npc_dota_hero_abaddon'].abilities[2].behavior.splice(index, 1);
+            
+            index = my.prototype.heroData['npc_dota_hero_riki'].abilities[2].behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE');
+            my.prototype.heroData['npc_dota_hero_riki'].abilities[2].behavior.splice(index, 1);
+            
+            for (var h in my.prototype.heroData) {
+                my.prototype.HeroOptions.push(new my.prototype.HeroOption(h.replace('npc_dota_hero_', ''), my.prototype.heroData[h].displayname));
+            }
                 
-                index = my.prototype.heroData['npc_dota_hero_abaddon'].abilities[2].behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE');
-                my.prototype.heroData['npc_dota_hero_abaddon'].abilities[2].behavior.splice(index, 1);
-                
-                index = my.prototype.heroData['npc_dota_hero_riki'].abilities[2].behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE');
-                my.prototype.heroData['npc_dota_hero_riki'].abilities[2].behavior.splice(index, 1);
-                
-                for (var h in my.prototype.heroData) {
-                    my.prototype.HeroOptions.push(new my.prototype.HeroOption(h.replace('npc_dota_hero_', ''), my.prototype.heroData[h].displayname));
-                }
-            }),
-            $.getJSON(ITEMDATA_PATH, function (data) {
-                my.prototype.itemData = data;
-            }),
-            $.getJSON(UNITDATA_PATH, function (data) {
-                my.prototype.unitData = data;
-            })
-        ).done(function(a1, a2, a3, a4){
-            if (callback) callback();
+            my.prototype.onResourceLoaded(callback);
+        });
+        my.prototype.getJSON(ITEMDATA_PATH, function (data) {
+            my.prototype.itemData = data;
+            my.prototype.onResourceLoaded(callback);
+        });
+        my.prototype.getJSON(UNITDATA_PATH, function (data) {
+            my.prototype.unitData = data;
+            my.prototype.onResourceLoaded(callback);
         });
     }
     
@@ -97,5 +107,27 @@ define(function (require, exports, module) {
         return out;
     };
 
+    my.prototype.getJSON = function (url, successCallback, errorCallback) {
+        var request = new XMLHttpRequest();
+        request.open('GET', url, true);
+
+        request.onload = function() {
+            if (request.status >= 200 && request.status < 400) {
+                // Success!
+                var data = JSON.parse(request.responseText);
+                successCallback(data);
+            } else {
+                // We reached our target server, but it returned an error
+                errorCallback();
+            }
+        };
+
+        request.onerror = function() {
+            // There was a connection error of some sort
+            errorCallback();
+        };
+
+        request.send();
+    }
     exports.HEROCALCULATOR = HEROCALCULATOR
 });
