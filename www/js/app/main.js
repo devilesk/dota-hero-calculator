@@ -27,8 +27,10 @@ define(function (require, exports, module) {
     ko.components.register('stats3', { require: 'components/stats/stats3' });
     ko.components.register('stats-additional', { require: 'components/stats/stats-additional' });
 
-    var my = require("./herocalc_core").HEROCALCULATOR;
-
+    // The app extends the herocalc library, provides a frontend
+    var my = require("herocalc").HEROCALCULATOR;
+    console.log('app/main', my);
+    
     my.prototype.PlayerColors = [
         "#2E6AE6", //Blue
         "#5DE6AD", //Teal
@@ -650,4 +652,6 @@ define(function (require, exports, module) {
             results = regex.exec(location.search);
         return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
     }
+    
+    exports.HEROCALCULATOR = my;
 });

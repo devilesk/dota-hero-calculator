@@ -1,6 +1,6 @@
 define(function (require, exports, module) {
     'use strict';
-    var ko = require('herocalc_knockout');
+    var ko = require('./herocalc_knockout');
     
     var my = require("./herocalc_core").HEROCALCULATOR;
     require("./herocalc_hero_damage").HEROCALCULATOR;

@@ -13,8 +13,6 @@ define(function (require, exports, module) {
     require("./herocalc_hero.illusion");
     require("./herocalc_hero.meepo");
     require("./herocalc_unit");
-    require("./herocalc_app");
-    //require("./knockout-binding-report");
 
     exports.HEROCALCULATOR = core.HEROCALCULATOR;
 });

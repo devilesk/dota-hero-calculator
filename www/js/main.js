@@ -1,8 +1,7 @@
 require.config({
-    packages: ["herocalc", "components"],
+    packages: ["app", "herocalc", "components"],
     paths: {
         'knockout': 'lib/knockout-min',
-        //'underscore': '//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min',
         'jquery': 'lib/jquery.min',
         'knockout-mapping': 'lib/knockout.mapping',
         'chartjs': 'lib/Chart.min',
@@ -12,8 +11,8 @@ require.config({
         'chartjs-scatter': 'lib/Chart.scatter',
         'text': 'lib/text',
         'polyfill': 'herocalc/polyfill',
-        'herocalc_knockout': 'herocalc/herocalc_knockout',
-        'jquery-ui.custom': 'herocalc/jquery-ui.custom',
+        'herocalc_knockout': 'app/herocalc_knockout',
+        'jquery-ui.custom': 'app/jquery-ui.custom',
         'rollbar': 'lib/rollbar.umd.nojson.min'
     },
     shim: {
@@ -42,9 +41,9 @@ require(['rollbar', 'polyfill'], function (errorTracker) {
       }
     };
     
-    var rollbar = Rollbar.init(rollbarConfig);
+    //var rollbar = Rollbar.init(rollbarConfig);
 
-    require(['jquery', 'herocalc', 'domReady!'], function ($, HEROCALCULATOR) {
+    require(['jquery', 'app', 'domReady!'], function ($, HEROCALCULATOR) {
         var userActions = [];
         function addUserAction(o) {
             if (userActions.length > 10) {
@@ -134,6 +133,8 @@ require(['rollbar', 'polyfill'], function (errorTracker) {
             }
             return null;
         }*/
+        
+        console.log('main', HEROCALCULATOR);
         
         hc = new HEROCALCULATOR.HEROCALCULATOR();
         var lastUpdate = "#DEV_BUILD";
