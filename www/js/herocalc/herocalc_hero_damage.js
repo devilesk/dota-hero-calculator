@@ -22,8 +22,8 @@ define(function (require, exports, module) {
     my.prototype.HeroDamageMixin = function (self) {
         self.critInfo = ko.pureComputed(function () {
             var critSources = self.inventory.getCritSource();
-            $.extend(critSources, self.ability().getCritSource());
-            $.extend(critSources, self.buffs.getCritSource());
+            my.prototype.extend(critSources, self.ability().getCritSource());
+            my.prototype.extend(critSources, self.buffs.getCritSource());
             var critSourcesArray = [];
             for (var prop in critSources) {
                 var el = critSources[prop];
@@ -79,8 +79,8 @@ define(function (require, exports, module) {
 
         self.cleaveInfo = ko.pureComputed(function () {
             var cleaveSources = self.inventory.getCleaveSource();
-            $.extend(cleaveSources, self.ability().getCleaveSource());
-            $.extend(cleaveSources, self.buffs.getCleaveSource());
+            my.prototype.extend(cleaveSources, self.ability().getCleaveSource());
+            my.prototype.extend(cleaveSources, self.buffs.getCleaveSource());
             var cleaveSourcesArray = [];
             for (var prop in cleaveSources) {
                 var el = cleaveSources[prop];
@@ -119,7 +119,7 @@ define(function (require, exports, module) {
         self.bashInfo = ko.pureComputed(function () {
             var attacktype = self.heroData().attacktype;
             var bashSources = self.inventory.getBashSource(attacktype);
-            $.extend(bashSources, self.ability().getBashSource());
+            my.prototype.extend(bashSources, self.ability().getBashSource());
             var bashSourcesArray = [];
             for (var prop in bashSources) {
                 var el = bashSources[prop];
