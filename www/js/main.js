@@ -134,8 +134,6 @@ require(['rollbar', 'polyfill'], function (errorTracker) {
             return null;
         }*/
         
-        console.log('main', HEROCALCULATOR);
-        
         hc = new HEROCALCULATOR.HEROCALCULATOR();
         var lastUpdate = "#DEV_BUILD";
         $('#last-update').text(lastUpdate);

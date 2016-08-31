@@ -231,7 +231,6 @@ define(function (require, exports, module) {
     }
         
     my.prototype.getAbilityTooltipData = function(hero, el) {
-        console.log('getAbilityTooltipData');
         if (my.prototype.abilityTooltipData[el] == undefined) {
             var abilityName = el
             var ability = {};
