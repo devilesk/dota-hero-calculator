@@ -12,6 +12,14 @@ my.prototype.itemData = {};
 my.prototype.unitData = {};
 my.prototype.abilityData = {};
 
+my.prototype.HeroOptions = [];
+
+my.prototype.HeroOption = function (name, displayname, hero) {
+    this.heroName = name;
+    this.heroDisplayName = displayname;
+    this.hero = hero;
+};
+
 my.prototype.idCounter = 0;
 my.prototype.uniqueId = function (prefix) {
     var id = ++my.prototype.idCounter + '';

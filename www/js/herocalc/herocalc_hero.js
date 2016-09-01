@@ -41,18 +41,11 @@ my.prototype.diffProperties = [
     'visionrangenight',
     'lifesteal'
 ];
-my.prototype.HeroOptions = [];
 
 my.prototype.IllusionOption = function (name, displayname, baseHero) {
     this.illusionName = name;
     this.illusionDisplayName = displayname;
     this.baseHero = baseHero;
-};
-
-my.prototype.HeroOption = function (name, displayname, hero) {
-    this.heroName = name;
-    this.heroDisplayName = displayname;
-    this.hero = hero;
 };
 
 my.prototype.createIllusionOptions = function () {
