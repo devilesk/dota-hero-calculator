@@ -67,9 +67,9 @@ my.prototype.HeroModel = function (h) {
     self.debuffs = new my.prototype.BuffViewModel();
     self.damageAmplification = new my.prototype.DamageAmpViewModel();
     self.damageReduction = new my.prototype.DamageAmpViewModel();
-    self.hero = ko.computed(function () {
+    /*self.hero = ko.computed(function () {
         return ko.mapping.fromJS(my.prototype.heroData['npc_dota_hero_' + self.heroId()]);
-    });
+    });*/
     self.heroData = ko.computed(function () {
       return my.prototype.heroData['npc_dota_hero_' + self.heroId()];
     });
@@ -363,7 +363,7 @@ my.prototype.HeroModel = function (h) {
                                 )
                             )
                 + Math.floor(
-                    (self.hero().attacktype() == 'DOTA_UNIT_CAP_RANGED_ATTACK' 
+                    (self.heroData().attacktype == 'DOTA_UNIT_CAP_RANGED_ATTACK' 
                         ? ((self.heroId() == 'drow_ranger') ? self.ability().getBonusDamagePrecisionAura().total[0] * self.totalAgi() : self.buffs.getBonusDamagePrecisionAura().total[1])
                         : 0)
                   )
@@ -509,7 +509,7 @@ my.prototype.HeroModel = function (h) {
     });
     self.lifesteal = ko.pureComputed(function () {
         var total = self.inventory.getLifesteal() + self.ability().getLifesteal() + self.buffs.getLifesteal();
-        if (self.hero().attacktype() == 'DOTA_UNIT_CAP_MELEE_ATTACK') {
+        if (self.heroData().attacktype == 'DOTA_UNIT_CAP_MELEE_ATTACK') {
             var lifestealAura = [self.inventory.getLifestealAura, self.buffs.itemBuffs.getLifestealAura].reduce(function (memo, fn) {
                 var obj = fn(memo.excludeList);
                 obj.value += memo.value;

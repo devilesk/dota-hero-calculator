@@ -120,10 +120,10 @@
             <ul class="nav nav-tabs">
             <!-- ko foreach: tabs() -->
                 <li class="popHero" data-trigger="manual" data-toggle="popover" data-placement="bottom" data-bind="css: 'player-color-' + $index(), attr: { id: 'popHero' + $index() }, secondTab: hero.id">
-                    <a data-toggle="tab" data-bind="click: $root.clickTab, attr: { id: hero.id, href: '#' + hero.href }, style: { color: hero.color }, text: hero.data.hero().displayname(), hoverTab: hero.id"></a>
+                    <a data-toggle="tab" data-bind="click: $root.clickTab, attr: { id: hero.id, href: '#' + hero.href }, style: { color: hero.color }, text: hero.data.heroData().displayname, hoverTab: hero.id"></a>
                 </li>
                 <li data-bind="visible: hero.data.showUnitTab, secondTab: unit.id">
-                    <a data-toggle="tab" data-bind="click: $root.clickTab, attr: { id: unit.id, href: '#' + unit.href }, style: { color: unit.color }, text: unit.data.hero().displayname(), hoverTab: unit.id"></a>
+                    <a data-toggle="tab" data-bind="click: $root.clickTab, attr: { id: unit.id, href: '#' + unit.href }, style: { color: unit.color }, text: unit.data.hero().displayname, hoverTab: unit.id"></a>
                 </li>
                 <li data-bind="visible: hero.data.selectedHero().heroName == 'meepo', secondTab: clone.id">
                     <a data-toggle="tab" data-bind="click: $root.clickTab, attr: { id: clone.id, href: '#' + clone.href }, style: { color: clone.color }, hoverTab: clone.id">Meepo Clone</a>

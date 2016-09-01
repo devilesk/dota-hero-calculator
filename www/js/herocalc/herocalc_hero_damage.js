@@ -301,7 +301,7 @@ my.prototype.HeroDamageMixin = function (self) {
         
         // echo_sabre
         var item = self.inventory.items().find(function (o) { return o.item === "echo_sabre" && o.enabled(); });
-        if (item && self.hero().attacktype() === 'DOTA_UNIT_CAP_MELEE_ATTACK') {
+        if (item && self.heroData().attacktype === 'DOTA_UNIT_CAP_MELEE_ATTACK') {
             var item_echo_sabre = my.prototype.itemData['item_echo_sabre'];
             attackSources.push({
                 name: item_echo_sabre.displayname,
@@ -400,7 +400,7 @@ my.prototype.HeroDamageMixin = function (self) {
                 }
             }
             // drow_ranger_trueshot
-            if (self.hero().attacktype() === 'DOTA_UNIT_CAP_RANGED_ATTACK') {
+            if (self.heroData().attacktype === 'DOTA_UNIT_CAP_RANGED_ATTACK') {
                 if (self.selectedHero().heroName === 'drow_ranger') {
                     var s = self.ability().getBonusDamagePrecisionAura().sources;
                     var index = 0;
