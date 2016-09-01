@@ -3,7 +3,6 @@ var ko = require('./herocalc_knockout');
 
 var my = require("./herocalc_core");
 require("./herocalc_hero_damage");
-require("./herocalc_hero_damageamp");
 
 my.prototype.totalExp = [0, 200, 500, 900, 1400, 2000, 2600, 3400, 4400, 5400, 6000, 8200, 9000, 10400, 11900, 13500, 15200, 17000, 18900, 20900, 23000, 25200, 27500, 29900, 32400];
 my.prototype.nextLevelExp = [200, 300, 400, 500, 600, 600, 800, 1000, 1000, 600, 2200, 800, 1400, 1500, 1600, 1700, 1800, 1900, 2000, 2100, 2200, 2300, 2400, 2500, '&mdash;'];
@@ -65,8 +64,6 @@ my.prototype.HeroModel = function (h) {
     self.buffs = new my.prototype.BuffViewModel();
     self.buffs.hasScepter = self.inventory.hasScepter;
     self.debuffs = new my.prototype.BuffViewModel();
-    self.damageAmplification = new my.prototype.DamageAmpViewModel();
-    self.damageReduction = new my.prototype.DamageAmpViewModel();
     /*self.hero = ko.computed(function () {
         return ko.mapping.fromJS(my.prototype.heroData['npc_dota_hero_' + self.heroId()]);
     });*/
@@ -519,8 +516,6 @@ my.prototype.HeroModel = function (h) {
         }
         return (total).toFixed(2);
     });
-
-    my.prototype.HeroDamageAmpMixin(self);
     
     self.addIllusion = function (data, event) {
         self.illusions.push(ko.observable(new my.prototype.IllusionViewModel(0, self, self.illusionAbilityLevel())));

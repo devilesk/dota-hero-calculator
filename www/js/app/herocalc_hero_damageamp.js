@@ -1,7 +1,7 @@
 'use strict';
 var ko = require('./herocalc_knockout');
     
-var my = require("./herocalc_core");
+var my = require("../herocalc/main");
 
 my.prototype.DamageInstance = function (label, damageType, value, data, total) {
     this.label = label || '';

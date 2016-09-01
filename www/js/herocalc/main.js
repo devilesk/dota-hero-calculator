@@ -5,7 +5,6 @@ require("./herocalc_inventory");
 require("./herocalc_abilitydata");
 require("./herocalc_abilities");
 require("./herocalc_buffs");
-require("./herocalc_buffs.amplification.reduction");
 require("./herocalc_buildexplorer");
 require("./herocalc_hero");
 require("./herocalc_hero.illusion");
