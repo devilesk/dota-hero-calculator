@@ -1164,7 +1164,7 @@ my.prototype.AbilityModel = function (a, h) {
                             break;
                             // sven_gods_strength
                             case 'gods_strength_damage':
-                                if (ability.name() == 'sven_gods_strength' && self.hero != undefined && self.hero.selectedHero().heroName == 'sven') {
+                                if (ability.name() == 'sven_gods_strength' && self.hero != undefined && self.hero.heroId() == 'sven') {
                                     totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes(), attribute.name(), ability.level())/100;
                                     sources[ability.name()] = {
                                         'damage': self.getAbilityAttributeValue(self.abilities()[i].attributes(), attribute.name(), ability.level())/100,
@@ -2318,7 +2318,7 @@ my.prototype.AbilityModel = function (a, h) {
         if (self.abilities()[index()].level() < hero.getAbilityLevelMax(data) && hero.availableSkillPoints() > 0 ) {
             switch(self.abilities()[index()].abilitytype()) {
                 case 'DOTA_ABILITY_TYPE_ULTIMATE':
-                    if (hero.selectedHero().heroName == 'invoker') {
+                    if (hero.heroId() == 'invoker') {
                         if (
                             (self.abilities()[index()].level() == 0) && (parseInt(hero.selectedHeroLevel()) >= 2) ||
                             (self.abilities()[index()].level() == 1) && (parseInt(hero.selectedHeroLevel()) >= 7) ||
@@ -2329,7 +2329,7 @@ my.prototype.AbilityModel = function (a, h) {
                             hero.skillPointHistory.push(index());
                         }
                     }
-                    else if (hero.selectedHero().heroName == 'meepo') {
+                    else if (hero.heroId() == 'meepo') {
                         if (self.abilities()[index()].level() * 7 + 3 <= parseInt(hero.selectedHeroLevel())) {
                             self.abilities()[index()].level(self.abilities()[index()].level()+1);
                             hero.skillPointHistory.push(index());
