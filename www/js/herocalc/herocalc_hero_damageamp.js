@@ -3,6 +3,14 @@ var ko = require('./herocalc_knockout');
     
 var my = require("./herocalc_core");
 
+my.prototype.DamageInstance = function (label, damageType, value, data, total) {
+    this.label = label || '';
+    this.damageType = damageType || '';
+    this.value = parseFloat(value) || 0;
+    this.data = data || [];
+    this.total = parseFloat(total) || 0;
+}
+
 my.prototype.HeroDamageAmpMixin = function (self) {
     self.damageBrackets = [
         ['medusa_mana_shield', 'templar_assassin_refraction', 'faceless_void_backtrack', 'nyx_assassin_spiked_carapace'],
@@ -87,6 +95,7 @@ my.prototype.HeroDamageAmpMixin = function (self) {
         return new my.prototype.DamageInstance('Total', 'physical', initialDamage, instances, instances.reduce(function(memo, i) {return parseFloat(memo) + parseFloat(i.total);}, 0));
     };
     
+    self.damageInputValue = ko.observable(0);
     self.damageInputModified = ko.computed(function () {
         return self.getDamageAmpReduc(self.damageInputValue());
     });

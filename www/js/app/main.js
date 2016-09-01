@@ -29,6 +29,7 @@ ko.components.register('stats-additional', { template: require('fs').readFileSyn
 // The app extends the herocalc library, provides a frontend
 var my = require("../herocalc/main");
 require("./herocalc_tooltips");
+require("./heroviewmodel");
 
 my.prototype.PlayerColors = [
     "#2E6AE6", //Blue

@@ -2,8 +2,8 @@
 var ko = require('./herocalc_knockout');
 
 var my = require("./herocalc_core");
-require("./herocalc_hero_damage").HEROCALCULATOR;
-require("./herocalc_hero_damageamp").HEROCALCULATOR;
+require("./herocalc_hero_damage");
+require("./herocalc_hero_damageamp");
 
 my.prototype.totalExp = [0, 200, 500, 900, 1400, 2000, 2600, 3400, 4400, 5400, 6000, 8200, 9000, 10400, 11900, 13500, 15200, 17000, 18900, 20900, 23000, 25200, 27500, 29900, 32400];
 my.prototype.nextLevelExp = [200, 300, 400, 500, 600, 600, 800, 1000, 1000, 600, 2200, 800, 1400, 1500, 1600, 1700, 1800, 1900, 2000, 2100, 2200, 2300, 2400, 2500, '&mdash;'];
@@ -65,14 +65,6 @@ my.prototype.HeroOption2 = function (hero) {
     this.hero = hero;
 };
 
-my.prototype.DamageInstance = function (label, damageType, value, data, total) {
-    this.label = label || '';
-    this.damageType = damageType || '';
-    this.value = parseFloat(value) || 0;
-    this.data = data || [];
-    this.total = parseFloat(total) || 0;
-}
-
 my.prototype.createIllusionOptions = function () {
     var options = [];
     for (var h in my.prototype.illusionData) {
@@ -80,58 +72,10 @@ my.prototype.createIllusionOptions = function () {
     }
     return options;
 }
-    
-my.prototype.HeroCalculatorModel = function (h) {
+
+my.prototype.HeroModel = function (h) {
     var self = this;
-    self.index = ko.observable(h);
-    self.bound = ko.observable(false);
-    self.playerColorCss = ko.computed(function () {
-        return 'player-color-' + self.index();
-    });
-    self.otherHeroes = ko.observableArray([]);
-    self.availableCompare = ko.computed(function () {
-        return self.otherHeroes().map(function (o) {
-            return o.heroOption;
-        });
-    });
-    self.selectedCompare = ko.observable();
-    self.selectedCompare.subscribe(function (newValue) {
-        self.heroCompare(newValue.hero);
-    });
-    self.enemies = ko.observableArray([]);
-    self.availableEnemies = ko.computed(function () {
-        return self.enemies().map(function (o) {
-            return o.heroOption;
-        });
-    });
-    self.selectedEnemy = ko.observable();
-    self.selectedEnemy.subscribe(function (newValue) {
-        self.enemy(newValue.hero);
-    });
-    self.setHeroOptionStyling = function(option, item) {
-        ko.applyBindingsToNode(option, {css: item.hero.playerColorCss() }, item);
-    }
-    self.availableHeroes = ko.observableArray(my.prototype.HeroOptions);
-    self.sectionDisplay = ko.observable({
-        'inventory': ko.observable(true),
-        'ability': ko.observable(true),
-        'buff': ko.observable(true),
-        'debuff': ko.observable(true),
-        'damageamp': ko.observable(false),
-        'illusion': ko.observable(false),
-        'skillbuild': ko.observable(false),
-        'skillbuild-skills': ko.observable(true),
-        'skillbuild-items': ko.observable(true)
-    });
-    self.sectionDisplayToggle = function (section) {
-        self.sectionDisplay()[section](!self.sectionDisplay()[section]());
-    }
-    self.showUnitTab = ko.observable(false);
-    self.availableHeroes.sort(function (left, right) {
-        return left.heroDisplayName == right.heroDisplayName ? 0 : (left.heroDisplayName < right.heroDisplayName ? -1 : 1);
-    });
-    self.selectedHero = ko.observable(self.availableHeroes()[h]);
-    self.heroOption = new my.prototype.HeroOption2(self);
+    self.selectedHero = ko.observable(h);
     self.selectedHeroLevel = ko.observable(1);
     self.inventory = new my.prototype.InventoryViewModel(self);
     self.selectedInventory = ko.observable(-1);
@@ -157,7 +101,6 @@ my.prototype.HeroCalculatorModel = function (h) {
     self.illusionAbilityMaxLevel = ko.computed(function () {
         return my.prototype.illusionData[self.selectedIllusion().illusionName].max_level;
     });
-    self.showDiff = ko.observable(false);
     self.getAbilityLevelMax = function (data) {
         if (data.abilitytype() === 'DOTA_ABILITY_TYPE_ATTRIBUTES') {
             return 10;
@@ -210,12 +153,6 @@ my.prototype.HeroCalculatorModel = function (h) {
         a.hasScepter = self.inventory.hasScepter
         return a;
     });
-    
-    self.showCriticalStrikeDetails = ko.observable(false);
-    self.damageInputValue = ko.observable(0);
-    self.showDamageDetails = ko.observable(false);
-    self.showStatDetails = ko.observable(false);
-    self.showDamageAmpCalcDetails = ko.observable(false);
 
     self.availableSkillPoints = ko.computed(function () {
         var c = self.selectedHeroLevel();
@@ -625,3 +562,4 @@ my.prototype.HeroCalculatorModel = function (h) {
     
     self.buildExplorer = new my.prototype.BuildExplorerViewModel(self);
 };
+
