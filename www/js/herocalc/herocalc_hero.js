@@ -55,16 +55,6 @@ my.prototype.HeroOption = function (name, displayname, hero) {
     this.hero = hero;
 };
 
-my.prototype.HeroOption2 = function (hero) {
-    this.heroName = ko.computed(function () {
-        return hero.selectedHero().heroName;
-    });
-    this.heroDisplayName = ko.computed(function () {
-        return hero.selectedHero().heroDisplayName;
-    });
-    this.hero = hero;
-};
-
 my.prototype.createIllusionOptions = function () {
     var options = [];
     for (var h in my.prototype.illusionData) {
@@ -75,7 +65,7 @@ my.prototype.createIllusionOptions = function () {
 
 my.prototype.HeroModel = function (h) {
     var self = this;
-    self.selectedHero = ko.observable(h);
+    self.heroId = ko.observable(h);
     self.selectedHeroLevel = ko.observable(1);
     self.inventory = new my.prototype.InventoryViewModel(self);
     self.selectedInventory = ko.observable(-1);
@@ -85,10 +75,10 @@ my.prototype.HeroModel = function (h) {
     self.damageAmplification = new my.prototype.DamageAmpViewModel();
     self.damageReduction = new my.prototype.DamageAmpViewModel();
     self.hero = ko.computed(function () {
-        return ko.mapping.fromJS(my.prototype.heroData['npc_dota_hero_' + self.selectedHero().heroName]);
+        return ko.mapping.fromJS(my.prototype.heroData['npc_dota_hero_' + self.heroId()]);
     });
     self.heroData = ko.computed(function () {
-      return my.prototype.heroData['npc_dota_hero_' + self.selectedHero().heroName];
+      return my.prototype.heroData['npc_dota_hero_' + self.heroId()];
     });
     self.heroCompare = ko.observable(self);
     self.enemy = ko.observable(self);
@@ -141,10 +131,10 @@ my.prototype.HeroModel = function (h) {
     
     self.ability = ko.computed(function () {
         var a = new my.prototype.AbilityModel(ko.mapping.fromJS(self.heroData().abilities), self);
-        if (self.selectedHero().heroName === 'earth_spirit' || self.selectedHero().heroName === 'ogre_magi') {
+        if (self.heroId() === 'earth_spirit' || self.heroId() === 'ogre_magi') {
             a.abilities()[3].level(1);
         }
-        else if (self.selectedHero().heroName === 'invoker') {
+        else if (self.heroId() === 'invoker') {
             for (var i = 6; i < 16; i++) {
                 a.abilities()[i].level(1);
             }
@@ -162,7 +152,7 @@ my.prototype.HeroModel = function (h) {
             };
             switch(self.ability().abilities()[i].abilitytype()) {
                 case 'DOTA_ABILITY_TYPE_ULTIMATE':
-                    if (self.selectedHero().heroName === 'invoker') {
+                    if (self.heroId() === 'invoker') {
                         while (
                             ((self.ability().abilities()[i].level() == 1) && (parseInt(self.selectedHeroLevel()) < 2)) ||
                             ((self.ability().abilities()[i].level() == 2) && (parseInt(self.selectedHeroLevel()) < 7)) ||
@@ -172,7 +162,7 @@ my.prototype.HeroModel = function (h) {
                             self.ability().levelDownAbility(getIndex, null, null, self);
                         }
                     }
-                    else if (self.selectedHero().heroName === 'meepo') {
+                    else if (self.heroId() === 'meepo') {
                         while ((self.ability().abilities()[i].level()-1) * 7 + 3 > parseInt(self.selectedHeroLevel())) {
                             self.ability().levelDownAbility(getIndex, null, null, self);
                         }
@@ -284,7 +274,7 @@ my.prototype.HeroModel = function (h) {
                 + self.totalInt() * .04 
                 + self.ability().getManaRegen()) 
                 * (1 + self.inventory.getManaRegenPercent()) 
-                + (self.selectedHero().heroName === 'crystal_maiden' ? self.ability().getManaRegenArcaneAura() * 2 : self.buffs.getManaRegenArcaneAura())
+                + (self.heroId() === 'crystal_maiden' ? self.ability().getManaRegenArcaneAura() * 2 : self.buffs.getManaRegenArcaneAura())
                 + self.inventory.getManaRegenBloodstone()
                 + self.inventory.getManaRegen()
                 - self.enemy().ability().getManaRegenReduction()).toFixed(2);
@@ -381,11 +371,11 @@ my.prototype.HeroModel = function (h) {
                             )
                 + Math.floor(
                     (self.hero().attacktype() == 'DOTA_UNIT_CAP_RANGED_ATTACK' 
-                        ? ((self.selectedHero().heroName == 'drow_ranger') ? self.ability().getBonusDamagePrecisionAura().total[0] * self.totalAgi() : self.buffs.getBonusDamagePrecisionAura().total[1])
+                        ? ((self.heroId() == 'drow_ranger') ? self.ability().getBonusDamagePrecisionAura().total[0] * self.totalAgi() : self.buffs.getBonusDamagePrecisionAura().total[1])
                         : 0)
                   )
                 + Math.floor(
-                    ((self.selectedHero().heroName == 'riki') ? self.ability().getBonusDamageBackstab().total[0] * self.totalAgi() : 0)
+                    ((self.heroId() == 'riki') ? self.ability().getBonusDamageBackstab().total[0] * self.totalAgi() : 0)
                   )
                 ) * self.ability().getSelfBaseDamageReductionPct()
                   * self.enemy().ability().getBaseDamageReductionPct()

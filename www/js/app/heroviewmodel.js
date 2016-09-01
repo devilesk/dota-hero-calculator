@@ -1,6 +1,16 @@
 var ko = require('knockout');
 var my = require("../herocalc/main");
 
+my.prototype.HeroOption2 = function (hero) {
+    this.heroName = ko.computed(function () {
+        return hero.selectedHero().heroName;
+    });
+    this.heroDisplayName = ko.computed(function () {
+        return hero.selectedHero().heroDisplayName;
+    });
+    this.hero = hero;
+};
+
 my.prototype.HeroCalculatorModel = function (h) {
     var self = this;
     self.index = ko.observable(h);
@@ -8,8 +18,14 @@ my.prototype.HeroCalculatorModel = function (h) {
     self.availableHeroes.sort(function (left, right) {
         return left.heroDisplayName == right.heroDisplayName ? 0 : (left.heroDisplayName < right.heroDisplayName ? -1 : 1);
     });
+    self.selectedHero = ko.observable(self.availableHeroes()[h]);
     
-    my.prototype.HeroModel.call(this, self.availableHeroes()[h]);
+    my.prototype.HeroModel.call(this, self.selectedHero().heroName);
+    
+    self.selectedHero.subscribe(function (newValue) {
+        self.heroId(newValue.heroName);
+    });
+    
     
     self.bound = ko.observable(false);
     self.playerColorCss = ko.computed(function () {
