@@ -10,14 +10,6 @@ my.prototype.DamageTypeColor = {
     'default': '#979aa2'
 }
 
-my.prototype.DamageDetailsRow = function (label, damage, damageReduced, visible) {
-    this.label = label;
-    this.damage = damage;
-    this.damageReduced = damageReduced;
-    this.visible = ko.observable(visible);
-    this.enabled = ko.observable(visible);
-}
-
 my.prototype.HeroDamageMixin = function (self) {
     self.critInfo = ko.pureComputed(function () {
         var critSources = self.inventory.getCritSource();
