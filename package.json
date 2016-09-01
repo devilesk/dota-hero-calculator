@@ -12,6 +12,10 @@
   "bugs": {
     "url": "https://github.com/devilesk/dota-hero-calculator/issues"
   },
+  "scripts": {
+    "devbuild": "browserify --debug -d -t brfs -p [minifyify --map bundle.js.map --output www/js/bundle.js.map] www/js/main.js > www/js/bundle.js",
+    "standalonebuild": "browserify --debug --standalone HeroCalc www/js/herocalc/main.js > www/js/herocalc.js"
+  },
   "homepage": "https://github.com/devilesk/dota-hero-calculator#readme",
   "devDependencies": {
     "bootstrap": "^3.3.7",
