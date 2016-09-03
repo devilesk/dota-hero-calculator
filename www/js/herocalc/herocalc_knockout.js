@@ -1,7 +1,7 @@
 'use strict';
 var ko = require('knockout');
 
-ko.mapping = require('knockout-mapping');
+ko.mapping = require('../lib/knockout.mapping');
 
 ko.extenders.numeric = function(target, precision) {
     //create a writeable computed observable to intercept writes to our observable

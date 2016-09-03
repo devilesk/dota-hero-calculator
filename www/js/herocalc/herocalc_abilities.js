@@ -2313,6 +2313,12 @@ my.prototype.AbilityModel = function (a, h) {
             self.abilities()[index()].isDetail(true);
         }
     }.bind(this);
+    
+    self.getAbility = function (abilityName) {
+        return self.abilities().find(function(b) {
+            return b.name() == abilityName;
+        });
+    }
 
     self.levelUpAbility = function (index, data, event, hero) {
         if (self.abilities()[index()].level() < hero.getAbilityLevelMax(data) && hero.availableSkillPoints() > 0 ) {

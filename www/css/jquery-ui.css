@@ -67,10 +67,10 @@
 
 /* states and images */
 .ui-icon {
-	display: block;
+	/*display: block;
 	text-indent: -99999px;
 	overflow: hidden;
-	background-repeat: no-repeat;
+	background-repeat: no-repeat;*/
 }
 
 

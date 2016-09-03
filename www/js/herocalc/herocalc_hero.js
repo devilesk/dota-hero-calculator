@@ -349,6 +349,15 @@ my.prototype.HeroModel = function (h) {
         return [Math.floor((minDamage + totalAttribute + abilityBaseDamage.total) * self.ability().getSelfBaseDamageReductionPct() * self.enemy().ability().getBaseDamageReductionPct() * self.debuffs.getBaseDamageReductionPct() * self.debuffs.itemBuffs.getBaseDamageReductionPct() * abilityBaseDamage.multiplier),
                 Math.floor((maxDamage + totalAttribute + abilityBaseDamage.total) * self.ability().getSelfBaseDamageReductionPct() * self.enemy().ability().getBaseDamageReductionPct() * self.debuffs.getBaseDamageReductionPct() * self.debuffs.itemBuffs.getBaseDamageReductionPct() * abilityBaseDamage.multiplier)];
     });
+    self.baseDamageAvg = ko.pureComputed(function () {
+        return (self.baseDamage()[0] + self.baseDamage()[1]) / 2;
+    });
+    self.baseDamageMin = ko.pureComputed(function () {
+        return self.baseDamage()[0];
+    });
+    self.baseDamageMax = ko.pureComputed(function () {
+        return self.baseDamage()[1];
+    });
     self.bonusDamage = ko.pureComputed(function () {
         return ((self.inventory.getBonusDamage().total
                 + self.ability().getBonusDamage().total
@@ -374,9 +383,18 @@ my.prototype.HeroModel = function (h) {
     self.bonusDamageReduction = ko.pureComputed(function () {
         return Math.abs(self.enemy().ability().getBonusDamageReduction() + self.debuffs.getBonusDamageReduction());
     });
+    self.damageAvg = ko.pureComputed(function () {
+        return (self.baseDamage()[0] + self.baseDamage()[1]) / 2 + self.bonusDamage();
+    });
+    self.damageMin = ko.pureComputed(function () {
+        return self.baseDamage()[0] + self.bonusDamage();
+    });
+    self.damageMax = ko.pureComputed(function () {
+        return self.baseDamage()[1] + self.bonusDamage();
+    });
     self.damage = ko.pureComputed(function () {
-        return [self.baseDamage()[0] + self.bonusDamage()[0],
-                self.baseDamage()[1] + self.bonusDamage()[1]];
+        return [self.baseDamage()[0] + self.bonusDamage(),
+                self.baseDamage()[1] + self.bonusDamage()];
     });
     self.totalMagicResistanceProduct = ko.pureComputed(function () {
         return (1 - self.heroData().magicalresistance / 100) 
@@ -537,7 +555,6 @@ my.prototype.HeroModel = function (h) {
         var index = i;
         self.diff[self.diffProperties[index]] = self.getDiffFunction(self.diffProperties[index]);
     }
-    
-    self.buildExplorer = new my.prototype.BuildExplorerViewModel(self);
+
 };
 

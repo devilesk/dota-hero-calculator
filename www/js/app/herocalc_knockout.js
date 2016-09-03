@@ -310,6 +310,7 @@ ko.bindingHandlers.spinner = {
     init: function(element, valueAccessor, allBindingsAccessor) {
         //initialize datepicker with some optional options
         var options = allBindingsAccessor().spinnerOptions || {};
+        options.icons = options.icons || { down: "glyphicon glyphicon-triangle-bottom", up: "glyphicon glyphicon-triangle-top" };
         $(element).spinner(options);
 
         //handle the field changing

@@ -2,6 +2,7 @@ var ko = require('knockout');
 var my = require("../herocalc/main");
 require("./herocalc_hero_damageamp");
 require("./herocalc_buffs.amplification.reduction");
+require("./herocalc_buildexplorer");
 
 my.prototype.HeroOption2 = function (hero) {
     this.heroName = ko.computed(function () {
@@ -80,7 +81,7 @@ my.prototype.HeroCalculatorModel = function (h) {
     
     self.damageAmplification = new my.prototype.DamageAmpViewModel();
     self.damageReduction = new my.prototype.DamageAmpViewModel();
-    
+    self.buildExplorer = new my.prototype.BuildExplorerViewModel(self);
     my.prototype.HeroDamageAmpMixin(self);
 }
 my.prototype.HeroCalculatorModel.prototype = Object.create(my.prototype.HeroModel.prototype);

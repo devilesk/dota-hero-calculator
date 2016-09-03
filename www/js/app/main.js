@@ -18,7 +18,7 @@ ko.components.register('buff-section', { template: require('fs').readFileSync(__
 ko.components.register('damage-details', { template: require('fs').readFileSync(__dirname + '/../components/damage-details.html', 'utf8') });
 ko.components.register('damage-amp', { template: require('fs').readFileSync(__dirname + '/../components/damage-amp.html', 'utf8') });
 ko.components.register('ability', { template: require('fs').readFileSync(__dirname + '/../components/ability.html', 'utf8') });
-ko.components.register('shop', { template: require('fs').readFileSync(__dirname + '/../components/shop.html', 'utf8') });
+ko.components.register('shop', require('../components/shop'));
 ko.components.register('stat', { template: require('fs').readFileSync(__dirname + '/../components/stats/stat.html', 'utf8') });
 ko.components.register('stats0', { template: require('fs').readFileSync(__dirname + '/../components/stats/stats0.html', 'utf8') });
 ko.components.register('stats1', { template: require('fs').readFileSync(__dirname + '/../components/stats/stats1.html', 'utf8') });
@@ -28,7 +28,12 @@ ko.components.register('stats-additional', { template: require('fs').readFileSyn
 
 // The app extends the herocalc library, provides a frontend
 var my = require("../herocalc/main");
-require("./herocalc_tooltips");
+var getItemTooltipData = require("../herocalc/herocalc_tooltips_item");
+var getAbilityTooltipData = require("../herocalc/herocalc_tooltips_ability");
+my.prototype.AbilityModel.prototype.getAbilityTooltipData = function (hero, el) {
+    return getAbilityTooltipData(my.prototype.heroData, my.prototype.unitData, hero, el);
+}
+//require("./herocalc_tooltips");
 require("./heroviewmodel");
 
 my.prototype.PlayerColors = [
@@ -287,7 +292,7 @@ my.prototype.HeroCalculatorViewModel = function () {
     self.shopDock = ko.observable(false);
     self.shopDock.subscribe(function (newValue) {
         if (newValue) {
-
+            self.shopPopout(false);
         }
         else {
         }
@@ -328,6 +333,12 @@ my.prototype.HeroCalculatorViewModel = function () {
         }
     });
 
+    self.addItem = function (data, event) {
+        self.selectedTab().data.buildExplorer.getSelectedInventory().addItem(data, event);
+    }
+    self.itemOptions = ko.computed(function () {
+        return self.selectedTab().data.inventory.itemOptions();
+    });
     
     self.changeSelectedItem = function (data, event) {
         self.itemInputValue(1);
@@ -335,7 +346,7 @@ my.prototype.HeroCalculatorViewModel = function () {
     }
     
     self.getItemTooltipData = ko.computed(function () {
-        return my.prototype.getItemTooltipData(self.selectedItem());
+        return getItemTooltipData(my.prototype.itemData, self.selectedItem());
     }, this);
     self.getItemInputLabel = ko.computed(function () {
         if (my.prototype.stackableItems.indexOf(self.selectedItem()) != -1) {
