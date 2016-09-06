@@ -18,9 +18,44 @@ module.exports = [
         "filterValue": ko.observable()
     },
     {
+        "id": "attributeprimary",
+        "header": "PSTAT",
+        "title": "Primary Stat",
+        "align": "center",
+        "display": ko.observable(true),
+        "filter": true,
+        "filterType": "select",
+        "filterValue": ko.observable(),
+        "filterOptions": [
+            {
+                "text": 'Agility',
+                "value": 'AGI'
+            },
+            {
+                "text": 'Strength',
+                "value": 'STR'
+            },
+            {
+                "text": 'Intelligence',
+                "value": 'INT'
+            }
+        ]
+    },
+    {
         "id": "totalAgi",
         "header": "AGI",
         "title": "Agility",
+        "align": "right",
+        "display": ko.observable(true),
+        "filter": true,
+        "filterType": "numeric",
+        "filterValue": ko.observable(),
+        "filterComparison": ko.observable()
+    },
+    {
+        "id": "attributeagilitygain",
+        "header": "AGIG",
+        "title": "Agility Gain",
         "align": "right",
         "display": ko.observable(true),
         "filter": true,
@@ -40,9 +75,31 @@ module.exports = [
         "filterComparison": ko.observable()
     },
     {
+        "id": "attributeintelligencegain",
+        "header": "INTG",
+        "title": "Intelligence Gain",
+        "align": "right",
+        "display": ko.observable(true),
+        "filter": true,
+        "filterType": "numeric",
+        "filterValue": ko.observable(),
+        "filterComparison": ko.observable()
+    },
+    {
         "id": "totalStr",
         "header": "STR",
         "title": "Strength",
+        "align": "right",
+        "display": ko.observable(true),
+        "filter": true,
+        "filterType": "numeric",
+        "filterValue": ko.observable(),
+        "filterComparison": ko.observable()
+    },
+    {
+        "id": "attributestrengthgain",
+        "header": "STRG",
+        "title": "Strength Gain",
         "align": "right",
         "display": ko.observable(true),
         "filter": true,
@@ -63,7 +120,7 @@ module.exports = [
     },
     {
         "id": "healthregen",
-        "header": "HR",
+        "header": "HPR",
         "title": "Health Regen",
         "align": "right",
         "display": ko.observable(true),
@@ -74,7 +131,7 @@ module.exports = [
     },
     {
         "id": "mana",
-        "header": "M",
+        "header": "MP",
         "title": "Mana",
         "align": "right",
         "display": ko.observable(true),
@@ -85,7 +142,7 @@ module.exports = [
     },
     {
         "id": "manaregen",
-        "header": "MR",
+        "header": "MPR",
         "title": "Mana Regen",
         "align": "right",
         "display": ko.observable(true),
@@ -96,7 +153,7 @@ module.exports = [
     },
     {
         "id": "totalArmorPhysical",
-        "header": "ARM",
+        "header": "ARMR",
         "title": "Armor",
         "align": "right",
         "display": ko.observable(true),
@@ -260,6 +317,26 @@ module.exports = [
         "filterComparison": ko.observable()
     },
     {
+        "id": "attacktype",
+        "header": "ATKT",
+        "title": "Attack Type",
+        "align": "right",
+        "display": ko.observable(true),
+        "filter": true,
+        "filterType": "select",
+        "filterValue": ko.observable(),
+        "filterOptions": [
+            {
+                "text": 'Ranged',
+                "value": 'RANGED'
+            },
+            {
+                "text": 'Melee',
+                "value": 'MELEE'
+            }
+        ]
+    },
+    {
         "id": "attackTime",
         "header": "AT",
         "title": "Attack Time",
@@ -274,6 +351,28 @@ module.exports = [
         "id": "attacksPerSecond",
         "header": "APS",
         "title": "Attacks Per Second",
+        "align": "right",
+        "display": ko.observable(true),
+        "filter": true,
+        "filterType": "numeric",
+        "filterValue": ko.observable(),
+        "filterComparison": ko.observable()
+    },
+    {
+        "id": "attackpoint",
+        "header": "ATKP",
+        "title": "Attack Point",
+        "align": "right",
+        "display": ko.observable(true),
+        "filter": true,
+        "filterType": "numeric",
+        "filterValue": ko.observable(),
+        "filterComparison": ko.observable()
+    },
+    {
+        "id": "projectilespeed",
+        "header": "PSPD",
+        "title": "Projectile Speed",
         "align": "right",
         "display": ko.observable(true),
         "filter": true,
@@ -327,7 +426,7 @@ module.exports = [
     },
     {
         "id": "critChance",
-        "header": "%CRIT",
+        "header": "%CRT",
         "title": "Crit Chance",
         "align": "right",
         "display": ko.observable(true),
@@ -338,7 +437,7 @@ module.exports = [
     },
     {
         "id": "critDamage",
-        "header": "CRITD",
+        "header": "CRTD",
         "title": "Crit Damage",
         "align": "right",
         "display": ko.observable(true),
@@ -360,7 +459,7 @@ module.exports = [
     },
     {
         "id": "totalattackrange",
-        "header": "ATKR",
+        "header": "RNGE",
         "title": "Attack Range",
         "align": "right",
         "display": ko.observable(true),
@@ -395,6 +494,28 @@ module.exports = [
         "id": "lifesteal",
         "header": "LS",
         "title": "Lifesteal",
+        "align": "right",
+        "display": ko.observable(true),
+        "filter": true,
+        "filterType": "numeric",
+        "filterValue": ko.observable(),
+        "filterComparison": ko.observable()
+    },
+    {
+        "id": "attackdamage",
+        "header": "ATKD",
+        "title": "Attack Damage",
+        "align": "right",
+        "display": ko.observable(true),
+        "filter": true,
+        "filterType": "numeric",
+        "filterValue": ko.observable(),
+        "filterComparison": ko.observable()
+    },
+    {
+        "id": "dps",
+        "header": "DPS",
+        "title": "Damage Per Second",
         "align": "right",
         "display": ko.observable(true),
         "filter": true,

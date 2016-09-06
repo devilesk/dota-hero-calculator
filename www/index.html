@@ -7,7 +7,7 @@
     <meta name="description" content="Dota 2 Hero Calculator. A hero calculator that takes into account level, items, skills, and stats. Choose hero level, items, and skills and see detailed information about a hero's stats.">
     <meta name="author" content="devilesk">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <link rel="shortcut icon" href="/media/favicon.png">
   
     <link rel="stylesheet" href="/media/bootstrap/css/bootstrap.css">
@@ -49,7 +49,7 @@
                                             <li><a href="/dota2/all-hero-challenge-list">All Hero Challenge List</a></li>
                                                               </ul>
                 </li>
-                <li class="dropdown ">
+                <li class="dropdown active">
                   <a href="/dota2/apps" class="dropdown-toggle" data-toggle="dropdown">WEB APPS <b class="caret"></b></a>
                   <ul class="dropdown-menu">
                     <li class="mobile-only"><a href="/dota2/apps">Web Apps Home</a></li>
@@ -104,11 +104,18 @@
 <!-- @if NODE_ENV='production' -->
 <!-- @include .navbar.html -->
 <!-- @endif -->
+<div class="container" data-bind="visible: !(sideView())">
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/dota2/">Home</a></li>
+    <li class="breadcrumb-item"><a href="/dota2/apps/">Web Apps</a></li>
+    <li class="breadcrumb-item active">Hero Calculator</li>
+</ol>
+</div>
 <div class="container" data-bind="css: { container: !(sideView()), 'col-md-12': sideView() }">
     <header class="banner clearfix" data-bind="visible: !(sideView())">
         <h2 class="pull-left">Hero Calculator</h2>
         <div class="error-warning alert-danger alert" style="display: none;">An error has occurred. <a href="#log" class="error-warning-view">View</a><div class="error-warning-close">&times;</div></div>
-        <div class="pull-right initial-hidden" style="display:none;margin-top:15px;">
+        <div class="pull-right initial-hidden" style="display:none;margin-top:30px;">
             <div class="checkbox pull-right" style="margin-left:15px;margin-top:5px;"><label><input type="checkbox" data-bind="checked: sideView"><span class="glyphicon glyphicon-fullscreen"></span> Fullscreen</label></div>
             <button class="btn btn-default btn-xs shop-button glyphicon glyphicon-plus pull-right" data-bind="toggle: displayShop, visible: !displayShop() && !shopPopout()" title="Maximize shop"></button>
             <button class="btn btn-default btn-xs shop-button glyphicon glyphicon-new-window pull-right hidden-xs" data-bind="click: shopPopout, visible: !displayShop() && !shopPopout()" title="Popout shop"></button>

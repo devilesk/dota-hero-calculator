@@ -284,7 +284,7 @@ my.prototype.HeroDamageMixin = function (self) {
         });
         
         // weaver_geminate_attack
-        if (self.selectedHero().heroName === 'weaver') {
+        if (self.heroId() === 'weaver') {
             var a = self.ability().abilities().find(function (ability) {
                 return ability.name() === 'weaver_geminate_attack';
             });
@@ -401,7 +401,7 @@ my.prototype.HeroDamageMixin = function (self) {
             }
             // drow_ranger_trueshot
             if (self.heroData().attacktype === 'DOTA_UNIT_CAP_RANGED_ATTACK') {
-                if (self.selectedHero().heroName === 'drow_ranger') {
+                if (self.heroId() === 'drow_ranger') {
                     var s = self.ability().getBonusDamagePrecisionAura().sources;
                     var index = 0;
                 }
@@ -410,7 +410,7 @@ my.prototype.HeroDamageMixin = function (self) {
                     var index = 1;
                 }
                 if (s[index] != undefined) {
-                    if (self.selectedHero().heroName === 'drow_ranger') {
+                    if (self.heroId() === 'drow_ranger') {
                         var d = s[index].damage * self.totalAgi();
                     }
                     else {
@@ -430,7 +430,7 @@ my.prototype.HeroDamageMixin = function (self) {
             }
             
             // riki_backstab
-            if (self.selectedHero().heroName === 'riki') {
+            if (self.heroId() === 'riki') {
                 var s = self.ability().getBonusDamageBackstab().sources;
                 var index = 0;
             }
@@ -439,7 +439,7 @@ my.prototype.HeroDamageMixin = function (self) {
                 var index = 1;
             }
             if (s[index] != undefined) {
-                if (self.selectedHero().heroName === 'riki') {
+                if (self.heroId() === 'riki') {
                     var d = s[index].damage * self.totalAgi();
                 }
                 else {

@@ -433,7 +433,7 @@ img {
 .player-color-9 {
     color: #956000; /*Brown*/
 }
-.nav > li > a {
+.nav-tabs.nav > li > a {
     padding: 10px;
     font-size: 14px;
 }

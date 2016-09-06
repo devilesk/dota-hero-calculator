@@ -33,6 +33,8 @@ hc.init("/media/js/herodata.json","/media/js/itemdata.json","/media/js/unitdata.
     
     function ViewModel() {
         var self = this;
+        self.loaded = ko.observable(false);
+        
         self.filterVisible = ko.observable(false);
         self.toggleFilterVisibility = function() {
             self.filterVisible(!self.filterVisible());
@@ -86,6 +88,25 @@ hc.init("/media/js/herodata.json","/media/js/itemdata.json","/media/js/unitdata.
                 break;
                 case 'displayname':
                     val = hero.heroData()[prop];
+                break;
+                case 'attributeprimary':
+                    val = hero.heroData()[prop].replace('DOTA_ATTRIBUTE_', '').slice(0, 3);
+                break;
+                case 'attacktype':
+                    val = hero.heroData()[prop].replace('DOTA_UNIT_CAP_', '').replace('_ATTACK', '');
+                break;
+                case 'attributeagilitygain':
+                case 'attributeintelligencegain':
+                case 'attributestrengthgain':
+                case 'attackpoint':
+                case 'projectilespeed':
+                    val = hero.heroData()[prop];
+                break;
+                case 'attackdamage':
+                    val = hero.damageTotalInfo().totalRow[0]().toFixed(2);
+                break;
+                case 'dps':
+                    val = hero.damageTotalInfo().totalRow[2]().toFixed(2);
                 break;
                 default:
                     val = hero[prop]();
@@ -310,7 +331,38 @@ hc.init("/media/js/herodata.json","/media/js/itemdata.json","/media/js/unitdata.
         
         
         self.exportCSV = function() {
+            var d = [];
+            d.push(
+                self.headers().filter(function (header) {
+                    return header.display();
+                }).map(function (header) {
+                    return header.title;
+                })
+            );
+            self.heroes().forEach(function (hero) {
+                d.push(
+                    self.headers().filter(function (header) {
+                        return header.display();
+                    }).map(function (header, i) {
+                        return self.getData(hero, i);
+                    })
+                );
+            });
+            console.log(d);
             
+            var csvContent = "data:text/csv;charset=utf-8,";
+            d.forEach(function(infoArray, index){
+               dataString = infoArray.join(",");
+               csvContent += index < d.length ? dataString+ "\n" : dataString;
+            }); 
+            var encodedUri = encodeURI(csvContent);
+            var link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "hero_stats.csv");
+            document.body.appendChild(link); // Required for FF
+
+            link.click();
+            document.body.removeChild(link); // Required for FF
         }
         
 
@@ -326,7 +378,7 @@ hc.init("/media/js/herodata.json","/media/js/itemdata.json","/media/js/unitdata.
             return self.heroes()[0].inventory.itemOptions();
         });
     
-        self.displayShop = ko.observable(true);
+        self.displayShop = ko.observable(false);
         self.displayShopItemTooltip = ko.observable(true);
         var $window = $(window);
         self.windowWidth = ko.observable($window.width());
@@ -423,4 +475,6 @@ hc.init("/media/js/herodata.json","/media/js/itemdata.json","/media/js/unitdata.
     $('.header-tooltip').tooltip({container : 'body'});
     $('.header-row > th').tooltip({container : 'body'});
     console.log('done');
+    vm.loaded(true);
+    $('#spinner').hide();
 })

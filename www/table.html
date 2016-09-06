@@ -33,10 +33,6 @@ td.long-header.td-displayname {
 .header-group input[type=checkbox] {
     display: none;
 }
-.header-tooltip {
-    float: right;
-    margin-top: 0.5em;
-}
 table {
     border-collapse: separate;
 }
@@ -67,6 +63,12 @@ table {
     vertical-align: middle;
     margin-right: 10px;
     margin-bottom: 10px;
+}
+.well .form-inline .form-group {
+    margin: 0;
+}
+.well label {
+    width: 100%;
 }
 .form-inline .form-group label, .bonusAttributeLevel-label {
     vertical-align: middle;
@@ -176,11 +178,12 @@ th, td {
         <div id="main" role="main">
         <header class="banner clearfix">
                             <h2>Stats Table<div class="form-group pull-right">
-                <input class="btn btn-default" type="button" data-bind="click: exportCSV" value="Export to CSV" />
+                <input style="display:none" class="btn btn-default" type="button" data-bind="visible: loaded, click: exportCSV" value="Export to CSV" />
                 </div></h2>
         </header>
         <section class="content">
-
+        <h4 id="spinner">Loading...</h4>
+    <div style="display:none" data-bind="visible: loaded">
     <div class="col-md-12" data-bind="css: { 'col-lg-8': displayShop() && !shopPopout() }">
         <div class="row form-group">
             <div class="col-md-12 form-inline">
@@ -222,7 +225,8 @@ th, td {
         <div class="col-md-12" data-bind="visible: filterVisible, foreach: headers">
         <!-- ko if: filter -->
         <div class="col-xs-6 col-sm-3 col-md-2 well">
-            <label data-bind="html: header"></label>
+            <label class="header-tooltip" data-toggle="tooltip" data-bind="html: $data.header, attr: { title: $data.title }">
+            </label>
             <div class="form-inline text-center" data-bind="template: { name: $root.filterTemplateToUse, data: $data }"></div>
         </div>
         <!-- /ko -->
@@ -257,7 +261,7 @@ th, td {
             <div class="col-md-12 form-inline" data-bind="visible: columnsVisible, foreach: headers"><div class="form-group header-group">
                 <label class="btn btn-default btn-block" data-bind="css: { active: display }" title="">
                 <input type="checkbox" data-bind="checked: display">
-                <span data-bind="html: $data.header"></span> <span class="header-tooltip glyphicon glyphicon-info-sign" aria-hidden="true" data-toggle="tooltip" data-bind="attr: { title: $data.title }" data-toggle="tooltip"></span>
+                <div class="header-tooltip" data-toggle="tooltip", data-bind="html: $data.header, attr: { title: $data.title }"></div>
                 </label>
                 </div></div>
         </div>
@@ -302,6 +306,7 @@ th, td {
         </div>
     </div>
     <div id="shop-dialog" data-bind="component: { name: 'shop', params: $root}, css: {'popped-out': shopPopout()}"></div>
+    </div>
 </div>
         </section>
     </div>
