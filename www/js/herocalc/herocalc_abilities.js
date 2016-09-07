@@ -2368,6 +2368,7 @@ my.prototype.AbilityModel = function (a, h) {
                 case 'keeper_of_the_light_spirit_form':
                     self.abilities()[index() - 1].level(self.abilities()[index()].level());
                     self.abilities()[index() - 2].level(self.abilities()[index()].level());
+                break;
                 case 'nevermore_shadowraze1':
                     self.abilities()[index() + 1].level(self.abilities()[index()].level());
                     self.abilities()[index() + 2].level(self.abilities()[index()].level());
@@ -2406,6 +2407,7 @@ my.prototype.AbilityModel = function (a, h) {
                 case 'keeper_of_the_light_spirit_form':
                     self.abilities()[index() - 1].level(self.abilities()[index()].level());
                     self.abilities()[index() - 2].level(self.abilities()[index()].level());
+                break;
                 case 'nevermore_shadowraze1':
                     self.abilities()[index() + 1].level(self.abilities()[index()].level());
                     self.abilities()[index() + 2].level(self.abilities()[index()].level());
@@ -2427,8 +2429,4 @@ my.prototype.AbilityModel = function (a, h) {
             }
         }
     };
-    
-    self.isQWER = function (ability) {
-        return (ability.displayname() != 'Empty' &&  (ability.behavior().indexOf('DOTA_ABILITY_BEHAVIOR_HIDDEN') == -1 || ability.name().indexOf('invoker_') != -1) && ability.behavior().indexOf('DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE') == -1)
-    }
 }

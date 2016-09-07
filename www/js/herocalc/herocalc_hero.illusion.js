@@ -106,7 +106,7 @@ my.prototype.illusionData = {
 }
 
 my.prototype.IllusionViewModel = function (h, p, abilityLevel) {
-    var self = new my.prototype.HeroCalculatorModel(0);
+    var self = new my.prototype.HeroModel(0);
     self.parent = p;
     self.inventory = self.parent.inventory;
     self.illusionType = ko.observable(self.parent.selectedIllusion().illusionName);
@@ -121,7 +121,7 @@ my.prototype.IllusionViewModel = function (h, p, abilityLevel) {
     }
     self.selectedHeroLevel(self.parent.selectedHeroLevel());
     self.hero = ko.computed(function() {
-        return ko.mapping.fromJS(my.prototype.heroData['npc_dota_hero_' + self.selectedHero().heroName]);
+        return ko.wrap.fromJS(my.prototype.heroData['npc_dota_hero_' + self.selectedHero().heroName]);
     });
     
     self.ability().getAttributeBonusLevel = self.parent.ability().getAttributeBonusLevel;

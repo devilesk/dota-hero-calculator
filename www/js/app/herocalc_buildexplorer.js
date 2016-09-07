@@ -8,6 +8,10 @@ my.prototype.GraphPropertyOption = function (id, label) {
     this.label = label;
 };
 
+my.prototype.AbilityModel.prototype.isQWER = function (ability) {
+    return (ability.displayname() != 'Empty' &&  (ability.behavior().indexOf('DOTA_ABILITY_BEHAVIOR_HIDDEN') == -1 || ability.name().indexOf('invoker_') != -1) && ability.behavior().indexOf('DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE') == -1)
+}
+
 my.prototype.BuildExplorerViewModel = function (h) {
 var self = this;
     self.parent = h;

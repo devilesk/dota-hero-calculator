@@ -13,7 +13,7 @@ my.prototype.UnitOption = function (name, displayname, levels, image, level) {
 };
 
 my.prototype.UnitViewModel = function (h,p) {
-    var self = new my.prototype.HeroCalculatorModel(0);
+    var self = new my.prototype.HeroModel(0);
     self.parent = p;
     self.selectedUnitLevel = ko.observable(1);
     self.availableUnits = ko.observableArray([
@@ -40,7 +40,7 @@ my.prototype.UnitViewModel = function (h,p) {
         }
     });
     self.hero = ko.computed(function() {
-        return ko.mapping.fromJS(my.prototype.unitData[self.selectedUnit().heroName()]);
+        return ko.wrap.fromJS(my.prototype.unitData[self.selectedUnit().heroName()]);
     });
     self.heroData = ko.computed(function() {
         return my.prototype.unitData[self.selectedUnit().heroName()];

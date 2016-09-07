@@ -94,94 +94,108 @@ my.prototype.BasicInventoryViewModel = function (h) {
     self.toggleMuteItem = function (item) {
         item.enabled(!item.enabled());
     }.bind(this);      
-
-    self.getItemImage = function (data) {
-        var state = ko.utils.unwrapObservable(data.state);
-        switch (data.item) {
-            case 'power_treads':
-                if (state == 0) {
-                    return '/media/images/items/' + data.item + '_str.png';
-                }
-                else if (state == 1) {
-                    return '/media/images/items/' + data.item + '_int.png';
-                }
-                else {
-                    return '/media/images/items/' + data.item + '_agi.png';
-                }
-            break;
-            case 'tranquil_boots':
-            case 'ring_of_basilius':
-                if (state == 0) {
-                    return '/media/images/items/' + data.item + '.png';
-                }
-                else {
-                    return '/media/images/items/' + data.item + '_active.png';
-                }
-            break;
-            case 'armlet':
-                if (state == 0) {
-                    return '/media/images/items/' + data.item + '.png';
-                }
-                else {
-                    return '/media/images/items/' + data.item + '_active.png';
-                }
-            break;
-            case 'ring_of_aquila':
-                if (state == 0) {
-                    return '/media/images/items/' + data.item + '_active.png';
-                }
-                else {
-                    return '/media/images/items/' + data.item + '.png';
-                }
-            break;
-            case 'dagon':
-            case 'diffusal_blade':
-            case 'travel_boots':
-            case 'necronomicon':
-                if (data.size > 1) {
-                    return '/media/images/items/' + data.item + '_' + data.size + '.png';
-                }
-                else {
-                    return '/media/images/items/' + data.item + '.png';
-                }
-            break;
-            default:
-                return '/media/images/items/' + data.item + '.png';            
-            break;
-        }
-    };
-    self.getItemSizeLabel = function (data) {
-        if (my.prototype.stackableItems.indexOf(data.item) != -1) {
-            return '<span style="font-size:10px">Qty: </span>' + data.size;
-        }
-        else if (my.prototype.levelitems.indexOf(data.item) != -1) {
-            return '<span style="font-size:10px">Lvl: </span>' + data.size;
-        }
-        else if (data.item == 'bloodstone') {
-            return '<span style="font-size:10px">Charges: </span>' + data.size;
-        }
-        else {
-            return '';
-        }
-    };
-    self.getActiveBorder = function (data) {
-        switch (data.item) {
-            case 'power_treads':
-            case 'tranquil_boots':
-            case 'ring_of_basilius':
-            case 'ring_of_aquila':
-            case 'armlet':
-                return 0;
-            break;
-            default:
-                return ko.utils.unwrapObservable(data.state);    
-            break;
-        }
-    }
     self.removeAll = function () {
         self.activeItems.removeAll();
         self.items.removeAll();
     }.bind(this);
+}
+my.prototype.BasicInventoryViewModel.prototype.getItemImage = function (data) {
+    var state = ko.utils.unwrapObservable(data.state);
+    switch (data.item) {
+        case 'power_treads':
+            if (state == 0) {
+                return '/media/images/items/' + data.item + '_str.png';
+            }
+            else if (state == 1) {
+                return '/media/images/items/' + data.item + '_int.png';
+            }
+            else {
+                return '/media/images/items/' + data.item + '_agi.png';
+            }
+        break;
+        case 'tranquil_boots':
+        case 'ring_of_basilius':
+            if (state == 0) {
+                return '/media/images/items/' + data.item + '.png';
+            }
+            else {
+                return '/media/images/items/' + data.item + '_active.png';
+            }
+        break;
+        case 'armlet':
+            if (state == 0) {
+                return '/media/images/items/' + data.item + '.png';
+            }
+            else {
+                return '/media/images/items/' + data.item + '_active.png';
+            }
+        break;
+        case 'ring_of_aquila':
+            if (state == 0) {
+                return '/media/images/items/' + data.item + '_active.png';
+            }
+            else {
+                return '/media/images/items/' + data.item + '.png';
+            }
+        break;
+        case 'dagon':
+        case 'diffusal_blade':
+        case 'travel_boots':
+        case 'necronomicon':
+            if (data.size > 1) {
+                return '/media/images/items/' + data.item + '_' + data.size + '.png';
+            }
+            else {
+                return '/media/images/items/' + data.item + '.png';
+            }
+        break;
+        default:
+            return '/media/images/items/' + data.item + '.png';            
+        break;
+    }
+};
+my.prototype.BasicInventoryViewModel.prototype.getItemSizeLabel = function (data) {
+    if (my.prototype.stackableItems.indexOf(data.item) != -1) {
+        return '<span style="font-size:10px">Qty: </span>' + data.size;
+    }
+    else if (my.prototype.levelitems.indexOf(data.item) != -1) {
+        return '<span style="font-size:10px">Lvl: </span>' + data.size;
+    }
+    else if (data.item == 'bloodstone') {
+        return '<span style="font-size:10px">Charges: </span>' + data.size;
+    }
+    else {
+        return '';
+    }
+};
+my.prototype.BasicInventoryViewModel.prototype.getActiveBorder = function (data) {
+    switch (data.item) {
+        case 'power_treads':
+        case 'tranquil_boots':
+        case 'ring_of_basilius':
+        case 'ring_of_aquila':
+        case 'armlet':
+            return 0;
+        break;
+        default:
+            return ko.utils.unwrapObservable(data.state);    
+        break;
+    }
+}
+my.prototype.BasicInventoryViewModel.prototype.getItemAttributeValue = function (attributes, attributeName, level) {
+    for (var i = 0; i < attributes.length; i++) {
+        if (attributes[i].name == attributeName) {
+            if (level == 0) {
+                return parseFloat(attributes[i].value[0]);
+            }
+            else if (level > attributes[i].value.length) {
+                return parseFloat(attributes[i].value[0]);
+            }
+            else {
+                return parseFloat(attributes[i].value[level - 1]);
+            }
+        }
+    }
 }
 
 my.prototype.InventoryViewModel = function (h) {
@@ -249,20 +263,6 @@ my.prototype.InventoryViewModel = function (h) {
         }
         return c;
     }, this);
-    /*self.addItem = function (data, event) {
-        if (self.hasInventory() && data.selectedItem() != undefined) {
-            var new_item = {
-                item: data.selectedItem(),
-                state: ko.observable(0),
-                size: data.itemInputValue(),
-                enabled: ko.observable(true)
-            }
-            self.items.push(new_item);
-            if (data.selectedItem() === 'ring_of_aquila' || data.selectedItem() === 'ring_of_basilius' || data.selectedItem() === 'heart') {
-                self.toggleItem(undefined, new_item, undefined);
-            }
-        }
-    };*/
     self.addItemBuff = function (data, event) {
         if (self.hasInventory() && self.selectedItemBuff() != undefined) {
             var new_item = {
@@ -294,139 +294,6 @@ my.prototype.InventoryViewModel = function (h) {
             }
         }
     };
-    /*self.toggleItem = function (index, data, event) {
-        if (my.prototype.itemsWithActive.indexOf(data.item) >= 0) {
-            if (self.activeItems.indexOf(data) < 0) {
-                self.activeItems.push(data);
-            }
-            else {
-                self.activeItems.remove(data);
-            }
-            switch (data.item) {
-                case 'power_treads':
-                    if (data.state() < 2) {
-                        data.state(data.state() + 1);
-                    }
-                    else {
-                        data.state(0);
-                    }                
-                break;
-                default:
-                    if (data.state() == 0) {
-                        data.state(1);
-                    }
-                    else {
-                        data.state(0);
-                    }                
-                break;
-            }
-        }
-    }.bind(this);
-    self.removeItem = function (item) {
-        self.activeItems.remove(item);
-        self.items.remove(item);
-    }.bind(this);
-    self.toggleMuteItem = function (item) {
-        item.enabled(!item.enabled());
-    }.bind(this);
-    self.getItemImage = function (data) {
-        switch (data.item) {
-            case 'power_treads':
-                if (data.state() == 0) {
-                    return '/media/images/items/' + data.item + '_str.png';
-                }
-                else if (data.state() == 1) {
-                    return '/media/images/items/' + data.item + '_int.png';
-                }
-                else {
-                    return '/media/images/items/' + data.item + '_agi.png';
-                }
-            break;
-            case 'tranquil_boots':
-            case 'ring_of_basilius':
-                if (data.state() == 0) {
-                    return '/media/images/items/' + data.item + '.png';
-                }
-                else {
-                    return '/media/images/items/' + data.item + '_active.png';
-                }
-            break;
-            case 'armlet':
-                if (data.state() == 0) {
-                    return '/media/images/items/' + data.item + '.png';
-                }
-                else {
-                    return '/media/images/items/' + data.item + '_active.png';
-                }
-            break;
-            case 'ring_of_aquila':
-                if (data.state() == 0) {
-                    return '/media/images/items/' + data.item + '_active.png';
-                }
-                else {
-                    return '/media/images/items/' + data.item + '.png';
-                }
-            break;
-            case 'dagon':
-            case 'diffusal_blade':
-            case 'necronomicon':
-                if (data.size > 1) {
-                    return '/media/images/items/' + data.item + '_' + data.size + '.png';
-                }
-                else {
-                    return '/media/images/items/' + data.item + '.png';
-                }
-            break;
-            default:
-                return '/media/images/items/' + data.item + '.png';            
-            break;
-        }
-    };
-    self.getItemSizeLabel = function (data) {
-        if (my.prototype.stackableItems.indexOf(data.item) != -1) {
-            return '<span style="font-size:10px">Qty: </span>' + data.size;
-        }
-        else if (my.prototype.levelitems.indexOf(data.item) != -1) {
-            return '<span style="font-size:10px">Lvl: </span>' + data.size;
-        }
-        else if (data.item == 'bloodstone') {
-            return '<span style="font-size:10px">Charges: </span>' + data.size;
-        }
-        else {
-            return '';
-        }
-    };
-    self.getActiveBorder = function (data) {
-        switch (data.item) {
-            case 'power_treads':
-            case 'tranquil_boots':
-            case 'ring_of_basilius':
-            case 'ring_of_aquila':
-            case 'armlet':
-                return 0;
-            break;
-            default:
-                return ko.utils.unwrapObservable(data.state);    
-            break;
-        }
-        
-    }*/
-
-    self.getItemAttributeValue = function (attributes, attributeName, level) {
-        for (var i = 0; i < attributes.length; i++) {
-            if (attributes[i].name == attributeName) {
-                if (level == 0) {
-                    return parseFloat(attributes[i].value[0]);
-                }
-                else if (level > attributes[i].value.length) {
-                    return parseFloat(attributes[i].value[0]);
-                }
-                else {
-                    return parseFloat(attributes[i].value[level - 1]);
-                }
-            }
-        }
-    }
     
     self.getAttributes = function (attributetype) {
         var totalAttribute = 0;
@@ -1535,35 +1402,12 @@ my.prototype.InventoryViewModel = function (h) {
         return totalAttribute;
     };    
     
-    self.itemOptions = ko.observableArray([]);
-    var itemOptionsArr = [];
-    for (var i = 0; i < my.prototype.validItems.length; i++) {
-        itemOptionsArr.push(new my.prototype.ItemInput(my.prototype.validItems[i], my.prototype.itemData['item_' + my.prototype.validItems[i]].displayname));
-    }
-    self.itemOptions.push.apply(self.itemOptions, itemOptionsArr);
-    /*for (i in my.prototype.itemData) {
-        self.itemOptions.push(new my.prototype.ItemInput(i.replace('item_',''),my.prototype.itemData[i].displayname));
-    }*/
+    self.itemOptions = ko.observableArray(my.prototype.itemOptionsArr);
     
-    var itemBuffs = ['assault', 'ancient_janggo', 'headdress', 'mekansm', 'pipe', 'ring_of_aquila', 'vladmir', 'ring_of_basilius', 'buckler', 'solar_crest'];
-    self.itemBuffOptions = ko.observableArray(itemBuffs.map(function(item) { return new my.prototype.ItemInput(item, my.prototype.itemData['item_' + item].displayname); }));
+    self.itemBuffOptions = ko.observableArray(my.prototype.itemBuffOptions);
     self.selectedItemBuff = ko.observable('assault');
 
-    var itemDebuffs = [
-        {item: 'assault', debuff: null},
-        {item: 'shivas_guard', debuff: null},
-        {item: 'desolator', debuff: null},
-        {item: 'medallion_of_courage', debuff: null},
-        {item: 'radiance', debuff: null},
-        {item: 'sheepstick', debuff: null},
-        {item: 'veil_of_discord', debuff: null},
-        {item: 'solar_crest', debuff: null},
-        {item: 'silver_edge', debuff: {id: 'shadow_walk', name: 'Shadow Walk'}},
-        {item: 'silver_edge', debuff: {id: 'maim', name: 'Lesser Maim'}}
-    ]
-    self.itemDebuffOptions = ko.observableArray(itemDebuffs.map(function(item) {
-        return new my.prototype.ItemInput(item.item, my.prototype.itemData['item_' + item.item].displayname, item.debuff);
-    }));
+    self.itemDebuffOptions = ko.observableArray(my.prototype.itemDebuffOptions);
     self.selectedItemDebuff = ko.observable('assault');
     
     return self;

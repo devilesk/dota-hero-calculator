@@ -33,7 +33,7 @@ my.prototype.diffProperties = [
     'ehpMagical',
     'bash',
     'critChance',
-    'critDamage',
+    //'critDamage',
     'missChance',
     'totalattackrange',
     'visionrangeday',
@@ -120,7 +120,7 @@ my.prototype.HeroModel = function (h) {
     self.skillPointHistory = ko.observableArray();
     
     self.ability = ko.computed(function () {
-        var a = new my.prototype.AbilityModel(ko.mapping.fromJS(self.heroData().abilities), self);
+        var a = new my.prototype.AbilityModel(ko.wrap.fromJS(self.heroData().abilities), self);
         if (self.heroId() === 'earth_spirit' || self.heroId() === 'ogre_magi') {
             a.abilities()[3].level(1);
         }
@@ -500,10 +500,10 @@ my.prototype.HeroModel = function (h) {
 
     my.prototype.HeroDamageMixin(self);
     
-    self.critDamage = ko.computed(function () {
+    /*self.critDamage = ko.computed(function () {
         self.critInfo();
         return 0;
-    });
+    });*/
     self.missChance = ko.pureComputed(function () {
         var missDebuff = [self.enemy().inventory.getMissChance, self.debuffs.itemBuffs.getMissChance].reduce(function (memo, fn) {
             var obj = fn(memo.excludeList);
