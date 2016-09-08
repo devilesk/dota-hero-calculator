@@ -13,7 +13,7 @@ my.prototype.UnitOption = function (name, displayname, levels, image, level) {
 };
 
 my.prototype.UnitViewModel = function (h,p) {
-    var self = new my.prototype.HeroModel(0);
+    var self = new my.prototype.HeroModel(h);
     self.parent = p;
     self.selectedUnitLevel = ko.observable(1);
     self.availableUnits = ko.observableArray([
@@ -26,7 +26,7 @@ my.prototype.UnitViewModel = function (h,p) {
         new my.prototype.UnitOption('npc_dota_lycan_wolf','Lycan Wolf',4,'/media/images/units/npc_dota_lycan_wolf.png', self.selectedUnitLevel),
         new my.prototype.UnitOption('npc_dota_visage_familiar','Visage Familiar',3,'/media/images/units/npc_dota_visage_familiar.png', self.selectedUnitLevel)
     ]);
-    self.selectedUnit = ko.observable(self.availableUnits()[h]);
+    self.selectedUnit = ko.observable(self.availableUnits()[0]);
     self.selectedUnit.subscribe(function(newValue) {
         if (newValue.heroName().indexOf('npc_dota_lone_druid_bear') != -1) {
             self.inventory.hasInventory(true);

@@ -81,41 +81,6 @@ my.prototype.HeroModel = function (h) {
     self.illusionAbilityMaxLevel = ko.computed(function () {
         return my.prototype.illusionData[self.selectedIllusion().illusionName].max_level;
     });
-    self.getAbilityLevelMax = function (data) {
-        if (data.abilitytype() === 'DOTA_ABILITY_TYPE_ATTRIBUTES') {
-            return 10;
-        }
-        else if (data.name() === 'invoker_quas' || data.name() === 'invoker_wex' || data.name() === 'invoker_exort') {
-            return 7;
-        }
-        else if (data.name() === 'invoker_invoke') {
-            return 4;
-        }
-        else if (data.name() === 'earth_spirit_stone_caller' || data.name() === 'ogre_magi_unrefined_fireblast') {
-            return 1;
-        }
-        else if (data.abilitytype() === 'DOTA_ABILITY_TYPE_ULTIMATE' || data.name() === 'keeper_of_the_light_recall' ||
-                 data.name() === 'keeper_of_the_light_blinding_light' || data.name() === 'ember_spirit_activate_fire_remnant' ||
-                 data.name() === 'lone_druid_true_form_battle_cry') {
-            return 3;
-        }
-        else if (data.name() === 'puck_ethereal_jaunt'  || data.name() === 'shadow_demon_shadow_poison_release' ||
-                 data.name() === 'templar_assassin_trap' || data.name() === 'spectre_reality') {
-            return 0;
-        }
-        else if (data.name() === 'invoker_cold_snap'  || data.name() === 'invoker_ghost_walk' || data.name() === 'invoker_tornado' || 
-                 data.name() === 'invoker_emp' || data.name() === 'invoker_alacrity' || data.name() === 'invoker_chaos_meteor' || 
-                 data.name() === 'invoker_sun_strike' || data.name() === 'invoker_forge_spirit' || data.name() === 'invoker_ice_wall' || 
-                 data.name() === 'invoker_deafening_blast') {
-            return 0;
-        }
-        else if (data.name() === 'techies_minefield_sign' || data.name() === 'techies_focused_detonate') {
-            return 0;
-        }
-        else {
-            return 4;
-        }
-    };
     
     self.skillPointHistory = ko.observableArray();
     
@@ -541,20 +506,57 @@ my.prototype.HeroModel = function (h) {
     
     self.diffProperties = my.prototype.diffProperties;
     self.diff = {};
-    self.getDiffFunction = function (prop) {
-        return ko.computed(function () {
-            if (prop == 'baseDamage') {
-                return [self[prop]()[0] - self.heroCompare()[prop]()[0], self[prop]()[1] - self.heroCompare()[prop]()[1]];
-            }
-            else {
-                return self[prop]() - self.heroCompare()[prop]();
-            }
-        }, this, { deferEvaluation: true });
-    }
+
     for (var i = 0; i < self.diffProperties.length; i++) {
         var index = i;
         self.diff[self.diffProperties[index]] = self.getDiffFunction(self.diffProperties[index]);
     }
-
 };
 
+my.prototype.HeroModel.prototype.getDiffFunction = function (prop) {
+    var self = this;
+    return ko.computed(function () {
+        if (prop == 'baseDamage') {
+            return [self[prop]()[0] - self.heroCompare()[prop]()[0], self[prop]()[1] - self.heroCompare()[prop]()[1]];
+        }
+        else {
+            return self[prop]() - self.heroCompare()[prop]();
+        }
+    }, this, { deferEvaluation: true });
+}
+
+my.prototype.HeroModel.prototype.getAbilityLevelMax = function (data) {
+    if (data.abilitytype() === 'DOTA_ABILITY_TYPE_ATTRIBUTES') {
+        return 10;
+    }
+    else if (data.name() === 'invoker_quas' || data.name() === 'invoker_wex' || data.name() === 'invoker_exort') {
+        return 7;
+    }
+    else if (data.name() === 'invoker_invoke') {
+        return 4;
+    }
+    else if (data.name() === 'earth_spirit_stone_caller' || data.name() === 'ogre_magi_unrefined_fireblast') {
+        return 1;
+    }
+    else if (data.abilitytype() === 'DOTA_ABILITY_TYPE_ULTIMATE' || data.name() === 'keeper_of_the_light_recall' ||
+             data.name() === 'keeper_of_the_light_blinding_light' || data.name() === 'ember_spirit_activate_fire_remnant' ||
+             data.name() === 'lone_druid_true_form_battle_cry') {
+        return 3;
+    }
+    else if (data.name() === 'puck_ethereal_jaunt'  || data.name() === 'shadow_demon_shadow_poison_release' ||
+             data.name() === 'templar_assassin_trap' || data.name() === 'spectre_reality') {
+        return 0;
+    }
+    else if (data.name() === 'invoker_cold_snap'  || data.name() === 'invoker_ghost_walk' || data.name() === 'invoker_tornado' || 
+             data.name() === 'invoker_emp' || data.name() === 'invoker_alacrity' || data.name() === 'invoker_chaos_meteor' || 
+             data.name() === 'invoker_sun_strike' || data.name() === 'invoker_forge_spirit' || data.name() === 'invoker_ice_wall' || 
+             data.name() === 'invoker_deafening_blast') {
+        return 0;
+    }
+    else if (data.name() === 'techies_minefield_sign' || data.name() === 'techies_focused_detonate') {
+        return 0;
+    }
+    else {
+        return 4;
+    }
+};

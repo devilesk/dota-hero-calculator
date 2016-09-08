@@ -13,11 +13,11 @@ my.prototype.CloneOption = function (name, displayname, levels, image, level) {
 };
 
 my.prototype.CloneViewModel = function (h,p) {
-    var self = new my.prototype.HeroModel(0);
+    var self = new my.prototype.HeroModel(h);
     self.parent = p;
-    self.selectedHero(my.prototype.findWhere(self.availableHeroes(), {heroName: 'meepo'}));
+    /*self.selectedHero(my.prototype.findWhere(self.availableHeroes(), {heroName: 'meepo'}));
     self.hero = ko.computed(function() {
         return ko.wrap.fromJS(my.prototype.heroData['npc_dota_hero_meepo']);
-    });
+    });*/
     return self;
 }

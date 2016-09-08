@@ -436,17 +436,6 @@ module.exports = [
         "filterComparison": ko.observable()
     },
     {
-        "id": "critDamage",
-        "header": "CRTD",
-        "title": "Crit Damage",
-        "align": "right",
-        "display": ko.observable(true),
-        "filter": true,
-        "filterType": "numeric",
-        "filterValue": ko.observable(),
-        "filterComparison": ko.observable()
-    },
-    {
         "id": "missChance",
         "header": "MISS",
         "title": "Miss Chance",

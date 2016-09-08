@@ -118,8 +118,8 @@ my.prototype.HeroCalculatorViewModel = function () {
     }
     
     for (var i = 0; i < 10; i++) {
-        self.heroes[i].clone = ko.observable(new my.prototype.CloneViewModel(0, self.heroes[i]));
-        self.heroes[i].unit = ko.observable(new my.prototype.UnitViewModel(0, self.heroes[i]));
+        self.heroes[i].clone = ko.observable(new my.prototype.CloneViewModel('meepo', self.heroes[i]));
+        self.heroes[i].unit = ko.observable(new my.prototype.UnitViewModel('abaddon', self.heroes[i]));
         
         self.heroes[i].selectedCompare(self.heroes[i].availableCompare()[i < 5 ? 4 + i : i - 5]);
         self.heroes[i].selectedEnemy(self.heroes[i].availableEnemies()[i % 5]);

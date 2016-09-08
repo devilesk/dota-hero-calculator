@@ -2322,6 +2322,7 @@ my.prototype.AbilityModel = function (a, h) {
 }
 
 my.prototype.AbilityModel.prototype.levelUpAbility = function (index, data, event, hero) {
+    var self = this;
     if (self.abilities()[index()].level() < hero.getAbilityLevelMax(data) && hero.availableSkillPoints() > 0 ) {
         switch(self.abilities()[index()].abilitytype()) {
             case 'DOTA_ABILITY_TYPE_ULTIMATE':
@@ -2392,6 +2393,7 @@ my.prototype.AbilityModel.prototype.levelUpAbility = function (index, data, even
     }
 };
 my.prototype.AbilityModel.prototype.levelDownAbility = function (index, data, event, hero) {
+    var self = this;
     if (self.abilities()[index()].level() > 0) {
         self.abilities()[index()].level(self.abilities()[index()].level() - 1);
         hero.skillPointHistory.splice(hero.skillPointHistory().lastIndexOf(index()), 1);
