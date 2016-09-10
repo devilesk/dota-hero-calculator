@@ -153,7 +153,7 @@ my.prototype.abilityData = {
             controls: [0,1],
             fn: function (v, a, parent, index, abilityModel, ability) {
                 if (parent.inventory.hasScepter()) {
-                    return v[0]*abilityModel.getAbilityAttributeValue(ability.attributes(), 'fiend_grip_damage_scepter',ability.level());
+                    return v[0]*abilityModel.getAbilityAttributeValue(ability.attributes, 'fiend_grip_damage_scepter',ability.level());
                 }
                 else {
                     return v[0]*a;
@@ -168,7 +168,7 @@ my.prototype.abilityData = {
             noLevel: true,
             fn: function (v, a, parent, index, abilityModel, ability) {
                 if (parent.inventory.hasScepter()) {
-                    return v[0]*v[1]*abilityModel.getAbilityAttributeValue(ability.attributes(), 'fiend_grip_mana_drain_scepter',ability.level())/100;
+                    return v[0]*v[1]*abilityModel.getAbilityAttributeValue(ability.attributes, 'fiend_grip_mana_drain_scepter',ability.level())/100;
                 }
                 else {
                     return v[0]*v[1]*a/100;
@@ -258,7 +258,7 @@ my.prototype.abilityData = {
             ignoreTooltip: true,
             controlType: 'text',
             fn: function (v, a, parent, index, abilityModel, ability) {
-                return -(abilityModel.getAbilityAttributeValue(ability.attributes(), 'base_move_slow',0)+v*a);
+                return -(abilityModel.getAbilityAttributeValue(ability.attributes, 'base_move_slow',0)+v*a);
             },
             returnProperty: 'movementSpeedPctReduction'
         }
@@ -273,8 +273,8 @@ my.prototype.abilityData = {
             label: 'DAMAGE',
             controlType: 'text',
             fn: function (v, a, parent, index, abilityModel, ability) {
-                var total = abilityModel.getAbilityAttributeValue(ability.attributes(), 'quill_base_damage',ability.level())+v*a,
-                damage_cap = abilityModel.getAbilityAttributeValue(ability.attributes(), 'max_damage',0);
+                var total = abilityModel.getAbilityAttributeValue(ability.attributes, 'quill_base_damage',ability.level())+v*a,
+                damage_cap = abilityModel.getAbilityAttributeValue(ability.attributes, 'max_damage',0);
                 if (total > damage_cap) {
                     total = damage_cap;
                 }
@@ -298,14 +298,14 @@ my.prototype.abilityData = {
             ignoreTooltip: true,
             controlType: 'text',
             fn: function (v, a, parent, index, abilityModel, ability) {
-                var ability = abilityModel.abilities().find(function(b) {
-                    return b.name() == 'bristleback_bristleback';
+                var ability = abilityModel.abilities.find(function(b) {
+                    return b.name == 'bristleback_bristleback';
                 });
                 if (v == 'back') {
-                    var total = abilityModel.getAbilityAttributeValue(ability.attributes(), 'back_damage_reduction', ability.level());
+                    var total = abilityModel.getAbilityAttributeValue(ability.attributes, 'back_damage_reduction', ability.level());
                 }
                 else {
-                    var total = abilityModel.getAbilityAttributeValue(ability.attributes(), 'side_damage_reduction', ability.level());
+                    var total = abilityModel.getAbilityAttributeValue(ability.attributes, 'side_damage_reduction', ability.level());
                 }
                 return -total;
             },
@@ -327,7 +327,7 @@ my.prototype.abilityData = {
                     return 0;
                 }
                 else {
-                    return abilityModel.getAbilityAttributeValue(ability.attributes(), 'base_damage',ability.level())+(v-1)*a;
+                    return abilityModel.getAbilityAttributeValue(ability.attributes, 'base_damage',ability.level())+(v-1)*a;
                 }
             }
         },
@@ -341,7 +341,7 @@ my.prototype.abilityData = {
                     return 0;
                 }
                 else {
-                    return abilityModel.getAbilityAttributeValue(ability.attributes(), 'base_move_speed',ability.level())+(v-1)*a;
+                    return abilityModel.getAbilityAttributeValue(ability.attributes, 'base_move_speed',ability.level())+(v-1)*a;
                 }
             },
             returnProperty: 'movementSpeedPct'
@@ -357,7 +357,7 @@ my.prototype.abilityData = {
             label: 'DAMAGE:',
             controlType: 'text',
             fn: function (v, a, parent, index, abilityModel, ability) {
-                return abilityModel.getAbilityAttributeValue(ability.attributes(), 'return_damage',ability.level()) + v*a/100;
+                return abilityModel.getAbilityAttributeValue(ability.attributes, 'return_damage',ability.level()) + v*a/100;
             }
         }
     ],
@@ -550,7 +550,7 @@ my.prototype.abilityData = {
             controlType: 'text',
             fn: function (v, a, parent, index, abilityModel, ability) {
                 if (parent.inventory.hasScepter()) {
-                    return v*abilityModel.getAbilityAttributeValue(ability.attributes(), 'damage_scepter',ability.level());
+                    return v*abilityModel.getAbilityAttributeValue(ability.attributes, 'damage_scepter',ability.level());
                 }
                 else {
                     return v*a;
@@ -670,7 +670,7 @@ my.prototype.abilityData = {
             controlType: 'text',
             controls: [0,1],
             fn: function (v, a, parent, index, abilityModel, ability) {
-                return v[0]*abilityModel.getAbilityAttributeValue(ability.attributes(), 'damage_heroes',ability.level()) + v[1]*a;
+                return v[0]*abilityModel.getAbilityAttributeValue(ability.attributes, 'damage_heroes',ability.level()) + v[1]*a;
             },
             returnProperty: 'bonusDamage'
         },
@@ -681,7 +681,7 @@ my.prototype.abilityData = {
             controlType: 'text',
             controls: [0,1],
             fn: function (v, a, parent, index, abilityModel, ability) {
-                return v[0]*abilityModel.getAbilityAttributeValue(ability.attributes(), 'move_pct_heroes',ability.level()) + v[1]*a;
+                return v[0]*abilityModel.getAbilityAttributeValue(ability.attributes, 'move_pct_heroes',ability.level()) + v[1]*a;
             },
             returnProperty: 'movementSpeedPct'
         }
@@ -720,7 +720,7 @@ my.prototype.abilityData = {
             ignoreTooltip: true,
             controlType: 'text',
             fn: function (v, a, parent, index, abilityModel, ability) {
-                return abilityModel.getAbilityAttributeValue(ability.attributes(), 'wisp_count',ability.level())*v*a;
+                return abilityModel.getAbilityAttributeValue(ability.attributes, 'wisp_count',ability.level())*v*a;
             }
         }
     ],
@@ -926,7 +926,7 @@ my.prototype.abilityData = {
             fn: function (v, a, parent, index, abilityModel, ability) {
                 var v = Math.min(v, 100);
                 v = Math.max(v, 10);
-                var hp_threshold_max = abilityModel.getAbilityAttributeValue(ability.attributes(), 'hp_threshold_max',0);
+                var hp_threshold_max = abilityModel.getAbilityAttributeValue(ability.attributes, 'hp_threshold_max',0);
                 var d = 100 - hp_threshold_max;
                 var c = (v - hp_threshold_max) / d;
                 c = 1 - c;
@@ -942,7 +942,7 @@ my.prototype.abilityData = {
             fn: function (v, a, parent, index, abilityModel, ability) {
                 var v = Math.min(v, 100);
                 v = Math.max(v, 10);
-                var hp_threshold_max = abilityModel.getAbilityAttributeValue(ability.attributes(), 'hp_threshold_max',0);
+                var hp_threshold_max = abilityModel.getAbilityAttributeValue(ability.attributes, 'hp_threshold_max',0);
                 var d = 100 - hp_threshold_max;
                 var c = (v - hp_threshold_max) / d;
                 c = 1 - c;
@@ -1086,7 +1086,7 @@ my.prototype.abilityData = {
                 if (v == 0) {
                     return 0;
                 }
-                return abilityModel.getAbilityAttributeValue(ability.attributes(), 'enemy_slow',v);
+                return abilityModel.getAbilityAttributeValue(ability.attributes, 'enemy_slow',v);
             },
             returnProperty: 'movementSpeedPctReduction'
         },
@@ -1104,7 +1104,7 @@ my.prototype.abilityData = {
                 if (v == 0) {
                     return 0;
                 }
-                return abilityModel.getAbilityAttributeValue(ability.attributes(), 'self_slow',v);
+                return abilityModel.getAbilityAttributeValue(ability.attributes, 'self_slow',v);
             },
             returnProperty: 'movementSpeedPct'
         }
@@ -1122,7 +1122,7 @@ my.prototype.abilityData = {
                 if (v == 0) {
                     return 0;
                 }
-                return abilityModel.getAbilityAttributeValue(ability.attributes(), 'bonus_attack_speed',v);
+                return abilityModel.getAbilityAttributeValue(ability.attributes, 'bonus_attack_speed',v);
             },
             returnProperty: 'attackspeed'
         },
@@ -1138,7 +1138,7 @@ my.prototype.abilityData = {
                 if (v == 0) {
                     return 0;
                 }
-                return abilityModel.getAbilityAttributeValue(ability.attributes(), 'bonus_damage',v);
+                return abilityModel.getAbilityAttributeValue(ability.attributes, 'bonus_damage',v);
             },
             returnProperty: 'bonusDamage'
         }
@@ -1156,7 +1156,7 @@ my.prototype.abilityData = {
                 if (v == 0) {
                     return 0;
                 }
-                return abilityModel.getAbilityAttributeValue(ability.attributes(), 'slow',v);
+                return abilityModel.getAbilityAttributeValue(ability.attributes, 'slow',v);
             },
             returnProperty: 'movementSpeedPctReduction'
         },
@@ -1181,7 +1181,7 @@ my.prototype.abilityData = {
                 if (v[0] == 0) {
                     return 0;
                 }
-                return abilityModel.getAbilityAttributeValue(ability.attributes(), 'damage_per_second',v[0])*v[1];
+                return abilityModel.getAbilityAttributeValue(ability.attributes, 'damage_per_second',v[0])*v[1];
             }
         }
     ],
@@ -1195,7 +1195,7 @@ my.prototype.abilityData = {
             controlType: 'text',
             fn: function (v, a, parent, index, abilityModel, ability) {
                 return abilityModel.getAbilityPropertyValue(ability, 'damage')*2 + 
-                abilityModel.getAbilityAttributeValue(ability.attributes(), 'burn_damage',ability.level())*v;
+                abilityModel.getAbilityAttributeValue(ability.attributes, 'burn_damage',ability.level())*v;
             }
         },
         {
@@ -1298,7 +1298,7 @@ my.prototype.abilityData = {
             ignoreTooltip: true,
             controlType: 'text',
             fn: function (v, a, parent, index, abilityModel, ability) {
-                return abilityModel.getAbilityAttributeValue(ability.attributes(), 'omni_slash_damage',1)*v;
+                return abilityModel.getAbilityAttributeValue(ability.attributes, 'omni_slash_damage',1)*v;
             }
         },
         {
@@ -1306,7 +1306,7 @@ my.prototype.abilityData = {
             ignoreTooltip: true,
             controlType: 'text',
             fn: function (v, a, parent, index, abilityModel, ability) {
-                return abilityModel.getAbilityAttributeValue(ability.attributes(), 'omni_slash_damage',2)*v;
+                return abilityModel.getAbilityAttributeValue(ability.attributes, 'omni_slash_damage',2)*v;
             }
         }
     ],
@@ -1452,7 +1452,7 @@ my.prototype.abilityData = {
             controlType: 'text',
             noLevel: true,
             fn: function (v, a, parent, index, abilityModel, ability) {
-                return abilityModel.getAbilityAttributeValue(ability.attributes(), 'slow_steps',v+1);
+                return abilityModel.getAbilityAttributeValue(ability.attributes, 'slow_steps',v+1);
             },
             returnProperty: 'movementSpeedPctReduction'
         }
@@ -1525,8 +1525,8 @@ my.prototype.abilityData = {
             label: 'Total Damage',
             controlType: 'text',
             fn: function (v, a, parent, index, abilityModel, ability) {
-                var lucentBeamAbility = abilityModel.abilities().find(function(b) {
-                    return b.name() == 'luna_lucent_beam';
+                var lucentBeamAbility = abilityModel.abilities.find(function(b) {
+                    return b.name == 'luna_lucent_beam';
                 });
                 if (lucentBeamAbility.level() == 0) return 0;
                 var damage = abilityModel.getAbilityPropertyValue(lucentBeamAbility, 'damage');
@@ -1546,8 +1546,8 @@ my.prototype.abilityData = {
             controlType: 'method',
             display: 'none',
             fn: function (v, a, parent, index, abilityModel, ability) {
-                var snake_jumps = abilityModel.getAbilityAttributeValue(ability.attributes(), 'snake_jumps',ability.level());
-                var snake_scale = abilityModel.getAbilityAttributeValue(ability.attributes(), 'snake_scale',0);
+                var snake_jumps = abilityModel.getAbilityAttributeValue(ability.attributes, 'snake_jumps',ability.level());
+                var snake_scale = abilityModel.getAbilityAttributeValue(ability.attributes, 'snake_scale',0);
                 var damage = [];
                 for (var i = 0; i < snake_jumps; i++) {
                     damage.push(a + a * i * snake_scale/100);
@@ -1644,7 +1644,7 @@ my.prototype.abilityData = {
             controlType: 'text',
             noLevel: true,
             fn: function (v, a, parent, index, abilityModel, ability) {
-                return abilityModel.getAbilityAttributeValue(ability.attributes(), 'slow',ability.level())*v;
+                return abilityModel.getAbilityAttributeValue(ability.attributes, 'slow',ability.level())*v;
             },
             returnProperty: 'movementSpeedPctReduction'
         }
@@ -1660,8 +1660,8 @@ my.prototype.abilityData = {
             ignoreTooltip: true,
             controlType: 'text',
             fn: function (v, a, parent, index, abilityModel, ability) {
-                var arrow_min_stun = abilityModel.getAbilityAttributeValue(ability.attributes(), 'arrow_min_stun',0);
-                var arrow_max_stunrange = abilityModel.getAbilityAttributeValue(ability.attributes(), 'arrow_max_stunrange',0);
+                var arrow_min_stun = abilityModel.getAbilityAttributeValue(ability.attributes, 'arrow_min_stun',0);
+                var arrow_max_stunrange = abilityModel.getAbilityAttributeValue(ability.attributes, 'arrow_max_stunrange',0);
                 var scale = Math.min(v, arrow_max_stunrange) / arrow_max_stunrange;
                 return Math.max(arrow_min_stun, Math.floor(a * scale / 0.1) * 0.1);
             }
@@ -1674,7 +1674,7 @@ my.prototype.abilityData = {
             fn: function (v, a, parent, index, abilityModel, ability) {
                 var ability = ability;
                 var damage = ability.damage()[ability.level()-1];
-                var arrow_max_stunrange = abilityModel.getAbilityAttributeValue(ability.attributes(), 'arrow_max_stunrange',0);
+                var arrow_max_stunrange = abilityModel.getAbilityAttributeValue(ability.attributes, 'arrow_max_stunrange',0);
                 var scale = Math.min(v, arrow_max_stunrange) / arrow_max_stunrange;
                 var bonus_damage = Math.floor(a * scale / 2.8) * 2.8;
                 return damage + ' + ' + bonus_damage + ' = ' + (damage + bonus_damage);
@@ -1730,7 +1730,7 @@ my.prototype.abilityData = {
             ignoreTooltip: true,
             controlType: 'text',
             fn: function (v, a, parent, index, abilityModel, ability) {
-                return v*a*abilityModel.getAbilityAttributeValue(ability.attributes(), 'morph_cooldown',ability.level());
+                return v*a*abilityModel.getAbilityAttributeValue(ability.attributes, 'morph_cooldown',ability.level());
             }
         }
     ],
@@ -1783,7 +1783,7 @@ my.prototype.abilityData = {
             ignoreTooltip: true,
             controlType: 'text',
             fn: function (v, a, parent, index, abilityModel, ability) {
-                return v*a*abilityModel.getAbilityAttributeValue(ability.attributes(), 'morph_cooldown',ability.level());
+                return v*a*abilityModel.getAbilityAttributeValue(ability.attributes, 'morph_cooldown',ability.level());
             }
         }
     ],
@@ -1836,7 +1836,7 @@ my.prototype.abilityData = {
             controlType: 'text',
             controls: [0,1],
             fn: function (v, a, parent, index, abilityModel, ability) {
-                var hero_multiplier = abilityModel.getAbilityAttributeValue(ability.attributes(), 'hero_multiplier',0)
+                var hero_multiplier = abilityModel.getAbilityAttributeValue(ability.attributes, 'hero_multiplier',0)
                 return (v[0]+v[1]*hero_multiplier)*a;
             },
             returnProperty: 'healthregen'
@@ -1847,7 +1847,7 @@ my.prototype.abilityData = {
             controlType: 'text',
             controls: [0,1],
             fn: function (v, a, parent, index, abilityModel, ability) {
-                var hero_multiplier = abilityModel.getAbilityAttributeValue(ability.attributes(), 'hero_multiplier',0)
+                var hero_multiplier = abilityModel.getAbilityAttributeValue(ability.attributes, 'hero_multiplier',0)
                 return (v[0]+v[1]*hero_multiplier)*a;
             },
             returnProperty: 'manaregen'
@@ -1865,10 +1865,10 @@ my.prototype.abilityData = {
             controlType: 'text',
             fn: function (v, a, parent, index, abilityModel, ability) {
                 if (v) {
-                    return abilityModel.getAbilityAttributeValue(ability.attributes(), 'miss_rate_night',ability.level());
+                    return abilityModel.getAbilityAttributeValue(ability.attributes, 'miss_rate_night',ability.level());
                 }
                 else {
-                    return abilityModel.getAbilityAttributeValue(ability.attributes(), 'miss_rate_day',ability.level());
+                    return abilityModel.getAbilityAttributeValue(ability.attributes, 'miss_rate_day',ability.level());
                 }
             },
             returnProperty: 'missChance'
@@ -2065,7 +2065,7 @@ my.prototype.abilityData = {
             ignoreTooltip: true,
             controlType: 'text',
             fn: function (v, a, parent, index, abilityModel, ability) {
-                var duration_damage = abilityModel.getAbilityAttributeValue(ability.attributes(), 'duration_damage',ability.level());
+                var duration_damage = abilityModel.getAbilityAttributeValue(ability.attributes, 'duration_damage',ability.level());
                 var ticks = Math.floor(v/3);
                 return a + duration_damage * ticks;
             }
@@ -2102,8 +2102,8 @@ my.prototype.abilityData = {
             fn: function (v, a, parent, index, abilityModel, ability) {
                 var max_radius = a + 200;
                 var scale = (Math.min(Math.max(v, 200), max_radius) - 200) / (max_radius - 200);
-                var damage_min = abilityModel.getAbilityAttributeValue(ability.attributes(), 'damage_min',ability.level());
-                var damage_max = abilityModel.getAbilityAttributeValue(ability.attributes(), 'damage_max',ability.level());
+                var damage_min = abilityModel.getAbilityAttributeValue(ability.attributes, 'damage_min',ability.level());
+                var damage_max = abilityModel.getAbilityAttributeValue(ability.attributes, 'damage_max',ability.level());
                 return damage_min + (damage_max - damage_min) * scale;
             }
         }
@@ -2121,7 +2121,7 @@ my.prototype.abilityData = {
             fn: function (v, a, parent, index, abilityModel, ability) {
                 var tick_duration = Math.floor(v * 4) + 1;
                 var ticks = Math.min(a * 4 + 1, tick_duration);
-                var drain_rate = abilityModel.getAbilityAttributeValue(ability.attributes(), 'drain_rate',ability.level());
+                var drain_rate = abilityModel.getAbilityAttributeValue(ability.attributes, 'drain_rate',ability.level());
                 return ticks * drain_rate/4;
             },
             returnProperty: 'bonusDamage'
@@ -2135,7 +2135,7 @@ my.prototype.abilityData = {
             fn: function (v, a, parent, index, abilityModel, ability) {
                 var tick_duration = Math.floor(v * 4) + 1;
                 var ticks = Math.min(a * 4 + 1, tick_duration);
-                var drain_rate = abilityModel.getAbilityAttributeValue(ability.attributes(), 'drain_rate',ability.level());
+                var drain_rate = abilityModel.getAbilityAttributeValue(ability.attributes, 'drain_rate',ability.level());
                 return ticks * drain_rate/4;
             },
             returnProperty: 'bonusDamageReduction'
@@ -2165,7 +2165,7 @@ my.prototype.abilityData = {
             label: 'Total Damage',
             controlType: 'text',
             fn: function (v, a, parent, index, abilityModel, ability) {
-                return a * (1 - v*abilityModel.getAbilityAttributeValue(ability.attributes(), 'jump_damage_reduction_pct',ability.level())/100);
+                return a * (1 - v*abilityModel.getAbilityAttributeValue(ability.attributes, 'jump_damage_reduction_pct',ability.level())/100);
             }
         },
         {
@@ -2549,7 +2549,7 @@ my.prototype.abilityData = {
             controls: [0, 1],
             fn: function (v, a, parent, index, abilityModel, ability) {
                 var distance_intervals = Math.floor(v[1]/100);
-                var travel_cost_base = abilityModel.getAbilityAttributeValue(ability.attributes(), 'ball_lightning_travel_cost_base',0);
+                var travel_cost_base = abilityModel.getAbilityAttributeValue(ability.attributes, 'ball_lightning_travel_cost_base',0);
                 return a + distance_intervals * travel_cost_base;
             }
         },
@@ -2561,7 +2561,7 @@ my.prototype.abilityData = {
             controls: [0, 1],
             fn: function (v, a, parent, index, abilityModel, ability) {
                 var distance_intervals = Math.floor(v[1]/100);
-                var travel_cost_percent = abilityModel.getAbilityAttributeValue(ability.attributes(), 'ball_lightning_travel_cost_percent',0);
+                var travel_cost_percent = abilityModel.getAbilityAttributeValue(ability.attributes, 'ball_lightning_travel_cost_percent',0);
                 return a + distance_intervals * travel_cost_percent;
             }
         },
@@ -2587,7 +2587,7 @@ my.prototype.abilityData = {
             ignoreTooltip: true,
             controlType: 'text',
             fn: function (v, a, parent, index, abilityModel, ability) {
-                var max_slow = abilityModel.getAbilityAttributeValue(ability.attributes(), 'movement_speed_max_tooltip',0);
+                var max_slow = abilityModel.getAbilityAttributeValue(ability.attributes, 'movement_speed_max_tooltip',0);
                 var slow_per_tick = (max_slow - a)/40;
                 return -(a + slow_per_tick * Math.min(Math.max(0, v), 4) * 10);
             },
@@ -2631,7 +2631,7 @@ my.prototype.abilityData = {
             ignoreTooltip: true,
             controlType: 'text',
             fn: function (v, a, parent, index, abilityModel, ability) {
-                var interval = abilityModel.getAbilityAttributeValue(ability.attributes(), 'damage_interval',0);
+                var interval = abilityModel.getAbilityAttributeValue(ability.attributes, 'damage_interval',0);
                 var ticks = Math.floor(v / interval);
                 return a*interval*ticks;
             }
@@ -2642,7 +2642,7 @@ my.prototype.abilityData = {
             ignoreTooltip: true,
             controlType: 'text',
             fn: function (v, a, parent, index, abilityModel, ability) {
-                var interval = abilityModel.getAbilityAttributeValue(ability.attributes(), 'damage_interval',0);
+                var interval = abilityModel.getAbilityAttributeValue(ability.attributes, 'damage_interval',0);
                 var ticks = Math.floor(v / interval);
                 return a*interval*ticks;
             }
@@ -2854,7 +2854,7 @@ my.prototype.abilityData = {
             controlType: 'text',
             fn: function (v, a, parent, index, abilityModel, ability) {
                 if (parent.inventory.hasScepter()) {
-                    var str_steal_scepter = abilityModel.getAbilityAttributeValue(ability.attributes(), 'str_steal_scepter',0);
+                    var str_steal_scepter = abilityModel.getAbilityAttributeValue(ability.attributes, 'str_steal_scepter',0);
                     return v*str_steal_scepter;
                 }
                 else {
@@ -2890,9 +2890,9 @@ my.prototype.abilityData = {
             ignoreTooltip: true,
             controlType: 'text',
             fn: function (v, a, parent, index, abilityModel, ability) {
-                var min_speed_slow = abilityModel.getAbilityAttributeValue(ability.attributes(), 'min_speed_slow', 0);
-                var radius = abilityModel.getAbilityAttributeValue(ability.attributes(), 'radius', 0);
-                var full_power_radius = abilityModel.getAbilityAttributeValue(ability.attributes(), 'full_power_radius', 0);
+                var min_speed_slow = abilityModel.getAbilityAttributeValue(ability.attributes, 'min_speed_slow', 0);
+                var radius = abilityModel.getAbilityAttributeValue(ability.attributes, 'radius', 0);
+                var full_power_radius = abilityModel.getAbilityAttributeValue(ability.attributes, 'full_power_radius', 0);
                 var distance = Math.min(Math.max(v, full_power_radius), radius);
                 var scale = 1 - (distance - full_power_radius) / (radius - full_power_radius);
                 return -Math.max(scale * a, min_speed_slow);
@@ -2905,9 +2905,9 @@ my.prototype.abilityData = {
             ignoreTooltip: true,
             controlType: 'text',
             fn: function (v, a, parent, index, abilityModel, ability) {
-                var min_damage_amp = abilityModel.getAbilityAttributeValue(ability.attributes(), 'min_damage_amp', 0);
-                var radius = abilityModel.getAbilityAttributeValue(ability.attributes(), 'radius', 0);
-                var full_power_radius = abilityModel.getAbilityAttributeValue(ability.attributes(), 'full_power_radius', 0);
+                var min_damage_amp = abilityModel.getAbilityAttributeValue(ability.attributes, 'min_damage_amp', 0);
+                var radius = abilityModel.getAbilityAttributeValue(ability.attributes, 'radius', 0);
+                var full_power_radius = abilityModel.getAbilityAttributeValue(ability.attributes, 'full_power_radius', 0);
                 var distance = Math.min(Math.max(v, full_power_radius), radius);
                 var scale = 1 - (distance - full_power_radius) / (radius - full_power_radius);
                 return Math.max(scale * a, min_damage_amp);
@@ -2967,11 +2967,11 @@ my.prototype.abilityData = {
             label: 'Total Damage',
             controlType: 'text',
             fn: function (v, a, parent, index, abilityModel, ability) {
-                var enrageAbility = abilityModel.abilities().find(function(b) {
-                    return b.name() == 'ursa_enrage';
+                var enrageAbility = abilityModel.abilities.find(function(b) {
+                    return b.name == 'ursa_enrage';
                 });
                 if (enrageAbility.isActive() && enrageAbility.level() > 0) {
-                    var enrage_multiplier = abilityModel.getAbilityAttributeValue(enrageAbility.attributes(), 'enrage_multiplier', enrageAbility.level());
+                    var enrage_multiplier = abilityModel.getAbilityAttributeValue(enrageAbility.attributes, 'enrage_multiplier', enrageAbility.level());
                     return v*a*enrage_multiplier;
                 }
                 return v*a;
@@ -3000,7 +3000,7 @@ my.prototype.abilityData = {
             label: 'Total Damage',
             controlType: 'text',
             fn: function (v, a, parent, index, abilityModel, ability) {
-                return abilityModel.getAbilityAttributeValue(ability.attributes(), 'strike_damage',ability.level()) + Math.floor(v/3)*a;
+                return abilityModel.getAbilityAttributeValue(ability.attributes, 'strike_damage',ability.level()) + Math.floor(v/3)*a;
             }
         },
         {
@@ -3166,8 +3166,8 @@ my.prototype.abilityData = {
             ignoreTooltip: true,
             controlType: 'text',
             fn: function (v, a, parent, index, abilityModel, ability) {
-                var soul_base_damage = abilityModel.getAbilityAttributeValue(ability.attributes(), 'soul_base_damage',0);
-                var stack_limit = abilityModel.getAbilityAttributeValue(ability.attributes(), 'stack_limit', ability.level());
+                var soul_base_damage = abilityModel.getAbilityAttributeValue(ability.attributes, 'soul_base_damage',0);
+                var stack_limit = abilityModel.getAbilityAttributeValue(ability.attributes, 'stack_limit', ability.level());
                 stack_limit = Math.max(Math.min(v, stack_limit), 0);
                 return soul_base_damage + stack_limit*a;
             }
@@ -3224,7 +3224,7 @@ my.prototype.abilityData = {
             ignoreTooltip: true,
             controlType: 'text',
             fn: function (v, a, parent, index, abilityModel, ability) {
-                var max_slow = abilityModel.getAbilityAttributeValue(ability.attributes(), 'max_slow',0);
+                var max_slow = abilityModel.getAbilityAttributeValue(ability.attributes, 'max_slow',0);
                 var slow_per_tick = max_slow / (a - 0.5) / 2;
                 var ticks = Math.max(Math.floor(v * 2) - 1, 0);
                 return -Math.min(ticks * slow_per_tick, max_slow);
@@ -3285,7 +3285,7 @@ my.prototype.abilityData = {
             controlType: 'text',
             controls: [0,1],
             fn: function (v, a, parent, index, abilityModel, ability) {
-                var base_heal = abilityModel.getAbilityAttributeValue(ability.attributes(), 'heal_additive',ability.level());
+                var base_heal = abilityModel.getAbilityAttributeValue(ability.attributes, 'heal_additive',ability.level());
                 return (base_heal + v[1] * a/100) * v[0];
             }
         }
@@ -3368,7 +3368,7 @@ my.prototype.abilityData = {
             label: 'Total Damage',
             controlType: 'text',
             fn: function (v, a, parent, index, abilityModel, ability) {
-                var bounces = abilityModel.getAbilityAttributeValue(ability.attributes(), 'bounces',ability.level());
+                var bounces = abilityModel.getAbilityAttributeValue(ability.attributes, 'bounces',ability.level());
                 return Math.min(Math.max(v, 0), bounces)*a;
             }
         },
@@ -3382,7 +3382,7 @@ my.prototype.abilityData = {
             ignoreTooltip: true,
             controlType: 'text',
             fn: function (v, a, parent, index, abilityModel, ability) {
-                var bounces = abilityModel.getAbilityAttributeValue(ability.attributes(), 'bounces',ability.level());
+                var bounces = abilityModel.getAbilityAttributeValue(ability.attributes, 'bounces',ability.level());
                 var damage = abilityModel.getAbilityPropertyValue(ability, 'damage');
                 return Math.min(Math.max(v, 0), bounces)*damage;
             }
@@ -3398,7 +3398,7 @@ my.prototype.abilityData = {
             label: 'Total Damage',
             controlType: 'text',
             fn: function (v, a, parent, index, abilityModel, ability) {
-                var interval = abilityModel.getAbilityAttributeValue(ability.attributes(), 'heal_interval',ability.level());
+                var interval = abilityModel.getAbilityAttributeValue(ability.attributes, 'heal_interval',ability.level());
                 var heal_per_tick = a * interval;
                 var ticks = Math.max(Math.floor(v / interval) - 1, 0);
                 return heal_per_tick * ticks;
@@ -3410,7 +3410,7 @@ my.prototype.abilityData = {
             ignoreTooltip: true,
             controlType: 'text',
             fn: function (v, a, parent, index, abilityModel, ability) {
-                var interval = abilityModel.getAbilityAttributeValue(ability.attributes(), 'heal_interval',ability.level());
+                var interval = abilityModel.getAbilityAttributeValue(ability.attributes, 'heal_interval',ability.level());
                 var mana_per_tick = a * interval;
                 var ticks = Math.max(Math.floor(v / interval) - 1, 0);
                 return mana_per_tick * ticks;
@@ -3513,7 +3513,7 @@ my.prototype.abilityData = {
             controlType: 'method',
             controls: [9],
             fn: function (v, a, parent, index, abilityModel, ability) {
-                var duration = abilityModel.getAbilityAttributeValue(ability.attributes(), 'duration_tooltip',0);
+                var duration = abilityModel.getAbilityAttributeValue(ability.attributes, 'duration_tooltip',0);
                 var damage = abilityModel.getAbilityPropertyValue(ability, 'damage');
                 return damage * duration + v[0];
             }
@@ -3527,7 +3527,7 @@ my.prototype.abilityData = {
             label: 'DOT Damage',
             controlType: 'text',
             fn: function (v, a, parent, index, abilityModel, ability) {
-                var duration = abilityModel.getAbilityAttributeValue(ability.attributes(), 'duration_tooltip',0);
+                var duration = abilityModel.getAbilityAttributeValue(ability.attributes, 'duration_tooltip',0);
                 return abilityModel.getAbilityPropertyValue(ability, 'damage')*Math.min(Math.max(v, 0), duration);
             }
         }

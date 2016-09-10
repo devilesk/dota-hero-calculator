@@ -85,13 +85,13 @@ my.prototype.HeroModel = function (h) {
     self.skillPointHistory = ko.observableArray();
     
     self.ability = ko.computed(function () {
-        var a = new my.prototype.AbilityModel(ko.wrap.fromJS(self.heroData().abilities), self);
+        var a = new my.prototype.AbilityModel(JSON.parse(JSON.stringify(self.heroData().abilities)), self);
         if (self.heroId() === 'earth_spirit' || self.heroId() === 'ogre_magi') {
-            a.abilities()[3].level(1);
+            a.abilities[3].level(1);
         }
         else if (self.heroId() === 'invoker') {
             for (var i = 6; i < 16; i++) {
-                a.abilities()[i].level(1);
+                a.abilities[i].level(1);
             }
         }
         self.skillPointHistory.removeAll();
@@ -101,35 +101,35 @@ my.prototype.HeroModel = function (h) {
 
     self.availableSkillPoints = ko.computed(function () {
         var c = self.selectedHeroLevel();
-        for (var i = 0; i < self.ability().abilities().length; i++) {
+        for (var i = 0; i < self.ability().abilities.length; i++) {
             var getIndex = function () {
                 return i;
             };
-            switch(self.ability().abilities()[i].abilitytype()) {
+            switch(self.ability().abilities[i].abilitytype) {
                 case 'DOTA_ABILITY_TYPE_ULTIMATE':
                     if (self.heroId() === 'invoker') {
                         while (
-                            ((self.ability().abilities()[i].level() == 1) && (parseInt(self.selectedHeroLevel()) < 2)) ||
-                            ((self.ability().abilities()[i].level() == 2) && (parseInt(self.selectedHeroLevel()) < 7)) ||
-                            ((self.ability().abilities()[i].level() == 3) && (parseInt(self.selectedHeroLevel()) < 11)) ||
-                            ((self.ability().abilities()[i].level() == 4) && (parseInt(self.selectedHeroLevel()) < 17))
+                            ((self.ability().abilities[i].level() == 1) && (parseInt(self.selectedHeroLevel()) < 2)) ||
+                            ((self.ability().abilities[i].level() == 2) && (parseInt(self.selectedHeroLevel()) < 7)) ||
+                            ((self.ability().abilities[i].level() == 3) && (parseInt(self.selectedHeroLevel()) < 11)) ||
+                            ((self.ability().abilities[i].level() == 4) && (parseInt(self.selectedHeroLevel()) < 17))
                         ) {
                             self.ability().levelDownAbility(getIndex, null, null, self);
                         }
                     }
                     else if (self.heroId() === 'meepo') {
-                        while ((self.ability().abilities()[i].level()-1) * 7 + 3 > parseInt(self.selectedHeroLevel())) {
+                        while ((self.ability().abilities[i].level()-1) * 7 + 3 > parseInt(self.selectedHeroLevel())) {
                             self.ability().levelDownAbility(getIndex, null, null, self);
                         }
                     }
                     else {
-                        while (self.ability().abilities()[i].level() * 5 + 1 > parseInt(self.selectedHeroLevel())) {
+                        while (self.ability().abilities[i].level() * 5 + 1 > parseInt(self.selectedHeroLevel())) {
                             self.ability().levelDownAbility(getIndex, null, null, self);
                         }
                     }
                 break;
                 default:
-                    while (self.ability().abilities()[i].level() * 2 - 1 > parseInt(self.selectedHeroLevel())) {
+                    while (self.ability().abilities[i].level() * 2 - 1 > parseInt(self.selectedHeroLevel())) {
                         self.ability().levelDownAbility(getIndex, null, null, self);
                     }
                 break;
@@ -526,34 +526,34 @@ my.prototype.HeroModel.prototype.getDiffFunction = function (prop) {
 }
 
 my.prototype.HeroModel.prototype.getAbilityLevelMax = function (data) {
-    if (data.abilitytype() === 'DOTA_ABILITY_TYPE_ATTRIBUTES') {
+    if (data.abilitytype === 'DOTA_ABILITY_TYPE_ATTRIBUTES') {
         return 10;
     }
-    else if (data.name() === 'invoker_quas' || data.name() === 'invoker_wex' || data.name() === 'invoker_exort') {
+    else if (data.name === 'invoker_quas' || data.name === 'invoker_wex' || data.name === 'invoker_exort') {
         return 7;
     }
-    else if (data.name() === 'invoker_invoke') {
+    else if (data.name === 'invoker_invoke') {
         return 4;
     }
-    else if (data.name() === 'earth_spirit_stone_caller' || data.name() === 'ogre_magi_unrefined_fireblast') {
+    else if (data.name === 'earth_spirit_stone_caller' || data.name === 'ogre_magi_unrefined_fireblast') {
         return 1;
     }
-    else if (data.abilitytype() === 'DOTA_ABILITY_TYPE_ULTIMATE' || data.name() === 'keeper_of_the_light_recall' ||
-             data.name() === 'keeper_of_the_light_blinding_light' || data.name() === 'ember_spirit_activate_fire_remnant' ||
-             data.name() === 'lone_druid_true_form_battle_cry') {
+    else if (data.abilitytype === 'DOTA_ABILITY_TYPE_ULTIMATE' || data.name === 'keeper_of_the_light_recall' ||
+             data.name === 'keeper_of_the_light_blinding_light' || data.name === 'ember_spirit_activate_fire_remnant' ||
+             data.name === 'lone_druid_true_form_battle_cry') {
         return 3;
     }
-    else if (data.name() === 'puck_ethereal_jaunt'  || data.name() === 'shadow_demon_shadow_poison_release' ||
-             data.name() === 'templar_assassin_trap' || data.name() === 'spectre_reality') {
+    else if (data.name === 'puck_ethereal_jaunt'  || data.name === 'shadow_demon_shadow_poison_release' ||
+             data.name === 'templar_assassin_trap' || data.name === 'spectre_reality') {
         return 0;
     }
-    else if (data.name() === 'invoker_cold_snap'  || data.name() === 'invoker_ghost_walk' || data.name() === 'invoker_tornado' || 
-             data.name() === 'invoker_emp' || data.name() === 'invoker_alacrity' || data.name() === 'invoker_chaos_meteor' || 
-             data.name() === 'invoker_sun_strike' || data.name() === 'invoker_forge_spirit' || data.name() === 'invoker_ice_wall' || 
-             data.name() === 'invoker_deafening_blast') {
+    else if (data.name === 'invoker_cold_snap'  || data.name === 'invoker_ghost_walk' || data.name === 'invoker_tornado' || 
+             data.name === 'invoker_emp' || data.name === 'invoker_alacrity' || data.name === 'invoker_chaos_meteor' || 
+             data.name === 'invoker_sun_strike' || data.name === 'invoker_forge_spirit' || data.name === 'invoker_ice_wall' || 
+             data.name === 'invoker_deafening_blast') {
         return 0;
     }
-    else if (data.name() === 'techies_minefield_sign' || data.name() === 'techies_focused_detonate') {
+    else if (data.name === 'techies_minefield_sign' || data.name === 'techies_focused_detonate') {
         return 0;
     }
     else {

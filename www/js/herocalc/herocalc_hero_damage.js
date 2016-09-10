@@ -285,14 +285,14 @@ my.prototype.HeroDamageMixin = function (self) {
         
         // weaver_geminate_attack
         if (self.heroId() === 'weaver') {
-            var a = self.ability().abilities().find(function (ability) {
-                return ability.name() === 'weaver_geminate_attack';
+            var a = self.ability().abilities.find(function (ability) {
+                return ability.name === 'weaver_geminate_attack';
             });
             if (a) {
                 if (a.level() > 0) {
-                    var cd = a.cooldown()[a.level() - 1];
+                    var cd = a.cooldown[a.level() - 1];
                     attackSources.push({
-                        name: a.displayname(),
+                        name: a.displayname,
                         cooldown: (1/cd)
                     });
                 }

@@ -46,14 +46,14 @@ my.prototype.UnitViewModel = function (h,p) {
         return my.prototype.unitData[self.selectedUnit().heroName()];
     });
     self.getAbilityLevelMax = function(data) {
-        if (data.abilitytype() == 'DOTA_ABILITY_TYPE_ATTRIBUTES') {
+        if (data.abilitytype == 'DOTA_ABILITY_TYPE_ATTRIBUTES') {
             return 10;
         }
-        else if (data.name() == 'necronomicon_archer_mana_burn' || data.name() == 'necronomicon_archer_aoe'
-            || data.name() == 'necronomicon_warrior_mana_burn' || data.name() == 'necronomicon_warrior_last_will') {
+        else if (data.name == 'necronomicon_archer_mana_burn' || data.name == 'necronomicon_archer_aoe'
+            || data.name == 'necronomicon_warrior_mana_burn' || data.name == 'necronomicon_warrior_last_will') {
             return 3;
         }
-        else if (data.name() == 'necronomicon_warrior_sight') {
+        else if (data.name == 'necronomicon_warrior_sight') {
             return 1;
         }
         else {
@@ -66,26 +66,26 @@ my.prototype.UnitViewModel = function (h,p) {
         switch (self.selectedUnit().heroName()) {
             case 'npc_dota_necronomicon_archer_1':
             case 'npc_dota_necronomicon_warrior_1':
-                a.abilities()[0].level(1);
-                a.abilities()[1].level(1);
+                a.abilities[0].level(1);
+                a.abilities[1].level(1);
             break;
             case 'npc_dota_necronomicon_archer_2':
             case 'npc_dota_necronomicon_warrior_2':
-                a.abilities()[0].level(2);
-                a.abilities()[1].level(2);
+                a.abilities[0].level(2);
+                a.abilities[1].level(2);
             break;
             case 'npc_dota_necronomicon_archer_3':
-                a.abilities()[0].level(3);
-                a.abilities()[1].level(3);
+                a.abilities[0].level(3);
+                a.abilities[1].level(3);
             break;
             case 'npc_dota_necronomicon_warrior_3':
-                a.abilities()[0].level(3);
-                a.abilities()[1].level(3);
-                a.abilities()[2].level(1);
+                a.abilities[0].level(3);
+                a.abilities[1].level(3);
+                a.abilities[2].level(1);
             break;
         }
         a.levelUpAbility = function(index, data, event, hero) {
-            switch (a.abilities()[index()].name()) {
+            switch (a.abilities[index()].name) {
                 case 'necronomicon_archer_mana_burn':
                 case 'necronomicon_archer_aoe':
                 case 'necronomicon_warrior_mana_burn':
@@ -93,15 +93,15 @@ my.prototype.UnitViewModel = function (h,p) {
                 case 'necronomicon_warrior_sight':
                 break;
                 default:
-                    if (a.abilities()[index()].level() < hero.getAbilityLevelMax(data)) {
-                        a.abilities()[index()].level(a.abilities()[index()].level()+1);
+                    if (a.abilities[index()].level() < hero.getAbilityLevelMax(data)) {
+                        a.abilities[index()].level(a.abilities[index()].level()+1);
                     }                    
                 break;
             }
 
         };
         a.levelDownAbility = function(index, data, event, hero) {            
-            switch (a.abilities()[index()].name()) {
+            switch (a.abilities[index()].name) {
                 case 'necronomicon_archer_mana_burn':
                 case 'necronomicon_archer_aoe':
                 case 'necronomicon_warrior_mana_burn':
@@ -109,8 +109,8 @@ my.prototype.UnitViewModel = function (h,p) {
                 case 'necronomicon_warrior_sight':
                 break;
                 default:
-                    if (a.abilities()[index()].level()>0) {
-                        a.abilities()[index()].level(a.abilities()[index()].level()-1);
+                    if (a.abilities[index()].level()>0) {
+                        a.abilities[index()].level(a.abilities[index()].level()-1);
                     }
                 break;
             }
