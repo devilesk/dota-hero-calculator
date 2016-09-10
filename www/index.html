@@ -278,7 +278,7 @@
         <div class="pull-left" style="width:50px;height:50px;position:relative;border:1px solid black;">
             <div style="position:absolute;bottom:0;right:0;background-color:white;color:black;opacity:.8" data-bind="text: $index() + 1"></div>
             <!-- ko if: $data != -1 -->
-            <img class="img-rounded" data-bind="attr:{src: '/media/images/spellicons/' + $parents[3].ability().abilities()[$data].name() + '.png'}"/>
+            <img class="img-rounded" data-bind="attr:{src: '/media/images/spellicons/' + $parents[3].ability().abilities()[$data].name + '.png'}"/>
             <!-- /ko -->
             <!-- ko if: $data == -1 -->
             
@@ -320,15 +320,15 @@
 </script>
 
 <script type="text/html" id="ability-2-template">
-    <div data-bind="if: $data.displayname() != 'Empty' &&  ($data.behavior().indexOf('DOTA_ABILITY_BEHAVIOR_HIDDEN') == -1 || $data.name().indexOf('invoker_') != -1),
-        style: {clear: $data.name() == 'invoker_cold_snap' || $data.name() == 'invoker_chaos_meteor' ? 'both' : ''}, css: {row: $data.isDetail() || ($index() < $parent.ability().abilities().length-1 && $parent.ability().abilities()[$index()+1].isDetail()), row3: $data.isDetail() || ($index() < $parent.ability().abilities().length-1 && $parent.ability().abilities()[$index()+1].isDetail()) }">
+    <div data-bind="if: $data.displayname != 'Empty' &&  ($data.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_HIDDEN') == -1 || $data.name.indexOf('invoker_') != -1),
+        style: {clear: $data.name == 'invoker_cold_snap' || $data.name == 'invoker_chaos_meteor' ? 'both' : ''}, css: {row: $data.isDetail() || ($index() < $parent.ability().abilities().length-1 && $parent.ability().abilities()[$index()+1].isDetail()), row3: $data.isDetail() || ($index() < $parent.ability().abilities().length-1 && $parent.ability().abilities()[$index()+1].isDetail()) }">
         <div class="col-md-2 text-center bottom-buffer row2">
-            <img style="padding:0px;margin-bottom:1px;" class="img-rounded ability" data-bind="css: { ability_active: $data.isActive() || $data.behavior().indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1, ability_inactive: !$data.isActive() && $data.behavior().indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') == -1, btn: $data.behavior().indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') == -1, 'btn-default': $data.behavior().indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') == -1}, attr:{src: '/media/images/spellicons/' + $data.name() + '.png'}, click: function(data, event) { $parent.ability().toggleAbility($index, data, event); }"/>
+            <img style="padding:0px;margin-bottom:1px;" class="img-rounded ability" data-bind="css: { ability_active: $data.isActive() || $data.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1, ability_inactive: !$data.isActive() && $data.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') == -1, btn: $data.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') == -1, 'btn-default': $data.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') == -1}, attr:{src: '/media/images/spellicons/' + $data.name + '.png'}, click: function(data, event) { $parent.ability().toggleAbility($index, data, event); }"/>
             <div class="progress" style="position:relative">
                 <div style="position:absolute;width:100%;color:white;" class="text-center" data-bind="visible: $parent.getAbilityLevelMax($data) > 0, text: $data.level() + '/' + $parent.getAbilityLevelMax($data)"></div>
                 <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;" data-bind="attr: { 'aria-valuenow': ($parent.getAbilityLevelMax($data) > 0 ? $data.level()/$parent.getAbilityLevelMax($data)*100 : 0) }, style: { width: ($parent.getAbilityLevelMax($data) > 0 ? $data.level()/$parent.getAbilityLevelMax($data)*100 : 0) + '%' }"></div>
             </div>
-            <div class="btn-group btn-group-justified" data-bind="if: $data.behavior().indexOf('DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE') == -1">
+            <div class="btn-group btn-group-justified" data-bind="if: $data.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE') == -1">
                 <a class="btn btn-default btn-sm" data-bind="click: function(data, event) { $parent.ability().levelDownAbility($index, data, event, $parent); }">-</a>
                 <a class="btn btn-default btn-sm" data-bind="click: function(data, event) { $parent.ability().levelUpAbility($index, data, event, $parent); }">+</a>
             </div>
@@ -338,10 +338,10 @@
         </div>
         <div class="col-md-10 bottom-buffer" data-bind="visible: $data.isDetail()">
             <button type="button" class="close" data-bind="click: function(data, event) { $parent.ability().toggleAbilityDetail($index, data, event); }">&times;</button>
-            <div data-bind="html: $parent.ability().getAbilityTooltipData($parent.hero().name(), $data.name())"></div>
-            <div data-bind="if: $data.name() in $parent.ability().abilityData && $parent.ability().abilities()[$index()].level() > 0">
+            <div data-bind="html: $parent.ability().getAbilityTooltipData($parent.hero().name, $data.name)"></div>
+            <div data-bind="if: $data.name in $parent.ability().abilityData && $parent.ability().abilities()[$index()].level() > 0">
                 <div class="col-md-8">
-                    <div data-bind="template: { name: 'ability-settings-template', data: $parent.ability().abilitySettingsData($data.name(), $parent, $index()) }"></div>
+                    <div data-bind="template: { name: 'ability-settings-template', data: $parent.ability().abilitySettingsData($data.name, $parent, $index()) }"></div>
                 </div>
             </div>
         </div>
@@ -349,11 +349,11 @@
 </script>
 
 <script type="text/html" id="ability-3-template">
-    <tr class="row row3" data-bind="if: $data.displayname() != 'Empty' &&  ($data.behavior().indexOf('DOTA_ABILITY_BEHAVIOR_HIDDEN') == -1 || $data.name().indexOf('invoker_') != -1) && $data.behavior().indexOf('DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE') == -1,
-    style: {clear: $data.name() == 'invoker_cold_snap' || $data.name() == 'invoker_chaos_meteor' ? 'both' : ''}">
+    <tr class="row row3" data-bind="if: $data.displayname != 'Empty' &&  ($data.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_HIDDEN') == -1 || $data.name.indexOf('invoker_') != -1) && $data.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE') == -1,
+    style: {clear: $data.name == 'invoker_cold_snap' || $data.name == 'invoker_chaos_meteor' ? 'both' : ''}">
         <td style="padding-bottom:10px;">
             <div style="width:80px;">
-                <img style="padding:0px;margin-bottom:1px;" class="img-rounded" data-bind="attr:{src: '/media/images/spellicons/' + $data.name() + '.png'}"/>
+                <img style="padding:0px;margin-bottom:1px;" class="img-rounded" data-bind="attr:{src: '/media/images/spellicons/' + $data.name + '.png'}"/>
                 <div class="progress" style="position:relative">
                     <div style="position:absolute;width:100%;color:white;" class="text-center" data-bind="visible: $parent.getAbilityLevelMax($data) > 0, text: $parent.buildExplorer.getSkillBuildAbilityLevel($index()) + '/' + $parent.getAbilityLevelMax($data)"></div>
                     <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;" data-bind="attr: { 'aria-valuenow': ($parent.getAbilityLevelMax($data) > 0 ? $parent.buildExplorer.getSkillBuildAbilityLevel($index())/$parent.getAbilityLevelMax($data)*100 : 0) }, style: { width: ($parent.getAbilityLevelMax($data) > 0 ? $parent.buildExplorer.getSkillBuildAbilityLevel($index())/$parent.getAbilityLevelMax($data)*100 : 0) + '%' }"></div>
