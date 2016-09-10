@@ -37,98 +37,98 @@ my.prototype.DamageAmpViewModel = function (a) {
         }
         else {
             var ability = a.data;
-            return self.getAbilityAttributeValue(ability.attributes(), attributeName, ability.level());
+            return self.getAbilityAttributeValue(ability.attributes, attributeName, ability.level());
         }
     }
     
     self.getDamageMultiplierSources = ko.computed(function () {
         var sources = {};
-        for (var i = 0; i < self.abilities().length; i++) {
-            var ability = self.abilities()[i];
-                if (ability.level() > 0 && (ability.isActive() || (ability.behavior().indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
-                    switch (ability.name()) {
+        for (var i = 0; i < self.abilities.length; i++) {
+            var ability = self.abilities[i];
+                if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
+                    switch (ability.name) {
                         case 'bristleback_bristleback':
-                            sources[ability.name()] = {
+                            sources[ability.name] = {
                                 'multiplier': ability.damageReduction() / 100,
                                 'damageType': 'physical',
-                                'displayname': ability.displayname()
+                                'displayname': ability.displayname
                             }
                         break;
                         case 'slardar_sprint':
-                            sources[ability.name()] = {
-                                'multiplier': self.getAbilityAttributeValue(ability.attributes(), 'bonus_damage', ability.level()) / 100,
+                            sources[ability.name] = {
+                                'multiplier': self.getAbilityAttributeValue(ability.attributes, 'bonus_damage', ability.level()) / 100,
                                 'damageType': 'physical',
-                                'displayname': ability.displayname()
+                                'displayname': ability.displayname
                             }
                         break;
                         case 'undying_flesh_golem':
-                            sources[ability.name()] = {
+                            sources[ability.name] = {
                                 'multiplier': ability.damageAmplification() / 100,
                                 'damageType': 'physical',
-                                'displayname': ability.displayname()
+                                'displayname': ability.displayname
                             }
                         break;
                         case 'medusa_stone_gaze':
-                            sources[ability.name()] = {
-                                'multiplier': self.getAbilityAttributeValue(ability.attributes(), 'bonus_physical_damage', ability.level()) / 100,
+                            sources[ability.name] = {
+                                'multiplier': self.getAbilityAttributeValue(ability.attributes, 'bonus_physical_damage', ability.level()) / 100,
                                 'damageType': 'physical',
-                                'displayname': ability.displayname()
+                                'displayname': ability.displayname
                             }
                         break;
                         case 'chen_penitence':
-                            sources[ability.name()] = {
-                                'multiplier': self.getAbilityAttributeValue(ability.attributes(), 'bonus_damage_taken', ability.level()) / 100,
+                            sources[ability.name] = {
+                                'multiplier': self.getAbilityAttributeValue(ability.attributes, 'bonus_damage_taken', ability.level()) / 100,
                                 'damageType': 'physical',
-                                'displayname': ability.displayname()
+                                'displayname': ability.displayname
                             }
                         break;
                         case 'shadow_demon_soul_catcher':
-                            sources[ability.name()] = {
-                                'multiplier': self.getAbilityAttributeValue(ability.attributes(), 'bonus_damage_taken', ability.level()) / 100,
+                            sources[ability.name] = {
+                                'multiplier': self.getAbilityAttributeValue(ability.attributes, 'bonus_damage_taken', ability.level()) / 100,
                                 'damageType': 'pure',
-                                'displayname': ability.displayname()
+                                'displayname': ability.displayname
                             }
                         break;
                         case 'medusa_mana_shield':
-                            sources[ability.name()] = {
+                            sources[ability.name] = {
                                 'multiplier': ability.damageReduction() / 100,
                                 'damageType': 'physical',
-                                'displayname': ability.displayname()
+                                'displayname': ability.displayname
                             }                            
                         break;
                         case 'spectre_dispersion':
-                            sources[ability.name()] = {
-                                'multiplier': -self.getAbilityAttributeValue(ability.attributes(), 'damage_reflection_pct', ability.level()) / 100,
+                            sources[ability.name] = {
+                                'multiplier': -self.getAbilityAttributeValue(ability.attributes, 'damage_reflection_pct', ability.level()) / 100,
                                 'damageType': 'percentreduction',
-                                'displayname': ability.displayname()
+                                'displayname': ability.displayname
                             }                                
                         break;
                         case 'abaddon_aphotic_shield':
-                            sources[ability.name()] = {
-                                'multiplier': self.getAbilityAttributeValue(ability.attributes(), 'damage_absorb', ability.level()),
+                            sources[ability.name] = {
+                                'multiplier': self.getAbilityAttributeValue(ability.attributes, 'damage_absorb', ability.level()),
                                 'damageType': 'flatreduction',
-                                'displayname': ability.displayname()
+                                'displayname': ability.displayname
                             }                                
                         break;
                         case 'kunkka_ghostship':
-                            sources[ability.name()] = {
+                            sources[ability.name] = {
                                 'multiplier': -50 / 100,
                                 'damageType': 'percentreduction',
-                                'displayname': ability.displayname()
+                                'displayname': ability.displayname
                             }                                
                         break;
                         case 'wisp_overcharge':
-                            sources[ability.name()] = {
-                                'multiplier': self.getAbilityAttributeValue(ability.attributes(), 'bonus_damage_pct', ability.level()) / 100,
+                            sources[ability.name] = {
+                                'multiplier': self.getAbilityAttributeValue(ability.attributes, 'bonus_damage_pct', ability.level()) / 100,
                                 'damageType': 'percentreduction',
-                                'displayname': ability.displayname()
+                                'displayname': ability.displayname
                             }                                
                         break;
                         /*case 'faceless_void_backtrack':
-                            sources[ability.name()] = {
-                                'multiplier': -self.getAbilityAttributeValue(ability.attributes(), 'dodge_chance_pct', ability.level()) / 100,
+                            sources[ability.name] = {
+                                'multiplier': -self.getAbilityAttributeValue(ability.attributes, 'dodge_chance_pct', ability.level()) / 100,
                                 'damageType': 'percentreduction',
-                                'displayname': ability.displayname()
+                                'displayname': ability.displayname
                             }                                
                         break;*/
                     }

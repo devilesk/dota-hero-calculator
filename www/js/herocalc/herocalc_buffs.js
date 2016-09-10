@@ -37,7 +37,7 @@ my.prototype.ItemBuffOption = function (item) {
 };
 
 my.prototype.BuffViewModel = function (a) {
-    var self = new my.prototype.AbilityModel(ko.observableArray([]));
+    var self = new my.prototype.AbilityModel([]);
     self.availableBuffs = ko.observableArray(my.prototype.availableBuffs);
     self.availableDebuffs = ko.observableArray(my.prototype.availableDebuffs);
     self.selectedBuff = ko.observable(self.availableBuffs()[0]);
@@ -47,7 +47,8 @@ my.prototype.BuffViewModel = function (a) {
     
     self.addBuff = function (data, event) {
         if (my.prototype.findWhere(self.buffs(), { name: self.selectedBuff().buffName })  == undefined) {
-            var a = ko.wrap.fromJS(self.selectedBuff().abilityData);
+            var a = JSON.parse(JSON.stringify(self.selectedBuff().abilityData));
+            a.level = ko.observable(0);
             a.isActive = ko.observable(false);
             a.isDetail = ko.observable(false);
             a.baseDamage = ko.observable(0);
@@ -135,6 +136,7 @@ my.prototype.BuffViewModel = function (a) {
             }
             else {
                 self.buffs()[index()].data.isActive(true);
+                console.log(self.abilities, index(), self.abilities[index()]);
                 self.abilities[index()].isActive(true);
             }
         }

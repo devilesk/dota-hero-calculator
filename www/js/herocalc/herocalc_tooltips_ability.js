@@ -51,6 +51,7 @@ var getTooltipAbilityDescription = function (item) {
 }
 
 var getTooltipAbilityAttributes = function (item) {
+    console.log('getTooltipAbilityAttributes', item);
     var a = '';
     if (item.damage.length > 0 && item.damage.reduce(function(memo, num){ return memo + num; }, 0) > 0) {
         var attributeTooltip = 'DAMAGE: ';
@@ -123,6 +124,7 @@ var getTooltipAbilityCooldown = function (item) {
 }
     
 var getAbilityTooltipData = function(heroData, unitData, hero, el) {
+    console.log('getAbilityTooltipData', heroData, unitData, hero, el);
     if (abilityTooltipData[el] == undefined) {
         var abilityName = el
         var ability = {};

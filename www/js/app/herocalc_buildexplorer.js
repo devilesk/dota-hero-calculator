@@ -9,7 +9,7 @@ my.prototype.GraphPropertyOption = function (id, label) {
 };
 
 my.prototype.AbilityModel.prototype.isQWER = function (ability) {
-    return (ability.displayname() != 'Empty' &&  (ability.behavior().indexOf('DOTA_ABILITY_BEHAVIOR_HIDDEN') == -1 || ability.name().indexOf('invoker_') != -1) && ability.behavior().indexOf('DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE') == -1)
+    return (ability.displayname != 'Empty' &&  (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_HIDDEN') == -1 || ability.name.indexOf('invoker_') != -1) && ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE') == -1)
 }
 
 my.prototype.BuildExplorerViewModel = function (h) {
@@ -34,7 +34,7 @@ var self = this;
     self.abilityMap = ko.computed(function () {
         if (self.abilityMapHero == self.parent.selectedHero().heroName) return;
         self.abilityMapHero = self.parent.selectedHero().heroName;
-        var newMap = self.parent.ability().abilities().map(function(ability, index) {
+        var newMap = self.parent.ability().abilities.map(function(ability, index) {
             if (self.parent.ability().isQWER(ability)) {
                 return index;
             }
@@ -63,8 +63,8 @@ var self = this;
     };
     self.toggleAbilitySkillBuild = function (index, abilityIndex, data, event) {
         if (self.skillBuild()[index]() != abilityIndex) {
-            var ability = self.parent.ability().abilities()[abilityIndex],
-                abilityType = ability.abilitytype(),
+            var ability = self.parent.ability().abilities[abilityIndex],
+                abilityType = ability.abilitytype,
                 skillBuildSlice = self.skillBuild().slice(0, index),
                 currentAbilityLevel = self.skillBuild().reduce(function(memo, num){ return memo + (num() == abilityIndex); }, 0),
                 n = skillBuildSlice.reduce(function(memo, num){ return memo + (num() == abilityIndex); }, 0);
@@ -97,11 +97,11 @@ var self = this;
     };
     self.IsValidAbilityLevel = function (ability, heroName, heroLevel, abilityLevel) {
         var a = 1, b = 2, m = 4;
-        if (ability.name() == 'attribute_bonus') {
+        if (ability.name == 'attribute_bonus') {
             m = 10;
         }
         else {
-            if (ability.abilitytype() == 'DOTA_ABILITY_TYPE_ULTIMATE') {
+            if (ability.abilitytype == 'DOTA_ABILITY_TYPE_ULTIMATE') {
                 if (heroName == 'invoker') {
                     a = 2;
                     b = 5;
@@ -171,14 +171,14 @@ var self = this;
             carryOverItems = [],
             carryOverActiveItems = [],
             dataset = [];
-        for (var i = 0; i < self.parent.ability().abilities().length; i++) {
-            savedAbilityLevels.push(self.parent.ability().abilities()[i].level());
+        for (var i = 0; i < self.parent.ability().abilities.length; i++) {
+            savedAbilityLevels.push(self.parent.ability().abilities[i].level());
         }
         for (var i = 1; i < 26; i++) {
             self.parent.selectedHeroLevel(i);
             var skillBuildSubset = s.slice(0, i);
-            for (var j = 0; j < self.parent.ability().abilities().length; j++) {
-                var a = self.parent.ability().abilities()[j],
+            for (var j = 0; j < self.parent.ability().abilities.length; j++) {
+                var a = self.parent.ability().abilities[j],
                     count = skillBuildSubset.reduce(function(memo, num) {
                         return memo + (num == j);
                     }, 0);
@@ -244,8 +244,8 @@ var self = this;
 
         self.graphData.push(data);
         self.parent.selectedHeroLevel(savedLevel);
-        for (var i = 0; i < self.parent.ability().abilities().length; i++) {
-            self.parent.ability().abilities()[i].level(savedAbilityLevels[i]);
+        for (var i = 0; i < self.parent.ability().abilities.length; i++) {
+            self.parent.ability().abilities[i].level(savedAbilityLevels[i]);
         }
         self.parent.inventory.items(savedItems);
         self.parent.inventory.activeItems(savedActiveItems);

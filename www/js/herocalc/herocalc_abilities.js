@@ -225,7 +225,7 @@ my.prototype.AbilityModel = function (a, h) {
         for (var i=0; i<attributes.length; i++) {
             if (attributes[i].name == attributeName) {
                 if (attributes[i].hasOwnProperty('tooltip')) {
-                    var d = attributes[i].tooltip().replace(/\\n/g, '');
+                    var d = attributes[i].tooltip.replace(/\\n/g, '');
                     return d;
                 }
                 else {
@@ -756,6 +756,7 @@ my.prototype.AbilityModel = function (a, h) {
     });
     
     self.getAttackSpeed = ko.computed(function () {
+        console.log('getAttackSpeed', self.abilities);
         var totalAttribute = 0;
         for (var i = 0; i < self.abilities.length; i++) {
             var ability = self.abilities[i];
@@ -802,6 +803,7 @@ my.prototype.AbilityModel = function (a, h) {
                                  || ability.name == 'windrunner_focusfire' 
                                  || ability.name == 'ogre_magi_bloodlust'
                                  || ability.name == 'centaur_khan_endurance_aura') {
+                                    console.log('beastmaster_inner_beast', self.abilities[i].attributes, attribute.name, ability.level());
                                     totalAttribute += self.getAbilityAttributeValue(self.abilities[i].attributes, attribute.name, ability.level());
                                 }
                             break;
