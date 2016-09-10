@@ -285,7 +285,7 @@ my.prototype.HeroDamageMixin = function (self) {
         
         // weaver_geminate_attack
         if (self.heroId() === 'weaver') {
-            var a = self.ability().abilities.find(function (ability) {
+            var a = self.ability().abilities().find(function (ability) {
                 return ability.name === 'weaver_geminate_attack';
             });
             if (a) {

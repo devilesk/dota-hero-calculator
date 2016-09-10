@@ -298,7 +298,7 @@ my.prototype.abilityData = {
             ignoreTooltip: true,
             controlType: 'text',
             fn: function (v, a, parent, index, abilityModel, ability) {
-                var ability = abilityModel.abilities.find(function(b) {
+                var ability = abilityModel.abilities().find(function(b) {
                     return b.name == 'bristleback_bristleback';
                 });
                 if (v == 'back') {
@@ -1525,7 +1525,7 @@ my.prototype.abilityData = {
             label: 'Total Damage',
             controlType: 'text',
             fn: function (v, a, parent, index, abilityModel, ability) {
-                var lucentBeamAbility = abilityModel.abilities.find(function(b) {
+                var lucentBeamAbility = abilityModel.abilities().find(function(b) {
                     return b.name == 'luna_lucent_beam';
                 });
                 if (lucentBeamAbility.level() == 0) return 0;
@@ -2967,7 +2967,7 @@ my.prototype.abilityData = {
             label: 'Total Damage',
             controlType: 'text',
             fn: function (v, a, parent, index, abilityModel, ability) {
-                var enrageAbility = abilityModel.abilities.find(function(b) {
+                var enrageAbility = abilityModel.abilities().find(function(b) {
                     return b.name == 'ursa_enrage';
                 });
                 if (enrageAbility.isActive() && enrageAbility.level() > 0) {

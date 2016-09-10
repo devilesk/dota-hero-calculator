@@ -85,13 +85,13 @@ my.prototype.HeroModel = function (h) {
     self.skillPointHistory = ko.observableArray();
     
     self.ability = ko.computed(function () {
-        var a = new my.prototype.AbilityModel(JSON.parse(JSON.stringify(self.heroData().abilities)), self);
+        var a = new my.prototype.AbilityModel(ko.observableArray(JSON.parse(JSON.stringify(self.heroData().abilities))), self);
         if (self.heroId() === 'earth_spirit' || self.heroId() === 'ogre_magi') {
-            a.abilities[3].level(1);
+            a.abilities()[3].level(1);
         }
         else if (self.heroId() === 'invoker') {
             for (var i = 6; i < 16; i++) {
-                a.abilities[i].level(1);
+                a.abilities()[i].level(1);
             }
         }
         self.skillPointHistory.removeAll();
@@ -101,35 +101,35 @@ my.prototype.HeroModel = function (h) {
 
     self.availableSkillPoints = ko.computed(function () {
         var c = self.selectedHeroLevel();
-        for (var i = 0; i < self.ability().abilities.length; i++) {
+        for (var i = 0; i < self.ability().abilities().length; i++) {
             var getIndex = function () {
                 return i;
             };
-            switch(self.ability().abilities[i].abilitytype) {
+            switch(self.ability().abilities()[i].abilitytype) {
                 case 'DOTA_ABILITY_TYPE_ULTIMATE':
                     if (self.heroId() === 'invoker') {
                         while (
-                            ((self.ability().abilities[i].level() == 1) && (parseInt(self.selectedHeroLevel()) < 2)) ||
-                            ((self.ability().abilities[i].level() == 2) && (parseInt(self.selectedHeroLevel()) < 7)) ||
-                            ((self.ability().abilities[i].level() == 3) && (parseInt(self.selectedHeroLevel()) < 11)) ||
-                            ((self.ability().abilities[i].level() == 4) && (parseInt(self.selectedHeroLevel()) < 17))
+                            ((self.ability().abilities()[i].level() == 1) && (parseInt(self.selectedHeroLevel()) < 2)) ||
+                            ((self.ability().abilities()[i].level() == 2) && (parseInt(self.selectedHeroLevel()) < 7)) ||
+                            ((self.ability().abilities()[i].level() == 3) && (parseInt(self.selectedHeroLevel()) < 11)) ||
+                            ((self.ability().abilities()[i].level() == 4) && (parseInt(self.selectedHeroLevel()) < 17))
                         ) {
                             self.ability().levelDownAbility(getIndex, null, null, self);
                         }
                     }
                     else if (self.heroId() === 'meepo') {
-                        while ((self.ability().abilities[i].level()-1) * 7 + 3 > parseInt(self.selectedHeroLevel())) {
+                        while ((self.ability().abilities()[i].level()-1) * 7 + 3 > parseInt(self.selectedHeroLevel())) {
                             self.ability().levelDownAbility(getIndex, null, null, self);
                         }
                     }
                     else {
-                        while (self.ability().abilities[i].level() * 5 + 1 > parseInt(self.selectedHeroLevel())) {
+                        while (self.ability().abilities()[i].level() * 5 + 1 > parseInt(self.selectedHeroLevel())) {
                             self.ability().levelDownAbility(getIndex, null, null, self);
                         }
                     }
                 break;
                 default:
-                    while (self.ability().abilities[i].level() * 2 - 1 > parseInt(self.selectedHeroLevel())) {
+                    while (self.ability().abilities()[i].level() * 2 - 1 > parseInt(self.selectedHeroLevel())) {
                         self.ability().levelDownAbility(getIndex, null, null, self);
                     }
                 break;

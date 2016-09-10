@@ -101,7 +101,7 @@
         <div class="row">
             <div class="col-md-12">
                 <h3 class="section_header" data-bind="toggle: sectionDisplay().ability, css: { section_disabled: !sectionDisplay().ability() }">Abilities <small style="color:inherit" data-bind="text: availableSkillPoints() ? (availableSkillPoints() == 1 ? '1 unspent skillpoint' : availableSkillPoints() + ' unspent skillpoints') : ''"></small></h3>
-                <div class="row" data-bind="visible: sectionDisplay().ability(), foreach: ability().abilities">
+                <div class="row" data-bind="visible: sectionDisplay().ability(), foreach: ability().abilities()">
                     <div data-bind="component: { name: 'ability', params: $data }"></div>
                 </div>
                 <div class="form-horizontal" data-bind="if: selectedHero().heroName == 'silencer', visible: sectionDisplay().ability()">

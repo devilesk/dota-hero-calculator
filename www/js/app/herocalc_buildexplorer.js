@@ -34,7 +34,7 @@ var self = this;
     self.abilityMap = ko.computed(function () {
         if (self.abilityMapHero == self.parent.selectedHero().heroName) return;
         self.abilityMapHero = self.parent.selectedHero().heroName;
-        var newMap = self.parent.ability().abilities.map(function(ability, index) {
+        var newMap = self.parent.ability().abilities().map(function(ability, index) {
             if (self.parent.ability().isQWER(ability)) {
                 return index;
             }
@@ -63,7 +63,7 @@ var self = this;
     };
     self.toggleAbilitySkillBuild = function (index, abilityIndex, data, event) {
         if (self.skillBuild()[index]() != abilityIndex) {
-            var ability = self.parent.ability().abilities[abilityIndex],
+            var ability = self.parent.ability().abilities()[abilityIndex],
                 abilityType = ability.abilitytype,
                 skillBuildSlice = self.skillBuild().slice(0, index),
                 currentAbilityLevel = self.skillBuild().reduce(function(memo, num){ return memo + (num() == abilityIndex); }, 0),
@@ -171,14 +171,14 @@ var self = this;
             carryOverItems = [],
             carryOverActiveItems = [],
             dataset = [];
-        for (var i = 0; i < self.parent.ability().abilities.length; i++) {
-            savedAbilityLevels.push(self.parent.ability().abilities[i].level());
+        for (var i = 0; i < self.parent.ability().abilities().length; i++) {
+            savedAbilityLevels.push(self.parent.ability().abilities()[i].level());
         }
         for (var i = 1; i < 26; i++) {
             self.parent.selectedHeroLevel(i);
             var skillBuildSubset = s.slice(0, i);
-            for (var j = 0; j < self.parent.ability().abilities.length; j++) {
-                var a = self.parent.ability().abilities[j],
+            for (var j = 0; j < self.parent.ability().abilities().length; j++) {
+                var a = self.parent.ability().abilities()[j],
                     count = skillBuildSubset.reduce(function(memo, num) {
                         return memo + (num == j);
                     }, 0);
@@ -244,8 +244,8 @@ var self = this;
 
         self.graphData.push(data);
         self.parent.selectedHeroLevel(savedLevel);
-        for (var i = 0; i < self.parent.ability().abilities.length; i++) {
-            self.parent.ability().abilities[i].level(savedAbilityLevels[i]);
+        for (var i = 0; i < self.parent.ability().abilities().length; i++) {
+            self.parent.ability().abilities()[i].level(savedAbilityLevels[i]);
         }
         self.parent.inventory.items(savedItems);
         self.parent.inventory.activeItems(savedActiveItems);

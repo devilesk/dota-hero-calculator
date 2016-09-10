@@ -43,8 +43,8 @@ my.prototype.DamageAmpViewModel = function (a) {
     
     self.getDamageMultiplierSources = ko.computed(function () {
         var sources = {};
-        for (var i = 0; i < self.abilities.length; i++) {
-            var ability = self.abilities[i];
+        for (var i = 0; i < self.abilities().length; i++) {
+            var ability = self.abilities()[i];
                 if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
                     switch (ability.name) {
                         case 'bristleback_bristleback':

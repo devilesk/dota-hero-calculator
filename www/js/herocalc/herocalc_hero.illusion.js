@@ -106,7 +106,7 @@ my.prototype.illusionData = {
 }
 
 my.prototype.IllusionViewModel = function (h, p, abilityLevel) {
-    var self = new my.prototype.HeroModel(0);
+    var self = new my.prototype.HeroCalculatorModel(0);
     self.parent = p;
     self.inventory = self.parent.inventory;
     self.illusionType = ko.observable(self.parent.selectedIllusion().illusionName);

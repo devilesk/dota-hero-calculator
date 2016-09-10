@@ -37,7 +37,7 @@ my.prototype.ItemBuffOption = function (item) {
 };
 
 my.prototype.BuffViewModel = function (a) {
-    var self = new my.prototype.AbilityModel([]);
+    var self = new my.prototype.AbilityModel(ko.observableArray([]));
     self.availableBuffs = ko.observableArray(my.prototype.availableBuffs);
     self.availableDebuffs = ko.observableArray(my.prototype.availableDebuffs);
     self.selectedBuff = ko.observable(self.availableBuffs()[0]);
@@ -119,10 +119,10 @@ my.prototype.BuffViewModel = function (a) {
                     }
                     self.abilityControlData[abilityName] = undefined;
                 }
-                for (var i = 0; i < self.abilities.length; i++) {
-                    if (self.abilities[i].name == abilityName) {
-                        self.abilities[i].level(0);
-                        self.abilities.remove(self.abilities[i]);
+                for (var i = 0; i < self.abilities().length; i++) {
+                    if (self.abilities()[i].name == abilityName) {
+                        self.abilities()[i].level(0);
+                        self.abilities.remove(self.abilities()[i]);
                         break;
                     }
                 }
@@ -132,12 +132,11 @@ my.prototype.BuffViewModel = function (a) {
         if (self.buffs()[index()].data.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') < 0) {
             if (self.buffs()[index()].data.isActive()) {
                 self.buffs()[index()].data.isActive(false);
-                self.abilities[index()].isActive(false);
+                self.abilities()[index()].isActive(false);
             }
             else {
                 self.buffs()[index()].data.isActive(true);
-                console.log(self.abilities, index(), self.abilities[index()]);
-                self.abilities[index()].isActive(true);
+                self.abilities()[index()].isActive(true);
             }
         }
     }.bind(this);
@@ -153,76 +152,76 @@ my.prototype.BuffViewModel = function (a) {
 
     // Overrides the ability module function to remove available skill point check
     self.levelUpAbility = function (index, data, event, hero) {
-        if (self.abilities[index()].level() < hero.getAbilityLevelMax(data)) {
-            switch(self.abilities[index()].abilitytype) {
+        if (self.abilities()[index()].level() < hero.getAbilityLevelMax(data)) {
+            switch(self.abilities()[index()].abilitytype) {
                 case 'DOTA_ABILITY_TYPE_ULTIMATE':
-                    self.abilities[index()].level(self.abilities[index()].level() + 1);
+                    self.abilities()[index()].level(self.abilities()[index()].level() + 1);
                 break;
                 default:
-                    self.abilities[index()].level(self.abilities[index()].level() + 1);
+                    self.abilities()[index()].level(self.abilities()[index()].level() + 1);
                 break;
             }
-            switch (self.abilities[index()].name) {
+            switch (self.abilities()[index()].name) {
                 case 'beastmaster_call_of_the_wild':
                 case 'chen_test_of_faith':
                 case 'morphling_morph_agi':
                 case 'shadow_demon_shadow_poison':
-                    self.abilities[index() + 1].level(self.abilities[index()].level());
+                    self.abilities()[index() + 1].level(self.abilities()[index()].level());
                 break;
                 case 'morphling_morph_str':
-                    self.abilities[index() - 1].level(self.abilities[index()].level());
+                    self.abilities()[index() - 1].level(self.abilities()[index()].level());
                 break;
                 case 'keeper_of_the_light_spirit_form':
-                    self.abilities[index() - 1].level(self.abilities[index()].level());
-                    self.abilities[index() - 2].level(self.abilities[index()].level());
+                    self.abilities()[index() - 1].level(self.abilities()[index()].level());
+                    self.abilities()[index() - 2].level(self.abilities()[index()].level());
                 case 'nevermore_shadowraze1':
-                    self.abilities[index() + 1].level(self.abilities[index()].level());
-                    self.abilities[index() + 2].level(self.abilities[index()].level());
+                    self.abilities()[index() + 1].level(self.abilities()[index()].level());
+                    self.abilities()[index() + 2].level(self.abilities()[index()].level());
                 break;
                 case 'nevermore_shadowraze2':
-                    self.abilities[index() - 1].level(self.abilities[index()].level());
-                    self.abilities[index() + 1].level(self.abilities[index()].level());
+                    self.abilities()[index() - 1].level(self.abilities()[index()].level());
+                    self.abilities()[index() + 1].level(self.abilities()[index()].level());
                 break;
                 case 'nevermore_shadowraze3':
-                    self.abilities[index() - 1].level(self.abilities[index()].level());
-                    self.abilities[index() - 2].level(self.abilities[index()].level());
+                    self.abilities()[index() - 1].level(self.abilities()[index()].level());
+                    self.abilities()[index() - 2].level(self.abilities()[index()].level());
                 break;
             }
         }
     };
     self.levelDownAbility = function (index, data, event, hero) {
-        if (self.abilities[index()].level() > 0) {
-            self.abilities[index()].level(self.abilities[index()].level() - 1);
-            switch (self.abilities[index()].name) {
+        if (self.abilities()[index()].level() > 0) {
+            self.abilities()[index()].level(self.abilities()[index()].level() - 1);
+            switch (self.abilities()[index()].name) {
                 case 'beastmaster_call_of_the_wild':
                 case 'chen_test_of_faith':
                 case 'morphling_morph_agi':
                 case 'shadow_demon_shadow_poison':
-                    self.abilities[index() + 1].level(self.abilities[index()].level());
+                    self.abilities()[index() + 1].level(self.abilities()[index()].level());
                 break;
                 case 'morphling_morph_str':
-                    self.abilities[index() - 1].level(self.abilities[index()].level());
+                    self.abilities()[index() - 1].level(self.abilities()[index()].level());
                 break;
                 case 'keeper_of_the_light_spirit_form':
-                    self.abilities[index() - 1].level(self.abilities[index()].level());
-                    self.abilities[index() - 2].level(self.abilities[index()].level());
+                    self.abilities()[index() - 1].level(self.abilities()[index()].level());
+                    self.abilities()[index() - 2].level(self.abilities()[index()].level());
                 case 'nevermore_shadowraze1':
-                    self.abilities[index() + 1].level(self.abilities[index()].level());
-                    self.abilities[index() + 2].level(self.abilities[index()].level());
+                    self.abilities()[index() + 1].level(self.abilities()[index()].level());
+                    self.abilities()[index() + 2].level(self.abilities()[index()].level());
                 break;
                 case 'nevermore_shadowraze2':
-                    self.abilities[index() - 1].level(self.abilities[index()].level());
-                    self.abilities[index() + 1].level(self.abilities[index()].level());
+                    self.abilities()[index() - 1].level(self.abilities()[index()].level());
+                    self.abilities()[index() + 1].level(self.abilities()[index()].level());
                 break;
                 case 'nevermore_shadowraze3':
-                    self.abilities[index() - 1].level(self.abilities[index()].level());
-                    self.abilities[index() - 2].level(self.abilities[index()].level());
+                    self.abilities()[index() - 1].level(self.abilities()[index()].level());
+                    self.abilities()[index() - 2].level(self.abilities()[index()].level());
                 break;
                 case 'ember_spirit_fire_remnant':
-                    self.abilities[index() - 1].level(self.abilities[index()].level());
+                    self.abilities()[index() - 1].level(self.abilities()[index()].level());
                 break;
                 case 'lone_druid_true_form':
-                    self.abilities[index() - 1].level(self.abilities[index()].level());
+                    self.abilities()[index() - 1].level(self.abilities()[index()].level());
                 break;
             }
         }
