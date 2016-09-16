@@ -10,47 +10,48 @@ my.prototype.AbilityModel = function (a, h) {
     self.hasScepter = ko.observable(false);
     self.isShapeShiftActive = ko.observable(false);
     self.abilities = a;
+    self._abilities = self.abilities();
     for (var i = 0; i < self.abilities().length; i++) {
-        self.abilities()[i].level = ko.observable(0);
-        self.abilities()[i].isActive = ko.observable(false);
-        self.abilities()[i].isDetail = ko.observable(false);
-        self.abilities()[i].baseDamage = ko.observable(0);
-        self.abilities()[i].baseDamageReductionPct = ko.observable(0);
-        self.abilities()[i].baseDamageMultiplier = ko.observable(0);
-        self.abilities()[i].bash = ko.observable(0);
-        self.abilities()[i].bashBonusDamage = ko.observable(0);
-        self.abilities()[i].bonusDamage = ko.observable(0);
-        self.abilities()[i].bonusDamageOrb = ko.observable(0);
-        self.abilities()[i].bonusDamagePct = ko.observable(0);
-        self.abilities()[i].bonusDamagePrecisionAura = ko.observable(0);
-        self.abilities()[i].bonusDamageReduction = ko.observable(0);
-        self.abilities()[i].bonusHealth = ko.observable(0);
-        self.abilities()[i].bonusStrength = ko.observable(0);
-        self.abilities()[i].bonusStrength2 = ko.observable(0);
-        self.abilities()[i].bonusAgility = ko.observable(0);
-        self.abilities()[i].bonusAgility2 = ko.observable(0);
-        self.abilities()[i].bonusInt = ko.observable(0);
-        self.abilities()[i].bonusAllStatsReduction = ko.observable(0);
-        self.abilities()[i].damageAmplification = ko.observable(0);
-        self.abilities()[i].damageReduction = ko.observable(0);
-        self.abilities()[i].evasion = ko.observable(0);
-        self.abilities()[i].magicResist = ko.observable(0);
-        self.abilities()[i].manaregen = ko.observable(0);
-        self.abilities()[i].manaregenreduction = ko.observable(0);
-        self.abilities()[i].missChance = ko.observable(0);
-        self.abilities()[i].movementSpeedFlat = ko.observable(0);
-        self.abilities()[i].movementSpeedPct = ko.observable(0);
-        self.abilities()[i].movementSpeedPctReduction = ko.observable(0);
-        self.abilities()[i].turnRateReduction = ko.observable(0);
-        self.abilities()[i].attackrange = ko.observable(0);
-        self.abilities()[i].attackspeed = ko.observable(0);
-        self.abilities()[i].attackspeedreduction = ko.observable(0);
-        self.abilities()[i].armor = ko.observable(0);
-        self.abilities()[i].armorReduction = ko.observable(0);
-        self.abilities()[i].healthregen = ko.observable(0);
-        self.abilities()[i].lifesteal = ko.observable(0);
-        self.abilities()[i].visionnight = ko.observable(0);
-        self.abilities()[i].visionday = ko.observable(0);
+        self._abilities[i].level = ko.observable(0);
+        self._abilities[i].isActive = ko.observable(false);
+        self._abilities[i].isDetail = ko.observable(false);
+        self._abilities[i].baseDamage = ko.observable(0);
+        self._abilities[i].baseDamageReductionPct = ko.observable(0);
+        self._abilities[i].baseDamageMultiplier = ko.observable(0);
+        self._abilities[i].bash = ko.observable(0);
+        self._abilities[i].bashBonusDamage = ko.observable(0);
+        self._abilities[i].bonusDamage = ko.observable(0);
+        self._abilities[i].bonusDamageOrb = ko.observable(0);
+        self._abilities[i].bonusDamagePct = ko.observable(0);
+        self._abilities[i].bonusDamagePrecisionAura = ko.observable(0);
+        self._abilities[i].bonusDamageReduction = ko.observable(0);
+        self._abilities[i].bonusHealth = ko.observable(0);
+        self._abilities[i].bonusStrength = ko.observable(0);
+        self._abilities[i].bonusStrength2 = ko.observable(0);
+        self._abilities[i].bonusAgility = ko.observable(0);
+        self._abilities[i].bonusAgility2 = ko.observable(0);
+        self._abilities[i].bonusInt = ko.observable(0);
+        self._abilities[i].bonusAllStatsReduction = ko.observable(0);
+        self._abilities[i].damageAmplification = ko.observable(0);
+        self._abilities[i].damageReduction = ko.observable(0);
+        self._abilities[i].evasion = ko.observable(0);
+        self._abilities[i].magicResist = ko.observable(0);
+        self._abilities[i].manaregen = ko.observable(0);
+        self._abilities[i].manaregenreduction = ko.observable(0);
+        self._abilities[i].missChance = ko.observable(0);
+        self._abilities[i].movementSpeedFlat = ko.observable(0);
+        self._abilities[i].movementSpeedPct = ko.observable(0);
+        self._abilities[i].movementSpeedPctReduction = ko.observable(0);
+        self._abilities[i].turnRateReduction = ko.observable(0);
+        self._abilities[i].attackrange = ko.observable(0);
+        self._abilities[i].attackspeed = ko.observable(0);
+        self._abilities[i].attackspeedreduction = ko.observable(0);
+        self._abilities[i].armor = ko.observable(0);
+        self._abilities[i].armorReduction = ko.observable(0);
+        self._abilities[i].healthregen = ko.observable(0);
+        self._abilities[i].lifesteal = ko.observable(0);
+        self._abilities[i].visionnight = ko.observable(0);
+        self._abilities[i].visionday = ko.observable(0);
     }
     self.abilityControlData = {};
     self.abilitySettingsData = function (data, parent, index) {
@@ -238,8 +239,8 @@ my.prototype.AbilityModel = function (a, h) {
     
     self.getAbilityLevelByAbilityName = function (abilityName) {
         for (var i = 0; i < self.abilities().length; i++) {
-            if (self.abilities()[i].name == abilityName) {
-                return self.abilities()[i].level();
+            if (self._abilities[i].name == abilityName) {
+                return self._abilities[i].level();
             }
         }
         return -1;
@@ -247,8 +248,8 @@ my.prototype.AbilityModel = function (a, h) {
 
     self.getAbilityByName = function (abilityName) {
         for (var i = 0; i < self.abilities().length; i++) {
-            if (self.abilities()[i].name == abilityName) {
-                return self.abilities()[i];
+            if (self._abilities[i].name == abilityName) {
+                return self._abilities[i];
             }
         }
         return undefined;
@@ -260,8 +261,8 @@ my.prototype.AbilityModel = function (a, h) {
     
     self.getAttributeBonusLevel = function () {
         for (var i = 0; i < self.abilities().length; i++) {
-            if (self.abilities()[i].name == 'attribute_bonus') {
-                return self.abilities()[i].level();
+            if (self._abilities[i].name == 'attribute_bonus') {
+                return self._abilities[i].level();
             }
         }
         return 0;        
@@ -270,11 +271,11 @@ my.prototype.AbilityModel = function (a, h) {
     self.getAllStatsReduction = ko.computed(function () {
         var totalAttribute = 0;
         for (var i = 0; i < self.abilities().length; i++) {
-            var ability = self.abilities()[i];
+            var ability = self._abilities[i];
             if (!(ability.name in self.abilityData)) {
                 if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
-                    for (var j = 0; j < self.abilities()[i].attributes.length; j++) {
-                        var attribute = self.abilities()[i].attributes[j];
+                    for (var j = 0; j < self._abilities[i].attributes.length; j++) {
+                        var attribute = self._abilities[i].attributes[j];
                         /*switch(attribute.name) {
                             // invoker_quas
                             case 'bonus_strength':
@@ -297,11 +298,11 @@ my.prototype.AbilityModel = function (a, h) {
     self.getStrengthReduction = ko.computed(function () {
         var totalAttribute = 0;
         for (var i = 0; i < self.abilities().length; i++) {
-            var ability = self.abilities()[i];
+            var ability = self._abilities[i];
             if (!(ability.name in self.abilityData)) {
                 if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
-                    for (var j = 0; j < self.abilities()[i].attributes.length; j++) {
-                        var attribute = self.abilities()[i].attributes[j];
+                    for (var j = 0; j < self._abilities[i].attributes.length; j++) {
+                        var attribute = self._abilities[i].attributes[j];
                         /*switch(attribute.name) {
                             // invoker_quas
                             case 'bonus_strength':
@@ -324,11 +325,11 @@ my.prototype.AbilityModel = function (a, h) {
     self.getStrength = ko.computed(function () {
         var totalAttribute = 0;
         for (var i = 0; i < self.abilities().length; i++) {
-            var ability = self.abilities()[i];
+            var ability = self._abilities[i];
             if (!(ability.name in self.abilityData)) {
                 if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
-                    for (var j = 0; j < self.abilities()[i].attributes.length; j++) {
-                        var attribute = self.abilities()[i].attributes[j];
+                    for (var j = 0; j < self._abilities[i].attributes.length; j++) {
+                        var attribute = self._abilities[i].attributes[j];
                         /*switch(attribute.name) {
                             // invoker_quas
                             case 'bonus_strength':
@@ -359,15 +360,15 @@ my.prototype.AbilityModel = function (a, h) {
     self.getAgility = ko.computed(function () {
         var totalAttribute = 0;
         for (var i = 0; i < self.abilities().length; i++) {
-            var ability = self.abilities()[i];
+            var ability = self._abilities[i];
             if (!(ability.name in self.abilityData)) {
                 if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
-                    for (var j = 0; j < self.abilities()[i].attributes.length; j++) {
-                        var attribute = self.abilities()[i].attributes[j];
+                    for (var j = 0; j < self._abilities[i].attributes.length; j++) {
+                        var attribute = self._abilities[i].attributes[j];
                         switch(attribute.name) {
                             // drow_ranger_marksmanship
                             case 'marksmanship_agility_bonus':
-                                totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level());
+                                totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
                             break;
                         }
                     }
@@ -394,15 +395,15 @@ my.prototype.AbilityModel = function (a, h) {
     self.getIntelligence = ko.computed(function () {
         var totalAttribute = 0;
         for (var i = 0; i < self.abilities().length; i++) {
-            var ability = self.abilities()[i];
+            var ability = self._abilities[i];
             if (!(ability.name in self.abilityData)) {
                 if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
-                    for (var j = 0; j < self.abilities()[i].attributes.length; j++) {
-                        var attribute = self.abilities()[i].attributes[j];
+                    for (var j = 0; j < self._abilities[i].attributes.length; j++) {
+                        var attribute = self._abilities[i].attributes[j];
                         switch(attribute.name) {
                             // invoker_exort
                         /*    case 'bonus_intelligence':
-                                totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level());
+                                totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
                             break;*/
                         }
                     }
@@ -421,26 +422,26 @@ my.prototype.AbilityModel = function (a, h) {
     self.getArmor = ko.computed(function () {
         var totalAttribute = 0;
         for (var i = 0; i < self.abilities().length; i++) {
-            var ability = self.abilities()[i];
+            var ability = self._abilities[i];
             if (!(ability.name in self.abilityData)) {
                 if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
-                    for (var j = 0; j < self.abilities()[i].attributes.length; j++) {
-                        var attribute = self.abilities()[i].attributes[j];
+                    for (var j = 0; j < self._abilities[i].attributes.length; j++) {
+                        var attribute = self._abilities[i].attributes[j];
                         switch(attribute.name) {
                             // axe_berserkers_call,dragon_knight_dragon_blood,troll_warlord_berserkers_rage,lycan_shapeshift,enraged_wildkin_toughness_aura
                             case 'bonus_armor':
                                 if (ability.name != 'templar_assassin_meld') {
-                                    totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level());
+                                    totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
                                 }
                             break;
                             // sven_warcry
                             case 'warcry_armor':
-                                totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level());
+                                totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
                             break;
                             // lich_frost_armor,ogre_magi_frost_armor
                             case 'armor_bonus':
                                 if (ability.name == 'lich_frost_armor' || ability.name == 'ogre_magi_frost_armor') {
-                                    totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level());
+                                    totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
                                 }
                             break;
                         }
@@ -460,13 +461,13 @@ my.prototype.AbilityModel = function (a, h) {
     self.getArmorBaseReduction = ko.computed(function () {
         var totalAttribute = 1;
         for (var i = 0; i < self.abilities().length; i++) {
-            var ability = self.abilities()[i];
+            var ability = self._abilities[i];
             if (!(ability.name in self.abilityData)) {
                 if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
                     switch(ability.name) {
                         //elder_titan_natural_order
                         case 'elder_titan_natural_order':
-                            totalAttribute *= (1-self.getAbilityAttributeValue(self.abilities()[i].attributes, 'armor_reduction_pct', ability.level())/100);
+                            totalAttribute *= (1-self.getAbilityAttributeValue(self._abilities[i].attributes, 'armor_reduction_pct', ability.level())/100);
                         break;
                     }
                 }
@@ -478,17 +479,17 @@ my.prototype.AbilityModel = function (a, h) {
     self.getArmorReduction = ko.computed(function () {
         var totalAttribute = 0;
         for (var i = 0; i < self.abilities().length; i++) {
-            var ability = self.abilities()[i];
+            var ability = self._abilities[i];
             if (!(ability.name in self.abilityData)) {
                 if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
                     switch(ability.name) {
                         //templar_assassin_meld
                         case 'templar_assassin_meld':
-                            totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, 'bonus_armor', ability.level());
+                            totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, 'bonus_armor', ability.level());
                         break;
                         // tidehunter_gush
                         case 'tidehunter_gush':
-                            totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, 'armor_bonus', ability.level());
+                            totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, 'armor_bonus', ability.level());
                         break;
                         // naga_siren_rip_tide
                         case 'naga_siren_rip_tide':
@@ -496,11 +497,11 @@ my.prototype.AbilityModel = function (a, h) {
                         case 'slardar_amplify_damage':
                         // vengefulspirit_wave_of_terror
                         case 'vengefulspirit_wave_of_terror':
-                            totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, 'armor_reduction', ability.level());
+                            totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, 'armor_reduction', ability.level());
                         break;
                         // nevermore_dark_lord
                         case 'nevermore_dark_lord':
-                            totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, 'presence_armor_reduction', ability.level());
+                            totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, 'presence_armor_reduction', ability.level());
                         break;
                     }
                 }
@@ -518,20 +519,20 @@ my.prototype.AbilityModel = function (a, h) {
     self.getHealth = ko.computed(function () {
         var totalAttribute = 0;
         for (var i = 0; i < self.abilities().length; i++) {
-            var ability = self.abilities()[i];
+            var ability = self._abilities[i];
             if (!(ability.name in self.abilityData)) {
                 if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
-                    for (var j = 0; j < self.abilities()[i].attributes.length; j++) {
-                        var attribute = self.abilities()[i].attributes[j];
+                    for (var j = 0; j < self._abilities[i].attributes.length; j++) {
+                        var attribute = self._abilities[i].attributes[j];
                         switch(attribute.name) {
                             // lone_druid_true_form,lycan_shapeshift,troll_warlord_berserkers_rage
                             case 'bonus_hp':
-                                totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level());
+                                totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
                             break;
                             // lone_druid_synergy
                             case 'true_form_hp_bonus':
                                 if (self.isTrueFormActive()) {
-                                    totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level());
+                                    totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
                                 }
                             break;
                         }
@@ -550,7 +551,7 @@ my.prototype.AbilityModel = function (a, h) {
     
     self.isTrueFormActive = function () {
         for (var i = 0; i < self.abilities().length; i++) {
-            var ability = self.abilities()[i];
+            var ability = self._abilities[i];
             if (ability.isActive() && ability.name == 'lone_druid_true_form') {
                 return true;
             }
@@ -561,11 +562,11 @@ my.prototype.AbilityModel = function (a, h) {
     self.getHealthRegen = ko.computed(function () {
         var totalAttribute = 0;
         for (var i = 0; i < self.abilities().length; i++) {
-            var ability = self.abilities()[i];
+            var ability = self._abilities[i];
             if (!(ability.name in self.abilityData)) {
                 if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
-                    for (var j = 0; j < self.abilities()[i].attributes.length; j++) {
-                        var attribute = self.abilities()[i].attributes[j];
+                    for (var j = 0; j < self._abilities[i].attributes.length; j++) {
+                        var attribute = self._abilities[i].attributes[j];
                         switch(attribute.name) {
                             // alchemist_chemical_rage, dragon_knight_dragon_blood
                             case 'bonus_health_regen':
@@ -573,11 +574,11 @@ my.prototype.AbilityModel = function (a, h) {
                             case 'heath_regen':
                             // omniknight_guardian_angel,treant_living_armor,satyr_hellcaller_unholy_aura
                             case 'health_regen':
-                                totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level());
+                                totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
                             break;
                             // legion_commander_press_the_attack
                             case 'hp_regen':
-                                totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level());
+                                totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
                             break;
                         }
                     }
@@ -596,15 +597,15 @@ my.prototype.AbilityModel = function (a, h) {
     self.getMana = ko.computed(function () {
         var totalAttribute = 0;
         for (var i = 0; i < self.abilities().length; i++) {
-            var ability = self.abilities()[i];
+            var ability = self._abilities[i];
             if (!(ability.name in self.abilityData)) {
                 if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
-                    for (var j = 0; j < self.abilities()[i].attributes.length; j++) {
-                        var attribute = self.abilities()[i].attributes[j];
+                    for (var j = 0; j < self._abilities[i].attributes.length; j++) {
+                        var attribute = self._abilities[i].attributes[j];
                         switch(attribute.name) {
                             // obsidian_destroyer_essence_aura
                             case 'bonus_mana':
-                                totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level());
+                                totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
                             break;
                         }
                     }
@@ -617,15 +618,15 @@ my.prototype.AbilityModel = function (a, h) {
     self.getManaRegen = ko.computed(function () {
         var totalAttribute = 0;
         for (var i = 0; i < self.abilities().length; i++) {
-            var ability = self.abilities()[i];
+            var ability = self._abilities[i];
             if (!(ability.name in self.abilityData)) {
                 if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
-                    for (var j = 0; j < self.abilities()[i].attributes.length; j++) {
-                        var attribute = self.abilities()[i].attributes[j];
+                    for (var j = 0; j < self._abilities[i].attributes.length; j++) {
+                        var attribute = self._abilities[i].attributes[j];
                         switch(attribute.name) {
                             // alchemist_chemical_rage
                             case 'bonus_mana_regen':
-                                totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level());
+                                totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
                             break;
                         }
                     }
@@ -644,16 +645,16 @@ my.prototype.AbilityModel = function (a, h) {
     self.getManaRegenArcaneAura = ko.computed(function () {
         var totalAttribute = 0;
         for (var i = 0; i < self.abilities().length; i++) {
-            var ability = self.abilities()[i];
+            var ability = self._abilities[i];
             if (!(ability.name in self.abilityData)) {
                 if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
-                    for (var j = 0; j < self.abilities()[i].attributes.length; j++) {
-                        var attribute = self.abilities()[i].attributes[j];
+                    for (var j = 0; j < self._abilities[i].attributes.length; j++) {
+                        var attribute = self._abilities[i].attributes[j];
                         switch(attribute.name) {
                             // crystal_maiden_brilliance_aura
                             case 'mana_regen':
                                 if (ability.name == 'crystal_maiden_brilliance_aura') {
-                                    totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level());
+                                    totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
                                 }
                             break;
                         }
@@ -667,11 +668,11 @@ my.prototype.AbilityModel = function (a, h) {
     self.getManaRegenReduction = ko.computed(function () {
         var totalAttribute = 0;
         for (var i = 0; i < self.abilities().length; i++) {
-            var ability = self.abilities()[i];
+            var ability = self._abilities[i];
             if (!(ability.name in self.abilityData)) {
                 if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
-                    for (var j = 0; j < self.abilities()[i].attributes.length; j++) {
-                        var attribute = self.abilities()[i].attributes[j];
+                    for (var j = 0; j < self._abilities[i].attributes.length; j++) {
+                        var attribute = self._abilities[i].attributes[j];
                         //switch(attribute.name) {
                         //    // 
                         //    case '':
@@ -694,37 +695,37 @@ my.prototype.AbilityModel = function (a, h) {
     self.getAttackRange = ko.computed(function () {
         var totalAttribute = 0;
         for (var i = 0; i < self.abilities().length; i++) {
-            var ability = self.abilities()[i];
+            var ability = self._abilities[i];
             if (!(ability.name in self.abilityData)) {
                 if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
-                    for (var j = 0; j < self.abilities()[i].attributes.length; j++) {
-                        var attribute = self.abilities()[i].attributes[j];
+                    for (var j = 0; j < self._abilities[i].attributes.length; j++) {
+                        var attribute = self._abilities[i].attributes[j];
                         switch(attribute.name) {
                             // winter_wyvern_arctic_burn
                             case 'attack_range_bonus':
-                                totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level());
+                                totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
                             break;
                             // templar_assassin_psi_blades,sniper_take_aim
                             case 'bonus_attack_range':
                             // terrorblade_metamorphosis,troll_warlord_berserkers_rage
                             case 'bonus_range':
                                 if (ability.name == 'terrorblade_metamorphosis') {
-                                    totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level());
+                                    totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
                                 }
                                 if (ability.name == 'troll_warlord_berserkers_rage') {
-                                    totalAttribute -= self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level());
+                                    totalAttribute -= self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
                                 }
                             break;
                             // tiny_grow
                             case 'bonus_range_scepter':
                                 if (ability.name == 'tiny_grow' && self.hasScepter()) {
-                                    totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level());
+                                    totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
                                 }
                             break;
                             // enchantress_impetus
                             case 'bonus_attack_range_scepter':
                                 if (ability.name == 'enchantress_impetus' && self.hasScepter()) {
-                                    totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level());
+                                    totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
                                 }
                             break;
                         }
@@ -735,11 +736,11 @@ my.prototype.AbilityModel = function (a, h) {
                     }
                 }
                 else if (ability.level() > 0 && ability.name == 'enchantress_impetus' && self.hasScepter()) {
-                    for (var j = 0; j < self.abilities()[i].attributes.length; j++) {
-                        var attribute = self.abilities()[i].attributes[j];
+                    for (var j = 0; j < self._abilities[i].attributes.length; j++) {
+                        var attribute = self._abilities[i].attributes[j];
                         switch(attribute.name) {
                           case 'bonus_attack_range_scepter':
-                            totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level());
+                            totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
                           break;
                         }
                     }
@@ -758,11 +759,11 @@ my.prototype.AbilityModel = function (a, h) {
     self.getAttackSpeed = ko.computed(function () {
         var totalAttribute = 0;
         for (var i = 0; i < self.abilities().length; i++) {
-            var ability = self.abilities()[i];
+            var ability = self._abilities[i];
             if (!(ability.name in self.abilityData)) {
                 if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
-                    for (var j = 0; j < self.abilities()[i].attributes.length; j++) {
-                        var attribute = self.abilities()[i].attributes[j];
+                    for (var j = 0; j < self._abilities[i].attributes.length; j++) {
+                        var attribute = self._abilities[i].attributes[j];
                         switch(attribute.name) {
                             // abaddon_frostmourne,troll_warlord_battle_trance
                             case 'attack_speed':
@@ -772,24 +773,24 @@ my.prototype.AbilityModel = function (a, h) {
                             case 'leap_speedbonus_as':
                             // life_stealer
                             case 'attack_speed_bonus':
-                                totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level());
+                                totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
                             break;
                             // clinkz_strafe,ursa_overpower
                             case 'attack_speed_bonus_pct':
                                 if (ability.name == 'clinkz_strafe' || ability.name == 'ursa_overpower') {
-                                    totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level());
+                                    totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
                                 }
                             break;
                             // axe_culling_blade,necronomicon_archer_aoe
                             case 'speed_bonus':
                                 if (ability.name == 'axe_culling_blade' || ability.name == 'necronomicon_archer_aoe') {
-                                    totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level());
+                                    totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
                                 }
                             break;
                             // ancient_apparition_chilling_touch
                             case 'attack_speed_pct':
                                 if (ability.name == 'ancient_apparition_chilling_touch') {
-                                    totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level());
+                                    totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
                                 }
                             break;
                             // beastmaster_inner_beast,lycan_feral_impulse,lone_druid_rabid,tiny_grow,phantom_assassin_phantom_strike,windrunner_focusfire,ogre_magi_bloodlust,centaur_khan_endurance_aura
@@ -802,7 +803,7 @@ my.prototype.AbilityModel = function (a, h) {
                                  || ability.name == 'windrunner_focusfire' 
                                  || ability.name == 'ogre_magi_bloodlust'
                                  || ability.name == 'centaur_khan_endurance_aura') {
-                                    totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level());
+                                    totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
                                 }
                             break;
                         }
@@ -822,11 +823,11 @@ my.prototype.AbilityModel = function (a, h) {
     self.getAttackSpeedReduction = ko.computed(function () {
         var totalAttribute = 0;
         for (var i = 0; i < self.abilities().length; i++) {
-            var ability = self.abilities()[i];
+            var ability = self._abilities[i];
             if (!(ability.name in self.abilityData)) {
                 if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
-                    for (var j = 0; j < self.abilities()[i].attributes.length; j++) {
-                        var attribute = self.abilities()[i].attributes[j];
+                    for (var j = 0; j < self._abilities[i].attributes.length; j++) {
+                        var attribute = self._abilities[i].attributes[j];
                         switch(attribute.name) {
                             // night_stalker_void,crystal_maiden_crystal_nova,ghost_frost_attack,ogre_magi_frost_armor,polar_furbolg_ursa_warrior_thunder_clap
                             case 'attackspeed_slow':
@@ -836,60 +837,60 @@ my.prototype.AbilityModel = function (a, h) {
                             case 'slow_attack_speed_pct':
                             // storm_spirit_overload
                             case 'overload_attack_slow':
-                                totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level());
+                                totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
                             break;
                             // omniknight_degen_aura
                             case 'speed_bonus':
                                 if (ability.name == 'omniknight_degen_aura') {
-                                    totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level());
+                                    totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
                                 }
                             break;
                             // tusk_frozen_sigil,crystal_maiden_freezing_field
                             case 'attack_slow':
                                 if (ability.name == 'crystal_maiden_freezing_field' && !self.hasScepter()) {
-                                    totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level());
+                                    totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
                                 }
                                 else if (ability.name == 'tusk_frozen_sigil') {
-                                    totalAttribute -= self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level());
+                                    totalAttribute -= self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
                                 }
                             break;
                             case 'attack_slow_scepter':
                                 if (ability.name == 'crystal_maiden_freezing_field' && self.hasScepter()) {
-                                    totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level());
+                                    totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
                                 }
                             break;
                             // faceless_void_time_walk
                             case 'attack_speed_pct':
                                 if (ability.name == 'faceless_void_time_walk') {
-                                    totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level());
+                                    totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
                                 }
                             break;
                             // bounty_hunter_jinada
                             case 'bonus_attackspeed':
                                 if (ability.name == 'bounty_hunter_jinada') {
-                                    totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level());
+                                    totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
                                 }
                             break;
                             // brewmaster_thunder_clap
                             case 'attack_speed_slow':
                                 if (ability.name == 'brewmaster_thunder_clap') {
-                                    totalAttribute -= self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level());
+                                    totalAttribute -= self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
                                 }
                             break;
                             // medusa_stone_gaze
                             case 'slow':
                                 if (ability.name == 'medusa_stone_gaze') {
-                                    totalAttribute -= self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level());
+                                    totalAttribute -= self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
                                 }
                             break;
                             // visage_grave_chill
                             case 'attackspeed_bonus':
-                                totalAttribute -= self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level());
+                                totalAttribute -= self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
                             break;
                             // abaddon_frostmourne
                             case 'attack_slow_tooltip':
                                 if (ability.name == 'abaddon_frostmourne') {
-                                    totalAttribute -= self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level());
+                                    totalAttribute -= self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
                                 }
                             break;
                         }
@@ -911,17 +912,17 @@ my.prototype.AbilityModel = function (a, h) {
     self.getBash = ko.computed(function () {
         var totalAttribute = 1;
         for (var i = 0; i < self.abilities().length; i++) {
-            var ability = self.abilities()[i];
+            var ability = self._abilities[i];
             if (!(ability.name in self.abilityData)) {
                 if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
-                    for (var j = 0; j < self.abilities()[i].attributes.length; j++) {
-                        var attribute = self.abilities()[i].attributes[j];
+                    for (var j = 0; j < self._abilities[i].attributes.length; j++) {
+                        var attribute = self._abilities[i].attributes[j];
                         switch(attribute.name) {
                             // slardar_bash
                             case 'chance':
                             // sniper_headshot
                             case 'proc_chance':
-                                totalAttribute *= (1 - self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level())/100);
+                                totalAttribute *= (1 - self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100);
                             break;
                         }
                     }
@@ -941,18 +942,18 @@ my.prototype.AbilityModel = function (a, h) {
         var totalMultiplier = 1;
         var sources = {};
         for (var i = 0; i < self.abilities().length; i++) {
-            var ability = self.abilities()[i];
+            var ability = self._abilities[i];
             if (!(ability.name in self.abilityData)) {
                 if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
-                    for (var j = 0; j < self.abilities()[i].attributes.length; j++) {
-                        var attribute = self.abilities()[i].attributes[j];
+                    for (var j = 0; j < self._abilities[i].attributes.length; j++) {
+                        var attribute = self._abilities[i].attributes[j];
                         switch(attribute.name) {
                             // tiny_grow,terrorblade_metamorphosis
                             case 'bonus_damage':
                                 if (ability.name == 'tiny_grow' || ability.name == 'terrorblade_metamorphosis') {
-                                    totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level());
+                                    totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
                                     sources[ability.name] = {
-                                        'damage': self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level()),
+                                        'damage': self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level()),
                                         'damageType': 'physical',
                                         'displayname': ability.displayname
                                     }
@@ -994,25 +995,25 @@ my.prototype.AbilityModel = function (a, h) {
     self.getSelfBaseDamageReductionPct = ko.computed(function () {
         var totalAttribute = 1;
         for (var i = 0; i < self.abilities().length; i++) {
-            var ability = self.abilities()[i];
+            var ability = self._abilities[i];
             if (!(ability.name in self.abilityData)) {
                 if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
-                    for (var j = 0; j < self.abilities()[i].attributes.length; j++) {
-                        var attribute = self.abilities()[i].attributes[j];
+                    for (var j = 0; j < self._abilities[i].attributes.length; j++) {
+                        var attribute = self._abilities[i].attributes[j];
                         switch(attribute.name) {
                             // medusa_split_shot
                             case 'damage_modifier':
-                                totalAttribute *= (1 + self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level())/100);
+                                totalAttribute *= (1 + self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100);
                             break;
                             // windrunner_focusfire
                             case 'focusfire_damage_reduction':
                                 if (!self.hasScepter()) {
-                                    totalAttribute *= (1 + self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level())/100);
+                                    totalAttribute *= (1 + self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100);
                                 }
                             break;
                             case 'focusfire_damage_reduction_scepter':
                                 if (self.hasScepter()) {
-                                    totalAttribute *= (1 + self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level())/100);
+                                    totalAttribute *= (1 + self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100);
                                 }
                             break;
                         }
@@ -1026,16 +1027,16 @@ my.prototype.AbilityModel = function (a, h) {
     self.getBaseDamageReductionPct = ko.computed(function () {
         var totalAttribute = 1;
         for (var i = 0; i < self.abilities().length; i++) {
-            var ability = self.abilities()[i];
+            var ability = self._abilities[i];
             if (!(ability.name in self.abilityData)) {
                 if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
-                    for (var j = 0; j < self.abilities()[i].attributes.length; j++) {
-                        var attribute = self.abilities()[i].attributes[j];
+                    for (var j = 0; j < self._abilities[i].attributes.length; j++) {
+                        var attribute = self._abilities[i].attributes[j];
                         switch(attribute.name) {
                             // vengefulspirit_command_aura
                             case 'bonus_damage_pct':
                                 if (ability.name == 'vengefulspirit_command_aura') {
-                                    totalAttribute *= (1 - self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level())/100);
+                                    totalAttribute *= (1 - self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100);
                                 }
                             break;
                         }
@@ -1055,15 +1056,15 @@ my.prototype.AbilityModel = function (a, h) {
     self.getBAT = ko.computed(function () {
         var totalAttribute = 0;
         for (var i = 0; i < self.abilities().length; i++) {
-            var ability = self.abilities()[i];
+            var ability = self._abilities[i];
             if (!(ability.name in self.abilityData)) {
                 if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
-                    for (var j = 0; j < self.abilities()[i].attributes.length; j++) {
-                        var attribute = self.abilities()[i].attributes[j];
+                    for (var j = 0; j < self._abilities[i].attributes.length; j++) {
+                        var attribute = self._abilities[i].attributes[j];
                         switch(attribute.name) {
                             // troll_warlord_berserkers_rage,alchemist_chemical_rage,lone_druid_true_form,lycan_shapeshift
                             case 'base_attack_time':
-                                totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level());
+                                totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
                             break;
                         }
                     }
@@ -1076,20 +1077,20 @@ my.prototype.AbilityModel = function (a, h) {
         var totalAttribute = 0;
         var sources = {};
         for (var i = 0; i < self.abilities().length; i++) {
-            var ability = self.abilities()[i];
+            var ability = self._abilities[i];
             if (!(ability.name in self.abilityData)) {
                 if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
-                    for (var j = 0; j < self.abilities()[i].attributes.length; j++) {
-                        var attribute = self.abilities()[i].attributes[j];
+                    for (var j = 0; j < self._abilities[i].attributes.length; j++) {
+                        var attribute = self._abilities[i].attributes[j];
                         switch(attribute.name) {
                             // broodmother_insatiable_hunger,luna_lunar_blessing,templar_assassin_refraction,templar_assassin_meld,troll_warlord_berserkers_rage,lone_druid_true_form_battle_cry
                             case 'bonus_damage':
                                 if (ability.name == 'broodmother_insatiable_hunger' || ability.name == 'luna_lunar_blessing'
                                  || ability.name == 'templar_assassin_refraction' || ability.name == 'templar_assassin_meld'
                                  || ability.name == 'troll_warlord_berserkers_rage' || ability.name == 'lone_druid_true_form_battle_cry') {
-                                    totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level());
+                                    totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
                                     sources[ability.name] = {
-                                        'damage': self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level()),
+                                        'damage': self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level()),
                                         'damageType': 'physical',
                                         'displayname': ability.displayname
                                     }
@@ -1097,9 +1098,9 @@ my.prototype.AbilityModel = function (a, h) {
                             break;
                             // lycan_howl
                             case 'hero_bonus_damage':
-                                totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level());
+                                totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
                                 sources[ability.name] = {
-                                    'damage': self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level()),
+                                    'damage': self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level()),
                                     'damageType': 'physical',
                                     'displayname': ability.displayname
                                 }
@@ -1135,18 +1136,18 @@ my.prototype.AbilityModel = function (a, h) {
         var totalAttribute = 0;
         var sources = {};
         for (var i = 0; i < self.abilities().length; i++) {
-            var ability = self.abilities()[i];
+            var ability = self._abilities[i];
             if (!(ability.name in self.abilityData)) {
                 if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
-                    for (var j = 0; j < self.abilities()[i].attributes.length; j++) {
-                        var attribute = self.abilities()[i].attributes[j];
+                    for (var j = 0; j < self._abilities[i].attributes.length; j++) {
+                        var attribute = self._abilities[i].attributes[j];
                         switch(attribute.name) {
                             // bloodseeker_bloodrage
                             case 'damage_increase_pct':
                                 if (ability.name == 'bloodseeker_bloodrage') {
-                                    totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level())/100;
+                                    totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100;
                                     sources[ability.name] = {
-                                        'damage': self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level())/100,
+                                        'damage': self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100,
                                         'damageType': 'physical',
                                         'displayname': ability.displayname
                                     }
@@ -1155,9 +1156,9 @@ my.prototype.AbilityModel = function (a, h) {
                             // magnataur_empower,vengefulspirit_command_aura,alpha_wolf_command_aura
                             case 'bonus_damage_pct':
                                 if (ability.name == 'magnataur_empower' || ability.name == 'vengefulspirit_command_aura' || ability.name == 'alpha_wolf_command_aura') {
-                                    totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level())/100;
+                                    totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100;
                                     sources[ability.name] = {
-                                        'damage': self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level())/100,
+                                        'damage': self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100,
                                         'damageType': 'physical',
                                         'displayname': ability.displayname
                                     }
@@ -1166,9 +1167,9 @@ my.prototype.AbilityModel = function (a, h) {
                             // sven_gods_strength
                             case 'gods_strength_damage':
                                 if (ability.name == 'sven_gods_strength' && self.hero != undefined && self.hero.heroId() == 'sven') {
-                                    totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level())/100;
+                                    totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100;
                                     sources[ability.name] = {
-                                        'damage': self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level())/100,
+                                        'damage': self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100,
                                         'damageType': 'physical',
                                         'displayname': ability.displayname
                                     }
@@ -1176,9 +1177,9 @@ my.prototype.AbilityModel = function (a, h) {
                             break;
                             case 'gods_strength_damage_scepter':
                                 if (ability.name == 'sven_gods_strength' && self.hero == undefined) {
-                                    totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level())/100;
+                                    totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100;
                                     sources[ability.name] = {
-                                        'damage': self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level())/100,
+                                        'damage': self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100,
                                         'damageType': 'physical',
                                         'displayname': ability.displayname
                                     }
@@ -1208,17 +1209,17 @@ my.prototype.AbilityModel = function (a, h) {
         var totalAttribute2 = 0;
         var sources = [];
         for (var i = 0; i < self.abilities().length; i++) {
-            var ability = self.abilities()[i];
+            var ability = self._abilities[i];
             if (ability.name == 'riki_backstab') {
                 if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
-                    for (var j = 0; j < self.abilities()[i].attributes.length; j++) {
-                        var attribute = self.abilities()[i].attributes[j];
+                    for (var j = 0; j < self._abilities[i].attributes.length; j++) {
+                        var attribute = self._abilities[i].attributes[j];
                         switch(attribute.name) {
                             // riki_backstab
                             case 'damage_multiplier':
-                                totalAttribute1 += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level());
+                                totalAttribute1 += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
                                 sources.push({
-                                    'damage': self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level()),
+                                    'damage': self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level()),
                                     'damageType': 'physical',
                                     'displayname': ability.displayname
                                 });
@@ -1247,17 +1248,17 @@ my.prototype.AbilityModel = function (a, h) {
         var totalAttribute2 = 0;
         var sources = [];
         for (var i = 0; i < self.abilities().length; i++) {
-            var ability = self.abilities()[i];
+            var ability = self._abilities[i];
             if (ability.name == 'drow_ranger_trueshot') {
                 if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
-                    for (var j = 0; j < self.abilities()[i].attributes.length; j++) {
-                        var attribute = self.abilities()[i].attributes[j];
+                    for (var j = 0; j < self._abilities[i].attributes.length; j++) {
+                        var attribute = self._abilities[i].attributes[j];
                         switch(attribute.name) {
                             // drow_ranger_trueshot
                             case 'trueshot_ranged_damage':
-                                totalAttribute1 += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level())/100;
+                                totalAttribute1 += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100;
                                 sources.push({
-                                    'damage': self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level())/100,
+                                    'damage': self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100,
                                     'damageType': 'physical',
                                     'displayname': ability.displayname
                                 });
@@ -1282,15 +1283,15 @@ my.prototype.AbilityModel = function (a, h) {
     self.getBonusDamageReduction = ko.computed(function () {
         var totalAttribute = 0;
         for (var i = 0; i < self.abilities().length; i++) {
-            var ability = self.abilities()[i];
+            var ability = self._abilities[i];
             if (!(ability.name in self.abilityData)) {
                 if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
-                    for (var j = 0; j < self.abilities()[i].attributes.length; j++) {
-                        var attribute = self.abilities()[i].attributes[j];
+                    for (var j = 0; j < self._abilities[i].attributes.length; j++) {
+                        var attribute = self._abilities[i].attributes[j];
                         switch(attribute.name) {
                             // bane_enfeeble
                             case 'enfeeble_attack_reduction':
-                                totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level());
+                                totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
                             break;
                         }
                     }
@@ -1309,25 +1310,25 @@ my.prototype.AbilityModel = function (a, h) {
     self.getBonusDamageReductionPct = ko.computed(function () {
         var totalAttribute = 1;
         for (var i = 0; i < self.abilities().length; i++) {
-            var ability = self.abilities()[i];
+            var ability = self._abilities[i];
             if (!(ability.name in self.abilityData)) {
                 if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
-                    for (var j = 0; j < self.abilities()[i].attributes.length; j++) {
-                        var attribute = self.abilities()[i].attributes[j];
+                    for (var j = 0; j < self._abilities[i].attributes.length; j++) {
+                        var attribute = self._abilities[i].attributes[j];
                         switch(attribute.name) {
                             // medusa_split_shot
                             case 'damage_modifier':
-                                totalAttribute *= (1 + self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level())/100);
+                                totalAttribute *= (1 + self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100);
                             break;
                             // windrunner_focusfire
                             case 'focusfire_damage_reduction':
                                 if (!self.hasScepter()) {
-                                    totalAttribute *= (1 + self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level())/100);
+                                    totalAttribute *= (1 + self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100);
                                 }
                             break;
                             case 'focusfire_damage_reduction_scepter':
                                 if (self.hasScepter()) {
-                                    totalAttribute *= (1 + self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level())/100);
+                                    totalAttribute *= (1 + self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100);
                                 }
                             break;
                         }
@@ -1341,15 +1342,15 @@ my.prototype.AbilityModel = function (a, h) {
     self.getDamageAmplification = ko.computed(function () {
         var totalAttribute = 1;
         for (var i = 0; i < self.abilities().length; i++) {
-            var ability = self.abilities()[i];
+            var ability = self._abilities[i];
             if (!(ability.name in self.abilityData)) {
                 /*if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
-                    for (var j = 0; j < self.abilities()[i].attributes.length; j++) {
-                        var attribute = self.abilities()[i].attributes[j];
+                    for (var j = 0; j < self._abilities[i].attributes.length; j++) {
+                        var attribute = self._abilities[i].attributes[j];
                         switch(attribute.name) {
                             // bane_enfeeble
                             case 'enfeeble_attack_reduction':
-                                totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level());
+                                totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
                             break;
                         }
                     }
@@ -1368,16 +1369,16 @@ my.prototype.AbilityModel = function (a, h) {
     self.getDamageReduction = ko.computed(function () {
         var totalAttribute = 1;
         for (var i = 0; i < self.abilities().length; i++) {
-            var ability = self.abilities()[i];
+            var ability = self._abilities[i];
             if (!(ability.name in self.abilityData)) {
                 if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
-                    for (var j = 0; j < self.abilities()[i].attributes.length; j++) {
-                        var attribute = self.abilities()[i].attributes[j];
+                    for (var j = 0; j < self._abilities[i].attributes.length; j++) {
+                        var attribute = self._abilities[i].attributes[j];
                         switch(attribute.name) {
                             // bloodseeker_bloodrage
                             case 'damage_increase_pct':
                                 if (ability.name == 'bloodseeker_bloodrage') {
-                                    totalAttribute *= (1 + self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level())/100);
+                                    totalAttribute *= (1 + self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100);
                                 }
                             break;
                         }
@@ -1401,7 +1402,7 @@ my.prototype.AbilityModel = function (a, h) {
     self.getCritSource = ko.computed(function () {
         var sources = {};
         for (var i = 0; i < self.abilities().length; i++) {
-            var ability = self.abilities()[i];
+            var ability = self._abilities[i];
             if (!(ability.name in self.abilityData)) {
                 if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
                     switch(ability.name) {
@@ -1409,8 +1410,8 @@ my.prototype.AbilityModel = function (a, h) {
                         case 'phantom_assassin_coup_de_grace':
                             if (sources[ability.name] == undefined) {
                                 sources[ability.name] = {
-                                    'chance': self.getAbilityAttributeValue(self.abilities()[i].attributes, 'crit_chance', ability.level())/100,
-                                    'multiplier': self.getAbilityAttributeValue(self.abilities()[i].attributes, 'crit_bonus', ability.level())/100,
+                                    'chance': self.getAbilityAttributeValue(self._abilities[i].attributes, 'crit_chance', ability.level())/100,
+                                    'multiplier': self.getAbilityAttributeValue(self._abilities[i].attributes, 'crit_bonus', ability.level())/100,
                                     'count': 1,
                                     'displayname': ability.displayname
                                 }
@@ -1422,8 +1423,8 @@ my.prototype.AbilityModel = function (a, h) {
                         case 'brewmaster_drunken_brawler':
                             if (sources[ability.name] == undefined) {
                                 sources[ability.name] = {
-                                    'chance': self.getAbilityAttributeValue(self.abilities()[i].attributes, 'crit_chance', ability.level())/100,
-                                    'multiplier': self.getAbilityAttributeValue(self.abilities()[i].attributes, 'crit_multiplier', ability.level())/100,
+                                    'chance': self.getAbilityAttributeValue(self._abilities[i].attributes, 'crit_chance', ability.level())/100,
+                                    'multiplier': self.getAbilityAttributeValue(self._abilities[i].attributes, 'crit_multiplier', ability.level())/100,
                                     'count': 1,
                                     'displayname': ability.displayname
                                 }
@@ -1436,8 +1437,8 @@ my.prototype.AbilityModel = function (a, h) {
                         case 'lycan_shapeshift':
                             if (sources[ability.name] == undefined) {
                                 sources[ability.name] = {
-                                    'chance': self.getAbilityAttributeValue(self.abilities()[i].attributes, 'crit_chance', ability.level())/100,
-                                    'multiplier': self.getAbilityAttributeValue(self.abilities()[i].attributes, 'crit_multiplier', ability.level())/100,
+                                    'chance': self.getAbilityAttributeValue(self._abilities[i].attributes, 'crit_chance', ability.level())/100,
+                                    'multiplier': self.getAbilityAttributeValue(self._abilities[i].attributes, 'crit_multiplier', ability.level())/100,
                                     'count': 1,
                                     'displayname': ability.displayname
                                 }
@@ -1449,8 +1450,8 @@ my.prototype.AbilityModel = function (a, h) {
                         case 'skeleton_king_mortal_strike':
                             if (sources[ability.name] == undefined) {
                                 sources[ability.name] = {
-                                    'chance': self.getAbilityAttributeValue(self.abilities()[i].attributes, 'crit_chance', ability.level())/100,
-                                    'multiplier': self.getAbilityAttributeValue(self.abilities()[i].attributes, 'crit_mult', ability.level())/100,
+                                    'chance': self.getAbilityAttributeValue(self._abilities[i].attributes, 'crit_chance', ability.level())/100,
+                                    'multiplier': self.getAbilityAttributeValue(self._abilities[i].attributes, 'crit_mult', ability.level())/100,
                                     'count': 1,
                                     'displayname': ability.displayname
                                 }
@@ -1462,8 +1463,8 @@ my.prototype.AbilityModel = function (a, h) {
                         case 'juggernaut_blade_dance':
                             if (sources[ability.name] == undefined) {
                                 sources[ability.name] = {
-                                    'chance': self.getAbilityAttributeValue(self.abilities()[i].attributes, 'blade_dance_crit_chance', ability.level())/100,
-                                    'multiplier': self.getAbilityAttributeValue(self.abilities()[i].attributes, 'blade_dance_crit_mult', ability.level())/100,
+                                    'chance': self.getAbilityAttributeValue(self._abilities[i].attributes, 'blade_dance_crit_chance', ability.level())/100,
+                                    'multiplier': self.getAbilityAttributeValue(self._abilities[i].attributes, 'blade_dance_crit_mult', ability.level())/100,
                                     'count': 1,
                                     'displayname': ability.displayname
                                 }
@@ -1476,8 +1477,8 @@ my.prototype.AbilityModel = function (a, h) {
                         case 'giant_wolf_critical_strike':
                             if (sources[ability.name] == undefined) {
                                 sources[ability.name] = {
-                                    'chance': self.getAbilityAttributeValue(self.abilities()[i].attributes, 'crit_chance', ability.level())/100,
-                                    'multiplier': self.getAbilityAttributeValue(self.abilities()[i].attributes, 'crit_mult', ability.level())/100,
+                                    'chance': self.getAbilityAttributeValue(self._abilities[i].attributes, 'crit_chance', ability.level())/100,
+                                    'multiplier': self.getAbilityAttributeValue(self._abilities[i].attributes, 'crit_mult', ability.level())/100,
                                     'count': 1,
                                     'displayname': ability.displayname
                                 }
@@ -1496,7 +1497,7 @@ my.prototype.AbilityModel = function (a, h) {
     self.getCleaveSource = ko.computed(function () {
         var sources = {};
         for (var i = 0; i < self.abilities().length; i++) {
-            var ability = self.abilities()[i];
+            var ability = self._abilities[i];
             if (!(ability.name in self.abilityData)) {
                 if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
                     switch(ability.name) {
@@ -1504,8 +1505,8 @@ my.prototype.AbilityModel = function (a, h) {
                         case 'magnataur_empower':
                             if (sources[ability.name] == undefined) {
                                 sources[ability.name] = {
-                                    'radius': self.getAbilityAttributeValue(self.abilities()[i].attributes, 'cleave_radius', ability.level()),
-                                    'magnitude': self.getAbilityAttributeValue(self.abilities()[i].attributes, 'cleave_damage_pct', ability.level())/100,
+                                    'radius': self.getAbilityAttributeValue(self._abilities[i].attributes, 'cleave_radius', ability.level()),
+                                    'magnitude': self.getAbilityAttributeValue(self._abilities[i].attributes, 'cleave_damage_pct', ability.level())/100,
                                     'count': 1,
                                     'displayname': ability.displayname
                                 }
@@ -1518,8 +1519,8 @@ my.prototype.AbilityModel = function (a, h) {
                         case 'sven_great_cleave':
                             if (sources[ability.name] == undefined) {
                                 sources[ability.name] = {
-                                    'radius': self.getAbilityAttributeValue(self.abilities()[i].attributes, 'great_cleave_radius', ability.level()),
-                                    'magnitude': self.getAbilityAttributeValue(self.abilities()[i].attributes, 'great_cleave_damage', ability.level())/100,
+                                    'radius': self.getAbilityAttributeValue(self._abilities[i].attributes, 'great_cleave_radius', ability.level()),
+                                    'magnitude': self.getAbilityAttributeValue(self._abilities[i].attributes, 'great_cleave_damage', ability.level())/100,
                                     'count': 1,
                                     'displayname': ability.displayname
                                 }
@@ -1532,7 +1533,7 @@ my.prototype.AbilityModel = function (a, h) {
                         case 'kunkka_tidebringer':
                             if (sources[ability.name] == undefined) {
                                 sources[ability.name] = {
-                                    'radius': self.getAbilityAttributeValue(self.abilities()[i].attributes, 'radius', ability.level()),
+                                    'radius': self.getAbilityAttributeValue(self._abilities[i].attributes, 'radius', ability.level()),
                                     'magnitude': 1,
                                     'count': 1,
                                     'displayname': ability.displayname
@@ -1547,8 +1548,8 @@ my.prototype.AbilityModel = function (a, h) {
                             if (self.hasScepter()) {
                                 if (sources[ability.name] == undefined) {
                                     sources[ability.name] = {
-                                        'radius': self.getAbilityAttributeValue(self.abilities()[i].attributes, 'bonus_cleave_radius_scepter', ability.level()),
-                                        'magnitude': self.getAbilityAttributeValue(self.abilities()[i].attributes, 'bonus_cleave_damage_scepter', ability.level())/100,
+                                        'radius': self.getAbilityAttributeValue(self._abilities[i].attributes, 'bonus_cleave_radius_scepter', ability.level()),
+                                        'magnitude': self.getAbilityAttributeValue(self._abilities[i].attributes, 'bonus_cleave_damage_scepter', ability.level())/100,
                                         'count': 1,
                                         'displayname': ability.displayname
                                     }
@@ -1568,15 +1569,15 @@ my.prototype.AbilityModel = function (a, h) {
     self.getCritChance = ko.computed(function () {
         var totalAttribute = 1;
         for (var i = 0; i < self.abilities().length; i++) {
-            var ability = self.abilities()[i];
+            var ability = self._abilities[i];
             if (!(ability.name in self.abilityData)) {
                 if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
-                    for (var j = 0; j < self.abilities()[i].attributes.length; j++) {
-                        var attribute = self.abilities()[i].attributes[j];
+                    for (var j = 0; j < self._abilities[i].attributes.length; j++) {
+                        var attribute = self._abilities[i].attributes[j];
                         switch(attribute.name) {
                             // phantom_assassin_coup_de_grace,brewmaster_drunken_brawler,chaos_knight_chaos_strike,lycan_shapeshift,skeleton_king_mortal_strike
                             case 'crit_chance':
-                                totalAttribute *= (1 - self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level())/100);
+                                totalAttribute *= (1 - self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100);
                             break;
                         }
                     }
@@ -1589,17 +1590,17 @@ my.prototype.AbilityModel = function (a, h) {
     self.getEvasion = ko.computed(function () {
         var totalAttribute = 1;
         for (var i = 0; i < self.abilities().length; i++) {
-            var ability = self.abilities()[i];
+            var ability = self._abilities[i];
             if (!(ability.name in self.abilityData)) {
                 if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
-                    for (var j = 0; j < self.abilities()[i].attributes.length; j++) {
-                        var attribute = self.abilities()[i].attributes[j];
+                    for (var j = 0; j < self._abilities[i].attributes.length; j++) {
+                        var attribute = self._abilities[i].attributes[j];
                         switch(attribute.name) {
                             // phantom_assassin_blur
                             case 'bonus_evasion':
                             // brewmaster_drunken_brawler
                             case 'dodge_chance':
-                                totalAttribute *= (1 - self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level())/100);
+                                totalAttribute *= (1 - self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100);
                             break;
                         }
                     }
@@ -1612,15 +1613,15 @@ my.prototype.AbilityModel = function (a, h) {
     self.getEvasionBacktrack = ko.computed(function () {
         var totalAttribute = 1;
         for (var i = 0; i < self.abilities().length; i++) {
-            var ability = self.abilities()[i];
+            var ability = self._abilities[i];
             if (!(ability.name in self.abilityData)) {
                 if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
-                    for (var j = 0; j < self.abilities()[i].attributes.length; j++) {
-                        var attribute = self.abilities()[i].attributes[j];
+                    for (var j = 0; j < self._abilities[i].attributes.length; j++) {
+                        var attribute = self._abilities[i].attributes[j];
                         switch(attribute.name) {
                             // faceless_void_backtrack
                             case 'dodge_chance_pct':
-                                totalAttribute *= (1 - self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level())/100);
+                                totalAttribute *= (1 - self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100);
                             break;
                         }
                     }
@@ -1633,17 +1634,17 @@ my.prototype.AbilityModel = function (a, h) {
     self.getMissChance = ko.computed(function () {
         var totalAttribute = 1;
         for (var i = 0; i < self.abilities().length; i++) {
-            var ability = self.abilities()[i];
+            var ability = self._abilities[i];
             if (!(ability.name in self.abilityData)) {
                 if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
-                    for (var j = 0; j < self.abilities()[i].attributes.length; j++) {
-                        var attribute = self.abilities()[i].attributes[j];
+                    for (var j = 0; j < self._abilities[i].attributes.length; j++) {
+                        var attribute = self._abilities[i].attributes[j];
                         switch(attribute.name) {
                             // broodmother_incapacitating_bite,brewmaster_drunken_haze
                             case 'miss_chance':
                             // riki_smoke_screen,keeper_of_the_light_blinding_light,tinker_laser
                             case 'miss_rate':
-                                totalAttribute *= (1 - self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level())/100);
+                                totalAttribute *= (1 - self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100);
                             break;
                         }
                     }
@@ -1662,17 +1663,17 @@ my.prototype.AbilityModel = function (a, h) {
     self.getLifesteal = ko.computed(function () {
         var totalAttribute = 0;
         for (var i = 0; i < self.abilities().length; i++) {
-            var ability = self.abilities()[i];
+            var ability = self._abilities[i];
             if (!(ability.name in self.abilityData)) {
                 if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
-                    for (var j = 0; j < self.abilities()[i].attributes.length; j++) {
-                        var attribute = self.abilities()[i].attributes[j];
+                    for (var j = 0; j < self._abilities[i].attributes.length; j++) {
+                        var attribute = self._abilities[i].attributes[j];
                         switch(attribute.name) {
                             // skeleton_king_vampiric_aura
                             case 'vampiric_aura':
                             // broodmother_insatiable_hunger
                             case 'lifesteal_pct':
-                                totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level());
+                                totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
                             break;
                         }
                     }
@@ -1691,26 +1692,26 @@ my.prototype.AbilityModel = function (a, h) {
     self.getMagicResist = ko.computed(function () {
         var totalAttribute = 1;
         for (var i = 0; i < self.abilities().length; i++) {
-            var ability = self.abilities()[i];
+            var ability = self._abilities[i];
             if (!(ability.name in self.abilityData)) {
                 if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
-                    for (var j = 0; j < self.abilities()[i].attributes.length; j++) {
-                        var attribute = self.abilities()[i].attributes[j];
+                    for (var j = 0; j < self._abilities[i].attributes.length; j++) {
+                        var attribute = self._abilities[i].attributes[j];
                         switch(attribute.name) {
                             // antimage_spell_shield
                             case 'spell_shield_resistance':
-                                totalAttribute *= (1 - self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level())/100);
+                                totalAttribute *= (1 - self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100);
                             break;
                             // phantom_lancer_phantom_edge
                             case 'magic_resistance_pct':
                                 if (ability.name == 'phantom_lancer_phantom_edge') {
-                                    totalAttribute *= (1 - self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level())/100);
+                                    totalAttribute *= (1 - self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100);
                                 }
                             break;
                             // rubick_null_field
                             case 'magic_damage_reduction_pct':
                                 if (ability.name == 'rubick_null_field') {
-                                    totalAttribute *= (1 - self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level())/100);
+                                    totalAttribute *= (1 - self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100);
                                 }
                             break;
                         }
@@ -1730,11 +1731,11 @@ my.prototype.AbilityModel = function (a, h) {
     self.getMagicResistReduction = ko.computed(function () {
         var totalAttribute = 1;
         for (var i = 0; i < self.abilities().length; i++) {
-            var ability = self.abilities()[i];
+            var ability = self._abilities[i];
             if (!(ability.name in self.abilityData)) {
                 if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
-                    for (var j = 0; j < self.abilities()[i].attributes.length; j++) {
-                        var attribute = self.abilities()[i].attributes[j];
+                    for (var j = 0; j < self._abilities[i].attributes.length; j++) {
+                        var attribute = self._abilities[i].attributes[j];
                         switch(attribute.name) {
                             // ancient_apparition_ice_vortex
                             case 'spell_resist_pct':
@@ -1742,11 +1743,11 @@ my.prototype.AbilityModel = function (a, h) {
                             case 'bonus_spell_damage_pct':
                             // skywrath_mage_ancient_seal
                             case 'resist_debuff':
-                                totalAttribute *= (1 - self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level())/100);
+                                totalAttribute *= (1 - self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100);
                             break;
                             // elder_titan_natural_order
                             case 'magic_resistance_pct':
-                                totalAttribute *= (1 - self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level())/100);
+                                totalAttribute *= (1 - self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100);
                             break;
                         }
                     }
@@ -1759,33 +1760,33 @@ my.prototype.AbilityModel = function (a, h) {
     self.getMovementSpeedFlat = ko.computed(function () {
         var totalAttribute = 0;
         for (var i = 0; i < self.abilities().length; i++) {
-            var ability = self.abilities()[i];
+            var ability = self._abilities[i];
             if (!(ability.name in self.abilityData)) {
                 if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
-                    for (var j = 0; j < self.abilities()[i].attributes.length; j++) {
-                        var attribute = self.abilities()[i].attributes[j];
+                    for (var j = 0; j < self._abilities[i].attributes.length; j++) {
+                        var attribute = self._abilities[i].attributes[j];
                         switch(attribute.name) {
                             // alchemist_chemical_rage
                             case 'bonus_movespeed':
                                 if (ability.name == 'alchemist_chemical_rage') {
-                                    totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level());
+                                    totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
                                 }
                             break;
                             // tiny_grow
                             case 'bonus_movement_speed':
                                 if (ability.name == 'tiny_grow') {
-                                    totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level());
+                                    totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
                                 }
                             break;
                             // troll_warlord_berserkers_rage
                             case 'bonus_move_speed':
                                 if (ability.name == 'troll_warlord_berserkers_rage') {
-                                    totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level());
+                                    totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
                                 }                                
                             break;
                             // lone_druid_true_form
                             case 'speed_loss':
-                                totalAttribute -= self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level());
+                                totalAttribute -= self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
                             break;
                         }
                     }
@@ -1804,11 +1805,11 @@ my.prototype.AbilityModel = function (a, h) {
     self.getMovementSpeedPercent = ko.computed(function () {
         var totalAttribute = 0;
         for (var i = 0; i < self.abilities().length; i++) {
-            var ability = self.abilities()[i];
+            var ability = self._abilities[i];
             if (!(ability.name in self.abilityData)) {
                 if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
-                    for (var j = 0; j < self.abilities()[i].attributes.length; j++) {
-                        var attribute = self.abilities()[i].attributes[j];
+                    for (var j = 0; j < self._abilities[i].attributes.length; j++) {
+                        var attribute = self._abilities[i].attributes[j];
                         switch(attribute.name) {
                             // abaddon_frostmourne 
                             case 'move_speed_pct':
@@ -1822,60 +1823,60 @@ my.prototype.AbilityModel = function (a, h) {
                             case 'move_speed_bonus_pct':
                             // windrunner_windrun
                             case 'movespeed_bonus_pct':
-                                totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level())/100;
+                                totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100;
                             break;
                             // broodmother_spin_web,spectre_spectral_dagger
                             case 'bonus_movespeed':
                                 if (ability.name == 'broodmother_spin_web' || ability.name == 'spectre_spectral_dagger') {
-                                    totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level())/100;
+                                    totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100;
                                 }
                             break;
                             // axe_culling_blade,necronomicon_archer_aoe
                             case 'speed_bonus':
                                 if (ability.name == 'axe_culling_blade' || ability.name == 'necronomicon_archer_aoe') {
-                                    totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level())/100;
+                                    totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100;
                                 }
                             break;
                             // nyx_assassin_vendetta 
                             case 'movement_speed':
                                 if (ability.name == 'nyx_assassin_vendetta') {
-                                    totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level())/100;
+                                    totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100;
                                 }
                             break;
                             // spirit_breaker_empowering_haste
                             case 'bonus_movespeed_pct':
                                 if (ability.name == 'spirit_breaker_empowering_haste') {
-                                    totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level())/100;
+                                    totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100;
                                 }
                             break;
                             // ogre_magi_bloodlust,death_prophet_witchcraft,kobold_taskmaster_speed_aura
                             case 'bonus_movement_speed':
                                 if (ability.name == 'ogre_magi_bloodlust' || ability.name == 'death_prophet_witchcraft' || ability.name == 'kobold_taskmaster_speed_aura') {
-                                    totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level())/100;
+                                    totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100;
                                 }
                             break;
                             // razor_unstable_current,phantom_lancer_doppelwalk
                             case 'movement_speed_pct':
                                 if (ability.name == 'razor_unstable_current' || ability.name == 'phantom_lancer_doppelwalk') {
-                                    totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level())/100;
+                                    totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100;
                                 }
                             break;
                             // treant_natures_guise,lone_druid_rabid
                             case 'bonus_move_speed':
                                 if (ability.name == 'treant_natures_guise' || ability.name == 'lone_druid_rabid') {
-                                    totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level())/100;
+                                    totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100;
                                 }
                             break;
                             // wisp_tether
                             case 'movespeed':
                                 if (ability.name == 'wisp_tether') {
-                                    totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level())/100;
+                                    totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100;
                                 }
                             break;
                             // kunkka_ghostship,visage_grave_chill
                             case 'movespeed_bonus':
                                 if (ability.name == 'kunkka_ghostship' || ability.name == 'visage_grave_chill') {
-                                    totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level())/100;
+                                    totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100;
                                 }                                
                             break;
                         }
@@ -1895,31 +1896,31 @@ my.prototype.AbilityModel = function (a, h) {
     self.getMovementSpeedPercentReduction = ko.computed(function () {
         var totalAttribute = 0;
         for (var i = 0; i < self.abilities().length; i++) {
-            var ability = self.abilities()[i];
+            var ability = self._abilities[i];
             if (!(ability.name in self.abilityData)) {
                 if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
-                    for (var j = 0; j < self.abilities()[i].attributes.length; j++) {
-                        var attribute = self.abilities()[i].attributes[j];
+                    for (var j = 0; j < self._abilities[i].attributes.length; j++) {
+                        var attribute = self._abilities[i].attributes[j];
                         switch(attribute.name) {
                             // crystal_maiden_freezing_field
                             case 'movespeed_slow':
                                 if (ability.name == 'crystal_maiden_freezing_field' && !self.hasScepter()) {
-                                    totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level())/100;
+                                    totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100;
                                 }
                             break;
                             case 'movespeed_slow_scepter':
                                 if (ability.name == 'crystal_maiden_freezing_field' && self.hasScepter()) {
-                                    totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level())/100;
+                                    totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100;
                                 }
                             break;
                             // elder_titan_earth_splitter,magnataur_skewer,abaddon_frostmourne 
                             case 'slow_pct':
-                                totalAttribute -= self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level())/100;
+                                totalAttribute -= self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100;
                             break;
                             // night_stalker_void,crystal_maiden_crystal_nova,ghost_frost_attack,ogre_magi_frost_armor,polar_furbolg_ursa_warrior_thunder_clap
                             case 'movespeed_slow':
                                 if (ability.name != 'crystal_maiden_freezing_field') {
-                                    totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level())/100;
+                                    totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100;
                                 }
                             break;
                             // lich_frost_armor,lich_frost_nova,enchantress_enchant
@@ -1936,90 +1937,90 @@ my.prototype.AbilityModel = function (a, h) {
                             case 'overload_move_slow':
                             // windrunner_windrun
                             case 'enemy_movespeed_bonus_pct':
-                                totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level())/100;
+                                totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100;
                             break;
                             // phantom_assassin_stifling_dagger,tusk_frozen_sigil
                             case 'move_slow':
                                 if (ability.name == 'phantom_assassin_stifling_dagger') {
-                                    totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level())/100;
+                                    totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100;
                                 }
                                 else if (ability.name == 'tusk_frozen_sigil') {
-                                    totalAttribute -= self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level())/100;
+                                    totalAttribute -= self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100;
                                 }
                             break;
                             // invoker_ice_wall,medusa_stone_gaze,wisp_tether
                             case 'slow':
                                 if (ability.name == 'medusa_stone_gaze') {
-                                    totalAttribute -= self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level())/100;
+                                    totalAttribute -= self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100;
                                 }
                                 else {
-                                    totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level())/100;
+                                    totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100;
                                 }
                             break;
                             // broodmother_incapacitating_bite,bounty_hunter_jinada,spectre_spectral_dagger,winter_wyvern_arctic_burn
                             case 'bonus_movespeed':
                                 if (ability.name == 'broodmother_incapacitating_bite' || ability.name == 'bounty_hunter_jinada' || ability.name == 'winter_wyvern_arctic_burn' || ability.name == 'winter_wyvern_splinter_blast') {
-                                    totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level())/100;
+                                    totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100;
                                 }
                                 else if (ability.name == 'spectre_spectral_dagger') {
-                                    totalAttribute -= self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level())/100;
+                                    totalAttribute -= self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100;
                                 }
                             break;
                             // omniknight_degen_aura
                             case 'speed_bonus':
                                 if (ability.name == 'omniknight_degen_aura') {
-                                    totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level())/100;
+                                    totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100;
                                 }
                             break;
                             // tidehunter_gush
                             case 'movement_speed':
                                 if (ability.name == 'tidehunter_gush') {
-                                    totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level())/100;
+                                    totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100;
                                 }
                             break;
                             // pugna_decrepify,chen_penitence
                             case 'bonus_movement_speed':
                                 if (ability.name == 'pugna_decrepify' || ability.name == 'chen_penitence') {
-                                    totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level())/100;
+                                    totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100;
                                 }
                             break;
                             // ancient_apparition_ice_vortex,phantom_lancer_spirit_lance,skywrath_mage_concussive_shot,faceless_void_time_walk
                             case 'movement_speed_pct':
                                 if (ability.name == 'ancient_apparition_ice_vortex' || ability.name == 'phantom_lancer_spirit_lance' || ability.name == 'faceless_void_time_walk') {
-                                    totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level())/100;
+                                    totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100;
                                 }
                                 else if (ability.name == 'skywrath_mage_concussive_shot') {
-                                    totalAttribute -= self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level())/100;
+                                    totalAttribute -= self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100;
                                 }
                             break;
                             // razor_unstable_current
                             case 'slow_amount':
                                 if (ability.name == 'razor_unstable_current') {
-                                    totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level())/100;
+                                    totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100;
                                 }
                             break;
                             // brewmaster_drunken_haze,brewmaster_thunder_clap,treant_leech_seed
                             case 'movement_slow':
                                 if (ability.name == 'brewmaster_drunken_haze' || ability.name == 'brewmaster_thunder_clap') {
-                                    totalAttribute -= self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level())/100;
+                                    totalAttribute -= self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100;
                                 }
                                 else if (ability.name == 'ursa_earthshock' || ability.name == 'treant_leech_seed') {
-                                    totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level())/100;
+                                    totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100;
                                 }
                             break;
                             // skeleton_king_reincarnation
                             case 'movespeed':
                                 if (ability.name == 'skeleton_king_reincarnation') {
-                                    totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level())/100;
+                                    totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100;
                                 }
                             break;
                             // kunkka_torrent,visage_grave_chill
                             case 'movespeed_bonus':
                                 if (ability.name == 'kunkka_torrent') {
-                                    totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level())/100;
+                                    totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100;
                                 }
                                 else if (ability.name == 'visage_grave_chill') {
-                                    totalAttribute -= self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level())/100;
+                                    totalAttribute -= self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100;
                                 }
                             break;
                         }
@@ -2049,16 +2050,16 @@ my.prototype.AbilityModel = function (a, h) {
     self.getTurnRateReduction = ko.computed(function () {
         var totalAttribute = 0;
         for (var i = 0; i < self.abilities().length; i++) {
-            var ability = self.abilities()[i];
+            var ability = self._abilities[i];
             if (!(ability.name in self.abilityData)) {
                 if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
-                    for (var j = 0; j < self.abilities()[i].attributes.length; j++) {
-                        var attribute = self.abilities()[i].attributes[j];
+                    for (var j = 0; j < self._abilities[i].attributes.length; j++) {
+                        var attribute = self._abilities[i].attributes[j];
                         switch(attribute.name) {
                             // medusa_stone_gaze
                             case 'slow':
                                 if (ability.name == 'medusa_stone_gaze') {
-                                    totalAttribute -= self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level())/100;
+                                    totalAttribute -= self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100;
                                 }
                             break;
                         }
@@ -2078,17 +2079,17 @@ my.prototype.AbilityModel = function (a, h) {
     self.getVisionRangeNight = ko.computed(function () {
         var totalAttribute = 0;
         for (var i = 0; i < self.abilities().length; i++) {
-            var ability = self.abilities()[i];
+            var ability = self._abilities[i];
             if (!(ability.name in self.abilityData)) {
                 if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
-                    for (var j = 0; j < self.abilities()[i].attributes.length; j++) {
-                        var attribute = self.abilities()[i].attributes[j];
+                    for (var j = 0; j < self._abilities[i].attributes.length; j++) {
+                        var attribute = self._abilities[i].attributes[j];
                         switch(attribute.name) {
                             // winter_wyvern_arctic_burn
                             case 'night_vision_bonus':
                             // lycan_shapeshift,luna_lunar_blessing
                             case 'bonus_night_vision':
-                                totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level());
+                                totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
                             break;
                         }
                     }
@@ -2107,15 +2108,15 @@ my.prototype.AbilityModel = function (a, h) {
     self.getVisionRangePctReduction = ko.computed(function () {
         var totalAttribute = 0;
         for (var i = 0; i < self.abilities().length; i++) {
-            var ability = self.abilities()[i];
+            var ability = self._abilities[i];
             if (!(ability.name in self.abilityData)) {
                 if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
-                    for (var j = 0; j < self.abilities()[i].attributes.length; j++) {
-                        var attribute = self.abilities()[i].attributes[j];
+                    for (var j = 0; j < self._abilities[i].attributes.length; j++) {
+                        var attribute = self._abilities[i].attributes[j];
                         switch(attribute.name) {
                             // night_stalker_darkness
                             case 'blind_percentage':
-                                totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes, attribute.name, ability.level())/100;
+                                totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100;
                             break;
                         }
                     }
@@ -2128,7 +2129,7 @@ my.prototype.AbilityModel = function (a, h) {
     self.setEvasion = ko.computed(function () {
         var totalAttribute = 0;
         for (var i = 0; i < self.abilities().length; i++) {
-            var ability = self.abilities()[i];
+            var ability = self._abilities[i];
             if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
                 if (ability.name == 'windrunner_windrun') {
                     return 1;
@@ -2143,7 +2144,7 @@ my.prototype.AbilityModel = function (a, h) {
         var MIN_MOVESPEED = 100;
         var totalAttribute = 0;
         for (var i = 0; i < self.abilities().length; i++) {
-            var ability = self.abilities()[i];
+            var ability = self._abilities[i];
             if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
                 if (ability.name == 'spirit_breaker_charge_of_darkness') {
                     return self.getAbilityAttributeValue(ability.attributes, 'movement_speed', ability.level());
@@ -2168,11 +2169,11 @@ my.prototype.AbilityModel = function (a, h) {
     self.getBashSource = function (attacktype) {
         var sources = {};
         for (var i = 0; i < self.abilities().length; i++) {
-            var ability = self.abilities()[i];
+            var ability = self._abilities[i];
             if (!(ability.name in self.abilityData)) {
                 if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
-                    for (var j = 0; j < self.abilities()[i].attributes.length; j++) {
-                        var attribute = self.abilities()[i].attributes[j];
+                    for (var j = 0; j < self._abilities[i].attributes.length; j++) {
+                        var attribute = self._abilities[i].attributes[j];
                         switch(attribute.name) {
                             // sniper_headshot
                             case 'proc_chance':
@@ -2234,11 +2235,11 @@ my.prototype.AbilityModel = function (a, h) {
     self.getOrbSource = function () {
         var sources = {};
         for (var i = 0; i < self.abilities().length; i++) {
-            var ability = self.abilities()[i];
+            var ability = self._abilities[i];
             if (!(ability.name in self.abilityData)) {
                 if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
-                    for (var j = 0; j < self.abilities()[i].attributes.length; j++) {
-                        var attribute = self.abilities()[i].attributes[j];
+                    for (var j = 0; j < self._abilities[i].attributes.length; j++) {
+                        var attribute = self._abilities[i].attributes[j];
                         switch(attribute.name) {
                             // antimage_mana_break
                             case 'mana_per_hit':
