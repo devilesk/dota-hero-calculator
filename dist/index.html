@@ -10,21 +10,13 @@
 
     <link rel="shortcut icon" href="/media/favicon.png">
   
-    <link rel="stylesheet" href="/media/bootstrap/css/bootstrap.css">
-    <!-- @if NODE_ENV='development' -->
-    <link rel="stylesheet" type="text/css" href="css/jquery-ui.css" />
-    <link rel="stylesheet" type="text/css" href="css/hero-calculator.items.css" />
-    <link rel="stylesheet" type="text/css" href="css/hero-calculator.common.css" />
-    <!-- @endif -->
-    <!-- @if NODE_ENV='production' -->
+    <link rel="stylesheet" href="/media/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/hero-calculator.min.css" />
-    <!-- @endif -->
     <link id="hero-css" rel="stylesheet" type="text/css" href="css/hero-calculator.theme.dark.css" />
     <script data-main="js/main" src="js/lib/require.js"></script>
 </head>
 <body id="index" class="page-webapps">
 <div class="wrapper">
-<!-- @if NODE_ENV='development' -->
 <div class="navbar navbar-default main_nav" data-bind="visible: !sideView()">
 	<div class="container">
         <div class="navbar-header">
@@ -101,10 +93,6 @@
 		</div>
 	</div>
 </div>
-<!-- @endif -->
-<!-- @if NODE_ENV='production' -->
-<!-- @include .navbar.html -->
-<!-- @endif -->
 <div class="container" data-bind="css: { container: !(sideView()), 'col-md-12': sideView() }">
     <header class="banner clearfix" data-bind="visible: !(sideView())">
         <h2 class="pull-left">Hero Calculator</h2>
