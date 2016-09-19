@@ -702,10 +702,10 @@ define(['require','exports','module','herocalc_knockout','./herocalc_core'],func
                             switch(attribute.name()) {
                                 // winter_wyvern_arctic_burn
                                 case 'attack_range_bonus':
-                                    totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes(), attribute.name(), ability.level());
-                                break;
                                 // templar_assassin_psi_blades,sniper_take_aim
                                 case 'bonus_attack_range':
+                                    totalAttribute += self.getAbilityAttributeValue(self.abilities()[i].attributes(), attribute.name(), ability.level());
+                                break;
                                 // terrorblade_metamorphosis,troll_warlord_berserkers_rage
                                 case 'bonus_range':
                                     if (ability.name() == 'terrorblade_metamorphosis') {

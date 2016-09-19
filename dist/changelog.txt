@@ -1,3 +1,7 @@
+2016-09-19
+- Fix bonus attack range from Sniper Take Aim and Templar Assassin Psi Blades
+- Fix Hurricane Pike IAS
+
 2016-08-08
 - Added/Fixed the following abilities:
     Huskar Berserker's Blood
