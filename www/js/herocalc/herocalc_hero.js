@@ -86,13 +86,16 @@ my.prototype.HeroModel = function (h) {
     
     self.ability = ko.computed(function () {
         var a = new my.prototype.AbilityModel(ko.observableArray(JSON.parse(JSON.stringify(self.heroData().abilities))), self);
-        if (self.heroId() === 'earth_spirit' || self.heroId() === 'ogre_magi') {
-            a.abilities()[3].level(1);
-        }
-        else if (self.heroId() === 'invoker') {
-            for (var i = 6; i < 16; i++) {
-                a.abilities()[i].level(1);
-            }
+        switch (self.heroId()) {
+            case 'earth_spirit':
+            case 'ogre_magi':
+                a._abilities[3].level(1);
+            break;
+            case 'invoker':
+                for (var i = 6; i < 16; i++) {
+                    a._abilities[i].level(1);
+                }
+            break;
         }
         self.skillPointHistory.removeAll();
         a.hasScepter = self.inventory.hasScepter
