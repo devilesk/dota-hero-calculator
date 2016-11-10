@@ -1,3 +1,6 @@
+2016-10-25
+- Fix Solar Crest and Medallion actives
+
 2016-09-19
 - Fix bonus attack range from Sniper Take Aim and Templar Assassin Psi Blades
 - Fix Hurricane Pike IAS
