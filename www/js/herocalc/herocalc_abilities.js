@@ -631,8 +631,8 @@ my.prototype.AbilityModel = function (a, h) {
         for (var i = 0; i < self.abilities().length; i++) {
             var ability = self._abilities[i];
             if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
-                if (!(ability.name in self.abilityData)) {
-                    /*for (var j = 0; j < self._abilities[i].attributes.length; j++) {
+                /*if (!(ability.name in self.abilityData)) {
+                    for (var j = 0; j < self._abilities[i].attributes.length; j++) {
                         var attribute = self._abilities[i].attributes[j];
                         //switch(attribute.name) {
                         //    // 
@@ -640,9 +640,9 @@ my.prototype.AbilityModel = function (a, h) {
                         //        totalAttribute += parseInt(attribute.value[ability.level()-1]);
                         //    break;
                         //}
-                    }*/
+                    }
                 }
-                else if (ability.manaregenreduction != undefined) {
+                else*/ if (ability.manaregenreduction != undefined) {
                     // pugna_nether_ward
                     totalAttribute+=ability.manaregenreduction();
                 }
@@ -1254,8 +1254,8 @@ my.prototype.AbilityModel = function (a, h) {
         var totalAttribute = 1;
         for (var i = 0; i < self.abilities().length; i++) {
             var ability = self._abilities[i];
-            if (!(ability.name in self.abilityData)) {
-                if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
+            if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
+                if (!(ability.name in self.abilityData)) {
                     for (var j = 0; j < self._abilities[i].attributes.length; j++) {
                         var attribute = self._abilities[i].attributes[j];
                         switch(attribute.name) {
@@ -1286,23 +1286,23 @@ my.prototype.AbilityModel = function (a, h) {
         var totalAttribute = 1;
         for (var i = 0; i < self.abilities().length; i++) {
             var ability = self._abilities[i];
-            if (!(ability.name in self.abilityData)) {
-                /*if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
-                    for (var j = 0; j < self._abilities[i].attributes.length; j++) {
-                        var attribute = self._abilities[i].attributes[j];
-                        switch(attribute.name) {
-                            // bane_enfeeble
-                            case 'enfeeble_attack_reduction':
-                                totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
-                            break;
+            if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
+                /*if (!(ability.name in self.abilityData)) {
+                    if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
+                        for (var j = 0; j < self._abilities[i].attributes.length; j++) {
+                            var attribute = self._abilities[i].attributes[j];
+                            switch(attribute.name) {
+                                // bane_enfeeble
+                                case 'enfeeble_attack_reduction':
+                                    totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
+                                break;
+                            }
                         }
                     }
-                }*/
-            }
-            else if (ability.damageAmplification != undefined) {
-                if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
-                    // undying_flesh_golem
-                    totalAttribute *= (1 + ability.damageAmplification()/100);
+                }
+                else*/ if (ability.damageAmplification != undefined) {
+                        // undying_flesh_golem
+                        totalAttribute *= (1 + ability.damageAmplification()/100);
                 }
             }
         }
@@ -1313,8 +1313,8 @@ my.prototype.AbilityModel = function (a, h) {
         var totalAttribute = 1;
         for (var i = 0; i < self.abilities().length; i++) {
             var ability = self._abilities[i];
-            if (!(ability.name in self.abilityData)) {
-                if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
+            if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
+                if (!(ability.name in self.abilityData)) {
                     for (var j = 0; j < self._abilities[i].attributes.length; j++) {
                         var attribute = self._abilities[i].attributes[j];
                         switch(attribute.name) {
@@ -1331,9 +1331,7 @@ my.prototype.AbilityModel = function (a, h) {
                         totalAttribute *= (1 - 50/100);
                     }
                 }
-            }
-            else if (ability.damageReduction != undefined) {
-                if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
+                else if (ability.damageReduction != undefined) {
                     // wisp_overcharge,bristleback_bristleback,spectre_dispersion,medusa_mana_shield,ursa_enrage
                     totalAttribute *= (1 + ability.damageReduction()/100);
                 }
@@ -1346,8 +1344,8 @@ my.prototype.AbilityModel = function (a, h) {
         var sources = {};
         for (var i = 0; i < self.abilities().length; i++) {
             var ability = self._abilities[i];
-            if (!(ability.name in self.abilityData)) {
-                if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
+            if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
+                if (!(ability.name in self.abilityData)) {
                     switch(ability.name) {
                         // phantom_assassin_coup_de_grace,brewmaster_drunken_brawler,chaos_knight_chaos_strike,lycan_shapeshift,skeleton_king_mortal_strike,juggernaut_blade_dance,alpha_wolf_critical_strike,giant_wolf_critical_strike
                         case 'phantom_assassin_coup_de_grace':
@@ -1441,8 +1439,8 @@ my.prototype.AbilityModel = function (a, h) {
         var sources = {};
         for (var i = 0; i < self.abilities().length; i++) {
             var ability = self._abilities[i];
-            if (!(ability.name in self.abilityData)) {
-                if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
+            if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
+                if (!(ability.name in self.abilityData)) {
                     switch(ability.name) {
                         // magnataur_empower
                         case 'magnataur_empower':
@@ -1513,8 +1511,8 @@ my.prototype.AbilityModel = function (a, h) {
         var totalAttribute = 1;
         for (var i = 0; i < self.abilities().length; i++) {
             var ability = self._abilities[i];
-            if (!(ability.name in self.abilityData)) {
-                if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
+            if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
+                if (!(ability.name in self.abilityData)) {
                     for (var j = 0; j < self._abilities[i].attributes.length; j++) {
                         var attribute = self._abilities[i].attributes[j];
                         switch(attribute.name) {
@@ -1534,8 +1532,8 @@ my.prototype.AbilityModel = function (a, h) {
         var totalAttribute = 1;
         for (var i = 0; i < self.abilities().length; i++) {
             var ability = self._abilities[i];
-            if (!(ability.name in self.abilityData)) {
-                if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
+            if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
+                if (!(ability.name in self.abilityData)) {
                     for (var j = 0; j < self._abilities[i].attributes.length; j++) {
                         var attribute = self._abilities[i].attributes[j];
                         switch(attribute.name) {
@@ -1557,8 +1555,8 @@ my.prototype.AbilityModel = function (a, h) {
         var totalAttribute = 1;
         for (var i = 0; i < self.abilities().length; i++) {
             var ability = self._abilities[i];
-            if (!(ability.name in self.abilityData)) {
-                if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
+            if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
+                if (!(ability.name in self.abilityData)) {
                     for (var j = 0; j < self._abilities[i].attributes.length; j++) {
                         var attribute = self._abilities[i].attributes[j];
                         switch(attribute.name) {
@@ -1578,8 +1576,8 @@ my.prototype.AbilityModel = function (a, h) {
         var totalAttribute = 1;
         for (var i = 0; i < self.abilities().length; i++) {
             var ability = self._abilities[i];
-            if (!(ability.name in self.abilityData)) {
-                if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
+            if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
+                if (!(ability.name in self.abilityData)) {
                     for (var j = 0; j < self._abilities[i].attributes.length; j++) {
                         var attribute = self._abilities[i].attributes[j];
                         switch(attribute.name) {
@@ -1592,9 +1590,7 @@ my.prototype.AbilityModel = function (a, h) {
                         }
                     }
                 }
-            }
-            else if (ability.missChance != undefined) {
-                if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
+                else if (ability.missChance != undefined) {
                     // night_stalker_crippling_fear
                     totalAttribute*=(1-ability.missChance()/100);
                 }
@@ -1607,8 +1603,8 @@ my.prototype.AbilityModel = function (a, h) {
         var totalAttribute = 0;
         for (var i = 0; i < self.abilities().length; i++) {
             var ability = self._abilities[i];
-            if (!(ability.name in self.abilityData)) {
-                if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
+            if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
+                if (!(ability.name in self.abilityData)) {
                     for (var j = 0; j < self._abilities[i].attributes.length; j++) {
                         var attribute = self._abilities[i].attributes[j];
                         switch(attribute.name) {
@@ -1621,9 +1617,7 @@ my.prototype.AbilityModel = function (a, h) {
                         }
                     }
                 }
-            }
-            else if (ability.lifesteal != undefined) {
-                if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
+                else if (ability.lifesteal != undefined) {
                     // life_stealer_open_wounds
                     totalAttribute+=ability.lifesteal();
                 }
@@ -1636,8 +1630,8 @@ my.prototype.AbilityModel = function (a, h) {
         var totalAttribute = 1;
         for (var i = 0; i < self.abilities().length; i++) {
             var ability = self._abilities[i];
-            if (!(ability.name in self.abilityData)) {
-                if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
+            if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
+                if (!(ability.name in self.abilityData)) {
                     for (var j = 0; j < self._abilities[i].attributes.length; j++) {
                         var attribute = self._abilities[i].attributes[j];
                         switch(attribute.name) {
@@ -1660,9 +1654,7 @@ my.prototype.AbilityModel = function (a, h) {
                         }
                     }
                 }
-            }
-            else if (ability.magicResist != undefined) {
-                if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
+                else if (ability.magicResist != undefined) {
                     // huskar_berserkers_blood,viper_corrosive_skin,visage_gravekeepers_cloak
                     totalAttribute *= (1 - ability.magicResist()/100);
                 }
@@ -1675,8 +1667,8 @@ my.prototype.AbilityModel = function (a, h) {
         var totalAttribute = 1;
         for (var i = 0; i < self.abilities().length; i++) {
             var ability = self._abilities[i];
-            if (!(ability.name in self.abilityData)) {
-                if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
+            if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
+                if (!(ability.name in self.abilityData)) {
                     for (var j = 0; j < self._abilities[i].attributes.length; j++) {
                         var attribute = self._abilities[i].attributes[j];
                         switch(attribute.name) {
@@ -1704,8 +1696,8 @@ my.prototype.AbilityModel = function (a, h) {
         var totalAttribute = 0;
         for (var i = 0; i < self.abilities().length; i++) {
             var ability = self._abilities[i];
-            if (!(ability.name in self.abilityData)) {
-                if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
+            if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
+                if (!(ability.name in self.abilityData)) {
                     for (var j = 0; j < self._abilities[i].attributes.length; j++) {
                         var attribute = self._abilities[i].attributes[j];
                         switch(attribute.name) {
@@ -1734,10 +1726,8 @@ my.prototype.AbilityModel = function (a, h) {
                         }
                     }
                 }
-            }
-            else if (ability.movementSpeedFlat != undefined) {
+                else if (ability.movementSpeedFlat != undefined) {
                 // dragon_knight_elder_dragon_form
-                if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
                     totalAttribute+=ability.movementSpeedFlat();
                 }
             }
@@ -1749,8 +1739,8 @@ my.prototype.AbilityModel = function (a, h) {
         var totalAttribute = 0;
         for (var i = 0; i < self.abilities().length; i++) {
             var ability = self._abilities[i];
-            if (!(ability.name in self.abilityData)) {
-                if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
+            if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
+                if (!(ability.name in self.abilityData)) {
                     for (var j = 0; j < self._abilities[i].attributes.length; j++) {
                         var attribute = self._abilities[i].attributes[j];
                         switch(attribute.name) {
@@ -1825,10 +1815,8 @@ my.prototype.AbilityModel = function (a, h) {
                         }
                     }
                 }
-            }
-            else if (ability.movementSpeedPct != undefined) {
+                else if (ability.movementSpeedPct != undefined) {
                 // axe_battle_hunger,bristleback_warpath,spirit_breaker_greater_bash,lina_fiery_soul,invoker_ghost_walk,invoker_wex,elder_titan_ancestral_spirit
-                if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
                     totalAttribute+=ability.movementSpeedPct()/100;
                 }
             }
@@ -1840,8 +1828,8 @@ my.prototype.AbilityModel = function (a, h) {
         var totalAttribute = 0;
         for (var i = 0; i < self.abilities().length; i++) {
             var ability = self._abilities[i];
-            if (!(ability.name in self.abilityData)) {
-                if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
+            if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
+                if (!(ability.name in self.abilityData)) {
                     for (var j = 0; j < self._abilities[i].attributes.length; j++) {
                         var attribute = self._abilities[i].attributes[j];
                         switch(attribute.name) {
@@ -1975,9 +1963,7 @@ my.prototype.AbilityModel = function (a, h) {
                         totalAttribute -= 15/100;
                     }
                 }
-            }
-            else if (ability.movementSpeedPctReduction != undefined) {
-                if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
+                else if (ability.movementSpeedPctReduction != undefined) {
                     // axe_battle_hunger,batrider_sticky_napalm,shredder_chakram,meepo_geostrike,life_stealer_open_wounds,
                     // venomancer_poison_sting,viper_viper_strike,viper_corrosive_skin,viper_poison_attack,venomancer_venomous_gale,treant_leech_seed
                     // lich_chain_frost,sniper_shrapnel,centaur_stampede,huskar_life_break,jakiro_dual_breath,meepo_geostrike,sandking_epicenter
@@ -1994,8 +1980,8 @@ my.prototype.AbilityModel = function (a, h) {
         var totalAttribute = 0;
         for (var i = 0; i < self.abilities().length; i++) {
             var ability = self._abilities[i];
-            if (!(ability.name in self.abilityData)) {
-                if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
+            if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
+                if (!(ability.name in self.abilityData)) {
                     for (var j = 0; j < self._abilities[i].attributes.length; j++) {
                         var attribute = self._abilities[i].attributes[j];
                         switch(attribute.name) {
@@ -2008,9 +1994,7 @@ my.prototype.AbilityModel = function (a, h) {
                         }
                     }
                 }
-            }
-            else if (ability.turnRateReduction != undefined) {
-                if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
+                else if (ability.turnRateReduction != undefined) {
                     // batrider_sticky_napalm
                     totalAttribute+=ability.turnRateReduction()/100;
                 }
@@ -2023,8 +2007,8 @@ my.prototype.AbilityModel = function (a, h) {
         var totalAttribute = 0;
         for (var i = 0; i < self.abilities().length; i++) {
             var ability = self._abilities[i];
-            if (!(ability.name in self.abilityData)) {
-                if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
+            if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
+                if (!(ability.name in self.abilityData)) {
                     for (var j = 0; j < self._abilities[i].attributes.length; j++) {
                         var attribute = self._abilities[i].attributes[j];
                         switch(attribute.name) {
@@ -2037,9 +2021,7 @@ my.prototype.AbilityModel = function (a, h) {
                         }
                     }
                 }
-            }
-            else if (ability.visionnight != undefined) {
-                if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
+                else if (ability.visionnight != undefined) {
                     // 
                     totalAttribute+=ability.visionnight();
                 }
@@ -2052,8 +2034,8 @@ my.prototype.AbilityModel = function (a, h) {
         var totalAttribute = 0;
         for (var i = 0; i < self.abilities().length; i++) {
             var ability = self._abilities[i];
-            if (!(ability.name in self.abilityData)) {
-                if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
+            if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
+                if (!(ability.name in self.abilityData)) {
                     for (var j = 0; j < self._abilities[i].attributes.length; j++) {
                         var attribute = self._abilities[i].attributes[j];
                         switch(attribute.name) {
@@ -2113,8 +2095,8 @@ my.prototype.AbilityModel = function (a, h) {
         var sources = {};
         for (var i = 0; i < self.abilities().length; i++) {
             var ability = self._abilities[i];
-            if (!(ability.name in self.abilityData)) {
-                if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
+            if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
+                if (!(ability.name in self.abilityData)) {
                     for (var j = 0; j < self._abilities[i].attributes.length; j++) {
                         var attribute = self._abilities[i].attributes[j];
                         switch(attribute.name) {
@@ -2145,9 +2127,7 @@ my.prototype.AbilityModel = function (a, h) {
                         }
                     }
                 }
-            }
-            else if (ability.bashBonusDamage != undefined) {
-                if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
+                else if (ability.bashBonusDamage != undefined) {
                     // faceless_void_time_lock
                     if (sources[ability.name] == undefined && ability.name == 'faceless_void_time_lock') {
                         sources[ability.name] = {
@@ -2179,8 +2159,8 @@ my.prototype.AbilityModel = function (a, h) {
         var sources = {};
         for (var i = 0; i < self.abilities().length; i++) {
             var ability = self._abilities[i];
-            if (!(ability.name in self.abilityData)) {
-                if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
+            if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
+                if (!(ability.name in self.abilityData)) {
                     for (var j = 0; j < self._abilities[i].attributes.length; j++) {
                         var attribute = self._abilities[i].attributes[j];
                         switch(attribute.name) {
@@ -2217,9 +2197,7 @@ my.prototype.AbilityModel = function (a, h) {
                         }
                     }
                 }
-            }
-            else if (ability.bonusDamageOrb != undefined) {
-                if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
+                else if (ability.bonusDamageOrb != undefined) {
                     // obsidian_destroyer_arcane_orb
                     if (sources[ability.name] == undefined && ability.name == 'obsidian_destroyer_arcane_orb') {
                         sources[ability.name] = {
@@ -2338,41 +2316,42 @@ my.prototype.AbilityModel.prototype.levelUpAbility = function (index, data, even
     }
 };
 my.prototype.AbilityModel.prototype.levelDownAbility = function (index, data, event, hero) {
+    var i = ko.utils.unwrapObservable(index);
     var self = this;
-    if (self.abilities()[index()].level() > 0) {
-        self.abilities()[index()].level(self.abilities()[index()].level() - 1);
-        hero.skillPointHistory.splice(hero.skillPointHistory().lastIndexOf(index()), 1);
-        switch (self.abilities()[index()].name) {
+    if (self.abilities()[i].level() > 0) {
+        self.abilities()[i].level(self.abilities()[i].level() - 1);
+        hero.skillPointHistory.splice(hero.skillPointHistory().lastIndexOf(i), 1);
+        switch (self.abilities()[i].name) {
             case 'beastmaster_call_of_the_wild':
             case 'chen_test_of_faith':
             case 'morphling_morph_agi':
             case 'shadow_demon_shadow_poison':
-                self.abilities()[index() + 1].level(self.abilities()[index()].level());
+                self.abilities()[i + 1].level(self.abilities()[i].level());
             break;
             case 'morphling_morph_str':
-                self.abilities()[index() - 1].level(self.abilities()[index()].level());
+                self.abilities()[i - 1].level(self.abilities()[i].level());
             break;
             case 'keeper_of_the_light_spirit_form':
-                self.abilities()[index() - 1].level(self.abilities()[index()].level());
-                self.abilities()[index() - 2].level(self.abilities()[index()].level());
+                self.abilities()[i - 1].level(self.abilities()[i].level());
+                self.abilities()[i - 2].level(self.abilities()[i].level());
             break;
             case 'nevermore_shadowraze1':
-                self.abilities()[index() + 1].level(self.abilities()[index()].level());
-                self.abilities()[index() + 2].level(self.abilities()[index()].level());
+                self.abilities()[i + 1].level(self.abilities()[i].level());
+                self.abilities()[i + 2].level(self.abilities()[i].level());
             break;
             case 'nevermore_shadowraze2':
-                self.abilities()[index() - 1].level(self.abilities()[index()].level());
-                self.abilities()[index() + 1].level(self.abilities()[index()].level());
+                self.abilities()[i - 1].level(self.abilities()[i].level());
+                self.abilities()[i + 1].level(self.abilities()[i].level());
             break;
             case 'nevermore_shadowraze3':
-                self.abilities()[index() - 1].level(self.abilities()[index()].level());
-                self.abilities()[index() - 2].level(self.abilities()[index()].level());
+                self.abilities()[i - 1].level(self.abilities()[i].level());
+                self.abilities()[i - 2].level(self.abilities()[i].level());
             break;
             case 'ember_spirit_fire_remnant':
-                self.abilities()[index() - 1].level(self.abilities()[index()].level());
+                self.abilities()[i - 1].level(self.abilities()[i].level());
             break;
             case 'lone_druid_true_form':
-                self.abilities()[index() - 1].level(self.abilities()[index()].level());
+                self.abilities()[i - 1].level(self.abilities()[i].level());
             break;
         }
     }

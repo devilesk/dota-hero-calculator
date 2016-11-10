@@ -105,9 +105,6 @@ my.prototype.HeroModel = function (h) {
     self.availableSkillPoints = ko.computed(function () {
         var c = self.selectedHeroLevel();
         for (var i = 0; i < self.ability().abilities().length; i++) {
-            var getIndex = function () {
-                return i;
-            };
             switch(self.ability().abilities()[i].abilitytype) {
                 case 'DOTA_ABILITY_TYPE_ULTIMATE':
                     if (self.heroId() === 'invoker') {
@@ -117,32 +114,29 @@ my.prototype.HeroModel = function (h) {
                             ((self.ability().abilities()[i].level() == 3) && (parseInt(self.selectedHeroLevel()) < 11)) ||
                             ((self.ability().abilities()[i].level() == 4) && (parseInt(self.selectedHeroLevel()) < 17))
                         ) {
-                            self.ability().levelDownAbility(getIndex, null, null, self);
+                            self.ability().levelDownAbility(i, null, null, self);
                         }
                     }
                     else if (self.heroId() === 'meepo') {
                         while ((self.ability().abilities()[i].level()-1) * 7 + 3 > parseInt(self.selectedHeroLevel())) {
-                            self.ability().levelDownAbility(getIndex, null, null, self);
+                            self.ability().levelDownAbility(i, null, null, self);
                         }
                     }
                     else {
                         while (self.ability().abilities()[i].level() * 5 + 1 > parseInt(self.selectedHeroLevel())) {
-                            self.ability().levelDownAbility(getIndex, null, null, self);
+                            self.ability().levelDownAbility(i, null, null, self);
                         }
                     }
                 break;
                 default:
                     while (self.ability().abilities()[i].level() * 2 - 1 > parseInt(self.selectedHeroLevel())) {
-                        self.ability().levelDownAbility(getIndex, null, null, self);
+                        self.ability().levelDownAbility(i, null, null, self);
                     }
                 break;
             }
         }
-        var getIndex = function () {
-            return self.skillPointHistory()[self.skillPointHistory().length-1];
-        };
         while (self.skillPointHistory().length > c) {
-            self.ability().levelDownAbility(getIndex, null, null, self);
+            self.ability().levelDownAbility(self.skillPointHistory()[self.skillPointHistory().length-1], null, null, self);
         }
         return c-self.skillPointHistory().length;
     }, this);
