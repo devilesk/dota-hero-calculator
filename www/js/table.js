@@ -281,7 +281,7 @@ hc.init("/media/js/herodata.json","/media/js/itemdata.json","/media/js/unitdata.
         self.bonusAttributeLevel = ko.computed(function () {
             var hero = self.heroes()[0];
             var attributeBonus = hero.ability().getAbility('attribute_bonus');
-            return attributeBonus.level() + '/' + Math.floor((self.selectedHeroLevel()-1)/2 + 1);
+            return attributeBonus.level() + '/' + Math.min(Math.floor((self.selectedHeroLevel()-1)/2 + 1), 10);
         });
         
         self.levelUpAttributeBonus = function () {

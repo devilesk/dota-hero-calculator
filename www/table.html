@@ -84,6 +84,32 @@ th, td {
     font-family: "Courier New";
     font-size: 12px;
 }
+.option-button, .option-group, #rowcount-label {
+    width: 215px;
+}
+#rowcount-label label {
+    margin-bottom: 5px;
+}
+#rowcount-label span {
+    float: right;
+}
+.herolevel-group, .attributelevel-group {
+    position: relative;
+}
+#herolevel {
+    padding-right: 50px;
+    text-align: right;
+}
+#attributelevel {
+    padding-right: 40px;
+    text-align: right;
+}
+#herolevel-label, #attributelevel-label {
+    position: absolute;
+    line-height: 44px;
+    top: 0;
+    left: 10px;
+}
 </style>
         	    </head>
 <body id="index">
@@ -185,38 +211,59 @@ th, td {
         <h4 id="spinner">Loading...</h4>
     <div style="display:none" data-bind="visible: loaded">
     <div class="col-md-12" data-bind="css: { 'col-lg-8': displayShop() && !shopPopout() }">
-        <div class="row form-group">
+        <div class="row">
             <div class="col-md-12 form-inline">
-                <div class="form-group">
-                <label for="herolevel">Hero Level</label>
-                <select id="herolevel" class="form-control" data-bind="value: selectedHeroLevel, foreach: new Array(25)">
-                    <option data-bind="text: $index()+1"></option>
-                </select>
+                <div class="form-group option-group herolevel-group">
+                    <input id="herolevel" data-bind="spinner: selectedHeroLevel, spinnerOptions: { min: 1, max: 25 }">
+                    <label id="herolevel-label" for="herolevel">Hero Level</label>
                 </div>
 
+                <div class="form-group option-group attributelevel-group">
+                    <span class="ui-spinner ui-corner-all ui-widget ui-widget-content">
+                        <input id="attributelevel" class="ui-spinner-input" disabled data-bind="value: bonusAttributeLevel">
+                        <a tabindex="-1" aria-hidden="true" class="ui-button ui-widget ui-spinner-button ui-spinner-up ui-corner-tr ui-button-icon-only" role="button" data-bind="click: levelUpAttributeBonus">
+                            <span class="ui-button-icon ui-icon glyphicon glyphicon-triangle-top"></span><span class="ui-button-icon-space"> </span>
+                        </a>
+                        <a tabindex="-1" aria-hidden="true" class="ui-button ui-widget ui-spinner-button ui-spinner-down ui-corner-br ui-button-icon-only" role="button" data-bind="click: levelDownAttributeBonus">
+                            <span class="ui-button-icon ui-icon glyphicon glyphicon-triangle-bottom"></span><span class="ui-button-icon-space"> </span>
+                        </a>
+                    </span>
+                    <label id="attributelevel-label" for="attributelevel">Attribute Level</label>
+                </div>
+                
                 <div class="form-group">
-                <label for="bonuslevel">Attribute Bonus Level:</label> <span class="bonusAttributeLevel-label" data-bind="text: bonusAttributeLevel"></span>
-                <button class="btn btn-default" type="text" data-bind="click: levelUpAttributeBonus" >Level Up Attributes</button>
-                <button class="btn btn-default" type="text" data-bind="click: levelDownAttributeBonus" >Level Down Attributes</button>
+                <div class="form-control" id="rowcount-label">
+                <label>Row count </label><span data-bind="text: rowCount()"></span>
+                </div>
+                </div>
+                
+                <div class="form-group">
+                <label class="btn btn-default option-button" data-bind="css: { active: filterVisible }">
+                <input type="checkbox" data-bind="checked: filterVisible">
+                Row Filters
+                </label>
+                </div>
+                
+                <div class="form-group">
+                <label class="btn btn-default option-button" data-bind="css: { active: columnsVisible }">
+                <input type="checkbox" data-bind="checked: columnsVisible">
+                Column Display
+                </label>
+                </div>
+                
+                <div class="form-group">
+                <label class="btn btn-default option-button" data-bind="css: { active: multiSort }" title="">
+                <input type="checkbox" data-bind="checked: multiSort, disable: shiftKey">
+                Multi-column sorting <span id="multiSort-tooltip" class="glyphicon glyphicon-info-sign" aria-hidden="true" data-toggle="tooltip" title="Holding shift also enables this."></span>
+                </label>
                 </div>
             </div>
         </div>
 
-        <div class="row">
+        <div class="row" data-bind="visible: filterVisible">
             <div class="col-md-12 form-inline">
-                
                 <div class="form-group">
-                <input class="btn btn-default" type="button" data-toggle="button" data-bind="click: toggleFilterVisibility" value="Show Row Filters" />
-                </div>
-                
-                <div class="form-group">
-                <input class="btn btn-default" type="button" data-bind="click: clearFilters" value="Clear All Row Filters" />
-                </div>
-                
-                <div class="form-group">
-                <div class="btn no-btn">
-                Row count: <span data-bind="text: rowCount()"></span>
-                </div>
+                <input class="btn btn-default option-button" type="button" data-bind="click: clearFilters" value="Clear All Row Filters" />
                 </div>
             </div>
         </div>
@@ -233,26 +280,15 @@ th, td {
         </div>
         </div>
         
-        <div class="row">
+        <div class="row" data-bind="visible: columnsVisible">
             <div class="col-md-12 form-inline">
                 
                 <div class="form-group">
-                <input class="btn btn-default" type="button" data-toggle="button" data-bind="click: toggleColumnVisibility" value="Show Column Filters" />
+                <input class="btn btn-default option-button" type="button" data-toggle="button" data-bind="click: hideAllColumns" value="Hide All Columns" />
                 </div>
                 
                 <div class="form-group">
-                <input class="btn btn-default" type="button" data-toggle="button" data-bind="click: hideAllColumns" value="Hide All Columns" />
-                </div>
-                
-                <div class="form-group">
-                <input class="btn btn-default" type="button" data-toggle="button" data-bind="click: resetColumns" value="Reset Columns" />
-                </div>
-                
-                <div class="form-group">
-                <label class="btn btn-default" data-bind="css: { active: multiSort }" title="">
-                <input type="checkbox" data-bind="checked: multiSort, disable: shiftKey">
-                Multi-column sorting <span id="multiSort-tooltip" class="glyphicon glyphicon-info-sign" aria-hidden="true" data-toggle="tooltip" title="Holding shift also enables this."></span>
-                </label>
+                <input class="btn btn-default option-button" type="button" data-toggle="button" data-bind="click: resetColumns" value="Reset Columns" />
                 </div>
             </div>
         </div>
@@ -269,7 +305,7 @@ th, td {
         <div class="row">
             <div class="col-md-12 form-group">
                 <div class="sort-container form-control">
-                <label for="sortby">Sorting by: </label>
+                <label for="sortby">Sorting by </label>
                 <span id="sortby" data-bind="foreach: sortColumns">
                     <a class="label label-default" data-bind="html: $parent.headers()[$data].header, click: function(data, event) { $parent.sortLabelClick($index, data, event); }"></a>
                 </span>
@@ -286,7 +322,7 @@ th, td {
                     <strong style="cursor:pointer" class="pull-right shop-button" data-bind="toggle: displayShop, visible: !displayShop() && !shopPopout()">Shop</strong>
                 </div>
                 
-                <div class="form-group">
+                <div class="form-group" data-bind="visible: inventory.items().length" >
                     <div id="inventory" class="inventory hover-cursor" data-bind="template: { name: 'item-template', foreach: inventory.items }"></div>
                 </div>
             </div>
