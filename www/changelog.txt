@@ -1,9 +1,12 @@
+2016-11-20
+- Fixed Timbersaw Reactive Armor values not calculated properly.
+
 2016-10-25
-- Fix Solar Crest and Medallion actives
+- Fixed Solar Crest and Medallion actives.
 
 2016-09-19
-- Fix bonus attack range from Sniper Take Aim and Templar Assassin Psi Blades
-- Fix Hurricane Pike IAS
+- Fixed bonus attack range from Sniper Take Aim and Templar Assassin Psi Blades.
+- Fixed Hurricane Pike IAS.
 
 2016-08-08
 - Added/Fixed the following abilities:
@@ -33,8 +36,8 @@
 - Added more error tracking and reporting.
 
 2016-07-23
-- Fix Diffusal Blade not adding correctly.
-- Fix Javelin Pierce damage type.
+- Fixed Diffusal Blade not adding correctly.
+- Fixed Javelin Pierce damage type.
 
 2016-07-15
 - Improved page load time.
@@ -47,7 +50,7 @@
 - Fixed armlet Unholy Strength active not giving armor.
 
 2016-05-06
-- Added 6.87 items
+- Added 6.87 items.
 
 2016-05-05
 - Updated HP per strength and mana per int.
@@ -93,7 +96,7 @@
 - Fixed Invoker stat gains from orbs not applying when ability is not toggled on.
 
 2015-04-30
-- Updated to patch 6.84
+- Updated to patch 6.84.
 
 2015-04-06
 - Fixed Medusa Mana Shield damage reduction.
@@ -110,7 +113,7 @@
 - Added Vengeful Spirit Vengeance Aura debuff.
 
 2015-02-12
-- Added Winter Wyvern
+- Added Winter Wyvern.
 
 2015-01-29
 - Build Explorer data now included in saved builds.
@@ -167,13 +170,13 @@
 - Damage Amplification & Reduction section usable.
 
 2014-09-21
-- Added Medusa Mana Shield
-- Added Spectre Desolate
+- Added Medusa Mana Shield.
+- Added Spectre Desolate.
 - Faceless Void Backtrack now affects magical EHP.
 
 2014-09-20
-- Added Undying Flesh Golem
-- Added Visage Familiar
+- Added Undying Flesh Golem.
+- Added Visage Familiar.
 
 2014-09-19
 - Added Medallion of Courage to debuffs section.

@@ -2604,7 +2604,6 @@ define(function (require, exports, module) {
                 attributeName: 'bonus_armor',
                 label: 'Total Armor Bonus',
                 controlType: 'text',
-                noLevel: true,
                 fn: function (v, a, parent, index, abilityModel, ability) {
                     return v*a;
                 },
@@ -2614,7 +2613,6 @@ define(function (require, exports, module) {
                 attributeName: 'bonus_hp_regen',
                 label: 'Total HP Regen Bonus',
                 controlType: 'text',
-                noLevel: true,
                 fn: function (v, a, parent, index, abilityModel, ability) {
                     return v*a;
                 },
