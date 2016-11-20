@@ -2603,7 +2603,6 @@ my.prototype.abilityData = {
             attributeName: 'bonus_armor',
             label: 'Total Armor Bonus',
             controlType: 'text',
-            noLevel: true,
             fn: function (v, a, parent, index, abilityModel, ability) {
                 return v*a;
             },
@@ -2613,7 +2612,6 @@ my.prototype.abilityData = {
             attributeName: 'bonus_hp_regen',
             label: 'Total HP Regen Bonus',
             controlType: 'text',
-            noLevel: true,
             fn: function (v, a, parent, index, abilityModel, ability) {
                 return v*a;
             },
