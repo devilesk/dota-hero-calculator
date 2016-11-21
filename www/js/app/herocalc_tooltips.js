@@ -1,7 +1,7 @@
 'use strict';
     var $ = require('jquery');
 
-var my = require("../herocalc/main");
+var my = require("dota-hero-calculator-library");
 
 my.prototype.itemtooltipdata = {};
 my.prototype.ability_vars = {
