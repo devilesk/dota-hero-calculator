@@ -1,5 +1,5 @@
 var ko = require('knockout');
-var my = require("../herocalc/main");
+var my = require("dota-hero-calculator-library");
 require("./herocalc_hero_damageamp");
 require("./herocalc_buffs.amplification.reduction");
 require("./herocalc_buildexplorer");

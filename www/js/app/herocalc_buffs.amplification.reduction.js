@@ -1,7 +1,7 @@
 'use strict';
 var ko = require('./herocalc_knockout');
     
-var my = require("../herocalc/main");
+var my = require("dota-hero-calculator-library");
 
 my.prototype.DamageAmpViewModel = function (a) {
     var self = new my.prototype.BuffViewModel(ko.observableArray([]));

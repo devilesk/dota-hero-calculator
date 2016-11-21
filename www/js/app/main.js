@@ -27,15 +27,16 @@ ko.components.register('stats3', { template: require('fs').readFileSync(__dirnam
 ko.components.register('stats-additional', { template: require('fs').readFileSync(__dirname + '/../components/stats/stats-additional.html', 'utf8') });
 
 // The app extends the herocalc library, provides a frontend
-var my = require("../herocalc/main");
-var getItemTooltipData = require("../herocalc/herocalc_tooltips_item");
-var getAbilityTooltipData = require("../herocalc/herocalc_tooltips_ability");
+var my = require("dota-hero-calculator-library");
+var getItemTooltipData = require("./herocalc_tooltips_item");
+var getAbilityTooltipData = require("./herocalc_tooltips_ability");
 my.prototype.AbilityModel.prototype.getAbilityTooltipData = function (hero, el) {
     return getAbilityTooltipData(my.prototype.heroData, my.prototype.unitData, hero, el);
 }
 //require("./herocalc_tooltips");
 require("./heroviewmodel");
 require("./unitviewmodel");
+require("./cloneviewmodel");
 
 my.prototype.PlayerColors = [
     "#2E6AE6", //Blue
@@ -232,6 +233,7 @@ my.prototype.HeroCalculatorViewModel = function () {
             self.selectedTabId(event.target.id);
         }*/
         self.selectedTabId(event.target.id);
+        console.log('clickTab', data, event, index, self.selectedTab());
         if (self.selectedTabs()[1] != event.target.id) {
             self.selectedTabs.shift();
             self.selectedTabs.push(event.target.id);

@@ -1,5 +1,5 @@
 var ko = require('knockout');
-var my = require("../herocalc/main");
+var my = require("dota-hero-calculator-library");
 
 my.prototype.UnitViewModel = function (h, p) {
     var self = this;

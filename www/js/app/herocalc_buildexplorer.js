@@ -1,7 +1,7 @@
 'use strict';
 var ko = require('./herocalc_knockout');
     
-var my = require("../herocalc/main");
+var my = require("dota-hero-calculator-library");
 
 my.prototype.GraphPropertyOption = function (id, label) {
     this.id = id;
