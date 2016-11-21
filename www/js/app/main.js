@@ -35,6 +35,7 @@ my.prototype.AbilityModel.prototype.getAbilityTooltipData = function (hero, el) 
 }
 //require("./herocalc_tooltips");
 require("./heroviewmodel");
+require("./unitviewmodel");
 
 my.prototype.PlayerColors = [
     "#2E6AE6", //Blue
@@ -239,9 +240,11 @@ my.prototype.HeroCalculatorViewModel = function () {
             self.selectedTab().data.bound(true);
 
             // make sure build explorer graph renders
-            setTimeout(function () {
-                self.selectedTab().data.buildExplorer.graphData.valueHasMutated();
-            }, 0);
+            if (self.selectedTab().data.hasOwnProperty('buildExplorer')) {
+                setTimeout(function () {
+                    self.selectedTab().data.buildExplorer.graphData.valueHasMutated();
+                }, 0);
+            }
         }
         if (event.target.id === 'settingsTab') self.boundSettings(true);
     };

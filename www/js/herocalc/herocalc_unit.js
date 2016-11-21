@@ -12,38 +12,18 @@ my.prototype.UnitOption = function (name, displayname, levels, image, level) {
     this.levels = levels;
 };
 
-my.prototype.UnitViewModel = function (h,p) {
-    var self = new my.prototype.HeroModel(h);
+my.prototype.UnitModel = function (h,p) {
+    var self = this;
+    my.prototype.HeroModel.call(this, 'abaddon');
     self.parent = p;
-    self.selectedUnitLevel = ko.observable(1);
-    self.availableUnits = ko.observableArray([
-        new my.prototype.UnitOption('npc_dota_lone_druid_bear', 'Lone Druid Spirit Bear',4,'/media/images/units/spirit_bear.png', self.selectedUnitLevel),
-        new my.prototype.UnitOption('npc_dota_brewmaster_earth_','Brewmaster Earth Warrior',3,'/media/images/units/npc_dota_brewmaster_earth.png', self.selectedUnitLevel),
-        new my.prototype.UnitOption('npc_dota_brewmaster_fire_','Brewmaster Fire Warrior',3,'/media/images/units/npc_dota_brewmaster_fire.png', self.selectedUnitLevel),
-        new my.prototype.UnitOption('npc_dota_brewmaster_storm_','Brewmaster Storm Warrior',3,'/media/images/units/npc_dota_brewmaster_storm.png', self.selectedUnitLevel),
-        new my.prototype.UnitOption('npc_dota_necronomicon_archer_','Necronomicon Archer',3,'/media/images/units/npc_dota_necronomicon_archer.png', self.selectedUnitLevel),
-        new my.prototype.UnitOption('npc_dota_necronomicon_warrior_','Necronomicon Warrior',3,'/media/images/units/npc_dota_necronomicon_warrior.png', self.selectedUnitLevel),
-        new my.prototype.UnitOption('npc_dota_lycan_wolf','Lycan Wolf',4,'/media/images/units/npc_dota_lycan_wolf.png', self.selectedUnitLevel),
-        new my.prototype.UnitOption('npc_dota_visage_familiar','Visage Familiar',3,'/media/images/units/npc_dota_visage_familiar.png', self.selectedUnitLevel)
-    ]);
-    self.selectedUnit = ko.observable(self.availableUnits()[0]);
-    self.selectedUnit.subscribe(function(newValue) {
-        if (newValue.heroName().indexOf('npc_dota_lone_druid_bear') != -1) {
-            self.inventory.hasInventory(true);
-            self.inventory.items.removeAll();
-            self.inventory.activeItems.removeAll();
-        }
-        else {
-            self.inventory.hasInventory(false);
-            self.inventory.items.removeAll();
-            self.inventory.activeItems.removeAll();
-        }
-    });
-    self.hero = ko.computed(function() {
-        return ko.wrap.fromJS(my.prototype.unitData[self.selectedUnit().heroName()]);
-    });
+    self.unitId = ko.observable(h);
+    self.unitLevel = ko.observable(1);
+
+    /*self.hero = ko.computed(function() {
+        return ko.wrap.fromJS(my.prototype.unitData[self.unitId()]);
+    });*/
     self.heroData = ko.computed(function() {
-        return my.prototype.unitData[self.selectedUnit().heroName()];
+        return my.prototype.unitData[self.unitId()];
     });
     self.getAbilityLevelMax = function(data) {
         if (data.abilitytype == 'DOTA_ABILITY_TYPE_ATTRIBUTES') {
@@ -61,9 +41,10 @@ my.prototype.UnitViewModel = function (h,p) {
         }
     };
     self.ability = ko.computed(function() {
-        var a = new my.prototype.AbilityModel(ko.mapping.fromJS(my.prototype.unitData[self.selectedUnit().heroName()].abilities));
+        //var a = new my.prototype.AbilityModel(ko.mapping.fromJS(my.prototype.unitData[self.unitId()].abilities));
+        var a = new my.prototype.AbilityModel(ko.observableArray(JSON.parse(JSON.stringify(self.heroData().abilities))), self);
         a.hasScepter = self.inventory.hasScepter
-        switch (self.selectedUnit().heroName()) {
+        switch (self.unitId()) {
             case 'npc_dota_necronomicon_archer_1':
             case 'npc_dota_necronomicon_warrior_1':
                 a.abilities()[0].level(1);
@@ -118,7 +99,7 @@ my.prototype.UnitViewModel = function (h,p) {
         return a;
     });        
     self.primaryAttribute = ko.computed(function() {
-        //var v = my.prototype.unitData[self.selectedUnit().heroName()].attributeprimary;
+        //var v = my.prototype.unitData[self.unitId()].attributeprimary;
         var v = 0;
         if (v == 'DOTA_ATTRIBUTE_AGILITY') {
             return 'agi'
@@ -146,8 +127,8 @@ my.prototype.UnitViewModel = function (h,p) {
         return 0;
     };
     self.totalAgi = ko.computed(function() {
-        return (my.prototype.unitData[self.selectedUnit().heroName()].attributebaseagility
-                + my.prototype.unitData[self.selectedUnit().heroName()].attributeagilitygain * (self.selectedHeroLevel() - 1) 
+        return (my.prototype.unitData[self.unitId()].attributebaseagility
+                + my.prototype.unitData[self.unitId()].attributeagilitygain * (self.selectedHeroLevel() - 1) 
                 //+ self.inventory.getAttributes('agi') 
                 + self.ability().getAttributeBonusLevel()*2
                 + self.ability().getAgility()
@@ -156,8 +137,8 @@ my.prototype.UnitViewModel = function (h,p) {
                ).toFixed(2);
     });
     self.totalInt = ko.computed(function() {
-        return (my.prototype.unitData[self.selectedUnit().heroName()].attributebaseintelligence 
-                + my.prototype.unitData[self.selectedUnit().heroName()].attributeintelligencegain * (self.selectedHeroLevel() - 1) 
+        return (my.prototype.unitData[self.unitId()].attributebaseintelligence 
+                + my.prototype.unitData[self.unitId()].attributeintelligencegain * (self.selectedHeroLevel() - 1) 
                 //+ self.inventory.getAttributes('int') 
                 + self.ability().getAttributeBonusLevel()*2
                 + self.ability().getIntelligence()
@@ -166,8 +147,8 @@ my.prototype.UnitViewModel = function (h,p) {
                ).toFixed(2);
     });
     self.totalStr = ko.computed(function() {
-        return (my.prototype.unitData[self.selectedUnit().heroName()].attributebasestrength 
-                + my.prototype.unitData[self.selectedUnit().heroName()].attributestrengthgain * (self.selectedHeroLevel() - 1) 
+        return (my.prototype.unitData[self.unitId()].attributebasestrength 
+                + my.prototype.unitData[self.unitId()].attributestrengthgain * (self.selectedHeroLevel() - 1) 
                 //+ self.inventory.getAttributes('str') 
                 + self.ability().getAttributeBonusLevel()*2
                 + self.ability().getStrength()
@@ -176,21 +157,21 @@ my.prototype.UnitViewModel = function (h,p) {
                ).toFixed(2);
     });
     /*self.health = ko.computed(function() {
-        return (my.prototype.unitData[self.selectedUnit().heroName()].statushealth + self.totalStr()*19 
+        return (my.prototype.unitData[self.unitId()].statushealth + self.totalStr()*19 
                 + self.inventory.getHealth()
                 + self.ability().getHealth()).toFixed(2);
     });
     self.healthregen = ko.computed(function() {
-        return (my.prototype.unitData[self.selectedUnit().heroName()].statushealthregen + self.totalStr()*.03 
+        return (my.prototype.unitData[self.unitId()].statushealthregen + self.totalStr()*.03 
                 + self.inventory.getHealthRegen() 
                 + self.ability().getHealthRegen()
                 + self.buffs.getHealthRegen()).toFixed(2);
     });
     self.mana = ko.computed(function() {
-        return (my.prototype.unitData[self.selectedUnit().heroName()].statusmana + self.totalInt()*13 + self.inventory.getMana()).toFixed(2);
+        return (my.prototype.unitData[self.unitId()].statusmana + self.totalInt()*13 + self.inventory.getMana()).toFixed(2);
     });
     self.manaregen = ko.computed(function() {
-        return ((my.prototype.unitData[self.selectedUnit().heroName()].statusmanaregen 
+        return ((my.prototype.unitData[self.unitId()].statusmanaregen 
                 + self.totalInt()*.04 
                 + self.ability().getManaRegen()) 
                 * (1 + self.inventory.getManaRegenPercent()) 
@@ -199,7 +180,7 @@ my.prototype.UnitViewModel = function (h,p) {
                 - self.enemy().ability().getManaRegenReduction()).toFixed(2);
     });
     self.totalArmorPhysical = ko.computed(function() {
-        return (self.enemy().ability().getArmorBaseReduction() * self.debuffs.getArmorBaseReduction() * (my.prototype.unitData[self.selectedUnit().heroName()].armorphysical + self.totalAgi()*.14)
+        return (self.enemy().ability().getArmorBaseReduction() * self.debuffs.getArmorBaseReduction() * (my.prototype.unitData[self.unitId()].armorphysical + self.totalAgi()*.14)
                 + self.inventory.getArmor() + self.ability().getArmor() + self.enemy().ability().getArmorReduction() + self.buffs.getArmor() + self.debuffs.getArmorReduction()).toFixed(2);
     });
     self.totalArmorPhysicalReduction = ko.computed(function() {
@@ -214,7 +195,7 @@ my.prototype.UnitViewModel = function (h,p) {
             return ms;
         }
         else {
-            return ((my.prototype.unitData[self.selectedUnit().heroName()].movementspeed + self.inventory.getMovementSpeedFlat()+ self.ability().getMovementSpeedFlat()) * 
+            return ((my.prototype.unitData[self.unitId()].movementspeed + self.inventory.getMovementSpeedFlat()+ self.ability().getMovementSpeedFlat()) * 
                     (1 + self.inventory.getMovementSpeedPercent() 
                        + self.ability().getMovementSpeedPercent() 
                        + self.enemy().inventory.getMovementSpeedPercentReduction() 
@@ -225,14 +206,14 @@ my.prototype.UnitViewModel = function (h,p) {
         }
     });
     self.totalTurnRate = ko.computed(function() {
-        return (my.prototype.unitData[self.selectedUnit().heroName()].movementturnrate 
+        return (my.prototype.unitData[self.unitId()].movementturnrate 
                 * (1 + self.enemy().ability().getTurnRateReduction()
                      + self.debuffs.getTurnRateReduction())).toFixed(2);
     });
     */
     self.baseDamage = ko.computed(function() {
-        return [Math.floor(my.prototype.unitData[self.selectedUnit().heroName()].attackdamagemin + self.totalAttribute(self.primaryAttribute()) + self.ability().getBaseDamage().total),
-                Math.floor(my.prototype.unitData[self.selectedUnit().heroName()].attackdamagemax + self.totalAttribute(self.primaryAttribute()) + self.ability().getBaseDamage().total)];
+        return [Math.floor(my.prototype.unitData[self.unitId()].attackdamagemin + self.totalAttribute(self.primaryAttribute()) + self.ability().getBaseDamage().total),
+                Math.floor(my.prototype.unitData[self.unitId()].attackdamagemax + self.totalAttribute(self.primaryAttribute()) + self.ability().getBaseDamage().total)];
     });
     /*self.bonusDamage = ko.computed(function() {
         return self.inventory.getBonusDamage().total
@@ -258,7 +239,7 @@ my.prototype.UnitViewModel = function (h,p) {
                 self.baseDamage()[1] + self.bonusDamage()[1]];
     });*/
     self.totalMagicResistanceProduct = ko.computed(function() {
-        return (1 - my.prototype.unitData[self.selectedUnit().heroName()].magicalresistance / 100) 
+        return (1 - my.prototype.unitData[self.unitId()].magicalresistance / 100) 
                    * (1 - self.inventory.getMagicResist() / 100) 
                    * (1 - self.ability().getMagicResist() / 100) 
                    * (1 - self.buffs.getMagicResist() / 100) 
@@ -274,7 +255,7 @@ my.prototype.UnitViewModel = function (h,p) {
         if (abilityBAT > 0) {
             return abilityBAT;
         }
-        return my.prototype.unitData[self.selectedUnit().heroName()].attackrate;
+        return my.prototype.unitData[self.unitId()].attackrate;
     });
     /*
     self.ias = ko.computed(function() {
@@ -313,6 +294,11 @@ my.prototype.UnitViewModel = function (h,p) {
     self.ehpMagical = ko.computed(function() {
         return (self.health() / self.totalMagicResistanceProduct()).toFixed(2);
     });
-    
+    self.heroId(h);
+    self.unitId.subscribe(function (newValue) {
+        self.heroId(newValue);
+    });
     return self;
 }
+my.prototype.UnitModel.prototype = Object.create(my.prototype.HeroModel.prototype);
+my.prototype.UnitModel.prototype.constructor = my.prototype.UnitModel;

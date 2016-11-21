@@ -8,7 +8,7 @@
     </div>
     <div class="col-md-4">
         <label for="unitlevel">Level</label>
-        <p class="form-control-static" data-bind="visible: selectedUnit().levels == 0, text: hero().level"></p>
+        <p class="form-control-static" data-bind="visible: selectedUnit().levels == 0, text: heroData().level"></p>
         <select id="herolevel" class="form-control" data-bind="visible: selectedUnit().levels > 0, value: selectedUnitLevel, foreach: new Array(selectedUnit().levels)">
             <option data-bind="text: $index()+1"></option>
         </select>
@@ -25,9 +25,9 @@
             <div class="col-md-12" data-bind="css: {'col-md-12': $root.layout() == 0, 'col-md-3': $root.layout() == 1}">
                 <table class="table table-condensed">
                 <tbody>
-                <tr><td>Gold:</td><td class="text-right"><span data-bind="text: hero().bountygoldmin() == hero().bountygoldmax() ? hero().bountygoldmax() : hero().bountygoldmin() + '-' + hero().bountygoldmax()"></span></td></tr>
-                <tr><td>Experience:</td><td class="text-right"><span data-bind="text: hero().bountyxp()"></span></td></tr>
-                <tr><td>Level:</td><td class="text-right"><span data-bind="text: hero().level()"></span></td></tr>
+                <tr><td>Gold:</td><td class="text-right"><span data-bind="text: heroData().bountygoldmin == heroData().bountygoldmax ? heroData().bountygoldmax : heroData().bountygoldmin + '-' + heroData().bountygoldmax"></span></td></tr>
+                <tr><td>Experience:</td><td class="text-right"><span data-bind="text: heroData().bountyxp"></span></td></tr>
+                <tr><td>Level:</td><td class="text-right"><span data-bind="text: heroData().level"></span></td></tr>
                 <tr><td><abbr title="Movement Speed">MS</abbr>:</td><td class="text-right"><span data-bind="text: totalMovementSpeed"></span></td></tr>
                 <tr><td>Turn Rate:</td><td class="text-right"><span data-bind="text: totalTurnRate"></span></td></tr>
                 <tr><td>Sight Range:</td><td class="text-right"><span data-bind="html: '<abbr title=\'Day\'>' + visionrangeday() + '</abbr>/<abbr title=\'Night\'>' + visionrangenight() + '</abbr>'"></span></td></tr>
@@ -103,16 +103,6 @@
                 <h3 class="section_header" data-bind="toggle: sectionDisplay().ability, css: { section_disabled: !sectionDisplay().ability() }">Abilities <small style="color:inherit" data-bind="text: availableSkillPoints() ? (availableSkillPoints() == 1 ? '1 unspent skillpoint' : availableSkillPoints() + ' unspent skillpoints') : ''"></small></h3>
                 <div class="row" data-bind="visible: sectionDisplay().ability(), foreach: ability().abilities()">
                     <div data-bind="component: { name: 'ability', params: $data }"></div>
-                </div>
-                <div class="form-horizontal" data-bind="if: selectedHero().heroName == 'silencer', visible: sectionDisplay().ability()">
-                    <div class="form-group">
-                            <div class="col-md-2 control-label">
-                                <label for="intelligencestolen">Intelligence Stolen</label>
-                            </div>
-                            <div class="col-md-2">
-                                <input class="form-control" id="intelligencestolen" data-bind="value: intStolen" />
-                            </div>
-                    </div>
                 </div>
             </div>
         </div>

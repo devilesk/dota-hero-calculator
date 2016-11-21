@@ -126,7 +126,7 @@ var getAbilityTooltipData = function(heroData, unitData, hero, el) {
     if (abilityTooltipData[el] == undefined) {
         var abilityName = el
         var ability = {};
-        if (heroData[hero] == undefined) {
+        if (heroData['npc_dota_hero_' + hero] == undefined) {
             for (var i = 0; i < unitData[hero].abilities.length; i++) {
                 if (unitData[hero].abilities[i].name == el) {
                     ability = unitData[hero].abilities[i];
@@ -134,9 +134,9 @@ var getAbilityTooltipData = function(heroData, unitData, hero, el) {
             }            
         }
         else {
-            for (var i = 0; i < heroData[hero].abilities.length; i++) {
-                if (heroData[hero].abilities[i].name == el) {
-                    ability = heroData[hero].abilities[i];
+            for (var i = 0; i < heroData['npc_dota_hero_' + hero].abilities.length; i++) {
+                if (heroData['npc_dota_hero_' + hero].abilities[i].name == el) {
+                    ability = heroData['npc_dota_hero_' + hero].abilities[i];
                 }
             }
         }

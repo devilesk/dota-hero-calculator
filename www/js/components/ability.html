@@ -20,7 +20,7 @@ css: {row: $data.isDetail() || ($index() < $parents[1].ability().abilities().len
     </div>
     <div class="col-md-9 bottom-buffer2" data-bind="visible: $data.isDetail()">
         <button type="button" class="close" data-bind="click: function(data, event) { $parents[1].ability().toggleAbilityDetail($index, data, event); }">&times;</button>
-        <div data-bind="html: $parents[1].ability().getAbilityTooltipData('npc_dota_hero_' + $parents[1].heroId(), $data.name)"></div>
+        <div data-bind="html: $parents[1].ability().getAbilityTooltipData($parents[1].heroId(), $data.name)"></div>
         <div data-bind="if: $data.name in $parents[1].ability().abilityData && $parents[1].ability().abilities()[$index()].level() > 0">
             <div class="col-md-12" style="margin-top: 10px" >
                 <div data-bind="template: { name: 'ability-settings-template', data: $parents[1].ability().abilitySettingsData($data.name, $parents[1], $index()) }"></div>
