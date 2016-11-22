@@ -84,7 +84,9 @@ gulp.task('bundle-prod', function () {
         .transform('brfs')
         .transform('browserify-replace', {
             replace: [
-                { from: /#DEV_BUILD/, to: new Date().toString() }
+                { from: /#DEV_BUILD/, to: new Date().toString() },
+                { from: /#code_version/, to: git.long() },
+                { from: /environment: 'development'/, to: "environment: 'production'" }
             ]
         })
         .bundle()

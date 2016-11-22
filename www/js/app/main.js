@@ -233,7 +233,6 @@ my.prototype.HeroCalculatorViewModel = function () {
             self.selectedTabId(event.target.id);
         }*/
         self.selectedTabId(event.target.id);
-        console.log('clickTab', data, event, index, self.selectedTab());
         if (self.selectedTabs()[1] != event.target.id) {
             self.selectedTabs.shift();
             self.selectedTabs.push(event.target.id);
