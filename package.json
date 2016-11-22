@@ -24,6 +24,7 @@
     "bootstrap": "^3.3.7",
     "brfs": "^1.4.3",
     "browserify": "^13.1.0",
+    "browserify-replace": "^0.9.0",
     "browserify-shim": "^3.8.12",
     "del": "^2.2.1",
     "dota-hero-calculator-library": "^1.0.4",
