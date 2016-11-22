@@ -50,7 +50,12 @@ gulp.task('copy-navbar', function () {
 
 gulp.task('html', ['copy-navbar'], function () {
     return gulp.src('www/index.html')
-        .pipe(preprocess({context: {NODE_ENV: 'production'}})) //To set environment variables in-line 
+        .pipe(preprocess({
+            context: {
+                NODE_ENV: 'production',
+                COMMIT_HASH: git.short()
+            }
+        })) //To set environment variables in-line 
         .pipe(replace('bootstrap.css', 'bootstrap.min.css'))
         .pipe(gulp.dest('dist/'))
 });
@@ -72,8 +77,8 @@ gulp.task('image', function () {
     return cmd.on('close', cb);
 });*/
 
-gulp.task('bundle', function () {
-    return browserify('./www/js/main.js')  // Pass browserify the entry point
+gulp.task('bundle-prod', function () {
+    return browserify(['./www/js/main.js'], {debug:true})  // Pass browserify the entry point
         .external('knockout')
         .external('jquery')
         .transform('brfs')
@@ -85,9 +90,24 @@ gulp.task('bundle', function () {
         .bundle()
         .pipe(source('./www/js/main.js'))
         .pipe(buffer())
+        .pipe(rename('bundle.' + git.short() + '.js'))
+        .pipe(sourcemaps.init({loadMaps: true}))
         .pipe(uglify())
-        .pipe(rename('bundle.js'))
+        .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest('./dist/js/'))
+        
+})
+
+gulp.task('bundle', function () {
+    return browserify('./www/js/main.js', {debug:true})  // Pass browserify the entry point
+        .external('knockout')
+        .external('jquery')
+        .transform('brfs')
+        .bundle()
+        .pipe(source('./www/js/main.js'))
+        .pipe(buffer())
+        .pipe(rename('bundle.js'))
+        .pipe(gulp.dest('./www/js/'))
 })
 
 gulp.task('rollbar', function () {
@@ -168,6 +188,6 @@ gulp.task('deploy', function () {
         .pipe(gulp.dest('/srv/www/devilesk.com/dota2/apps/hero-calculator'));
 });
 
-gulp.task('staging', gulpSequence('bundle', ['css', 'css-themes', 'html', 'image', 'stage-files']));
+gulp.task('staging', gulpSequence('bundle-prod', ['css', 'css-themes', 'html', 'image', 'stage-files']));
 
 gulp.task('full-deploy', gulpSequence('staging', 'rollbar', 'clean-deploy', 'deploy', 'rollbar-deploy-tracking', 'purge-cache'));
