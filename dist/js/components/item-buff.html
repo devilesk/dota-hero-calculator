@@ -1,7 +1,0 @@
-<div class="btn-group">
-    <img style="width:75px;" class="img-rounded" data-bind="css: { item_disabled: !enabled(), item_active: $parents[1].buffs.itemBuffs.getActiveBorder($data) == 1, item_inactive: $parents[1].buffs.itemBuffs.getActiveBorder($data) == 0 }, attr:{ src: $parents[1].buffs.itemBuffs.getItemImage($data) }, click: function(data, event) { $parents[1].buffs.itemBuffs.toggleItem($index, data, event); }, event: { dblclick: $parents[1].buffs.itemBuffs.removeItem }"/>
-    <div class="btn-group-vertical">
-        <button style="padding:3px 10px;" class="btn btn-default btn-xs" title="Remove Item" data-bind="click: $parents[1].buffs.itemBuffs.removeItem">&times;</button>
-        <button style="padding:3px 10px;" class="btn btn-default btn-xs" title="Disable/Enable Item" data-bind="click: $parents[1].buffs.itemBuffs.toggleMuteItem, html: enabled() ? 'o' : '-', attr: {title: enabled() ? 'Disable Item' : 'Enable Item'}">o</button>
-    </div>
-</div>

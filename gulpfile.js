@@ -5,7 +5,6 @@ var rename = require('gulp-rename');
 var preprocess = require('gulp-preprocess');
 var replace = require('gulp-replace');
 var imagemin = require('gulp-imagemin');
-var rjs = require('requirejs');
 var fs = require('fs');
 var rollbar = require('gulp-rollbar');
 var git = require('git-rev-sync');
@@ -14,7 +13,12 @@ var del = require('del');
 var gulpSequence = require('gulp-sequence');
 var chmod = require('gulp-chmod');
 var request = require('request');
+var spawn = require('child_process').spawn;
 var config = require('./config.json');
+var browserify = require('browserify');
+var source = require('vinyl-source-stream');
+var buffer = require('vinyl-buffer');
+var uglify = require('gulp-uglify');
 
 gulp.task('css', function () {
     return gulp.src([
@@ -46,8 +50,13 @@ gulp.task('copy-navbar', function () {
 
 gulp.task('html', ['copy-navbar'], function () {
     return gulp.src('www/index.html')
-        .pipe(preprocess({context: { NODE_ENV: 'production'}})) //To set environment variables in-line 
+        .pipe(preprocess({context: {NODE_ENV: 'production'}})) //To set environment variables in-line 
         .pipe(replace('bootstrap.css', 'bootstrap.min.css'))
+        .pipe(gulp.dest('dist/'))
+});
+
+gulp.task('stage-files', function () {
+    return gulp.src(['www/save.php', 'www/report.php', 'www/changelog.txt'])
         .pipe(gulp.dest('dist/'))
 });
 
@@ -57,44 +66,29 @@ gulp.task('image', function () {
         .pipe(gulp.dest('dist/img'))
 });
 
-gulp.task('build', function (cb) {
-    rjs.optimize({
-        appDir: "www",
-        baseUrl: "js",
-        dir: "dist",
-        packages: ["herocalc", "components"],
-        mainConfigFile: "www/js/main.js",
-        optimize: "uglify2",
-        findNestedDependencies: true,
-        generateSourceMaps: true,
-        preserveLicenseComments: false,
-        useSourceUrl: false,
-        onBuildWrite   : function(name, path, contents) {
-            console.log('Writing: ' + name);
-            if (name === 'main') {
-                // output the original source contents
-                //console.log(contents);
-                // perform transformations on the original source
-                contents = contents.replace(/#DEV_BUILD/, new Date().toString());
-                contents = contents.replace(/#code_version/, git.long());
-                contents = contents.replace(/development/, 'production');
-                contents = contents.replace(/waitSeconds: 7/, 'waitSeconds: 0');
-                // output the processed contents
-                //console.log(contents);
-            }
-            // return contents
-            return contents;
-        },
-        modules: [
-            {
-                name: "main"
-            }
-        ]
-    }, function (buildResponse){
-        // console.log('build response', buildResponse);
-        cb();
-    }, cb);
-});
+/*gulp.task('build', function (cb) {
+    var flags = ['run-script', 'build-prod'];
+    var cmd = spawn('npm', flags, {stdio: 'inherit'});
+    return cmd.on('close', cb);
+});*/
+
+gulp.task('bundle', function () {
+    return browserify('./www/js/main.js')  // Pass browserify the entry point
+        .external('knockout')
+        .external('jquery')
+        .transform('brfs')
+        .transform('browserify-replace', {
+            replace: [
+                { from: /#DEV_BUILD/, to: new Date().toString() }
+            ]
+        })
+        .bundle()
+        .pipe(source('./www/js/main.js'))
+        .pipe(buffer())
+        .pipe(uglify())
+        .pipe(rename('bundle.js'))
+        .pipe(gulp.dest('./dist/js/'))
+})
 
 gulp.task('rollbar', function () {
     return gulp.src('dist/**/*.js')
@@ -152,6 +146,12 @@ gulp.task('purge-cache', function (cb) {
 
 gulp.task('clean', function () {
     return del([
+        './dist/**/*'
+    ], {force: true});
+});
+
+gulp.task('clean-deploy', function () {
+    return del([
         '/srv/www/devilesk.com/dota2/apps/hero-calculator/**/*',
         '!/srv/www/devilesk.com/dota2/apps/hero-calculator/save',
         '!/srv/www/devilesk.com/dota2/apps/hero-calculator/save/*'
@@ -168,6 +168,6 @@ gulp.task('deploy', function () {
         .pipe(gulp.dest('/srv/www/devilesk.com/dota2/apps/hero-calculator'));
 });
 
-gulp.task('staging', gulpSequence('build', ['css', 'css-themes', 'html', 'image']));
+gulp.task('staging', gulpSequence('bundle', ['css', 'css-themes', 'html', 'image', 'stage-files']));
 
-gulp.task('full-deploy', gulpSequence('build', ['css', 'css-themes', 'html', 'image', 'rollbar'], 'deploy', 'rollbar-deploy-tracking', 'purge-cache'));
+gulp.task('full-deploy', gulpSequence('staging', 'rollbar', 'clean-deploy', 'deploy', 'rollbar-deploy-tracking', 'purge-cache'));

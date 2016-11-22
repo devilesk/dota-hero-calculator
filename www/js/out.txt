@@ -1,4 +1,0 @@
-
-> dota-hero-calculator@1.0.0 devbuild /srv/www/dev.devilesk.com/dota2/apps/hero-calculator/app
-> BROWSERIFYSHIM_DIAGNOSTICS=1 browserify --debug -d -t brfs -x 'knockout' -x 'jquery' www/js/main.js > www/js/bundle.js
-

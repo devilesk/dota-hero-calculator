@@ -13,8 +13,8 @@
     "url": "https://github.com/devilesk/dota-hero-calculator/issues"
   },
   "scripts": {
-    "devbuild": "browserify -d -t brfs -x 'knockout' -x 'jquery' www/js/main.js > www/js/bundle.js",
-    "prodbuild": "browserify -d -t brfs -x 'knockout' -x 'jquery' -p [minifyify --map bundle.js.map --output www/js/bundle.js.map] www/js/main.js > www/js/bundle.js",
+    "build": "browserify -d -t brfs -x 'knockout' -x 'jquery' www/js/main.js > www/js/bundle.js",
+    "build-prod": "browserify -d -t brfs -x 'knockout' -x 'jquery' -p [minifyify --map bundle.js.map --output dist/js/bundle.js.map] www/js/main.js > dist/js/bundle.js",
     "testbuild": "browserify -d -t brfs -p [minifyify --map test2.bundle.js.map --output www/js/test2.bundle.js.map] www/js/test2.js > www/js/test2.bundle.js",
     "standalonebuild": "browserify -d -x 'knockout' -x 'jquery' --standalone HeroCalc www/js/herocalc/main.js > www/js/herocalc.js",
     "tablebuild": "browserify -d -t brfs -x 'knockout' -x 'jquery' www/js/table.js > www/js/table.bundle.js"
@@ -26,6 +26,7 @@
     "browserify": "^13.1.0",
     "browserify-shim": "^3.8.12",
     "del": "^2.2.1",
+    "dota-hero-calculator-library": "^1.0.4",
     "git-rev-sync": "^1.6.0",
     "gulp": "^3.9.1",
     "gulp-chmod": "^1.3.0",
@@ -42,9 +43,7 @@
     "jquery-ui": "^1.12.0",
     "knockout": "^3.4.0",
     "knockout-mapping": "^2.6.0",
-    "minifyify": "^7.3.3",
-    "request": "^2.74.0",
-    "requirejs": "^2.2.0"
+    "request": "^2.74.0"
   },
   "dependencies": {},
   "browserify": {
