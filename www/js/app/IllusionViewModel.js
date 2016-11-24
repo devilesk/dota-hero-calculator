@@ -9,7 +9,6 @@ var findWhere = require("dota-hero-calculator-library/src/herocalc/util/findWher
 
 var IllusionViewModel = function (h, p, abilityLevel) {
     var self = this;
-    console.log('IllusionViewModel', h, p);
     self.parent = p;
     self.illusionType = ko.observable(self.parent.selectedIllusion().illusionName);
     if (!illusionData[self.illusionType()].use_selected_hero) {

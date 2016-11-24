@@ -8,25 +8,25 @@ var findWhere = require("dota-hero-calculator-library/src/herocalc/util/findWher
 var DamageAmpViewModel = function (a) {
     var self = BuffViewModel(ko.observableArray([]));
     self.availableBuffs = ko.observableArray([
-        BuffOption('slardar', 'slardar_sprint'),
-        BuffOption('undying', 'undying_flesh_golem'),
-        BuffOption('chen', 'chen_penitence'),
-        BuffOption('medusa', 'medusa_stone_gaze'),
-        BuffOption('shadow_demon', 'shadow_demon_soul_catcher')
+        new BuffOption('slardar', 'slardar_sprint'),
+        new BuffOption('undying', 'undying_flesh_golem'),
+        new BuffOption('chen', 'chen_penitence'),
+        new BuffOption('medusa', 'medusa_stone_gaze'),
+        new BuffOption('shadow_demon', 'shadow_demon_soul_catcher')
     ]);
     self.availableDebuffs = ko.observableArray([
-        BuffOption('medusa', 'medusa_mana_shield'),
-        //BuffOption('templar_assassin', 'templar_assassin_refraction'),
-        //BuffOption('faceless_void', 'faceless_void_backtrack'),
-        //BuffOption('nyx_assassin', 'nyx_assassin_spiked_carapace'),
-        BuffOption('spectre', 'spectre_dispersion'),
-        BuffOption('wisp', 'wisp_overcharge'),
-        BuffOption('bristleback', 'bristleback_bristleback'),
-        //BuffOption('abaddon', 'abaddon_borrowed_time'),
-        //BuffOption('abaddon', 'abaddon_aphotic_shield'),
-        //BuffOption('dazzle', 'dazzle_shallow_grave'),
-        //BuffOption('treant', 'treant_living_armor'),
-        BuffOption('kunkka', 'kunkka_ghostship')
+        new BuffOption('medusa', 'medusa_mana_shield'),
+        //new BuffOption('templar_assassin', 'templar_assassin_refraction'),
+        //new BuffOption('faceless_void', 'faceless_void_backtrack'),
+        //new BuffOption('nyx_assassin', 'nyx_assassin_spiked_carapace'),
+        new BuffOption('spectre', 'spectre_dispersion'),
+        new BuffOption('wisp', 'wisp_overcharge'),
+        new BuffOption('bristleback', 'bristleback_bristleback'),
+        //new BuffOption('abaddon', 'abaddon_borrowed_time'),
+        //new BuffOption('abaddon', 'abaddon_aphotic_shield'),
+        //new BuffOption('dazzle', 'dazzle_shallow_grave'),
+        //new BuffOption('treant', 'treant_living_armor'),
+        new BuffOption('kunkka', 'kunkka_ghostship')
     ]);
     self.selectedBuff = ko.observable(self.availableBuffs()[0]);
     
