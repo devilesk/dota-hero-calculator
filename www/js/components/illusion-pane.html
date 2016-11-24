@@ -10,11 +10,11 @@
             <tbody>
             <tr>
                 <td>Damage Dealt</td>
-                <td class="text-right" data-bind="text: (getOutgoingDamageMultiplier(illusionType(), false, hero().attacktype())*100).toFixed(0)+'%'"></td>
+                <td class="text-right" data-bind="text: (getOutgoingDamageMultiplier(illusionType(), false, heroData().attacktype)*100).toFixed(0)+'%'"></td>
             </tr>
             <tr>
                 <td>Damage Taken</td>
-                <td class="text-right" data-bind="text: (getIncomingDamageMultiplier(illusionType(), false, hero().attacktype())*100).toFixed(0)+'%'"></td>
+                <td class="text-right" data-bind="text: (getIncomingDamageMultiplier(illusionType(), false, heroData().attacktype)*100).toFixed(0)+'%'"></td>
             </tr>
             </tbody>
         </table>

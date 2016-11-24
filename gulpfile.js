@@ -22,23 +22,11 @@ var uglify = require('gulp-uglify');
 
 gulp.task('css', function () {
     return gulp.src([
-          '!www/css/hero-calculator.theme.light.css',
-          '!www/css/hero-calculator.theme.dark.css',
-          '!www/css/qunit-2.0.1.css',
           'www/css/*.css'
         ])
         .pipe(concat('hero-calculator.css'))
         .pipe(minifyCSS())
-        .pipe(rename('hero-calculator.min.css'))
-        .pipe(gulp.dest('dist/css'))
-});
-
-gulp.task('css-themes', function () {
-    return gulp.src([
-          'www/css/hero-calculator.theme.light.css',
-          'www/css/hero-calculator.theme.dark.css'
-        ])
-        .pipe(minifyCSS())
+        .pipe(rename('hero-calculator.min.' + git.short() + '.css'))
         .pipe(gulp.dest('dist/css'))
 });
 
@@ -140,10 +128,6 @@ gulp.task('rollbar-deploy-tracking', function (cb) {
 
 gulp.task('purge-cache', function (cb) {
     var files = [
-            'http://devilesk.com/dota2/apps/hero-calculator/js/main.js',
-            'http://devilesk.com/dota2/apps/hero-calculator/css/hero-calculator.min.css',
-            'http://devilesk.com/dota2/apps/hero-calculator/css/hero-calculator.theme.dark.css',
-            'http://devilesk.com/dota2/apps/hero-calculator/css/hero-calculator.theme.light.css',
             'http://devilesk.com/dota2/apps/hero-calculator/img/hero-calculator.items.png'
         ],
         counter = 0;
@@ -190,6 +174,6 @@ gulp.task('deploy', function () {
         .pipe(gulp.dest('/srv/www/devilesk.com/dota2/apps/hero-calculator'));
 });
 
-gulp.task('staging', gulpSequence('bundle-prod', ['css', 'css-themes', 'html', 'image', 'stage-files']));
+gulp.task('staging', gulpSequence('bundle-prod', ['css', 'html', 'image', 'stage-files']));
 
 gulp.task('full-deploy', gulpSequence('staging', 'rollbar', 'clean-deploy', 'deploy', 'rollbar-deploy-tracking', 'purge-cache'));

@@ -1,10 +1,24 @@
+require("./app/polyfill");
 var Rollbar = require("rollbar-browser");
 var $ = require('jquery');
-var HEROCALCULATOR = require('./app/main');
-hc = new HEROCALCULATOR();
+var getParameterByName = require("./app/getParameterByName");
+var HeroCalculatorViewModel = require('./app/HeroCalculatorViewModel');
+var viewModel = new HeroCalculatorViewModel();
+ko.applyBindings(viewModel);
+$('#spinner').hide();
+$('.initial-hidden').css('display', 'inline-block');
+$('#popHero0').addClass('active');
+$('#heroPane0').addClass('active');
+$('[data-toggle="tooltip"]').tooltip();
+var saveId = getParameterByName('id');
+if (saveId) {
+    $.get('save/' + saveId + '.json', function (data) {
+        viewModel.load(data);
+    });
+}
+
 var lastUpdate = "#DEV_BUILD";
 $('#last-update').text(lastUpdate);
-hc.init("/media/js/herodata.json","/media/js/itemdata.json","/media/js/unitdata.json", hc.run);
 
 var rollbarConfig = {
     accessToken: 'de1980fcab4849d6a7a066cf098a6521',
@@ -28,6 +42,50 @@ var rollbar = Rollbar.init(rollbarConfig);
 $('.error-warning-view, .error-warning-close').click(function () {
     $('.error-warning').fadeOut(200);
 });
+
+var userActions = [];
+function addUserAction(o) {
+    if (userActions.length > 10) {
+        userActions.shift();
+    }
+    userActions.push(o);
+}
+
+function actionTrackWrapper(func, eventName) {
+    return function() {
+        var el = this;
+        var data = {
+            eventName: eventName
+        };
+        if (el.id) data.id = el.id;
+        if (el.src) data.src = el.src;
+        if (el.className) data.className = el.className;
+        if (el.textContent) data.textContent = el.textContent;
+        if (el.nodeName) data.nodeName = el.nodeName;
+        if (el.getAttribute('data-bind')) data['data-bind'] = el.getAttribute('data-bind');
+        
+        for (var property in data) {
+            if (data.hasOwnProperty(property)) {
+                data[property] = data[property].substring(0, Math.min(200, data[property].length));
+            }
+        }
+        addUserAction(data);
+        return func.apply(this, arguments);
+    }
+}
+
+function callbackWrap(object, property, argumentIndex, wrapperFactory, eventFilter) {
+    var original = object[property];
+    object[property] = function() {
+        if (eventFilter.indexOf(arguments[0]) != -1) {
+            arguments[argumentIndex] = wrapperFactory(arguments[argumentIndex], arguments[0]);
+        }
+        return original.apply(this, arguments);
+    }
+    return original;
+}
+
+callbackWrap(Element.prototype, "addEventListener", 1, actionTrackWrapper, ['click', 'focus', 'blur', 'change', 'dblclick'])
 
 window.onerror = (function (old) {
     return function () {
@@ -74,15 +132,15 @@ window.onerror = (function (old) {
             payload.clientLogCreated = false;
         }
 
-        if (hc && hc.heroCalculator) {
+        if (HeroCalculatorViewModel && viewModel) {
             try {
-                payload.heroCalcState = hc.heroCalculator.getSaveData();
+                payload.heroCalcState = viewModel.getSaveData();
             }
             catch (e) {
                 rollbar.error("window.onerror getSaveData failed.", e);
             }
             try {
-                payload.appState = hc.heroCalculator.getAppState();
+                payload.appState = viewModel.getAppState();
             }
             catch (e) {
                 rollbar.error("window.onerror getAppState failed.", e);
