@@ -28,6 +28,7 @@
     "browserify": "^13.1.0",
     "browserify-replace": "^0.9.0",
     "browserify-shim": "^3.8.12",
+    "chart.js": "^1.1.1",
     "del": "^2.2.1",
     "dota-hero-calculator-library": "^0.2.2",
     "git-rev-sync": "^1.6.0",

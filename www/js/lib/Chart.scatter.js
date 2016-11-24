@@ -1,4 +1,4 @@
-var Chart = require('./Chart.min');
+var Chart = require('chart.js');
 Chart.types.Line.extend({
     // Passing in a name registers this chart in the Chart namespace in the same way
     name: "Scatter",

@@ -1,6 +1,8 @@
 'use strict';
 var ko = require('knockout');
 var $ = require('jquery');
+var Chart = require('chart.js');
+require('../lib/Chart.scatter');
 
 ko.bindingHandlers.stopBinding = {
     init: function() {
@@ -263,6 +265,8 @@ ko.bindingHandlers.chart = {
       chartContext = allBindingsAccessor().chartContext;
             
         $(element).append(newCanvas);
+        console.log(data, options, ctx, chartType);
+        console.log('Chart', Chart);
         var myChart = new Chart(ctx)[chartType](data, options);
         ko.utils.domData.set(element, 'myChart', myChart);
         
