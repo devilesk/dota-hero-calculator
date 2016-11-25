@@ -265,8 +265,6 @@ ko.bindingHandlers.chart = {
       chartContext = allBindingsAccessor().chartContext;
             
         $(element).append(newCanvas);
-        console.log(data, options, ctx, chartType);
-        console.log('Chart', Chart);
         var myChart = new Chart(ctx)[chartType](data, options);
         ko.utils.domData.set(element, 'myChart', myChart);
         

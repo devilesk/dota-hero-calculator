@@ -1,8 +1,6 @@
 'use strict';
 var ko = require('./herocalc_knockout');
 var $ = require('jquery');
-global.jQuery = $;
-require('bootstrap');
 require('./jquery-ui.custom');
 
 ko.components.register('hero-pane', { template: require('fs').readFileSync(__dirname + '/../components/hero-pane.html', 'utf8') });
@@ -28,9 +26,9 @@ ko.components.register('stats-additional', { template: require('fs').readFileSyn
 var my = require("dota-hero-calculator-library");
 var findWhere = require("dota-hero-calculator-library/src/herocalc/util/findWhere");
 var uniqueId = require("dota-hero-calculator-library/src/herocalc/util/uniqueId");
-var itemData = require("dota-hero-calculator-library/src/herocalc/data/itemdata.json");
-var unitData = require("dota-hero-calculator-library/src/herocalc/data/unitdata.json");
-var heroData = require("dota-hero-calculator-library/src/herocalc/hero/heroData");
+var itemData = require("dota-hero-calculator-library/src/herocalc/data/main").itemData;
+var unitData = require("dota-hero-calculator-library/src/herocalc/data/main").unitData;
+var heroData = require("dota-hero-calculator-library/src/herocalc/data/main").heroData;
 var stackableItems = require("dota-hero-calculator-library/src/herocalc/inventory/stackableItems");
 var levelItems = require("dota-hero-calculator-library/src/herocalc/inventory/levelItems");
 var getItemTooltipData = require("./herocalc_tooltips_item");

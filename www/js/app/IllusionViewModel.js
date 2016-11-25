@@ -3,8 +3,8 @@ var ko = require('./herocalc_knockout');
     
 var HeroCalc = require("dota-hero-calculator-library");
 var illusionData = require("dota-hero-calculator-library/src/herocalc/illusion/illusionData");
-var heroData = require("dota-hero-calculator-library/src/herocalc/hero/heroData");
-var itemData = require("dota-hero-calculator-library/src/herocalc/data/itemdata.json");
+var heroData = require("dota-hero-calculator-library/src/herocalc/data/main").heroData;
+var itemData = require("dota-hero-calculator-library/src/herocalc/data/main").itemData;
 var findWhere = require("dota-hero-calculator-library/src/herocalc/util/findWhere");
 
 var IllusionViewModel = function (h, p, abilityLevel) {

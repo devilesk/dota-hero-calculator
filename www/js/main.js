@@ -2,20 +2,23 @@ require("./app/polyfill");
 var Rollbar = require("rollbar-browser");
 var $ = require('jquery');
 var getParameterByName = require("./app/getParameterByName");
-var HeroCalculatorViewModel = require('./app/HeroCalculatorViewModel');
-var viewModel = new HeroCalculatorViewModel();
-ko.applyBindings(viewModel);
-$('#spinner').hide();
-$('.initial-hidden').css('display', 'inline-block');
-$('#popHero0').addClass('active');
-$('#heroPane0').addClass('active');
-$('[data-toggle="tooltip"]').tooltip();
-var saveId = getParameterByName('id');
-if (saveId) {
-    $.get('save/' + saveId + '.json', function (data) {
-        viewModel.load(data);
-    });
-}
+var HeroCalcData = require("dota-hero-calculator-library/src/herocalc/data/main");
+HeroCalcData.init("/media/js/herodata.json","/media/js/itemdata.json","/media/js/unitdata.json", function () {
+    var HeroCalculatorViewModel = require('./app/HeroCalculatorViewModel');
+    var viewModel = new HeroCalculatorViewModel();
+    ko.applyBindings(viewModel);
+    $('#spinner').hide();
+    $('.initial-hidden').css('display', 'inline-block');
+    $('#popHero0').addClass('active');
+    $('#heroPane0').addClass('active');
+    $('[data-toggle="tooltip"]').tooltip();
+    var saveId = getParameterByName('id');
+    if (saveId) {
+        $.get('save/' + saveId + '.json', function (data) {
+            viewModel.load(data);
+        });
+    }
+});
 
 var lastUpdate = "#DEV_BUILD";
 $('#last-update').text(lastUpdate);

@@ -67,8 +67,8 @@ gulp.task('image', function () {
 
 gulp.task('bundle-prod', function () {
     return browserify(['./www/js/main.js'], {debug:true})  // Pass browserify the entry point
-        .external('knockout')
-        .external('jquery')
+        .exclude('knockout')
+        .exclude('jquery')
         .transform('brfs')
         .transform('browserify-replace', {
             replace: [
@@ -90,8 +90,9 @@ gulp.task('bundle-prod', function () {
 
 gulp.task('bundle', function () {
     return browserify('./www/js/main.js', {debug:true})  // Pass browserify the entry point
-        .external('knockout')
-        .external('jquery')
+        .exclude('bootstrap')
+        .exclude('knockout')
+        .exclude('jquery')
         .transform('brfs')
         .bundle()
         .pipe(source('./www/js/main.js'))
@@ -174,6 +175,6 @@ gulp.task('deploy', function () {
         .pipe(gulp.dest('/srv/www/devilesk.com/dota2/apps/hero-calculator'));
 });
 
-gulp.task('staging', gulpSequence('bundle-prod', ['css', 'html', 'image', 'stage-files']));
+gulp.task('staging', gulpSequence('clean', 'bundle-prod', ['css', 'html', 'image', 'stage-files']));
 
 gulp.task('full-deploy', gulpSequence('staging', 'rollbar', 'clean-deploy', 'deploy', 'rollbar-deploy-tracking', 'purge-cache'));
