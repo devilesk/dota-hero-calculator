@@ -6,7 +6,8 @@ var BuffOption = require("dota-hero-calculator-library/src/herocalc/buffs/BuffOp
 var findWhere = require("dota-hero-calculator-library/src/herocalc/util/findWhere");
 
 var DamageAmpViewModel = function (a) {
-    var self = BuffViewModel(ko.observableArray([]));
+    var self = this;
+    BuffViewModel.call(this, ko.observableArray([]));
     self.availableBuffs = ko.observableArray([
         new BuffOption('slardar', 'slardar_sprint'),
         new BuffOption('undying', 'undying_flesh_golem'),
@@ -141,5 +142,7 @@ var DamageAmpViewModel = function (a) {
     
     return self;
 }
+DamageAmpViewModel.prototype = Object.create(BuffViewModel.prototype);
+DamageAmpViewModel.prototype.constructor = DamageAmpViewModel;
 
 module.exports = DamageAmpViewModel;

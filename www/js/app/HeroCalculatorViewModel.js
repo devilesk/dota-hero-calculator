@@ -4,8 +4,6 @@ var $ = require('jquery');
 global.jQuery = $;
 require('bootstrap');
 require('./jquery-ui.custom');
-require('../lib/Chart.min');
-require('../lib/Chart.scatter');
 
 ko.components.register('hero-pane', { template: require('fs').readFileSync(__dirname + '/../components/hero-pane.html', 'utf8') });
 ko.components.register('unit-pane', { template: require('fs').readFileSync(__dirname + '/../components/unit-pane.html', 'utf8') });
