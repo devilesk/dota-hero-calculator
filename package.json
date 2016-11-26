@@ -28,7 +28,7 @@
     "browserify-shim": "^3.8.12",
     "chart.js": "^1.1.1",
     "del": "^2.2.1",
-    "dota-hero-calculator-library": "^0.3.0",
+    "dota-hero-calculator-library": "^0.4.0",
     "git-rev-sync": "^1.6.0",
     "gulp": "^3.9.1",
     "gulp-chmod": "^1.3.0",
