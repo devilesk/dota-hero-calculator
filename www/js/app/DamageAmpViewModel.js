@@ -2,32 +2,32 @@
 var ko = require('./herocalc_knockout');
 
 var BuffViewModel = require("dota-hero-calculator-library/src/herocalc/BuffViewModel");
-var BuffOption = require("dota-hero-calculator-library/src/herocalc/buffs/BuffOption");
+var BuffModel = require("dota-hero-calculator-library/src/herocalc/buffs/BuffModel");
 var findWhere = require("dota-hero-calculator-library/src/herocalc/util/findWhere");
 
 var DamageAmpViewModel = function (a) {
     var self = this;
     BuffViewModel.call(this, ko.observableArray([]));
     self.availableBuffs = ko.observableArray([
-        new BuffOption('slardar', 'slardar_sprint'),
-        new BuffOption('undying', 'undying_flesh_golem'),
-        new BuffOption('chen', 'chen_penitence'),
-        new BuffOption('medusa', 'medusa_stone_gaze'),
-        new BuffOption('shadow_demon', 'shadow_demon_soul_catcher')
+        new BuffModel('slardar', 'slardar_sprint'),
+        new BuffModel('undying', 'undying_flesh_golem'),
+        new BuffModel('chen', 'chen_penitence'),
+        new BuffModel('medusa', 'medusa_stone_gaze'),
+        new BuffModel('shadow_demon', 'shadow_demon_soul_catcher')
     ]);
     self.availableDebuffs = ko.observableArray([
-        new BuffOption('medusa', 'medusa_mana_shield'),
-        //new BuffOption('templar_assassin', 'templar_assassin_refraction'),
-        //new BuffOption('faceless_void', 'faceless_void_backtrack'),
-        //new BuffOption('nyx_assassin', 'nyx_assassin_spiked_carapace'),
-        new BuffOption('spectre', 'spectre_dispersion'),
-        new BuffOption('wisp', 'wisp_overcharge'),
-        new BuffOption('bristleback', 'bristleback_bristleback'),
-        //new BuffOption('abaddon', 'abaddon_borrowed_time'),
-        //new BuffOption('abaddon', 'abaddon_aphotic_shield'),
-        //new BuffOption('dazzle', 'dazzle_shallow_grave'),
-        //new BuffOption('treant', 'treant_living_armor'),
-        new BuffOption('kunkka', 'kunkka_ghostship')
+        new BuffModel('medusa', 'medusa_mana_shield'),
+        //new BuffModel('templar_assassin', 'templar_assassin_refraction'),
+        //new BuffModel('faceless_void', 'faceless_void_backtrack'),
+        //new BuffModel('nyx_assassin', 'nyx_assassin_spiked_carapace'),
+        new BuffModel('spectre', 'spectre_dispersion'),
+        new BuffModel('wisp', 'wisp_overcharge'),
+        new BuffModel('bristleback', 'bristleback_bristleback'),
+        //new BuffModel('abaddon', 'abaddon_borrowed_time'),
+        //new BuffModel('abaddon', 'abaddon_aphotic_shield'),
+        //new BuffModel('dazzle', 'dazzle_shallow_grave'),
+        //new BuffModel('treant', 'treant_living_armor'),
+        new BuffModel('kunkka', 'kunkka_ghostship')
     ]);
     self.selectedBuff = ko.observable(self.availableBuffs()[0]);
     
