@@ -2,8 +2,8 @@ require("./app/polyfill");
 var Rollbar = require("rollbar-browser");
 var $ = require('jquery');
 var getParameterByName = require("./app/getParameterByName");
-var HeroCalcData = require("dota-hero-calculator-library/src/herocalc/data/main");
-HeroCalcData.init("/media/js/herodata.json","/media/js/itemdata.json","/media/js/unitdata.json", function () {
+var HeroCalc = require("dota-hero-calculator-library");
+HeroCalc.init("/media/js/herodata.json","/media/js/itemdata.json","/media/js/unitdata.json", function () {
     var HeroCalculatorViewModel = require('./app/HeroCalculatorViewModel');
     var viewModel = new HeroCalculatorViewModel();
     ko.applyBindings(viewModel);
