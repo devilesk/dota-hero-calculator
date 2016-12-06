@@ -20,51 +20,6 @@ var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
 var uglify = require('gulp-uglify');
 
-gulp.task('css', function () {
-    return gulp.src([
-          'www/css/*.css'
-        ])
-        .pipe(concat('hero-calculator.css'))
-        .pipe(minifyCSS())
-        .pipe(rename('hero-calculator.min.' + git.short() + '.css'))
-        .pipe(gulp.dest('dist/css'))
-});
-
-gulp.task('copy-navbar', function () {
-    return gulp.src('/srv/www/dev.devilesk.com/dota2/.navbar.html')
-        .pipe(replace('<div class="navbar navbar-default main_nav">', '<div class="navbar navbar-default main_nav" data-bind="visible: !sideView()">'))
-        .pipe(gulp.dest('www/'))
-});
-
-gulp.task('html', ['copy-navbar'], function () {
-    return gulp.src('www/index.html')
-        .pipe(preprocess({
-            context: {
-                NODE_ENV: 'production',
-                COMMIT_HASH: git.short()
-            }
-        })) //To set environment variables in-line 
-        .pipe(replace('bootstrap.css', 'bootstrap.min.css'))
-        .pipe(gulp.dest('dist/'))
-});
-
-gulp.task('stage-files', function () {
-    return gulp.src(['www/save.php', 'www/report.php', 'www/changelog.txt'])
-        .pipe(gulp.dest('dist/'))
-});
-
-gulp.task('image', function () {
-    return gulp.src('www/img/*')
-        .pipe(imagemin())
-        .pipe(gulp.dest('dist/img'))
-});
-
-/*gulp.task('build', function (cb) {
-    var flags = ['run-script', 'build-prod'];
-    var cmd = spawn('npm', flags, {stdio: 'inherit'});
-    return cmd.on('close', cb);
-});*/
-
 gulp.task('bundle-prod', function () {
     return browserify(['./www/js/main.js'], {debug:true})  // Pass browserify the entry point
         .exclude('knockout')
@@ -86,19 +41,6 @@ gulp.task('bundle-prod', function () {
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest('./dist/js/'))
         
-})
-
-gulp.task('bundle', function () {
-    return browserify('./www/js/main.js', {debug:true})  // Pass browserify the entry point
-        .exclude('bootstrap')
-        .exclude('knockout')
-        .exclude('jquery')
-        .transform('brfs')
-        .bundle()
-        .pipe(source('./www/js/main.js'))
-        .pipe(buffer())
-        .pipe(rename('bundle.js'))
-        .pipe(gulp.dest('./www/js/'))
 })
 
 gulp.task('rollbar', function () {
@@ -127,35 +69,6 @@ gulp.task('rollbar-deploy-tracking', function (cb) {
     });
 });
 
-gulp.task('purge-cache', function (cb) {
-    var files = [
-            'http://devilesk.com/dota2/apps/hero-calculator/img/hero-calculator.items.png'
-        ],
-        counter = 0;
-    files.forEach(function (f) {
-        request.post({
-            url:'https://www.cloudflare.com/api_json.html',
-            form: {
-                a: 'zone_file_purge',
-                tkn: config.cloudflare_token,
-                email: 'devilesk@gmail.com',
-                z: 'devilesk.com',
-                url: f
-            }
-        },
-        function (err, httpResponse, body){
-            counter++;
-            console.log(body);
-            if (counter >= files.length) cb();
-        });
-    });
-});
-
-gulp.task('clean', function () {
-    return del([
-        './dist/**/*'
-    ], {force: true});
-});
 
 gulp.task('clean-deploy', function () {
     return del([
