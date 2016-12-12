@@ -13,24 +13,24 @@
     "url": "https://github.com/devilesk/dota-hero-calculator/issues"
   },
   "scripts": {
-    "browserify:dev": "browserify -d -t brfs -u 'knockout' -u 'jquery' --standalone DotaHeroCalculator www/js/main.js > www/js/bundle.js",
-    "browserify:prod": "browserify -d -t brfs -u 'knockout' -u 'jquery' -p [minifyify --map bundle.min.js.map --output build/js/bundle.min.js.map] --standalone DotaHeroCalculator www/js/main.js > build/js/bundle.min.js",
+    "browserify:dev": "browserify -d -t brfs -u 'knockout' -u 'jquery' --standalone DotaHeroCalculator src/js/main.js > www/bundle.js",
+    "browserify:prod": "browserify -d -t brfs -u 'knockout' -u 'jquery' -p [minifyify --map bundle.min.js.map --output build/bundle.min.js.map] --standalone DotaHeroCalculator src/js/main.js > build/bundle.min.js",
     "preprocess:dev": "NODE_ENV=dev node scripts/preprocess.js",
     "preprocess:prod": "NODE_ENV=prod node scripts/preprocess.js",
+    "www:dev": "npm run browserify:dev && npm run preprocess:dev",
     "clean:build": "rm -rf build/*",
     "build:css": "mkdir -p build/css && cleancss -o build/css/app.min.css www/css/*.css",
     "build:img": "mkdir -p build/img && imagemin www/img/* --out-dir=build/img",
-    "build:js": "mkdir -p build/js && npm run browserify:prod",
+    "build:js": "npm run browserify:prod",
     "build:copy": "cp www/*.php build/ && cp www/*.txt build/",
     "build:html": "npm run preprocess:prod",
-    "build:dev": "npm run browserify:dev && npm run build:html && npm run preprocess:dev",
-    "build:prod": "npm run clean:build && npm run build:js && npm run build:css && npm run build:img && npm run build:copy && npm run build:html",
+    "build": "npm run clean:build && npm run build:js && npm run build:css && npm run build:img && npm run build:copy && npm run build:html",
     "stage:rev": "node scripts/rev.js",
-    "stage": "npm run build:prod && npm run stage:rev",
+    "stage": "npm run build && npm run stage:rev",
     "cache:purge": "node scripts/purge_cache.js",
     "deploy:copy": "node scripts/deploy.js",
     "deploy": "npm run stage && npm run deploy:copy && npm cache:purge",
-    "watch": "watch 'npm run browserify:dev' www"
+    "watch": "watch 'npm run www:dev' src"
   },
   "homepage": "https://github.com/devilesk/dota-hero-calculator#readme",
   "devDependencies": {
