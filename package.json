@@ -19,7 +19,7 @@
     "preprocess:prod": "NODE_ENV=prod node scripts/preprocess.js",
     "www:dev": "npm run browserify:dev && npm run preprocess:dev",
     "clean:build": "rm -rf build/*",
-    "build:css": "mkdir -p build/css && cleancss -o build/css/app.min.css www/css/*.css",
+    "build:css": "mkdir -p build/css && cleancss --skip-rebase -o build/css/app.min.css www/css/*.css",
     "build:img": "mkdir -p build/img && imagemin www/img/* --out-dir=build/img",
     "build:js": "node scripts/browserify.js",
     "build:copy": "cp www/*.php build/ && cp www/*.txt build/ && npm run chmod",
