@@ -150,7 +150,7 @@ var getAbilityTooltipData = function(heroData, unitData, hero, el) {
             data.append($('<span>').html(abilityDamageTypes[ability.abilityunitdamagetype]).addClass('item_field pull-right item_ability_damage_type').css('margin-right','10px'));
         }
         data.append($('<hr>').css('clear', 'both'));
-        if (tooltipJSON() && tooltipJSON()[ability.name]) {
+        if (tooltipJSON() && tooltipJSON()[ability.name] && tooltipJSON()[ability.name].description) {
             data.append($('<div>').html(getTooltipAbilityDescription(ability)).addClass('item_field item_description'));
         }
         var attributedata = getTooltipAbilityAttributes(ability);
@@ -169,7 +169,7 @@ var getAbilityTooltipData = function(heroData, unitData, hero, el) {
             }
             data.append(cdmanacost);
         }
-        if (tooltipJSON() && tooltipJSON()[ability.name]) {
+        if (tooltipJSON() && tooltipJSON()[ability.name] && tooltipJSON()[ability.name].description) {
             data.append($('<div>').html(tooltipJSON()[ability.name].lore).addClass('item_field item_lore'));
         }
         if (!tooltipJSON()) {

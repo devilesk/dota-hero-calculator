@@ -75,6 +75,7 @@ var HeroViewModel = function (heroData, itemData, unitData, h) {
     self.sectionDisplay = ko.observable({
         'inventory': ko.observable(true),
         'ability': ko.observable(true),
+        'talent': ko.observable(true),
         'buff': ko.observable(true),
         'debuff': ko.observable(true),
         'damageamp': ko.observable(false),

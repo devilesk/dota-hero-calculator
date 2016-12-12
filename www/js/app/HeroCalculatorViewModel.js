@@ -8,6 +8,7 @@ ko.components.register('unit-pane', { template: require('fs').readFileSync(__dir
 ko.components.register('clone-pane', { template: require('fs').readFileSync(__dirname + '/../components/clone-pane.html', 'utf8') });
 ko.components.register('illusion-pane', { template: require('fs').readFileSync(__dirname + '/../components/illusion-pane.html', 'utf8') });
 ko.components.register('buff-settings', { template: require('fs').readFileSync(__dirname + '/../components/buff-settings.html', 'utf8') });
+ko.components.register('talent-section', { template: require('fs').readFileSync(__dirname + '/../components/talent-section.html', 'utf8') });
 ko.components.register('item-buff', { template: require('fs').readFileSync(__dirname + '/../components/item-buff.html', 'utf8') });
 ko.components.register('item-debuff', { template: require('fs').readFileSync(__dirname + '/../components/item-debuff.html', 'utf8') });
 ko.components.register('buff-section', { template: require('fs').readFileSync(__dirname + '/../components/buff-section.html', 'utf8') });

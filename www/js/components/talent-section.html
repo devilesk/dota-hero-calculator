@@ -1,0 +1,12 @@
+<div class="row">
+    <div class="col-md-12">
+        <h3 class="section_header" data-bind="toggle: sectionDisplay().talent, css: { section_disabled: !sectionDisplay().talent() }">Talents</h3>
+        <div class="row" data-bind="foreach: heroData().talents, visible: sectionDisplay().talent()">
+            <div class="talent col-xs-12">
+                <label class="talent-level col-sm-4 col-xs-12" data-bind="text: 'Level ' + ($index() * 5 + 10) + ':'"></label>
+                <div class="talent-1 col-sm-4 col-xs-12 btn btn-default btn-sm" data-bind="text: $data[0].displayname, click: function () { $parent.toggleTalent($index(), 0) }, css: {'toggled': $parent.talents[$index()]() == 0}"></div>
+                <div class="talent-2 col-sm-4 col-xs-12 btn btn-default btn-sm" data-bind="text: $data[1].displayname, click: function () { $parent.toggleTalent($index(), 1) }, css: {'toggled': $parent.talents[$index()]() == 1}"></div>
+            </div>
+        </div>
+    </div>
+</div>

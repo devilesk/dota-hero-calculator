@@ -29,7 +29,8 @@
     "stage": "npm run build:prod && npm run stage:rev",
     "cache:purge": "node scripts/purge_cache.js",
     "deploy:copy": "node scripts/deploy.js",
-    "deploy": "npm run stage && npm run deploy:copy && npm cache:purge"
+    "deploy": "npm run stage && npm run deploy:copy && npm cache:purge",
+    "watch": "watch 'npm run browserify:dev' www"
   },
   "homepage": "https://github.com/devilesk/dota-hero-calculator#readme",
   "devDependencies": {
@@ -59,7 +60,8 @@
     "rev-hash": "^1.0.0",
     "rollbar-browser": "^1.9.2",
     "vinyl-buffer": "^1.0.0",
-    "vinyl-source-stream": "^1.1.0"
+    "vinyl-source-stream": "^1.1.0",
+    "watch": "^1.0.1"
   },
   "dependencies": {},
   "browserify": {
