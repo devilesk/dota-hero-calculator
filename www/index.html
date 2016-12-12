@@ -417,7 +417,7 @@ $.when(
     $.getJSON("/media/js/itemdata.json", function (data) {HeroCalcData.itemData = data;}),
     $.getJSON("/media/js/unitdata.json", function (data) {HeroCalcData.unitData = data;}),
     $.ajax({dataType: "script", cache: true, url: "bundle.js"})
-).done(function () { DotaHeroCalculator(appConfig); });
+).done(function () { console.log('window', HeroCalcData); DotaHeroCalculator(appConfig); });
 </script>
   </body>
 </html>
