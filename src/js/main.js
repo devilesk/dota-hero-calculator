@@ -3,12 +3,14 @@ var Rollbar = require("rollbar-browser");
 var $ = require('jquery');
 var getParameterByName = require("./app/getParameterByName");
 var HeroCalc = require("dota-hero-calculator-library");
+var HeroCalculatorViewModel = require('./app/HeroCalculatorViewModel');
+var viewModel;
 
 var App = function (appConfig) {
     
     HeroCalc.init(null, null, null, function () {
-        var HeroCalculatorViewModel = require('./app/HeroCalculatorViewModel');
-        var viewModel = new HeroCalculatorViewModel(appConfig.abilityTooltipPath);
+        
+        viewModel = new HeroCalculatorViewModel(appConfig.abilityTooltipPath);
         ko.options.deferUpdates = true;
         ko.applyBindings(viewModel);
         $('#spinner').hide();
