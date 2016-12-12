@@ -18,7 +18,7 @@ var HeroOption2 = function (hero) {
     this.hero = hero;
 };
 
-var HeroViewModel = function (h) {
+var HeroViewModel = function (heroData, itemData, unitData, h) {
     var self = this;
     self.index = ko.observable(h);
     self.availableHeroes = ko.observableArray(HeroCalc.HeroOptions);
@@ -27,7 +27,7 @@ var HeroViewModel = function (h) {
     });
     self.selectedHero = ko.observable(self.availableHeroes()[h]);
     
-    HeroCalc.HeroModel.call(this, self.selectedHero().heroName);
+    HeroCalc.HeroModel.call(this, heroData, itemData, self.selectedHero().heroName);
     
     self.selectedHero.subscribe(function (newValue) {
         self.heroId(newValue.heroName);
@@ -41,7 +41,7 @@ var HeroViewModel = function (h) {
         return illusionData[self.selectedIllusion().illusionName].max_level;
     });
     self.addIllusion = function (data, event) {
-        self.illusions.push(ko.observable(new IllusionViewModel(0, self, self.illusionAbilityLevel())));
+        self.illusions.push(ko.observable(new IllusionViewModel(heroData, itemData, 0, self, self.illusionAbilityLevel())));
     };
     
     self.bound = ko.observable(false);
@@ -93,8 +93,8 @@ var HeroViewModel = function (h) {
     self.showStatDetails = ko.observable(false);
     self.showDamageAmpCalcDetails = ko.observable(false);
     
-    self.damageAmplification = new DamageAmpViewModel();
-    self.damageReduction = new DamageAmpViewModel();
+    self.damageAmplification = new DamageAmpViewModel(heroData, itemData, unitData);
+    self.damageReduction = new DamageAmpViewModel(heroData, itemData, unitData);
     self.buildExplorer = new BuildExplorerViewModel(self);
     HeroDamageAmpMixin(self);
 }

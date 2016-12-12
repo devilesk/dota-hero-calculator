@@ -4,9 +4,9 @@ var HeroCalc = require("dota-hero-calculator-library");
 var DamageAmpViewModel = require("./DamageAmpViewModel");
 var HeroDamageAmpMixin = require("./HeroDamageAmpMixin");
 
-var CloneViewModel = function (h, p) {
+var CloneViewModel = function (heroData, itemData, unitData, h, p) {
     var self = this;
-    HeroCalc.CloneModel.call(this, h, p);
+    HeroCalc.CloneModel.call(this, heroData, itemData, h, p);
     self.bound = ko.observable(false);
     
     self.sectionDisplay = ko.observable({
@@ -30,8 +30,8 @@ var CloneViewModel = function (h, p) {
     self.showStatDetails = ko.observable(false);
     self.showDamageAmpCalcDetails = ko.observable(false);
     
-    self.damageAmplification = new DamageAmpViewModel();
-    self.damageReduction = new DamageAmpViewModel();
+    self.damageAmplification = new DamageAmpViewModel(heroData, itemData, unitData);
+    self.damageReduction = new DamageAmpViewModel(heroData, itemData, unitData);
     HeroDamageAmpMixin(self);
 }
 CloneViewModel.prototype = Object.create(HeroCalc.CloneModel.prototype);

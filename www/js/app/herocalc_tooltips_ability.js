@@ -1,6 +1,8 @@
 'use strict';
 var $ = require('jquery');
 
+require('./ko.extenders.async');
+
 var ability_vars = {
     '$health': 'Health',
     '$mana': 'Mana',
@@ -29,9 +31,10 @@ var abilityDamageTypes = {
     'DAMAGE_TYPE_COMPOSITE': 'Composite',
     'DAMAGE_TYPE_HP_REMOVAL': 'HP Removal'
 }
+var tooltipJSON = ko.observable();
 
 var getTooltipAbilityDescription = function (item) {
-    var d = item.description;
+    var d = tooltipJSON() ? tooltipJSON()[item.name].description : '';
     for (var i = 0; i < item.attributes.length; i++) {
         if (item.attributes[i].name != null) {
             var attributeName = item.attributes[i].name;
@@ -147,7 +150,7 @@ var getAbilityTooltipData = function(heroData, unitData, hero, el) {
             data.append($('<span>').html(abilityDamageTypes[ability.abilityunitdamagetype]).addClass('item_field pull-right item_ability_damage_type').css('margin-right','10px'));
         }
         data.append($('<hr>').css('clear', 'both'));
-        if (ability.description != null) {
+        if (tooltipJSON() && tooltipJSON()[ability.name]) {
             data.append($('<div>').html(getTooltipAbilityDescription(ability)).addClass('item_field item_description'));
         }
         var attributedata = getTooltipAbilityAttributes(ability);
@@ -166,15 +169,36 @@ var getAbilityTooltipData = function(heroData, unitData, hero, el) {
             }
             data.append(cdmanacost);
         }
-        if (ability.lore != null) {
-            data.append($('<div>').html(ability.lore).addClass('item_field item_lore'));
+        if (tooltipJSON() && tooltipJSON()[ability.name]) {
+            data.append($('<div>').html(tooltipJSON()[ability.name].lore).addClass('item_field item_lore'));
         }
-        abilityTooltipData[el] = data.html();
-        return data.html();
+        if (!tooltipJSON()) {
+            return ko.computed(function () {
+                if (!tooltipJSON()) {
+                    return data.html();
+                }
+                else {
+                    return getAbilityTooltipData(heroData, unitData, hero, el);
+                }
+            });
+        }
+        else {
+            abilityTooltipData[el] = data.html();
+            return data.html();
+        }
     }
     else {
         return abilityTooltipData[el];
     }
 }
+
+getAbilityTooltipData.tooltipJSON = tooltipJSON;
+
+var init = function (url) {
+    $.getJSON(url, function (data) {
+        tooltipJSON(data);
+    });
+}
+getAbilityTooltipData.init = init;
 
 module.exports = getAbilityTooltipData;

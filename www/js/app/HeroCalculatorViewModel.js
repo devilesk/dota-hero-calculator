@@ -92,12 +92,14 @@ TabGroup.prototype.toJS = function () {
     }
 }
 
-var HeroCalculatorViewModel = function () {
+var HeroCalculatorViewModel = function (tooltipURL) {
     var self = this;
     self.heroes = [];
+    
+    getAbilityTooltipData.init(tooltipURL);
 
     for (var i = 0; i < 10; i++) {
-        self.heroes.push(new HeroViewModel(i));
+        self.heroes.push(new HeroViewModel(heroData, itemData, unitData, i));
     }
     
     for (var i = 0; i < 5; i++) {
@@ -123,8 +125,8 @@ var HeroCalculatorViewModel = function () {
     }
     
     for (var i = 0; i < 10; i++) {
-        self.heroes[i].clone = ko.observable(new CloneViewModel('meepo', self.heroes[i]));
-        self.heroes[i].unit = ko.observable(new UnitViewModel('abaddon', self.heroes[i]));
+        self.heroes[i].clone = ko.observable(new CloneViewModel(heroData, itemData, unitData, 'meepo', self.heroes[i]));
+        self.heroes[i].unit = ko.observable(new UnitViewModel(heroData, itemData, unitData, 'abaddon', self.heroes[i]));
         
         self.heroes[i].selectedCompare(self.heroes[i].availableCompare()[i < 5 ? 4 + i : i - 5]);
         self.heroes[i].selectedEnemy(self.heroes[i].availableEnemies()[i % 5]);

@@ -7,16 +7,16 @@ var heroData = require("dota-hero-calculator-library/src/herocalc/data/main").he
 var itemData = require("dota-hero-calculator-library/src/herocalc/data/main").itemData;
 var findWhere = require("dota-hero-calculator-library/src/herocalc/util/findWhere");
 
-var IllusionViewModel = function (h, p, abilityLevel) {
+var IllusionViewModel = function (heroData, itemData, h, p, abilityLevel) {
     var self = this;
     self.parent = p;
     self.illusionType = ko.observable(self.parent.selectedIllusion().illusionName);
     if (!illusionData[self.illusionType()].use_selected_hero) {
-        HeroCalc.IllusionModel.call(this, self.parent.selectedIllusion().baseHero, p, abilityLevel);
+        HeroCalc.IllusionModel.call(this, heroData, itemData, self.parent.selectedIllusion().baseHero, p, abilityLevel);
         self.selectedHero = ko.observable(findWhere(self.parent.availableHeroes(), {heroName: self.parent.selectedIllusion().baseHero}));
     }
     else {
-        HeroCalc.IllusionModel.call(this, self.parent.selectedHero().heroName, p, abilityLevel);
+        HeroCalc.IllusionModel.call(this, heroData, itemData, self.parent.selectedHero().heroName, p, abilityLevel);
         self.selectedHero = ko.observable(self.parent.selectedHero());
     }
     

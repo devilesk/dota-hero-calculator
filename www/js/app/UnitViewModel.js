@@ -3,7 +3,7 @@ var ko = require('knockout');
 var HeroCalc = require("dota-hero-calculator-library");
 var UnitOption = require("dota-hero-calculator-library/src/herocalc/hero/UnitOption");
 
-var UnitViewModel = function (h, p) {
+var UnitViewModel = function (heroData, itemData, unitData, h, p) {
     var self = this;
     self.index = ko.observable(h);
     self.selectedUnitLevel = ko.observable(1);
@@ -18,7 +18,7 @@ var UnitViewModel = function (h, p) {
         new UnitOption('npc_dota_visage_familiar','Visage Familiar',3,'/media/images/units/npc_dota_visage_familiar.png', self.selectedUnitLevel)
     ]);
     self.selectedUnit = ko.observable(self.availableUnits()[0]);
-    HeroCalc.UnitModel.call(this, self.selectedUnit().heroName());
+    HeroCalc.UnitModel.call(this, heroData, itemData, unitData, self.selectedUnit().heroName());
     
     self.selectedUnitLevel.subscribe(function(newValue) {
         self.unitLevel(newValue);
