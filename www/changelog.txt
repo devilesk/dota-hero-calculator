@@ -1,3 +1,6 @@
+2016-12-12
+- Added stat based hero talents.
+
 2016-11-20
 - Fixed Timbersaw Reactive Armor values not calculated properly.
 
