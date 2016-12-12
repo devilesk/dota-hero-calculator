@@ -33,7 +33,7 @@
     "stage": "npm run build && npm run stage:rev",
     "cache:purge": "node scripts/purge_cache.js",
     "deploy:copy": "node scripts/deploy.js && npm run chmod",
-    "deploy": "npm run stage && npm run rollbar:sourcemap && npm run deploy:copy && npm run rollbar:deploy:prod && npm cache:purge",
+    "deploy": "npm run stage && npm run rollbar:sourcemap && npm run deploy:copy && npm run rollbar:deploy:prod && npm run cache:purge",
     "watch": "watch 'npm run www:dev' src"
   },
   "homepage": "https://github.com/devilesk/dota-hero-calculator#readme",
