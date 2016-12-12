@@ -4,9 +4,12 @@ var execSync = require('child_process').execSync;
 var del = require('del');
 
 // clean and move to deploy directory
-del([
-    path.normalize(config.path, '/**/*'),
-    '!' + path.normalize(config.path, '/save'),
-    '!' + path.normalize(config.path, '/save/*')
-], {force: true});
-execSync('cp dist/* ' + path.normalize(config.path));
+var normalizedPath = path.normalize(config.path);
+var paths = [
+    normalizedPath + '/**/*',
+    '!' + normalizedPath + '/save',
+    '!' + normalizedPath + '/save/*'
+]
+console.log(paths);
+del.sync(paths, {force: true});
+execSync('cp -r dist/* ' + normalizedPath);
