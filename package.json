@@ -47,7 +47,7 @@
     "chmod": "^0.2.1",
     "clean-css": "^3.4.21",
     "del": "^2.2.1",
-    "dota-hero-calculator-library": "^0.11.0",
+    "dota-hero-calculator-library": "^0.12.0",
     "git-rev-sync": "^1.6.0",
     "gulp": "^3.9.1",
     "gulp-rollbar": "^0.1.3",
