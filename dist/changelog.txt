@@ -1,12 +1,15 @@
+2016-12-17
+- Added Spell Amplification and Cooldown Reduction.
+
 2016-12-15
-- Fix Mirana Arrow.
-- Update total XP and next level XP values.
+- Fixed Mirana Arrow.
+- Updated total XP and next level XP values.
 
 2016-12-14
-- Fix Sniper Shrapnel.
+- Fixed Sniper Shrapnel.
 
 2016-12-13
-- Fix Monkey King ability leveling.
+- Fixed Monkey King ability leveling.
 
 2016-12-12
 - Added stat based hero talents.
