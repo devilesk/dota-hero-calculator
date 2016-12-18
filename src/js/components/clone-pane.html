@@ -22,7 +22,7 @@
         <div class="row">
             <div class="col-md-12">
                 <h3 class="section_header" data-bind="toggle: sectionDisplay().inventory, css: { section_disabled: !sectionDisplay().inventory() }">Inventory <small style="color:goldenrod" data-bind="html: inventory.totalCost() ? '<img src=\'http://cdn.dota2.com/apps/dota2/images/tooltips/gold.png\'/> ' + inventory.totalCost() : '' "></small></h3>
-                <div id="inventory" class="inventory hover-cursor" data-bind="click: function (data, event) { buildExplorer.selectInventory(-1); }, css: {'row-highlight': selectedInventory() == -1}, template: { name: 'item-template', foreach: inventory.items }, visible: sectionDisplay().inventory()"></div>
+                <div id="inventory" class="inventory hover-cursor row-highlight" data-bind="template: { name: 'item-template', foreach: inventory.items }, visible: sectionDisplay().inventory()"></div>
             </div>
         </div>
 

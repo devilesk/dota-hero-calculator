@@ -43,7 +43,7 @@
                 </div>
                 <div class="col-md-9 bottom-buffer" data-bind="visible: $data.data.isDetail()">
                     <button type="button" class="close" data-bind="click: function(data, event) { $parent.damageAmplification.toggleBuffDetail($index, data.data, event); }">&times;</button>
-                    <div data-bind="html: $parent.ability().getAbilityTooltipData($data.hero, $data.data.name)"></div>
+                    <div data-bind="component: { name: 'ability-detail', params: { hero: $parent, ability: $data.data } }"></div>
                     <div data-bind="if: $data.data.name in $parent.damageAmplification.abilityData && $parent.damageAmplification.buffs()[$index()].data.level() > 0">
                         <div class="col-md-8">
                             <div data-bind="component: { name: 'buff-settings', params: $parent.damageAmplification.abilitySettingsData($data.data.name, $parent, $index()) }"></div>
@@ -84,7 +84,7 @@
                 </div>
                 <div class="col-md-9 bottom-buffer" data-bind="visible: $data.data.isDetail()">
                     <button type="button" class="close" data-bind="click: function(data, event) { $parent.damageReduction.toggleBuffDetail($index, data.data, event); }">&times;</button>
-                    <div data-bind="html: $parent.ability().getAbilityTooltipData($data.hero, $data.data.name)"></div>
+                    <div data-bind="component: { name: 'ability-detail', params: { hero: $parent, ability: $data.data } }"></div>
                     <div data-bind="if: $data.data.name in $parent.damageReduction.abilityData && $parent.damageReduction.buffs()[$index()].data.level() > 0">
                         <div class="col-md-8">
                             <div data-bind="component: { name: 'buff-settings', params: $parent.damageReduction.abilitySettingsData($data.data.name, $parent, $index()) }"></div>

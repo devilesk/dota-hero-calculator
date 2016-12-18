@@ -8,7 +8,7 @@ var CloneViewModel = function (heroData, itemData, unitData, h, p) {
     var self = this;
     HeroCalc.CloneModel.call(this, heroData, itemData, h, p);
     self.bound = ko.observable(false);
-    
+    self.inventory = p.inventory;
     self.sectionDisplay = ko.observable({
         'inventory': ko.observable(true),
         'ability': ko.observable(true),

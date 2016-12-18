@@ -1,0 +1,15 @@
+<div>
+    <span class="item_field pull-left item_name" data-bind="text: displayname"></span>
+    <span class="item_field pull-right item_ability_damage_type" style="margin-right: 10px;"  data-bind="text: damageType"></span>
+    <hr style="clear: both;">
+    <div class="item_field item_description" data-bind="html: description"></div>
+    <div class="item_field item_attributes" data-bind="foreach: attributes">
+        <span data-bind="text: $data"></span>
+        <br>
+    </div>
+    <div class="item_cdmana">
+        <span class="item_field item_manacost" data-bind="visible: manacost, text: manacost"></span>
+        <span class="item_field item_cooldown" data-bind="visible: cooldown, text: cooldown"></span>
+    </div>
+    <div class="item_field item_lore" data-bind="text: lore"></div>
+</div>

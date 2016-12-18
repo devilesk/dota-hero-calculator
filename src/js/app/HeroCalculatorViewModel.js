@@ -15,6 +15,9 @@ ko.components.register('buff-section', { template: require('fs').readFileSync(__
 ko.components.register('damage-details', { template: require('fs').readFileSync(__dirname + '/../components/damage-details.html', 'utf8') });
 ko.components.register('damage-amp', { template: require('fs').readFileSync(__dirname + '/../components/damage-amp.html', 'utf8') });
 ko.components.register('ability', { template: require('fs').readFileSync(__dirname + '/../components/ability.html', 'utf8') });
+var abilityDetail = require('../components/ability-detail');
+//console.log(abilityDetail);
+ko.components.register('ability-detail', abilityDetail);
 ko.components.register('shop', require('../components/shop'));
 ko.components.register('stat', { template: require('fs').readFileSync(__dirname + '/../components/stats/stat.html', 'utf8') });
 ko.components.register('stats0', { template: require('fs').readFileSync(__dirname + '/../components/stats/stats0.html', 'utf8') });
@@ -33,14 +36,14 @@ var heroData = require("dota-hero-calculator-library/src/herocalc/data/main").he
 var stackableItems = require("dota-hero-calculator-library/src/herocalc/inventory/stackableItems");
 var levelItems = require("dota-hero-calculator-library/src/herocalc/inventory/levelItems");
 var getItemTooltipData = require("./herocalc_tooltips_item");
-var getAbilityTooltipData = require("./herocalc_tooltips_ability");
+//var getAbilityTooltipData = require("./herocalc_tooltips_ability");
 var HeroViewModel = require("./HeroViewModel");
 var CloneViewModel = require("./CloneViewModel");
 var UnitViewModel = require("./UnitViewModel");
 var AbilityModel = require("dota-hero-calculator-library/src/herocalc/AbilityModel");
-AbilityModel.prototype.getAbilityTooltipData = function (hero, el) {
+/*AbilityModel.prototype.getAbilityTooltipData = function (hero, el) {
     return getAbilityTooltipData(heroData, unitData, hero, el);
-}
+}*/
 
 var PlayerColors = [
     "#2E6AE6", //Blue
@@ -97,7 +100,11 @@ var HeroCalculatorViewModel = function (tooltipURL) {
     var self = this;
     self.heroes = [];
     
-    getAbilityTooltipData.init(tooltipURL);
+    $.getJSON(tooltipURL, function (data) {
+        abilityDetail.abilityTooltipData(data);
+    });
+    
+    //getAbilityTooltipData.init(tooltipURL);
 
     for (var i = 0; i < 10; i++) {
         self.heroes.push(new HeroViewModel(heroData, itemData, unitData, i));
@@ -248,8 +255,9 @@ var HeroCalculatorViewModel = function (tooltipURL) {
 
             // make sure build explorer graph renders
             if (self.selectedTab().data.hasOwnProperty('buildExplorer')) {
+                var buildExplorer = self.selectedTab().data.buildExplorer;
                 setTimeout(function () {
-                    self.selectedTab().data.buildExplorer.graphData.valueHasMutated();
+                    buildExplorer.graphData.valueHasMutated();
                 }, 0);
             }
         }
@@ -344,7 +352,12 @@ var HeroCalculatorViewModel = function (tooltipURL) {
     });
 
     self.addItem = function (data, event) {
-        self.selectedTab().data.buildExplorer.getSelectedInventory().addItem(data, event);
+        if (self.selectedTab().data.buildExplorer) {
+            self.selectedTab().data.buildExplorer.getSelectedInventory().addItem(data, event);
+        }
+        else {
+            self.selectedTab().data.inventory.addItem(data, event);
+        }
     }
     self.itemOptions = ko.computed(function () {
         return self.selectedTab().data.inventory.itemOptions();

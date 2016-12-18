@@ -7,6 +7,7 @@
     <tr><td><abbr title="Movement Speed">MS</abbr>:</td><td class="text-right" data-bind="component: { name: 'stat', params: {'hero': $data, 'stat': 'totalMovementSpeed' } }"></td></tr>
     <tr><td>Turn Rate:</td><td class="text-right" data-bind="component: { name: 'stat', params: {'hero': $data, 'stat': 'totalTurnRate' } }"></td></tr>
     <tr><td>Sight Range:</td><td class="text-right"><span data-bind="html: '<abbr title=\'Day\'>' + visionrangeday() + '</abbr>/<abbr title=\'Night\'>' + visionrangenight() + '</abbr>'"></span></td></tr>
+    <tr><td>%Spell Amp:</td><td class="text-right" data-bind="component: { name: 'stat', params: {'hero': $data, 'stat': 'spellAmp' } }"></td></tr>
     </tbody>
     </table>
 </div>
