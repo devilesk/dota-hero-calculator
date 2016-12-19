@@ -1,3 +1,7 @@
+2016-12-18
+- Added Blight Stone debuff.
+- Added Double Damage Rune buff.
+
 2016-12-17
 - Added Spell Amplification and Cooldown Reduction.
 
