@@ -2,6 +2,6 @@
 extends: base.j2
 title: Dota 2 Hero Calculator
 description: Dota 2 Hero Calculator. A hero calculator that takes into account level, items, skills, and stats. Choose hero level, items, and skills and see detailed information about a hero's stats.
-active_menu: page-webapps
+active_menu: page-hero-calculator
 header: Hero Calculator
 ---
