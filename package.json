@@ -5,6 +5,7 @@
   "main": "src/js/index.js",
   "private": true,
   "scripts": {
+    "postinstall": "npm run build",
     "browserify": "node scripts/browserify.js",
     "uglify": "node scripts/uglify.js",
     "sass": "node-sass src/scss/app.scss www/app.css",
@@ -15,7 +16,7 @@
     "build:html": "npm run render && node scripts/preprocess.js -- production",
     "build:img": "mkdir -p dist/img && imagemin www/img/* --out-dir=dist/img",
     "build:copy": "cp www/*.php dist/ && cp www/*.txt dist/ && npm run chmod",
-    "build": "npm run clean && npm run build:js && npm run build:css && npm run build:html && npm run build:img && npm run build:copy",
+    "build": "mkdir -p dist && npm run clean && npm run build:js && npm run build:css && npm run build:html && npm run build:img && npm run build:copy",
     "chmod": "node scripts/chmod.js",
     "watch:js": "node scripts/browserify.js -- development watch",
     "watch:css": "nodemon -e scss --watch src/scss -x \"npm run sass\"",
