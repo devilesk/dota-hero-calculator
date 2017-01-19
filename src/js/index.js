@@ -26,27 +26,10 @@ var App = function (appConfig) {
         }
     });
 
-    var lastUpdate = "#DEV_BUILD";
+    var lastUpdate = "#build_date";
     $('#last-update').text(lastUpdate);
 
-    var rollbarConfig = {
-        accessToken: 'de1980fcab4849d6a7a066cf098a6521',
-        captureUncaught: true,
-        payload: {
-            environment: 'development',
-            client: {
-                javascript: {
-                    source_map_enabled: true,
-                    code_version: "#code_version",
-                    // Optionally have Rollbar guess which frames the error was thrown from
-                    // when the browser does not provide line and column numbers.
-                    guess_uncaught_frames: true
-                }
-            }
-        }
-    };
-
-    var rollbar = Rollbar.init(rollbarConfig);
+    var rollbar = require('./rollbar');
 
     $('.error-warning-view, .error-warning-close').click(function () {
         $('.error-warning').fadeOut(200);

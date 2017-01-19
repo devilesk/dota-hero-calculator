@@ -5,11 +5,11 @@ var sourcemaps = require('gulp-sourcemaps');
 var config = require('./config.json');
 
 gulp.task('rollbar:sourcemap', function () {
-    return gulp.src('dist/**/*.js')
+    return gulp.src('dist/**/*.min.js')
         .pipe(sourcemaps.init({loadMaps: true}))
         .pipe(rollbar({
-          accessToken: config.rollbar_token,
+          accessToken: config.rollbar.server_token,
           version: git.long(),
-          sourceMappingURLPrefix: config.sourceMappingURLPrefix
+          sourceMappingURLPrefix: config.rollbar.sourceMappingURLPrefix
         }))
 });

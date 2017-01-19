@@ -1,0 +1,17 @@
+{
+    "rollbar": {
+        "client_token": "",
+        "server_token": "",
+        "local_username": "",
+        "username": "",
+        "sourceMappingURLPrefix": ""
+    },
+    "deployPath": {
+        "production": "dist",
+        "development": "dist"
+    },
+    "abilityTooltipPath": "/media/js/abilitytooltipdata.json",
+    "heroDataPath": "/media/js/herodata.json",
+    "itemDataPath": "/media/js/itemdata.json",
+    "unitDataPath": "/media/js/unitdata.json"
+}

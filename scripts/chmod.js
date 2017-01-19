@@ -3,8 +3,13 @@ var glob = require("glob")
 var chmod = require('chmod');
 var path = require('path');
 
-var normalizedPath = path.normalize(config.path);
-glob("{build,www,dist}/**/*.php", function (er, files) {
+var env = process.argv.indexOf('production') !== -1 ? 'production': 'development';
+console.log('env', env);
+
+var deployPath = config.deployPath[env];
+var normalizedPath = path.normalize(deployPath);
+
+glob("{www,dist}/**/*.php", function (er, files) {
     console.log(files);
 
     files.forEach(function (filePath) {

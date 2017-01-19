@@ -1,20 +1,16 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>Dota 2 Hero Calculator</title>
-    <meta name="description" content="Dota 2 Hero Calculator. A hero calculator that takes into account level, items, skills, and stats. Choose hero level, items, and skills and see detailed information about a hero's stats.">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+
+{% block page_head %}
 <link rel="stylesheet" href="app-a861b58.min.css" type="text/css">
-</head>
-<body>
-    <div class="wrapper">
+{% endblock page_head %}
 
+{% block nav %}
+{{ render_nav(menu, 'main_nav', 'data-bind="visible: !sideView()"') if render_nav }}
+{% endblock nav %}
 
+{% block content %}
 <div class="container" data-bind="visible: !(sideView())">
-
+{{ breadcrumb(resource) if breadcrumb }}
 </div>
 <div class="container" data-bind="css: { container: !(sideView()), 'col-md-12': sideView() }">
     <header class="banner clearfix" data-bind="visible: !(sideView())">
@@ -308,9 +304,9 @@
 </div>
 </script>
 </div>
+{% endblock content %}
 
-            <div class="push"></div>
-        </div>
+{% block scripts %}
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -324,5 +320,4 @@ $.when(
     $.ajax({dataType: "script", cache: true, url: "bundle-a861b58.min.js"})
 ).done(function () { DotaHeroCalculator(appConfig); });
 </script>
-</body>
-</html>
+{% endblock scripts %}

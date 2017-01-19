@@ -1,0 +1,60 @@
+.hc-shop {
+background-image: url("../img/hero-calculator.shop.png");
+background-repeat: no-repeat;
+display: inline-block;
+}
+.hc-shop-arcane {
+width: 50px;
+height: 50px;
+background-position: 0px 0px;
+}
+.hc-shop-armaments {
+width: 50px;
+height: 50px;
+background-position: 0px -51px;
+}
+.hc-shop-armor {
+width: 50px;
+height: 50px;
+background-position: 0px -102px;
+}
+.hc-shop-artifacts {
+width: 50px;
+height: 50px;
+background-position: 0px -153px;
+}
+.hc-shop-attributes {
+width: 50px;
+height: 50px;
+background-position: -51px 0px;
+}
+.hc-shop-caster {
+width: 50px;
+height: 50px;
+background-position: -51px -51px;
+}
+.hc-shop-common {
+width: 50px;
+height: 50px;
+background-position: -51px -102px;
+}
+.hc-shop-consumables {
+width: 50px;
+height: 50px;
+background-position: -51px -153px;
+}
+.hc-shop-secret {
+width: 50px;
+height: 50px;
+background-position: -102px 0px;
+}
+.hc-shop-support {
+width: 50px;
+height: 50px;
+background-position: -102px -51px;
+}
+.hc-shop-weapons {
+width: 50px;
+height: 50px;
+background-position: -102px -102px;
+}
