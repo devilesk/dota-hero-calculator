@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" href="app-a861b58.min.css" type="text/css">
+<link rel="stylesheet" href="app-355df68.min.css" type="text/css">
 </head>
 <body>
     <div class="wrapper">
@@ -315,13 +315,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
-var appConfig = { abilityTooltipPath: "/media/js/abilitytooltipdata.json" };
+var appConfig = { abilityTooltipPath: "/media/dota-json/abilitytooltipdata.json" };
 window.HeroCalcData = {};
 $.when(
-    $.getJSON("/media/js/herodata.json", function (data) {HeroCalcData.heroData = data;}),
-    $.getJSON("/media/js/itemdata.json", function (data) {HeroCalcData.itemData = data;}),
-    $.getJSON("/media/js/unitdata.json", function (data) {HeroCalcData.unitData = data;}),
-    $.ajax({dataType: "script", cache: true, url: "bundle-a861b58.min.js"})
+    $.getJSON("/media/dota-json/herodata.json", function (data) {HeroCalcData.heroData = data;}),
+    $.getJSON("/media/dota-json/itemdata.json", function (data) {HeroCalcData.itemData = data;}),
+    $.getJSON("/media/dota-json/unitdata.json", function (data) {HeroCalcData.unitData = data;}),
+    $.ajax({dataType: "script", cache: true, url: "bundle-355df68.min.js"})
 ).done(function () { DotaHeroCalculator(appConfig); });
 </script>
 </body>

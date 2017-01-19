@@ -25468,7 +25468,7 @@ var App = function (appConfig) {
         }
     });
 
-    var lastUpdate = "2017-01-19 15:11:49 UTC";
+    var lastUpdate = "2017-01-19 18:37:51 UTC";
     $('#last-update').text(lastUpdate);
 
     var rollbar = require('./rollbar');
@@ -25699,7 +25699,7 @@ var rollbarConfig = {
         client: {
             javascript: {
                 source_map_enabled: true,
-                code_version: "a861b586083b68751c4b4fe10dd858da912a6652",
+                code_version: "355df6804cf6d27137e88321fce17eff971f79d3",
                 // Optionally have Rollbar guess which frames the error was thrown from
                 // when the browser does not provide line and column numbers.
                 guess_uncaught_frames: true
@@ -25713,4 +25713,4 @@ var rollbar = Rollbar.init(rollbarConfig);
 module.exports = rollbar;
 },{"rollbar-browser":71}]},{},[87])(87)
 });
-//# sourceMappingURL=bundle-a861b58.js.map
+//# sourceMappingURL=bundle-355df68.js.map
