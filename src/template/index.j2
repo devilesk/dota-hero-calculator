@@ -14,9 +14,6 @@
 {% endblock nav %}
 
 {% block content %}
-<div class="container" data-bind="visible: !(sideView())">
-{{ breadcrumb(resource) if breadcrumb }}
-</div>
 <div class="container" data-bind="css: { container: !(sideView()), 'col-md-12': sideView() }">
     <header class="banner clearfix" data-bind="visible: !(sideView())">
         <h2 class="pull-left">Hero Calculator</h2>
