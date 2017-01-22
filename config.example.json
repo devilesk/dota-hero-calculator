@@ -1,4 +1,5 @@
 {
+    "appName": "DotaHeroCalculator",
     "rollbar": {
         "client_token": "",
         "server_token": "",

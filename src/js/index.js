@@ -1,5 +1,4 @@
 require("./app/polyfill");
-var Rollbar = require("rollbar-browser");
 var $ = require('jquery');
 var getParameterByName = require("./app/getParameterByName");
 var HeroCalc = require("dota-hero-calculator-library");
