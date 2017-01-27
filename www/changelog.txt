@@ -1,3 +1,8 @@
+2017-01-27
+- Fixed Bonus Damage Talents not showing in Damage Details section.
+- Fixed Drums of Endurance movement speed.
+- Fixed Boots of Travel 2 item cost.
+
 2016-12-18
 - Added Blight Stone debuff.
 - Added Double Damage Rune buff.
