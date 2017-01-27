@@ -318,12 +318,12 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <!-- @if NODE_ENV!='production' -->
 <script>
-var appConfig = { abilityTooltipPath: "../node_modules/dota-datafiles/dist/abilitytooltipdata.json" };
+var appConfig = { abilityTooltipPath: "data/abilitytooltipdata.json" };
 window.HeroCalcData = {};
 $.when(
-    $.getJSON("../node_modules/dota-datafiles/dist/herodata.json", function (data) {HeroCalcData.heroData = data;}),
-    $.getJSON("../node_modules/dota-datafiles/dist/itemdata.json", function (data) {HeroCalcData.itemData = data;}),
-    $.getJSON("../node_modules/dota-datafiles/dist/unitdata.json", function (data) {HeroCalcData.unitData = data;}),
+    $.getJSON("data/herodata.json", function (data) {HeroCalcData.heroData = data;}),
+    $.getJSON("data/itemdata.json", function (data) {HeroCalcData.itemData = data;}),
+    $.getJSON("data/unitdata.json", function (data) {HeroCalcData.unitData = data;}),
     $.ajax({dataType: "script", cache: true, url: "bundle.js"})
 ).done(function () { DotaHeroCalculator(appConfig); });
 </script>
