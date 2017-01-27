@@ -10,6 +10,7 @@
     "uglify": "node scripts/uglify.js",
     "sass": "node-sass src/scss/app.scss www/app.css",
     "preprocess:html": "node scripts/preprocess.js",
+    "data": "cp -r node_modules/dota-datafiles/dist www/data",
     "clean": "rm -rf dist/*",
     "build:js": "npm run browserify -- production && npm run uglify",
     "build:css": "npm run sass && cleancss www/app.css --skip-rebase -o dist/app-`git rev-parse --short HEAD`.min.css",
@@ -65,7 +66,7 @@
   "dependencies": {
     "chart.js": "^1.1.1",
     "dota-datafiles": "^0.3.0",
-    "dota-hero-calculator-library": "^0.16.0",
+    "dota-hero-calculator-library": "^0.17.0",
     "jquery": "^3.1.0",
     "jquery-ui": "^1.12.0",
     "knockout": "^3.4.0",
