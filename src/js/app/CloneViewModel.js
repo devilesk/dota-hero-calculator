@@ -9,6 +9,7 @@ var CloneViewModel = function (heroData, itemData, unitData, h, p) {
     HeroCalc.CloneModel.call(this, heroData, itemData, h, p);
     self.bound = ko.observable(false);
     self.inventory = p.inventory;
+    self.selectedHeroLevel = p.selectedHeroLevel;
     self.sectionDisplay = ko.observable({
         'inventory': ko.observable(true),
         'ability': ko.observable(true),
