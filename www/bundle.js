@@ -3918,7 +3918,7 @@ var HeroModel = function (heroData, itemData, h) {
                 + TalentController.getArmor(self.selectedTalents())
                 + self.enemy().ability().getArmorReduction()
                 + self.buffs.getArmor()
-                + self.buffs.itemBuffs.getArmor()
+                //+ self.buffs.itemBuffs.getArmor()
                 + self.debuffs.getArmorReduction()
                 //+ self.buffs.itemBuffs.getArmorAura().value
                 + armorAura.value
@@ -4088,11 +4088,16 @@ var HeroModel = function (heroData, itemData, h) {
         return self.heroData().attackrate;
     });
     self.ias = ko.pureComputed(function () {
-        var attackSpeed = [self.inventory.getAttackSpeed, self.buffs.itemBuffs.getAttackSpeed].reduce(function (memo, fn) {
+        var attackSpeed = [self.inventory.getAttackSpeed].reduce(function (memo, fn) {
             var obj = fn(memo.excludeList);
             obj.value += memo.value;
             return obj;
         }, {value:0, excludeList:[]});
+        var attackSpeedAura = [self.inventory.getAttackSpeedAura, self.buffs.itemBuffs.getAttackSpeedAura].reduce(function (memo, fn) {
+            var obj = fn(memo.excludeList);
+            obj.value += memo.value;
+            return obj;
+        }, {value: 0, excludeList: []});
         var attackSpeedReduction = [self.enemy().inventory.getAttackSpeedReduction, self.debuffs.itemBuffs.getAttackSpeedReduction].reduce(function (memo, fn) {
             var obj = fn(memo.excludeList);
             obj.value += memo.value;
@@ -4101,6 +4106,7 @@ var HeroModel = function (heroData, itemData, h) {
         var val = parseFloat(self.totalAgi()) 
                 //+ self.inventory.getAttackSpeed() 
                 + attackSpeed.value
+                + attackSpeedAura.value
                 + attackSpeedReduction.value
                 //+ self.enemy().inventory.getAttackSpeedReduction() 
                 + self.ability().getAttackSpeed() 
@@ -9376,6 +9382,7 @@ var InventoryViewModel = function (itemData, h) {
                 if (excludeList.indexOf(item + attribute.name) > -1) continue;
                 switch(attribute.name) {
                     case 'aura_health_regen':
+                    case 'hp_regen_aura':
                         totalAttribute += parseInt(attribute.value[0]);
                         excludeList.push(item + attribute.name);
                     break;
@@ -9878,20 +9885,10 @@ var InventoryViewModel = function (itemData, h) {
                     case 'bonus_speed':
                         totalAttribute += parseInt(attribute.value[0]);
                     break;
-                    case 'aura_attack_speed':
-                        if (item != 'shivas_guard') { totalAttribute += parseInt(attribute.value[0]); };
-                    break;
-                    // ancient_janggo
-                    case 'bonus_aura_attack_speed_pct':
+                    // helm_of_the_dominator
+                    case 'attack_speed':
                         totalAttribute += parseInt(attribute.value[0]);
                         excludeList.push(attribute.name);
-                    break;
-                    // ancient_janggo
-                    case 'bonus_attack_speed_pct':
-                        if (isActive) {
-                            totalAttribute += parseInt(attribute.value[0]);
-                            excludeList.push(attribute.name);
-                        }
                     break;
                     case 'unholy_bonus_attack_speed':
                         if (isActive) { totalAttribute += parseInt(attribute.value[0]); };
@@ -9904,6 +9901,41 @@ var InventoryViewModel = function (itemData, h) {
         }
         return {value: totalAttribute, excludeList: excludeList};
     };
+    
+    self.getAttackSpeedAura = function (e) {
+        var totalAttribute = 0,
+            excludeList = e || [];
+        for (var i = 0; i < self.items().length; i++) {
+            var item = self.items()[i].item;
+            var isActive = self.activeItems.indexOf(self.items()[i]) >= 0 ? true : false;
+            if (!self.items()[i].enabled()) continue;
+            for (var j = 0; j < itemData['item_' + item].attributes.length; j++) {
+                var attribute = itemData['item_' + item].attributes[j];
+                if (excludeList.indexOf(item + attribute.name) > -1) continue;
+                switch(attribute.name) {
+                    // helm_of_the_dominator
+                    case 'attack_speed_aura':
+                        totalAttribute += parseInt(attribute.value[0]);
+                        excludeList.push(item + attribute.name);
+                    break;
+                    // assault_cuirass
+                    case 'aura_attack_speed':
+                        if (item != 'shivas_guard') { totalAttribute += parseInt(attribute.value[0]); };
+                        excludeList.push(item + attribute.name);
+                    break;
+                    // ancient_janggo
+                    case 'bonus_attack_speed_pct':
+                        if (isActive) {
+                            totalAttribute += parseInt(attribute.value[0]);
+                            excludeList.push(attribute.name);
+                        }
+                    break;
+                }
+            }
+        }
+        return {value: totalAttribute, excludeList: excludeList};
+    };
+    
     self.getAttackSpeedReduction = function (e) {
         var totalAttribute = 0,
             excludeList = e || [];
@@ -10271,7 +10303,7 @@ module.exports = ItemInput;
 
 },{}],29:[function(require,module,exports){
 var ItemInput = require("./ItemInput");
-var itemBuffs = ['assault', 'ancient_janggo', 'headdress', 'mekansm', 'pipe', 'ring_of_aquila', 'vladmir', 'ring_of_basilius', 'buckler', 'solar_crest', 'bottle_doubledamage'];
+var itemBuffs = ['assault', 'ancient_janggo', 'headdress', 'mekansm', 'pipe', 'ring_of_aquila', 'vladmir', 'ring_of_basilius', 'buckler', 'solar_crest', 'bottle_doubledamage', 'helm_of_the_dominator'];
 var itemBuffOptions = {};
 
 var init = function (itemData) {
@@ -23359,6 +23391,7 @@ var CloneViewModel = function (heroData, itemData, unitData, h, p) {
     HeroCalc.CloneModel.call(this, heroData, itemData, h, p);
     self.bound = ko.observable(false);
     self.inventory = p.inventory;
+    self.selectedHeroLevel = p.selectedHeroLevel;
     self.sectionDisplay = ko.observable({
         'inventory': ko.observable(true),
         'ability': ko.observable(true),
@@ -25475,7 +25508,7 @@ var App = function (appConfig) {
         }
     });
 
-    var lastUpdate = "2017-01-27 23:46:35 UTC";
+    var lastUpdate = "2017-02-10 16:02:52 UTC";
     $('#last-update').text(lastUpdate);
 
     var rollbar = require('./rollbar');
@@ -25706,7 +25739,7 @@ var rollbarConfig = {
         client: {
             javascript: {
                 source_map_enabled: true,
-                code_version: "a680637b33e9e049a6d0d1cea275857e6f1521fc",
+                code_version: "cc00feac1f8c916767d826f89c55828dfc8a6f86",
                 // Optionally have Rollbar guess which frames the error was thrown from
                 // when the browser does not provide line and column numbers.
                 guess_uncaught_frames: true
