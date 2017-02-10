@@ -1,3 +1,10 @@
+2017-02-10
+- Updated to patch 7.02.
+- Added Helm of the Dominator Aura.
+- Fixed Attack Speed Aura item buffs.
+- Fixed Armor Aura item buffs.
+- Fixed Meepo clone not sharing level with main Meepo.
+
 2017-01-27
 - Fixed Bonus Damage Talents not showing in Damage Details section.
 - Fixed Drums of Endurance movement speed.
