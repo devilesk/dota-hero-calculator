@@ -1,3 +1,6 @@
+2017-04-18
+- Updated to patch 7.05.
+
 2017-02-10
 - Updated to patch 7.02.
 - Added Helm of the Dominator Aura.
