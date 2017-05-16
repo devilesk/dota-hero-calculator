@@ -1331,7 +1331,7 @@ var AbilityModel = function (a, h) {
                     }
                 }
                 else if (ability.damageReduction != undefined) {
-                    // wisp_overcharge,bristleback_bristleback,spectre_dispersion,medusa_mana_shield,ursa_enrage
+                    // wisp_overcharge,bristleback_bristleback,spectre_dispersion,medusa_mana_shield,ursa_enrage,visage_gravekeepers_cloak
                     totalAttribute *= (1 + ability.damageReduction()/100);
                 }
             }
@@ -2737,7 +2737,6 @@ var init = function (heroData, unitData) {
         new BuffModel(heroData, unitData, 'npc_dota_neutral_alpha_wolf', 'alpha_wolf_critical_strike'),
         new BuffModel(heroData, unitData, 'npc_dota_neutral_alpha_wolf', 'alpha_wolf_command_aura'),
         new BuffModel(heroData, unitData, 'npc_dota_neutral_polar_furbolg_ursa_warrior', 'centaur_khan_endurance_aura'),
-        new BuffModel(heroData, unitData, 'npc_dota_neutral_giant_wolf', 'giant_wolf_critical_strike'),
         new BuffModel(heroData, unitData, 'npc_dota_neutral_kobold_taskmaster', 'kobold_taskmaster_speed_aura'),
         new BuffModel(heroData, unitData, 'npc_dota_neutral_ogre_magi', 'ogre_magi_frost_armor'),
         new BuffModel(heroData, unitData, 'npc_dota_neutral_satyr_hellcaller', 'satyr_hellcaller_unholy_aura'),
@@ -3873,7 +3872,7 @@ var HeroModel = function (heroData, itemData, h) {
             obj.value += memo.value;
             return obj;
         }, {value: 0, excludeList: []});
-        return (self.heroData().statushealthregen + self.totalStr() * .03 
+        return (self.heroData().statushealthregen + self.totalStr() * .06 
                 + self.inventory.getHealthRegen() 
                 + self.ability().getHealthRegen()
                 + TalentController.getHealthRegen(self.selectedTalents())
@@ -3883,7 +3882,7 @@ var HeroModel = function (heroData, itemData, h) {
     });
     self.mana = ko.pureComputed(function () {
         return (self.heroData().statusmana
-                + self.totalInt() * 12
+                + self.totalInt() * 11
                 + self.inventory.getMana()
                 + TalentController.getMana(self.selectedTalents())
                 + self.ability().getMana()).toFixed(2);
@@ -3936,7 +3935,7 @@ var HeroModel = function (heroData, itemData, h) {
         }
     });
     self.spellAmp = ko.pureComputed(function () {
-        return (self.totalInt() / 16
+        return (self.totalInt() / 14
                 + self.inventory.getSpellAmp()
                 + self.ability().getSpellAmp()
                 + TalentController.getSpellAmp(self.selectedTalents())
@@ -8196,24 +8195,14 @@ var abilityData = {
             controlType: 'input'
         },
         {
-            attributeName: 'bonus_armor',
-            label: 'ARMOR:',
+            attributeName: 'damage_reduction',
+            label: 'DAMAGE REDUCTION:',
             ignoreTooltip: true,
             controlType: 'text',
             fn: function (v, a, parent, index, abilityModel, ability) {
-                return v*a;
+                return -v*a;
             },
-            returnProperty: 'armor'
-        },
-        {
-            attributeName: 'bonus_resist',
-            label: '%RESIST:',
-            ignoreTooltip: true,
-            controlType: 'text',
-            fn: function (v, a, parent, index, abilityModel, ability) {
-                return v*a;
-            },
-            returnProperty: 'magicResist'
+            returnProperty: 'damageReduction'
         }
     ],
     'warlock_shadow_word': [
@@ -25508,7 +25497,7 @@ var App = function (appConfig) {
         }
     });
 
-    var lastUpdate = "2017-04-18 14:14:51 UTC";
+    var lastUpdate = "2017-05-16 13:10:02 UTC";
     $('#last-update').text(lastUpdate);
 
     var rollbar = require('./rollbar');
@@ -25739,7 +25728,7 @@ var rollbarConfig = {
         client: {
             javascript: {
                 source_map_enabled: true,
-                code_version: "8a1eab2b0b80424247e23ff69f57ccbe94694da3",
+                code_version: "d9c3363bf66fef7d9a75beeac3b758bfbcdea20a",
                 // Optionally have Rollbar guess which frames the error was thrown from
                 // when the browser does not provide line and column numbers.
                 guess_uncaught_frames: true

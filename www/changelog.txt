@@ -1,3 +1,7 @@
+2017-05-16
+- Updated to patch 7.06.
+- Fix Visage Gravekeeper's Cloak
+
 2017-04-18
 - Updated to patch 7.05.
 
