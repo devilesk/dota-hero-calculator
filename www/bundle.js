@@ -296,12 +296,12 @@ var AbilityModel = function (a, h) {
                     if (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1)) {
                         for (var j = 0; j < self._abilities[i].attributes.length; j++) {
                             var attribute = self._abilities[i].attributes[j];
-                            /*switch(attribute.name) {
-                                // invoker_quas
-                                case 'bonus_strength':
+                            switch(attribute.name) {
+                                // sven_gods_strength
+                                case 'gods_strength_bonus_str':
                                     totalAttribute += parseInt(attribute.value[ability.level()-1]);
                                 break;
-                            }*/
+                            }
                         }
                     }
                 }
@@ -25497,7 +25497,7 @@ var App = function (appConfig) {
         }
     });
 
-    var lastUpdate = "2017-05-16 13:10:02 UTC";
+    var lastUpdate = "2017-05-22 13:28:57 UTC";
     $('#last-update').text(lastUpdate);
 
     var rollbar = require('./rollbar');
@@ -25728,7 +25728,7 @@ var rollbarConfig = {
         client: {
             javascript: {
                 source_map_enabled: true,
-                code_version: "d9c3363bf66fef7d9a75beeac3b758bfbcdea20a",
+                code_version: "e165e91ab7a5e9dc61623a5e36a899ce0048d272",
                 // Optionally have Rollbar guess which frames the error was thrown from
                 // when the browser does not provide line and column numbers.
                 guess_uncaught_frames: true

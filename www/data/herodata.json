@@ -12815,10 +12815,10 @@
       "name": "heath_regen",
       "tooltip": "HEALTH REGEN:",
       "value": [
-       2,
-       4,
-       6,
-       8
+       3,
+       5,
+       7,
+       9
       ]
      },
      {
@@ -16046,7 +16046,7 @@
       0,
       0
      ],
-     "displayname": "+1000 Creep Health",
+     "displayname": "+1000 Creep Min Health",
      "level": 0,
      "manacost": [
       0,
@@ -16106,7 +16106,7 @@
       0,
       0
      ],
-     "displayname": "+2 Holy Persuation Max Count",
+     "displayname": "+2 Holy Persuasion Max Count",
      "level": 0,
      "manacost": [
       0,
@@ -55989,7 +55989,7 @@
       0,
       0
      ],
-     "displayname": "+125 Shadow Raze Damage",
+     "displayname": "+150 Shadow Raze Damage",
      "level": 0,
      "manacost": [
       0,
@@ -82117,10 +82117,10 @@
      "DOTA_ABILITY_BEHAVIOR_PASSIVE"
     ],
     "cooldown": [
-     0,
-     0,
-     0,
-     0
+     1.5,
+     1.5,
+     1.5,
+     1.5
     ],
     "damage": [
      0,
@@ -83898,9 +83898,9 @@
       "name": "gods_strength_bonus_str",
       "tooltip": "BONUS STRENGTH:",
       "value": [
-       16,
-       28,
-       40
+       12,
+       24,
+       36
       ]
      },
      {
@@ -83925,8 +83925,6 @@
      "DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
     ],
     "cooldown": [
-     80,
-     80,
      80
     ],
     "damage": [
@@ -83951,7 +83949,7 @@
   "attackdamagemin": 41,
   "attackpoint": 0.4,
   "attackrange": 150,
-  "attackrate": 1.7,
+  "attackrate": 1.8,
   "attacktype": "DOTA_UNIT_CAP_MELEE_ATTACK",
   "attributeagilitygain": 2,
   "attributebaseagility": 21,
@@ -91370,7 +91368,7 @@
   "attackrange": 500,
   "attackrate": 1.7,
   "attacktype": "DOTA_UNIT_CAP_RANGED_ATTACK",
-  "attributeagilitygain": 2.75,
+  "attributeagilitygain": 2.5,
   "attributebaseagility": 21,
   "attributebaseintelligence": 13,
   "attributebasestrength": 20,

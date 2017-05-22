@@ -94,6 +94,12 @@
     ]
    },
    {
+    "name": "bash_cooldown",
+    "value": [
+     2.3
+    ]
+   },
+   {
     "name": "stun_duration",
     "tooltip": "OVERWHELM STUN DURATION:",
     "value": [
@@ -555,6 +561,12 @@
     ]
    },
    {
+    "name": "bash_cooldown",
+    "value": [
+     2.3
+    ]
+   },
+   {
     "name": "bonus_chance_damage",
     "tooltip": "BASH BONUS DAMAGE:",
     "value": [
@@ -562,7 +574,9 @@
     ]
    }
   ],
-  "cooldown": [],
+  "cooldown": [
+   2.3
+  ],
   "description": "Passive: Bash - Grants each attack a chance to stun the target for %bash_duration% seconds and deal %bonus_chance_damage% bonus damage, based on whether the equipped hero is ranged or melee.",
   "displayname": "Skull Basher",
   "id": 143,
@@ -3637,7 +3651,7 @@
   "cooldown": [
    100
   ],
-  "description": "Active: Transmute - Kills a non-hero target for %bonus_gold% gold and %xp_multiplier%x experience.  Cannot be used on Ancient Creeps.",
+  "description": "Active: Transmute - Kills a non-hero target for %bonus_gold% gold and 1.85x experience.  Cannot be used on Ancient Creeps.",
   "displayname": "Hand of Midas",
   "id": 65,
   "itemcost": 2150,

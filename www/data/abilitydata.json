@@ -7747,10 +7747,10 @@
     "name": "heath_regen",
     "tooltip": "HEALTH REGEN:",
     "value": [
-     2,
-     4,
-     6,
-     8
+     3,
+     5,
+     7,
+     9
     ]
    },
    {
@@ -63724,7 +63724,7 @@
    0,
    0
   ],
-  "displayname": "+2 Holy Persuation Max Count",
+  "displayname": "+2 Holy Persuasion Max Count",
   "level": 0,
   "manacost": [
    0,
@@ -63898,7 +63898,7 @@
    0,
    0
   ],
-  "displayname": "+1000 Creep Health",
+  "displayname": "+1000 Creep Min Health",
   "level": 0,
   "manacost": [
    0,
@@ -69948,7 +69948,7 @@
    0,
    0
   ],
-  "displayname": "+125 Shadow Raze Damage",
+  "displayname": "+150 Shadow Raze Damage",
   "level": 0,
   "manacost": [
    0,
@@ -76900,10 +76900,10 @@
    "DOTA_ABILITY_BEHAVIOR_PASSIVE"
   ],
   "cooldown": [
-   0,
-   0,
-   0,
-   0
+   1.5,
+   1.5,
+   1.5,
+   1.5
   ],
   "damage": [
    0,
@@ -77421,9 +77421,9 @@
     "name": "gods_strength_bonus_str",
     "tooltip": "BONUS STRENGTH:",
     "value": [
-     16,
-     28,
-     40
+     12,
+     24,
+     36
     ]
    },
    {
@@ -77448,8 +77448,6 @@
    "DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
   ],
   "cooldown": [
-   80,
-   80,
    80
   ],
   "damage": [

@@ -130,7 +130,7 @@
   "Lore": "Time and space are of little consequence to one as old as Zet."
  },
  "arc_warden_spark_wraith": {
-  "Description": "Summons a Spark Wraith that slowly materializes and patrols a targeted area until an enemy comes within its range. Once a target has been found the wraith fuses with them, dealing magical damage and slowing the unit.\\n\\nDISPEL TYPE: Basic Dispel",
+  "Description": "Summons a Spark Wraith that slowly materializes and patrols a targeted area until an enemy comes within its range. Once a target has been found the wraith fuses with them, dealing magical damage and slowing the unit.",
   "DisplayName": "Spark Wraith",
   "Lore": "Lesser fragments of Zet's original self."
  },
@@ -1579,7 +1579,7 @@
   "Lore": "One of many holy instruments constructed to honor the Omniscience."
  },
  "item_hand_of_midas": {
-  "Description": "Active: Transmute - Kills a non-hero target for %bonus_gold% gold and %xp_multiplier%x experience.  Cannot be used on Ancient Creeps.",
+  "Description": "Active: Transmute - Kills a non-hero target for %bonus_gold% gold and 1.85x experience.  Cannot be used on Ancient Creeps.",
   "DisplayName": "Hand of Midas",
   "Lore": "Preserved through unknown magical means, the Hand of Midas is a weapon of greed, sacrificing animals to line the owner's pockets."
  },
@@ -5492,7 +5492,7 @@
   "DisplayName": "Reality Rift Pierces Spell Immune"
  },
  "special_bonus_unique_chen_1": {
-  "DisplayName": "+2 Holy Persuation Max Count"
+  "DisplayName": "+2 Holy Persuasion Max Count"
  },
  "special_bonus_unique_chen_2": {
   "DisplayName": "+200 Hand of God Heal"
@@ -5501,7 +5501,7 @@
   "DisplayName": "-10s Test of Faith Cooldown"
  },
  "special_bonus_unique_chen_4": {
-  "DisplayName": "+1000 Creep Health"
+  "DisplayName": "+1000 Creep Min Health"
  },
  "special_bonus_unique_clinkz_1": {
   "DisplayName": "+30 Searing Arrows Damage"
@@ -5813,7 +5813,7 @@
   "DisplayName": "+2 Damage Per Soul"
  },
  "special_bonus_unique_nevermore_2": {
-  "DisplayName": "+125 Shadow Raze Damage"
+  "DisplayName": "+150 Shadow Raze Damage"
  },
  "special_bonus_unique_night_stalker": {
   "DisplayName": "-8s Crippling Fear Cooldown"

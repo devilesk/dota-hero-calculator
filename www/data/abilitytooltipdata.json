@@ -105,7 +105,7 @@
   "lore": "Time and space are of little consequence to one as old as Zet."
  },
  "arc_warden_spark_wraith": {
-  "description": "Summons a Spark Wraith that slowly materializes and patrols a targeted area until an enemy comes within its range. Once a target has been found the wraith fuses with them, dealing magical damage and slowing the unit.\\n\\nDISPEL TYPE: Basic Dispel",
+  "description": "Summons a Spark Wraith that slowly materializes and patrols a targeted area until an enemy comes within its range. Once a target has been found the wraith fuses with them, dealing magical damage and slowing the unit.",
   "lore": "Lesser fragments of Zet's original self."
  },
  "arc_warden_tempest_double": {
