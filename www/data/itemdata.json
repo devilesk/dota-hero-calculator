@@ -8116,6 +8116,7 @@
   "attributes": [],
   "cooldown": [],
   "description": null,
+  "displayname": "Rod of Atos Recipe",
   "id": 205,
   "itemcost": 1100,
   "level": 0,
@@ -9863,14 +9864,14 @@
     "name": "bonus_evasion",
     "tooltip": "%+$evasion",
     "value": [
-     25
+     20
     ]
    },
    {
     "name": "truestrike_chance",
-    "tooltip": "%TRUE STRIKE CHANCE:",
+    "tooltip": "%ACCURACY:",
     "value": [
-     25
+     35
     ]
    },
    {
@@ -9891,7 +9892,7 @@
   "cooldown": [
    7
   ],
-  "description": "Active: Shine - Temporarily removes the armor and evasion from Solar Crest. When cast on an ally it grants them %bonus_armor% armor and %bonus_evasion%%% evasion. When cast on an enemy, it removes %bonus_armor% of their armor and grants your allies to have %truestrike_chance%%% True Strike chance on the target. Cannot target magic immune enemies.",
+  "description": "Active: Shine - Temporarily removes the armor and evasion from Solar Crest. When cast on an ally it grants them %bonus_armor% armor and %bonus_evasion%%% evasion. When cast on an enemy, it removes %bonus_armor% of their armor and grants your allies to have %truestrike_chance%%% Accuracy on the target. Cannot target magic immune enemies.",
   "displayname": "Solar Crest",
   "id": 229,
   "itemcost": 2625,

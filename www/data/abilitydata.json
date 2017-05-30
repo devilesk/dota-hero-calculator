@@ -687,10 +687,10 @@
     "name": "burn_damage",
     "tooltip": "%MAX HP BURN DAMAGE:",
     "value": [
-     0.75,
-     1.5,
-     2.25,
-     3
+     0.8,
+     1.6,
+     2.4,
+     3.2
     ]
    },
    {
@@ -1594,9 +1594,9 @@
     "name": "stun_duration",
     "tooltip": "STUN DURATION:",
     "value": [
-     1.25,
      2,
-     2.75,
+     2.5,
+     3,
      3.5
     ]
    },
@@ -9114,8 +9114,8 @@
     "tooltip": "%HEALTH GAIN:",
     "value": [
      50,
-     65,
-     80
+     70,
+     90
     ]
    },
    {
@@ -9123,8 +9123,8 @@
     "tooltip": "%DAMAGE GAIN:",
     "value": [
      5,
-     6.5,
-     8
+     7,
+     9
     ]
    }
   ],
@@ -9333,10 +9333,10 @@
     "name": "move_speed_bonus_pct",
     "tooltip": "%BONUS MOVEMENT SPEED:",
     "value": [
-     11,
-     22,
-     33,
-     44
+     15,
+     25,
+     35,
+     45
     ]
    }
   ],
@@ -12966,7 +12966,7 @@
     "name": "ministun_duration",
     "tooltip": "STUN DURATION:",
     "value": [
-     0.4
+     0.6
     ]
    }
   ],
@@ -21222,7 +21222,7 @@
     "name": "radius",
     "tooltip": "RADIUS:",
     "value": [
-     1000
+     1250
     ]
    },
    {
@@ -21332,10 +21332,10 @@
     "name": "stun_duration",
     "tooltip": "STUN DURATION:",
     "value": [
-     2.2,
-     2.4,
-     2.6,
-     2.8
+     2.25,
+     2.5,
+     2.75,
+     3
     ]
    },
    {
@@ -26507,9 +26507,9 @@
   ],
   "cooldown": [
    60,
-   48,
-   36,
-   24
+   46,
+   32,
+   18
   ],
   "damage": [
    0,
@@ -31091,10 +31091,10 @@
     "name": "leap_speedbonus",
     "tooltip": "%MOVEMENT BONUS:",
     "value": [
-     4,
      8,
      12,
-     16
+     16,
+     20
     ]
    },
    {
@@ -31706,7 +31706,7 @@
    "DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES"
   ],
   "cooldown": [
-   1.4
+   1.2
   ],
   "damage": [
    0,
@@ -33506,7 +33506,7 @@
     "name": "slow_aoe",
     "tooltip": "SLOW RADIUS:",
     "value": [
-     600
+     750
     ]
    },
    {
@@ -34977,7 +34977,7 @@
    "DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
   ],
   "cooldown": [
-   13
+   14
   ],
   "damage": [
    80,
@@ -36592,9 +36592,9 @@
     "name": "duration",
     "tooltip": "DURATION:",
     "value": [
-     7,
      8,
-     9
+     9,
+     10
     ]
    },
    {
@@ -38288,7 +38288,6 @@
   "behavior": [
    "DOTA_ABILITY_BEHAVIOR_NO_TARGET",
    "DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE",
-   "DOTA_ABILITY_BEHAVIOR_HIDDEN",
    "DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK",
    "DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
   ],
@@ -38313,58 +38312,6 @@
    0
   ],
   "name": "phoenix_sun_ray_toggle_move"
- },
- "phoenix_sun_ray_toggle_move_empty": {
-  "AbilityCastPoint": [
-   0,
-   0,
-   0,
-   0
-  ],
-  "AbilityCastRange": 0,
-  "AbilityCastRangeBuffer": 250,
-  "AbilityChannelTime": [
-   0,
-   0,
-   0,
-   0
-  ],
-  "AbilityDuration": [
-   0,
-   0,
-   0,
-   0
-  ],
-  "AbilityModifierSupportBonus": 0,
-  "AbilityModifierSupportValue": 1,
-  "ID": 5629,
-  "abilitytype": "DOTA_ABILITY_TYPE_BASIC",
-  "attributes": [],
-  "behavior": [
-   "DOTA_ABILITY_BEHAVIOR_PASSIVE",
-   "DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-  ],
-  "cooldown": [
-   0,
-   0,
-   0,
-   0
-  ],
-  "damage": [
-   0,
-   0,
-   0,
-   0
-  ],
-  "displayname": "",
-  "level": 0,
-  "manacost": [
-   0,
-   0,
-   0,
-   0
-  ],
-  "name": "phoenix_sun_ray_toggle_move_empty"
  },
  "phoenix_supernova": {
   "AbilityCastPoint": 0.01,
@@ -39467,7 +39414,7 @@
    {
     "name": "drain_buffer",
     "value": [
-     100
+     200
     ]
    }
   ],
@@ -43822,12 +43769,7 @@
   "name": "shadow_demon_disruption"
  },
  "shadow_demon_shadow_poison": {
-  "AbilityCastPoint": [
-   0.3,
-   0.3,
-   0.3,
-   0.3
-  ],
+  "AbilityCastPoint": 0.25,
   "AbilityCastRange": 1500,
   "AbilityCastRangeBuffer": 250,
   "AbilityChannelTime": [
@@ -45822,7 +45764,7 @@
    0.1,
    0.1
   ],
-  "AbilityCastRange": 800,
+  "AbilityCastRange": 875,
   "AbilityCastRangeBuffer": 250,
   "AbilityChannelTime": [
    0,
@@ -71263,7 +71205,7 @@
    {
     "name": "value",
     "value": [
-     0.5
+     0.75
     ]
    }
   ],
@@ -71282,7 +71224,7 @@
    0,
    0
   ],
-  "displayname": "+0.5 Netherward Damage Per Mana",
+  "displayname": "+0.75 Netherward Damage Per Mana",
   "level": 0,
   "manacost": [
    0,
@@ -80922,7 +80864,7 @@
    "DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
   ],
   "cooldown": [
-   30
+   35
   ],
   "damage": [
    0,
@@ -83445,9 +83387,9 @@
     "tooltip": "DAMAGE PER SECOND:",
     "value": [
      6,
-     12,
-     18,
-     24
+     14,
+     22,
+     30
     ]
    },
    {
@@ -84849,9 +84791,7 @@
    "DOTA_ABILITY_BEHAVIOR_AOE"
   ],
   "cooldown": [
-   165,
-   165,
-   165
+   170
   ],
   "damage": [
    0,
@@ -84863,8 +84803,8 @@
   "level": 0,
   "manacost": [
    250,
-   350,
-   450
+   375,
+   500
   ],
   "name": "warlock_rain_of_chaos"
  },
@@ -85788,7 +85728,7 @@
     "name": "duration",
     "tooltip": "FLIGHT DURATION:",
     "value": [
-     6.0
+     8.0
     ]
    },
    {
@@ -86154,110 +86094,6 @@
   ],
   "name": "winter_wyvern_winters_curse"
  },
- "wisp_empty1": {
-  "AbilityCastPoint": [
-   0,
-   0,
-   0,
-   0
-  ],
-  "AbilityCastRange": 0,
-  "AbilityCastRangeBuffer": 250,
-  "AbilityChannelTime": [
-   0,
-   0,
-   0,
-   0
-  ],
-  "AbilityDuration": [
-   0,
-   0,
-   0,
-   0
-  ],
-  "AbilityModifierSupportBonus": 0,
-  "AbilityModifierSupportValue": 1,
-  "ID": 5498,
-  "abilitytype": "DOTA_ABILITY_TYPE_BASIC",
-  "attributes": [],
-  "behavior": [
-   "DOTA_ABILITY_BEHAVIOR_PASSIVE",
-   "DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-  ],
-  "cooldown": [
-   0,
-   0,
-   0,
-   0
-  ],
-  "damage": [
-   0,
-   0,
-   0,
-   0
-  ],
-  "displayname": "Spirits In",
-  "level": 0,
-  "manacost": [
-   0,
-   0,
-   0,
-   0
-  ],
-  "name": "wisp_empty1"
- },
- "wisp_empty2": {
-  "AbilityCastPoint": [
-   0,
-   0,
-   0,
-   0
-  ],
-  "AbilityCastRange": 0,
-  "AbilityCastRangeBuffer": 250,
-  "AbilityChannelTime": [
-   0,
-   0,
-   0,
-   0
-  ],
-  "AbilityDuration": [
-   0,
-   0,
-   0,
-   0
-  ],
-  "AbilityModifierSupportBonus": 0,
-  "AbilityModifierSupportValue": 1,
-  "ID": 5499,
-  "abilitytype": "DOTA_ABILITY_TYPE_BASIC",
-  "attributes": [],
-  "behavior": [
-   "DOTA_ABILITY_BEHAVIOR_PASSIVE",
-   "DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-  ],
-  "cooldown": [
-   0,
-   0,
-   0,
-   0
-  ],
-  "damage": [
-   0,
-   0,
-   0,
-   0
-  ],
-  "displayname": "Spirits Out",
-  "level": 0,
-  "manacost": [
-   0,
-   0,
-   0,
-   0
-  ],
-  "name": "wisp_empty2"
- },
  "wisp_overcharge": {
   "AbilityCastPoint": [
    0,
@@ -86316,20 +86152,14 @@
    {
     "name": "drain_pct",
     "value": [
-     0.045,
-     0.045,
-     0.045,
-     0.045
+     0.06
     ]
    },
    {
     "name": "drain_pct_tooltip",
     "tooltip": "%HEALTH/MANA DRAIN:",
     "value": [
-     4.5,
-     4.5,
-     4.5,
-     4.5
+     6.0
     ]
    }
   ],
@@ -86602,7 +86432,7 @@
   "behavior": [
    "DOTA_ABILITY_BEHAVIOR_NO_TARGET",
    "DOTA_ABILITY_BEHAVIOR_TOGGLE",
-   "DOTA_ABILITY_BEHAVIOR_HIDDEN"
+   "DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
   ],
   "cooldown": [
    0,
@@ -86655,7 +86485,7 @@
   "behavior": [
    "DOTA_ABILITY_BEHAVIOR_NO_TARGET",
    "DOTA_ABILITY_BEHAVIOR_TOGGLE",
-   "DOTA_ABILITY_BEHAVIOR_HIDDEN"
+   "DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
   ],
   "cooldown": [
    0,

@@ -1925,6 +1925,9 @@
  "item_recipe_refresher": {
   "DisplayName": "Refresher Orb Recipe"
  },
+ "item_recipe_rod_of_atos": {
+  "DisplayName": "Rod of Atos Recipe"
+ },
  "item_recipe_sange": {
   "DisplayName": "Sange Recipe"
  },
@@ -2080,7 +2083,7 @@
   "Lore": "A mask commonly used by mages and warlocks for various rituals."
  },
  "item_solar_crest": {
-  "Description": "Active: Shine - Temporarily removes the armor and evasion from Solar Crest. When cast on an ally it grants them %bonus_armor% armor and %bonus_evasion%%% evasion. When cast on an enemy, it removes %bonus_armor% of their armor and grants your allies to have %truestrike_chance%%% True Strike chance on the target. Cannot target magic immune enemies.",
+  "Description": "Active: Shine - Temporarily removes the armor and evasion from Solar Crest. When cast on an ally it grants them %bonus_armor% armor and %bonus_evasion%%% evasion. When cast on an enemy, it removes %bonus_armor% of their armor and grants your allies to have %truestrike_chance%%% Accuracy on the target. Cannot target magic immune enemies.",
   "DisplayName": "Solar Crest",
   "Lore": "A talisman forged to honor the daytime sky."
  },
@@ -4168,10 +4171,6 @@
   "DisplayName": "Toggle Movement",
   "Lore": "SQAWRK!"
  },
- "phoenix_sun_ray_toggle_move_empty": {
-  "Description": "",
-  "DisplayName": ""
- },
  "phoenix_supernova": {
   "Description": "The Phoenix willingly ends its current life for the chance to be reborn. Transforms into a burning sun that scorches enemies in a huge area. The sun can be destroyed by attacks from enemy Heroes. After %tooltip_duration% seconds the sun explodes, stunning all nearby enemies while restoring Phoenix to full health and mana with refreshed abilities.\\n\\nUpgradable by Aghanim's Scepter.\\n\\nDISPEL TYPE: Strong Dispel",
   "DisplayName": "Supernova",
@@ -5882,7 +5881,7 @@
   "DisplayName": "+150 Nether Blast Damage"
  },
  "special_bonus_unique_pugna_3": {
-  "DisplayName": "+0.5 Netherward Damage Per Mana"
+  "DisplayName": "+0.75 Netherward Damage Per Mana"
  },
  "special_bonus_unique_pugna_4": {
   "DisplayName": "-1s Netherblast Cooldown"
@@ -6663,14 +6662,6 @@
   "Description": "Winter Wyvern freezes an enemy in place while striking those nearby with a maddening curse which causes them to attack their frozen ally with increased attack speed. The frozen ally and those cursed to attack their ally are immune to all damage from their enemies.",
   "DisplayName": "Winter's Curse",
   "Lore": "The oldest of the bookwurm\u2019s spells, this curse lends truth to the old saw: sometimes the enemy of my enemy is my enemy still."
- },
- "wisp_empty1": {
-  "Description": "Calls the spirits closer to you. Can be toggled on and off. Only available while Spirits is active.",
-  "DisplayName": "Spirits In"
- },
- "wisp_empty2": {
-  "Description": "Sends the spirits farther away from you. Can be toggled on and off. Only available while Spirits is active.",
-  "DisplayName": "Spirits Out"
  },
  "wisp_overcharge": {
   "Description": "Io gains bonus attack speed and damage reduction, at the cost of draining a percentage of its current health and mana per second.  If Io is Tethered to an ally, that unit also gains the bonuses.",

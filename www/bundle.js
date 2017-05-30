@@ -25497,7 +25497,7 @@ var App = function (appConfig) {
         }
     });
 
-    var lastUpdate = "2017-05-22 13:28:57 UTC";
+    var lastUpdate = "2017-05-30 11:56:26 UTC";
     $('#last-update').text(lastUpdate);
 
     var rollbar = require('./rollbar');
@@ -25728,7 +25728,7 @@ var rollbarConfig = {
         client: {
             javascript: {
                 source_map_enabled: true,
-                code_version: "e165e91ab7a5e9dc61623a5e36a899ce0048d272",
+                code_version: "cc61e6c27961fbbfafe09b6386270a8642ac6fb5",
                 // Optionally have Rollbar guess which frames the error was thrown from
                 // when the browser does not provide line and column numbers.
                 guess_uncaught_frames: true

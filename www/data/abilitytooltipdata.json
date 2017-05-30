@@ -1680,9 +1680,6 @@
   "description": "Toggles slow forward movement during Sun Ray firing.",
   "lore": "SQAWRK!"
  },
- "phoenix_sun_ray_toggle_move_empty": {
-  "description": ""
- },
  "phoenix_supernova": {
   "description": "The Phoenix willingly ends its current life for the chance to be reborn. Transforms into a burning sun that scorches enemies in a huge area. The sun can be destroyed by attacks from enemy Heroes. After %tooltip_duration% seconds the sun explodes, stunning all nearby enemies while restoring Phoenix to full health and mana with refreshed abilities.\\n\\nUpgradable by Aghanim's Scepter.\\n\\nDISPEL TYPE: Strong Dispel",
   "lore": "The solar crucible of a Supernova may be fatal, yet from its flames arise new beacons to wander infinity."
@@ -2991,12 +2988,6 @@
  "winter_wyvern_winters_curse": {
   "description": "Winter Wyvern freezes an enemy in place while striking those nearby with a maddening curse which causes them to attack their frozen ally with increased attack speed. The frozen ally and those cursed to attack their ally are immune to all damage from their enemies.",
   "lore": "The oldest of the bookwurm\u2019s spells, this curse lends truth to the old saw: sometimes the enemy of my enemy is my enemy still."
- },
- "wisp_empty1": {
-  "description": "Calls the spirits closer to you. Can be toggled on and off. Only available while Spirits is active."
- },
- "wisp_empty2": {
-  "description": "Sends the spirits farther away from you. Can be toggled on and off. Only available while Spirits is active."
  },
  "wisp_overcharge": {
   "description": "Io gains bonus attack speed and damage reduction, at the cost of draining a percentage of its current health and mana per second.  If Io is Tethered to an ally, that unit also gains the bonuses.",

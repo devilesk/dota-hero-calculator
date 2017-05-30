@@ -1,3 +1,6 @@
+2017-05-30
+- Updated to patch 7.06c.
+
 2017-05-22
 - Updated to patch 7.06b.
 - Fix Sven God's Strength
