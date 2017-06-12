@@ -1,3 +1,9 @@
+2017-06-12
+- Updated to patch 7.06d.
+- Fixed consumed moon shard night vision.
+- Added Shadow Fiend +2 Damage per Necromastery Soul talent.
+- Fixed Faceless Void Time Lock damage.
+
 2017-05-30
 - Updated to patch 7.06c.
 
