@@ -2879,7 +2879,7 @@
     "name": "slow_duration",
     "tooltip": "SLOW DURATION:",
     "value": [
-     0.6
+     0.7
     ]
    }
   ],
@@ -3968,7 +3968,7 @@
     "name": "health_min",
     "tooltip": "DOMINATED HEALTH MINIMUM:",
     "value": [
-     1400
+     1500
     ]
    },
    {
@@ -5496,7 +5496,7 @@
    {
     "name": "summon_duration",
     "value": [
-     45
+     50
     ]
    },
    {
@@ -5654,7 +5654,7 @@
    {
     "name": "summon_duration",
     "value": [
-     45
+     50
     ]
    },
    {
@@ -5809,7 +5809,7 @@
    {
     "name": "summon_duration",
     "value": [
-     45
+     50
     ]
    },
    {
@@ -11095,7 +11095,7 @@
     "name": "observer_duration_minutes_tooltip",
     "tooltip": "OBSERVER DURATION (MINUTES):",
     "value": [
-     8
+     6
     ]
    },
    {

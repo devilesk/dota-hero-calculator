@@ -2217,6 +2217,7 @@
  "special_bonus_intelligence_10": {},
  "special_bonus_intelligence_12": {},
  "special_bonus_intelligence_13": {},
+ "special_bonus_intelligence_14": {},
  "special_bonus_intelligence_15": {},
  "special_bonus_intelligence_16": {},
  "special_bonus_intelligence_20": {},
@@ -2299,6 +2300,7 @@
  "special_bonus_spell_lifesteal_20": {},
  "special_bonus_spell_lifesteal_30": {},
  "special_bonus_spell_lifesteal_70": {},
+ "special_bonus_spell_lifesteal_8": {},
  "special_bonus_strength_10": {},
  "special_bonus_strength_12": {},
  "special_bonus_strength_14": {},
@@ -2763,7 +2765,7 @@
   "lore": "The roots and tendrils of the Treant Protectors are far-reaching, stimulating the growth and rejuvenation of all of nature."
  },
  "treant_natures_guise": {
-  "description": "Turns you invis when you are within %radius% radius of a tree for %fade_time% seconds. Increasing movement speed by %bonus_move_speed% while invisible, and causes a %bash_duration% seconds disarming root when attacking out of invisibility.",
+  "description": "Turns Treant invisible when he is within %radius% radius of a tree for %fade_time% seconds. Increases movement speed by %bonus_move_speed% while invisible, and causes a %bash_duration% seconds disarming root when attacking out of invisibility.",
   "lore": "The Protectors don't often come into vision; their natural state being nestled within their leafy brethren."
  },
  "treant_overgrowth": {
@@ -2775,7 +2777,7 @@
   "lore": "An adrenaline rush of pure hatred quickens your blades."
  },
  "troll_warlord_berserkers_rage": {
-  "description": "While active, Troll Warlord swaps from using ranged to melee attacks. Melee attacks have a chance to bash, dealing bonus damage and stunning the target. Berserker's Rage also grants additional health, movement speed, armor, and increased attack speed.\\n\\nWhirling Axes has different functionality while Berserker's Rage is active.",
+  "description": "While active, Troll Warlord swaps from using ranged to melee attacks. Melee attacks have a chance to bash, dealing bonus damage and stunning the target. Berserker's Rage also grants additional movement speed, armor, and increased attack speed.\\n\\nWhirling Axes has different functionality while Berserker's Rage is active.",
   "lore": "Like his anger, Troll Warlord's supply of axes is infinite."
  },
  "troll_warlord_fervor": {
