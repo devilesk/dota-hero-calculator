@@ -507,7 +507,7 @@ var AbilityModel = function (a, h) {
                     }
                 }
                 else if (ability.bonusHealth != undefined) {
-                    // clinkz_death_pact
+                    // clinkz_death_pact,lycan_howl
                     totalAttribute+=ability.bonusHealth();
                 }
             }
@@ -540,10 +540,10 @@ var AbilityModel = function (a, h) {
                             case 'heath_regen':
                             // omniknight_guardian_angel,treant_living_armor,satyr_hellcaller_unholy_aura
                             case 'health_regen':
-                                totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
-                            break;
                             // legion_commander_press_the_attack
                             case 'hp_regen':
+                            // lycan_feral_impulse
+                            case 'bonus_hp_regen':
                                 totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
                             break;
                         }
@@ -1046,15 +1046,6 @@ var AbilityModel = function (a, h) {
                                     }
                                 }
                             break;
-                            // lycan_howl
-                            case 'hero_bonus_damage':
-                                totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
-                                sources[ability.name] = {
-                                    'damage': self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level()),
-                                    'damageType': 'physical',
-                                    'displayname': ability.displayname
-                                }
-                            break;
                         }
                     }
                     if (ability.name == 'storm_spirit_overload') {
@@ -1067,7 +1058,7 @@ var AbilityModel = function (a, h) {
                     }
                 }
                 else if (ability.bonusDamage != undefined && ability.bonusDamage() != 0) {
-                    // nevermore_necromastery,ursa_fury_swipes,ursa_enrage,invoker_alacrity,invoker_exort,elder_titan_ancestral_spirit,spectre_desolate,razor_static_link
+                    // nevermore_necromastery,ursa_fury_swipes,ursa_enrage,invoker_alacrity,invoker_exort,elder_titan_ancestral_spirit,spectre_desolate,razor_static_link,lycan_howl
                     totalAttribute+=ability.bonusDamage();
                     sources[ability.name] = {
                         'damage': ability.bonusDamage(),
@@ -1104,6 +1095,17 @@ var AbilityModel = function (a, h) {
                             // magnataur_empower,vengefulspirit_command_aura,alpha_wolf_command_aura
                             case 'bonus_damage_pct':
                                 if (ability.name == 'magnataur_empower' || ability.name == 'vengefulspirit_command_aura' || ability.name == 'alpha_wolf_command_aura') {
+                                    totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100;
+                                    sources[ability.name] = {
+                                        'damage': self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100,
+                                        'damageType': 'physical',
+                                        'displayname': ability.displayname
+                                    }
+                                }
+                            break;
+                            // lycan_feral_impulse
+                            case 'bonus_damage':
+                                if (ability.name == 'lycan_feral_impulse') {
                                     totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100;
                                     sources[ability.name] = {
                                         'damage': self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100,
@@ -6558,6 +6560,40 @@ var abilityData = {
                 var damage = abilityModel.getAbilityPropertyValue(lucentBeamAbility, 'damage');
                 return v*damage;
             }
+        }
+    ],
+    'lycan_howl': [
+        {
+            label: 'Is Night',
+            controlType: 'checkbox'
+        },
+        {
+            attributeName: 'hero_bonus_damage',
+            label: '%CHANCE TO MISS:',
+            controlType: 'text',
+            fn: function (v, a, parent, index, abilityModel, ability, TalentController) {
+                if (v) {
+                    return a*2;
+                }
+                else {
+                    return a;
+                }
+            },
+            returnProperty: 'bonusDamage'
+        },
+        {
+            attributeName: 'hero_bonus_hp',
+            label: '%CHANCE TO MISS:',
+            controlType: 'text',
+            fn: function (v, a, parent, index, abilityModel, ability, TalentController) {
+                if (v) {
+                    return a*2;
+                }
+                else {
+                    return a;
+                }
+            },
+            returnProperty: 'bonusHealth'
         }
     ],
     'medusa_mystic_snake': [
@@ -25335,13 +25371,34 @@ if (!String.prototype.startsWith) {
     };
 }
 },{}],85:[function(require,module,exports){
+var ability_vars = {
+    '$health': 'Health',
+    '$mana': 'Mana',
+    '$armor': 'Armor',
+    '$damage': 'Damage',
+    '$str': 'Strength',
+    '$int': 'Intelligence',
+    '$agi': 'Agility',
+    '$all': 'All Attributes',
+    '$attack': 'Attack Speed',
+    '$hp_regen': 'HP Regen',
+    '$mana_regen': 'Mana Regen',
+    '$move_speed': 'Movement Speed',
+    '$evasion': 'Evasion',
+    '$spell_resist': 'Spell Resistance',
+    '$selected_attribute': 'Selected Attribute',
+    '$selected_attrib': 'Selected Attribute',
+    '$cast_range': 'Cast Range',
+    '$attack_range': 'Attack Range'
+};
+
 var abilityDamageTypes = {
     'DAMAGE_TYPE_MAGICAL': 'Magical',
     'DAMAGE_TYPE_PURE': 'Pure',
     'DAMAGE_TYPE_PHYSICAL': 'Physical',
     'DAMAGE_TYPE_COMPOSITE': 'Composite',
     'DAMAGE_TYPE_HP_REMOVAL': 'HP Removal'
-}
+};
 
 var abilityTooltipData = ko.observable();
 
@@ -25373,7 +25430,7 @@ function AttributeTooltip(tooltip, values, sep, suffix) {
 }
 AttributeTooltip.prototype.toString = function () {
     var self = this;
-    return this.tooltip + ' ' + this.values.map(function (v) { return v + self.suffix; }).join(this.sep);
+    return this.tooltip.toUpperCase() + ' ' + this.values.map(function (v) { return v + self.suffix; }).join(this.sep);
 }
 
 var getTooltipAbilityAttributes = function (item) {
@@ -25389,6 +25446,10 @@ var getTooltipAbilityAttributes = function (item) {
             if (attributeTooltip.indexOf('%') == 0) {
                 attributeTooltip = attributeTooltip.slice(1);
                 suffix = '%';
+            }
+            var d = attributeTooltip.indexOf('$');
+            if (d != -1) {
+                attributeTooltip = attributeTooltip.slice(0, d) + ability_vars[attributeTooltip.slice(d)] + ':';
             }
             a.push(new AttributeTooltip(attributeTooltip, item.attributes[i].value, ' / ', suffix));
         }
@@ -25509,7 +25570,7 @@ var App = function (appConfig) {
         }
     });
 
-    var lastUpdate = "2017-06-12 12:53:46 UTC";
+    var lastUpdate = "2017-07-13 11:53:52 UTC";
     $('#last-update').text(lastUpdate);
 
     var rollbar = require('./rollbar');
@@ -25740,7 +25801,7 @@ var rollbarConfig = {
         client: {
             javascript: {
                 source_map_enabled: true,
-                code_version: "7094ef8e27a8d9d7b9ac00b80427b81e6f643a59",
+                code_version: "7faa9c6724980451bc7e816736e47ade95205a83",
                 // Optionally have Rollbar guess which frames the error was thrown from
                 // when the browser does not provide line and column numbers.
                 guess_uncaught_frames: true

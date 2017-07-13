@@ -1,10 +1,31 @@
+var ability_vars = {
+    '$health': 'Health',
+    '$mana': 'Mana',
+    '$armor': 'Armor',
+    '$damage': 'Damage',
+    '$str': 'Strength',
+    '$int': 'Intelligence',
+    '$agi': 'Agility',
+    '$all': 'All Attributes',
+    '$attack': 'Attack Speed',
+    '$hp_regen': 'HP Regen',
+    '$mana_regen': 'Mana Regen',
+    '$move_speed': 'Movement Speed',
+    '$evasion': 'Evasion',
+    '$spell_resist': 'Spell Resistance',
+    '$selected_attribute': 'Selected Attribute',
+    '$selected_attrib': 'Selected Attribute',
+    '$cast_range': 'Cast Range',
+    '$attack_range': 'Attack Range'
+};
+
 var abilityDamageTypes = {
     'DAMAGE_TYPE_MAGICAL': 'Magical',
     'DAMAGE_TYPE_PURE': 'Pure',
     'DAMAGE_TYPE_PHYSICAL': 'Physical',
     'DAMAGE_TYPE_COMPOSITE': 'Composite',
     'DAMAGE_TYPE_HP_REMOVAL': 'HP Removal'
-}
+};
 
 var abilityTooltipData = ko.observable();
 
@@ -36,7 +57,7 @@ function AttributeTooltip(tooltip, values, sep, suffix) {
 }
 AttributeTooltip.prototype.toString = function () {
     var self = this;
-    return this.tooltip + ' ' + this.values.map(function (v) { return v + self.suffix; }).join(this.sep);
+    return this.tooltip.toUpperCase() + ' ' + this.values.map(function (v) { return v + self.suffix; }).join(this.sep);
 }
 
 var getTooltipAbilityAttributes = function (item) {
@@ -52,6 +73,10 @@ var getTooltipAbilityAttributes = function (item) {
             if (attributeTooltip.indexOf('%') == 0) {
                 attributeTooltip = attributeTooltip.slice(1);
                 suffix = '%';
+            }
+            var d = attributeTooltip.indexOf('$');
+            if (d != -1) {
+                attributeTooltip = attributeTooltip.slice(0, d) + ability_vars[attributeTooltip.slice(d)] + ':';
             }
             a.push(new AttributeTooltip(attributeTooltip, item.attributes[i].value, ' / ', suffix));
         }

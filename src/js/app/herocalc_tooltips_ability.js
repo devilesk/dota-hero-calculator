@@ -87,7 +87,12 @@ var getTooltipAbilityAttributes = function (item) {
                 attributeTooltip = attributeTooltip.slice(1);
             }
             var d = attributeTooltip.indexOf('$');
-            a = a + attributeTooltip + ' ' + attributeValue + '<br>';
+            if (d != -1) {
+                a = a + attributeTooltip.slice(0, d) + ' ' + attributeValue + ' ' + ability_vars[attributeTooltip.slice(d)] + '<br>';
+            }
+            else {
+                a = a + attributeTooltip + ' ' + attributeValue + '<br>';
+            }
         }
     }
     return a.trim('<br>');
