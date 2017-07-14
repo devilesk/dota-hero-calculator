@@ -1,29 +1,16 @@
 $imgPath: "img/";
+$screen-sm-min: 768px;
+$screen-md-min: 992px;
+$screen-xs-max: ($screen-sm-min - 1) !default;
+$screen-sm-max: ($screen-md-min - 1) !default;
 
 @import 'jquery-ui';
-@import 'hero-calculator.shop';
+@import 'shop';
+@import 'shop.header';
 @import 'items_50x36_sprite_jpg';
-@import 'hero-calculator.common';
-@import 'hero-calculator.theme.dark';
-
-$screen-sm-min: 768px;
-
-.talent {
-    margin-bottom: 5px;
-}
-
-.talent-level {
-    display: block;
-    @media (min-width: $screen-sm-min) {
-        display: inline-block;
-        width: 70px;
-    }
-}
-
-.talent-1, .talent-2 {
-    display: block;
-    @media (min-width: $screen-sm-min) {
-        display: inline-block;
-        width: calc(50% - 35px);
-    }
-}
+@import 'common';
+@import 'layout';
+@import 'error';
+@import 'player.color';
+@import 'theme.dark';
+@import 'talents';

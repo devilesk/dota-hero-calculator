@@ -1,0 +1,19 @@
+.talent {
+    margin-bottom: 5px;
+}
+
+.talent-level {
+    display: block;
+    @media (min-width: $screen-sm-min) {
+        display: inline-block;
+        width: 70px;
+    }
+}
+
+.talent-1, .talent-2 {
+    display: block;
+    @media (min-width: $screen-sm-min) {
+        display: inline-block;
+        width: calc(50% - 35px);
+    }
+}
