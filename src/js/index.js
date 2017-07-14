@@ -1,7 +1,7 @@
 require("./app/polyfill");
 var $ = require('jquery');
 var getParameterByName = require("./app/getParameterByName");
-var HeroCalc = require("dota-hero-calculator-library");
+var HeroCalc = require("./herocalc/main");
 var HeroCalculatorViewModel;
 var viewModel;
 

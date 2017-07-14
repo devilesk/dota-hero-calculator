@@ -1,0 +1,1 @@
+module.exports = ['necronomicon','dagon','diffusal_blade','travel_boots'];

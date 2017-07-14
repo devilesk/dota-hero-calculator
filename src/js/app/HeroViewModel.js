@@ -1,11 +1,11 @@
 "use strict";
 var ko = require('knockout');
-var HeroCalc = require("dota-hero-calculator-library");
+var HeroCalc = require("../herocalc/main");
 var DamageAmpViewModel = require("./DamageAmpViewModel");
 var BuildExplorerViewModel = require("./BuildExplorerViewModel");
 var HeroDamageAmpMixin = require("./HeroDamageAmpMixin");
-var illusionOptionsArray = require("dota-hero-calculator-library/src/herocalc/illusion/illusionOptionsArray");
-var illusionData = require("dota-hero-calculator-library/src/herocalc/illusion/illusionData");
+var illusionOptionsArray = require("../herocalc/illusion/illusionOptionsArray");
+var illusionData = require("../herocalc/illusion/illusionData");
 var IllusionViewModel = require("./IllusionViewModel");
 
 var HeroOption2 = function (hero) {

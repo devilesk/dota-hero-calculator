@@ -1,7 +1,7 @@
 'use strict';
 var ko = require('./herocalc_knockout');
-var extend = require("dota-hero-calculator-library/src/herocalc/util/extend");
-var findWhere = require("dota-hero-calculator-library/src/herocalc/util/findWhere");
+var extend = require("../herocalc/util/extend");
+var findWhere = require("../herocalc/util/findWhere");
 
 var DamageInstance = function (label, damageType, value, data, total) {
     this.label = label || '';

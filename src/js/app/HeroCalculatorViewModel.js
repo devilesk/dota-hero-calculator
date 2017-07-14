@@ -27,20 +27,20 @@ ko.components.register('stats3', { template: require('fs').readFileSync(__dirnam
 ko.components.register('stats-additional', { template: require('fs').readFileSync(__dirname + '/../components/stats/stats-additional.html', 'utf8') });
 
 // The app extends the herocalc library, provides a frontend
-var my = require("dota-hero-calculator-library");
-var findWhere = require("dota-hero-calculator-library/src/herocalc/util/findWhere");
-var uniqueId = require("dota-hero-calculator-library/src/herocalc/util/uniqueId");
-var itemData = require("dota-hero-calculator-library/src/herocalc/data/main").itemData;
-var unitData = require("dota-hero-calculator-library/src/herocalc/data/main").unitData;
-var heroData = require("dota-hero-calculator-library/src/herocalc/data/main").heroData;
-var stackableItems = require("dota-hero-calculator-library/src/herocalc/inventory/stackableItems");
-var levelItems = require("dota-hero-calculator-library/src/herocalc/inventory/levelItems");
+var my = require("../herocalc/main");
+var findWhere = require("../herocalc/util/findWhere");
+var uniqueId = require("../herocalc/util/uniqueId");
+var itemData = require("../herocalc/data/main").itemData;
+var unitData = require("../herocalc/data/main").unitData;
+var heroData = require("../herocalc/data/main").heroData;
+var stackableItems = require("../herocalc/inventory/stackableItems");
+var levelItems = require("../herocalc/inventory/levelItems");
 var getItemTooltipData = require("./herocalc_tooltips_item");
 //var getAbilityTooltipData = require("./herocalc_tooltips_ability");
 var HeroViewModel = require("./HeroViewModel");
 var CloneViewModel = require("./CloneViewModel");
 var UnitViewModel = require("./UnitViewModel");
-var AbilityModel = require("dota-hero-calculator-library/src/herocalc/AbilityModel");
+var AbilityModel = require("../herocalc/AbilityModel");
 /*AbilityModel.prototype.getAbilityTooltipData = function (hero, el) {
     return getAbilityTooltipData(heroData, unitData, hero, el);
 }*/

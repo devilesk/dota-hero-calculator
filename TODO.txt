@@ -1,0 +1,178 @@
+special_bonus_20_bash_2	+20% 2s Bash
+special_bonus_cast_range_75	+75 Cast Range
+special_bonus_cast_range_100	+100 Cast Range
+special_bonus_cast_range_125	+125 Cast Range
+special_bonus_cast_range_150	+150 Cast Range
+special_bonus_cast_range_175	+175 Cast Range
+special_bonus_cast_range_200	+200 Cast Range
+special_bonus_cast_range_250	+250 Cast Range
+special_bonus_cast_range_300	+300 Cast Range
+special_bonus_exp_boost_10	+10% XP Gain
+special_bonus_exp_boost_15	+15% XP Gain
+special_bonus_exp_boost_20	+20% XP Gain
+special_bonus_exp_boost_25	+25% XP Gain
+special_bonus_exp_boost_30	+30% XP Gain
+special_bonus_gold_income_10	+60 Gold/Min
+special_bonus_gold_income_15	+90 Gold/Min
+special_bonus_gold_income_20	+120 Gold/Min
+special_bonus_gold_income_25	+150 Gold/Min
+special_bonus_gold_income_50	+300 Gold/Min
+special_bonus_spell_lifesteal_20	20% Spell Lifesteal
+special_bonus_spell_lifesteal_70	70% Spell Lifesteal
+special_bonus_unique_abaddon	+200 Aphotic Shield Health
+special_bonus_unique_alchemist	-4 Acid Spray Armor
+special_bonus_unique_ancient_apparition_1	3 Charges of Cold Feet
+special_bonus_unique_ancient_apparition_2	+80 Chilling Touch Damage
+special_bonus_unique_antimage	-2s Blink Cooldown
+special_bonus_unique_arc_warden	+175 Spark Wraith Damage
+special_bonus_unique_axe	+100 Battle Hunger DPS
+special_bonus_unique_bane_1	+120 Enfeeble Damage Reduction
+special_bonus_unique_bane_2	+200 Brain Sap Damage/Heal
+special_bonus_unique_batrider_1	+8s Firefly Duration
+special_bonus_unique_batrider_2	+200 Flamebreak AoE/Knockback
+special_bonus_unique_beastmaster	+175 Wild Axes Damage
+special_bonus_unique_bloodseeker	-7s Bloodrite Cooldown
+special_bonus_unique_bounty_hunter	-5s Jinada Cooldown
+special_bonus_unique_brewmaster	+14 Primal Split Unit Armor
+special_bonus_unique_bristleback	+4 Max Goo Stacks
+special_bonus_unique_broodmother_1	+8 Max Webs
+special_bonus_unique_broodmother_2	+200 Spiders Health
+special_bonus_unique_centaur_1	Gains Return Aura
+special_bonus_unique_centaur_2	+1s Hoof Stomp Duration
+special_bonus_unique_chaos_knight	Reality Rift Pierces Spell Immune
+special_bonus_unique_chen_1	+2 Holy Persuation Max Count
+special_bonus_unique_chen_2	+200 Hand of God Heal
+special_bonus_unique_clinkz_1	+30 Searing Arrows Damage
+special_bonus_unique_clinkz_2	+70 Strafe Attack Speed
+special_bonus_unique_clockwerk	+10s Battery Assault Duration
+special_bonus_unique_crystal_maiden_1	+1.5s Frostbite Duration
+special_bonus_unique_crystal_maiden_2	+200 Crystal Nova Damage
+special_bonus_unique_dark_seer	+70 Ion Shell Damage
+special_bonus_unique_dazzle_1	-6s Poison Touch Cooldown
+special_bonus_unique_dazzle_2	+60 Shadow Wave Heal
+special_bonus_unique_death_prophet	+6 Exorcism Spirits
+special_bonus_unique_disruptor	+4 Thunder Strike Hits
+special_bonus_unique_doom_1	+2% Infernal Blade Damage
+special_bonus_unique_doom_2	Devour Can Target Ancients
+special_bonus_unique_dragon_knight	2x Dragon Blood HP Regen/Armor
+special_bonus_unique_drow_ranger_1	+6% Precision Aura Damage
+special_bonus_unique_drow_ranger_2	+350 Gust Distance/Knockback
+special_bonus_unique_drow_ranger_3	+25 Marksmanship Agility
+special_bonus_unique_earthshaker	-2s Enchant Totem Cooldown
+special_bonus_unique_earth_spirit	+300 Rolling Boulder Damage
+special_bonus_unique_elder_titan	+80 Astral Spirit Hero Attack
+special_bonus_unique_ember_spirit_1	+500 Flame Guard Absorption
+special_bonus_unique_ember_spirit_2	+2s Searing Chains
+special_bonus_unique_enchantress_1	+8s Nature's Attendants Duration
+special_bonus_unique_enchantress_2	+10 Nature's Attendants Wisps
+special_bonus_unique_enigma	+8 Demonic Conversion Eidolons
+special_bonus_unique_faceless_void	+600 Timewalk Cast Range
+special_bonus_unique_furion	+6 Treants Summoned
+special_bonus_unique_gyrocopter_1	+3 Homing Missile Charges
+special_bonus_unique_gyrocopter_2	+4 Flak Cannon Attacks
+special_bonus_unique_huskar	+400 Life Break Cast Range
+special_bonus_unique_invoker_1	+1 Forged Spirit Summoned
+special_bonus_unique_invoker_2	AoE Deafening Blast
+special_bonus_unique_invoker_3	-15s Tornado Cooldown
+special_bonus_unique_jakiro	+1.25s Ice Path Duration
+special_bonus_unique_juggernaut	+175 Blade Fury DPS
+special_bonus_unique_keeper_of_the_light	+200 Illuminate Damage/Heal
+special_bonus_unique_kunkka	+200 Torrent AoE
+special_bonus_unique_legion_commander	+40 Duel Damage Bonus
+special_bonus_unique_leshrac_1	+50 Diabolic Edict Explosions
+special_bonus_unique_leshrac_2	+2s Lightning Storm Slow Duration
+special_bonus_unique_lich_1	+25 Frost Armor Structure Armor
+special_bonus_unique_lich_2	Attacks Apply 30% MS and AS Slow
+special_bonus_unique_lifestealer	+1s Rage Duration
+special_bonus_unique_lina_1	-4s Dragon Slave Cooldown
+special_bonus_unique_lina_2	+1 Firey Soul Max Stacks
+special_bonus_unique_lion	+3 Mana Drain Multi Target
+special_bonus_unique_lone_druid_1	+30 Spirit Bear Damage
+special_bonus_unique_lone_druid_2	+7 Spirit Bear Armor
+special_bonus_unique_lone_druid_3	+1.5s Entangle Duration
+special_bonus_unique_lone_druid_4	-10s Savage Roar Cooldown
+special_bonus_unique_luna_1	+40 Lucent Beam Damage
+special_bonus_unique_luna_2	-4s Lucent Beam Cooldown
+special_bonus_unique_lycan_1	+15s Shapeshift Duration
+special_bonus_unique_lycan_2	+2 Wolves Summoned
+special_bonus_unique_magnus	-4s Shockwave Cooldown
+special_bonus_unique_medusa	+1s Stone Gaze Stun
+special_bonus_unique_meepo	-3s Poof Cooldown
+special_bonus_unique_mirana_1	+100 Leap Attack Speed
+special_bonus_unique_mirana_2	+2 Multishot Sacred Arrows
+special_bonus_unique_monkey_king	+100% Boundless Strike Crit
+special_bonus_unique_morphling_1	+400 Waveform Range
+special_bonus_unique_morphling_2	+30% Replicate Damage
+special_bonus_unique_naga_siren	+1 Mirror Image Illusion
+special_bonus_unique_necrophos	-1s Death Pulse Cooldown
+special_bonus_unique_nevermore_1	+2 Damage Per Soul
+special_bonus_unique_nevermore_2	-7s Shadow Raze Cooldown
+special_bonus_unique_night_stalker	-6s Crippling Fear Cooldown
+special_bonus_unique_nyx	+200% Spiked Carapace Damage
+special_bonus_unique_ogre_magi	+40 Bloodlust AS
+special_bonus_unique_omniknight_1	+200 Purification Damage/Heal
+special_bonus_unique_omniknight_2	-16% Degen Aura
+special_bonus_unique_oracle	+2 False Promise Duration
+special_bonus_unique_outworld_devourer	+60s Arcane Orb Int Steal
+special_bonus_unique_phantom_assassin	Double Strike Stifling Dagger
+special_bonus_unique_phantom_lancer	+600 Phantom Rush Range
+special_bonus_unique_phoenix_1	+2 Supernova Hit Count
+special_bonus_unique_phoenix_2	+1s Supernova Stun Duration
+special_bonus_unique_puck	+75% Illusory Orb Distance/Speed 
+special_bonus_unique_pudge_1	+1.75 Flesh Heap Stack Str
+special_bonus_unique_pudge_2	+120 Rot Damage
+special_bonus_unique_pugna_1	+50% Life Drain Heal
+special_bonus_unique_pugna_2	+100 Nether Blast Damage
+special_bonus_unique_razor	+14 Static Link Damage Steal 
+special_bonus_unique_riki_1	+0.4 Backstab Multiplier
+special_bonus_unique_riki_2	-4s Smokescreen Cooldown
+special_bonus_unique_rubick	+400 Telekinesis Land Distance
+special_bonus_unique_sand_king	+4 Epicenter Pulses
+special_bonus_unique_shadow_demon_1	+400 Demonic Purge Damage
+special_bonus_unique_shadow_demon_2	-1s Shadow Poison Cooldown
+special_bonus_unique_shadow_shaman_1	+1 Serpent Wards Attacks HP
+special_bonus_unique_shadow_shaman_2	+3s Shackles Duration
+special_bonus_unique_silencer	+20% Curse Slow
+special_bonus_unique_skywrath	-4s Ancient Seal Cooldown
+special_bonus_unique_slardar	+10% Bash Chance
+special_bonus_unique_slark	+3s Pounce Leash
+special_bonus_unique_sniper_1	+20 Shrapnel DPS
+special_bonus_unique_sniper_2	+4 Shrapnel Charges
+special_bonus_unique_spectre	-10s Spectral Dagger Cooldown
+special_bonus_unique_spirit_breaker_1	+17% Greater Bash Chance
+special_bonus_unique_spirit_breaker_2	+500 Charge Speed
+special_bonus_unique_storm_spirit	+0.75s Electric Vortex
+special_bonus_unique_sven	-5s Stormbolt Cooldown
+special_bonus_unique_techies	+400 Blast Off Damage
+special_bonus_unique_templar_assassin	+3 Refraction Instances
+special_bonus_unique_terrorblade	-30s Sunder Cooldown
+special_bonus_unique_tidehunter	-5 Gush Armor
+special_bonus_unique_timbersaw	+6% Whirling Death Attribute Reduction
+special_bonus_unique_tinker	+100 Laser Damage
+special_bonus_unique_tiny	+200 Avalanche Damage
+special_bonus_unique_treant	+5 Living Armor Block Instances
+special_bonus_unique_troll_warlord	-7s Whirling Axes Cooldown
+special_bonus_unique_tusk	+150% Walrus Punch Crit
+special_bonus_unique_underlord	+0.4s Pit of Malice Root
+special_bonus_unique_undying	+40 Tombstone Zombie Damage
+special_bonus_unique_ursa	+10 Fury Swipes Damage
+special_bonus_unique_vengeful_spirit_1	+100 Magic Missile Damage
+special_bonus_unique_vengeful_spirit_2	+20% Vengeance Aura Damage
+special_bonus_unique_vengeful_spirit_3	Magic Missile Pierces Spell Immunity
+special_bonus_unique_venomancer	3x Plague Ward HP/Damage
+special_bonus_unique_viper_1	Poison Attack Affects Buildings
+special_bonus_unique_viper_2	+80 Viper Strike DPS
+special_bonus_unique_visage_2	+120 Familiars Movement Speed
+special_bonus_unique_warlock_1	Magic Immunity for Chaotic Offering Golems
+special_bonus_unique_warlock_2	+15 Chaotic Offering Golems Armor
+special_bonus_unique_weaver_1	+30 Shukuchi Damage
+special_bonus_unique_weaver_2	+200 Shukuchi Movement Speed
+special_bonus_unique_windranger	-5s Powershot Cooldown
+special_bonus_unique_winter_wyvern_1	+15% Arctic Burn Slow
+special_bonus_unique_winter_wyvern_2	-3s Splinter Blast Cooldown
+special_bonus_unique_wisp	+150 Spirits Damage
+special_bonus_unique_witch_doctor_1	+150 Death Ward Attack Range
+special_bonus_unique_witch_doctor_2	+20 Voodoo Restoration Heal
+special_bonus_unique_wraith_king_1	No Reincarnation Manacost
+special_bonus_unique_wraith_king_2	+20% Vampiric Aura Lifesteal
+special_bonus_unique_zeus	+1.5% Static Field Damage

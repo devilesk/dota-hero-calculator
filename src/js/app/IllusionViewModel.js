@@ -1,11 +1,11 @@
 'use strict';
 var ko = require('./herocalc_knockout');
     
-var HeroCalc = require("dota-hero-calculator-library");
-var illusionData = require("dota-hero-calculator-library/src/herocalc/illusion/illusionData");
-var heroData = require("dota-hero-calculator-library/src/herocalc/data/main").heroData;
-var itemData = require("dota-hero-calculator-library/src/herocalc/data/main").itemData;
-var findWhere = require("dota-hero-calculator-library/src/herocalc/util/findWhere");
+var HeroCalc = require("../herocalc/main");
+var illusionData = require("../herocalc/illusion/illusionData");
+var heroData = require("../herocalc/data/main").heroData;
+var itemData = require("../herocalc/data/main").itemData;
+var findWhere = require("../herocalc/util/findWhere");
 
 var IllusionViewModel = function (heroData, itemData, h, p, abilityLevel) {
     var self = this;

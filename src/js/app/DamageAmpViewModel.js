@@ -1,9 +1,9 @@
 'use strict';
 var ko = require('./herocalc_knockout');
 
-var BuffViewModel = require("dota-hero-calculator-library/src/herocalc/BuffViewModel");
-var BuffModel = require("dota-hero-calculator-library/src/herocalc/buffs/BuffModel");
-var findWhere = require("dota-hero-calculator-library/src/herocalc/util/findWhere");
+var BuffViewModel = require("../herocalc/BuffViewModel");
+var BuffModel = require("../herocalc/buffs/BuffModel");
+var findWhere = require("../herocalc/util/findWhere");
 
 var DamageAmpViewModel = function (heroData, itemData, unitData, a) {
     var self = this;

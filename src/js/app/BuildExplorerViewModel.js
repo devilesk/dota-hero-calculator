@@ -1,10 +1,10 @@
 'use strict';
 var ko = require('./herocalc_knockout');
     
-var my = require("dota-hero-calculator-library");
-var AbilityModel = require("dota-hero-calculator-library/src/herocalc/AbilityModel");
-var BasicInventoryViewModel = require("dota-hero-calculator-library/src/herocalc/inventory/BasicInventoryViewModel");
-var union = require("dota-hero-calculator-library/src/herocalc/util/union");
+var my = require("../herocalc/main");
+var AbilityModel = require("../herocalc/AbilityModel");
+var BasicInventoryViewModel = require("../herocalc/inventory/BasicInventoryViewModel");
+var union = require("../herocalc/util/union");
 
 var inventoryClipBoard = {
     items: [],

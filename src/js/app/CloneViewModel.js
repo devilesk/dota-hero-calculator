@@ -1,6 +1,6 @@
 "use strict";
 var ko = require('knockout');
-var HeroCalc = require("dota-hero-calculator-library");
+var HeroCalc = require("../herocalc/main");
 var DamageAmpViewModel = require("./DamageAmpViewModel");
 var HeroDamageAmpMixin = require("./HeroDamageAmpMixin");
 

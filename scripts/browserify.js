@@ -43,6 +43,7 @@ function bundle() {
      .on('error', console.error)
      .pipe(exorcist(mapfile))
      .pipe(fs.createWriteStream(dst));
+    console.log('bundled');
 }
     
 var b = browserify(opts);

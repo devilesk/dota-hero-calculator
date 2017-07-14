@@ -1,7 +1,7 @@
 "use strict";
 var ko = require('knockout');
-var HeroCalc = require("dota-hero-calculator-library");
-var UnitOption = require("dota-hero-calculator-library/src/herocalc/hero/UnitOption");
+var HeroCalc = require("../herocalc/main");
+var UnitOption = require("../herocalc/hero/UnitOption");
 
 var UnitViewModel = function (heroData, itemData, unitData, h, p) {
     var self = this;
