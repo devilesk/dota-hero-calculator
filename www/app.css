@@ -1859,3 +1859,20 @@ img {
     background-color: #131415;
     z-index: 100;
     border: 1px solid #202126; } }
+
+.talent {
+  margin-bottom: 5px; }
+
+.talent-level {
+  display: block; }
+  @media (min-width: 768px) {
+    .talent-level {
+      display: inline-block;
+      width: 70px; } }
+
+.talent-1, .talent-2 {
+  display: block; }
+  @media (min-width: 768px) {
+    .talent-1, .talent-2 {
+      display: inline-block;
+      width: calc(50% - 35px); } }
