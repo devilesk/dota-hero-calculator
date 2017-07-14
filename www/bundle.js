@@ -1649,6 +1649,11 @@ var AbilityModel = function (a, h) {
         return totalAttribute;
     });
     
+    self.getUniqueCooldownReductionFlat = function (ability) {
+        var cooldownMap = TalentController.getUniqueCooldownReductionFlat(self.hero.selectedTalents());
+        return cooldownMap[ability] || 0;
+    }
+    
     self.getCooldownReductionFlat = ko.computed(function () {
         var totalAttribute = 0;
         for (var i = 0; i < self.abilities().length; i++) {
@@ -2470,7 +2475,7 @@ AbilityModel.prototype.getAbilityAttributeTooltip = function (attributes, attrib
 }
 
 module.exports = AbilityModel;
-},{"./hero/TalentController":14,"./herocalc_abilitydata":21,"./herocalc_knockout":22}],2:[function(require,module,exports){
+},{"./hero/TalentController":14,"./herocalc_abilitydata":23,"./herocalc_knockout":24}],2:[function(require,module,exports){
 'use strict';
 var ko = require('./herocalc_knockout');
 
@@ -2678,7 +2683,7 @@ BuffViewModel.prototype = Object.create(AbilityModel.prototype);
 BuffViewModel.prototype.constructor = BuffViewModel;
 
 module.exports = BuffViewModel;
-},{"./AbilityModel":1,"./buffs/buffOptionsArray":4,"./buffs/debuffOptionsArray":5,"./herocalc_knockout":22,"./inventory/InventoryViewModel":27,"./util/findWhere":38}],3:[function(require,module,exports){
+},{"./AbilityModel":1,"./buffs/buffOptionsArray":4,"./buffs/debuffOptionsArray":5,"./herocalc_knockout":24,"./inventory/InventoryViewModel":29,"./util/findWhere":40}],3:[function(require,module,exports){
 var findWhere = require("../util/findWhere");
 
 var BuffModel = function (heroData, unitData, hero, ability) {
@@ -2700,7 +2705,7 @@ var BuffModel = function (heroData, unitData, hero, ability) {
 };
 
 module.exports = BuffModel;
-},{"../util/findWhere":38}],4:[function(require,module,exports){
+},{"../util/findWhere":40}],4:[function(require,module,exports){
 var BuffModel = require("./BuffModel");
 
 var buffOptionsArray = {};
@@ -2986,7 +2991,7 @@ var init = function (HERODATA_PATH, ITEMDATA_PATH, UNITDATA_PATH, callback) {
 HeroCalcData.init = init;
 
 module.exports = HeroCalcData;
-},{"../util/getJSON":39,"../util/isEmpty":40,"../util/isString":41,"./HeroCalcData":6}],8:[function(require,module,exports){
+},{"../util/getJSON":41,"../util/isEmpty":42,"../util/isString":43,"./HeroCalcData":6}],8:[function(require,module,exports){
 'use strict';
 var HeroModel = require("./HeroModel");
 
@@ -3674,7 +3679,7 @@ var HeroDamageMixin = function (self, itemData) {
 }
 
 module.exports = HeroDamageMixin;
-},{"../herocalc_knockout":22,"../util/extend":37,"./DamageTypeColor":9,"./TalentController":14}],11:[function(require,module,exports){
+},{"../herocalc_knockout":24,"../util/extend":39,"./DamageTypeColor":9,"./TalentController":14}],11:[function(require,module,exports){
 'use strict';
 var ko = require('../herocalc_knockout');
 
@@ -4299,7 +4304,7 @@ HeroModel.prototype.toggleTalent = function (talentTier, talentIndex) {
 }
 
 module.exports = HeroModel;
-},{"../AbilityModel":1,"../BuffViewModel":2,"../herocalc_knockout":22,"../inventory/InventoryViewModel":27,"./HeroDamageMixin":10,"./TalentController":14,"./diffProperties":17,"./nextLevelExp":19,"./totalExp":20}],12:[function(require,module,exports){
+},{"../AbilityModel":1,"../BuffViewModel":2,"../herocalc_knockout":24,"../inventory/InventoryViewModel":29,"./HeroDamageMixin":10,"./TalentController":14,"./diffProperties":18,"./nextLevelExp":20,"./totalExp":22}],12:[function(require,module,exports){
 var HeroOption = function (name, displayname, hero) {
     this.heroName = name;
     this.heroDisplayName = displayname;
@@ -4448,7 +4453,10 @@ IllusionModel.prototype = Object.create(HeroModel.prototype);
 IllusionModel.prototype.constructor = IllusionModel;
 
 module.exports = IllusionModel;
-},{"../illusion/illusionData":24,"../util/findWhere":38,"./HeroModel":11}],14:[function(require,module,exports){
+},{"../illusion/illusionData":26,"../util/findWhere":40,"./HeroModel":11}],14:[function(require,module,exports){
+var cooldownTalents = require('./cooldownTalents');
+var talentAbilityMap = require('./talentAbilityMap');
+
 module.exports = {
     getTalentById: function (talents, talentId) {
         for (var i = 0; i < talents.length; i++) {
@@ -4530,6 +4538,19 @@ module.exports = {
             var ability = talents[i];
             if (ability.name.startsWith('special_bonus_spell_amplify_')) {
                 totalAttribute += ability.attributes[0].value[0];
+            }
+        }
+        return totalAttribute;
+    },
+    getUniqueCooldownReductionFlat: function (talents) {
+        var totalAttribute = {};
+        for (var i = 0; i < talents.length; i++) {
+            var talent = talents[i];
+            if (cooldownTalents.indexOf(talent.name) != -1) {
+                var abilities = [].concat(talentAbilityMap[talent.name]);
+                abilities.forEach(function (ability) {
+                    totalAttribute[ability] = talent.attributes[0].value[0];
+                });
             }
         }
         return totalAttribute;
@@ -4666,7 +4687,7 @@ module.exports = {
         return totalAttribute;
     }
 }
-},{}],15:[function(require,module,exports){
+},{"./cooldownTalents":17,"./talentAbilityMap":21}],15:[function(require,module,exports){
 'use strict';
 var ko = require('../herocalc_knockout');
 
@@ -4964,7 +4985,7 @@ UnitModel.prototype = Object.create(HeroModel.prototype);
 UnitModel.prototype.constructor = UnitModel;
 
 module.exports = UnitModel;
-},{"../AbilityModel":1,"../herocalc_knockout":22,"./HeroModel":11}],16:[function(require,module,exports){
+},{"../AbilityModel":1,"../herocalc_knockout":24,"./HeroModel":11}],16:[function(require,module,exports){
 var UnitOption = function (name, displayname, levels, image, level) {
     this.heroName = ko.computed(function() {
         return (levels > 0) ? name + (level() <= levels ? level() : 1) : name;
@@ -4976,6 +4997,8 @@ var UnitOption = function (name, displayname, levels, image, level) {
 
 module.exports = UnitOption;
 },{}],17:[function(require,module,exports){
+module.exports = ['special_bonus_unique_antimage', 'special_bonus_unique_bloodseeker', 'special_bonus_unique_bounty_hunter', 'special_bonus_unique_dazzle_1', 'special_bonus_unique_earthshaker', 'special_bonus_unique_invoker_3', 'special_bonus_unique_lina_1', 'special_bonus_unique_lone_druid_4', 'special_bonus_unique_luna_2', 'special_bonus_unique_magnus', 'special_bonus_unique_meepo', 'special_bonus_unique_necrophos', 'special_bonus_unique_nevermore_2', 'special_bonus_unique_night_stalker', 'special_bonus_unique_riki_2', 'special_bonus_unique_shadow_demon_2', 'special_bonus_unique_skywrath', 'special_bonus_unique_spectre', 'special_bonus_unique_sven', 'special_bonus_unique_terrorblade', 'special_bonus_unique_troll_warlord', 'special_bonus_unique_windranger', 'special_bonus_unique_winter_wyvern_2'];
+},{}],18:[function(require,module,exports){
 var diffProperties = [
     'totalAgi',
     'totalInt',
@@ -5014,7 +5037,7 @@ var diffProperties = [
 ];
 
 module.exports = diffProperties;
-},{}],18:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 var HeroOption = require("./HeroOption");
 
 var heroOptionsArray = {};
@@ -5030,15 +5053,263 @@ var init = function (heroData) {
 heroOptionsArray.init = init;
 
 module.exports = heroOptionsArray;
-},{"./HeroOption":12}],19:[function(require,module,exports){
+},{"./HeroOption":12}],20:[function(require,module,exports){
 var nextLevelExp = [200, 300, 400, 500, 600, 615, 630, 645, 660, 675, 775, 1175, 1200, 1225, 1250, 1275, 1375, 1400, 1425, 1600, 1900, 2200, 2500, 2975, '&mdash;'];
 
 module.exports = nextLevelExp;
-},{}],20:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
+module.exports = {
+    special_bonus_unique_abaddon: 'abaddon_aphotic_shield',
+    special_bonus_unique_underlord: 'abyssal_underlord_pit_of_malice',
+    special_bonus_unique_alchemist_2: 'alchemist_unstable_concoction',
+    special_bonus_unique_alchemist: 'alchemist_acid_spray',
+    special_bonus_unique_ancient_apparition_3: 'ancient_apparition_ice_vortex',
+    special_bonus_unique_ancient_apparition_4: 'ancient_apparition_ice_vortex',
+    special_bonus_unique_ancient_apparition_1: 'ancient_apparition_cold_feet',
+    special_bonus_unique_ancient_apparition_2: 'ancient_apparition_chilling_touch',
+    special_bonus_unique_antimage: 'antimage_blink',
+    special_bonus_unique_antimage_2: 'antimage_mana_void',
+    special_bonus_unique_arc_warden_2: 'arc_warden_flux',
+    special_bonus_unique_arc_warden: 'arc_warden_spark_wraith',
+    special_bonus_unique_axe: 'axe_battle_hunger',
+    special_bonus_unique_bane_1: 'bane_enfeeble',
+    special_bonus_unique_bane_2: 'bane_brain_sap',
+    special_bonus_unique_batrider_1: 'batrider_firefly',
+    special_bonus_unique_batrider_2: 'batrider_flamebreak',
+    special_bonus_unique_beastmaster: 'beastmaster_wild_axes',
+    special_bonus_unique_bloodseeker_2: 'bloodseeker_blood_bath',
+    special_bonus_unique_bloodseeker_3: 'bloodseeker_rupture',
+    special_bonus_unique_bloodseeker: 'bloodseeker_blood_bath',
+    special_bonus_unique_bounty_hunter_2: 'bounty_hunter_shuriken_toss',
+    special_bonus_unique_bounty_hunter: 'bounty_hunter_jinada',
+    special_bonus_unique_brewmaster_2: 'brewmaster_thunder_clap',
+    special_bonus_unique_brewmaster: 'brewmaster_primal_split',
+    special_bonus_unique_centaur_1: 'centaur_return',
+    special_bonus_unique_centaur_2: 'centaur_hoof_stomp',
+    special_bonus_unique_chaos_knight: 'chaos_knight_reality_rift',
+    special_bonus_unique_chen_3: 'chen_test_of_faith_teleport',
+    special_bonus_unique_chen_1: 'chen_holy_persuasion',
+    special_bonus_unique_chen_2: 'chen_hand_of_god',
+    special_bonus_unique_clinkz_1: 'clinkz_searing_arrows',
+    special_bonus_unique_clinkz_2: 'clinkz_strafe',
+    special_bonus_unique_crystal_maiden_3: 'crystal_maiden_freezing_field',
+    special_bonus_unique_crystal_maiden_1: 'crystal_maiden_frostbite',
+    special_bonus_unique_crystal_maiden_2: 'crystal_maiden_crystal_nova',
+    special_bonus_unique_dark_seer_2: 'dark_seer_vacuum',
+    special_bonus_unique_dark_seer: 'dark_seer_ion_shell',
+    special_bonus_unique_dazzle_3: 'dazzle_poison_touch',
+    special_bonus_unique_dazzle_1: 'dazzle_poison_touch',
+    special_bonus_unique_dazzle_2: 'dazzle_shadow_wave',
+    special_bonus_unique_death_prophet_2: 'death_prophet_carrion_swarm',
+    special_bonus_unique_death_prophet: 'death_prophet_exorcism',
+    special_bonus_unique_disruptor_2: 'disruptor_kinetic_field',
+    special_bonus_unique_disruptor_3: 'disruptor_thunder_strike',
+    special_bonus_unique_disruptor: 'disruptor_thunder_strike',
+    special_bonus_unique_doom_3: 'doom_bringer_devour',
+    special_bonus_unique_doom_4: 'doom_bringer_scorched_earth',
+    special_bonus_unique_doom_5: 'doom_bringer_doom',
+    special_bonus_unique_doom_2: 'doom_bringer_devour',
+    special_bonus_unique_doom_1: 'doom_bringer_infernal_blade',
+    special_bonus_unique_dragon_knight: 'dragon_knight_dragon_blood',
+    special_bonus_unique_drow_ranger_1: 'drow_ranger_trueshot',
+    special_bonus_unique_drow_ranger_2: 'drow_ranger_wave_of_silence',
+    special_bonus_unique_drow_ranger_3: 'drow_ranger_marksmanship',
+    special_bonus_unique_earth_spirit_2: 'earth_spirit_geomagnetic_grip',
+    special_bonus_unique_earth_spirit: 'earth_spirit_rolling_boulder',
+    special_bonus_unique_earthshaker_3: 'earthshaker_fissure',
+    special_bonus_unique_earthshaker: 'earthshaker_enchant_totem',
+    special_bonus_unique_elder_titan_2: 'elder_titan_echo_stomp',
+    special_bonus_unique_elder_titan: 'elder_titan_ancestral_spirit',
+    special_bonus_unique_ember_spirit_1: 'ember_spirit_flame_guard',
+    special_bonus_unique_ember_spirit_2: 'ember_spirit_searing_chains',
+    special_bonus_unique_enchantress_2: 'enchantress_natures_attendants',
+    special_bonus_unique_enchantress_3: 'enchantress_untouchable',
+    special_bonus_unique_enchantress_4: 'enchantress_impetus',
+    special_bonus_unique_enchantress_1: 'enchantress_enchant',
+    special_bonus_unique_enigma_2: 'enigma_malefice',
+    special_bonus_unique_enigma: 'enigma_demonic_conversion',
+    special_bonus_unique_furion_3: 'furion_teleportation',
+    special_bonus_unique_gyrocopter_1: 'gyrocopter_homing_missile',
+    special_bonus_unique_gyrocopter_2: 'gyrocopter_flak_cannon',
+    special_bonus_unique_huskar_2: 'huskar_burning_spear',
+    special_bonus_unique_huskar: 'huskar_life_break',
+    special_bonus_unique_invoker_2: 'invoker_deafening_blast',
+    special_bonus_unique_invoker_3: 'invoker_tornado',
+    special_bonus_unique_jakiro_2: 'jakiro_dual_breath',
+    special_bonus_unique_jakiro_3: 'jakiro_macropyre',
+    special_bonus_unique_jakiro: 'jakiro_ice_path',
+    special_bonus_unique_juggernaut: 'juggernaut_blade_fury',
+    special_bonus_unique_keeper_of_the_light_2: 'keeper_of_the_light_chakra_magic',
+    special_bonus_unique_keeper_of_the_light: 'keeper_of_the_light_spirit_form_illuminate',
+    special_bonus_unique_kunkka_2: 'kunkka_torrent',
+    special_bonus_unique_kunkka: 'kunkka_torrent',
+    special_bonus_unique_legion_commander: 'legion_commander_duel',
+    special_bonus_unique_legion_commander_2: 'legion_commander_press_the_attack',
+    special_bonus_unique_leshrac_1: 'leshrac_diabolic_edict',
+    special_bonus_unique_leshrac_2: 'leshrac_lightning_storm',
+    special_bonus_unique_lich_3: 'lich_frost_nova',
+    special_bonus_unique_lifestealer: 'life_stealer_rage',
+    special_bonus_unique_lina_3: 'lina_light_strike_array',
+    special_bonus_unique_lina_1: 'lina_dragon_slave',
+    special_bonus_unique_lina_2: 'lina_fiery_soul',
+    special_bonus_unique_lion_2: 'lion_impale',
+    special_bonus_unique_lion: 'lion_mana_drain',
+    special_bonus_unique_lone_druid_4: 'lone_druid_savage_roar',
+    special_bonus_unique_luna_1: 'luna_lucent_beam',
+    special_bonus_unique_luna_2: 'luna_lucent_beam',
+    special_bonus_unique_lycan_1: 'lycan_shapeshift',
+    special_bonus_unique_magnus_2: 'magnataur_empower',
+    special_bonus_unique_magnus_3: 'magnataur_skewer',
+    special_bonus_unique_medusa_2: 'medusa_split_shot',
+    special_bonus_unique_medusa: 'medusa_stone_gaze',
+    special_bonus_unique_meepo: 'meepo_poof',
+    special_bonus_unique_mirana_3: 'mirana_arrow',
+    special_bonus_unique_mirana_1: 'mirana_leap',
+    special_bonus_unique_mirana_2: 'mirana_arrow',
+    special_bonus_unique_monkey_king_2: 'monkey_king_jingu_mastery',
+    special_bonus_unique_monkey_king: 'monkey_king_boundless_strike',
+    special_bonus_unique_morphling_1: 'morphling_waveform',
+    special_bonus_unique_morphling_2: 'morphling_replicate',
+    special_bonus_unique_naga_siren_2: 'naga_siren_ensnare',
+    special_bonus_unique_naga_siren: 'naga_siren_mirror_image',
+    special_bonus_unique_necrophos: 'necrolyte_death_pulse',
+    special_bonus_unique_night_stalker: 'night_stalker_crippling_fear',
+    special_bonus_unique_nyx_2: 'nyx_assassin_impale',
+    special_bonus_unique_nyx: 'nyx_assassin_spiked_carapace',
+    special_bonus_unique_outworld_devourer: 'obsidian_destroyer_arcane_orb',
+    special_bonus_unique_ogre_magi: 'ogre_magi_bloodlust',
+    special_bonus_unique_omniknight_1: 'omniknight_purification',
+    special_bonus_unique_omniknight_2: 'omniknight_degen_aura',
+    special_bonus_unique_oracle_2: 'oracle_fortunes_end',
+    special_bonus_unique_oracle: 'oracle_false_promise',
+    special_bonus_unique_phantom_assassin: 'phantom_assassin_stifling_dagger',
+    special_bonus_unique_phantom_lancer_2: 'phantom_lancer_spirit_lance',
+    special_bonus_unique_phantom_lancer: 'phantom_lancer_phantom_edge',
+    special_bonus_unique_phoenix_3: 'phoenix_fire_spirits',
+    special_bonus_unique_phoenix_1: 'phoenix_supernova',
+    special_bonus_unique_phoenix_2: 'phoenix_supernova',
+    special_bonus_unique_puck_2: 'puck_waning_rift',
+    special_bonus_unique_puck: 'puck_illusory_orb',
+    special_bonus_unique_pudge_3: 'pudge_dismember',
+    special_bonus_unique_pudge_1: 'pudge_flesh_heap',
+    special_bonus_unique_pudge_2: 'pudge_rot',
+    special_bonus_unique_pugna_5: 'pugna_decrepify',
+    special_bonus_unique_pugna_1: 'pugna_life_drain',
+    special_bonus_unique_pugna_2: 'pugna_nether_blast',
+    special_bonus_unique_queen_of_pain: 'queenofpain_shadow_strike',
+    special_bonus_unique_clockwerk_2: 'rattletrap_rocket_flare',
+    special_bonus_unique_clockwerk_3: 'rattletrap_battery_assault',
+    special_bonus_unique_clockwerk: 'rattletrap_battery_assault',
+    special_bonus_unique_razor_2: 'razor_unstable_current',
+    special_bonus_unique_razor: 'razor_static_link',
+    special_bonus_unique_rubick: 'rubick_telekinesis_land',
+    special_bonus_unique_sand_king_2: 'sandking_sand_storm',
+    special_bonus_unique_sand_king_3: 'sandking_epicenter',
+    special_bonus_unique_sand_king: 'sandking_epicenter',
+    special_bonus_unique_shadow_demon_3: 'shadow_demon_shadow_poison',
+    special_bonus_unique_shadow_demon_1: 'shadow_demon_demonic_purge',
+    special_bonus_unique_shadow_demon_2: 'shadow_demon_soul_catcher',
+    special_bonus_unique_shadow_shaman_2: 'shadow_shaman_shackles',
+    special_bonus_unique_shadow_shaman_3: 'shadow_shaman_ether_shock',
+    special_bonus_unique_timbersaw: 'shredder_whirling_death',
+    special_bonus_unique_wraith_king_3: 'skeleton_king_hellfire_blast',
+    special_bonus_unique_wraith_king_2: 'skeleton_king_vampiric_aura',
+    special_bonus_unique_wraith_king_1: 'skeleton_king_reincarnation',
+    special_bonus_unique_wraith_king_4: 'skeleton_king_reincarnation',
+    special_bonus_unique_skywrath: 'skywrath_mage_ancient_seal',
+    special_bonus_unique_slark: 'slark_pounce',
+    special_bonus_unique_sniper_1: 'sniper_shrapnel',
+    special_bonus_unique_sniper_2: 'sniper_shrapnel',
+    special_bonus_unique_spectre: 'spectre_spectral_dagger',
+    special_bonus_unique_spirit_breaker_3: 'spirit_breaker_greater_bash',
+    special_bonus_unique_spirit_breaker_1: 'spirit_breaker_greater_bash',
+    special_bonus_unique_storm_spirit: 'storm_spirit_electric_vortex',
+    special_bonus_unique_sven: 'sven_storm_bolt',
+    special_bonus_unique_templar_assassin_2: 'templar_assassin_meld',
+    special_bonus_unique_templar_assassin: 'templar_assassin_refraction',
+    special_bonus_unique_terrorblade: 'terrorblade_sunder',
+    special_bonus_unique_tidehunter: 'tidehunter_gush',
+    special_bonus_unique_tinker: 'tinker_laser',
+    special_bonus_unique_tiny: 'tiny_avalanche',
+    special_bonus_unique_treant_2: 'treant_leech_seed',
+    special_bonus_unique_treant: 'treant_living_armor',
+    special_bonus_unique_tusk_2: 'tusk_snowball',
+    special_bonus_unique_undying: 'undying_tombstone',
+    special_bonus_unique_undying_2: 'undying_decay',
+    special_bonus_unique_ursa: 'ursa_fury_swipes',
+    special_bonus_unique_vengeful_spirit_1: 'vengefulspirit_magic_missile',
+    special_bonus_unique_vengeful_spirit_2: 'vengefulspirit_command_aura',
+    special_bonus_unique_vengeful_spirit_3: 'vengefulspirit_magic_missile',
+    special_bonus_unique_venomancer_2: 'venomancer_poison_sting',
+    special_bonus_unique_venomancer: 'venomancer_plague_ward',
+    special_bonus_unique_viper_1: 'viper_poison_attack',
+    special_bonus_unique_viper_2: 'viper_viper_strike',
+    special_bonus_unique_visage_3: 'visage_soul_assumption',
+    special_bonus_unique_warlock_3: 'warlock_shadow_word',
+    special_bonus_unique_warlock_1: 'warlock_rain_of_chaos',
+    special_bonus_unique_warlock_2: 'warlock_rain_of_chaos',
+    special_bonus_unique_weaver_1: 'weaver_shukuchi',
+    special_bonus_unique_weaver_2: 'weaver_shukuchi',
+    special_bonus_unique_windranger_2: 'windrunner_windrun',
+    special_bonus_unique_windranger: 'windrunner_windrun',
+    special_bonus_unique_windranger_3: 'windrunner_powershot',
+    special_bonus_unique_winter_wyvern_3: 'winter_wyvern_cold_embrace',
+    special_bonus_unique_winter_wyvern_1: 'winter_wyvern_arctic_burn',
+    special_bonus_unique_winter_wyvern_2: 'winter_wyvern_splinter_blast',
+    special_bonus_unique_wisp_2: 'wisp_tether',
+    special_bonus_unique_wisp: 'wisp_spirits',
+    special_bonus_unique_witch_doctor_1: 'witch_doctor_death_ward',
+    special_bonus_unique_witch_doctor_2: 'witch_doctor_voodoo_restoration',
+    special_bonus_unique_zeus_2: 'zuus_arc_lightning',
+    special_bonus_unique_zeus_3: 'zuus_lightning_bolt',
+    special_bonus_unique_zeus: 'zuus_static_field',
+    
+    special_bonus_unique_beastmaster_2: 'beastmaster_call_of_the_wild_boar',
+    special_bonus_unique_brewmaster_3: 'brewmaster_thunder_clap',
+    special_bonus_unique_bristleback: 'bristleback_viscous_nasal_goo',
+    special_bonus_unique_bristleback_2: 'bristleback_quill_spray',
+    special_bonus_unique_broodmother_3: 'broodmother_spawn_spiderlings',
+    //special_bonus_unique_broodmother_4: '+14 Spiders Attack Damage',
+    special_bonus_unique_broodmother_1: 'broodmother_spin_web',
+    //special_bonus_unique_broodmother_2: '+225 Spiders Health',
+    //special_bonus_unique_chen_4: '+1000 Creep Min Health',
+    special_bonus_unique_earthshaker_2: 'earthshaker_echo_slam',
+    special_bonus_unique_faceless_void: 'faceless_void_time_walk',
+    special_bonus_unique_furion_2: 'furion_force_of_nature',
+    //special_bonus_unique_furion: '2x Treant HP/Damage',
+    special_bonus_unique_invoker_1: 'invoker_forge_spirit',
+    special_bonus_unique_legion_commander_3: 'legion_commander_moment_of_courage',
+    special_bonus_unique_lich_1: 'lich_frost_armor',
+    //special_bonus_unique_lich_2: 'Attacks Apply 30% MS and AS Slow',
+    //special_bonus_unique_lone_druid_1: '+50 Spirit Bear Damage',
+    //special_bonus_unique_lone_druid_2: '+12 Spirit Bear Armor',
+    //special_bonus_unique_lone_druid_5: '+50% Spirit Bear Magic Resistance',
+    special_bonus_unique_lone_druid_3: 'lone_druid_spirit_bear_entangle',
+    special_bonus_unique_lycan_3: 'lycan_feral_impulse',
+    special_bonus_unique_lycan_2: 'lycan_summon_wolves',
+    special_bonus_unique_nevermore_1: 'nevermore_necromastery',
+    special_bonus_unique_nevermore_2: ['nevermore_shadowraze1', 'nevermore_shadowraze2', 'nevermore_shadowraze3'],
+    special_bonus_unique_pugna_4: 'pugna_nether_blast',
+    special_bonus_unique_pugna_3: 'pugna_nether_ward',
+    special_bonus_unique_riki_1: 'riki_permanent_invisibility',
+    special_bonus_unique_riki_2: 'riki_smoke_screen',
+    special_bonus_unique_shadow_shaman_4: 'shadow_shaman_mass_serpent_ward',
+    special_bonus_unique_shadow_shaman_1: 'shadow_shaman_mass_serpent_ward',
+    special_bonus_unique_silencer: 'silencer_curse_of_the_silent',
+    special_bonus_unique_slardar: 'slardar_bash',
+    special_bonus_unique_spirit_breaker_2: 'spirit_breaker_charge_of_darkness',
+    special_bonus_unique_techies: 'techies_suicide',
+    special_bonus_unique_troll_warlord: ['troll_warlord_whirling_axes_melee', 'troll_warlord_whirling_axes_ranged'],
+    special_bonus_unique_tusk: 'tusk_walrus_punch',
+    //special_bonus_unique_visage_2: '+120 Familiars Movement Speed',
+    special_bonus_unique_warlock_4: 'warlock_rain_of_chaos',
+    special_bonus_unique_witch_doctor_3: 'witch_doctor_paralyzing_cask'
+}
+},{}],22:[function(require,module,exports){
 var totalExp = [0, 200, 500, 900, 1400, 2000, 2615, 3425, 3890, 4550, 5225, 6000, 7175, 8375, 9600, 10850, 12125, 13500, 14900, 16325, 17925, 19825, 22025, 24525, 27500];
 
 module.exports = totalExp;
-},{}],21:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 var abilityData = {
     'alchemist_acid_spray': [
         {
@@ -8612,7 +8883,7 @@ var abilityData = {
 }
 
 module.exports = abilityData;
-},{}],22:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 (function (global){
 'use strict';
 var ko = (typeof window !== "undefined" ? window['ko'] : typeof global !== "undefined" ? global['ko'] : null);
@@ -8652,7 +8923,7 @@ ko.extenders.numeric = function(target, opts) {
 module.exports = ko;
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"../lib/knockout.mapping":46,"../lib/knockout.wrap":47}],23:[function(require,module,exports){
+},{"../lib/knockout.mapping":48,"../lib/knockout.wrap":49}],25:[function(require,module,exports){
 var IllusionOption = function (name, displayname, baseHero) {
     this.illusionName = name;
     this.illusionDisplayName = displayname;
@@ -8660,7 +8931,7 @@ var IllusionOption = function (name, displayname, baseHero) {
 };
 
 module.exports = IllusionOption;
-},{}],24:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 var illusionData = {
     chaos_knight_phantasm: {
         hero: 'chaos_knight',
@@ -8764,7 +9035,7 @@ var illusionData = {
 }
 
 module.exports = illusionData;
-},{}],25:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 var IllusionOption = require("./IllusionOption");
 var illusionData = require("./illusionData");
 
@@ -8774,7 +9045,7 @@ for (var h in illusionData) {
 }
 
 module.exports = illusionOptionsArray;
-},{"./IllusionOption":23,"./illusionData":24}],26:[function(require,module,exports){
+},{"./IllusionOption":25,"./illusionData":26}],28:[function(require,module,exports){
 (function (global){
 var ko = (typeof window !== "undefined" ? window['ko'] : typeof global !== "undefined" ? global['ko'] : null);
 var stackableItems = require("./stackableItems");
@@ -8954,7 +9225,7 @@ BasicInventoryViewModel.prototype.getItemAttributeValue = function (attributes, 
 module.exports = BasicInventoryViewModel;
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"./itemsWithActive":32,"./levelItems":33,"./stackableItems":34}],27:[function(require,module,exports){
+},{"./itemsWithActive":34,"./levelItems":35,"./stackableItems":36}],29:[function(require,module,exports){
 'use strict';
 var ko = require('../herocalc_knockout');
 
@@ -10310,7 +10581,7 @@ InventoryViewModel.prototype = Object.create(BasicInventoryViewModel.prototype);
 InventoryViewModel.prototype.constructor = InventoryViewModel;
 
 module.exports = InventoryViewModel;
-},{"../herocalc_knockout":22,"./BasicInventoryViewModel":26,"./itemBuffOptions":29,"./itemDebuffOptions":30,"./itemOptionsArray":31,"./levelItems":33,"./stackableItems":34}],28:[function(require,module,exports){
+},{"../herocalc_knockout":24,"./BasicInventoryViewModel":28,"./itemBuffOptions":31,"./itemDebuffOptions":32,"./itemOptionsArray":33,"./levelItems":35,"./stackableItems":36}],30:[function(require,module,exports){
 (function (global){
 var ko = (typeof window !== "undefined" ? window['ko'] : typeof global !== "undefined" ? global['ko'] : null);
 
@@ -10338,7 +10609,7 @@ var ItemInput = function (itemData, value, name, debuff) {
 module.exports = ItemInput;
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{}],29:[function(require,module,exports){
+},{}],31:[function(require,module,exports){
 var ItemInput = require("./ItemInput");
 var itemBuffs = ['assault', 'ancient_janggo', 'headdress', 'mekansm', 'pipe', 'ring_of_aquila', 'vladmir', 'ring_of_basilius', 'buckler', 'solar_crest', 'bottle_doubledamage', 'helm_of_the_dominator'];
 var itemBuffOptions = {};
@@ -10357,7 +10628,7 @@ var init = function (itemData) {
 itemBuffOptions.init = init;
 
 module.exports = itemBuffOptions;
-},{"./ItemInput":28}],30:[function(require,module,exports){
+},{"./ItemInput":30}],32:[function(require,module,exports){
 var ItemInput = require("./ItemInput");
 var itemDebuffs = [
     {item: 'assault', debuff: null},
@@ -10388,7 +10659,7 @@ var init = function (itemData) {
 itemDebuffOptions.init = init;
 
 module.exports = itemDebuffOptions;
-},{"./ItemInput":28}],31:[function(require,module,exports){
+},{"./ItemInput":30}],33:[function(require,module,exports){
 var validItems = require("./validItems");
 var ItemInput = require("./ItemInput");
 
@@ -10405,15 +10676,15 @@ var init = function (itemData) {
 itemOptionsArray.init = init;
 
 module.exports = itemOptionsArray;
-},{"./ItemInput":28,"./validItems":35}],32:[function(require,module,exports){
+},{"./ItemInput":30,"./validItems":37}],34:[function(require,module,exports){
 module.exports = ['solar_crest', 'heart','smoke_of_deceit','dust','ghost','tranquil_boots','phase_boots','power_treads','buckler','medallion_of_courage','ancient_janggo','mekansm','pipe','veil_of_discord','rod_of_atos','orchid','sheepstick','armlet','invis_sword','ethereal_blade','shivas_guard','manta','mask_of_madness','diffusal_blade','mjollnir','satanic','ring_of_basilius','ring_of_aquila', 'butterfly', 'moon_shard', 'silver_edge','bloodthorn','hurricane_pike'];
-},{}],33:[function(require,module,exports){
-module.exports = ['necronomicon','dagon','diffusal_blade','travel_boots'];
-},{}],34:[function(require,module,exports){
-module.exports = ['clarity','flask','dust','ward_observer','ward_sentry','tango','tpscroll','smoke_of_deceit'];
 },{}],35:[function(require,module,exports){
-module.exports = ["abyssal_blade","ultimate_scepter","courier","arcane_boots","armlet","assault","boots_of_elves","bfury","belt_of_strength","black_king_bar","blade_mail","blade_of_alacrity","blades_of_attack","blink","bloodstone","boots","travel_boots","bottle","bracer","broadsword","buckler","butterfly","chainmail","circlet","clarity","claymore","cloak","lesser_crit","greater_crit","dagon","demon_edge","desolator","diffusal_blade","rapier","ancient_janggo","dust","eagle","energy_booster","ethereal_blade","cyclone","skadi","flying_courier","force_staff","gauntlets","gem","ghost","gloves","hand_of_midas","headdress","flask","heart","heavens_halberd","helm_of_iron_will","helm_of_the_dominator","hood_of_defiance","hyperstone","branches","javelin","sphere","maelstrom","magic_stick","magic_wand","manta","mantle","mask_of_madness","medallion_of_courage","mekansm","mithril_hammer","mjollnir","monkey_king_bar","lifesteal","mystic_staff","necronomicon","null_talisman","oblivion_staff","ward_observer","ogre_axe","orb_of_venom","orchid","pers","phase_boots","pipe","platemail","point_booster","poor_mans_shield","power_treads","quarterstaff","quelling_blade","radiance","reaver","refresher","ring_of_aquila","ring_of_basilius","ring_of_health","ring_of_protection","ring_of_regen","robe","rod_of_atos","relic","sobi_mask","sange","sange_and_yasha","satanic","sheepstick","ward_sentry","shadow_amulet","invis_sword","shivas_guard","basher","slippers","smoke_of_deceit","soul_booster","soul_ring","staff_of_wizardry","stout_shield","talisman_of_evasion","tango","tpscroll","tranquil_boots","ultimate_orb","urn_of_shadows","vanguard","veil_of_discord","vitality_booster","vladmir","void_stone","wraith_band","yasha","crimson_guard","enchanted_mango","lotus_orb","glimmer_cape","guardian_greaves","moon_shard","silver_edge","solar_crest","octarine_core","aether_lens","faerie_fire","iron_talon","dragon_lance","echo_sabre","infused_raindrop","blight_stone","wind_lace","tome_of_knowledge","bloodthorn","hurricane_pike"];
+module.exports = ['necronomicon','dagon','diffusal_blade','travel_boots'];
 },{}],36:[function(require,module,exports){
+module.exports = ['clarity','flask','dust','ward_observer','ward_sentry','tango','tpscroll','smoke_of_deceit'];
+},{}],37:[function(require,module,exports){
+module.exports = ["abyssal_blade","ultimate_scepter","courier","arcane_boots","armlet","assault","boots_of_elves","bfury","belt_of_strength","black_king_bar","blade_mail","blade_of_alacrity","blades_of_attack","blink","bloodstone","boots","travel_boots","bottle","bracer","broadsword","buckler","butterfly","chainmail","circlet","clarity","claymore","cloak","lesser_crit","greater_crit","dagon","demon_edge","desolator","diffusal_blade","rapier","ancient_janggo","dust","eagle","energy_booster","ethereal_blade","cyclone","skadi","flying_courier","force_staff","gauntlets","gem","ghost","gloves","hand_of_midas","headdress","flask","heart","heavens_halberd","helm_of_iron_will","helm_of_the_dominator","hood_of_defiance","hyperstone","branches","javelin","sphere","maelstrom","magic_stick","magic_wand","manta","mantle","mask_of_madness","medallion_of_courage","mekansm","mithril_hammer","mjollnir","monkey_king_bar","lifesteal","mystic_staff","necronomicon","null_talisman","oblivion_staff","ward_observer","ogre_axe","orb_of_venom","orchid","pers","phase_boots","pipe","platemail","point_booster","poor_mans_shield","power_treads","quarterstaff","quelling_blade","radiance","reaver","refresher","ring_of_aquila","ring_of_basilius","ring_of_health","ring_of_protection","ring_of_regen","robe","rod_of_atos","relic","sobi_mask","sange","sange_and_yasha","satanic","sheepstick","ward_sentry","shadow_amulet","invis_sword","shivas_guard","basher","slippers","smoke_of_deceit","soul_booster","soul_ring","staff_of_wizardry","stout_shield","talisman_of_evasion","tango","tpscroll","tranquil_boots","ultimate_orb","urn_of_shadows","vanguard","veil_of_discord","vitality_booster","vladmir","void_stone","wraith_band","yasha","crimson_guard","enchanted_mango","lotus_orb","glimmer_cape","guardian_greaves","moon_shard","silver_edge","solar_crest","octarine_core","aether_lens","faerie_fire","iron_talon","dragon_lance","echo_sabre","infused_raindrop","blight_stone","wind_lace","tome_of_knowledge","bloodthorn","hurricane_pike"];
+},{}],38:[function(require,module,exports){
 'use strict';
 
 var core = {};
@@ -10440,7 +10711,7 @@ core.init = function (HERODATA_PATH, ITEMDATA_PATH, UNITDATA_PATH, callback) {
 }
 
 module.exports = core;
-},{"./AbilityModel":1,"./BuffViewModel":2,"./buffs/buffOptionsArray":4,"./buffs/debuffOptionsArray":5,"./data/main":7,"./hero/CloneModel":8,"./hero/HeroModel":11,"./hero/IllusionModel":13,"./hero/UnitModel":15,"./hero/heroOptionsArray":18,"./inventory/InventoryViewModel":27,"./inventory/itemBuffOptions":29,"./inventory/itemDebuffOptions":30,"./inventory/itemOptionsArray":31,"./util/main":42}],37:[function(require,module,exports){
+},{"./AbilityModel":1,"./BuffViewModel":2,"./buffs/buffOptionsArray":4,"./buffs/debuffOptionsArray":5,"./data/main":7,"./hero/CloneModel":8,"./hero/HeroModel":11,"./hero/IllusionModel":13,"./hero/UnitModel":15,"./hero/heroOptionsArray":19,"./inventory/InventoryViewModel":29,"./inventory/itemBuffOptions":31,"./inventory/itemDebuffOptions":32,"./inventory/itemOptionsArray":33,"./util/main":44}],39:[function(require,module,exports){
 var extend = function (out) {
     out = out || {};
 
@@ -10464,7 +10735,7 @@ var extend = function (out) {
 };
 
 module.exports = extend;
-},{}],38:[function(require,module,exports){
+},{}],40:[function(require,module,exports){
 var findWhere = function (arr, obj) {
     arrLoop: for (var i = 0; i < arr.length; i++) {
         objLoop: for (var key in obj) {
@@ -10477,7 +10748,7 @@ var findWhere = function (arr, obj) {
 }
 
 module.exports = findWhere;
-},{}],39:[function(require,module,exports){
+},{}],41:[function(require,module,exports){
 "use strict";
 
 var getJSON = function (url, successCallback, errorCallback) {
@@ -10504,19 +10775,19 @@ var getJSON = function (url, successCallback, errorCallback) {
 }
 
 module.exports = getJSON;
-},{}],40:[function(require,module,exports){
+},{}],42:[function(require,module,exports){
 var isEmpty = function (obj) {
     return Object.keys(obj).length === 0 && obj.constructor === Object;
 }
 
 module.exports = isEmpty;
-},{}],41:[function(require,module,exports){
+},{}],43:[function(require,module,exports){
 var isString = function (myVar) {
     return typeof myVar === 'string' || myVar instanceof String;
 }
 
 module.exports = isString;
-},{}],42:[function(require,module,exports){
+},{}],44:[function(require,module,exports){
 'use strict';
 
 var util = {};
@@ -10528,7 +10799,7 @@ util.uniqueId = require("./uniqueId");
 util.uniques = require("./uniques");
 
 module.exports = util;
-},{"./extend":37,"./findWhere":38,"./getJSON":39,"./union":43,"./uniqueId":44,"./uniques":45}],43:[function(require,module,exports){
+},{"./extend":39,"./findWhere":40,"./getJSON":41,"./union":45,"./uniqueId":46,"./uniques":47}],45:[function(require,module,exports){
 "use strict";
 var uniques = require("./uniques");
 
@@ -10538,7 +10809,7 @@ var union = function (a, b) {
 }
 
 module.exports = union;
-},{"./uniques":45}],44:[function(require,module,exports){
+},{"./uniques":47}],46:[function(require,module,exports){
 "use strict";
 
 var idCounter = 0;
@@ -10548,7 +10819,7 @@ var uniqueId = function (prefix) {
 };
 
 module.exports = uniqueId;
-},{}],45:[function(require,module,exports){
+},{}],47:[function(require,module,exports){
 "use strict";
 var uniques = function (arr) {
     var a = [];
@@ -10559,7 +10830,7 @@ var uniques = function (arr) {
 }
 
 module.exports = uniques;
-},{}],46:[function(require,module,exports){
+},{}],48:[function(require,module,exports){
 (function (global){
 (function (factory) {
 	// Module systems magic dance.
@@ -11369,7 +11640,7 @@ module.exports = uniques;
 }));
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{}],47:[function(require,module,exports){
+},{}],49:[function(require,module,exports){
 (function (global){
 // Knockout Fast Mapping v0.1
 // License: MIT (http://www.opensource.org/licenses/mit-license.php)
@@ -11582,7 +11853,7 @@ module.exports = uniques;
 }));
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{}],48:[function(require,module,exports){
+},{}],50:[function(require,module,exports){
 /*!
  * Chart.js
  * http://chartjs.org/
@@ -15320,7 +15591,7 @@ module.exports = uniques;
 
 }).call(this);
 
-},{}],49:[function(require,module,exports){
+},{}],51:[function(require,module,exports){
 /*!
  * jQuery UI :data 1.12.1
  * http://jqueryui.com
@@ -15361,7 +15632,7 @@ return $.extend( $.expr[ ":" ], {
 } );
 } ) );
 
-},{}],50:[function(require,module,exports){
+},{}],52:[function(require,module,exports){
 /*!
  * jQuery UI Disable Selection 1.12.1
  * http://jqueryui.com
@@ -15409,7 +15680,7 @@ return $.fn.extend( {
 
 } ) );
 
-},{}],51:[function(require,module,exports){
+},{}],53:[function(require,module,exports){
 /*!
  * jQuery UI Focusable 1.12.1
  * http://jqueryui.com
@@ -15495,7 +15766,7 @@ return $.ui.focusable;
 
 } ) );
 
-},{}],52:[function(require,module,exports){
+},{}],54:[function(require,module,exports){
 ( function( factory ) {
 	if ( typeof define === "function" && define.amd ) {
 
@@ -15512,7 +15783,7 @@ return $.ui.focusable;
 return $.ui.ie = !!/msie [\w.]+/.exec( navigator.userAgent.toLowerCase() );
 } ) );
 
-},{}],53:[function(require,module,exports){
+},{}],55:[function(require,module,exports){
 /*!
  * jQuery UI Keycode 1.12.1
  * http://jqueryui.com
@@ -15559,7 +15830,7 @@ return $.ui.keyCode = {
 
 } ) );
 
-},{}],54:[function(require,module,exports){
+},{}],56:[function(require,module,exports){
 ( function( factory ) {
 	if ( typeof define === "function" && define.amd ) {
 
@@ -15605,7 +15876,7 @@ return $.ui.plugin = {
 
 } ) );
 
-},{}],55:[function(require,module,exports){
+},{}],57:[function(require,module,exports){
 /*!
  * jQuery UI Position 1.12.1
  * http://jqueryui.com
@@ -16105,7 +16376,7 @@ return $.ui.position;
 
 } ) );
 
-},{}],56:[function(require,module,exports){
+},{}],58:[function(require,module,exports){
 ( function( factory ) {
 	if ( typeof define === "function" && define.amd ) {
 
@@ -16147,7 +16418,7 @@ return $.ui.safeActiveElement = function( document ) {
 
 } ) );
 
-},{}],57:[function(require,module,exports){
+},{}],59:[function(require,module,exports){
 ( function( factory ) {
 	if ( typeof define === "function" && define.amd ) {
 
@@ -16170,7 +16441,7 @@ return $.ui.safeBlur = function( element ) {
 
 } ) );
 
-},{}],58:[function(require,module,exports){
+},{}],60:[function(require,module,exports){
 /*!
  * jQuery UI Scroll Parent 1.12.1
  * http://jqueryui.com
@@ -16217,7 +16488,7 @@ return $.fn.scrollParent = function( includeHidden ) {
 
 } ) );
 
-},{}],59:[function(require,module,exports){
+},{}],61:[function(require,module,exports){
 /*!
  * jQuery UI Tabbable 1.12.1
  * http://jqueryui.com
@@ -16254,7 +16525,7 @@ return $.extend( $.expr[ ":" ], {
 
 } ) );
 
-},{}],60:[function(require,module,exports){
+},{}],62:[function(require,module,exports){
 /*!
  * jQuery UI Unique ID 1.12.1
  * http://jqueryui.com
@@ -16305,7 +16576,7 @@ return $.fn.extend( {
 
 } ) );
 
-},{}],61:[function(require,module,exports){
+},{}],63:[function(require,module,exports){
 ( function( factory ) {
 	if ( typeof define === "function" && define.amd ) {
 
@@ -16324,7 +16595,7 @@ return $.ui.version = "1.12.1";
 
 } ) );
 
-},{}],62:[function(require,module,exports){
+},{}],64:[function(require,module,exports){
 /*!
  * jQuery UI Widget 1.12.1
  * http://jqueryui.com
@@ -17059,7 +17330,7 @@ return $.widget;
 
 } ) );
 
-},{}],63:[function(require,module,exports){
+},{}],65:[function(require,module,exports){
 /*!
  * jQuery UI Autocomplete 1.12.1
  * http://jqueryui.com
@@ -17743,7 +18014,7 @@ return $.ui.autocomplete;
 
 } ) );
 
-},{}],64:[function(require,module,exports){
+},{}],66:[function(require,module,exports){
 /*!
  * jQuery UI Button 1.12.1
  * http://jqueryui.com
@@ -18131,7 +18402,7 @@ return $.ui.button;
 
 } ) );
 
-},{}],65:[function(require,module,exports){
+},{}],67:[function(require,module,exports){
 /*!
  * jQuery UI Dialog 1.12.1
  * http://jqueryui.com
@@ -19073,7 +19344,7 @@ return $.ui.dialog;
 
 } ) );
 
-},{}],66:[function(require,module,exports){
+},{}],68:[function(require,module,exports){
 /*!
  * jQuery UI Draggable 1.12.1
  * http://jqueryui.com
@@ -20325,7 +20596,7 @@ return $.ui.draggable;
 
 } ) );
 
-},{}],67:[function(require,module,exports){
+},{}],69:[function(require,module,exports){
 /*!
  * jQuery UI Menu 1.12.1
  * http://jqueryui.com
@@ -21000,7 +21271,7 @@ return $.widget( "ui.menu", {
 
 } ) );
 
-},{}],68:[function(require,module,exports){
+},{}],70:[function(require,module,exports){
 /*!
  * jQuery UI Mouse 1.12.1
  * http://jqueryui.com
@@ -21228,7 +21499,7 @@ return $.widget( "ui.mouse", {
 
 } ) );
 
-},{}],69:[function(require,module,exports){
+},{}],71:[function(require,module,exports){
 /*!
  * jQuery UI Resizable 1.12.1
  * http://jqueryui.com
@@ -22431,7 +22702,7 @@ return $.ui.resizable;
 
 } ) );
 
-},{}],70:[function(require,module,exports){
+},{}],72:[function(require,module,exports){
 /*!
  * jQuery UI Spinner 1.12.1
  * http://jqueryui.com
@@ -23008,9 +23279,9 @@ return $.ui.spinner;
 
 } ) );
 
-},{}],71:[function(require,module,exports){
+},{}],73:[function(require,module,exports){
 !function(e,r){if("object"==typeof exports&&"object"==typeof module)module.exports=r();else if("function"==typeof define&&define.amd)define([],r);else{var t=r();for(var n in t)("object"==typeof exports?exports:e)[n]=t[n]}}(this,function(){return function(e){function r(n){if(t[n])return t[n].exports;var o=t[n]={exports:{},id:n,loaded:!1};return e[n].call(o.exports,o,o.exports,r),o.loaded=!0,o.exports}var t={};return r.m=e,r.c=t,r.p="",r(0)}([function(e,r,t){e.exports=t(1)},function(e,r,t){"use strict";function n(){var e="undefined"==typeof JSON?{}:JSON;o.setupJSON(e)}var o=t(2),i=t(3);n();var a=window._rollbarConfig,s=a&&a.globalAlias||"Rollbar",u=window[s]&&"undefined"!=typeof window[s].shimId;!u&&a?o.wrapper.init(a):(window.Rollbar=o.wrapper,window.RollbarNotifier=i.Notifier),e.exports=o.wrapper},function(e,r,t){"use strict";function n(e,r,t){!t[4]&&window._rollbarWrappedError&&(t[4]=window._rollbarWrappedError,window._rollbarWrappedError=null),e.uncaughtError.apply(e,t),r&&r.apply(window,t)}function o(e,r){if(r.hasOwnProperty&&r.hasOwnProperty("addEventListener")){var t=r.addEventListener;r.addEventListener=function(r,n,o){t.call(this,r,e.wrap(n),o)};var n=r.removeEventListener;r.removeEventListener=function(e,r,t){n.call(this,e,r&&r._wrapped||r,t)}}}var i=t(3),a=t(8),s=i.Notifier;window._rollbarWrappedError=null;var u={};u.init=function(e,r){var t=new s(r);if(t.configure(e),e.captureUncaught){var i;r&&a.isType(r._rollbarOldOnError,"function")?i=r._rollbarOldOnError:window.onerror&&!window.onerror.belongsToShim&&(i=window.onerror),window.onerror=function(){var e=Array.prototype.slice.call(arguments,0);n(t,i,e)};var u,c,l=["EventTarget","Window","Node","ApplicationCache","AudioTrackList","ChannelMergerNode","CryptoOperation","EventSource","FileReader","HTMLUnknownElement","IDBDatabase","IDBRequest","IDBTransaction","KeyOperation","MediaController","MessagePort","ModalWindow","Notification","SVGElementInstance","Screen","TextTrack","TextTrackCue","TextTrackList","WebSocket","WebSocketWorker","Worker","XMLHttpRequest","XMLHttpRequestEventTarget","XMLHttpRequestUpload"];for(u=0;u<l.length;++u)c=l[u],window[c]&&window[c].prototype&&o(t,window[c].prototype)}return e.captureUnhandledRejections&&(r&&a.isType(r._unhandledRejectionHandler,"function")&&window.removeEventListener("unhandledrejection",r._unhandledRejectionHandler),t._unhandledRejectionHandler=function(e){var r=e.reason,n=e.promise,o=e.detail;!r&&o&&(r=o.reason,n=o.promise),t.unhandledRejection(r,n)},window.addEventListener("unhandledrejection",t._unhandledRejectionHandler)),window.Rollbar=t,s.processPayloads(),t},e.exports={wrapper:u,setupJSON:i.setupJSON}},function(e,r,t){"use strict";function n(e){E=e,w.setupJSON(e),v.setupJSON(e)}function o(e,r){return function(){var t=r||this;try{return e.apply(t,arguments)}catch(e){v.consoleError("[Rollbar]:",e)}}}function i(){h||(h=setTimeout(f,1e3))}function a(){return _}function s(e){_=_||this;var r="https://"+s.DEFAULT_ENDPOINT;this.options={enabled:!0,endpoint:r,environment:"production",scrubFields:g([],s.DEFAULT_SCRUB_FIELDS),checkIgnore:null,logLevel:s.DEFAULT_LOG_LEVEL,reportLevel:s.DEFAULT_REPORT_LEVEL,uncaughtErrorLevel:s.DEFAULT_UNCAUGHT_ERROR_LEVEL,payload:{}},this.lastError=null,this.plugins={},this.parentNotifier=e,e&&(e.hasOwnProperty("shimId")?e.notifier=this:this.configure(e.options))}function u(e){window._rollbarPayloadQueue.push(e),i()}function c(e){return o(function(){var r=this._getLogArgs(arguments);return this._log(e||r.level||this.options.logLevel||s.DEFAULT_LOG_LEVEL,r.message,r.err,r.custom,r.callback)})}function l(e,r){e||(e=r?E.stringify(r):"");var t={body:e};return r&&(t.extra=g(!0,{},r)),{message:t}}function p(e,r,t){var n=m.guessErrorClass(r.message),o=r.name||n[0],i=n[1],a={exception:{class:o,message:i}};if(e&&(a.exception.description=e||"uncaught exception"),r.stack){var s,u,c,p,f,d,h,w;for(a.frames=[],h=0;h<r.stack.length;++h)s=r.stack[h],u={filename:s.url?v.sanitizeUrl(s.url):"(unknown)",lineno:s.line||null,method:s.func&&"?"!==s.func?s.func:"[anonymous]",colno:s.column},c=p=f=null,d=s.context?s.context.length:0,d&&(w=Math.floor(d/2),p=s.context.slice(0,w),c=s.context[w],f=s.context.slice(w)),c&&(u.code=c),(p||f)&&(u.context={},p&&p.length&&(u.context.pre=p),f&&f.length&&(u.context.post=f)),s.args&&(u.args=s.args),a.frames.push(u);return a.frames.reverse(),t&&(a.extra=g(!0,{},t)),{trace:a}}return l(o+": "+i,t)}function f(){var e;try{for(;e=window._rollbarPayloadQueue.shift();)d(e)}finally{h=void 0}}function d(e){var r=e.endpointUrl,t=e.accessToken,n=e.payload,o=e.callback||function(){},i=(new Date).getTime();i-L>=6e4&&(L=i,R=0);var a=window._globalRollbarOptions.maxItems,c=window._globalRollbarOptions.itemsPerMinute,l=function(){return!n.ignoreRateLimit&&a>=1&&T>=a},p=function(){return!n.ignoreRateLimit&&c>=1&&R>=c};return l()?void o(new Error(a+" max items reached")):p()?void o(new Error(c+" items per minute reached")):(T++,R++,l()&&_._log(_.options.uncaughtErrorLevel,"maxItems has been hit. Ignoring errors for the remainder of the current page load.",null,{maxItems:a},null,!1,!0),n.ignoreRateLimit&&delete n.ignoreRateLimit,void y.post(r,t,n,function(r,t){return r?(r instanceof b&&(e.callback=function(){},setTimeout(function(){u(e)},s.RETRY_DELAY)),o(r)):o(null,t)}))}var h,g=t(4),m=t(5),v=t(8),w=t(11),y=w.XHR,b=w.ConnectionError,E=null;s.NOTIFIER_VERSION="1.9.4",s.DEFAULT_ENDPOINT="api.rollbar.com/api/1/",s.DEFAULT_SCRUB_FIELDS=["pw","pass","passwd","password","secret","confirm_password","confirmPassword","password_confirmation","passwordConfirmation","access_token","accessToken","secret_key","secretKey","secretToken"],s.DEFAULT_LOG_LEVEL="debug",s.DEFAULT_REPORT_LEVEL="debug",s.DEFAULT_UNCAUGHT_ERROR_LEVEL="error",s.DEFAULT_ITEMS_PER_MIN=60,s.DEFAULT_MAX_ITEMS=0,s.LEVELS={debug:0,info:1,warning:2,error:3,critical:4},s.RETRY_DELAY=1e4,window._rollbarPayloadQueue=window._rollbarPayloadQueue||[],window._globalRollbarOptions={startTime:(new Date).getTime(),maxItems:s.DEFAULT_MAX_ITEMS,itemsPerMinute:s.DEFAULT_ITEMS_PER_MIN};var _,x=s.prototype;x._getLogArgs=function(e){for(var r,t,n,i,a,u,c=this.options.logLevel||s.DEFAULT_LOG_LEVEL,l=[],p=0;p<e.length;++p)u=e[p],a=v.typeName(u),"string"===a?r?l.push(u):r=u:"function"===a?i=o(u,this):"date"===a?l.push(u):"error"===a||u instanceof Error||"undefined"!=typeof DOMException&&u instanceof DOMException?t?l.push(u):t=u:"object"!==a&&"array"!==a||(n?l.push(u):n=u);return l.length&&(n=n||{},n.extraArgs=l),{level:c,message:r,err:t,custom:n,callback:i}},x._route=function(e){var r=this.options.endpoint,t=/\/$/.test(r),n=/^\//.test(e);return t&&n?e=e.substring(1):t||n||(e="/"+e),r+e},x._processShimQueue=function(e){for(var r,t,n,o,i,a,u,c={};t=e.shift();)r=t.shim,n=t.method,o=t.args,i=r.parentShim,u=c[r.shimId],u||(i?(a=c[i.shimId],u=new s(a)):u=this,c[r.shimId]=u),u[n]&&v.isType(u[n],"function")&&u[n].apply(u,o)},x._buildPayload=function(e,r,t,n,o){var i=this.options.accessToken,a=this.options.environment,u=g(!0,{},this.options.payload),c=v.uuid4();if(void 0===s.LEVELS[r])throw new Error("Invalid level");if(!t&&!n&&!o)throw new Error("No message, stack info or custom data");var l={environment:a,endpoint:this.options.endpoint,uuid:c,level:r,platform:"browser",framework:"browser-js",language:"javascript",body:this._buildBody(t,n,o),request:{url:window.location.href,query_string:window.location.search,user_ip:"$remote_ip"},client:{runtime_ms:e.getTime()-window._globalRollbarOptions.startTime,timestamp:Math.round(e.getTime()/1e3),javascript:{browser:window.navigator.userAgent,language:window.navigator.language,cookie_enabled:window.navigator.cookieEnabled,screen:{width:window.screen.width,height:window.screen.height},plugins:this._getBrowserPlugins()}},server:{},notifier:{name:"rollbar-browser-js",version:s.NOTIFIER_VERSION}};u.body&&delete u.body;var p={access_token:i,data:g(!0,l,u)};return this._scrub(p.data),p},x._buildBody=function(e,r,t){var n;return n=r?p(e,r,t):l(e,t)},x._getBrowserPlugins=function(){if(!this._browserPlugins){var e,r,t=window.navigator.plugins||[],n=t.length,o=[];for(r=0;r<n;++r)e=t[r],o.push({name:e.name,description:e.description});this._browserPlugins=o}return this._browserPlugins},x._scrub=function(e){function r(e,r,t,n,o,i){return r+v.redact(i)}function t(e){var t;if(v.isType(e,"string"))for(t=0;t<s.length;++t)e=e.replace(s[t],r);return e}function n(e,r){var t;for(t=0;t<a.length;++t)if(a[t].test(e)){r=v.redact(r);break}return r}function o(e,r){var o=n(e,r);return o===r?t(o):o}var i=this.options.scrubFields,a=this._getScrubFieldRegexs(i),s=this._getScrubQueryParamRegexs(i);return v.traverse(e,o),e},x._getScrubFieldRegexs=function(e){for(var r,t=[],n=0;n<e.length;++n)r="\\[?(%5[bB])?"+e[n]+"\\[?(%5[bB])?\\]?(%5[dD])?",t.push(new RegExp(r,"i"));return t},x._getScrubQueryParamRegexs=function(e){for(var r,t=[],n=0;n<e.length;++n)r="\\[?(%5[bB])?"+e[n]+"\\[?(%5[bB])?\\]?(%5[dD])?",t.push(new RegExp("("+r+"=)([^&\\n]+)","igm"));return t},x._urlIsWhitelisted=function(e){var r,t,n,o,i,a,s,u,c,l;try{if(r=this.options.hostWhiteList,t=e&&e.data&&e.data.body&&e.data.body.trace,!r||0===r.length)return!0;if(!t)return!0;for(s=r.length,i=t.frames.length,c=0;c<i;c++){if(n=t.frames[c],o=n.filename,!v.isType(o,"string"))return!0;for(l=0;l<s;l++)if(a=r[l],u=new RegExp(a),u.test(o))return!0}}catch(e){return this.configure({hostWhiteList:null}),v.consoleError("[Rollbar]: Error while reading your configuration's hostWhiteList option. Removing custom hostWhiteList.",e),!0}return!1},x._messageIsIgnored=function(e){var r,t,n,o,i,a,s,u,c;try{if(i=!1,n=this.options.ignoredMessages,!n||0===n.length)return!1;if(s=e&&e.data&&e.data.body,u=s&&s.trace&&s.trace.exception&&s.trace.exception.message,c=s&&s.message&&s.message.body,r=u||c,!r)return!1;for(o=n.length,t=0;t<o&&(a=new RegExp(n[t],"gi"),!(i=a.test(r)));t++);}catch(e){this.configure({ignoredMessages:null}),v.consoleError("[Rollbar]: Error while reading your configuration's ignoredMessages option. Removing custom ignoredMessages.")}return i},x._enqueuePayload=function(e,r,t,n){var o={callback:n,accessToken:this.options.accessToken,endpointUrl:this._route("item/"),payload:e},i=function(){if(n){var e="This item was not sent to Rollbar because it was ignored. This can happen if a custom checkIgnore() function was used or if the item's level was less than the notifier' reportLevel. See https://rollbar.com/docs/notifier/rollbar.js/configuration for more details.";n(null,{err:0,result:{id:null,uuid:null,message:e}})}};if(this._internalCheckIgnore(r,t,e))return void i();try{if(v.isType(this.options.checkIgnore,"function")&&this.options.checkIgnore(r,t,e))return void i()}catch(e){this.configure({checkIgnore:null}),v.consoleError("[Rollbar]: Error while calling custom checkIgnore() function. Removing custom checkIgnore().",e)}if(this._urlIsWhitelisted(e)&&!this._messageIsIgnored(e)){if(this.options.verbose){if(e.data&&e.data.body&&e.data.body.trace){var a=e.data.body.trace,s=a.exception.message;v.consoleError("[Rollbar]: ",s)}v.consoleInfo("[Rollbar]: ",o)}v.isType(this.options.logFunction,"function")&&this.options.logFunction(o);try{v.isType(this.options.transform,"function")&&this.options.transform(e)}catch(e){this.configure({transform:null}),v.consoleError("[Rollbar]: Error while calling custom transform() function. Removing custom transform().",e)}this.options.enabled&&u(o)}},x._internalCheckIgnore=function(e,r,t){var n=r[0],o=s.LEVELS[n]||0,i=s.LEVELS[this.options.reportLevel]||0;if(o<i)return!0;var a=this.options?this.options.plugins:{};if(a&&a.jquery&&a.jquery.ignoreAjaxErrors)try{return!!t.data.body.message.extra.isAjax}catch(e){return!1}return!1},x._log=function(e,r,t,n,o,i,a){var s=null;if(t)try{if(s=t._savedStackTrace?t._savedStackTrace:m.parse(t),t===this.lastError)return;this.lastError=t}catch(e){v.consoleError("[Rollbar]: Error while parsing the error object.",e),r=t.message||t.description||r||String(t),t=null}var u=this._buildPayload(new Date,e,r,s,n);return a&&(u.ignoreRateLimit=!0),this._enqueuePayload(u,!!i,[e,r,t,n],o),{uuid:u.data.uuid}},x.log=c(),x.debug=c("debug"),x.info=c("info"),x.warn=c("warning"),x.warning=c("warning"),x.error=c("error"),x.critical=c("critical"),x.uncaughtError=o(function(e,r,t,n,o,i){if(i=i||null,o&&v.isType(o,"error"))return void this._log(this.options.uncaughtErrorLevel,e,o,i,null,!0);if(r&&v.isType(r,"error"))return void this._log(this.options.uncaughtErrorLevel,e,r,i,null,!0);var a={url:r||"",line:t};a.func=m.guessFunctionName(a.url,a.line),a.context=m.gatherContext(a.url,a.line);var s={mode:"onerror",message:o?String(o):e||"uncaught exception",url:document.location.href,stack:[a],useragent:navigator.userAgent},u=this._buildPayload(new Date,this.options.uncaughtErrorLevel,e,s,i);this._enqueuePayload(u,!0,[this.options.uncaughtErrorLevel,e,r,t,n,o])}),x.unhandledRejection=o(function(e,r){var t,n;if(e?(t=e.message||String(e),n=e._rollbarContext):t="unhandled rejection was null or undefined!",n=n||r._rollbarContext||null,e&&v.isType(e,"error"))return void this._log(this.options.uncaughtErrorLevel,t,e,n,null,!0);var o={url:"",line:0};o.func=m.guessFunctionName(o.url,o.line),o.context=m.gatherContext(o.url,o.line);var i={mode:"unhandledrejection",message:t,url:document.location.href,stack:[o],useragent:navigator.userAgent},a=this._buildPayload(new Date,this.options.uncaughtErrorLevel,t,i,n);this._enqueuePayload(a,!0,[this.options.uncaughtErrorLevel,t,o.url,o.line,0,e,r])}),x.global=o(function(e){e=e||{};var r={startTime:e.startTime,maxItems:e.maxItems,itemsPerMinute:e.itemsPerMinute};g(!0,window._globalRollbarOptions,r),void 0!==e.maxItems&&(T=0),void 0!==e.itemsPerMinute&&(R=0)}),x.configure=o(function(e,r){var t=g(!0,{},e);g(!r,this.options,t),this.global(t)}),x.scope=o(function(e){var r=new s(this);return g(!0,r.options.payload,e),r}),x.wrap=function(e,r){try{var t;if(t=v.isType(r,"function")?r:function(){return r||{}},!v.isType(e,"function"))return e;if(e._isWrap)return e;if(!e._wrapped){e._wrapped=function(){try{return e.apply(this,arguments)}catch(r){throw"string"==typeof r&&(r=new String(r)),r.stack||(r._savedStackTrace=m.parse(r)),r._rollbarContext=t()||{},r._rollbarContext._wrappedSource=e.toString(),window._rollbarWrappedError=r,r}},e._wrapped._isWrap=!0;for(var n in e)e.hasOwnProperty(n)&&(e._wrapped[n]=e[n])}return e._wrapped}catch(r){return e}},x.loadFull=function(){v.consoleError("[Rollbar]: Unexpected Rollbar.loadFull() called on a Notifier instance")},s.processPayloads=function(e){return e?void f():void i()};var L=(new Date).getTime(),T=0,R=0;e.exports={Notifier:s,setupJSON:n,topLevelNotifier:a}},function(e,r){"use strict";var t=Object.prototype.hasOwnProperty,n=Object.prototype.toString,o=function(e){return"function"==typeof Array.isArray?Array.isArray(e):"[object Array]"===n.call(e)},i=function(e){if(!e||"[object Object]"!==n.call(e))return!1;var r=t.call(e,"constructor"),o=e.constructor&&e.constructor.prototype&&t.call(e.constructor.prototype,"isPrototypeOf");if(e.constructor&&!r&&!o)return!1;var i;for(i in e);return"undefined"==typeof i||t.call(e,i)};e.exports=function e(){var r,t,n,a,s,u,c=arguments[0],l=1,p=arguments.length,f=!1;for("boolean"==typeof c?(f=c,c=arguments[1]||{},l=2):("object"!=typeof c&&"function"!=typeof c||null==c)&&(c={});l<p;++l)if(r=arguments[l],null!=r)for(t in r)n=c[t],a=r[t],c!==a&&(f&&a&&(i(a)||(s=o(a)))?(s?(s=!1,u=n&&o(n)?n:[]):u=n&&i(n)?n:{},c[t]=e(f,u,a)):"undefined"!=typeof a&&(c[t]=a));return c}},function(e,r,t){"use strict";function n(){return l}function o(){return null}function i(e){var r={};return r._stackFrame=e,r.url=e.fileName,r.line=e.lineNumber,r.func=e.functionName,r.column=e.columnNumber,r.args=e.args,r.context=o(r.url,r.line),r}function a(e){function r(){var r=[];try{r=c.parse(e)}catch(e){r=[]}for(var t=[],n=0;n<r.length;n++)t.push(new i(r[n]));return t}return{stack:r(),message:e.message,name:e.name}}function s(e){return new a(e)}function u(e){if(!e)return["Unknown error. There was no error message to display.",""];var r=e.match(p),t="(unknown)";return r&&(t=r[r.length-1],e=e.replace((r[r.length-2]||"")+t+":",""),e=e.replace(/(^[\s]+|[\s]+$)/g,"")),[t,e]}var c=t(6),l="?",p=new RegExp("^(([a-zA-Z0-9-_$ ]*): *)?(Uncaught )?([a-zA-Z0-9-_$ ]*): ");e.exports={guessFunctionName:n,guessErrorClass:u,gatherContext:o,parse:s,Stack:a,Frame:i}},function(e,r,t){var n,o,i;!function(a,s){"use strict";o=[t(7)],n=s,i="function"==typeof n?n.apply(r,o):n,!(void 0!==i&&(e.exports=i))}(this,function(e){"use strict";function r(e,r,t){if("function"==typeof Array.prototype.map)return e.map(r,t);for(var n=new Array(e.length),o=0;o<e.length;o++)n[o]=r.call(t,e[o]);return n}function t(e,r,t){if("function"==typeof Array.prototype.filter)return e.filter(r,t);for(var n=[],o=0;o<e.length;o++)r.call(t,e[o])&&n.push(e[o]);return n}var n=/(^|@)\S+\:\d+/,o=/^\s*at .*(\S+\:\d+|\(native\))/m,i=/^(eval@)?(\[native code\])?$/;return{parse:function(e){if("undefined"!=typeof e.stacktrace||"undefined"!=typeof e["opera#sourceloc"])return this.parseOpera(e);if(e.stack&&e.stack.match(o))return this.parseV8OrIE(e);if(e.stack)return this.parseFFOrSafari(e);throw new Error("Cannot parse given Error object")},extractLocation:function(e){if(e.indexOf(":")===-1)return[e];var r=e.replace(/[\(\)\s]/g,"").split(":"),t=r.pop(),n=r[r.length-1];if(!isNaN(parseFloat(n))&&isFinite(n)){var o=r.pop();return[r.join(":"),o,t]}return[r.join(":"),t,void 0]},parseV8OrIE:function(n){var i=t(n.stack.split("\n"),function(e){return!!e.match(o)},this);return r(i,function(r){r.indexOf("(eval ")>-1&&(r=r.replace(/eval code/g,"eval").replace(/(\(eval at [^\()]*)|(\)\,.*$)/g,""));var t=r.replace(/^\s+/,"").replace(/\(eval code/g,"(").split(/\s+/).slice(1),n=this.extractLocation(t.pop()),o=t.join(" ")||void 0,i="eval"===n[0]?void 0:n[0];return new e(o,void 0,i,n[1],n[2],r)},this)},parseFFOrSafari:function(n){var o=t(n.stack.split("\n"),function(e){return!e.match(i)},this);return r(o,function(r){if(r.indexOf(" > eval")>-1&&(r=r.replace(/ line (\d+)(?: > eval line \d+)* > eval\:\d+\:\d+/g,":$1")),r.indexOf("@")===-1&&r.indexOf(":")===-1)return new e(r);var t=r.split("@"),n=this.extractLocation(t.pop()),o=t.shift()||void 0;return new e(o,void 0,n[0],n[1],n[2],r)},this)},parseOpera:function(e){return!e.stacktrace||e.message.indexOf("\n")>-1&&e.message.split("\n").length>e.stacktrace.split("\n").length?this.parseOpera9(e):e.stack?this.parseOpera11(e):this.parseOpera10(e)},parseOpera9:function(r){for(var t=/Line (\d+).*script (?:in )?(\S+)/i,n=r.message.split("\n"),o=[],i=2,a=n.length;i<a;i+=2){var s=t.exec(n[i]);s&&o.push(new e(void 0,void 0,s[2],s[1],void 0,n[i]))}return o},parseOpera10:function(r){for(var t=/Line (\d+).*script (?:in )?(\S+)(?:: In function (\S+))?$/i,n=r.stacktrace.split("\n"),o=[],i=0,a=n.length;i<a;i+=2){var s=t.exec(n[i]);s&&o.push(new e(s[3]||void 0,void 0,s[2],s[1],void 0,n[i]))}return o},parseOpera11:function(o){var i=t(o.stack.split("\n"),function(e){return!!e.match(n)&&!e.match(/^Error created at/)},this);return r(i,function(r){var t,n=r.split("@"),o=this.extractLocation(n.pop()),i=n.shift()||"",a=i.replace(/<anonymous function(: (\w+))?>/,"$2").replace(/\([^\)]*\)/g,"")||void 0;i.match(/\(([^\)]*)\)/)&&(t=i.replace(/^[^\(]+\(([^\)]*)\)$/,"$1"));var s=void 0===t||"[arguments not available]"===t?void 0:t.split(",");return new e(a,s,o[0],o[1],o[2],r)},this)}}})},function(e,r,t){var n,o,i;!function(t,a){"use strict";o=[],n=a,i="function"==typeof n?n.apply(r,o):n,!(void 0!==i&&(e.exports=i))}(this,function(){"use strict";function e(e){return!isNaN(parseFloat(e))&&isFinite(e)}function r(e,r,t,n,o,i){void 0!==e&&this.setFunctionName(e),void 0!==r&&this.setArgs(r),void 0!==t&&this.setFileName(t),void 0!==n&&this.setLineNumber(n),void 0!==o&&this.setColumnNumber(o),void 0!==i&&this.setSource(i)}return r.prototype={getFunctionName:function(){return this.functionName},setFunctionName:function(e){this.functionName=String(e)},getArgs:function(){return this.args},setArgs:function(e){if("[object Array]"!==Object.prototype.toString.call(e))throw new TypeError("Args must be an Array");this.args=e},getFileName:function(){return this.fileName},setFileName:function(e){this.fileName=String(e)},getLineNumber:function(){return this.lineNumber},setLineNumber:function(r){if(!e(r))throw new TypeError("Line Number must be a Number");this.lineNumber=Number(r)},getColumnNumber:function(){return this.columnNumber},setColumnNumber:function(r){if(!e(r))throw new TypeError("Column Number must be a Number");this.columnNumber=Number(r)},getSource:function(){return this.source},setSource:function(e){this.source=String(e)},toString:function(){var r=this.getFunctionName()||"{anonymous}",t="("+(this.getArgs()||[]).join(",")+")",n=this.getFileName()?"@"+this.getFileName():"",o=e(this.getLineNumber())?":"+this.getLineNumber():"",i=e(this.getColumnNumber())?":"+this.getColumnNumber():"";return r+t+n+o+i}},r})},function(e,r,t){"use strict";function n(e){v=e}function o(e){return{}.toString.call(e).match(/\s([a-zA-Z]+)/)[1].toLowerCase()}function i(e,r){return o(e)===r}function a(e){if(!i(e,"string"))throw new Error("received invalid input");for(var r=w,t=r.parser[r.strictMode?"strict":"loose"].exec(e),n={},o=14;o--;)n[r.key[o]]=t[o]||"";return n[r.q.name]={},n[r.key[12]].replace(r.q.parser,function(e,t,o){t&&(n[r.q.name][t]=o)}),n}function s(e){var r=a(e);return""===r.anchor&&(r.source=r.source.replace("#","")),e=r.source.replace("?"+r.query,"")}function u(e,r){var t,n,o,a=i(e,"object"),s=i(e,"array"),c=[];if(a)for(t in e)e.hasOwnProperty(t)&&c.push(t);else if(s)for(o=0;o<e.length;++o)c.push(o);for(o=0;o<c.length;++o)t=c[o],n=e[t],a=i(n,"object"),s=i(n,"array"),a||s?e[t]=u(n,r):e[t]=r(t,n);return e}function c(e){return e=String(e),new Array(e.length+1).join("*")}function l(){var e=(new Date).getTime(),r="xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g,function(r){var t=(e+16*Math.random())%16|0;return e=Math.floor(e/16),("x"===r?t:7&t|8).toString(16)});return r}function p(e){return"function"!=typeof Object.create?function(e){var r=function(){};return function(e){if(null!==e&&e!==Object(e))throw TypeError("Argument must be an object, or null");r.prototype=e||{};var t=new r;return r.prototype=null,null===e&&(t.__proto__=null),t}}()(e):Object.create(e)}function f(){for(var e=[],r=0;r<arguments.length;r++){var t=arguments[r];"object"==typeof t?(t=v.stringify(t),t.length>500&&(t=t.substr(0,500)+"...")):"undefined"==typeof t&&(t="undefined"),e.push(t)}return e.join(" ")}function d(){m.ieVersion()<=8?console.error(f.apply(null,arguments)):console.error.apply(null,arguments)}function h(){m.ieVersion()<=8?console.info(f.apply(null,arguments)):console.info.apply(null,arguments)}function g(){m.ieVersion()<=8?console.log(f.apply(null,arguments)):console.log.apply(null,arguments)}t(9);var m=t(10),v=null,w={strictMode:!1,key:["source","protocol","authority","userInfo","user","password","host","port","relative","path","directory","file","query","anchor"],q:{name:"queryKey",parser:/(?:^|&)([^&=]*)=?([^&]*)/g},parser:{strict:/^(?:([^:\/?#]+):)?(?:\/\/((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?))?((((?:[^?#\/]*\/)*)([^?#]*))(?:\?([^#]*))?(?:#(.*))?)/,loose:/^(?:(?![^:@]+:[^:@\/]*@)([^:\/?#.]+):)?(?:\/\/)?((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?)(((\/(?:[^?#](?![^?#\/]*\.[^?#\/.]+(?:[?#]|$)))*\/?)?([^?#\/]*))(?:\?([^#]*))?(?:#(.*))?)/}},y={setupJSON:n,isType:i,parseUri:a,parseUriOptions:w,redact:c,sanitizeUrl:s,traverse:u,typeName:o,uuid4:l,objectCreate:p,consoleError:d,consoleInfo:h,consoleLog:g};e.exports=y},function(e,r){!function(e){"use strict";e.console||(e.console={});for(var r,t,n=e.console,o=function(){},i=["memory"],a="assert,clear,count,debug,dir,dirxml,error,exception,group,groupCollapsed,groupEnd,info,log,markTimeline,profile,profiles,profileEnd,show,table,time,timeEnd,timeline,timelineEnd,timeStamp,trace,warn".split(",");r=i.pop();)n[r]||(n[r]={});for(;t=a.pop();)n[t]||(n[t]=o)}("undefined"==typeof window?this:window)},function(e,r){"use strict";function t(){for(var e,r=3,t=document.createElement("div"),n=t.getElementsByTagName("i");t.innerHTML="<!--[if gt IE "+ ++r+"]><i></i><![endif]-->",n[0];);return r>4?r:e}var n={ieVersion:t};e.exports=n},function(e,r,t){"use strict";function n(e){a=e}function o(e){this.name="Connection Error",this.message=e,this.stack=(new Error).stack}var i=t(8),a=null;o.prototype=i.objectCreate(Error.prototype),o.prototype.constructor=o;var s={XMLHttpFactories:[function(){return new XMLHttpRequest},function(){return new ActiveXObject("Msxml2.XMLHTTP")},function(){return new ActiveXObject("Msxml3.XMLHTTP")},function(){return new ActiveXObject("Microsoft.XMLHTTP")}],createXMLHTTPObject:function(){var e,r=!1,t=s.XMLHttpFactories,n=t.length;for(e=0;e<n;e++)try{r=t[e]();break}catch(e){}return r},post:function(e,r,t,n){if(!i.isType(t,"object"))throw new Error("Expected an object to POST");t=a.stringify(t),n=n||function(){};var u=s.createXMLHTTPObject();if(u)try{try{var c=function(){try{if(c&&4===u.readyState){c=void 0;var e=a.parse(u.responseText);200===u.status?n(null,e):i.isType(u.status,"number")&&u.status>=400&&u.status<600?(403==u.status&&i.consoleError("[Rollbar]:"+e.message),n(new Error(String(u.status)))):n(new o("XHR response had no status code (likely connection failure)"))}}catch(e){var r;r=e&&e.stack?e:new Error(e),n(r)}};u.open("POST",e,!0),u.setRequestHeader&&(u.setRequestHeader("Content-Type","application/json"),u.setRequestHeader("X-Rollbar-Access-Token",r)),u.onreadystatechange=c,u.send(t)}catch(r){if("undefined"!=typeof XDomainRequest){"http:"===window.location.href.substring(0,5)&&"https"===e.substring(0,5)&&(e="http"+e.substring(5));var l=function(){n(new o("Request timed out"))},p=function(){n(new Error("Error during request"))},f=function(){n(null,a.parse(u.responseText))};u=new XDomainRequest,u.onprogress=function(){},u.ontimeout=l,u.onerror=p,u.onload=f,u.open("POST",e,!0),u.send(t)}}}catch(e){n(e)}}};e.exports={XHR:s,setupJSON:n,ConnectionError:o}}])});
-},{}],72:[function(require,module,exports){
+},{}],74:[function(require,module,exports){
 'use strict';
 var ko = require('./herocalc_knockout');
     
@@ -23415,7 +23686,7 @@ var self = this;
 }
 
 module.exports = BuildExplorerViewModel;
-},{"./herocalc_knockout":81,"dota-hero-calculator-library":36,"dota-hero-calculator-library/src/herocalc/AbilityModel":1,"dota-hero-calculator-library/src/herocalc/inventory/BasicInventoryViewModel":26,"dota-hero-calculator-library/src/herocalc/util/union":43}],73:[function(require,module,exports){
+},{"./herocalc_knockout":83,"dota-hero-calculator-library":38,"dota-hero-calculator-library/src/herocalc/AbilityModel":1,"dota-hero-calculator-library/src/herocalc/inventory/BasicInventoryViewModel":28,"dota-hero-calculator-library/src/herocalc/util/union":45}],75:[function(require,module,exports){
 (function (global){
 "use strict";
 var ko = (typeof window !== "undefined" ? window['ko'] : typeof global !== "undefined" ? global['ko'] : null);
@@ -23460,7 +23731,7 @@ CloneViewModel.prototype.constructor = CloneViewModel;
 module.exports = CloneViewModel;
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"./DamageAmpViewModel":74,"./HeroDamageAmpMixin":76,"dota-hero-calculator-library":36}],74:[function(require,module,exports){
+},{"./DamageAmpViewModel":76,"./HeroDamageAmpMixin":78,"dota-hero-calculator-library":38}],76:[function(require,module,exports){
 'use strict';
 var ko = require('./herocalc_knockout');
 
@@ -23609,7 +23880,7 @@ DamageAmpViewModel.prototype = Object.create(BuffViewModel.prototype);
 DamageAmpViewModel.prototype.constructor = DamageAmpViewModel;
 
 module.exports = DamageAmpViewModel;
-},{"./herocalc_knockout":81,"dota-hero-calculator-library/src/herocalc/BuffViewModel":2,"dota-hero-calculator-library/src/herocalc/buffs/BuffModel":3,"dota-hero-calculator-library/src/herocalc/util/findWhere":38}],75:[function(require,module,exports){
+},{"./herocalc_knockout":83,"dota-hero-calculator-library/src/herocalc/BuffViewModel":2,"dota-hero-calculator-library/src/herocalc/buffs/BuffModel":3,"dota-hero-calculator-library/src/herocalc/util/findWhere":40}],77:[function(require,module,exports){
 (function (global){
 'use strict';
 var ko = require('./herocalc_knockout');
@@ -24269,7 +24540,7 @@ var HeroCalculatorViewModel = function (tooltipURL) {
 module.exports = HeroCalculatorViewModel;
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"../components/ability-detail":85,"../components/shop":86,"./CloneViewModel":73,"./HeroViewModel":77,"./UnitViewModel":79,"./herocalc_knockout":81,"./herocalc_tooltips_item":82,"./jquery-ui.custom":83,"dota-hero-calculator-library":36,"dota-hero-calculator-library/src/herocalc/AbilityModel":1,"dota-hero-calculator-library/src/herocalc/data/main":7,"dota-hero-calculator-library/src/herocalc/inventory/levelItems":33,"dota-hero-calculator-library/src/herocalc/inventory/stackableItems":34,"dota-hero-calculator-library/src/herocalc/util/findWhere":38,"dota-hero-calculator-library/src/herocalc/util/uniqueId":44}],76:[function(require,module,exports){
+},{"../components/ability-detail":87,"../components/shop":88,"./CloneViewModel":75,"./HeroViewModel":79,"./UnitViewModel":81,"./herocalc_knockout":83,"./herocalc_tooltips_item":84,"./jquery-ui.custom":85,"dota-hero-calculator-library":38,"dota-hero-calculator-library/src/herocalc/AbilityModel":1,"dota-hero-calculator-library/src/herocalc/data/main":7,"dota-hero-calculator-library/src/herocalc/inventory/levelItems":35,"dota-hero-calculator-library/src/herocalc/inventory/stackableItems":36,"dota-hero-calculator-library/src/herocalc/util/findWhere":40,"dota-hero-calculator-library/src/herocalc/util/uniqueId":46}],78:[function(require,module,exports){
 'use strict';
 var ko = require('./herocalc_knockout');
 var extend = require("dota-hero-calculator-library/src/herocalc/util/extend");
@@ -24374,7 +24645,7 @@ var HeroDamageAmpMixin = function (self) {
 }
 
 module.exports = HeroDamageAmpMixin;
-},{"./herocalc_knockout":81,"dota-hero-calculator-library/src/herocalc/util/extend":37,"dota-hero-calculator-library/src/herocalc/util/findWhere":38}],77:[function(require,module,exports){
+},{"./herocalc_knockout":83,"dota-hero-calculator-library/src/herocalc/util/extend":39,"dota-hero-calculator-library/src/herocalc/util/findWhere":40}],79:[function(require,module,exports){
 (function (global){
 "use strict";
 var ko = (typeof window !== "undefined" ? window['ko'] : typeof global !== "undefined" ? global['ko'] : null);
@@ -24483,7 +24754,7 @@ HeroViewModel.prototype.constructor = HeroViewModel;
 module.exports = HeroViewModel;
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"./BuildExplorerViewModel":72,"./DamageAmpViewModel":74,"./HeroDamageAmpMixin":76,"./IllusionViewModel":78,"dota-hero-calculator-library":36,"dota-hero-calculator-library/src/herocalc/illusion/illusionData":24,"dota-hero-calculator-library/src/herocalc/illusion/illusionOptionsArray":25}],78:[function(require,module,exports){
+},{"./BuildExplorerViewModel":74,"./DamageAmpViewModel":76,"./HeroDamageAmpMixin":78,"./IllusionViewModel":80,"dota-hero-calculator-library":38,"dota-hero-calculator-library/src/herocalc/illusion/illusionData":26,"dota-hero-calculator-library/src/herocalc/illusion/illusionOptionsArray":27}],80:[function(require,module,exports){
 'use strict';
 var ko = require('./herocalc_knockout');
     
@@ -24547,7 +24818,7 @@ IllusionViewModel.prototype = Object.create(HeroCalc.IllusionModel.prototype);
 IllusionViewModel.prototype.constructor = IllusionViewModel;
 
 module.exports = IllusionViewModel;
-},{"./herocalc_knockout":81,"dota-hero-calculator-library":36,"dota-hero-calculator-library/src/herocalc/data/main":7,"dota-hero-calculator-library/src/herocalc/illusion/illusionData":24,"dota-hero-calculator-library/src/herocalc/util/findWhere":38}],79:[function(require,module,exports){
+},{"./herocalc_knockout":83,"dota-hero-calculator-library":38,"dota-hero-calculator-library/src/herocalc/data/main":7,"dota-hero-calculator-library/src/herocalc/illusion/illusionData":26,"dota-hero-calculator-library/src/herocalc/util/findWhere":40}],81:[function(require,module,exports){
 (function (global){
 "use strict";
 var ko = (typeof window !== "undefined" ? window['ko'] : typeof global !== "undefined" ? global['ko'] : null);
@@ -24624,7 +24895,7 @@ UnitViewModel.prototype.constructor = UnitViewModel;
 module.exports = UnitViewModel;
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"dota-hero-calculator-library":36,"dota-hero-calculator-library/src/herocalc/hero/UnitOption":16}],80:[function(require,module,exports){
+},{"dota-hero-calculator-library":38,"dota-hero-calculator-library/src/herocalc/hero/UnitOption":16}],82:[function(require,module,exports){
 "use strict";
 
 var getParameterByName = function (name) {
@@ -24635,7 +24906,7 @@ var getParameterByName = function (name) {
 }
 
 module.exports = getParameterByName;
-},{}],81:[function(require,module,exports){
+},{}],83:[function(require,module,exports){
 (function (global){
 'use strict';
 var ko = (typeof window !== "undefined" ? window['ko'] : typeof global !== "undefined" ? global['ko'] : null);
@@ -25148,7 +25419,7 @@ ko.bindingHandlers.jqAutoCombo = {
 module.exports = ko;
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"../lib/Chart.scatter":88,"chart.js":48}],82:[function(require,module,exports){
+},{"../lib/Chart.scatter":90,"chart.js":50}],84:[function(require,module,exports){
 (function (global){
 'use strict';
 var $ = (typeof window !== "undefined" ? window['$'] : typeof global !== "undefined" ? global['$'] : null);
@@ -25282,7 +25553,7 @@ var getItemTooltipData = function(itemData, el) {
 module.exports = getItemTooltipData;
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{}],83:[function(require,module,exports){
+},{}],85:[function(require,module,exports){
 (function (global){
 'use strict';
 var $ = (typeof window !== "undefined" ? window['$'] : typeof global !== "undefined" ? global['$'] : null);
@@ -25340,7 +25611,7 @@ $.extend( proto, {
 });
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"jquery-ui/ui/data":49,"jquery-ui/ui/disable-selection":50,"jquery-ui/ui/focusable":51,"jquery-ui/ui/ie":52,"jquery-ui/ui/keycode":53,"jquery-ui/ui/plugin":54,"jquery-ui/ui/position":55,"jquery-ui/ui/safe-active-element":56,"jquery-ui/ui/safe-blur":57,"jquery-ui/ui/scroll-parent":58,"jquery-ui/ui/tabbable":59,"jquery-ui/ui/unique-id":60,"jquery-ui/ui/version":61,"jquery-ui/ui/widget":62,"jquery-ui/ui/widgets/autocomplete":63,"jquery-ui/ui/widgets/button":64,"jquery-ui/ui/widgets/dialog":65,"jquery-ui/ui/widgets/draggable":66,"jquery-ui/ui/widgets/menu":67,"jquery-ui/ui/widgets/mouse":68,"jquery-ui/ui/widgets/resizable":69,"jquery-ui/ui/widgets/spinner":70}],84:[function(require,module,exports){
+},{"jquery-ui/ui/data":51,"jquery-ui/ui/disable-selection":52,"jquery-ui/ui/focusable":53,"jquery-ui/ui/ie":54,"jquery-ui/ui/keycode":55,"jquery-ui/ui/plugin":56,"jquery-ui/ui/position":57,"jquery-ui/ui/safe-active-element":58,"jquery-ui/ui/safe-blur":59,"jquery-ui/ui/scroll-parent":60,"jquery-ui/ui/tabbable":61,"jquery-ui/ui/unique-id":62,"jquery-ui/ui/version":63,"jquery-ui/ui/widget":64,"jquery-ui/ui/widgets/autocomplete":65,"jquery-ui/ui/widgets/button":66,"jquery-ui/ui/widgets/dialog":67,"jquery-ui/ui/widgets/draggable":68,"jquery-ui/ui/widgets/menu":69,"jquery-ui/ui/widgets/mouse":70,"jquery-ui/ui/widgets/resizable":71,"jquery-ui/ui/widgets/spinner":72}],86:[function(require,module,exports){
 if (!Array.prototype.find) {
   Array.prototype.find = function(predicate) {
     'use strict';
@@ -25370,7 +25641,7 @@ if (!String.prototype.startsWith) {
         return this.substr(position, searchString.length) === searchString;
     };
 }
-},{}],85:[function(require,module,exports){
+},{}],87:[function(require,module,exports){
 var ability_vars = {
     '$health': 'Health',
     '$mana': 'Mana',
@@ -25479,10 +25750,11 @@ var getTooltipAbilityCooldown = function (hero, item) {
         return c;
     }
     return item.cooldown.map(function (v) {
-        return parseFloat((
-            v * hero.cooldownReductionProduct()
-            - hero.cooldownReductionFlat()
-        ).toFixed(2));
+        var val = (
+            v - hero.cooldownReductionFlat()
+              - hero.ability().getUniqueCooldownReductionFlat(item.name)
+        ) * hero.cooldownReductionProduct();
+        return parseFloat(val.toFixed(2));
     }).join(' ');
     return c;
 }
@@ -25518,7 +25790,7 @@ module.exports = {
     template: "<div>\n    <span class=\"item_field pull-left item_name\" data-bind=\"text: displayname\"></span>\n    <span class=\"item_field pull-right item_ability_damage_type\" style=\"margin-right: 10px;\"  data-bind=\"text: damageType\"></span>\n    <hr style=\"clear: both;\">\n    <div class=\"item_field item_description\" data-bind=\"html: description\"></div>\n    <div class=\"item_field item_attributes\" data-bind=\"foreach: attributes\">\n        <span data-bind=\"text: $data\"></span>\n        <br>\n    </div>\n    <div class=\"item_cdmana\">\n        <span class=\"item_field item_manacost\" data-bind=\"visible: manacost, text: manacost\"></span>\n        <span class=\"item_field item_cooldown\" data-bind=\"visible: cooldown, text: cooldown\"></span>\n    </div>\n    <div class=\"item_field item_lore\" data-bind=\"text: lore\"></div>\n</div>",
     abilityTooltipData: abilityTooltipData
 };
-},{}],86:[function(require,module,exports){
+},{}],88:[function(require,module,exports){
 function ViewModel(params) {
     var self = this;
     self.windowWidth = params.windowWidth;
@@ -25541,7 +25813,7 @@ module.exports = {
     viewModel: ViewModel,
     template: "        <div id=\"shop-container\" class=\"col-md-12 col-lg-4\" data-bind=\"shopDockStyle: shopDockTrigger, visible: displayShop() || shopPopout(), css: {'col-lg-4': !shopPopout()}, style: { 'padding-top': shopPopout() ? '5px' : '0px'}\">\n              <button id=\"shop-minimize\" class=\"btn btn-default btn-xs shop-button glyphicon glyphicon-minus pull-right\" data-bind=\"toggle: displayShop, visible: displayShop()\" title=\"Minimize shop\"></button>\n              <button id=\"shop-maximize\" class=\"btn btn-default btn-xs shop-button glyphicon glyphicon-plus pull-right\" data-bind=\"toggle: displayShop, visible: !displayShop()\" title=\"Maximize shop\"></button>\n              <button class=\"btn btn-default btn-xs shop-button glyphicon glyphicon-new-window pull-right hidden-xs\" data-bind=\"click: shopPopout, visible: !shopPopout()\" title=\"Popout shop\"></button>\n              <button class=\"btn btn-default btn-xs shop-button glyphicon glyphicon-align-right pull-right hidden-xs\" data-bind=\"toggle: shopDock, attr: { title: shopDock() ? 'Undock shop to right side of screen' : 'Dock shop to right side of screen' }\" ></button>\n            <ul id=\"shoptabs\" class=\"nav nav-tabs\" data-bind=\"visible: displayShop()\">\n              <li><a href=\"#shop_basic\" data-toggle=\"tab\">Basic</a></li>\n              <li><a href=\"#shop_upgrade\" data-toggle=\"tab\">Upgrade</a></li>\n              <li><a href=\"#shop_secret\" data-toggle=\"tab\">Secret</a></li>\n            </ul>\n            <div class=\"tab-content text-center bottom-buffer2\" data-bind=\"visible: displayShop()\">\n                <div class=\"tab-pane active\" id=\"shop_basic\">\n<div class=\"shop-column\">\n  <div class=\"hc-shop hc-shop-consumables\" id=\"consumables\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-clarity\" id=\"clarity\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-faerie_fire\" id=\"faerie_fire\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-enchanted_mango\" id=\"enchanted_mango\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-tango\" id=\"tango\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-flask\" id=\"flask\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-smoke_of_deceit\" id=\"smoke_of_deceit\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-tpscroll\" id=\"tpscroll\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-dust\" id=\"dust\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-courier\" id=\"courier\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-flying_courier\" id=\"flying_courier\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-ward_observer\" id=\"ward_observer\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-ward_sentry\" id=\"ward_sentry\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-tome_of_knowledge\" id=\"tome_of_knowledge\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-bottle\" id=\"bottle\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n</div>\n<div class=\"shop-column\">\n  <div class=\"hc-shop hc-shop-attributes\" id=\"attributes\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-branches\" id=\"branches\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-gauntlets\" id=\"gauntlets\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-slippers\" id=\"slippers\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-mantle\" id=\"mantle\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-circlet\" id=\"circlet\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-belt_of_strength\" id=\"belt_of_strength\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-boots_of_elves\" id=\"boots_of_elves\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-robe\" id=\"robe\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-ogre_axe\" id=\"ogre_axe\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-blade_of_alacrity\" id=\"blade_of_alacrity\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-staff_of_wizardry\" id=\"staff_of_wizardry\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-emptyitembg\" id=\"emptyitembg\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-emptyitembg\" id=\"emptyitembg\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-emptyitembg\" id=\"emptyitembg\"></div>\n</div>\n<div class=\"shop-column\">\n  <div class=\"hc-shop hc-shop-armaments\" id=\"armaments\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-ring_of_protection\" id=\"ring_of_protection\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-stout_shield\" id=\"stout_shield\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-quelling_blade\" id=\"quelling_blade\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-infused_raindrop\" id=\"infused_raindrop\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-blight_stone\" id=\"blight_stone\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-orb_of_venom\" id=\"orb_of_venom\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-blades_of_attack\" id=\"blades_of_attack\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-chainmail\" id=\"chainmail\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-quarterstaff\" id=\"quarterstaff\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-helm_of_iron_will\" id=\"helm_of_iron_will\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-broadsword\" id=\"broadsword\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-claymore\" id=\"claymore\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-javelin\" id=\"javelin\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-mithril_hammer\" id=\"mithril_hammer\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n</div>\n<div class=\"shop-column\">\n  <div class=\"hc-shop hc-shop-arcane\" id=\"arcane\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-wind_lace\" id=\"wind_lace\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-magic_stick\" id=\"magic_stick\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-sobi_mask\" id=\"sobi_mask\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-ring_of_regen\" id=\"ring_of_regen\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-boots\" id=\"boots\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-gloves\" id=\"gloves\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-cloak\" id=\"cloak\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-ring_of_health\" id=\"ring_of_health\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-void_stone\" id=\"void_stone\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-gem\" id=\"gem\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-lifesteal\" id=\"lifesteal\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-shadow_amulet\" id=\"shadow_amulet\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-ghost\" id=\"ghost\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-blink\" id=\"blink\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n</div>\n\n\n                </div>\n                <div class=\"tab-pane\" id=\"shop_upgrade\">\n<div class=\"shop-column\">\n  <div class=\"hc-shop hc-shop-common\" id=\"common\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-magic_wand\" id=\"magic_wand\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-null_talisman\" id=\"null_talisman\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-wraith_band\" id=\"wraith_band\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-poor_mans_shield\" id=\"poor_mans_shield\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-bracer\" id=\"bracer\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-soul_ring\" id=\"soul_ring\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-phase_boots\" id=\"phase_boots\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-power_treads\" id=\"power_treads\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-oblivion_staff\" id=\"oblivion_staff\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-pers\" id=\"pers\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-hand_of_midas\" id=\"hand_of_midas\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-travel_boots\" id=\"travel_boots\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-moon_shard\" id=\"moon_shard\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-emptyitembg\" id=\"emptyitembg\"></div>\n</div>\n<div class=\"shop-column\">\n  <div class=\"hc-shop hc-shop-support\" id=\"support\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-ring_of_basilius\" id=\"ring_of_basilius\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-iron_talon\" id=\"iron_talon\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-headdress\" id=\"headdress\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-buckler\" id=\"buckler\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-urn_of_shadows\" id=\"urn_of_shadows\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-tranquil_boots\" id=\"tranquil_boots\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-ring_of_aquila\" id=\"ring_of_aquila\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-medallion_of_courage\" id=\"medallion_of_courage\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-arcane_boots\" id=\"arcane_boots\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-ancient_janggo\" id=\"ancient_janggo\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-mekansm\" id=\"mekansm\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-vladmir\" id=\"vladmir\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-pipe\" id=\"pipe\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-guardian_greaves\" id=\"guardian_greaves\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n</div>\n<div class=\"shop-column\">\n  <div class=\"hc-shop hc-shop-caster\" id=\"caster\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-glimmer_cape\" id=\"glimmer_cape\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-force_staff\" id=\"force_staff\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-veil_of_discord\" id=\"veil_of_discord\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-aether_lens\" id=\"aether_lens\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-necronomicon\" id=\"necronomicon\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-dagon\" id=\"dagon\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-cyclone\" id=\"cyclone\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-solar_crest\" id=\"solar_crest\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-rod_of_atos\" id=\"rod_of_atos\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-orchid\" id=\"orchid\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-ultimate_scepter\" id=\"ultimate_scepter\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-refresher\" id=\"refresher\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-sheepstick\" id=\"sheepstick\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-octarine_core\" id=\"octarine_core\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n</div>\n<div class=\"shop-column\">\n  <div class=\"hc-shop hc-shop-weapons\" id=\"weapons\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-lesser_crit\" id=\"lesser_crit\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-armlet\" id=\"armlet\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-invis_sword\" id=\"invis_sword\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-basher\" id=\"basher\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-bfury\" id=\"bfury\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-ethereal_blade\" id=\"ethereal_blade\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-silver_edge\" id=\"silver_edge\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-radiance\" id=\"radiance\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-monkey_king_bar\" id=\"monkey_king_bar\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-greater_crit\" id=\"greater_crit\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-butterfly\" id=\"butterfly\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-rapier\" id=\"rapier\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-abyssal_blade\" id=\"abyssal_blade\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-bloodthorn\" id=\"bloodthorn\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n</div>\n<div class=\"shop-column\">\n  <div class=\"hc-shop hc-shop-armor\" id=\"armor\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-hood_of_defiance\" id=\"hood_of_defiance\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-vanguard\" id=\"vanguard\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-blade_mail\" id=\"blade_mail\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-soul_booster\" id=\"soul_booster\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-crimson_guard\" id=\"crimson_guard\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-black_king_bar\" id=\"black_king_bar\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-lotus_orb\" id=\"lotus_orb\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-shivas_guard\" id=\"shivas_guard\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-bloodstone\" id=\"bloodstone\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-manta\" id=\"manta\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-sphere\" id=\"sphere\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-hurricane_pike\" id=\"hurricane_pike\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-assault\" id=\"assault\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-heart\" id=\"heart\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n</div>\n<div class=\"shop-column\">\n  <div class=\"hc-shop hc-shop-artifacts\" id=\"artifacts\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-mask_of_madness\" id=\"mask_of_madness\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-helm_of_the_dominator\" id=\"helm_of_the_dominator\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-dragon_lance\" id=\"dragon_lance\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-sange\" id=\"sange\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-yasha\" id=\"yasha\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-echo_sabre\" id=\"echo_sabre\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-maelstrom\" id=\"maelstrom\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-diffusal_blade\" id=\"diffusal_blade\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-desolator\" id=\"desolator\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-heavens_halberd\" id=\"heavens_halberd\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-sange_and_yasha\" id=\"sange_and_yasha\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-skadi\" id=\"skadi\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-mjollnir\" id=\"mjollnir\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-satanic\" id=\"satanic\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n</div>\n                </div>\n                <div class=\"tab-pane\" id=\"shop_secret\">\n<div class=\"shop-column\">\n  <div class=\"hc-shop hc-shop-secret\" id=\"secret\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-energy_booster\" id=\"energy_booster\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-vitality_booster\" id=\"vitality_booster\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-point_booster\" id=\"point_booster\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-platemail\" id=\"platemail\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-talisman_of_evasion\" id=\"talisman_of_evasion\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-hyperstone\" id=\"hyperstone\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-ultimate_orb\" id=\"ultimate_orb\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-demon_edge\" id=\"demon_edge\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-mystic_staff\" id=\"mystic_staff\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-eagle\" id=\"eagle\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-reaver\" id=\"reaver\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-relic\" id=\"relic\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n</div>\n                </div>\n            </div>\n\n            <div class=\"form-group\" data-bind=\"visible: displayShop()\">\n                <div class=\"input-group\">\n                    <input class=\"form-control\" id=\"auto\" data-bind=\"jqAuto: { autoFocus: true, html: true }, jqAutoSource: itemOptions, jqAutoValue: selectedItem, jqAutoSourceLabel: 'displayname', jqAutoSourceInputValue: 'name', jqAutoSourceValue: 'value'\" />\n                    <span class=\"input-group-btn\">\n                        <button class=\"btn btn-default\" data-bind=\"jqAutoCombo: 'auto'\"><span class=\"glyphicon glyphicon-search\"></span></button>\n                    </span>\n                </div>\n            </div>\n\n            <div data-bind=\"visible: selectedItem() && displayShop()\">\n                <button class=\"btn btn-default btn-xs glyphicon glyphicon-minus pull-right\" data-bind=\"toggle: displayShopItemTooltip, visible: displayShopItemTooltip()\" title=\"Hide item description\"></button>\n                <button class=\"btn btn-default btn-xs glyphicon glyphicon-plus pull-right\" data-bind=\"toggle: displayShopItemTooltip, visible: !displayShopItemTooltip()\" title=\"Show item description\"></button>\n                <div data-bind=\"html: getItemTooltipData, css: { 'hide-shop-item-details': !displayShopItemTooltip() }\"></div>\n                <div style=\"margin-top:10px;margin-bottom:10px;\" class=\"form-inline\" data-bind=\"visible: getItemInputLabel() != ''\">\n                    <div class=\"form-group\">\n                        <label for=\"iteminput\" data-bind=\"text: getItemInputLabel\"></label>\n                        <input class=\"form-control\" id=\"iteminput\" data-bind=\"value: itemInputValue\" />\n                    </div>\n                </div>\n                <div class=\"form-group text-right\">\n                    <button class=\"btn btn-default\" data-bind=\"click: addItem\">Add Item</button>\n                </div>\n            </div>\n        </div>"
 };
-},{}],87:[function(require,module,exports){
+},{}],89:[function(require,module,exports){
 (function (global){
 require("./app/polyfill");
 var $ = (typeof window !== "undefined" ? window['$'] : typeof global !== "undefined" ? global['$'] : null);
@@ -25570,7 +25842,7 @@ var App = function (appConfig) {
         }
     });
 
-    var lastUpdate = "2017-07-13 11:53:52 UTC";
+    var lastUpdate = "2017-07-14 01:21:04 UTC";
     $('#last-update').text(lastUpdate);
 
     var rollbar = require('./rollbar');
@@ -25699,7 +25971,7 @@ var App = function (appConfig) {
 module.exports = App;
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"./app/HeroCalculatorViewModel":75,"./app/getParameterByName":80,"./app/polyfill":84,"./rollbar":89,"dota-hero-calculator-library":36}],88:[function(require,module,exports){
+},{"./app/HeroCalculatorViewModel":77,"./app/getParameterByName":82,"./app/polyfill":86,"./rollbar":91,"dota-hero-calculator-library":38}],90:[function(require,module,exports){
 var Chart = require('chart.js');
 Chart.types.Line.extend({
     // Passing in a name registers this chart in the Chart namespace in the same way
@@ -25790,7 +26062,7 @@ Chart.types.Line.extend({
             },this);
         }
 });
-},{"chart.js":48}],89:[function(require,module,exports){
+},{"chart.js":50}],91:[function(require,module,exports){
 var Rollbar = require("rollbar-browser");
 
 var rollbarConfig = {
@@ -25801,7 +26073,7 @@ var rollbarConfig = {
         client: {
             javascript: {
                 source_map_enabled: true,
-                code_version: "7faa9c6724980451bc7e816736e47ade95205a83",
+                code_version: "0717619b6bd79ce4c6a0bc1bfc29ea3d9fc75482",
                 // Optionally have Rollbar guess which frames the error was thrown from
                 // when the browser does not provide line and column numbers.
                 guess_uncaught_frames: true
@@ -25813,6 +26085,6 @@ var rollbarConfig = {
 var rollbar = Rollbar.init(rollbarConfig);
 
 module.exports = rollbar;
-},{"rollbar-browser":71}]},{},[87])(87)
+},{"rollbar-browser":73}]},{},[89])(89)
 });
 //# sourceMappingURL=bundle.js.map

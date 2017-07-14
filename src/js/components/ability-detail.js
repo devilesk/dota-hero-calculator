@@ -106,10 +106,11 @@ var getTooltipAbilityCooldown = function (hero, item) {
         return c;
     }
     return item.cooldown.map(function (v) {
-        return parseFloat((
-            v * hero.cooldownReductionProduct()
-            - hero.cooldownReductionFlat()
-        ).toFixed(2));
+        var val = (
+            v - hero.cooldownReductionFlat()
+              - hero.ability().getUniqueCooldownReductionFlat(item.name)
+        ) * hero.cooldownReductionProduct();
+        return parseFloat(val.toFixed(2));
     }).join(' ');
     return c;
 }
