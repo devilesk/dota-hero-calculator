@@ -1603,6 +1603,12 @@ img {
 .hero-image {
   margin-top: 27px;
   width: 100%; }
+  .hero-image img {
+    width: 100%; }
+  .hero-image.illusion {
+    background-color: #428bca; }
+    .hero-image.illusion img {
+      opacity: 0.5; }
 
 .tab-content > .tab-pane,
 .pill-content > .pill-pane {

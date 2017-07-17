@@ -273,4 +273,16 @@ img {
 .hero-image {
     margin-top: 27px;
     width: 100%;
+    
+    img {
+        width: 100%;
+    }
+    
+    &.illusion {
+        background-color: #428bca;
+        
+        img {
+            opacity: 0.5;
+        }
+    }
 }

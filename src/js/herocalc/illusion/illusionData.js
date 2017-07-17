@@ -30,15 +30,24 @@ var illusionData = {
         use_selected_hero: true,
         max_level: 3,
         outgoing_damage: 'illusion_damage_out_pct',
-        incoming_damage: 'illusion_damage_in_pct'
+        incoming_damage: 'illusion_damage_in_pct',
+        outgoing_damage_sign: -1
     },
-    phantom_lancer_doppelwalk: {
+    phantom_lancer_doppelwalk_1: {
         hero: 'phantom_lancer',
-        displayName: 'Phantom Lancer Doppelwalk',
+        displayName: 'Phantom Lancer Doppelwalk 1',
         use_selected_hero: false,
         max_level: 4,
-        outgoing_damage: 'illusion_damage_out_pct',
-        incoming_damage: 'illusion_damage_in_pct'        
+        outgoing_damage: 'illusion_1_damage_out_pct',
+        incoming_damage: 'illusion_1_damage_in_pct'
+    },
+    phantom_lancer_doppelwalk_2: {
+        hero: 'phantom_lancer',
+        displayName: 'Phantom Lancer Doppelwalk 2',
+        use_selected_hero: false,
+        max_level: 4,
+        outgoing_damage: 'illusion_2_damage_out_pct',
+        incoming_damage: 'illusion_2_damage_in_pct'
     },
     phantom_lancer_juxtapose: {
         hero: 'phantom_lancer',
@@ -46,7 +55,7 @@ var illusionData = {
         use_selected_hero: false,
         max_level: 4,
         outgoing_damage: 'illusion_damage_out_pct',
-        incoming_damage: 'illusion_damage_in_pct'        
+        incoming_damage: 'illusion_damage_in_pct'
     },
     phantom_lancer_spirit_lance: {
         hero: 'phantom_lancer',
@@ -54,7 +63,7 @@ var illusionData = {
         use_selected_hero: false,
         max_level: 4,
         outgoing_damage: 'illusion_damage_out_pct',
-        incoming_damage: 'illusion_damage_in_pct'        
+        incoming_damage: 'illusion_damage_in_pct'
     },
     shadow_demon_disruption: {
         hero: 'shadow_demon',
@@ -62,7 +71,8 @@ var illusionData = {
         use_selected_hero: true,
         max_level: 4,
         outgoing_damage: 'illusion_outgoing_damage',
-        incoming_damage: 'illusion_incoming_damage'        
+        incoming_damage: 'illusion_incoming_damage',
+        outgoing_damage_sign: -1
     },
     spectre_haunt: {
         hero: 'spectre',
@@ -70,7 +80,8 @@ var illusionData = {
         use_selected_hero: false,
         max_level: 3,
         outgoing_damage: 'illusion_damage_outgoing',
-        incoming_damage: 'illusion_damage_incoming'        
+        incoming_damage: 'illusion_damage_incoming',
+        outgoing_damage_sign: -1
     },
     terrorblade_conjure_image: {
         hero: 'terrorblade',
@@ -78,14 +89,16 @@ var illusionData = {
         use_selected_hero: false,
         max_level: 4,
         outgoing_damage: 'illusion_outgoing_damage',
-        incoming_damage: 'illusion_incoming_damage'        
+        incoming_damage: 'illusion_incoming_damage',
+        outgoing_damage_sign: -1
     },
     terrorblade_reflection: {
         hero: 'terrorblade',
         displayName: 'Terrorblade Reflection',
         use_selected_hero: true,
         max_level: 4,
-        outgoing_damage: 'illusion_outgoing_damage'     
+        outgoing_damage: 'illusion_outgoing_damage',
+        outgoing_damage_sign: -1
     },
     item_manta: {
         hero: '',

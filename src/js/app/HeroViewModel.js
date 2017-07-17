@@ -34,15 +34,23 @@ var HeroViewModel = function (heroData, itemData, unitData, h) {
     });
     
     self.illusions = ko.observableArray([]);
-    self.availableIllusions = ko.observableArray(illusionOptionsArray);
-    self.selectedIllusion = ko.observable(self.availableIllusions()[0]);
-    self.illusionAbilityLevel = ko.observable(1);
-    self.illusionAbilityMaxLevel = ko.computed(function () {
-        return illusionData[self.selectedIllusion().illusionName].max_level;
+    self.availableIllusions = ko.computed(function () {
+        return illusionOptionsArray.filter(function (illusionOption) {
+            console.log('illusionOption', illusionOption, self.heroId());
+            return illusionOption.use_selected_hero || illusionOption.baseHero == self.heroId();
+        });
     });
-    self.addIllusion = function (data, event) {
+    self.selectedIllusion = ko.observable();
+    self.selectedIllusion.subscribe(function (newValue) {
+        self.illusionId(newValue.illusionName);
+    });
+    //self.illusionAbilityLevel = ko.observable(1);
+    self.illusionAbilityMaxLevel = ko.computed(function () {
+        return self.selectedIllusion() ? illusionData[self.selectedIllusion().illusionName].max_level : 0;
+    });
+    /*self.addIllusion = function (data, event) {
         self.illusions.push(ko.observable(new IllusionViewModel(heroData, itemData, 0, self, self.illusionAbilityLevel())));
-    };
+    };*/
     
     self.bound = ko.observable(false);
     self.playerColorCss = ko.computed(function () {

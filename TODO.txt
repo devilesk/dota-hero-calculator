@@ -1,3 +1,6 @@
+illusion mana regen
+illusion magic resistance
+
 special_bonus_20_bash_2	+20% 2s Bash
 special_bonus_cast_range_75	+75 Cast Range
 special_bonus_cast_range_100	+100 Cast Range

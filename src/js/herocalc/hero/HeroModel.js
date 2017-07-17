@@ -9,10 +9,14 @@ var HeroDamageMixin = require("./HeroDamageMixin");
 var TalentController = require("./TalentController");
 var totalExp = require("./totalExp");
 var nextLevelExp = require("./nextLevelExp");
+var illusionData = require("../illusion/illusionData");
+var findWhere = require("../util/findWhere");
 
 var HeroModel = function (heroData, itemData, h) {
     var self = this;
     self.heroId = ko.observable(h);
+    self.illusionId = ko.observable('');
+    self.isIllusion = ko.observable(false);
     self.selectedHeroLevel = ko.observable(1);
     self.inventory = new InventoryViewModel(itemData, self);
     self.selectedInventory = ko.observable(-1);
@@ -109,6 +113,63 @@ var HeroModel = function (heroData, itemData, h) {
         }
         return c-self.skillPointHistory().length;
     }, this);
+    
+    self.getAbilityAttributeValue = function(hero, ability, attributeName, level) {
+        if (!attributeName) return 0;
+        ability = ability.indexOf('phantom_lancer_doppelwalk') == -1 ? ability : 'phantom_lancer_doppelwalk';
+        if (ability == 'item_manta') {
+            var abilityObj = itemData[ability];
+        }
+        else {
+            var abilityObj = findWhere(heroData['npc_dota_hero_' + hero].abilities, {name: ability});
+        }
+        var attribute = findWhere(abilityObj.attributes, {name: attributeName});
+        if (level == 0) {
+            return parseFloat(attribute.value[0]);
+        }
+        else if (level > attribute.value.length) {
+            return parseFloat(attribute.value[0]);
+        }
+        else {
+            return parseFloat(attribute.value[level - 1]);
+        }
+    }
+    
+    self.illusionAbilityLevel = ko.observable(0);
+    
+    self.getIncomingDamageMultiplier = function(illusionType, hasScepter, attackType) {
+        console.log('illusionType', illusionType);
+        if (!illusionType) return 1;
+        var sign = illusionData[illusionType].incoming_damage_sign || 1;
+        if (illusionType == 'item_manta') {
+            if (attackType == 'DOTA_UNIT_CAP_MELEE_ATTACK') {
+                return (1 + sign * self.getAbilityAttributeValue(illusionData[illusionType].hero, illusionType, illusionData[illusionType].incoming_damage_melee, self.illusionAbilityLevel())/100)
+            }
+            else {
+                return (1 + sign * self.getAbilityAttributeValue(illusionData[illusionType].hero, illusionType, illusionData[illusionType].incoming_damage_ranged, self.illusionAbilityLevel())/100)
+            }
+        }
+        else {
+            return (1 + sign * self.getAbilityAttributeValue(illusionData[illusionType].hero, illusionType, illusionData[illusionType].incoming_damage, self.illusionAbilityLevel())/100)
+        }
+    }
+    self.getOutgoingDamageMultiplier = function(illusionType, hasScepter, attackType) {
+        console.log('illusionType', illusionType);
+        if (!illusionType) return 1;
+        var sign = illusionData[illusionType].outgoing_damage_sign || 1;
+        if (illusionType == 'item_manta') {
+            if (attackType == 'DOTA_UNIT_CAP_MELEE_ATTACK') {
+                return (1 + sign * self.getAbilityAttributeValue(illusionData[illusionType].hero, illusionType, illusionData[illusionType].outgoing_damage_melee, self.illusionAbilityLevel())/100);
+            }
+            else {
+                return (1 + sign * self.getAbilityAttributeValue(illusionData[illusionType].hero, illusionType, illusionData[illusionType].outgoing_damage_ranged, self.illusionAbilityLevel())/100);
+            }
+        }
+        else {
+            return (1 + sign * self.getAbilityAttributeValue(illusionData[illusionType].hero, illusionType, illusionData[illusionType].outgoing_damage, self.illusionAbilityLevel())/100);
+        }
+    }
+    
     self.primaryAttribute = ko.pureComputed(function () {
         var v = self.heroData().attributeprimary;
         if (v === 'DOTA_ATTRIBUTE_AGILITY') return 'agi';
@@ -199,11 +260,12 @@ var HeroModel = function (heroData, itemData, h) {
             return obj;
         }, {value: 0, excludeList: []});
         return (self.heroData().statushealthregen + self.totalStr() * .06 
-                + self.inventory.getHealthRegen() 
-                + self.ability().getHealthRegen()
-                + TalentController.getHealthRegen(self.selectedTalents())
-                + self.buffs.getHealthRegen()
-                + healthRegenAura.value
+                + (self.isIllusion() ? 0 : self.inventory.getHealthRegen() 
+                    + self.ability().getHealthRegen()
+                    + TalentController.getHealthRegen(self.selectedTalents())
+                    + self.buffs.getHealthRegen()
+                    + healthRegenAura.value
+                    )
                 ).toFixed(2);
     });
     self.mana = ko.pureComputed(function () {
@@ -236,17 +298,18 @@ var HeroModel = function (heroData, itemData, h) {
             return obj;
         }, {value: 0, excludeList: []});
         return (self.enemy().ability().getArmorBaseReduction() * self.debuffs.getArmorBaseReduction() * (self.heroData().armorphysical + self.totalAgi() * .14)
-                + self.inventory.getArmor()
-                //+ self.inventory.getArmorAura().value
-                //+ self.enemy().inventory.getArmorReduction()
-                + self.ability().getArmor()
-                + TalentController.getArmor(self.selectedTalents())
+                + (self.isIllusion() ? 0 : self.inventory.getArmor()
+                    //+ self.inventory.getArmorAura().value
+                    //+ self.enemy().inventory.getArmorReduction()
+                    + self.ability().getArmor()
+                    + TalentController.getArmor(self.selectedTalents())
+                    + self.buffs.getArmor()
+                    )
+                + armorAura.value
                 + self.enemy().ability().getArmorReduction()
-                + self.buffs.getArmor()
                 //+ self.buffs.itemBuffs.getArmor()
                 + self.debuffs.getArmorReduction()
                 //+ self.buffs.itemBuffs.getArmorAura().value
-                + armorAura.value
                 + armorReduction.value
                 //+ self.debuffs.getArmorReduction()
                 ).toFixed(2);
@@ -339,8 +402,17 @@ var HeroModel = function (heroData, itemData, h) {
             abilityBaseDamage = self.ability().getBaseDamage(),
             minDamage = self.heroData().attackdamagemin,
             maxDamage = self.heroData().attackdamagemax;
-        return [Math.floor((minDamage + totalAttribute + abilityBaseDamage.total) * self.ability().getSelfBaseDamageReductionPct() * self.enemy().ability().getBaseDamageReductionPct() * self.debuffs.getBaseDamageReductionPct() * self.debuffs.itemBuffs.getBaseDamageReductionPct() * abilityBaseDamage.multiplier),
-                Math.floor((maxDamage + totalAttribute + abilityBaseDamage.total) * self.ability().getSelfBaseDamageReductionPct() * self.enemy().ability().getBaseDamageReductionPct() * self.debuffs.getBaseDamageReductionPct() * self.debuffs.itemBuffs.getBaseDamageReductionPct() * abilityBaseDamage.multiplier)];
+        console.log('abilityBaseDamage.multiplier', abilityBaseDamage.multiplier);
+        var multiplier = self.ability().getSelfBaseDamageReductionPct()
+            * self.enemy().ability().getBaseDamageReductionPct()
+            * self.debuffs.getBaseDamageReductionPct()
+            * self.debuffs.itemBuffs.getBaseDamageReductionPct()
+            * abilityBaseDamage.multiplier
+            * (self.isIllusion() ? self.getOutgoingDamageMultiplier(self.illusionId(), false, self.heroData().attacktype) : 1);
+        return [
+            Math.floor((minDamage + totalAttribute + abilityBaseDamage.total) * multiplier),
+            Math.floor((maxDamage + totalAttribute + abilityBaseDamage.total) * multiplier)
+        ];
     });
     self.baseDamageAvg = ko.pureComputed(function () {
         return (self.baseDamage()[0] + self.baseDamage()[1]) / 2;
@@ -352,7 +424,7 @@ var HeroModel = function (heroData, itemData, h) {
         return self.baseDamage()[1];
     });
     self.bonusDamage = ko.pureComputed(function () {
-        return ((self.inventory.getBonusDamage().total
+        return self.isIllusion() ? 0 : ((self.inventory.getBonusDamage().total
                 + self.ability().getBonusDamage().total
                 + TalentController.getBonusDamage(self.selectedTalents()).total
                 + self.buffs.getBonusDamage().total
@@ -489,6 +561,7 @@ var HeroModel = function (heroData, itemData, h) {
         ehp *= (1 / self.buffs.getDamageReduction());
         ehp *= (1 / self.enemy().ability().getDamageAmplification());
         ehp *= (1 / self.debuffs.getDamageAmplification());
+        if (self.isIllusion()) ehp *= (1 / self.getIncomingDamageMultiplier(self.illusionId(), false, self.heroData().attacktype));
         return ehp.toFixed(2);
     });
     self.ehpMagical = ko.pureComputed(function () {
@@ -499,6 +572,7 @@ var HeroModel = function (heroData, itemData, h) {
         ehp *= (1 / self.ability().getEvasionBacktrack());
         ehp *= (1 / self.enemy().ability().getDamageAmplification());
         ehp *= (1 / self.debuffs.getDamageAmplification());
+        if (self.isIllusion()) ehp *= (1 / self.getIncomingDamageMultiplier(self.illusionId(), false, self.heroData().attacktype));
         return ehp.toFixed(2);
     });
     self.bash = ko.pureComputed(function () {

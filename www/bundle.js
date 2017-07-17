@@ -11831,7 +11831,7 @@ var self = this;
 }
 
 module.exports = BuildExplorerViewModel;
-},{"../herocalc/AbilityModel":40,"../herocalc/inventory/BasicInventoryViewModel":67,"../herocalc/main":79,"../herocalc/util/union":86,"./herocalc_knockout":34}],26:[function(require,module,exports){
+},{"../herocalc/AbilityModel":40,"../herocalc/inventory/BasicInventoryViewModel":66,"../herocalc/main":78,"../herocalc/util/union":86,"./herocalc_knockout":34}],26:[function(require,module,exports){
 (function (global){
 "use strict";
 var ko = (typeof window !== "undefined" ? window['ko'] : typeof global !== "undefined" ? global['ko'] : null);
@@ -11876,7 +11876,7 @@ CloneViewModel.prototype.constructor = CloneViewModel;
 module.exports = CloneViewModel;
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"../herocalc/main":79,"./DamageAmpViewModel":27,"./HeroDamageAmpMixin":29}],27:[function(require,module,exports){
+},{"../herocalc/main":78,"./DamageAmpViewModel":27,"./HeroDamageAmpMixin":29}],27:[function(require,module,exports){
 'use strict';
 var ko = require('./herocalc_knockout');
 
@@ -12032,7 +12032,7 @@ var ko = require('./herocalc_knockout');
 var $ = (typeof window !== "undefined" ? window['$'] : typeof global !== "undefined" ? global['$'] : null);
 require('./jquery-ui.custom');
 
-ko.components.register('hero-pane', { template: "<div class=\"row\">\n    <div class=\"col-md-3 col-sm-6\">\n        <img class=\"img-rounded hero-image\" data-bind=\"attr:{src: '/media/images/heroes/' + selectedHero().heroName + '.png'}\"/>\n    </div>\n    <div class=\"col-md-9 col-sm-6\">\n        <div class=\"row form-group\">\n            <div class=\"col-md-6\">\n                <label for=\"heroselect\">Hero</label>\n                <select id=\"heroselect\" class=\"form-control\" data-bind=\"options: availableHeroes , optionsText: 'heroDisplayName', value: selectedHero\"></select>\n            </div>\n            <div class=\"col-md-6\">\n                <label for=\"herolevel\">Level</label>\n                <input id=\"herolevel\" data-bind=\"spinner: selectedHeroLevel, spinnerOptions: { min: 1, max: 25 }\">\n            </div>\n        </div>\n        <div class=\"row\">\n            <div class=\"col-md-6\">\n                <label for=\"enemyselect\">Enemy</label>\n                <select id=\"enemyselect\" class=\"form-control\" data-bind=\"css: enemy().playerColorCss, options: availableEnemies , optionsText: 'heroDisplayName', value: selectedEnemy, optionsAfterRender: setHeroOptionStyling\"></select>\n            </div>\n            <div class=\"col-md-6\">\n                <label for=\"enemyselect\">Compare to</label>\n                <select id=\"enemyselect\" class=\"form-control\" data-bind=\"css: heroCompare().playerColorCss, options: availableCompare , optionsText: 'heroDisplayName', value: selectedCompare, optionsAfterRender: setHeroOptionStyling\"></select>\n            </div>\n            <div class=\"col-md-12 checkbox\" style=\"margin-bottom:0px;padding-left:34px;\" data-bind=\"visible: $root.layout() == 0\">\n                <label><input type=\"checkbox\" style=\"float:none;margin-right:5px;\" data-bind=\"checked: showDiff\"><span style=\"font-size:12px\">Show <abbr title=\"The difference between two adjacent hero tabs shown next to each stat.\">delta values</abbr>. <span data-bind=\"visible: showDiff\">Comparing level <span data-bind=\"text: selectedHeroLevel\"></span> <span data-bind=\"text: heroData().displayname, css: playerColorCss\"></span> to level <span data-bind=\"text: heroCompare().selectedHeroLevel\"></span> <span data-bind=\"text: heroCompare().heroData().displayname, css: heroCompare().playerColorCss\"></span>.</span></span></label>\n                <label style=\"margin-left:25px;font-size:12px;\"><input type=\"checkbox\" style=\"float:none;margin-right:5px;\" data-bind=\"checked: showUnitTab\">Show unit tab</label>\n            </div>\n        </div>\n    </div>\n</div>\n\n<div class=\"row\">\n    <div class=\"col-md-4\" data-bind=\"css: {'col-md-4': $root.layout() == 0, 'col-md-12': $root.layout() == 1}\">\n        <div class=\"row\">\n            <h3 class=\"col-md-12\">Stats <a class=\"btn btn-default btn-xs\" data-bind=\"toggle: showStatDetails, text: !showStatDetails() ? 'Show more' : 'Show less', attr: {title: !showStatDetails() ? 'Click to show base stats' : 'Click to hide base stats'}\"></a>\n                <div style=\"margin-left:15px;display:inline;\" data-bind=\"style: {'display': $root.layout() == 1 ? 'inline' : 'none'}\">\n                    <label><input type=\"checkbox\" style=\"float:none;margin-right:5px;\" data-bind=\"checked: showDiff\"><span style=\"font-size:12px\">Show <abbr title=\"The difference between two adjacent hero tabs shown next to each stat.\">delta values</abbr>. <span data-bind=\"visible: showDiff\">Comparing level <span data-bind=\"text: selectedHeroLevel\"></span> <span data-bind=\"text: heroData().displayname, css: playerColorCss\"></span> to level <span data-bind=\"text: heroCompare().selectedHeroLevel\"></span> <span data-bind=\"text: heroCompare().heroData().displayname, css: heroCompare().playerColorCss\"></span>.</span></span></label>\n                    <label style=\"margin-left:25px;font-size:12px;\"><input type=\"checkbox\" style=\"float:none;margin-right:5px;\" data-bind=\"checked: showUnitTab\">Show unit tab</label>\n                </div>\n            </h3>\n\n            <div class=\"col-md-12\" data-bind=\"visible: showStatDetails(), css: {'col-md-12': $root.layout() == 0, 'col-md-3': $root.layout() == 1}, component: {name: 'stats-additional', params: $data}\"></div>\n\n            <div class=\"statscontainer\" data-bind=\"foreach: $root.allItems\">\n                <div data-bind=\"component: { name: $data.value, params: $parentContext.$data}\"></div>\n            </div>\n        </div>\n    </div>\n    <div class=\"col-md-8\" data-bind=\"css: {'col-md-8': $root.layout() == 0, 'col-md-12': $root.layout() == 1}\">\n        <div data-bind=\"component: { name: 'damage-details', params: $data}\"></div>\n    \n        <div class=\"row\">\n            <div class=\"col-md-12\" data-bind=\"itemBuildTable: $data.buildExplorer\">\n                <h3 class=\"section_header\" data-bind=\"toggle: sectionDisplay().inventory, css: { section_disabled: !sectionDisplay().inventory() }\">Inventory <small style=\"color:goldenrod\" data-bind=\"html: inventory.totalCost() ? '<img src=\\'http://cdn.dota2.com/apps/dota2/images/tooltips/gold.png\\'/> ' + inventory.totalCost() : '' \"></small></h3>\n                <div id=\"inventory\" class=\"inventory hover-cursor\" data-bind=\"click: function (data, event) { buildExplorer.selectInventory(-1); }, css: {'row-highlight': selectedInventory() == -1}, template: { name: 'item-template', foreach: inventory.items }, visible: sectionDisplay().inventory()\"></div>\n            </div>\n        </div>\n        \n        <div class=\"row\">\n            <div class=\"col-md-12\">\n                <h3 class=\"section_header\" data-bind=\"toggle: sectionDisplay().ability, css: { section_disabled: !sectionDisplay().ability() }\">Abilities <small style=\"color:inherit\" data-bind=\"text: availableSkillPoints() ? (availableSkillPoints() == 1 ? '1 unspent skillpoint' : availableSkillPoints() + ' unspent skillpoints') : ''\"></small></h3>\n                <div class=\"row\" data-bind=\"visible: sectionDisplay().ability(), foreach: ability().abilities()\">\n                    <div data-bind=\"component: { name: 'ability', params: $data }\"></div>\n                </div>\n                <div class=\"form-horizontal\" data-bind=\"if: selectedHero().heroName == 'silencer', visible: sectionDisplay().ability()\">\n                    <div class=\"form-group\">\n                            <div class=\"col-md-2 control-label\">\n                                <label for=\"intelligencestolen\">Intelligence Stolen</label>\n                            </div>\n                            <div class=\"col-md-2\">\n                                <input class=\"form-control\" id=\"intelligencestolen\" data-bind=\"value: intStolen\" />\n                            </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n        <div data-bind=\"component: { name: 'talent-section', params: $data}\"></div>\n        \n        <div data-bind=\"component: { name: 'buff-section', params: $data}\"></div>\n        \n        <div class=\"row\" data-bind=\"component: { name: 'damage-amp', params: $data}\"></div>\n\n        <div class=\"row\">\n            <div class=\"col-md-12\">\n                <h3 class=\"section_header\" data-bind=\"toggle: sectionDisplay().illusion, css: { section_disabled: !sectionDisplay().illusion() }\">Illusions</h3>\n                <div data-bind=\"visible: sectionDisplay().illusion(), lazyBinding: sectionDisplay().illusion\">\n                    <h4 style=\"color:red\">Under Construction</h4>\n                    <div class=\"form-horizontal\">\n                        <div class=\"form-group\">\n                                <div class=\"col-md-2 control-label\">\n                                    <label for=\"illusionSelect\">Type</label>\n                                </div>\n                                <div class=\"col-md-10\">\n                                    <select id=\"illusionSelect\" class=\"form-control\" data-bind=\"options: availableIllusions , optionsText: 'illusionDisplayName', value: selectedIllusion\"></select>\n                                </div>\n                        </div>\n                        <div class=\"form-group\">\n                                <div class=\"col-md-2 control-label\">\n                                    <label for=\"illusionabilitylevel\">Ability Level</label>\n                                </div>\n                                <div class=\"col-md-10\">\n                                    <select id=\"illusionabilitylevel\" class=\"form-control\" data-bind=\"value: illusionAbilityLevel, foreach: new Array(illusionAbilityMaxLevel())\">\n                                        <option data-bind=\"text: $index()+1\"></option>\n                                    </select>\n                                </div>\n                        </div>\n                        <div class=\"form-group\">\n                            <div class=\"col-md-offset-2 col-md-10\">\n                                <button class=\"btn btn-default\" data-bind=\"click: addIllusion\">Add Illusion</button>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n    \n    <div class=\"col-md-12\">\n        <h3 class=\"section_header\" data-bind=\"toggle: sectionDisplay().skillbuild, css: { section_disabled: !sectionDisplay().skillbuild() }\">Build Explorer</h3>\n        <div data-bind=\"visible: sectionDisplay().skillbuild(), attr: {id: 'section-build-explorer-' + index() }, lazyBinding: sectionDisplay().skillbuild\">\n            <div class=\"section-content\">    \n                <div class=\"col-md-12\">\n                    <h4 class=\"section_header\" data-bind=\"toggle: sectionDisplay()['skillbuild-skills'], css: { section_disabled: !sectionDisplay()['skillbuild-skills']() }\">Skill Build <small style=\"color:inherit\" data-bind=\"text: buildExplorer.availableSkillBuildPoints() ? (buildExplorer.availableSkillBuildPoints() == 1 ? '1 unspent skillpoint' : buildExplorer.availableSkillBuildPoints() + ' unspent skillpoints') : ''\"></small></h4>\n                        <div data-bind=\"visible: sectionDisplay()['skillbuild-skills']\">\n                        <table>\n                            <tbody data-bind=\"template: { name: 'ability-3-template', foreach: ability().abilities() }\"></tbody>\n                        </table>\n                        <div class=\"form-group\">\n                            <button class=\"btn btn-default\" data-bind=\"click: buildExplorer.resetSkillBuild\">Clear</button>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-md-12\">\n                    <h4 class=\"section_header\" data-bind=\"toggle: sectionDisplay()['skillbuild-items'], css: { section_disabled: !sectionDisplay()['skillbuild-items']() }\">Item Build</h4>\n                    <div data-bind=\"visible: sectionDisplay()['skillbuild-items']\">\n                        <table class=\"table\">\n                            <thead>\n                                <tr>\n                                    <th>Level</th>\n                                    <th class=\"text-center\">Inventory</th>\n                                    <th></th>\n                                    <th></th>\n                                    <th></th>\n                                </tr>\n                            </thead>\n                            <tbody data-bind=\"foreach: new Array(25), itemBuildTable: buildExplorer\">\n                                <tr class=\"hover-cursor\" data-bind=\"css: {'row-highlight': $parent.selectedInventory() == $index()}\">\n                                    <td class=\"carry-over\" data-bind=\"click: function (data, event) { $parent.buildExplorer.selectInventory($index()); }\">\n                                        <strong data-bind=\"text: ($index() + 1)\"></strong>\n                                        <a class=\"btn btn-default btn-xs glyphicon\" data-bind=\"visible: $index() > 0, toggle: $parent.buildExplorer.itemBuild()[$index()].carryOver, preventBubble: 'click', css: { 'glyphicon-arrow-down': $parent.buildExplorer.itemBuild()[$index()].carryOver(), 'glyphicon-stop': !$parent.buildExplorer.itemBuild()[$index()].carryOver() }\" title=\"Carry over items to next level's inventory\"></a>\n                                    </td>\n                                    <td class=\"col-md-10\" data-bind=\"click: function (data, event) { $parent.buildExplorer.selectInventory($index()); }\">\n                                        <div class=\"itemBuild-inventory\" data-bind=\"template: { name: 'itemBuild-item-template', foreach: $parent.buildExplorer.itemBuild()[$index()].items }\"></div>\n                                    </td>\n                                    <td>\n                                        <a class=\"btn btn-default btn-xs\" data-bind=\"click: function (data, event) { $parent.buildExplorer.copyInventoryToClipBoard($index()); }\" title=\"Copy items\">Copy</a>\n                                    </td>\n                                    <td>\n                                        <a class=\"btn btn-default btn-xs\" data-bind=\"click: function (data, event) { $parent.buildExplorer.pasteInventoryFromClipBoard($index()); }\" title=\"Paste items\">Paste</a>\n                                    </td>\n                                    <td>\n                                        <a class=\"btn btn-default btn-xs\" data-bind=\"click: function (data, event) { $parent.buildExplorer.resetItemBuild($index()); }\" title=\"Clear inventory\">Clear</a>\n                                    </td>\n                                </tr>\n                            </tbody>\n                        </table>\n                        <div class=\"form-group\">\n                            <button class=\"btn btn-default\" data-bind=\"click: buildExplorer.resetAllItemBuilds\">Clear</button>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"form-group\">\n                    <label>Data set header label</label>\n                    <input type=\"text\" class=\"form-control\" data-bind=\"value: buildExplorer.graphDataHeader\">\n                </div>\n                <div class=\"form-group\">\n                    <label>Data set description</label>\n                    <input type=\"text\" class=\"form-control\" data-bind=\"value: buildExplorer.graphDataDescription\">\n                </div>\n                <div class=\"form-group\">\n                    <button class=\"btn btn-default\" data-bind=\"click: buildExplorer.graph\">Add data set</button>\n                </div>\n                <div class=\"form-group\">\n                    <label>Hero Property</label>\n                    <select class=\"form-control\" data-bind=\"options: buildExplorer.graphProperties, optionsText: 'label', optionsValue: 'id', value: buildExplorer.selectedGraphProperty\"></select>\n                </div>\n                <!-- ko if: buildExplorer.graphData().length > 0 -->\n                <div class=\"form-group\" data-bind=\"chart: buildExplorer.graphChartData, chartType: 'Scatter', chartOptions: buildExplorer.graphChartOptions(), chartContext: buildExplorer.graphChartContext\"></div>\n                <div class=\"form-group\">\n                  <button class=\"btn btn-default\" data-bind=\"click: buildExplorer.exportImage\"><span class=\"glyphicon glyphicon-export\"></span> Export Image</button>\n                </div>\n                <button class=\"btn btn-default btn-xs\" data-bind=\"toggle: buildExplorer.showGraphItemBuildRows, css: {'toggled': buildExplorer.showGraphItemBuildRows}\">Show item build rows</button>\n                <button class=\"btn btn-default btn-xs\" data-bind=\"toggle: buildExplorer.showGraphSkillBuildColumns, css: {'toggled': buildExplorer.showGraphSkillBuildColumns}\">Show skill build columns</button>\n                <table class=\"table build-table\">\n                    <thead>\n                        <tr>\n                            <th class=\"right-border\">Level</th>\n                            <!-- ko foreach: buildExplorer.graphData -->\n                            <th class=\"text-center\" data-bind=\"css: { 'right-border': !$parent.buildExplorer.showGraphSkillBuildColumns() || !$data.visible() }\">\n                                <span data-bind=\"css: { 'tooltip-underline': $data.description }, tooltip: {title: $data.description, placement: 'bottom'}, visible: $data.visible(), text: $data.header, style: { color: $parent.buildExplorer.graphDistinctColor($parent.buildExplorer.graphData().length, $index(), 1) }\"></span>\n                                <span class=\"btn btn-xs glyphicon glyphicon-info-sign\" data-bind=\"visible: $data.visible(), popover: {template: 'popover-graphData-template', data: $data, options: {} }\"></span>\n                                <button class=\"btn btn-default btn-xs shop-button glyphicon glyphicon-remove pull-right\" class=\"close\" data-bind=\"visible: !$parent.buildExplorer.showGraphSkillBuildColumns() || !$data.visible(), click: function(data, event) { $parent.buildExplorer.removeGraphDataSet($data); }\"></button>\n                                <button class=\"btn btn-default btn-xs shop-button glyphicon pull-right\" data-bind=\"visible: !$parent.buildExplorer.showGraphSkillBuildColumns() || !$data.visible(), toggle: $data.visible, css: { 'glyphicon-minus': $data.visible(), 'glyphicon-plus': !$data.visible()}\"></button>\n                            </th>\n                            <th class=\"text-left right-border\" data-bind=\"visible: $data.visible() && $parent.buildExplorer.showGraphSkillBuildColumns()\"><abbr title=\"Q-W-E-R-Stats\">Skill Build</abbr>\n                                <button class=\"btn btn-default btn-xs shop-button glyphicon glyphicon-remove pull-right\" class=\"close\" data-bind=\"visible: $parent.buildExplorer.showGraphSkillBuildColumns(), click: function(data, event) { $parent.buildExplorer.removeGraphDataSet($data); }\"></button>\n                                <button class=\"btn btn-default btn-xs shop-button glyphicon pull-right\" data-bind=\"visible: $parent.buildExplorer.showGraphSkillBuildColumns(), toggle: $data.visible, css: { 'glyphicon-minus': $data.visible(), 'glyphicon-plus': !$data.visible()}\"></button>\n                            </th>\n                            <!-- /ko -->\n                        </tr>\n                    </thead>\n                    <tbody data-bind=\"foreach: new Array(buildExplorer.graphData()[0].data.length)\">\n                        <tr>\n                            <td class=\"right-border\">\n                                <strong data-bind=\"text: ($index() + 1)\"></strong>\n                            </td>\n                            <!-- ko foreach: new Array($parent.buildExplorer.graphData().length) -->\n                            <td class=\"text-right\" data-bind=\"css: { 'right-border': !$parents[1].buildExplorer.showGraphSkillBuildColumns() || !$parents[1].buildExplorer.graphData()[$index()].visible() }\">\n                                <span data-bind=\"visible: $parents[1].buildExplorer.graphData()[$index()].visible(), text: $parents[1].buildExplorer.graphData()[$index()].data[$parentContext.$index()][$parents[1].buildExplorer.selectedGraphProperty()]\"></span>\n                            </td>\n                            <td class=\"text-left right-border\" data-bind=\"visible: $parents[1].buildExplorer.graphData()[$index()].visible() && $parents[1].buildExplorer.showGraphSkillBuildColumns(), text: $parents[1].buildExplorer.graphData()[$index()].cumulativeSkillBuild[$parentContext.$index()].join('-')\"></td>\n                            <!-- /ko -->\n                        </tr>\n                        <tr class=\"itemBuild-inventory\" data-bind=\"visible: $parent.buildExplorer.showGraphItemBuildRows() && $parent.buildExplorer.graphRowHasItems($index())\">\n                            <td class=\"right-border-itemrow no-top-border\"></td>\n                            <!-- ko foreach: new Array($parent.buildExplorer.graphData().length) -->\n                            <td class=\"right-border-itemrow no-top-border\" data-bind=\"attr: { colspan: $parents[1].buildExplorer.graphData()[$index()].visible() && $parents[1].buildExplorer.showGraphSkillBuildColumns() ? 2 : 1 }\">\n                                <div data-bind=\"visible: $parents[1].buildExplorer.graphData()[$index()].visible(), foreach: $parents[1].buildExplorer.graphData()[$index()].data[$parentContext.$index()].items\">\n                                    <img class=\"itemBuild-img-sm img-rounded\" data-bind=\"css: { item_disabled: !enabled, item_active: $parents[2].inventory.getActiveBorder($data) == 1, item_inactive: $parents[2].inventory.getActiveBorder($data) == 0 }, attr:{ src: $parents[2].inventory.getItemImage($data) }\"/>\n                                    <div style=\"float:left\" data-bind=\"visible: $parents[2].inventory.getItemSizeLabel($data) != ''\">\n                                        <div data-bind=\"html: $parents[2].inventory.getItemSizeLabel($data)\" style=\"position:absolute;left:0;bottom:0;color:white;opacity:.5;background-color:black;padding:0px 2px\"></div>\n                                        <div data-bind=\"html: $parents[2].inventory.getItemSizeLabel($data)\" style=\"position:absolute;left:0;bottom:0;color:white;padding:0px 2px\"></div>\n                                    </div>\n                                </div>\n                            </td>\n                            <!-- /ko -->\n                        </tr>\n                    </tbody>\n                </table>\n                <!-- /ko -->\n            </div>\n        </div>\n    </div>\n\n</div>" });
+ko.components.register('hero-pane', { template: "<div class=\"row\">\n    <div class=\"col-md-3 col-sm-6\">\n        <div class=\"hero-image\" data-bind=\"css: { illusion: isIllusion }\">\n            <img class=\"img-rounded\" data-bind=\"attr:{src: '/media/images/heroes/' + selectedHero().heroName + '.png'}\"/>\n        </div>\n    </div>\n    <div class=\"col-md-9 col-sm-6\">\n        <div class=\"row form-group\">\n            <div class=\"col-md-6\">\n                <label for=\"heroselect\">Hero</label>\n                <select id=\"heroselect\" class=\"form-control\" data-bind=\"options: availableHeroes , optionsText: 'heroDisplayName', value: selectedHero\"></select>\n            </div>\n            <div class=\"col-md-6\">\n                <label for=\"herolevel\">Level</label>\n                <input id=\"herolevel\" data-bind=\"spinner: selectedHeroLevel, spinnerOptions: { min: 1, max: 25 }\">\n            </div>\n        </div>\n        <div class=\"row\">\n            <div class=\"col-md-6\">\n                <label for=\"enemyselect\">Enemy</label>\n                <select id=\"enemyselect\" class=\"form-control\" data-bind=\"css: enemy().playerColorCss, options: availableEnemies , optionsText: 'heroDisplayName', value: selectedEnemy, optionsAfterRender: setHeroOptionStyling\"></select>\n            </div>\n            <div class=\"col-md-6\">\n                <label for=\"enemyselect\">Compare to</label>\n                <select id=\"enemyselect\" class=\"form-control\" data-bind=\"css: heroCompare().playerColorCss, options: availableCompare , optionsText: 'heroDisplayName', value: selectedCompare, optionsAfterRender: setHeroOptionStyling\"></select>\n            </div>\n            <div class=\"col-md-12 checkbox\" style=\"margin-bottom:0px;padding-left:34px;\" data-bind=\"visible: $root.layout() == 0\">\n                <label><input type=\"checkbox\" style=\"float:none;margin-right:5px;\" data-bind=\"checked: showDiff\"><span style=\"font-size:12px\">Show <abbr title=\"The difference between two adjacent hero tabs shown next to each stat.\">delta values</abbr>. <span data-bind=\"visible: showDiff\">Comparing level <span data-bind=\"text: selectedHeroLevel\"></span> <span data-bind=\"text: heroData().displayname, css: playerColorCss\"></span> to level <span data-bind=\"text: heroCompare().selectedHeroLevel\"></span> <span data-bind=\"text: heroCompare().heroData().displayname, css: heroCompare().playerColorCss\"></span>.</span></span></label>\n                <label style=\"margin-left:25px;font-size:12px;\"><input type=\"checkbox\" style=\"float:none;margin-right:5px;\" data-bind=\"checked: showUnitTab\">Show unit tab</label>\n            </div>\n        </div>\n    </div>\n</div>\n\n<div class=\"row\">\n    <div class=\"col-md-4\" data-bind=\"css: {'col-md-4': $root.layout() == 0, 'col-md-12': $root.layout() == 1}\">\n        <div class=\"row\">\n            <h3 class=\"col-md-12\">Stats <a class=\"btn btn-default btn-xs\" data-bind=\"toggle: showStatDetails, text: !showStatDetails() ? 'Show more' : 'Show less', attr: {title: !showStatDetails() ? 'Click to show base stats' : 'Click to hide base stats'}\"></a>\n                <div style=\"margin-left:15px;display:inline;\" data-bind=\"style: {'display': $root.layout() == 1 ? 'inline' : 'none'}\">\n                    <label><input type=\"checkbox\" style=\"float:none;margin-right:5px;\" data-bind=\"checked: showDiff\"><span style=\"font-size:12px\">Show <abbr title=\"The difference between two adjacent hero tabs shown next to each stat.\">delta values</abbr>. <span data-bind=\"visible: showDiff\">Comparing level <span data-bind=\"text: selectedHeroLevel\"></span> <span data-bind=\"text: heroData().displayname, css: playerColorCss\"></span> to level <span data-bind=\"text: heroCompare().selectedHeroLevel\"></span> <span data-bind=\"text: heroCompare().heroData().displayname, css: heroCompare().playerColorCss\"></span>.</span></span></label>\n                    <label style=\"margin-left:25px;font-size:12px;\"><input type=\"checkbox\" style=\"float:none;margin-right:5px;\" data-bind=\"checked: showUnitTab\">Show unit tab</label>\n                </div>\n            </h3>\n\n            <div class=\"col-md-12\" data-bind=\"visible: showStatDetails(), css: {'col-md-12': $root.layout() == 0, 'col-md-3': $root.layout() == 1}, component: {name: 'stats-additional', params: $data}\"></div>\n\n            <div class=\"statscontainer\" data-bind=\"foreach: $root.allItems\">\n                <div data-bind=\"component: { name: $data.value, params: $parentContext.$data}\"></div>\n            </div>\n        </div>\n    </div>\n    <div class=\"col-md-8\" data-bind=\"css: {'col-md-8': $root.layout() == 0, 'col-md-12': $root.layout() == 1}\">\n        <div data-bind=\"component: { name: 'damage-details', params: $data}\"></div>\n    \n        <div class=\"row\">\n            <div class=\"col-md-12\" data-bind=\"itemBuildTable: $data.buildExplorer\">\n                <h3 class=\"section_header\" data-bind=\"toggle: sectionDisplay().inventory, css: { section_disabled: !sectionDisplay().inventory() }\">Inventory <small style=\"color:goldenrod\" data-bind=\"html: inventory.totalCost() ? '<img src=\\'http://cdn.dota2.com/apps/dota2/images/tooltips/gold.png\\'/> ' + inventory.totalCost() : '' \"></small></h3>\n                <div id=\"inventory\" class=\"inventory hover-cursor\" data-bind=\"click: function (data, event) { buildExplorer.selectInventory(-1); }, css: {'row-highlight': selectedInventory() == -1}, template: { name: 'item-template', foreach: inventory.items }, visible: sectionDisplay().inventory()\"></div>\n            </div>\n        </div>\n        \n        <div class=\"row\">\n            <div class=\"col-md-12\">\n                <h3 class=\"section_header\" data-bind=\"toggle: sectionDisplay().ability, css: { section_disabled: !sectionDisplay().ability() }\">Abilities <small style=\"color:inherit\" data-bind=\"text: availableSkillPoints() ? (availableSkillPoints() == 1 ? '1 unspent skillpoint' : availableSkillPoints() + ' unspent skillpoints') : ''\"></small></h3>\n                <div class=\"row\" data-bind=\"visible: sectionDisplay().ability(), foreach: ability().abilities()\">\n                    <div data-bind=\"component: { name: 'ability', params: $data }\"></div>\n                </div>\n                <div class=\"form-horizontal\" data-bind=\"if: selectedHero().heroName == 'silencer', visible: sectionDisplay().ability()\">\n                    <div class=\"form-group\">\n                        <div class=\"col-md-2 control-label\">\n                            <label for=\"intelligencestolen\">Intelligence Stolen</label>\n                        </div>\n                        <div class=\"col-md-2\">\n                            <input class=\"form-control\" id=\"intelligencestolen\" data-bind=\"value: intStolen\" />\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n        <div data-bind=\"component: { name: 'talent-section', params: $data}\"></div>\n        \n        <div data-bind=\"component: { name: 'buff-section', params: $data}\"></div>\n        \n        <div class=\"row\" data-bind=\"component: { name: 'damage-amp', params: $data}\"></div>\n\n        <div class=\"row\">\n            <div class=\"col-md-12\">\n                <h3 class=\"section_header\" data-bind=\"toggle: sectionDisplay().illusion, css: { section_disabled: !sectionDisplay().illusion() }\">Illusions</h3>\n                <div data-bind=\"visible: sectionDisplay().illusion(), lazyBinding: sectionDisplay().illusion\">\n                    <label>\n                        <input type=\"checkbox\" style=\"float:none;margin-right:5px;\" data-bind=\"checked: isIllusion\">Is Illusion?\n                    </label>\n                    <div class=\"form-horizontal\" data-bind=\"visible: isIllusion\">\n                        <div class=\"form-group\">\n                            <div class=\"col-md-2 control-label\">\n                                <label for=\"illusionSelect\">Type</label>\n                            </div>\n                            <div class=\"col-md-10\">\n                                <select id=\"illusionSelect\" class=\"form-control\" data-bind=\"options: availableIllusions , optionsText: 'illusionDisplayName', value: selectedIllusion\"></select>\n                            </div>\n                        </div>\n                        <div class=\"form-group\">\n                            <div class=\"col-md-2 control-label\">\n                                <label for=\"illusionabilitylevel\">Ability Level</label>\n                            </div>\n                            <div class=\"col-md-10\">\n                                <select id=\"illusionabilitylevel\" class=\"form-control\" data-bind=\"value: illusionAbilityLevel, foreach: new Array(illusionAbilityMaxLevel())\">\n                                    <option data-bind=\"text: $index()+1\"></option>\n                                </select>\n                            </div>\n                        </div>\n                        <div class=\"form-group\">\n                            <div class=\"col-md-12\">\n                                <table class=\"table\">\n                                    <tbody>\n                                        <tr>\n                                            <td>Damage Dealt</td>\n                                            <td class=\"text-right\" data-bind=\"text: (getOutgoingDamageMultiplier(illusionId(), false, heroData().attacktype)*100).toFixed(0)+'%'\"></td>\n                                        </tr>\n                                        <tr>\n                                            <td>Damage Taken</td>\n                                            <td class=\"text-right\" data-bind=\"text: (getIncomingDamageMultiplier(illusionId(), false, heroData().attacktype)*100).toFixed(0)+'%'\"></td>\n                                        </tr>\n                                    </tbody>\n                                </table>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n    \n    <div class=\"col-md-12\">\n        <h3 class=\"section_header\" data-bind=\"toggle: sectionDisplay().skillbuild, css: { section_disabled: !sectionDisplay().skillbuild() }\">Build Explorer</h3>\n        <div data-bind=\"visible: sectionDisplay().skillbuild(), attr: {id: 'section-build-explorer-' + index() }, lazyBinding: sectionDisplay().skillbuild\">\n            <div class=\"section-content\">    \n                <div class=\"col-md-12\">\n                    <h4 class=\"section_header\" data-bind=\"toggle: sectionDisplay()['skillbuild-skills'], css: { section_disabled: !sectionDisplay()['skillbuild-skills']() }\">Skill Build <small style=\"color:inherit\" data-bind=\"text: buildExplorer.availableSkillBuildPoints() ? (buildExplorer.availableSkillBuildPoints() == 1 ? '1 unspent skillpoint' : buildExplorer.availableSkillBuildPoints() + ' unspent skillpoints') : ''\"></small></h4>\n                        <div data-bind=\"visible: sectionDisplay()['skillbuild-skills']\">\n                        <table>\n                            <tbody data-bind=\"template: { name: 'ability-3-template', foreach: ability().abilities() }\"></tbody>\n                        </table>\n                        <div class=\"form-group\">\n                            <button class=\"btn btn-default\" data-bind=\"click: buildExplorer.resetSkillBuild\">Clear</button>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-md-12\">\n                    <h4 class=\"section_header\" data-bind=\"toggle: sectionDisplay()['skillbuild-items'], css: { section_disabled: !sectionDisplay()['skillbuild-items']() }\">Item Build</h4>\n                    <div data-bind=\"visible: sectionDisplay()['skillbuild-items']\">\n                        <table class=\"table\">\n                            <thead>\n                                <tr>\n                                    <th>Level</th>\n                                    <th class=\"text-center\">Inventory</th>\n                                    <th></th>\n                                    <th></th>\n                                    <th></th>\n                                </tr>\n                            </thead>\n                            <tbody data-bind=\"foreach: new Array(25), itemBuildTable: buildExplorer\">\n                                <tr class=\"hover-cursor\" data-bind=\"css: {'row-highlight': $parent.selectedInventory() == $index()}\">\n                                    <td class=\"carry-over\" data-bind=\"click: function (data, event) { $parent.buildExplorer.selectInventory($index()); }\">\n                                        <strong data-bind=\"text: ($index() + 1)\"></strong>\n                                        <a class=\"btn btn-default btn-xs glyphicon\" data-bind=\"visible: $index() > 0, toggle: $parent.buildExplorer.itemBuild()[$index()].carryOver, preventBubble: 'click', css: { 'glyphicon-arrow-down': $parent.buildExplorer.itemBuild()[$index()].carryOver(), 'glyphicon-stop': !$parent.buildExplorer.itemBuild()[$index()].carryOver() }\" title=\"Carry over items to next level's inventory\"></a>\n                                    </td>\n                                    <td class=\"col-md-10\" data-bind=\"click: function (data, event) { $parent.buildExplorer.selectInventory($index()); }\">\n                                        <div class=\"itemBuild-inventory\" data-bind=\"template: { name: 'itemBuild-item-template', foreach: $parent.buildExplorer.itemBuild()[$index()].items }\"></div>\n                                    </td>\n                                    <td>\n                                        <a class=\"btn btn-default btn-xs\" data-bind=\"click: function (data, event) { $parent.buildExplorer.copyInventoryToClipBoard($index()); }\" title=\"Copy items\">Copy</a>\n                                    </td>\n                                    <td>\n                                        <a class=\"btn btn-default btn-xs\" data-bind=\"click: function (data, event) { $parent.buildExplorer.pasteInventoryFromClipBoard($index()); }\" title=\"Paste items\">Paste</a>\n                                    </td>\n                                    <td>\n                                        <a class=\"btn btn-default btn-xs\" data-bind=\"click: function (data, event) { $parent.buildExplorer.resetItemBuild($index()); }\" title=\"Clear inventory\">Clear</a>\n                                    </td>\n                                </tr>\n                            </tbody>\n                        </table>\n                        <div class=\"form-group\">\n                            <button class=\"btn btn-default\" data-bind=\"click: buildExplorer.resetAllItemBuilds\">Clear</button>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"form-group\">\n                    <label>Data set header label</label>\n                    <input type=\"text\" class=\"form-control\" data-bind=\"value: buildExplorer.graphDataHeader\">\n                </div>\n                <div class=\"form-group\">\n                    <label>Data set description</label>\n                    <input type=\"text\" class=\"form-control\" data-bind=\"value: buildExplorer.graphDataDescription\">\n                </div>\n                <div class=\"form-group\">\n                    <button class=\"btn btn-default\" data-bind=\"click: buildExplorer.graph\">Add data set</button>\n                </div>\n                <div class=\"form-group\">\n                    <label>Hero Property</label>\n                    <select class=\"form-control\" data-bind=\"options: buildExplorer.graphProperties, optionsText: 'label', optionsValue: 'id', value: buildExplorer.selectedGraphProperty\"></select>\n                </div>\n                <!-- ko if: buildExplorer.graphData().length > 0 -->\n                <div class=\"form-group\" data-bind=\"chart: buildExplorer.graphChartData, chartType: 'Scatter', chartOptions: buildExplorer.graphChartOptions(), chartContext: buildExplorer.graphChartContext\"></div>\n                <div class=\"form-group\">\n                  <button class=\"btn btn-default\" data-bind=\"click: buildExplorer.exportImage\"><span class=\"glyphicon glyphicon-export\"></span> Export Image</button>\n                </div>\n                <button class=\"btn btn-default btn-xs\" data-bind=\"toggle: buildExplorer.showGraphItemBuildRows, css: {'toggled': buildExplorer.showGraphItemBuildRows}\">Show item build rows</button>\n                <button class=\"btn btn-default btn-xs\" data-bind=\"toggle: buildExplorer.showGraphSkillBuildColumns, css: {'toggled': buildExplorer.showGraphSkillBuildColumns}\">Show skill build columns</button>\n                <table class=\"table build-table\">\n                    <thead>\n                        <tr>\n                            <th class=\"right-border\">Level</th>\n                            <!-- ko foreach: buildExplorer.graphData -->\n                            <th class=\"text-center\" data-bind=\"css: { 'right-border': !$parent.buildExplorer.showGraphSkillBuildColumns() || !$data.visible() }\">\n                                <span data-bind=\"css: { 'tooltip-underline': $data.description }, tooltip: {title: $data.description, placement: 'bottom'}, visible: $data.visible(), text: $data.header, style: { color: $parent.buildExplorer.graphDistinctColor($parent.buildExplorer.graphData().length, $index(), 1) }\"></span>\n                                <span class=\"btn btn-xs glyphicon glyphicon-info-sign\" data-bind=\"visible: $data.visible(), popover: {template: 'popover-graphData-template', data: $data, options: {} }\"></span>\n                                <button class=\"btn btn-default btn-xs shop-button glyphicon glyphicon-remove pull-right\" class=\"close\" data-bind=\"visible: !$parent.buildExplorer.showGraphSkillBuildColumns() || !$data.visible(), click: function(data, event) { $parent.buildExplorer.removeGraphDataSet($data); }\"></button>\n                                <button class=\"btn btn-default btn-xs shop-button glyphicon pull-right\" data-bind=\"visible: !$parent.buildExplorer.showGraphSkillBuildColumns() || !$data.visible(), toggle: $data.visible, css: { 'glyphicon-minus': $data.visible(), 'glyphicon-plus': !$data.visible()}\"></button>\n                            </th>\n                            <th class=\"text-left right-border\" data-bind=\"visible: $data.visible() && $parent.buildExplorer.showGraphSkillBuildColumns()\"><abbr title=\"Q-W-E-R-Stats\">Skill Build</abbr>\n                                <button class=\"btn btn-default btn-xs shop-button glyphicon glyphicon-remove pull-right\" class=\"close\" data-bind=\"visible: $parent.buildExplorer.showGraphSkillBuildColumns(), click: function(data, event) { $parent.buildExplorer.removeGraphDataSet($data); }\"></button>\n                                <button class=\"btn btn-default btn-xs shop-button glyphicon pull-right\" data-bind=\"visible: $parent.buildExplorer.showGraphSkillBuildColumns(), toggle: $data.visible, css: { 'glyphicon-minus': $data.visible(), 'glyphicon-plus': !$data.visible()}\"></button>\n                            </th>\n                            <!-- /ko -->\n                        </tr>\n                    </thead>\n                    <tbody data-bind=\"foreach: new Array(buildExplorer.graphData()[0].data.length)\">\n                        <tr>\n                            <td class=\"right-border\">\n                                <strong data-bind=\"text: ($index() + 1)\"></strong>\n                            </td>\n                            <!-- ko foreach: new Array($parent.buildExplorer.graphData().length) -->\n                            <td class=\"text-right\" data-bind=\"css: { 'right-border': !$parents[1].buildExplorer.showGraphSkillBuildColumns() || !$parents[1].buildExplorer.graphData()[$index()].visible() }\">\n                                <span data-bind=\"visible: $parents[1].buildExplorer.graphData()[$index()].visible(), text: $parents[1].buildExplorer.graphData()[$index()].data[$parentContext.$index()][$parents[1].buildExplorer.selectedGraphProperty()]\"></span>\n                            </td>\n                            <td class=\"text-left right-border\" data-bind=\"visible: $parents[1].buildExplorer.graphData()[$index()].visible() && $parents[1].buildExplorer.showGraphSkillBuildColumns(), text: $parents[1].buildExplorer.graphData()[$index()].cumulativeSkillBuild[$parentContext.$index()].join('-')\"></td>\n                            <!-- /ko -->\n                        </tr>\n                        <tr class=\"itemBuild-inventory\" data-bind=\"visible: $parent.buildExplorer.showGraphItemBuildRows() && $parent.buildExplorer.graphRowHasItems($index())\">\n                            <td class=\"right-border-itemrow no-top-border\"></td>\n                            <!-- ko foreach: new Array($parent.buildExplorer.graphData().length) -->\n                            <td class=\"right-border-itemrow no-top-border\" data-bind=\"attr: { colspan: $parents[1].buildExplorer.graphData()[$index()].visible() && $parents[1].buildExplorer.showGraphSkillBuildColumns() ? 2 : 1 }\">\n                                <div data-bind=\"visible: $parents[1].buildExplorer.graphData()[$index()].visible(), foreach: $parents[1].buildExplorer.graphData()[$index()].data[$parentContext.$index()].items\">\n                                    <img class=\"itemBuild-img-sm img-rounded\" data-bind=\"css: { item_disabled: !enabled, item_active: $parents[2].inventory.getActiveBorder($data) == 1, item_inactive: $parents[2].inventory.getActiveBorder($data) == 0 }, attr:{ src: $parents[2].inventory.getItemImage($data) }\"/>\n                                    <div style=\"float:left\" data-bind=\"visible: $parents[2].inventory.getItemSizeLabel($data) != ''\">\n                                        <div data-bind=\"html: $parents[2].inventory.getItemSizeLabel($data)\" style=\"position:absolute;left:0;bottom:0;color:white;opacity:.5;background-color:black;padding:0px 2px\"></div>\n                                        <div data-bind=\"html: $parents[2].inventory.getItemSizeLabel($data)\" style=\"position:absolute;left:0;bottom:0;color:white;padding:0px 2px\"></div>\n                                    </div>\n                                </div>\n                            </td>\n                            <!-- /ko -->\n                        </tr>\n                    </tbody>\n                </table>\n                <!-- /ko -->\n            </div>\n        </div>\n    </div>\n\n</div>" });
 ko.components.register('unit-pane', { template: "<div class=\"row\">\n    <div class=\"col-md-4\">\n        <img class=\"img-rounded\" data-bind=\"attr:{src: selectedUnit().image}\"/>\n    </div>\n    <div class=\"col-md-4\">\n        <label for=\"unitselect\">Unit</label>\n        <select id=\"unitselect\" class=\"form-control\" data-bind=\"options: availableUnits , optionsText: 'heroDisplayName', value: selectedUnit\"></select>\n    </div>\n    <div class=\"col-md-4\">\n        <label for=\"unitlevel\">Level</label>\n        <p class=\"form-control-static\" data-bind=\"visible: selectedUnit().levels == 0, text: heroData().level\"></p>\n        <select id=\"herolevel\" class=\"form-control\" data-bind=\"visible: selectedUnit().levels > 0, value: selectedUnitLevel, foreach: new Array(selectedUnit().levels)\">\n            <option data-bind=\"text: $index()+1\"></option>\n        </select>\n    </div>\n</div>\n\n<div class=\"row\">\n    <div class=\"col-md-4\" data-bind=\"css: {'col-md-4': $root.layout() == 0, 'col-md-12': $root.layout() == 1}\">\n        <div class=\"row\">\n            <h3 class=\"col-md-12\">Stats <a class=\"btn btn-default btn-xs\" data-bind=\"toggle: showStatDetails, text: !showStatDetails() ? 'Show more' : 'Show less', attr: {title: !showStatDetails() ? 'Click to show base stats' : 'Click to hide base stats'}\"></a></h3>\n\n            <div class=\"col-md-3\" data-bind=\"visible: showStatDetails(), component: {name: 'stats-additional', params: $data}\"></div>\n            \n            <div class=\"col-md-12\" data-bind=\"css: {'col-md-12': $root.layout() == 0, 'col-md-3': $root.layout() == 1}\">\n                <table class=\"table table-condensed\">\n                <tbody>\n                <tr><td>Gold:</td><td class=\"text-right\"><span data-bind=\"text: heroData().bountygoldmin == heroData().bountygoldmax ? heroData().bountygoldmax : heroData().bountygoldmin + '-' + heroData().bountygoldmax\"></span></td></tr>\n                <tr><td>Experience:</td><td class=\"text-right\"><span data-bind=\"text: heroData().bountyxp\"></span></td></tr>\n                <tr><td>Level:</td><td class=\"text-right\"><span data-bind=\"text: heroData().level\"></span></td></tr>\n                <tr><td><abbr title=\"Movement Speed\">MS</abbr>:</td><td class=\"text-right\"><span data-bind=\"text: totalMovementSpeed\"></span></td></tr>\n                <tr><td>Turn Rate:</td><td class=\"text-right\"><span data-bind=\"text: totalTurnRate\"></span></td></tr>\n                <tr><td>Sight Range:</td><td class=\"text-right\"><span data-bind=\"html: '<abbr title=\\'Day\\'>' + visionrangeday() + '</abbr>/<abbr title=\\'Night\\'>' + visionrangenight() + '</abbr>'\"></span></td></tr>\n                </tbody>\n                </table>\n            </div>\n\n\n            <div class=\"col-md-12\" data-bind=\"css: {'col-md-12': $root.layout() == 0, 'col-md-3': $root.layout() == 1}\">\n                <table class=\"table table-condensed\">\n                <tbody>\n                <tr><td>Health:</td><td class=\"text-right\"><span data-bind=\"text: health\"></span></td></tr>\n                <tr><td>Health Regen:</td><td class=\"text-right\"><span data-bind=\"text: healthregen\"></span></td></tr>\n                <tr><td>Mana:</td><td class=\"text-right\"><span data-bind=\"text: mana\"></span></td></tr>\n                <tr><td>Mana Regen:</td><td class=\"text-right\"><span data-bind=\"text: manaregen\"></span></td></tr>\n                <tr><td>Physical <abbr title=\"Effective Hit Points\">EHP</abbr>:</td><td class=\"text-right\"><span data-bind=\"text: ehpPhysical\"></span></td></tr>\n                <tr><td>Magical <abbr title=\"Effective Hit Points\">EHP</abbr>:</td><td class=\"text-right\"><span data-bind=\"text: ehpMagical\"></span></td></tr>\n                </tbody>\n                </table>\n            </div>\n\n            <div class=\"col-md-12\" data-bind=\"css: {'col-md-12': $root.layout() == 0, 'col-md-3': $root.layout() == 1}\">\n                <table class=\"table table-condensed\">\n                <tbody>\n                <tr><td>Armor:</td><td class=\"text-right\"><span data-bind=\"text: totalArmorPhysical\"></span></td></tr>\n                <tr><td>Magic Res:</td><td class=\"text-right\"><span data-bind=\"html: totalMagicResistance().toFixed(2) + '%'\"></span></td></tr>\n                <tr><td>Lifesteal:</td><td class=\"text-right\"><span data-bind=\"text: lifesteal\"></span></td></tr>\n                <tr><td>Evasion:</td><td class=\"text-right\"><span data-bind=\"text: evasion\"></span></td></tr>\n                <tr><td>Bash:</td><td class=\"text-right\"><span data-bind=\"text: bash\"></span></td></tr>\n                <tr><td>Miss Chance:</td><td class=\"text-right\"><span data-bind=\"text: missChance\"></span></td></tr>\n                </tbody>\n                <tbody class=\"tabledropdown\" style=\"border-top:0\" data-bind=\"visible: showCriticalStrikeDetails(),foreach: critInfo().sources\">\n                <tr><td colspan=2><strong data-bind=\"text: $data.name\"></strong></td></tr>\n                <tr><td>Crit Chance:</td><td class=\"text-right\"><span data-bind=\"text: ($data.totalchance * 100).toFixed(2) + '%'\"></span></td></tr>\n                <tr><td>Crit Multiplier:</td><td class=\"text-right\"><span data-bind=\"text: ($data.multiplier * 100).toFixed(2) + '%'\"></span></td></tr>\n                </tbody>\n                </table>\n            </div>\n\n            <div class=\"col-md-12\" data-bind=\"css: {'col-md-12': $root.layout() == 0, 'col-md-3': $root.layout() == 1}\">\n                <table class=\"table table-condensed\">\n                <tbody>\n                <tr>\n                    <td>Damage:</td>\n                    <td class=\"text-right\">\n                        <span data-bind=\"html: baseDamage()[0] + '-' + baseDamage()[1]\"></span>\n                        <span style=\"color:green\" data-bind=\"visible: bonusDamage() > 0, text: ' + ' + bonusDamage()\"></span>\n                        <span style=\"color:red\" data-bind=\"visible: bonusDamageReduction() != 0, text: ' - ' + bonusDamageReduction()\"></span>\n                    </td>\n                </tr>\n                <tr><td><abbr title=\"Increased Attack Speed\">IAS</abbr>:</td><td class=\"text-right\"><span data-bind=\"text: ias\"></span></td></tr>\n                <tr><td><abbr title=\"Base Attack Time\">BAT</abbr>:</td><td class=\"text-right\"><span data-bind=\"text: bat\"></span></td></tr>\n                <tr><td>Attack Time:</td><td class=\"text-right\"><span data-bind=\"text: attackTime\"></span></td></tr>\n                <tr><td>Attack / Sec:</td><td class=\"text-right\"><span data-bind=\"text: attacksPerSecond().toFixed(2)\"></span></td></tr>\n                <tr><td>Attack Range:</td><td class=\"text-right\"><span data-bind=\"text: totalattackrange\"></span></td></tr>\n                </tbody>\n                </table>\n            </div>\n        </div>\n    </div>\n    <div class=\"col-md-8\" data-bind=\"css: {'col-md-8': $root.layout() == 0, 'col-md-12': $root.layout() == 1}\">\n        <div data-bind=\"component: { name: 'damage-details', params: $data}\"></div>\n        \n        <div class=\"row\">\n            <div class=\"col-md-12\">\n                <h3 class=\"section_header\" data-bind=\"toggle: sectionDisplay().inventory, css: { section_disabled: !sectionDisplay().inventory() }\">Inventory <small style=\"color:goldenrod\" data-bind=\"html: inventory.totalCost() ? '<img src=\\'http://cdn.dota2.com/apps/dota2/images/tooltips/gold.png\\'/> ' + inventory.totalCost() : '' \"></small></h3>\n                <div id=\"inventory\" class=\"inventory hover-cursor row-highlight\" data-bind=\"template: { name: 'item-template', foreach: inventory.items }, visible: sectionDisplay().inventory()\"></div>\n            </div>\n        </div>\n        \n        <div class=\"row\">\n            <div class=\"col-md-12\">\n                <h3 class=\"section_header\" data-bind=\"toggle: sectionDisplay().ability, css: { section_disabled: !sectionDisplay().ability() }\">Abilities</h3>\n                <div class=\"row\" data-bind=\"visible: sectionDisplay().ability(), foreach: ability().abilities()\">\n                    <div data-bind=\"component: { name: 'ability', params: $data }\"></div>\n                </div>\n            </div>\n        </div>\n\n        <div data-bind=\"component: { name: 'buff-section', params: $data}\"></div>\n    </div>\n</div>" });
 ko.components.register('clone-pane', { template: "<div class=\"row\">\n    <div class=\"col-md-4\">\n        <img class=\"img-rounded\" data-bind=\"attr:{src: '/media/images/heroes/meepo.png'}\"/>\n    </div>\n</div>\n\n<div class=\"row\">\n    <div class=\"col-md-4\" data-bind=\"css: {'col-md-4': $root.layout() == 0, 'col-md-12': $root.layout() == 1}\">\n        <div class=\"row\">\n            <h3 class=\"col-md-12\">Stats <a class=\"btn btn-default btn-xs\" data-bind=\"toggle: showStatDetails, text: !showStatDetails() ? 'Show more' : 'Show less', attr: {title: !showStatDetails() ? 'Click to show base stats' : 'Click to hide base stats'}\"></a></h3>\n\n            <div class=\"col-md-12\" data-bind=\"visible: showStatDetails(), css: {'col-md-12': $root.layout() == 0, 'col-md-3': $root.layout() == 1}, component: {name: 'stats-additional', params: $data}\"></div>\n\n            <div class=\"statscontainer\" data-bind=\"foreach: $root.allItems\">\n                <div data-bind=\"component: { name: $data.value, params: $root.heroes[$parentContext.$index()].clone()}\"></div>\n            </div>\n        </div>\n    </div>\n    <div class=\"col-md-8\" data-bind=\"css: {'col-md-8': $root.layout() == 0, 'col-md-12': $root.layout() == 1}\">\n        <div data-bind=\"component: { name: 'damage-details', params: $data}\"></div>\n        \n        <div class=\"row\">\n            <div class=\"col-md-12\">\n                <h3 class=\"section_header\" data-bind=\"toggle: sectionDisplay().inventory, css: { section_disabled: !sectionDisplay().inventory() }\">Inventory <small style=\"color:goldenrod\" data-bind=\"html: inventory.totalCost() ? '<img src=\\'http://cdn.dota2.com/apps/dota2/images/tooltips/gold.png\\'/> ' + inventory.totalCost() : '' \"></small></h3>\n                <div id=\"inventory\" class=\"inventory hover-cursor row-highlight\" data-bind=\"template: { name: 'item-template', foreach: inventory.items }, visible: sectionDisplay().inventory()\"></div>\n            </div>\n        </div>\n\n        <div class=\"row\" data-bind=\"component: { name: 'damage-amp', params: $data}\"></div>\n    </div>\n</div>" });
 ko.components.register('illusion-pane', { template: "<div class=\"row\">\n    <div class=\"col-md-4\">\n        <div class=\"img-rounded\" style=\"background-color:#428bca;display:inline-block\">\n            <img class=\"img-rounded\" style=\"opacity:.5\" data-bind=\"attr:{src: '/media/images/heroes/' + selectedHero().heroName + '.png'}\"/>\n        </div>\n    </div>\n    <div class=\"col-md-4\">\n        <label for=\"illusionlevel\" data-bind=\"text: illusionDisplayName\"></label>\n        <table class=\"table\">\n            <tbody>\n            <tr>\n                <td>Damage Dealt</td>\n                <td class=\"text-right\" data-bind=\"text: (getOutgoingDamageMultiplier(illusionType(), false, heroData().attacktype)*100).toFixed(0)+'%'\"></td>\n            </tr>\n            <tr>\n                <td>Damage Taken</td>\n                <td class=\"text-right\" data-bind=\"text: (getIncomingDamageMultiplier(illusionType(), false, heroData().attacktype)*100).toFixed(0)+'%'\"></td>\n            </tr>\n            </tbody>\n        </table>\n    </div>\n    <div class=\"col-md-4\">\n        <div data-bind=\"visible: illusionType() != 'item_manta'\">\n            <label for=\"illusionlevel\">Ability Level</label>\n            <select id=\"illusionlevel\" class=\"form-control\" data-bind=\"value: illusionAbilityLevel, foreach: new Array(illusionAbilityMaxLevel())\">\n                <option data-bind=\"text: $index()+1\"></option>\n            </select>\n        </div>\n    </div>\n</div>\n\n<div class=\"row\">\n    <div class=\"col-md-4\" data-bind=\"css: {'col-md-4': $root.layout() == 0, 'col-md-12': $root.layout() == 1}\">\n        <div class=\"row\">\n            <h3 class=\"col-md-12\">Stats <a class=\"btn btn-default btn-xs\" data-bind=\"toggle: showStatDetails, text: !showStatDetails() ? 'Show more' : 'Show less', attr: {title: !showStatDetails() ? 'Click to show base stats' : 'Click to hide base stats'}\"></a></h3>\n\n            <div class=\"col-md-12\" data-bind=\"visible: showStatDetails(), css: {'col-md-12': $root.layout() == 0, 'col-md-3': $root.layout() == 1}, component: {name: 'stats-additional', params: $data}\">\n            </div>\n            <div class=\"statscontainer\" data-bind=\"foreach: $root.allItems\">\n                <div data-bind=\"component: { name: $data.value, params: $parentContext.$data}\"></div>\n            </div>\n        </div>\n    </div>\n    <div class=\"col-md-8\" data-bind=\"css: {'col-md-4': $root.layout() == 0, 'col-md-12': $root.layout() == 1}\">\n        <div class=\"row\">\n            <div class=\"col-md-12\">\n                <h3 class=\"section_header\" data-bind=\"toggle: sectionDisplay().inventory, css: { section_disabled: !sectionDisplay().inventory() }\">Inventory <small style=\"color:goldenrod\" data-bind=\"html: inventory.totalCost() ? '<img src=\\'http://cdn.dota2.com/apps/dota2/images/tooltips/gold.png\\'/> ' + inventory.totalCost() : '' \"></small></h3>\n                <div id=\"inventory\" class=\"inventory hover-cursor\" data-bind=\"click: function (data, event) { buildExplorer.selectInventory(-1); }, css: {'row-highlight': selectedInventory() == -1}, foreach: inventory.items, visible: sectionDisplay().inventory()\">\n                    <div class=\"btn-group\">\n                        <img style=\"width:75px;\" class=\"img-rounded\" data-bind=\"css: { item_disabled: !enabled(), item_active: $parent.inventory.getActiveBorder($data) == 1, item_inactive: $parent.inventory.getActiveBorder($data) == 0 }, attr:{ src: $parent.inventory.getItemImage($data) }, click: function(data, event) { $parent.inventory.toggleItem($index, data, event); }, event: { dblclick: $parent.inventory.removeItem }\"/>\n                        <div style=\"float:left\" data-bind=\"visible: $parent.inventory.getItemSizeLabel($data) != ''\">\n                            <div data-bind=\"html: $parent.inventory.getItemSizeLabel($data)\" style=\"position:absolute;left:0;bottom:0;color:white;opacity:.5;background-color:black;padding:0px 2px\"></div>\n                            <div data-bind=\"html: $parent.inventory.getItemSizeLabel($data)\" style=\"position:absolute;left:0;bottom:0;color:white;padding:0px 2px\"></div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>" });
@@ -12685,7 +12685,7 @@ var HeroCalculatorViewModel = function (tooltipURL) {
 module.exports = HeroCalculatorViewModel;
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"../components/ability-detail":38,"../components/shop":39,"../herocalc/AbilityModel":40,"../herocalc/data/main":46,"../herocalc/inventory/levelItems":74,"../herocalc/inventory/stackableItems":75,"../herocalc/main":79,"../herocalc/util/findWhere":81,"../herocalc/util/uniqueId":87,"./CloneViewModel":26,"./HeroViewModel":30,"./UnitViewModel":32,"./herocalc_knockout":34,"./herocalc_tooltips_item":35,"./jquery-ui.custom":36}],29:[function(require,module,exports){
+},{"../components/ability-detail":38,"../components/shop":39,"../herocalc/AbilityModel":40,"../herocalc/data/main":46,"../herocalc/inventory/levelItems":73,"../herocalc/inventory/stackableItems":74,"../herocalc/main":78,"../herocalc/util/findWhere":81,"../herocalc/util/uniqueId":87,"./CloneViewModel":26,"./HeroViewModel":30,"./UnitViewModel":32,"./herocalc_knockout":34,"./herocalc_tooltips_item":35,"./jquery-ui.custom":36}],29:[function(require,module,exports){
 'use strict';
 var ko = require('./herocalc_knockout');
 var extend = require("../herocalc/util/extend");
@@ -12828,15 +12828,23 @@ var HeroViewModel = function (heroData, itemData, unitData, h) {
     });
     
     self.illusions = ko.observableArray([]);
-    self.availableIllusions = ko.observableArray(illusionOptionsArray);
-    self.selectedIllusion = ko.observable(self.availableIllusions()[0]);
-    self.illusionAbilityLevel = ko.observable(1);
-    self.illusionAbilityMaxLevel = ko.computed(function () {
-        return illusionData[self.selectedIllusion().illusionName].max_level;
+    self.availableIllusions = ko.computed(function () {
+        return illusionOptionsArray.filter(function (illusionOption) {
+            console.log('illusionOption', illusionOption, self.heroId());
+            return illusionOption.use_selected_hero || illusionOption.baseHero == self.heroId();
+        });
     });
-    self.addIllusion = function (data, event) {
+    self.selectedIllusion = ko.observable();
+    self.selectedIllusion.subscribe(function (newValue) {
+        self.illusionId(newValue.illusionName);
+    });
+    //self.illusionAbilityLevel = ko.observable(1);
+    self.illusionAbilityMaxLevel = ko.computed(function () {
+        return self.selectedIllusion() ? illusionData[self.selectedIllusion().illusionName].max_level : 0;
+    });
+    /*self.addIllusion = function (data, event) {
         self.illusions.push(ko.observable(new IllusionViewModel(heroData, itemData, 0, self, self.illusionAbilityLevel())));
-    };
+    };*/
     
     self.bound = ko.observable(false);
     self.playerColorCss = ko.computed(function () {
@@ -12899,7 +12907,7 @@ HeroViewModel.prototype.constructor = HeroViewModel;
 module.exports = HeroViewModel;
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"../herocalc/illusion/illusionData":65,"../herocalc/illusion/illusionOptionsArray":66,"../herocalc/main":79,"./BuildExplorerViewModel":25,"./DamageAmpViewModel":27,"./HeroDamageAmpMixin":29,"./IllusionViewModel":31}],31:[function(require,module,exports){
+},{"../herocalc/illusion/illusionData":64,"../herocalc/illusion/illusionOptionsArray":65,"../herocalc/main":78,"./BuildExplorerViewModel":25,"./DamageAmpViewModel":27,"./HeroDamageAmpMixin":29,"./IllusionViewModel":31}],31:[function(require,module,exports){
 'use strict';
 var ko = require('./herocalc_knockout');
     
@@ -12963,7 +12971,7 @@ IllusionViewModel.prototype = Object.create(HeroCalc.IllusionModel.prototype);
 IllusionViewModel.prototype.constructor = IllusionViewModel;
 
 module.exports = IllusionViewModel;
-},{"../herocalc/data/main":46,"../herocalc/illusion/illusionData":65,"../herocalc/main":79,"../herocalc/util/findWhere":81,"./herocalc_knockout":34}],32:[function(require,module,exports){
+},{"../herocalc/data/main":46,"../herocalc/illusion/illusionData":64,"../herocalc/main":78,"../herocalc/util/findWhere":81,"./herocalc_knockout":34}],32:[function(require,module,exports){
 (function (global){
 "use strict";
 var ko = (typeof window !== "undefined" ? window['ko'] : typeof global !== "undefined" ? global['ko'] : null);
@@ -13040,7 +13048,7 @@ UnitViewModel.prototype.constructor = UnitViewModel;
 module.exports = UnitViewModel;
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"../herocalc/hero/UnitOption":55,"../herocalc/main":79}],33:[function(require,module,exports){
+},{"../herocalc/hero/UnitOption":55,"../herocalc/main":78}],33:[function(require,module,exports){
 "use strict";
 
 var getParameterByName = function (name) {
@@ -16435,7 +16443,7 @@ AbilityModel.prototype.getAbilityAttributeTooltip = function (attributes, attrib
 }
 
 module.exports = AbilityModel;
-},{"./hero/TalentController":53,"./herocalc_abilitydata":62,"./herocalc_knockout":63}],41:[function(require,module,exports){
+},{"./hero/TalentController":53,"./herocalc_abilitydata":61,"./herocalc_knockout":62}],41:[function(require,module,exports){
 'use strict';
 var ko = require('./herocalc_knockout');
 
@@ -16643,7 +16651,7 @@ BuffViewModel.prototype = Object.create(AbilityModel.prototype);
 BuffViewModel.prototype.constructor = BuffViewModel;
 
 module.exports = BuffViewModel;
-},{"./AbilityModel":40,"./buffs/buffOptionsArray":43,"./buffs/debuffOptionsArray":44,"./herocalc_knockout":63,"./inventory/InventoryViewModel":68,"./util/findWhere":81}],42:[function(require,module,exports){
+},{"./AbilityModel":40,"./buffs/buffOptionsArray":43,"./buffs/debuffOptionsArray":44,"./herocalc_knockout":62,"./inventory/InventoryViewModel":67,"./util/findWhere":81}],42:[function(require,module,exports){
 var findWhere = require("../util/findWhere");
 
 var BuffModel = function (heroData, unitData, hero, ability) {
@@ -17639,7 +17647,7 @@ var HeroDamageMixin = function (self, itemData) {
 }
 
 module.exports = HeroDamageMixin;
-},{"../herocalc_knockout":63,"../util/extend":80,"./DamageTypeColor":48,"./TalentController":53}],50:[function(require,module,exports){
+},{"../herocalc_knockout":62,"../util/extend":80,"./DamageTypeColor":48,"./TalentController":53}],50:[function(require,module,exports){
 'use strict';
 var ko = require('../herocalc_knockout');
 
@@ -17651,10 +17659,14 @@ var HeroDamageMixin = require("./HeroDamageMixin");
 var TalentController = require("./TalentController");
 var totalExp = require("./totalExp");
 var nextLevelExp = require("./nextLevelExp");
+var illusionData = require("../illusion/illusionData");
+var findWhere = require("../util/findWhere");
 
 var HeroModel = function (heroData, itemData, h) {
     var self = this;
     self.heroId = ko.observable(h);
+    self.illusionId = ko.observable('');
+    self.isIllusion = ko.observable(false);
     self.selectedHeroLevel = ko.observable(1);
     self.inventory = new InventoryViewModel(itemData, self);
     self.selectedInventory = ko.observable(-1);
@@ -17751,6 +17763,63 @@ var HeroModel = function (heroData, itemData, h) {
         }
         return c-self.skillPointHistory().length;
     }, this);
+    
+    self.getAbilityAttributeValue = function(hero, ability, attributeName, level) {
+        if (!attributeName) return 0;
+        ability = ability.indexOf('phantom_lancer_doppelwalk') == -1 ? ability : 'phantom_lancer_doppelwalk';
+        if (ability == 'item_manta') {
+            var abilityObj = itemData[ability];
+        }
+        else {
+            var abilityObj = findWhere(heroData['npc_dota_hero_' + hero].abilities, {name: ability});
+        }
+        var attribute = findWhere(abilityObj.attributes, {name: attributeName});
+        if (level == 0) {
+            return parseFloat(attribute.value[0]);
+        }
+        else if (level > attribute.value.length) {
+            return parseFloat(attribute.value[0]);
+        }
+        else {
+            return parseFloat(attribute.value[level - 1]);
+        }
+    }
+    
+    self.illusionAbilityLevel = ko.observable(0);
+    
+    self.getIncomingDamageMultiplier = function(illusionType, hasScepter, attackType) {
+        console.log('illusionType', illusionType);
+        if (!illusionType) return 1;
+        var sign = illusionData[illusionType].incoming_damage_sign || 1;
+        if (illusionType == 'item_manta') {
+            if (attackType == 'DOTA_UNIT_CAP_MELEE_ATTACK') {
+                return (1 + sign * self.getAbilityAttributeValue(illusionData[illusionType].hero, illusionType, illusionData[illusionType].incoming_damage_melee, self.illusionAbilityLevel())/100)
+            }
+            else {
+                return (1 + sign * self.getAbilityAttributeValue(illusionData[illusionType].hero, illusionType, illusionData[illusionType].incoming_damage_ranged, self.illusionAbilityLevel())/100)
+            }
+        }
+        else {
+            return (1 + sign * self.getAbilityAttributeValue(illusionData[illusionType].hero, illusionType, illusionData[illusionType].incoming_damage, self.illusionAbilityLevel())/100)
+        }
+    }
+    self.getOutgoingDamageMultiplier = function(illusionType, hasScepter, attackType) {
+        console.log('illusionType', illusionType);
+        if (!illusionType) return 1;
+        var sign = illusionData[illusionType].outgoing_damage_sign || 1;
+        if (illusionType == 'item_manta') {
+            if (attackType == 'DOTA_UNIT_CAP_MELEE_ATTACK') {
+                return (1 + sign * self.getAbilityAttributeValue(illusionData[illusionType].hero, illusionType, illusionData[illusionType].outgoing_damage_melee, self.illusionAbilityLevel())/100);
+            }
+            else {
+                return (1 + sign * self.getAbilityAttributeValue(illusionData[illusionType].hero, illusionType, illusionData[illusionType].outgoing_damage_ranged, self.illusionAbilityLevel())/100);
+            }
+        }
+        else {
+            return (1 + sign * self.getAbilityAttributeValue(illusionData[illusionType].hero, illusionType, illusionData[illusionType].outgoing_damage, self.illusionAbilityLevel())/100);
+        }
+    }
+    
     self.primaryAttribute = ko.pureComputed(function () {
         var v = self.heroData().attributeprimary;
         if (v === 'DOTA_ATTRIBUTE_AGILITY') return 'agi';
@@ -17841,11 +17910,12 @@ var HeroModel = function (heroData, itemData, h) {
             return obj;
         }, {value: 0, excludeList: []});
         return (self.heroData().statushealthregen + self.totalStr() * .06 
-                + self.inventory.getHealthRegen() 
-                + self.ability().getHealthRegen()
-                + TalentController.getHealthRegen(self.selectedTalents())
-                + self.buffs.getHealthRegen()
-                + healthRegenAura.value
+                + (self.isIllusion() ? 0 : self.inventory.getHealthRegen() 
+                    + self.ability().getHealthRegen()
+                    + TalentController.getHealthRegen(self.selectedTalents())
+                    + self.buffs.getHealthRegen()
+                    + healthRegenAura.value
+                    )
                 ).toFixed(2);
     });
     self.mana = ko.pureComputed(function () {
@@ -17878,17 +17948,18 @@ var HeroModel = function (heroData, itemData, h) {
             return obj;
         }, {value: 0, excludeList: []});
         return (self.enemy().ability().getArmorBaseReduction() * self.debuffs.getArmorBaseReduction() * (self.heroData().armorphysical + self.totalAgi() * .14)
-                + self.inventory.getArmor()
-                //+ self.inventory.getArmorAura().value
-                //+ self.enemy().inventory.getArmorReduction()
-                + self.ability().getArmor()
-                + TalentController.getArmor(self.selectedTalents())
+                + (self.isIllusion() ? 0 : self.inventory.getArmor()
+                    //+ self.inventory.getArmorAura().value
+                    //+ self.enemy().inventory.getArmorReduction()
+                    + self.ability().getArmor()
+                    + TalentController.getArmor(self.selectedTalents())
+                    + self.buffs.getArmor()
+                    )
+                + armorAura.value
                 + self.enemy().ability().getArmorReduction()
-                + self.buffs.getArmor()
                 //+ self.buffs.itemBuffs.getArmor()
                 + self.debuffs.getArmorReduction()
                 //+ self.buffs.itemBuffs.getArmorAura().value
-                + armorAura.value
                 + armorReduction.value
                 //+ self.debuffs.getArmorReduction()
                 ).toFixed(2);
@@ -17981,8 +18052,17 @@ var HeroModel = function (heroData, itemData, h) {
             abilityBaseDamage = self.ability().getBaseDamage(),
             minDamage = self.heroData().attackdamagemin,
             maxDamage = self.heroData().attackdamagemax;
-        return [Math.floor((minDamage + totalAttribute + abilityBaseDamage.total) * self.ability().getSelfBaseDamageReductionPct() * self.enemy().ability().getBaseDamageReductionPct() * self.debuffs.getBaseDamageReductionPct() * self.debuffs.itemBuffs.getBaseDamageReductionPct() * abilityBaseDamage.multiplier),
-                Math.floor((maxDamage + totalAttribute + abilityBaseDamage.total) * self.ability().getSelfBaseDamageReductionPct() * self.enemy().ability().getBaseDamageReductionPct() * self.debuffs.getBaseDamageReductionPct() * self.debuffs.itemBuffs.getBaseDamageReductionPct() * abilityBaseDamage.multiplier)];
+        console.log('abilityBaseDamage.multiplier', abilityBaseDamage.multiplier);
+        var multiplier = self.ability().getSelfBaseDamageReductionPct()
+            * self.enemy().ability().getBaseDamageReductionPct()
+            * self.debuffs.getBaseDamageReductionPct()
+            * self.debuffs.itemBuffs.getBaseDamageReductionPct()
+            * abilityBaseDamage.multiplier
+            * (self.isIllusion() ? self.getOutgoingDamageMultiplier(self.illusionId(), false, self.heroData().attacktype) : 1);
+        return [
+            Math.floor((minDamage + totalAttribute + abilityBaseDamage.total) * multiplier),
+            Math.floor((maxDamage + totalAttribute + abilityBaseDamage.total) * multiplier)
+        ];
     });
     self.baseDamageAvg = ko.pureComputed(function () {
         return (self.baseDamage()[0] + self.baseDamage()[1]) / 2;
@@ -17994,7 +18074,7 @@ var HeroModel = function (heroData, itemData, h) {
         return self.baseDamage()[1];
     });
     self.bonusDamage = ko.pureComputed(function () {
-        return ((self.inventory.getBonusDamage().total
+        return self.isIllusion() ? 0 : ((self.inventory.getBonusDamage().total
                 + self.ability().getBonusDamage().total
                 + TalentController.getBonusDamage(self.selectedTalents()).total
                 + self.buffs.getBonusDamage().total
@@ -18131,6 +18211,7 @@ var HeroModel = function (heroData, itemData, h) {
         ehp *= (1 / self.buffs.getDamageReduction());
         ehp *= (1 / self.enemy().ability().getDamageAmplification());
         ehp *= (1 / self.debuffs.getDamageAmplification());
+        if (self.isIllusion()) ehp *= (1 / self.getIncomingDamageMultiplier(self.illusionId(), false, self.heroData().attacktype));
         return ehp.toFixed(2);
     });
     self.ehpMagical = ko.pureComputed(function () {
@@ -18141,6 +18222,7 @@ var HeroModel = function (heroData, itemData, h) {
         ehp *= (1 / self.ability().getEvasionBacktrack());
         ehp *= (1 / self.enemy().ability().getDamageAmplification());
         ehp *= (1 / self.debuffs.getDamageAmplification());
+        if (self.isIllusion()) ehp *= (1 / self.getIncomingDamageMultiplier(self.illusionId(), false, self.heroData().attacktype));
         return ehp.toFixed(2);
     });
     self.bash = ko.pureComputed(function () {
@@ -18264,7 +18346,7 @@ HeroModel.prototype.toggleTalent = function (talentTier, talentIndex) {
 }
 
 module.exports = HeroModel;
-},{"../AbilityModel":40,"../BuffViewModel":41,"../herocalc_knockout":63,"../inventory/InventoryViewModel":68,"./HeroDamageMixin":49,"./TalentController":53,"./diffProperties":57,"./nextLevelExp":59,"./totalExp":61}],51:[function(require,module,exports){
+},{"../AbilityModel":40,"../BuffViewModel":41,"../herocalc_knockout":62,"../illusion/illusionData":64,"../inventory/InventoryViewModel":67,"../util/findWhere":81,"./HeroDamageMixin":49,"./TalentController":53,"./diffProperties":56,"./nextLevelExp":58,"./totalExp":60}],51:[function(require,module,exports){
 var HeroOption = function (name, displayname, hero) {
     this.heroName = name;
     this.heroDisplayName = displayname;
@@ -18413,8 +18495,8 @@ IllusionModel.prototype = Object.create(HeroModel.prototype);
 IllusionModel.prototype.constructor = IllusionModel;
 
 module.exports = IllusionModel;
-},{"../illusion/illusionData":65,"../util/findWhere":81,"./HeroModel":50}],53:[function(require,module,exports){
-var cooldownTalents = require('./cooldownTalents');
+},{"../illusion/illusionData":64,"../util/findWhere":81,"./HeroModel":50}],53:[function(require,module,exports){
+var cooldownTalents = require('../talents/cooldownTalents.json');
 var talentAbilityMap = require('./talentAbilityMap');
 
 module.exports = {
@@ -18647,7 +18729,7 @@ module.exports = {
         return totalAttribute;
     }
 }
-},{"./cooldownTalents":56,"./talentAbilityMap":60}],54:[function(require,module,exports){
+},{"../talents/cooldownTalents.json":79,"./talentAbilityMap":59}],54:[function(require,module,exports){
 'use strict';
 var ko = require('../herocalc_knockout');
 
@@ -18945,7 +19027,7 @@ UnitModel.prototype = Object.create(HeroModel.prototype);
 UnitModel.prototype.constructor = UnitModel;
 
 module.exports = UnitModel;
-},{"../AbilityModel":40,"../herocalc_knockout":63,"./HeroModel":50}],55:[function(require,module,exports){
+},{"../AbilityModel":40,"../herocalc_knockout":62,"./HeroModel":50}],55:[function(require,module,exports){
 var UnitOption = function (name, displayname, levels, image, level) {
     this.heroName = ko.computed(function() {
         return (levels > 0) ? name + (level() <= levels ? level() : 1) : name;
@@ -18957,8 +19039,6 @@ var UnitOption = function (name, displayname, levels, image, level) {
 
 module.exports = UnitOption;
 },{}],56:[function(require,module,exports){
-module.exports = ['special_bonus_unique_antimage', 'special_bonus_unique_bloodseeker', 'special_bonus_unique_bounty_hunter', 'special_bonus_unique_dazzle_1', 'special_bonus_unique_earthshaker', 'special_bonus_unique_invoker_3', 'special_bonus_unique_lina_1', 'special_bonus_unique_lone_druid_4', 'special_bonus_unique_luna_2', 'special_bonus_unique_magnus', 'special_bonus_unique_meepo', 'special_bonus_unique_necrophos', 'special_bonus_unique_nevermore_2', 'special_bonus_unique_night_stalker', 'special_bonus_unique_riki_2', 'special_bonus_unique_shadow_demon_2', 'special_bonus_unique_skywrath', 'special_bonus_unique_spectre', 'special_bonus_unique_sven', 'special_bonus_unique_terrorblade', 'special_bonus_unique_troll_warlord', 'special_bonus_unique_windranger', 'special_bonus_unique_winter_wyvern_2'];
-},{}],57:[function(require,module,exports){
 var diffProperties = [
     'totalAgi',
     'totalInt',
@@ -18997,7 +19077,7 @@ var diffProperties = [
 ];
 
 module.exports = diffProperties;
-},{}],58:[function(require,module,exports){
+},{}],57:[function(require,module,exports){
 var HeroOption = require("./HeroOption");
 
 var heroOptionsArray = {};
@@ -19013,11 +19093,11 @@ var init = function (heroData) {
 heroOptionsArray.init = init;
 
 module.exports = heroOptionsArray;
-},{"./HeroOption":51}],59:[function(require,module,exports){
+},{"./HeroOption":51}],58:[function(require,module,exports){
 var nextLevelExp = [200, 300, 400, 500, 600, 615, 630, 645, 660, 675, 775, 1175, 1200, 1225, 1250, 1275, 1375, 1400, 1425, 1600, 1900, 2200, 2500, 2975, '&mdash;'];
 
 module.exports = nextLevelExp;
-},{}],60:[function(require,module,exports){
+},{}],59:[function(require,module,exports){
 module.exports = {
     special_bonus_unique_abaddon: 'abaddon_aphotic_shield',
     special_bonus_unique_underlord: 'abyssal_underlord_pit_of_malice',
@@ -19265,11 +19345,11 @@ module.exports = {
     special_bonus_unique_warlock_4: 'warlock_rain_of_chaos',
     special_bonus_unique_witch_doctor_3: 'witch_doctor_paralyzing_cask'
 }
-},{}],61:[function(require,module,exports){
+},{}],60:[function(require,module,exports){
 var totalExp = [0, 200, 500, 900, 1400, 2000, 2615, 3425, 3890, 4550, 5225, 6000, 7175, 8375, 9600, 10850, 12125, 13500, 14900, 16325, 17925, 19825, 22025, 24525, 27500];
 
 module.exports = totalExp;
-},{}],62:[function(require,module,exports){
+},{}],61:[function(require,module,exports){
 var abilityData = {
     'alchemist_acid_spray': [
         {
@@ -22843,7 +22923,7 @@ var abilityData = {
 }
 
 module.exports = abilityData;
-},{}],63:[function(require,module,exports){
+},{}],62:[function(require,module,exports){
 (function (global){
 'use strict';
 var ko = (typeof window !== "undefined" ? window['ko'] : typeof global !== "undefined" ? global['ko'] : null);
@@ -22883,15 +22963,16 @@ ko.extenders.numeric = function(target, opts) {
 module.exports = ko;
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"./lib/knockout.mapping":77,"./lib/knockout.wrap":78}],64:[function(require,module,exports){
-var IllusionOption = function (name, displayname, baseHero) {
+},{"./lib/knockout.mapping":76,"./lib/knockout.wrap":77}],63:[function(require,module,exports){
+var IllusionOption = function (name, displayname, baseHero, use_selected_hero) {
     this.illusionName = name;
     this.illusionDisplayName = displayname;
     this.baseHero = baseHero;
+    this.use_selected_hero = use_selected_hero;
 };
 
 module.exports = IllusionOption;
-},{}],65:[function(require,module,exports){
+},{}],64:[function(require,module,exports){
 var illusionData = {
     chaos_knight_phantasm: {
         hero: 'chaos_knight',
@@ -22924,15 +23005,24 @@ var illusionData = {
         use_selected_hero: true,
         max_level: 3,
         outgoing_damage: 'illusion_damage_out_pct',
-        incoming_damage: 'illusion_damage_in_pct'
+        incoming_damage: 'illusion_damage_in_pct',
+        outgoing_damage_sign: -1
     },
-    phantom_lancer_doppelwalk: {
+    phantom_lancer_doppelwalk_1: {
         hero: 'phantom_lancer',
-        displayName: 'Phantom Lancer Doppelwalk',
+        displayName: 'Phantom Lancer Doppelwalk 1',
         use_selected_hero: false,
         max_level: 4,
-        outgoing_damage: 'illusion_damage_out_pct',
-        incoming_damage: 'illusion_damage_in_pct'        
+        outgoing_damage: 'illusion_1_damage_out_pct',
+        incoming_damage: 'illusion_1_damage_in_pct'
+    },
+    phantom_lancer_doppelwalk_2: {
+        hero: 'phantom_lancer',
+        displayName: 'Phantom Lancer Doppelwalk 2',
+        use_selected_hero: false,
+        max_level: 4,
+        outgoing_damage: 'illusion_2_damage_out_pct',
+        incoming_damage: 'illusion_2_damage_in_pct'
     },
     phantom_lancer_juxtapose: {
         hero: 'phantom_lancer',
@@ -22940,7 +23030,7 @@ var illusionData = {
         use_selected_hero: false,
         max_level: 4,
         outgoing_damage: 'illusion_damage_out_pct',
-        incoming_damage: 'illusion_damage_in_pct'        
+        incoming_damage: 'illusion_damage_in_pct'
     },
     phantom_lancer_spirit_lance: {
         hero: 'phantom_lancer',
@@ -22948,7 +23038,7 @@ var illusionData = {
         use_selected_hero: false,
         max_level: 4,
         outgoing_damage: 'illusion_damage_out_pct',
-        incoming_damage: 'illusion_damage_in_pct'        
+        incoming_damage: 'illusion_damage_in_pct'
     },
     shadow_demon_disruption: {
         hero: 'shadow_demon',
@@ -22956,7 +23046,8 @@ var illusionData = {
         use_selected_hero: true,
         max_level: 4,
         outgoing_damage: 'illusion_outgoing_damage',
-        incoming_damage: 'illusion_incoming_damage'        
+        incoming_damage: 'illusion_incoming_damage',
+        outgoing_damage_sign: -1
     },
     spectre_haunt: {
         hero: 'spectre',
@@ -22964,7 +23055,8 @@ var illusionData = {
         use_selected_hero: false,
         max_level: 3,
         outgoing_damage: 'illusion_damage_outgoing',
-        incoming_damage: 'illusion_damage_incoming'        
+        incoming_damage: 'illusion_damage_incoming',
+        outgoing_damage_sign: -1
     },
     terrorblade_conjure_image: {
         hero: 'terrorblade',
@@ -22972,14 +23064,16 @@ var illusionData = {
         use_selected_hero: false,
         max_level: 4,
         outgoing_damage: 'illusion_outgoing_damage',
-        incoming_damage: 'illusion_incoming_damage'        
+        incoming_damage: 'illusion_incoming_damage',
+        outgoing_damage_sign: -1
     },
     terrorblade_reflection: {
         hero: 'terrorblade',
         displayName: 'Terrorblade Reflection',
         use_selected_hero: true,
         max_level: 4,
-        outgoing_damage: 'illusion_outgoing_damage'     
+        outgoing_damage: 'illusion_outgoing_damage',
+        outgoing_damage_sign: -1
     },
     item_manta: {
         hero: '',
@@ -22995,17 +23089,17 @@ var illusionData = {
 }
 
 module.exports = illusionData;
-},{}],66:[function(require,module,exports){
+},{}],65:[function(require,module,exports){
 var IllusionOption = require("./IllusionOption");
 var illusionData = require("./illusionData");
 
 var illusionOptionsArray = [];
 for (var h in illusionData) {
-    illusionOptionsArray.push(new IllusionOption(h, illusionData[h].displayName, illusionData[h].hero));
+    illusionOptionsArray.push(new IllusionOption(h, illusionData[h].displayName, illusionData[h].hero, illusionData[h].use_selected_hero));
 }
 
 module.exports = illusionOptionsArray;
-},{"./IllusionOption":64,"./illusionData":65}],67:[function(require,module,exports){
+},{"./IllusionOption":63,"./illusionData":64}],66:[function(require,module,exports){
 (function (global){
 var ko = (typeof window !== "undefined" ? window['ko'] : typeof global !== "undefined" ? global['ko'] : null);
 var stackableItems = require("./stackableItems");
@@ -23185,7 +23279,7 @@ BasicInventoryViewModel.prototype.getItemAttributeValue = function (attributes, 
 module.exports = BasicInventoryViewModel;
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"./itemsWithActive":73,"./levelItems":74,"./stackableItems":75}],68:[function(require,module,exports){
+},{"./itemsWithActive":72,"./levelItems":73,"./stackableItems":74}],67:[function(require,module,exports){
 'use strict';
 var ko = require('../herocalc_knockout');
 
@@ -24541,7 +24635,7 @@ InventoryViewModel.prototype = Object.create(BasicInventoryViewModel.prototype);
 InventoryViewModel.prototype.constructor = InventoryViewModel;
 
 module.exports = InventoryViewModel;
-},{"../herocalc_knockout":63,"./BasicInventoryViewModel":67,"./itemBuffOptions":70,"./itemDebuffOptions":71,"./itemOptionsArray":72,"./levelItems":74,"./stackableItems":75}],69:[function(require,module,exports){
+},{"../herocalc_knockout":62,"./BasicInventoryViewModel":66,"./itemBuffOptions":69,"./itemDebuffOptions":70,"./itemOptionsArray":71,"./levelItems":73,"./stackableItems":74}],68:[function(require,module,exports){
 (function (global){
 var ko = (typeof window !== "undefined" ? window['ko'] : typeof global !== "undefined" ? global['ko'] : null);
 
@@ -24569,7 +24663,7 @@ var ItemInput = function (itemData, value, name, debuff) {
 module.exports = ItemInput;
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{}],70:[function(require,module,exports){
+},{}],69:[function(require,module,exports){
 var ItemInput = require("./ItemInput");
 var itemBuffs = ['assault', 'ancient_janggo', 'headdress', 'mekansm', 'pipe', 'ring_of_aquila', 'vladmir', 'ring_of_basilius', 'buckler', 'solar_crest', 'bottle_doubledamage', 'helm_of_the_dominator'];
 var itemBuffOptions = {};
@@ -24588,7 +24682,7 @@ var init = function (itemData) {
 itemBuffOptions.init = init;
 
 module.exports = itemBuffOptions;
-},{"./ItemInput":69}],71:[function(require,module,exports){
+},{"./ItemInput":68}],70:[function(require,module,exports){
 var ItemInput = require("./ItemInput");
 var itemDebuffs = [
     {item: 'assault', debuff: null},
@@ -24619,7 +24713,7 @@ var init = function (itemData) {
 itemDebuffOptions.init = init;
 
 module.exports = itemDebuffOptions;
-},{"./ItemInput":69}],72:[function(require,module,exports){
+},{"./ItemInput":68}],71:[function(require,module,exports){
 var validItems = require("./validItems");
 var ItemInput = require("./ItemInput");
 
@@ -24636,15 +24730,15 @@ var init = function (itemData) {
 itemOptionsArray.init = init;
 
 module.exports = itemOptionsArray;
-},{"./ItemInput":69,"./validItems":76}],73:[function(require,module,exports){
+},{"./ItemInput":68,"./validItems":75}],72:[function(require,module,exports){
 module.exports = ['solar_crest', 'heart','smoke_of_deceit','dust','ghost','tranquil_boots','phase_boots','power_treads','buckler','medallion_of_courage','ancient_janggo','mekansm','pipe','veil_of_discord','rod_of_atos','orchid','sheepstick','armlet','invis_sword','ethereal_blade','shivas_guard','manta','mask_of_madness','diffusal_blade','mjollnir','satanic','ring_of_basilius','ring_of_aquila', 'butterfly', 'moon_shard', 'silver_edge','bloodthorn','hurricane_pike'];
-},{}],74:[function(require,module,exports){
+},{}],73:[function(require,module,exports){
 module.exports = ['necronomicon','dagon','diffusal_blade','travel_boots'];
-},{}],75:[function(require,module,exports){
+},{}],74:[function(require,module,exports){
 module.exports = ['clarity','flask','dust','ward_observer','ward_sentry','tango','tpscroll','smoke_of_deceit'];
-},{}],76:[function(require,module,exports){
+},{}],75:[function(require,module,exports){
 module.exports = ["abyssal_blade","ultimate_scepter","courier","arcane_boots","armlet","assault","boots_of_elves","bfury","belt_of_strength","black_king_bar","blade_mail","blade_of_alacrity","blades_of_attack","blink","bloodstone","boots","travel_boots","bottle","bracer","broadsword","buckler","butterfly","chainmail","circlet","clarity","claymore","cloak","lesser_crit","greater_crit","dagon","demon_edge","desolator","diffusal_blade","rapier","ancient_janggo","dust","eagle","energy_booster","ethereal_blade","cyclone","skadi","flying_courier","force_staff","gauntlets","gem","ghost","gloves","hand_of_midas","headdress","flask","heart","heavens_halberd","helm_of_iron_will","helm_of_the_dominator","hood_of_defiance","hyperstone","branches","javelin","sphere","maelstrom","magic_stick","magic_wand","manta","mantle","mask_of_madness","medallion_of_courage","mekansm","mithril_hammer","mjollnir","monkey_king_bar","lifesteal","mystic_staff","necronomicon","null_talisman","oblivion_staff","ward_observer","ogre_axe","orb_of_venom","orchid","pers","phase_boots","pipe","platemail","point_booster","poor_mans_shield","power_treads","quarterstaff","quelling_blade","radiance","reaver","refresher","ring_of_aquila","ring_of_basilius","ring_of_health","ring_of_protection","ring_of_regen","robe","rod_of_atos","relic","sobi_mask","sange","sange_and_yasha","satanic","sheepstick","ward_sentry","shadow_amulet","invis_sword","shivas_guard","basher","slippers","smoke_of_deceit","soul_booster","soul_ring","staff_of_wizardry","stout_shield","talisman_of_evasion","tango","tpscroll","tranquil_boots","ultimate_orb","urn_of_shadows","vanguard","veil_of_discord","vitality_booster","vladmir","void_stone","wraith_band","yasha","crimson_guard","enchanted_mango","lotus_orb","glimmer_cape","guardian_greaves","moon_shard","silver_edge","solar_crest","octarine_core","aether_lens","faerie_fire","iron_talon","dragon_lance","echo_sabre","infused_raindrop","blight_stone","wind_lace","tome_of_knowledge","bloodthorn","hurricane_pike"];
-},{}],77:[function(require,module,exports){
+},{}],76:[function(require,module,exports){
 (function (global){
 (function (factory) {
 	// Module systems magic dance.
@@ -25454,7 +25548,7 @@ module.exports = ["abyssal_blade","ultimate_scepter","courier","arcane_boots","a
 }));
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{}],78:[function(require,module,exports){
+},{}],77:[function(require,module,exports){
 (function (global){
 // Knockout Fast Mapping v0.1
 // License: MIT (http://www.opensource.org/licenses/mit-license.php)
@@ -25667,7 +25761,7 @@ module.exports = ["abyssal_blade","ultimate_scepter","courier","arcane_boots","a
 }));
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{}],79:[function(require,module,exports){
+},{}],78:[function(require,module,exports){
 'use strict';
 
 var core = {};
@@ -25694,7 +25788,44 @@ core.init = function (HERODATA_PATH, ITEMDATA_PATH, UNITDATA_PATH, callback) {
 }
 
 module.exports = core;
-},{"./AbilityModel":40,"./BuffViewModel":41,"./buffs/buffOptionsArray":43,"./buffs/debuffOptionsArray":44,"./data/main":46,"./hero/CloneModel":47,"./hero/HeroModel":50,"./hero/IllusionModel":52,"./hero/UnitModel":54,"./hero/heroOptionsArray":58,"./inventory/InventoryViewModel":68,"./inventory/itemBuffOptions":70,"./inventory/itemDebuffOptions":71,"./inventory/itemOptionsArray":72,"./util/main":85}],80:[function(require,module,exports){
+},{"./AbilityModel":40,"./BuffViewModel":41,"./buffs/buffOptionsArray":43,"./buffs/debuffOptionsArray":44,"./data/main":46,"./hero/CloneModel":47,"./hero/HeroModel":50,"./hero/IllusionModel":52,"./hero/UnitModel":54,"./hero/heroOptionsArray":57,"./inventory/InventoryViewModel":67,"./inventory/itemBuffOptions":69,"./inventory/itemDebuffOptions":70,"./inventory/itemOptionsArray":71,"./util/main":85}],79:[function(require,module,exports){
+module.exports=[
+    "special_bonus_unique_ancient_apparition_3",
+    "special_bonus_unique_antimage",
+    "special_bonus_unique_antimage_2",
+    "special_bonus_unique_bloodseeker",
+    "special_bonus_unique_bounty_hunter",
+    "special_bonus_unique_chen_3",
+    "special_bonus_unique_dazzle_1",
+    "special_bonus_unique_death_prophet_2",
+    "special_bonus_unique_disruptor_2",
+    "special_bonus_unique_earthshaker",
+    "special_bonus_unique_furion_3",
+    "special_bonus_unique_invoker_3",
+    "special_bonus_unique_legion_commander_2",
+    "special_bonus_unique_lich_3",
+    "special_bonus_unique_lina_1",
+    "special_bonus_unique_lone_druid_4",
+    "special_bonus_unique_luna_2",
+    "special_bonus_unique_meepo",
+    "special_bonus_unique_naga_siren_2",
+    "special_bonus_unique_necrophos",
+    "special_bonus_unique_night_stalker",
+    "special_bonus_unique_puck_2",
+    "special_bonus_unique_pugna_4",
+    "special_bonus_unique_riki_2",
+    "special_bonus_unique_shadow_demon_3",
+    "special_bonus_unique_shadow_demon_2",
+    "special_bonus_unique_skywrath",
+    "special_bonus_unique_spectre",
+    "special_bonus_unique_sven",
+    "special_bonus_unique_terrorblade",
+    "special_bonus_unique_troll_warlord",
+    "special_bonus_unique_undying_2",
+    "special_bonus_unique_warlock_3",
+    "special_bonus_unique_winter_wyvern_2"
+]
+},{}],80:[function(require,module,exports){
 var extend = function (out) {
     out = out || {};
 
@@ -25842,7 +25973,7 @@ var App = function (appConfig) {
         }
     });
 
-    var lastUpdate = "2017-07-14 13:21:46 UTC";
+    var lastUpdate = "2017-07-16 20:49:24 UTC";
     $('#last-update').text(lastUpdate);
 
     var rollbar = require('./rollbar');
@@ -25971,7 +26102,7 @@ var App = function (appConfig) {
 module.exports = App;
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"./app/HeroCalculatorViewModel":28,"./app/getParameterByName":33,"./app/polyfill":37,"./herocalc/main":79,"./rollbar":91}],90:[function(require,module,exports){
+},{"./app/HeroCalculatorViewModel":28,"./app/getParameterByName":33,"./app/polyfill":37,"./herocalc/main":78,"./rollbar":91}],90:[function(require,module,exports){
 var Chart = require('chart.js');
 Chart.types.Line.extend({
     // Passing in a name registers this chart in the Chart namespace in the same way
@@ -26073,7 +26204,7 @@ var rollbarConfig = {
         client: {
             javascript: {
                 source_map_enabled: true,
-                code_version: "f580a6e01930cc3500464d697f9f13b3c84343c7",
+                code_version: "36b44f4281958a07b849392fa81b0f47f6e5fc70",
                 // Optionally have Rollbar guess which frames the error was thrown from
                 // when the browser does not provide line and column numbers.
                 guess_uncaught_frames: true

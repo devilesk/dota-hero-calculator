@@ -1,6 +1,8 @@
 <div class="row">
     <div class="col-md-3 col-sm-6">
-        <img class="img-rounded hero-image" data-bind="attr:{src: '/media/images/heroes/' + selectedHero().heroName + '.png'}"/>
+        <div class="hero-image" data-bind="css: { illusion: isIllusion }">
+            <img class="img-rounded" data-bind="attr:{src: '/media/images/heroes/' + selectedHero().heroName + '.png'}"/>
+        </div>
     </div>
     <div class="col-md-9 col-sm-6">
         <div class="row form-group">
@@ -65,12 +67,12 @@
                 </div>
                 <div class="form-horizontal" data-bind="if: selectedHero().heroName == 'silencer', visible: sectionDisplay().ability()">
                     <div class="form-group">
-                            <div class="col-md-2 control-label">
-                                <label for="intelligencestolen">Intelligence Stolen</label>
-                            </div>
-                            <div class="col-md-2">
-                                <input class="form-control" id="intelligencestolen" data-bind="value: intStolen" />
-                            </div>
+                        <div class="col-md-2 control-label">
+                            <label for="intelligencestolen">Intelligence Stolen</label>
+                        </div>
+                        <div class="col-md-2">
+                            <input class="form-control" id="intelligencestolen" data-bind="value: intStolen" />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -86,29 +88,42 @@
             <div class="col-md-12">
                 <h3 class="section_header" data-bind="toggle: sectionDisplay().illusion, css: { section_disabled: !sectionDisplay().illusion() }">Illusions</h3>
                 <div data-bind="visible: sectionDisplay().illusion(), lazyBinding: sectionDisplay().illusion">
-                    <h4 style="color:red">Under Construction</h4>
-                    <div class="form-horizontal">
+                    <label>
+                        <input type="checkbox" style="float:none;margin-right:5px;" data-bind="checked: isIllusion">Is Illusion?
+                    </label>
+                    <div class="form-horizontal" data-bind="visible: isIllusion">
                         <div class="form-group">
-                                <div class="col-md-2 control-label">
-                                    <label for="illusionSelect">Type</label>
-                                </div>
-                                <div class="col-md-10">
-                                    <select id="illusionSelect" class="form-control" data-bind="options: availableIllusions , optionsText: 'illusionDisplayName', value: selectedIllusion"></select>
-                                </div>
+                            <div class="col-md-2 control-label">
+                                <label for="illusionSelect">Type</label>
+                            </div>
+                            <div class="col-md-10">
+                                <select id="illusionSelect" class="form-control" data-bind="options: availableIllusions , optionsText: 'illusionDisplayName', value: selectedIllusion"></select>
+                            </div>
                         </div>
                         <div class="form-group">
-                                <div class="col-md-2 control-label">
-                                    <label for="illusionabilitylevel">Ability Level</label>
-                                </div>
-                                <div class="col-md-10">
-                                    <select id="illusionabilitylevel" class="form-control" data-bind="value: illusionAbilityLevel, foreach: new Array(illusionAbilityMaxLevel())">
-                                        <option data-bind="text: $index()+1"></option>
-                                    </select>
-                                </div>
+                            <div class="col-md-2 control-label">
+                                <label for="illusionabilitylevel">Ability Level</label>
+                            </div>
+                            <div class="col-md-10">
+                                <select id="illusionabilitylevel" class="form-control" data-bind="value: illusionAbilityLevel, foreach: new Array(illusionAbilityMaxLevel())">
+                                    <option data-bind="text: $index()+1"></option>
+                                </select>
+                            </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-md-offset-2 col-md-10">
-                                <button class="btn btn-default" data-bind="click: addIllusion">Add Illusion</button>
+                            <div class="col-md-12">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td>Damage Dealt</td>
+                                            <td class="text-right" data-bind="text: (getOutgoingDamageMultiplier(illusionId(), false, heroData().attacktype)*100).toFixed(0)+'%'"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Damage Taken</td>
+                                            <td class="text-right" data-bind="text: (getIncomingDamageMultiplier(illusionId(), false, heroData().attacktype)*100).toFixed(0)+'%'"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
