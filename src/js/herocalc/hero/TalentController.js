@@ -1,4 +1,4 @@
-var cooldownTalents = require('./cooldownTalents');
+var cooldownTalents = require('../talents/cooldownTalents.json');
 var talentAbilityMap = require('./talentAbilityMap');
 
 module.exports = {

@@ -25,5 +25,5 @@ for (var h in heroData) {
     });
 }
 
-fs.writeFile('./src/herocalc/talents/talentMap.json', JSON.stringify(talentMap, null, 4), function (err) {});
-fs.writeFile('./src/herocalc/talents/talentUnmap.json', JSON.stringify(talentUnmapped, null, 4), function (err) {});
+fs.writeFile('./src/js/herocalc/talents/talentMap.json', JSON.stringify(talentMap, null, 4), function (err) {});
+fs.writeFile('./src/js/herocalc/talents/talentUnmap.json', JSON.stringify(talentUnmapped, null, 4), function (err) {});

@@ -42,8 +42,9 @@ function bundle() {
     b.bundle()
      .on('error', console.error)
      .pipe(exorcist(mapfile))
-     .pipe(fs.createWriteStream(dst));
-    console.log('bundled');
+     .pipe(fs.createWriteStream(dst))
+     .on('finish', function () { console.log('bundled', dst); })
+    console.log('bundling', dst);
 }
     
 var b = browserify(opts);
