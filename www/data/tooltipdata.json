@@ -39,7 +39,7 @@
   "Lore": "The flames of conquest blaze forth from the darkest depths of the abyss."
  },
  "abyssal_underlord_pit_of_malice": {
-  "Description": "A deadly pit is conjured at the target location; any unit that enters will be rooted for %ensnare_duration% seconds. Each enemy unit within the pit are affected every %pit_interval% seconds.",
+  "Description": "A deadly pit is conjured at the target location; any unit that enters will be rooted. Each enemy unit within the pit are affected every %pit_interval% seconds.",
   "DisplayName": "Pit of Malice",
   "Lore": "Twisting into the seams of reality itself, Vrogros' manifest hatred paralyzes those who defy his will."
  },
@@ -455,7 +455,7 @@
   "DisplayName": "War Stomp"
  },
  "centaur_return": {
-  "Description": "Centaur applies an aura to nearby allied units. Causes allies to counters every attack, damaging the attacker based on a percentage of Centaur's strength.",
+  "Description": "Centaur applies an aura to nearby allied units. Causes allies to counter every attack, damaging the attacker based on a percentage of Centaur's strength.",
   "DisplayName": "Return",
   "Lore": "Bradwarden has no need to parry his opponent's attacks; his armor-like hide does it for him."
  },
@@ -766,7 +766,7 @@
   "Lore": "It is with the power of a mountain that Earth Spirit strikes his enemies."
  },
  "earth_spirit_geomagnetic_grip": {
-  "Description": "Earth Spirit pulls the target Stone Remnant. Enemies struck by the gripped target will be silenced, and take damage if the gripped target is a Stone Remnant.\\n\\nUpgradable by Aghanim's Scepter.",
+  "Description": "Earth Spirit pulls the target Stone Remnant. Enemies struck by the gripped target will be silenced, and take damage if the gripped target is a Stone Remnant.",
   "DisplayName": "Geomagnetic Grip",
   "Lore": "Like calls to like. Even the minerals found in the blood and bones of living beings are not immune to the call of the Earth Spirit."
  },
@@ -1751,7 +1751,7 @@
   "Lore": "You grow stronger just by holding it."
  },
  "item_orb_of_venom": {
-  "Description": "Passive: Poison Attack - Poisons the target, dealing damage over time and slowing movement based on whether the equipped hero is melee or ranged.",
+  "Description": "Passive: Poison Attack - Poisons the target, dealing %poison_damage% damage per second for %poison_duration% seconds and slowing movement %poison_movement_speed_melee%%% if the equipped hero is melee or %poison_movement_speed_range%%% if they are ranged.",
   "DisplayName": "Orb of Venom",
   "Lore": "Envenoms your veapon with the venom of a venomous viper."
  },
@@ -4523,7 +4523,7 @@
   "Lore": "Crixalis often lies in wait, burrowing under the surface to ambush his adversaries."
  },
  "sandking_caustic_finale": {
-  "Description": "Sand King's attacks inject a venom that causes enemy units to violently explode when its timer expires, or when the unit dies, damaging and slowing nearby enemies. Deals %caustic_finale_expire_dmg_pct_tooltip%%% damage if its timer expires.",
+  "Description": "Sand King's attacks inject a venom that causes enemy units to violently explode when its timer expires, or when the unit dies, damaging and slowing nearby enemies. Deals less damage if its timer expires.",
   "DisplayName": "Caustic Finale",
   "Lore": "An injection from Crixalis makes one brittle and as dry as the arid wastes, subject to implosive demise."
  },
@@ -4956,6 +4956,9 @@
  },
  "special_bonus_attack_speed_100": {
   "DisplayName": "+100 Attack Speed"
+ },
+ "special_bonus_attack_speed_140": {
+  "DisplayName": "+140 Attack Speed"
  },
  "special_bonus_attack_speed_15": {
   "DisplayName": "+15 Attack Speed"
@@ -5455,6 +5458,9 @@
  "special_bonus_spell_lifesteal_30": {
   "DisplayName": "30% Spell Lifesteal"
  },
+ "special_bonus_spell_lifesteal_60": {
+  "DisplayName": "60% Spell Lifesteal"
+ },
  "special_bonus_spell_lifesteal_70": {
   "DisplayName": "70% Spell Lifesteal"
  },
@@ -5597,7 +5603,7 @@
   "DisplayName": "+60 Spawn Spiderling Damage"
  },
  "special_bonus_unique_broodmother_4": {
-  "DisplayName": "+12 Spiders Attack Damage"
+  "DisplayName": "+14 Spiders Attack Damage"
  },
  "special_bonus_unique_centaur_1": {
   "DisplayName": "Gains Return Aura"
@@ -5834,7 +5840,7 @@
   "DisplayName": "-4s Dragon Slave Cooldown"
  },
  "special_bonus_unique_lina_2": {
-  "DisplayName": "+40/4% Fiery Soul Per Stack"
+  "DisplayName": "+35/3% Fiery Soul Per Stack"
  },
  "special_bonus_unique_lina_3": {
   "DisplayName": "+80 Light Strike Array Damage"
@@ -5996,7 +6002,7 @@
   "DisplayName": "+50% Life Drain Heal"
  },
  "special_bonus_unique_pugna_2": {
-  "DisplayName": "+150 Nether Blast Damage"
+  "DisplayName": "+200 Nether Blast Damage"
  },
  "special_bonus_unique_pugna_3": {
   "DisplayName": "+0.75 Netherward Damage Per Mana"

@@ -1078,7 +1078,7 @@
     "name": "bounty_multiplier_tooltip",
     "tooltip": "BOUNTY RUNE MULTIPLIER:",
     "value": [
-     2
+     2.5
     ]
    }
   ],
@@ -3864,8 +3864,8 @@
    "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
   ],
   "cooldown": [
-   90,
-   75,
+   100,
+   80,
    60
   ],
   "damage": [
@@ -8735,8 +8735,8 @@
     "tooltip": "HEAL:",
     "value": [
      225,
-     325,
-     425
+     350,
+     475
     ]
    },
    {
@@ -11005,10 +11005,10 @@
    "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
   ],
   "cooldown": [
+   13,
    12,
    11,
-   10,
-   9
+   10
   ],
   "damage": [
    0,
@@ -16148,10 +16148,7 @@
   "displayname": "Nature's Attendants",
   "level": 0,
   "manacost": [
-   125,
-   140,
-   155,
-   170
+   125
   ],
   "name": "enchantress_natures_attendants"
  },
@@ -17501,7 +17498,7 @@
    {
     "name": "treant_damage_bonus",
     "value": [
-     32
+     36
     ]
    },
    {
@@ -25920,7 +25917,7 @@
  },
  "legion_commander_press_the_attack": {
   "AbilityCastPoint": 0.2,
-  "AbilityCastRange": 800,
+  "AbilityCastRange": 700,
   "AbilityCastRangeBuffer": 250,
   "AbilityChannelTime": [
    0,
@@ -26212,8 +26209,8 @@
     "tooltip": "DAMAGE:",
     "value": [
      100,
-     130,
-     160
+     140,
+     180
     ]
    },
    {
@@ -27543,10 +27540,10 @@
    8
   ],
   "damage": [
-   110,
-   180,
-   250,
-   320
+   85,
+   160,
+   235,
+   310
   ],
   "displayname": "Dragon Slave",
   "level": 0,
@@ -29373,10 +29370,10 @@
    "DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
   ],
   "cooldown": [
+   60,
    55,
    50,
-   45,
-   40
+   45
   ],
   "damage": [
    0,
@@ -31264,7 +31261,7 @@
    "DOTA_ABILITY_BEHAVIOR_NORMAL_WHEN_STOLEN"
   ],
   "cooldown": [
-   25
+   22
   ],
   "damage": [
    0,
@@ -31826,7 +31823,7 @@
     "name": "attack_speed",
     "tooltip": "SOLDIER ATK SPEED:",
     "value": [
-     1.6
+     1.4
     ]
    },
    {
@@ -34687,10 +34684,10 @@
    "DOTA_ABILITY_BEHAVIOR_PASSIVE"
   ],
   "cooldown": [
+   30,
    26,
    22,
-   18,
-   14
+   18
   ],
   "damage": [
    0,
@@ -40032,10 +40029,7 @@
   "displayname": "Battery Assault",
   "level": 0,
   "manacost": [
-   75,
-   75,
-   75,
-   75
+   100
   ],
   "name": "rattletrap_battery_assault"
  },
@@ -43061,19 +43055,13 @@
     ]
    },
    {
-    "name": "caustic_finale_damage_expire_tooltip",
+    "name": "caustic_finale_damage_expire",
     "tooltip": "EXPLODE TIMER DAMAGE:",
     "value": [
-     45,
-     65,
-     85,
+     20,
+     50,
+     80,
      110
-    ]
-   },
-   {
-    "name": "caustic_finale_damage_reduced",
-    "value": [
-     50.0
     ]
    },
    {
@@ -43633,9 +43621,7 @@
    "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
   ],
   "cooldown": [
-   50,
-   50,
-   50
+   40
   ],
   "damage": [
    0,
@@ -51137,6 +51123,64 @@
    0
   ],
   "name": "special_bonus_attack_speed_100"
+ },
+ "special_bonus_attack_speed_140": {
+  "AbilityCastPoint": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "AbilityCastRange": 0,
+  "AbilityCastRangeBuffer": 250,
+  "AbilityChannelTime": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "AbilityDuration": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "AbilityModifierSupportBonus": 0,
+  "AbilityModifierSupportValue": 1,
+  "ID": 6555,
+  "abilitytype": "DOTA_ABILITY_TYPE_ATTRIBUTES",
+  "attributes": [
+   {
+    "name": "value",
+    "value": [
+     140
+    ]
+   }
+  ],
+  "behavior": [
+   "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+  ],
+  "cooldown": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "damage": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "displayname": "+140 Attack Speed",
+  "level": 0,
+  "manacost": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "name": "special_bonus_attack_speed_140"
  },
  "special_bonus_attack_speed_15": {
   "AbilityCastPoint": [
@@ -60766,6 +60810,64 @@
   ],
   "name": "special_bonus_spell_lifesteal_30"
  },
+ "special_bonus_spell_lifesteal_60": {
+  "AbilityCastPoint": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "AbilityCastRange": 0,
+  "AbilityCastRangeBuffer": 250,
+  "AbilityChannelTime": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "AbilityDuration": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "AbilityModifierSupportBonus": 0,
+  "AbilityModifierSupportValue": 1,
+  "ID": 6575,
+  "abilitytype": "DOTA_ABILITY_TYPE_ATTRIBUTES",
+  "attributes": [
+   {
+    "name": "value",
+    "value": [
+     60
+    ]
+   }
+  ],
+  "behavior": [
+   "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+  ],
+  "cooldown": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "damage": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "displayname": "60% Spell Lifesteal",
+  "level": 0,
+  "manacost": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "name": "special_bonus_spell_lifesteal_60"
+ },
  "special_bonus_spell_lifesteal_70": {
   "AbilityCastPoint": [
    0,
@@ -63521,7 +63623,7 @@
    {
     "name": "value",
     "value": [
-     12
+     14
     ]
    }
   ],
@@ -63540,7 +63642,7 @@
    0,
    0
   ],
-  "displayname": "+12 Spiders Attack Damage",
+  "displayname": "+14 Spiders Attack Damage",
   "level": 0,
   "manacost": [
    0,
@@ -66189,7 +66291,7 @@
    {
     "name": "value",
     "value": [
-     60
+     -60
     ]
    }
   ],
@@ -66364,6 +66466,12 @@
     "name": "value",
     "value": [
      2
+    ]
+   },
+   {
+    "name": "value2",
+    "value": [
+     1
     ]
    }
   ],
@@ -68109,13 +68217,13 @@
    {
     "name": "value",
     "value": [
-     40
+     35
     ]
    },
    {
     "name": "value2",
     "value": [
-     4
+     3
     ]
    }
   ],
@@ -68134,7 +68242,7 @@
    0,
    0
   ],
-  "displayname": "+40/4% Fiery Soul Per Stack",
+  "displayname": "+35/3% Fiery Soul Per Stack",
   "level": 0,
   "manacost": [
    0,
@@ -71253,7 +71361,7 @@
    {
     "name": "value",
     "value": [
-     150
+     200
     ]
    }
   ],
@@ -71272,7 +71380,7 @@
    0,
    0
   ],
-  "displayname": "+150 Nether Blast Damage",
+  "displayname": "+200 Nether Blast Damage",
   "level": 0,
   "manacost": [
    0,
@@ -77728,10 +77836,10 @@
    "DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
   ],
   "cooldown": [
-   32,
-   26,
-   20,
-   14
+   34,
+   28,
+   22,
+   16
   ],
   "damage": [
    0,
@@ -84137,7 +84245,7 @@
   "displayname": "Grave Chill",
   "level": 0,
   "manacost": [
-   100
+   90
   ],
   "name": "visage_grave_chill"
  },
@@ -85796,7 +85904,7 @@
   "displayname": "Windrun",
   "level": 0,
   "manacost": [
-   75
+   60
   ],
   "name": "windrunner_windrun"
  },
@@ -85869,9 +85977,9 @@
     "name": "move_slow",
     "tooltip": "%MOVEMENT SLOW:",
     "value": [
-     19,
-     26,
-     33,
+     22,
+     28,
+     34,
      40
     ]
    },
@@ -85978,7 +86086,7 @@
     "name": "heal_additive",
     "tooltip": "BASE HEALTH REGEN:",
     "value": [
-     20
+     25
     ]
    },
    {
@@ -86500,9 +86608,6 @@
   "displayname": "Spirits",
   "level": 0,
   "manacost": [
-   120,
-   130,
-   140,
    150
   ],
   "name": "wisp_spirits"

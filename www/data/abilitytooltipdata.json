@@ -32,7 +32,7 @@
   "lore": "The flames of conquest blaze forth from the darkest depths of the abyss."
  },
  "abyssal_underlord_pit_of_malice": {
-  "description": "A deadly pit is conjured at the target location; any unit that enters will be rooted for %ensnare_duration% seconds. Each enemy unit within the pit are affected every %pit_interval% seconds.",
+  "description": "A deadly pit is conjured at the target location; any unit that enters will be rooted. Each enemy unit within the pit are affected every %pit_interval% seconds.",
   "lore": "Twisting into the seams of reality itself, Vrogros' manifest hatred paralyzes those who defy his will."
  },
  "alchemist_acid_spray": {
@@ -361,7 +361,7 @@
   "description": "The Centaur Conqueror's powerful hooves stomp the ground, stunning and damaging nearby enemies. Heroes recover more quickly."
  },
  "centaur_return": {
-  "description": "Centaur applies an aura to nearby allied units. Causes allies to counters every attack, damaging the attacker based on a percentage of Centaur's strength.",
+  "description": "Centaur applies an aura to nearby allied units. Causes allies to counter every attack, damaging the attacker based on a percentage of Centaur's strength.",
   "lore": "Bradwarden has no need to parry his opponent's attacks; his armor-like hide does it for him."
  },
  "centaur_stampede": {
@@ -613,7 +613,7 @@
   "lore": "It is with the power of a mountain that Earth Spirit strikes his enemies."
  },
  "earth_spirit_geomagnetic_grip": {
-  "description": "Earth Spirit pulls the target Stone Remnant. Enemies struck by the gripped target will be silenced, and take damage if the gripped target is a Stone Remnant.\\n\\nUpgradable by Aghanim's Scepter.",
+  "description": "Earth Spirit pulls the target Stone Remnant. Enemies struck by the gripped target will be silenced, and take damage if the gripped target is a Stone Remnant.",
   "lore": "Like calls to like. Even the minerals found in the blood and bones of living beings are not immune to the call of the Earth Spirit."
  },
  "earth_spirit_magnetize": {
@@ -1877,7 +1877,7 @@
   "lore": "Crixalis often lies in wait, burrowing under the surface to ambush his adversaries."
  },
  "sandking_caustic_finale": {
-  "description": "Sand King's attacks inject a venom that causes enemy units to violently explode when its timer expires, or when the unit dies, damaging and slowing nearby enemies. Deals %caustic_finale_expire_dmg_pct_tooltip%%% damage if its timer expires.",
+  "description": "Sand King's attacks inject a venom that causes enemy units to violently explode when its timer expires, or when the unit dies, damaging and slowing nearby enemies. Deals less damage if its timer expires.",
   "lore": "An injection from Crixalis makes one brittle and as dry as the arid wastes, subject to implosive demise."
  },
  "sandking_epicenter": {
@@ -2133,6 +2133,7 @@
  "special_bonus_attack_range_75": {},
  "special_bonus_attack_speed_10": {},
  "special_bonus_attack_speed_100": {},
+ "special_bonus_attack_speed_140": {},
  "special_bonus_attack_speed_15": {},
  "special_bonus_attack_speed_20": {},
  "special_bonus_attack_speed_25": {},
@@ -2299,6 +2300,7 @@
  "special_bonus_spell_lifesteal_15": {},
  "special_bonus_spell_lifesteal_20": {},
  "special_bonus_spell_lifesteal_30": {},
+ "special_bonus_spell_lifesteal_60": {},
  "special_bonus_spell_lifesteal_70": {},
  "special_bonus_spell_lifesteal_8": {},
  "special_bonus_strength_10": {},

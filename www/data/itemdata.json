@@ -1155,7 +1155,7 @@
     "name": "target_crit_multiplier",
     "tooltip": "%SILENCE CRITICAL DAMAGE:",
     "value": [
-     145.0
+     140.0
     ]
    }
   ],
@@ -3840,7 +3840,7 @@
     "name": "disarm_range",
     "tooltip": "DISARM RANGED DURATION:",
     "value": [
-     5.5
+     5.0
     ]
    },
    {
@@ -6158,7 +6158,7 @@
    }
   ],
   "cooldown": [],
-  "description": "Passive: Poison Attack - Poisons the target, dealing damage over time and slowing movement based on whether the equipped hero is melee or ranged.",
+  "description": "Passive: Poison Attack - Poisons the target, dealing %poison_damage% damage per second for %poison_duration% seconds and slowing movement %poison_movement_speed_melee%%% if the equipped hero is melee or %poison_movement_speed_range%%% if they are ranged.",
   "displayname": "Orb of Venom",
   "id": 181,
   "itemcost": 275,
@@ -8451,7 +8451,7 @@
   "description": null,
   "displayname": "Veil of Discord Recipe",
   "id": 189,
-  "itemcost": 400,
+  "itemcost": 500,
   "level": 0,
   "lore": null,
   "manacost": [],
@@ -10896,7 +10896,7 @@
   "description": "Active: Magic Weakness - Emits a weakening blast that increases the magic damage enemies take. Lasts %resist_debuff_duration% seconds.",
   "displayname": "Veil of Discord",
   "id": 190,
-  "itemcost": 2240,
+  "itemcost": 2340,
   "level": 0,
   "lore": "The headwear of corrupt magi.",
   "manacost": [
