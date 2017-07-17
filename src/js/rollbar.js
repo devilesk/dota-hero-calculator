@@ -1,4 +1,4 @@
-var Rollbar = require("rollbar-browser");
+var Rollbar = require("rollbar");
 
 var rollbarConfig = {
     accessToken: "#rollbar_client_token",
@@ -17,6 +17,6 @@ var rollbarConfig = {
     }
 };
 
-var rollbar = Rollbar.init(rollbarConfig);
+var rollbar = new Rollbar(rollbarConfig);
 
 module.exports = rollbar;
