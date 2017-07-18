@@ -631,15 +631,34 @@ var InventoryViewModel = function (itemData, h) {
                             excludeList.push(item + '_' + attribute.name);
                         }
                     break;
-                    case 'aura_negative_armor':
-                        totalAttribute += parseInt(attribute.value[0]);
-                        excludeList.push(attribute.name);
-                    break;
                     case 'corruption_armor':
                         totalAttribute += parseInt(attribute.value[0]);
                         // allow blight_stone and desolator corruption_armor stacking from different sources, but not from same source
                         excludeList.push(item + '_' + attribute.name);
                         selfExcludeList.push(attribute.name);
+                    break;
+                }
+            }
+        }
+        return {value: totalAttribute, excludeList: excludeList};
+    };
+    self.getArmorReductionAura = function (e) {
+        var totalAttribute = 0,
+            excludeList = e || [],
+            selfExcludeList = [];
+        for (var i = 0; i < self.items().length; i++) {
+            var item = self.items()[i].item;
+            var isActive = self.activeItems.indexOf(self.items()[i]) >= 0 ? true : false;
+            if (!self.items()[i].enabled()) continue;
+            for (var j = 0; j < itemData['item_' + item].attributes.length; j++) {
+                var attribute = itemData['item_' + item].attributes[j];
+                if (excludeList.indexOf(attribute.name) > -1 || excludeList.indexOf(item + '_' + attribute.name) > -1) continue;
+                // self exclusion check only for hero items, not buff items
+                if (self.hero && (selfExcludeList.indexOf(attribute.name) > -1 || selfExcludeList.indexOf(item + '_' + attribute.name) > -1)) continue;
+                switch(attribute.name) {
+                    case 'aura_negative_armor':
+                        totalAttribute += parseInt(attribute.value[0]);
+                        excludeList.push(attribute.name);
                     break;
                 }
             }

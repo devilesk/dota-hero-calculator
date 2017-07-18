@@ -297,6 +297,11 @@ var HeroModel = function (heroData, itemData, h) {
             obj.value += memo.value;
             return obj;
         }, {value: 0, excludeList: []});
+        var armorReductionAura = [self.enemy().inventory.getArmorReductionAura, self.debuffs.itemBuffs.getArmorReductionAura].reduce(function (memo, fn) {
+            var obj = fn(memo.excludeList);
+            obj.value += memo.value;
+            return obj;
+        }, {value: 0, excludeList: []});
         return (self.enemy().ability().getArmorBaseReduction() * self.debuffs.getArmorBaseReduction() * (self.heroData().armorphysical + self.totalAgi() * .14)
                 + (self.isIllusion() ? 0 : self.inventory.getArmor()
                     //+ self.inventory.getArmorAura().value
@@ -304,8 +309,9 @@ var HeroModel = function (heroData, itemData, h) {
                     + self.ability().getArmor()
                     + TalentController.getArmor(self.selectedTalents())
                     + self.buffs.getArmor()
+                    + armorAura.value
+                    + armorReductionAura.value
                     )
-                + armorAura.value
                 + self.enemy().ability().getArmorReduction()
                 //+ self.buffs.itemBuffs.getArmor()
                 + self.debuffs.getArmorReduction()
@@ -463,16 +469,18 @@ var HeroModel = function (heroData, itemData, h) {
                 self.baseDamage()[1] + self.bonusDamage()];
     });
     self.totalMagicResistanceProduct = ko.pureComputed(function () {
-        return (1 - self.heroData().magicalresistance / 100) 
-                * self.inventory.getMagicResist()
-                * self.ability().getMagicResist()
-                * TalentController.getMagicResist(self.selectedTalents())
-                * self.buffs.getMagicResist()
-                * self.inventory.getMagicResistReductionSelf()
-                * self.enemy().inventory.getMagicResistReduction()
-                * self.enemy().ability().getMagicResistReduction()
-                * self.debuffs.getMagicResistReduction()
-                * self.debuffs.itemBuffs.getMagicResistReduction();
+        return (1 - self.heroData().magicalresistance / 100)
+                * (self.isIllusion() ? 
+                    self.inventory.getMagicResist()
+                    * self.ability().getMagicResist()
+                    * TalentController.getMagicResist(self.selectedTalents())
+                    * self.buffs.getMagicResist()
+                    * self.inventory.getMagicResistReductionSelf()
+                    * self.enemy().inventory.getMagicResistReduction()
+                    * self.enemy().ability().getMagicResistReduction()
+                    * self.debuffs.getMagicResistReduction()
+                    * self.debuffs.itemBuffs.getMagicResistReduction()
+                : 1);
     });
     self.totalMagicResistance = ko.pureComputed(function () {
         return ((1 - self.totalMagicResistanceProduct()) * 100).toFixed(2);

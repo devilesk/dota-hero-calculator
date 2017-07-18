@@ -332,81 +332,112 @@ var HeroDamageMixin = function (self, itemData) {
             totalCritableDamage += baseDamage;
             damage.physical += baseDamage;
             
-            // bonus damage from items
-            for (i in itemBonusDamage) {
-                var d = itemBonusDamage[i].damage*itemBonusDamage[i].count * self.ability().getSelfBaseDamageReductionPct() * self.enemy().ability().getBaseDamageReductionPct() * self.debuffs.itemBuffs.getBaseDamageReductionPct();
-                result.push({
-                    name: itemBonusDamage[i].displayname + (itemBonusDamage[i].count > 1 ? ' x' + itemBonusDamage[i].count : ''),
-                    damage: d,
-                    damageType: itemBonusDamage[i].damageType,
-                    damageReduced: self.getReducedDamage(d, itemBonusDamage[i].damageType),
-                    enabled: ko.observable(true)
-                });
-                totalDamage += d;
-                totalCritableDamage += d;
-                damage[itemBonusDamage[i].damageType] += d;
-            }
+            if (!self.isIllusion()) {
+                // bonus damage from items
+                for (i in itemBonusDamage) {
+                    var d = itemBonusDamage[i].damage*itemBonusDamage[i].count * self.ability().getSelfBaseDamageReductionPct() * self.enemy().ability().getBaseDamageReductionPct() * self.debuffs.itemBuffs.getBaseDamageReductionPct();
+                    result.push({
+                        name: itemBonusDamage[i].displayname + (itemBonusDamage[i].count > 1 ? ' x' + itemBonusDamage[i].count : ''),
+                        damage: d,
+                        damageType: itemBonusDamage[i].damageType,
+                        damageReduced: self.getReducedDamage(d, itemBonusDamage[i].damageType),
+                        enabled: ko.observable(true)
+                    });
+                    totalDamage += d;
+                    totalCritableDamage += d;
+                    damage[itemBonusDamage[i].damageType] += d;
+                }
 
-            // bonus damage percent from items
-            for (i in itemBonusDamagePct) {
-                var d = baseDamage * itemBonusDamagePct[i].damage;
-                result.push({
-                    name: itemBonusDamagePct[i].displayname,
-                    damage: d,
-                    damageType: itemBonusDamagePct[i].damageType,
-                    damageReduced: self.getReducedDamage(d, itemBonusDamagePct[i].damageType),
-                    enabled: ko.observable(true)
-                });
-                totalDamage += d;
-                totalCritableDamage += d;
-                damage[itemBonusDamagePct[i].damageType] += d;
-            }
-            
-            // bonus damage from abilities and buffs
-            for (var i = 0; i < bonusDamageArray.length; i++) {
-                for (j in bonusDamageArray[i]) {
-                    var d = bonusDamageArray[i][j].damage;
+                // bonus damage percent from items
+                for (i in itemBonusDamagePct) {
+                    var d = baseDamage * itemBonusDamagePct[i].damage;
                     result.push({
-                        name: bonusDamageArray[i][j].displayname,
+                        name: itemBonusDamagePct[i].displayname,
                         damage: d,
-                        damageType: bonusDamageArray[i][j].damageType,
-                        damageReduced: self.getReducedDamage(d, bonusDamageArray[i][j].damageType),
+                        damageType: itemBonusDamagePct[i].damageType,
+                        damageReduced: self.getReducedDamage(d, itemBonusDamagePct[i].damageType),
                         enabled: ko.observable(true)
                     });
                     totalDamage += d;
                     totalCritableDamage += d;
-                    damage[bonusDamageArray[i][j].damageType] += d;
+                    damage[itemBonusDamagePct[i].damageType] += d;
                 }
-            }
             
-            // bonus damage percent from abilities and buffs
-            for (var i = 0; i < bonusDamagePctArray.length; i++) {
-                for (j in bonusDamagePctArray[i]) {
-                    var d = baseDamage * bonusDamagePctArray[i][j].damage;
-                    result.push({
-                        name: bonusDamagePctArray[i][j].displayname,
-                        damage: d,
-                        damageType: bonusDamagePctArray[i][j].damageType,
-                        damageReduced: self.getReducedDamage(d, bonusDamagePctArray[i][j].damageType),
-                        enabled: ko.observable(true)
-                    });
-                    totalDamage += d;
-                    totalCritableDamage += d;
-                    damage[bonusDamagePctArray[i][j].damageType] += d;
+                // bonus damage from abilities and buffs
+                for (var i = 0; i < bonusDamageArray.length; i++) {
+                    for (j in bonusDamageArray[i]) {
+                        var d = bonusDamageArray[i][j].damage;
+                        result.push({
+                            name: bonusDamageArray[i][j].displayname,
+                            damage: d,
+                            damageType: bonusDamageArray[i][j].damageType,
+                            damageReduced: self.getReducedDamage(d, bonusDamageArray[i][j].damageType),
+                            enabled: ko.observable(true)
+                        });
+                        totalDamage += d;
+                        totalCritableDamage += d;
+                        damage[bonusDamageArray[i][j].damageType] += d;
+                    }
                 }
-            }
-            // drow_ranger_trueshot
-            if (self.heroData().attacktype === 'DOTA_UNIT_CAP_RANGED_ATTACK') {
-                if (self.heroId() === 'drow_ranger') {
-                    var s = self.ability().getBonusDamagePrecisionAura().sources;
+            
+                // bonus damage percent from abilities and buffs
+                for (var i = 0; i < bonusDamagePctArray.length; i++) {
+                    for (j in bonusDamagePctArray[i]) {
+                        var d = baseDamage * bonusDamagePctArray[i][j].damage;
+                        result.push({
+                            name: bonusDamagePctArray[i][j].displayname,
+                            damage: d,
+                            damageType: bonusDamagePctArray[i][j].damageType,
+                            damageReduced: self.getReducedDamage(d, bonusDamagePctArray[i][j].damageType),
+                            enabled: ko.observable(true)
+                        });
+                        totalDamage += d;
+                        totalCritableDamage += d;
+                        damage[bonusDamagePctArray[i][j].damageType] += d;
+                    }
+                }
+                
+                // drow_ranger_trueshot
+                if (self.heroData().attacktype === 'DOTA_UNIT_CAP_RANGED_ATTACK') {
+                    if (self.heroId() === 'drow_ranger') {
+                        var s = self.ability().getBonusDamagePrecisionAura().sources;
+                        var index = 0;
+                    }
+                    else {
+                        var s = self.buffs.getBonusDamagePrecisionAura().sources;
+                        var index = 1;
+                    }
+                    if (s[index] != undefined) {
+                        if (self.heroId() === 'drow_ranger') {
+                            var d = s[index].damage * self.totalAgi();
+                        }
+                        else {
+                            var d = s[index].damage;
+                        }
+                        result.push({
+                            name: s[index].displayname,
+                            damage: d,
+                            damageType: 'physical',
+                            damageReduced: self.getReducedDamage(d, 'physical'),
+                            enabled: ko.observable(true)
+                        });
+                        totalDamage += d;
+                        totalCritableDamage += d;
+                        damage.physical += d;                    
+                    }
+                }
+            
+                // riki_backstab
+                if (self.heroId() === 'riki') {
+                    var s = self.ability().getBonusDamageBackstab().sources;
                     var index = 0;
                 }
                 else {
-                    var s = self.buffs.getBonusDamagePrecisionAura().sources;
+                    var s = self.buffs.getBonusDamageBackstab().sources;
                     var index = 1;
                 }
                 if (s[index] != undefined) {
-                    if (self.heroId() === 'drow_ranger') {
+                    if (self.heroId() === 'riki') {
                         var d = s[index].damage * self.totalAgi();
                     }
                     else {
@@ -420,75 +451,46 @@ var HeroDamageMixin = function (self, itemData) {
                         enabled: ko.observable(true)
                     });
                     totalDamage += d;
-                    totalCritableDamage += d;
+                    //totalCritableDamage += d;
                     damage.physical += d;                    
                 }
-            }
-            
-            // riki_backstab
-            if (self.heroId() === 'riki') {
-                var s = self.ability().getBonusDamageBackstab().sources;
-                var index = 0;
-            }
-            else {
-                var s = self.buffs.getBonusDamageBackstab().sources;
-                var index = 1;
-            }
-            if (s[index] != undefined) {
-                if (self.heroId() === 'riki') {
-                    var d = s[index].damage * self.totalAgi();
-                }
-                else {
-                    var d = s[index].damage;
-                }
-                result.push({
-                    name: s[index].displayname,
-                    damage: d,
-                    damageType: 'physical',
-                    damageReduced: self.getReducedDamage(d, 'physical'),
-                    enabled: ko.observable(true)
-                });
-                totalDamage += d;
-                //totalCritableDamage += d;
-                damage.physical += d;                    
-            }
 
-            // bash damage
-            for (var i = 0; i < bashSources.sources.length; i++) {
-                var o = bashSources.sources[i];
-                var d = bashSources.sources[i].damage;
-                var cd = self.attacksPerSecond();
-                if (o.cooldown) {
-                    cd = Math.max(1/o.cooldown, cd);
+                // bash damage
+                for (var i = 0; i < bashSources.sources.length; i++) {
+                    var o = bashSources.sources[i];
+                    var d = bashSources.sources[i].damage;
+                    var cd = self.attacksPerSecond();
+                    if (o.cooldown) {
+                        cd = Math.max(1/o.cooldown, cd);
+                    }
+                    for (var j = 0; j < bashSources.sources[i].count; j++) {
+                        result.push({
+                            name: bashSources.sources[i].name,
+                            damage: d,
+                            damageType: bashSources.sources[i].damageType,
+                            damageReduced: self.getReducedDamage(d, bashSources.sources[i].damageType),
+                            dps: d * cd * bashSources.sources[i].chance,
+                            dpsReduced: self.getReducedDamage(d, bashSources.sources[i].damageType) * cd * bashSources.sources[i].chance,
+                            enabled: ko.observable(true)
+                        });
+                        totalDamage += d;
+                        damage[bashSources.sources[i].damageType] += d;
+                    }
                 }
-                for (var j = 0; j < bashSources.sources[i].count; j++) {
+            
+                // %-based orbs
+                for (var i = 0; i < itemProcOrbSources.sources.length; i++) {
+                    var d = itemProcOrbSources.sources[i].damage * (1 - Math.pow(1 - itemProcOrbSources.sources[i].chance, itemProcOrbSources.sources[i].count));
                     result.push({
-                        name: bashSources.sources[i].name,
+                        name: itemProcOrbSources.sources[i].name,
                         damage: d,
-                        damageType: bashSources.sources[i].damageType,
-                        damageReduced: self.getReducedDamage(d, bashSources.sources[i].damageType),
-                        dps: d * cd * bashSources.sources[i].chance,
-                        dpsReduced: self.getReducedDamage(d, bashSources.sources[i].damageType) * cd * bashSources.sources[i].chance,
+                        damageType: itemProcOrbSources.sources[i].damageType,
+                        damageReduced: self.getReducedDamage(d, itemProcOrbSources.sources[i].damageType),
                         enabled: ko.observable(true)
                     });
                     totalDamage += d;
-                    damage[bashSources.sources[i].damageType] += d;
+                    damage[itemProcOrbSources.sources[i].damageType] += d;
                 }
-
-            }
-            
-            // %-based orbs
-            for (var i = 0; i < itemProcOrbSources.sources.length; i++) {
-                var d = itemProcOrbSources.sources[i].damage * (1 - Math.pow(1 - itemProcOrbSources.sources[i].chance, itemProcOrbSources.sources[i].count));
-                result.push({
-                    name: itemProcOrbSources.sources[i].name,
-                    damage: d,
-                    damageType: itemProcOrbSources.sources[i].damageType,
-                    damageReduced: self.getReducedDamage(d, itemProcOrbSources.sources[i].damageType),
-                    enabled: ko.observable(true)
-                });
-                totalDamage += d;
-                damage[itemProcOrbSources.sources[i].damageType] += d;
             }
             
             // ability orbs
