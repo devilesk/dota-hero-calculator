@@ -470,7 +470,7 @@ var HeroModel = function (heroData, itemData, h) {
     });
     self.totalMagicResistanceProduct = ko.pureComputed(function () {
         return (1 - self.heroData().magicalresistance / 100)
-                * (self.isIllusion() ? 
+                * (self.isIllusion() ? 1 :
                     self.inventory.getMagicResist()
                     * self.ability().getMagicResist()
                     * TalentController.getMagicResist(self.selectedTalents())
@@ -480,7 +480,7 @@ var HeroModel = function (heroData, itemData, h) {
                     * self.enemy().ability().getMagicResistReduction()
                     * self.debuffs.getMagicResistReduction()
                     * self.debuffs.itemBuffs.getMagicResistReduction()
-                : 1);
+                  );
     });
     self.totalMagicResistance = ko.pureComputed(function () {
         return ((1 - self.totalMagicResistanceProduct()) * 100).toFixed(2);

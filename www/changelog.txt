@@ -1,3 +1,6 @@
+2017-07-29
+- Fixed Magic Resistance calculation.
+
 2017-07-18
 - Updated Illusion damage calculations.
 

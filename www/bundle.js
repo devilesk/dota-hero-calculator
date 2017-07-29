@@ -18123,7 +18123,7 @@ var HeroModel = function (heroData, itemData, h) {
     });
     self.totalMagicResistanceProduct = ko.pureComputed(function () {
         return (1 - self.heroData().magicalresistance / 100)
-                * (self.isIllusion() ? 
+                * (self.isIllusion() ? 1 :
                     self.inventory.getMagicResist()
                     * self.ability().getMagicResist()
                     * TalentController.getMagicResist(self.selectedTalents())
@@ -18133,7 +18133,7 @@ var HeroModel = function (heroData, itemData, h) {
                     * self.enemy().ability().getMagicResistReduction()
                     * self.debuffs.getMagicResistReduction()
                     * self.debuffs.itemBuffs.getMagicResistReduction()
-                : 1);
+                  );
     });
     self.totalMagicResistance = ko.pureComputed(function () {
         return ((1 - self.totalMagicResistanceProduct()) * 100).toFixed(2);
@@ -26003,7 +26003,7 @@ var App = function (appConfig) {
         }
     });
 
-    var lastUpdate = "2017-07-18 11:29:15 UTC";
+    var lastUpdate = "2017-07-29 13:29:35 UTC";
     $('#last-update').text(lastUpdate);
 
     var rollbar = require('./rollbar');
@@ -26234,7 +26234,7 @@ var rollbarConfig = {
         client: {
             javascript: {
                 source_map_enabled: true,
-                code_version: "9cbd4fd3f5f1b92ca12d5856da846fc70315cbf1",
+                code_version: "3a1f922c5dbab0ce012c52343af8ada2469a2367",
                 // Optionally have Rollbar guess which frames the error was thrown from
                 // when the browser does not provide line and column numbers.
                 guess_uncaught_frames: true
