@@ -536,8 +536,10 @@ var HeroCalculatorViewModel = function (tooltipURL) {
 
             // load abilities
             for (var j = 0; j < data.heroes[i].abilities.length; j++) {
-                hero.ability().abilities()[j].level(data.heroes[i].abilities[j].level);
-                hero.ability().abilities()[j].isActive(data.heroes[i].abilities[j].isActive);
+                if (hero.ability().abilities()[j]) {
+                    hero.ability().abilities()[j].level(data.heroes[i].abilities[j].level);
+                    hero.ability().abilities()[j].isActive(data.heroes[i].abilities[j].isActive);
+                }
             }
             hero.skillPointHistory(data.heroes[i].skillPointHistory);
 
