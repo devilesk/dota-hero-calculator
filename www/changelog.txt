@@ -1,3 +1,6 @@
+2017-08-21
+- Updated to patch 7.06f
+
 2017-07-29
 - Fixed Magic Resistance calculation.
 

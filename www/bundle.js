@@ -12566,8 +12566,10 @@ var HeroCalculatorViewModel = function (tooltipURL) {
 
             // load abilities
             for (var j = 0; j < data.heroes[i].abilities.length; j++) {
-                hero.ability().abilities()[j].level(data.heroes[i].abilities[j].level);
-                hero.ability().abilities()[j].isActive(data.heroes[i].abilities[j].isActive);
+                if (hero.ability().abilities()[j]) {
+                    hero.ability().abilities()[j].level(data.heroes[i].abilities[j].level);
+                    hero.ability().abilities()[j].isActive(data.heroes[i].abilities[j].isActive);
+                }
             }
             hero.skillPointHistory(data.heroes[i].skillPointHistory);
 
@@ -26003,7 +26005,7 @@ var App = function (appConfig) {
         }
     });
 
-    var lastUpdate = "2017-07-29 13:29:35 UTC";
+    var lastUpdate = "2017-08-21 11:42:27 UTC";
     $('#last-update').text(lastUpdate);
 
     var rollbar = require('./rollbar');
@@ -26234,7 +26236,7 @@ var rollbarConfig = {
         client: {
             javascript: {
                 source_map_enabled: true,
-                code_version: "3a1f922c5dbab0ce012c52343af8ada2469a2367",
+                code_version: "e0cdd50bf66eaa6969d039682e828136842a9d0c",
                 // Optionally have Rollbar guess which frames the error was thrown from
                 // when the browser does not provide line and column numbers.
                 guess_uncaught_frames: true
