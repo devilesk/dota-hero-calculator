@@ -1284,42 +1284,42 @@
   "Lore": ""
  },
  "item_abyssal_blade": {
-  "Description": "Active: Overwhelm - Stuns a target enemy unit for %stun_duration% seconds. Pierces Spell Immunity.\\nPassive: Bash - Grants each attack a chance to stun the target for %bash_duration% seconds and deal %bonus_chance_damage% bonus damage, based on whether the equipped hero is ranged or melee.\\nPassive: Damage Block - Grants the wielder a %block_chance%%% chance to block damage from incoming attacks based on whether the equipped hero is melee or ranged.",
+  "Description": "<h1>Active: Overwhelm</h1> Stuns a target enemy unit for %stun_duration% seconds. <br><br>Pierces Spell Immunity.\\n<h1>Passive: Bash</h1> Grants melee heroes a %bash_chance_melee%% chance on hit to stun the target for %bash_duration% seconds and deal %bonus_chance_damage% bonus damage.  Bash chance for ranged heroes is %bash_chance_ranged%%. \\n<h1>Passive: Damage Block</h1>Grants a %block_chance%%% chance to block %block_damage_melee% damage on melee heroes, and %block_damage_ranged% damage on ranged.",
   "DisplayName": "Abyssal Blade",
   "Lore": "The lost blade of the Commander of the Abyss, this edge cuts into an enemy's soul."
  },
  "item_aegis": {
-  "Description": "Passive: Reincarnation - Brings you to life with full health and mana %reincarnate_time% seconds after you die, at the location where you died. Reincarnation must be used within %disappear_time_minutes_tooltip% minutes or Aegis of the Immortal disappears. If it expires, it will heal you over 5 seconds (dispels on damage).",
+  "Description": "<h1>Passive: Reincarnation</h1> Brings you to life with full health and mana %reincarnate_time% seconds after you die, at the location where you died. <br><br>Reincarnation must be used within %disappear_time_minutes_tooltip% minutes or Aegis of the Immortal disappears. If it expires, it will heal you over 5 seconds (dispels on damage).",
   "DisplayName": "Aegis of the Immortal",
   "Lore": "The Immortal was said to own a shield that protected him from death itself."
  },
  "item_aether_lens": {
-  "Description": "Passive: Increases spell cast range by %cast_range_bonus% and spell damage output by %spell_amp%%%",
+  "Description": "<h1>Passive: Aethereal Focus</h1> Increases targeted spell and item cast range by %cast_range_bonus%.",
   "DisplayName": "Aether Lens",
   "Lore": "Polished with the incantation of his final breath, the gift of a dying mage to his sickly son."
  },
  "item_ancient_janggo": {
-  "Description": "Active: Endurance - Gives bonus +%bonus_attack_speed_pct% attack speed and +%bonus_movement_speed_pct%%% movement speed to allies in a %radius% radius.\\nPassive: Swiftness Aura - Gives bonus movement speed to allies in a %radius% radius.\\n\\nMultiple instances of Swiftness Aura do not stack.",
+  "Description": "<h1>Active: Endurance</h1> Gives +%bonus_attack_speed_pct% attack speed and +%bonus_movement_speed_pct%%% movement speed to nearby allies for %duration% seconds. <br><br>Radius: %radius%\\n<h1>Passive: Swiftness Aura</h1>Gives %bonus_aura_movement_speed% movement speed to nearby allies. <br><br>Radius: %radius%",
   "DisplayName": "Drum of Endurance",
   "Lore": "A relic that enchants the bodies of those around it for swifter movement in times of crisis."
  },
  "item_arcane_boots": {
-  "Description": "Active: Replenish Mana - Restores mana to all allies in a %replenish_radius% area around the hero.\\n\\nFlat movement speed bonuses from multiple pairs of boots do not stack.",
+  "Description": "<h1>Active: Replenish Mana</h1>Restores %replenish_amount% mana to all nearby allies.<br>Flat movement speed bonuses from multiple pairs of boots do not stack.<br><br>Radius: %replenish_radius%",
   "DisplayName": "Arcane Boots",
   "Lore": "Magi equipped with these boots are valued in battle."
  },
  "item_armlet": {
-  "Description": "Active: Toggle Unholy Strength - When active, Unholy Strength grants +%unholy_bonus_damage% damage, +%unholy_bonus_strength% strength and +%unholy_bonus_armor% armor, but drains %unholy_health_drain_per_second_tooltip% health per second.  You cannot die from the health drain when Unholy Strength is activated, nor from the strength loss when Unholy Strength is deactivated.",
+  "Description": "<h1>Toggle: Unholy Strength</h1>When active, Unholy Strength grants +%unholy_bonus_damage% damage, +%unholy_bonus_strength% strength and +%unholy_bonus_armor% armor, but drains %unholy_health_drain_per_second_tooltip% health per second.<br><br> You cannot die from the health drain when Unholy Strength is activated, nor from the strength loss when Unholy Strength is deactivated.",
   "DisplayName": "Armlet of Mordiggian",
   "Lore": "Weapon of choice among brutes, the bearer sacrifices his life energy to gain immense strength and power."
  },
  "item_assault": {
-  "Description": "Passive: Assault Aura - Grants attack speed and armor to nearby allied units and structures, and decreases the armor of nearby enemies.\\n\\nMultiple instances of Assault Aura do not stack.",
+  "Description": "<h1>Passive: Assault Aura</h1> Grants %aura_attack_speed% attack speed and %aura_positive_armor% armor to nearby allied units and structures, and decreases nearby enemy unit and structure armor by %aura_negative_armor%.<br><br>Radius: %aura_radius%",
   "DisplayName": "Assault Cuirass",
   "Lore": "Forged in the depths of the nether reaches, this hellish mail provides an army with increased armor and attack speed."
  },
  "item_basher": {
-  "Description": "Passive: Bash - Grants each attack a chance to stun the target for %bash_duration% seconds and deal %bonus_chance_damage% bonus damage, based on whether the equipped hero is ranged or melee.",
+  "Description": "<h1>Passive: Bash</h1> Grants melee heroes a %bash_chance_melee%%% chance on hit to stun the target for %bash_duration% seconds and deal %bonus_chance_damage% bonus damage.  Bash chance for ranged heroes is %bash_chance_ranged%%.",
   "DisplayName": "Skull Basher",
   "Lore": "A feared weapon in the right hands, this maul's ability to shatter the defenses of its opponents should not be underestimated."
  },
@@ -1328,17 +1328,17 @@
   "Lore": "A valued accessory for improving vitality."
  },
  "item_bfury": {
-  "Description": "Active: Chop Tree/Ward - Destroy a target tree or ward. Chop cast range is increased when targetting wards.\\nPassive: Quell - Increases attack damage against non-hero units, based on whether the equipped hero is ranged or melee. Does not provide bonus damage against Roshan.\\nPassive: Cleave - Deals a percent of attack damage in an area around the target. Ranged units cannot Cleave.",
+  "Description": "<h1>Active: Chop Tree/Ward</h1> Destroy a target tree or ward.<br><br>Tree Cast Range: %cast_range_tooltip%<br>Ward Cast Range: %cast_range_ward% \\n<h1>Passive: Quell</h1> Increases attack damage against non-hero units by %tooltip_quelling_bonus%%% for melee heroes, and %tooltip_quelling_bonus_ranged%%% for ranged. \\n<h1>Passive: Cleave</h1> Deals %cleave_damage_percent%%% of attack damage in a cone up to %cleave_distance% around the target. (Melee Only)",
   "DisplayName": "Battle Fury",
   "Lore": "The bearer of this mighty axe gains the ability to cut down swaths of enemies at once."
  },
  "item_black_king_bar": {
-  "Description": "Active: Avatar - Grants Spell Immunity and 100% Magic Damage Resistance.  Duration and cooldown decrease with each use.  Some abilities are able to disable through Avatar.\\n\\nDISPEL TYPE: Basic Dispel",
+  "Description": "<h1>Active: Avatar</h1> Grants Spell Immunity and 100%% Magic Damage Resistance.  Duration and cooldown decrease with each use. <br><br>Duration: %duration% <br>Dispel Type: <span class=\\\"GameplayValues GameplayVariable\\\">Basic Dispel</span>",
   "DisplayName": "Black King Bar",
   "Lore": "A powerful staff imbued with the strength of giants."
  },
  "item_blade_mail": {
-  "Description": "Active: Damage Return - Reflects any damage taken back to the unit that dealt the damage.  Lasts %duration% seconds.",
+  "Description": "<h1>Active: Damage Return</h1>For %duration% seconds, duplicates any damage taken back to the unit that dealt the damage.",
   "DisplayName": "Blade Mail",
   "Lore": "A razor-sharp coat of mail, it is the choice of selfless martyrs in combat."
  },
@@ -1351,22 +1351,22 @@
   "Lore": "The damage of these small, concealable blades should not be underestimated."
  },
  "item_blight_stone": {
-  "Description": "Passive: Your attacks reduce target's armor for %corruption_duration% seconds.",
+  "Description": "<h1>Passive: Lesser Corruption</h1> Your attacks reduce the target's armor by %corruption_armor% for %corruption_duration% seconds.",
   "DisplayName": "Blight Stone",
   "Lore": "An unnerving stone unearthed beneath the Fields of Endless Carnage."
  },
  "item_blink": {
-  "Description": "Active: Blink - Teleport to a target point up to %blink_range% units away.  If damage is taken, Blink Dagger cannot be used for %blink_damage_cooldown% seconds.",
+  "Description": "<h1>Active: Blink</h1> Teleport to a target point up to %blink_range% units away. <br><br>Blink Dagger cannot be used for %blink_damage_cooldown% seconds after taking damage from an enemy hero or Roshan.",
   "DisplayName": "Blink Dagger",
   "Lore": "The fabled dagger used by the fastest assassin ever to walk the lands."
  },
  "item_bloodstone": {
-  "Description": "Active: Pocket Deny - Instantly causes you to die.\\nPassive: Bloodpact - Begins with 12 charges, and gains a charge each time an enemy hero dies within 1675 range. Each charge grants 1 mana regeneration per second, and reduces respawn time by %respawn_time_reduction% seconds. If the bearer dies, %heal_on_death_base% + %heal_on_death_per_charge% health per charge is restored to all allies within a %heal_on_death_range% radius, while the Bloodstone loses a third of its charges.",
+  "Description": "<h1>Active: Pocket Deny</h1>Instantly causes you to die.<br><br>Must ground target to cast.  Cannot self cast.\\n<h1>Passive: Bloodpact</h1>Begins with %tooltip_charges% charges, and gains a charge each time an enemy hero dies within %charge_range% range. <br><br>Each charge grants %tooltip_mana_per_charge% mana regeneration per second, and reduces respawn time by %respawn_time_reduction% seconds. <br><br>If the bearer dies, %heal_on_death_base% + %heal_on_death_per_charge% health per charge is restored to all nearby allies, while the Bloodstone loses a third of its charges. <br><br>Heal Radius: %heal_on_death_range%",
   "DisplayName": "Bloodstone",
   "Lore": "The Bloodstone's bright ruby color is unmistakable on the battlefield, as the owner seems to have infinite vitality and spirit."
  },
  "item_bloodthorn": {
-  "Description": "Active: Silences a target for %silence_duration% seconds and amplifies the damage it takes by %silence_damage_percent%%%. All attacks on the silenced target will have True Strike and land a crit on impact.\\nPassive: Critical Strike - Grants each attack a chance to deal additional damage. Critical Strike does not work against buildings.",
+  "Description": "<h1>Active: Soul Rend</h1> Silences a target for %silence_duration% seconds. At the end of the silence, an additional %silence_damage_percent%%% of all damage taken during the silence will be dealt to the target as magic damage.<br>Range: %tooltip_range%<br><br>All attacks on the silenced target will have True Strike and %tooltip_crit_chance%%% chance to crit for %target_crit_multiplier%%% more damage.\\n<h1>Passive: Critical Strike</h1> Grants a %crit_chance%%% chance for attacks to inflict %crit_multiplier%%% more damage.",
   "DisplayName": "Bloodthorn",
   "Lore": "A reviled blade that bites deeper with each wriggle of its victim's final throes."
  },
@@ -1380,7 +1380,7 @@
   "Lore": "A tensile fabric often used for its light weight and ease of movement."
  },
  "item_bottle": {
-  "Description": "Use: Regenerate - Consumes a charge to restore Health and Mana over time. Healing stops if attacked.  Bottle can be refilled at your team's fountain.  Runes can be stored in the Bottle for later use, and are activated automatically after 2 minutes.  If Bottle does not have full charges and is placed on a courier, the courier will move 30%% slower.\\n\\nHold Control to use Regenerate on an allied hero.  Stored runes cannot be shared.",
+  "Description": "<h1>Active: Regenerate</h1>Consumes a charge to restore %health_restore% health and %mana_restore% mana over %restore_time% seconds.<br><br>Range: %tooltip_range%<br><br>Healing stops if attacked by an enemy hero or Roshan.  Bottle can be refilled at your team's fountain. Runes can be stored in the Bottle for later use, and are activated automatically after 2 minutes.",
   "DisplayName": "Bottle",
   "Lore": "An old bottle that survived the ages, the contents placed inside become enchanted."
  },
@@ -1389,7 +1389,7 @@
   "Lore": "The bracer is a common choice to toughen up defenses and increase longevity."
  },
  "item_branches": {
-  "Description": "Active: Targets the ground to plant a happy little tree that lasts for %tree_duration% seconds.",
+  "Description": "<h1>Use: Plant Tree</h1> Targets the ground to plant a happy little tree that lasts for %tree_duration% seconds.<br><br>Range: %range_tooltip%",
   "DisplayName": "Iron Branch",
   "Lore": "A seemingly ordinary branch, its ironlike qualities are bestowed upon the bearer."
  },
@@ -1398,12 +1398,12 @@
   "Lore": "The classic weapon of choice for knights, this blade is sturdy and reliable for slaying enemies."
  },
  "item_buckler": {
-  "Description": "Active: Armor Bonus - Gives +%bonus_aoe_armor% armor to all allied units in a %bonus_aoe_radius% radius.  Lasts 25 seconds on heroes, 30 seconds on units.",
+  "Description": "<h1>Active: Armor Bonus</h1> Gives +%bonus_aoe_armor% armor to all allied units.  Lasts %bonus_aoe_duration_hero% seconds on heroes, %bonus_aoe_duration% seconds on units.<br><br>Radius: %bonus_aoe_radius%",
   "DisplayName": "Buckler",
   "Lore": "A powerful shield that imbues the bearer with the strength of heroes past, it is capable of protecting entire armies in battle."
  },
  "item_butterfly": {
-  "Description": "Active: Flutter - Trade evasion for %bonus_move_speed%%% additional movement speed for %duration% seconds.\\n\\nStacks diminishingly with other sources of Evasion.",
+  "Description": "<h1>Active: Flutter</h1> Trades the %bonus_evasion%%% evasion for %bonus_move_speed%%% additional movement speed for %duration% seconds.",
   "DisplayName": "Butterfly",
   "Lore": "Only the mightiest and most experienced of warriors can wield the Butterfly, but it provides incredible dexterity in combat."
  },
@@ -1412,7 +1412,7 @@
   "Lore": "A medium weave of metal chains."
  },
  "item_cheese": {
-  "Description": "Use: Consume to instantly restore health and mana.",
+  "Description": "<h1>Use: Fondue</h1> Instantly restores %health_restore% health and %mana_restore% mana.",
   "DisplayName": "Cheese",
   "Lore": "Made from the milk of a long lost Furbolg vendor, it restores the vitality of those who taste it."
  },
@@ -1421,7 +1421,7 @@
   "Lore": "An elegant circlet designed for human princesses."
  },
  "item_clarity": {
-  "Description": "Use: Restores mana to the target unit over time.  If the unit is attacked by an enemy hero or Roshan, the effect is lost.",
+  "Description": "<h1>Use: Replenish</h1> Restores %total_mana% mana to the target unit over %buff_duration% seconds.<br><br>If the unit is attacked by an enemy hero or Roshan, the effect is lost.<br><br>Range: %range_tooltip%",
   "DisplayName": "Clarity",
   "Lore": "Clear water that enhances the ability to meditate."
  },
@@ -1434,42 +1434,42 @@
   "Lore": "A cloak made of a magical material that works to dispel any magic cast on it."
  },
  "item_courier": {
-  "Description": "Use: Deploy Courier - Deploys a creature to carry items to and from your team's base.",
+  "Description": "<h1>Use: Deploy Courier</h1> Deploys a creature to carry items to and from your team's base.",
   "DisplayName": "Animal Courier",
   "Lore": "Losing the courier is punishable by death."
  },
  "item_crimson_guard": {
-  "Description": "Active: Guard - Grant nearby allied heroes and buildings a %block_chance_active%%% chance to block %block_damage_melee_active% damage from each incoming attack, along with %bonus_aoe_armor% armor. Lasts %duration% seconds.\\nPassive: Damage Block - Grants the wielder a %block_chance%%% chance to block damage from incoming attacks based on whether the equipped hero is melee or ranged.",
+  "Description": "<h1>Active: Guard</h1> For %duration% seconds, grant nearby allied heroes and buildings +%bonus_aoe_armor% armor, and a %block_chance_active%%% chance to block %block_damage_melee_active% damage from each incoming attack.<br><br>Units may only be affected by Guard once every %tooltip_reapply_time% seconds.<br><br>Radius: %bonus_aoe_radius%\\n<h1>Passive: Damage Block</h1> Grants a %block_chance%%% chance to block %block_damage_melee% damage on melee heroes, and %block_damage_ranged% damage on ranged.",
   "DisplayName": "Crimson Guard",
   "Lore": "A cuirass originally built to protect against the dreaded Year Beast."
  },
  "item_cyclone": {
-  "Description": "Active: Cyclone - Sweeps a target unit up into cyclone, making them invulnerable for %cyclone_duration% seconds. Cyclone can be cast on yourself. Enemy units take 50 magical damage upon landing.\\n\\nDISPEL TYPE: Basic Dispel",
+  "Description": "<h1>Active: Cyclone</h1> Sweeps a target unit up into a cyclone, making them invulnerable for %cyclone_duration% seconds. Cyclone can only be cast on enemy units or yourself.<br><br>Enemy units take %tooltip_drop_damage% magical damage upon landing.<br><br>Range: %cast_range_tooltip%<br>Dispel Type: <span class=\\\"GameplayValues GameplayVariable\\\">Basic Dispel</span>",
   "DisplayName": "Eul's Scepter of Divinity",
   "Lore": "A mysterious scepter passed down through the ages, its disruptive winds can be used for good or evil."
  },
  "item_dagon": {
-  "Description": "Active: Energy Burst - Emits a powerful burst of magical damage upon a targeted enemy unit. Upgradable.",
+  "Description": "<h1>Active: Energy Burst</h1> Emits a powerful burst of magical damage upon a targeted enemy unit. Upgradable.<br><br>Damage: %damage%<br>Range: %range_tooltip%<br>Mana Cost: %mana_cost_tooltip%",
   "DisplayName": "Dagon",
   "Lore": "A lesser wand that grows in power the longer it is used, it brings magic to the fingertips of the user."
  },
  "item_dagon_2": {
-  "Description": "Active: Energy Burst - Emits a powerful burst of magical damage upon a targeted enemy unit. Upgradable.",
+  "Description": "<h1>Active: Energy Burst</h1> Emits a powerful burst of magical damage upon a targeted enemy unit. Upgradable.<br><br>Damage: %damage%<br>Range: %range_tooltip%<br>Mana Cost: %mana_cost_tooltip%",
   "DisplayName": "Dagon",
   "Lore": "A lesser wand that grows in power the longer it is used, it brings magic to the fingertips of the user."
  },
  "item_dagon_3": {
-  "Description": "Active: Energy Burst - Emits a powerful burst of magical damage upon a targeted enemy unit. Upgradable.",
+  "Description": "<h1>Active: Energy Burst</h1> Emits a powerful burst of magical damage upon a targeted enemy unit. Upgradable.<br><br>Damage: %damage%<br>Range: %range_tooltip%<br>Mana Cost: %mana_cost_tooltip%",
   "DisplayName": "Dagon",
   "Lore": "A lesser wand that grows in power the longer it is used, it brings magic to the fingertips of the user."
  },
  "item_dagon_4": {
-  "Description": "Active: Energy Burst - Emits a powerful burst of magical damage upon a targeted enemy unit. Upgradable.",
+  "Description": "<h1>Active: Energy Burst</h1> Emits a powerful burst of magical damage upon a targeted enemy unit. Upgradable.<br><br>Damage: %damage%<br>Range: %range_tooltip%<br>Mana Cost: %mana_cost_tooltip%",
   "DisplayName": "Dagon",
   "Lore": "A lesser wand that grows in power the longer it is used, it brings magic to the fingertips of the user."
  },
  "item_dagon_5": {
-  "Description": "Active: Energy Burst - Emits a powerful burst of magical damage upon a targeted enemy unit.",
+  "Description": "<h1>Active: Energy Burst</h1> Emits a powerful burst of magical damage upon a targeted enemy unit. Upgradable.<br><br>Damage: %damage%<br>Range: %range_tooltip%<br>Mana Cost: %mana_cost_tooltip%",
   "DisplayName": "Dagon",
   "Lore": "A lesser wand that grows in power the longer it is used, it brings magic to the fingertips of the user."
  },
@@ -1478,27 +1478,27 @@
   "Lore": "One of the oldest weapons forged by the Demon-Smith Abzidian, it killed its maker when he tested its edge."
  },
  "item_desolator": {
-  "Description": "Passive: Corruption - Your attacks reduce target's armor for 15 seconds.",
+  "Description": "<h1>Passive: Corruption</h1> Your attacks reduce the target's armor by %corruption_armor% for %corruption_duration% seconds.",
   "DisplayName": "Desolator",
   "Lore": "A wicked weapon, used in torturing political criminals."
  },
  "item_diffusal_blade": {
-  "Description": "Active: Purge - Targets an enemy, removing buffs from the target and slowing it for %purge_slow_duration% seconds.\\nPassive: Manabreak - Each attack burns %feedback_mana_burn% mana from the target, and deals %damage_per_burn% physical damage per burned mana. Burns %feedback_mana_burn_illusion_melee% mana per attack from melee illusions and %feedback_mana_burn_illusion_ranged% mana per attack from ranged illusions. Does not stack with other manabreak abilities.\\n\\nUpgradable.\\n\\nDISPEL TYPE: Basic Dispel",
+  "Description": "<h1>Active: Purge</h1> Targets an enemy, removing buffs from the target and slowing it for %purge_slow_duration% seconds.<br><br>Range: %cast_range_tooltip%\\n<h1>Passive: Manabreak</h1>Each attack burns %feedback_mana_burn% mana from the target, and deals %damage_per_burn% physical damage per burned mana. <br><br>Burns %feedback_mana_burn_illusion_melee% mana per attack from melee illusions and %feedback_mana_burn_illusion_ranged% mana per attack from ranged illusions. <br><br>Dispel Type: <span class=\\\"GameplayValues GameplayVariable\\\">Basic Dispel</span>",
   "DisplayName": "Diffusal Blade",
   "Lore": "An enchanted blade that allows the user to cut straight into the enemy's soul."
  },
  "item_diffusal_blade_2": {
-  "Description": "Active: Purge - Targets an enemy, removing buffs from the target and slowing it for %purge_slow_duration% seconds.\\nPassive: Manabreak - Each attack burns %feedback_mana_burn% mana from the target, and deals %damage_per_burn% physical damage per burned mana. Burns %feedback_mana_burn_illusion_melee% mana per attack from melee illusions and %feedback_mana_burn_illusion_ranged% mana per attack from ranged illusions. Does not stack with other manabreak abilities.\\n\\nDISPEL TYPE: Basic Dispel",
+  "Description": "<h1>Active: Purge</h1> Targets an enemy, removing buffs from the target and slowing it for %purge_slow_duration% seconds.<br><br>Range: %cast_range_tooltip%\\n<h1>Passive: Manabreak</h1>Each attack burns %feedback_mana_burn% mana from the target, and deals %damage_per_burn% physical damage per burned mana. <br><br>Burns %feedback_mana_burn_illusion_melee% mana per attack from melee illusions and %feedback_mana_burn_illusion_ranged% mana per attack from ranged illusions. <br><br>Dispel Type: <span class=\\\"GameplayValues GameplayVariable\\\">Basic Dispel</span>",
   "DisplayName": "Diffusal Blade",
   "Lore": "An enchanted blade that allows the user to cut straight into the enemy's soul."
  },
  "item_dragon_lance": {
-  "Description": "Passive: Increases attack range of ranged heroes by %base_attack_range%.",
+  "Description": "<h1>Passive: Dragon's Reach</h1> Increases attack range of ranged heroes by %base_attack_range%.",
   "DisplayName": "Dragon Lance",
   "Lore": "The forward charge of the wyvern host grants no quarter."
  },
  "item_dust": {
-  "Description": "Use: Reveals and slows invisible Heroes in a nearby area.",
+  "Description": "<h1>Use: Reveal</h1>Reveals and slows invisible Heroes by %movespeed% in a %radius% radius around the caster for %duration% seconds.",
   "DisplayName": "Dust of Appearance",
   "Lore": "One may hide visage, but never volume."
  },
@@ -1507,12 +1507,12 @@
   "Lore": "Capturing the majestic call of an eagle, this mystical horn brings limitless dexterity to those who hear it."
  },
  "item_echo_sabre": {
-  "Description": "Passive: Causes melee attacks to attack twice in quick succession. The double attacks apply a %slow_duration% second %movement_slow%%% movement slow on each strike.",
+  "Description": "<h1>Passive: Echo Strike</h1> Causes melee attacks to attack twice in quick succession. The double attacks apply a %movement_slow%% movement slow for %slow_duration% seconds on each strike.",
   "DisplayName": "Echo Sabre",
   "Lore": "A deceptively swift blade imbued with resonant magic."
  },
  "item_enchanted_mango": {
-  "Description": "Use: Consume the mango to instantly restore %replenish_amount% mana.\\n\\nHold Control to use Enchanted Mango on an allied hero.",
+  "Description": "<h1>Use: Eat Mango</h1> Instantly restore %replenish_amount% mana.<br><br>Range: %range_tooltip%",
   "DisplayName": "Enchanted Mango",
   "Lore": "The bittersweet flavors of Jidi Isle are irresistible to amphibians."
  },
@@ -1521,27 +1521,27 @@
   "Lore": "This lapis gemstone is commonly added to the collection of wizards seeking to improve their presence in combat."
  },
  "item_ethereal_blade": {
-  "Description": "Active: Ether Blast - Launches a projectile which converts the target to ethereal form, increasing any incoming magic damage they take, while rendering them immune to physical damage and unable to attack.  Can be cast on self.  If the target is an enemy, it is also slowed, and takes %blast_agility_multiplier%x your primary attribute + %blast_damage_base% as magical damage.\\nUsing a Town Portal Scroll or Boots of Travel will not dispel Ethereal Form.",
+  "Description": "<h1>Active: Ether Blast</h1>Converts the target unit to ethereal form, rendering them immune to physical damage, but unable to attack and %ethereal_damage_bonus%% more vulnerable to magic damage.  Lasts for %duration_ally% seconds on allies and %duration% seconds on enemies.<br><br>  Enemy targets are also slowed by %blast_movement_slow%%%, and take %blast_agility_multiplier%x your primary attribute + %blast_damage_base% as magical damage.<br><br>Range: %tooltip_range%",
   "DisplayName": "Ethereal Blade",
   "Lore": "A flickering blade of a ghastly nature, it is capable of dealing damage in both magical and physical planes."
  },
  "item_faerie_fire": {
-  "Description": "Use: Consume the Faerie Fire to instantly restore %hp_restore% HP",
+  "Description": "<h1>Use: Imbue</h1> Instantly restores %hp_restore% HP.",
   "DisplayName": "Faerie Fire",
   "Lore": "The ethereal flames from the ever-burning ruins of Kindertree ignite across realities."
  },
  "item_flask": {
-  "Description": "Use: Restores health to the target unit over time.  If the unit is attacked by an enemy hero or Roshan, the effect is lost.",
+  "Description": "<h1>Use: Salve</h1> Restores %total_health% health to the target unit over %buff_duration% seconds.<br><br>If the unit is attacked by an enemy hero or Roshan, the effect is lost.<br><br>Range: %tooltip_range%",
   "DisplayName": "Healing Salve",
   "Lore": "A magical salve that can quickly mend even the deepest of wounds."
  },
  "item_flying_courier": {
-  "Description": "Upgrades your team's Animal Courier to a Flying Courier, granting it swift, unobstructed movement to carry items to and from your team's base.\\n\\nRequires a deployed Animal Courier.",
+  "Description": "<h1>Use: Upgrade Courier</h1>Upgrades your team's Animal Courier to a Flying Courier, granting it swift, unobstructed movement to carry items to and from your team's base. <br><br>Requires a deployed Animal Courier.",
   "DisplayName": "Flying Courier",
   "Lore": "The faithful mount upon which soar the fortunes of battle."
  },
  "item_force_staff": {
-  "Description": "Active: Force - Pushes any target unit %push_length% units in the direction it is facing.  Double click to instantly cast Force on yourself.",
+  "Description": "<h1>Active: Force</h1>Pushes any target unit %push_length% units in the direction it is facing.<br><br>Range: %tooltip_range%",
   "DisplayName": "Force Staff",
   "Lore": "Allows you to manipulate others, for good or evil."
  },
@@ -1550,17 +1550,17 @@
   "Lore": "Studded leather gloves that add brute strength."
  },
  "item_gem": {
-  "Description": "Passive: True Sight - Adds the ability to see invisible units and wards to any allied vision within its carrier's range.\\nDropped on death, and cannot be destroyed.",
+  "Description": "<h1>Passive: True Sight</h1> Grants the ability to see invisible units and wards to any allied vision within %radius% range of its carrier. \\n<h1>Passive: Everlasting</h1><font color='#e03e2e'>Dropped on death, and cannot be destroyed.</font>",
   "DisplayName": "Gem of True Sight",
   "Lore": "Not one thrall creature of the depths,\\nNor spirit bound in drowning's keep,\\nNor Maelrawn the Tentacular,\\nShall rest till seas, gem comes to sleep."
  },
  "item_ghost": {
-  "Description": "Active: Ghost Form - Enter ghost form, becoming immune to physical damage, yet unable to attack and taking 40%% extra magic damage.\\nUsing a Town Portal Scroll or Boots of Travel  will not dispel Ghost Form.",
+  "Description": "<h1>Active: Ghost Form</h1> You enter ghost form for %duration% seconds, becoming immune to physical damage, but are unable to attack and %extra_spell_damage_percent%%% more vulnerable to magic damage.",
   "DisplayName": "Ghost Scepter",
   "Lore": "Imbues the wielder with a ghostly presence, allowing them to evade physical damage."
  },
  "item_glimmer_cape": {
-  "Description": "Active: Glimmer - After a %fade_delay% second delay, grants invisibility and %active_magical_armor%%% magic resistance to you or a target allied unit. Can be cast while channelling.",
+  "Description": "<h1>Active: Glimmer</h1> After a %fade_delay% second delay, grants invisibility and %active_magical_armor%%% magic resistance to you or a target allied unit for %duration% seconds.<br><br>Range: %tooltip_range%<br><br>Can be cast while channelling.",
   "DisplayName": "Glimmer Cape",
   "Lore": "The stolen cape of a master illusionist."
  },
@@ -1569,32 +1569,32 @@
   "Lore": "A pair of magical gloves that seems to render weapons weightless."
  },
  "item_greater_crit": {
-  "Description": "Passive: Critical Strike - Grants each attack a chance to deal additional damage. Critical Strike does not work against buildings.",
+  "Description": "<h1>Passive: Critical Strike</h1>Grants each attack a %crit_chance%%% chance to deal %tooltip_crit_damage%%% additional damage.",
   "DisplayName": "Daedalus",
   "Lore": "A weapon of incredible power that is difficult for even the strongest of warriors to control."
  },
  "item_guardian_greaves": {
-  "Description": "Active: Mend - Restores %replenish_health% health and %replenish_mana% mana to nearby allies, and removes most negative buffs from the caster.\\nPassive: Guardian Aura - Provides nearby allies with %aura_health_regen% health regeneration and %aura_armor% bonus armor. If an allied hero's health falls below %aura_bonus_threshold%%%, they receive %aura_health_regen_bonus% health regeneration and %aura_armor_bonus% armor.\\n\\nDISPEL TYPE: Basic Dispel",
+  "Description": "<h1>Active: Mend</h1>Restores %replenish_health% health and %replenish_mana% mana to nearby allies, and removes most negative effects from the caster.<br><br>Radius: %replenish_radius%<br>Dispel Type: <span class=\\\"GameplayValues GameplayVariable\\\">Basic Dispel</span>\\n<h1>Passive: Guardian Aura</h1> Provides nearby allies with %aura_health_regen% health regeneration and %aura_armor% bonus armor. If an allied hero's health falls below %aura_bonus_threshold%%%, they receive %aura_health_regen_bonus% health regeneration and %aura_armor_bonus% armor.\\nFlat movement speed bonuses from multiple pairs of boots do not stack.",
   "DisplayName": "Guardian Greaves",
   "Lore": "One of many holy instruments constructed to honor the Omniscience."
  },
  "item_hand_of_midas": {
-  "Description": "Active: Transmute - Kills a non-hero target for %bonus_gold% gold and 1.85x experience.  Cannot be used on Ancient Creeps.",
+  "Description": "<h1>Active: Transmute</h1> Kills a non-hero target for %bonus_gold% gold and %xp_multiplier%x experience. <br><br> Cannot be used on Ancient Creeps.<br><br>Range: %transmute_cast_range_tooltip%",
   "DisplayName": "Hand of Midas",
   "Lore": "Preserved through unknown magical means, the Hand of Midas is a weapon of greed, sacrificing animals to line the owner's pockets."
  },
  "item_headdress": {
-  "Description": "Passive: Regeneration Aura - Restores health to allies in a %aura_radius% unit radius.\\n\\nMultiple instances of Regeneration Aura do not stack.",
+  "Description": "<h1>Passive: Regeneration Aura</h1>Grants %aura_health_regen% health regeneration to allies.<br><br>Radius: %aura_radius%",
   "DisplayName": "Headdress",
   "Lore": "Creates a soothing aura that restores allies in battle."
  },
  "item_heart": {
-  "Description": "Passive: Health Regeneration - Restores a percentage of max health per second. If damage is taken from an enemy hero or Roshan, this ability is disabled for %cooldown_melee% seconds for melee heroes, or %cooldown_ranged_tooltip% seconds for ranged heroes.",
+  "Description": "<h1>Passive: Health Regeneration</h1>Restores %health_regen_rate%%% of max health per second. <br><br>If damage is taken from an enemy hero or Roshan, this ability is disabled for %cooldown_melee% seconds for melee heroes, or %cooldown_ranged_tooltip% seconds for ranged heroes.",
   "DisplayName": "Heart of Tarrasque",
   "Lore": "Preserved heart of an extinct monster, it bolsters the bearer's fortitude."
  },
  "item_heavens_halberd": {
-  "Description": "Active: Disarm - Prevents a target from attacking. Lasts %disarm_melee% seconds on melee targets, and %disarm_range% seconds on ranged targets.\\nPassive: Lesser Maim - Each attack has a chance to slow the enemy's movement and attack speed for %maim_duration% seconds.\\n\\nStacks diminishingly with other sources of Evasion.",
+  "Description": "<h1>Active: Disarm</h1>Prevents a target from attacking for %disarm_melee% seconds on melee targets, and %disarm_range% seconds on ranged targets.<br><br>Range: %disarm_cast_range_tooltip% \\n<h1>Passive: Lesser Maim</h1>Each attack has a %maim_chance%%% chance to reduce enemy hero movement speed by %maim_slow_movement%%% and attack speed by %maim_slow_attack% if the user is melee. Reduces enemy hero movement by %maim_slow_movement_range%%% and attack speed by %maim_slow_attack_range% if the user is ranged. Effect lasts %maim_duration% seconds.",
   "DisplayName": "Heaven's Halberd",
   "Lore": "This halberd moves with the speed of a smaller weapon, allowing the bearer to win duels that a heavy edge would not."
  },
@@ -1603,17 +1603,17 @@
   "Lore": "The helmet of a legendary warrior who fell in battle."
  },
  "item_helm_of_the_dominator": {
-  "Description": "Active: Dominate - Take control of a non-hero, non-ancient target unit and sets its movement speed to %speed_base%. If a dominated creep's base health is naturally below the health minimum, its base health will be raised to the health minimum.",
+  "Description": "<h1>Active: Dominate</h1>Takes control of one neutral, non-ancient target unit and sets its movement speed to %speed_base% and max health to a minimum of %health_min%.<br><br>Dominated units with a max health of greater than %health_min% retain their original max health.  Dominated unit's bounty is set to %tooltip_bounty% gold.<br><br>Range: %tooltip_range%\\n<h1>Passive: Dominator Aura</h1> Increases nearby allies' attack speed by %attack_speed_aura% and health regen by %hp_regen_aura%.<br><br>Radius: %aura_radius%",
   "DisplayName": "Helm of the Dominator",
   "Lore": "The powerful headpiece of a dead necromancer."
  },
  "item_hood_of_defiance": {
-  "Description": "Active: Creates a spell shield that absorbs up to %barrier_block% magical damage.",
+  "Description": "<h1>Active: Barrier</h1> Creates a spell shield that absorbs up to %barrier_block% magical damage.  Lasts %barrier_duration% seconds.",
   "DisplayName": "Hood of Defiance",
   "Lore": "A furred, magic resistant headpiece that is feared by wizards."
  },
  "item_hurricane_pike": {
-  "Description": "Active: When used on an enemy, it pushes you both away from each other %enemy_length% units each, and allows you to attack the target without range restrictions for %max_attacks% attacks for a maximum of %range_duration% seconds. Grants %bonus_attack_speed% Attack Speed during the attacks. Works like Force Staff when used on self or allies.\\nPassive: Increases attack range of ranged heroes by %base_attack_range%.",
+  "Description": "<h1>Active: Hurricane Thrust</h1> Pushes you and target enemy %enemy_length% units away from each other, and for %range_duration% seconds, allows you to make %max_attacks% attacks against the target without range restrictions and with +%bonus_attack_speed% attack speed.<br><br>Works like Force Staff when used on self or allies.<br><br>Allied Range: %tooltip_range%<br>Enemy Range: %cast_range_enemy%\\n<h1>Passive:  Dragon's Reach</h1> Increases attack range of ranged heroes by %base_attack_range%.",
   "DisplayName": "Hurricane Pike",
   "Lore": "A legendary pike once held as royal sigil of the ancient wyvern riders."
  },
@@ -1622,57 +1622,57 @@
   "Lore": "A mystical, carved stone that boosts the fervor of the holder."
  },
  "item_infused_raindrop": {
-  "Description": "Passive: Consumes a charge to block %magic_damage_block% magic damage from damage instances over %min_damage% damage. Comes with %initial_charges% charges. When the charges are gone, the item disappears.",
+  "Description": "<h1>Passive: Magical Damage Block</h1> Consumes a charge to block %magic_damage_block% magic damage from damage instances over %min_damage% damage. <br><br>Comes with %initial_charges% charges. When the charges are gone, the item disappears.",
   "DisplayName": "Infused Raindrop",
   "Lore": "Elemental protection from magical assaults."
  },
  "item_invis_sword": {
-  "Description": "Active: Shadow Walk - Makes you invisible until the duration ends, or until you attack or cast a spell.  While Shadow Walk is active, you move %windwalk_movement_speed%%% faster and can move through units.  If attacking to end the invisibility, you gain %windwalk_bonus_damage% bonus damage on that attack.  Lasts %windwalk_duration% seconds.",
+  "Description": "<h1>Active: Shadow Walk</h1>Makes you invisible for %windwalk_duration% seconds, or until you attack or cast a spell.  While Shadow Walk is active, you move %windwalk_movement_speed%%% faster and can move through units.  <br><br>If attacking to end the invisibility, you gain %windwalk_bonus_damage% bonus damage on that attack.",
   "DisplayName": "Shadow Blade",
   "Lore": "The blade of a fallen king, it allows you to move unseen and strike from the shadows."
  },
  "item_iron_talon": {
-  "Description": "Active: Targets a non-player enemy unit to remove %creep_damage_pct%%% of its current HP.\\nPassive: Quell - Increases attack damage against non-hero units, based on whether the equipped hero is ranged or melee.",
+  "Description": "<h1>Active: Chop</h1>Targets a non-player enemy unit to remove %creep_damage_pct%%% of its current HP.<br><br>If cast on a tree or ward, instantly destroys it.<br><br>Unit Range: %tooltip_range%<br>Tree Range: %quelling_range_tooltip%<BR>Ward Range: %cast_range_ward%\\n<h1>Passive: Quell</h1>Increases attack damage against non-hero units by %damage_bonus% for melee heroes, and %damage_bonus_ranged% for ranged.",
   "DisplayName": "Iron Talon",
   "Lore": "A simple but effective weapon devised to quell a great Hellbear uprising."
  },
  "item_javelin": {
-  "Description": "Passive: Pierce - Grants each attack a chance to deal bonus damage.",
+  "Description": "<h1>Passive: Pierce</h1>Grants each attack a %bonus_chance%%% chance to deal %bonus_chance_damage% bonus damage.",
   "DisplayName": "Javelin",
   "Lore": "A rather typical spear that can sometimes pierce through an enemy's armor when used to attack."
  },
  "item_lesser_crit": {
-  "Description": "Passive: Critical Strike - Grants each attack a chance to deal additional damage. Critical Strike does not work against buildings.",
+  "Description": "<h1>Passive: Critical Strike</h1>Grants each attack a %crit_chance%% chance to deal %crit_multiplier%%% damage.<br><br> Critical Strike does not work against buildings.",
   "DisplayName": "Crystalys",
   "Lore": "A blade forged from rare crystals, it seeks weak points in enemy armor."
  },
  "item_lifesteal": {
-  "Description": "Passive: Lifesteal - Heals the attacker for a percentage of attack damage dealt.\\n\\nMorbid Mask is a Unique Attack Modifier, and does not stack with other Unique Attack Modifiers.",
+  "Description": "<h1>Passive: Lifesteal</h1>Heals the attacker for %lifesteal_percent%%% of attack damage dealt. <br><br>Morbid Mask is a Unique Attack Modifier, and does not stack with other Unique Attack Modifiers.",
   "DisplayName": "Morbid Mask",
   "Lore": "A mask that drains the energy of those caught in its gaze."
  },
  "item_lotus_orb": {
-  "Description": "Active: Echo Shell - Applies a shield to the target unit which re-casts most targeted spells back to their caster. The shielded unit will still take damage from the spell. Dispels negative buffs when applied.\\n\\nDISPEL TYPE: Basic Dispel",
+  "Description": "<h1>Active: Echo Shell</h1>Applies a shield to the target unit for %active_duration% seconds which re-casts most targeted spells back to their caster.<br><br>The shielded unit will still take damage from the spell. <br><br>Range: %cast_range_tooltip%<br>Dispel Type: <span class=\\\"GameplayValues GameplayVariable\\\">Basic Dispel</span>",
   "DisplayName": "Lotus Orb",
   "Lore": "The jewel at its center still reflects a pale image of its creator."
  },
  "item_maelstrom": {
-  "Description": "Passive: Chain Lightning - Grants a chance on attack to release a bolt of electricity that leaps between %chain_strikes% targets, dealing %chain_damage% magical damage to each.",
+  "Description": "<h1>Passive: Chain Lightning</h1>Grants a %chain_chance%%% chance on attack to release a bolt of electricity that leaps between %chain_strikes% targets within a %chain_radius% radius, dealing %chain_damage% magical damage to each.",
   "DisplayName": "Maelstrom",
   "Lore": "A hammer forged for the gods themselves, Maelstrom allows its user to harness the power of lightning."
  },
  "item_magic_stick": {
-  "Description": "Active: Energy Charge - Instantly restores health and mana based on the number of charges stored. Gains a charge (max %max_charges%) whenever a nearby visible enemy uses an ability.",
+  "Description": "<h1>Active: Energy Charge</h1> Instantly restores %restore_per_charge% health and mana per charge stored.<br><br> Max %max_charges% charges. Gains a charge whenever a visible enemy within %charge_radius% range uses an ability.",
   "DisplayName": "Magic Stick",
   "Lore": "A simple wand used to channel magic energies, it is favored by apprentice wizards and great warlocks alike."
  },
  "item_magic_wand": {
-  "Description": "Active: Energy Charge - Instantly restores health and mana based on the number of charges stored. Gains a charge (max %max_charges%) whenever a nearby visible enemy uses an ability.",
+  "Description": "<h1>Active: Energy Charge</h1>Instantly restores %restore_per_charge% health and mana per charge stored. <br><br>Max %max_charges% charges. Gains a charge whenever a visible enemy within %charge_radius% range uses an ability.",
   "DisplayName": "Magic Wand",
   "Lore": "A simple wand used to channel magic energies, it is favored by apprentice wizards and great warlocks alike."
  },
  "item_manta": {
-  "Description": "Active: Mirror Image - Creates %images_count% images of your hero that last %tooltip_illusion_duration% seconds. Melee heroes have a %cooldown_melee% second cooldown on this ability, while for Ranged heroes the cooldown is %cooldown_ranged_tooltip% seconds.\\n\\nMelee images deal %tooltip_damage_outgoing_melee%%% damage and take %tooltip_damage_incoming_melee_total_pct%%% damage, while Ranged images deal %tooltip_damage_outgoing_ranged%%% and take %tooltip_damage_incoming_ranged_total_pct%%% damage.\\n\\nYasha-based movement speed bonuses from multiple items do not stack.\\n\\nDISPEL TYPE: Basic Dispel",
+  "Description": "<h1>Active: Mirror Image</h1>Creates %images_count% images of your hero that last %tooltip_illusion_duration% seconds. <br><br>Melee images deal %tooltip_damage_outgoing_melee%%% damage and take %tooltip_damage_incoming_melee_total_pct%%% damage, while Ranged images deal %tooltip_damage_outgoing_ranged%%% and take %tooltip_damage_incoming_ranged_total_pct%%% damage. <br><br>Cooldown increased by %tooltip_ranged_cooldown_increase% seconds on ranged heroes.<br><br>Dispel Type: <span class=\\\"GameplayValues GameplayVariable\\\">Basic Dispel</span>",
   "DisplayName": "Manta Style",
   "Lore": "An axe made of reflective materials that causes confusion amongst enemy ranks."
  },
@@ -1681,17 +1681,17 @@
   "Lore": "A beautiful sapphire mantle worn by generations of queens."
  },
  "item_mask_of_madness": {
-  "Description": "Active: Berserk - Gives %berserk_bonus_attack_speed% attack speed and %berserk_bonus_movement_speed%%% movement speed, but reduces your armor by %berserk_armor_reduction% and silences you.  Lasts %berserk_duration% seconds.\\nPassive: Lifesteal - Heals the attacker for a percentage of attack damage dealt.\\n\\nMask of Madness is a Unique Attack Modifier, and does not stack with other Unique Attack Modifiers.",
+  "Description": "<h1>Active: Berserk</h1>Gives %berserk_bonus_attack_speed% attack speed and %berserk_bonus_movement_speed%%% movement speed, but reduces your armor by %berserk_armor_reduction% and silences you.  Lasts %berserk_duration% seconds.\\n<h1>Passive: Lifesteal</h1>Heals the attacker for %lifesteal_percent%% of attack damage dealt. <br><br>Mask of Madness is a Unique Attack Modifier, and does not stack with other Unique Attack Modifiers.",
   "DisplayName": "Mask of Madness",
   "Lore": "Once this mask is worn, its bearer becomes an uncontrollable aggressive force."
  },
  "item_medallion_of_courage": {
-  "Description": "Active: Valor - If cast on an ally, increases their armor while reducing the caster's. If cast on an enemy, reduces the armor of both the enemy and the caster. Cannot target magic immune enemies.",
+  "Description": "<h1>Active: Valor</h1> If cast on an ally, grants them the %bonus_armor% armor, and removing it from the caster. <br><br>If cast on an enemy, reduces %bonus_armor% armor on both the enemy and the caster. <br><br>Cannot target magic immune enemies.<br><br>Range: %valor_cast_range_tooltip%",
   "DisplayName": "Medallion of Courage",
   "Lore": "The bearer has no fear of combat."
  },
  "item_mekansm": {
-  "Description": "Active: Restore - Heals %heal_amount% health and gives +%heal_bonus_armor% armor to allied units in a %heal_radius% radius.\\nPassive: Mekansm Aura - Grants %aura_health_regen% health regeneration to allied units in a %aura_radius% radius.\\n\\nMultiple instances of Mekansm Aura do not stack.",
+  "Description": "<h1>Active: Restore</h1>Heals %heal_amount% health and gives +%heal_bonus_armor% armor to allied units in a %heal_radius% radius.\\n<h1>Passive: Mekansm Aura</h1>Grants %aura_health_regen% health regeneration to allied units in a %aura_radius% radius.",
   "DisplayName": "Mekansm",
   "Lore": "A glowing jewel formed out of assorted parts that somehow fit together perfectly."
  },
@@ -1700,17 +1700,17 @@
   "Lore": "A hammer forged of pure mithril."
  },
  "item_mjollnir": {
-  "Description": "Active: Static Charge - Places a charged shield on a target unit which has a %static_chance%%% chance to release a shocking bolt at a nearby attacker and %static_strikes% additional enemies.\\nPassive: Chain Lightning - Grants a chance on attack to release a bolt of electricity that leaps between %chain_strikes% targets, dealing %chain_damage% magical damage to each.",
+  "Description": "<h1>Active: Static Charge</h1>Places a charged shield on a target unit for %static_duration% seconds which has a %static_chance%%% chance to release a %static_damage% damage shocking bolt at a nearby attacker and %static_strikes% additional enemies.<br><br>Range: %tooltip_range%\\n<h1>Passive: Chain Lightning</h1>Grants a %chain_chance% chance on attack to release a bolt of electricity that leaps between %chain_strikes% targets within a %chain_radius% radius, dealing %chain_damage% magical damage to each.",
   "DisplayName": "Mjollnir",
   "Lore": "Thor's magical hammer, made for him by the dwarves Brok and Eitri."
  },
  "item_monkey_king_bar": {
-  "Description": "Passive: Mini-Bash - Grants each attack a chance to deal bonus damage and deal a mini-stun.\\nPassive: True Strike - Prevents your attacks from missing. True Strike does not work when attacking enemy structures.",
+  "Description": "<h1>Passive: Mini-Bash</h1>Grants each attack a %bash_chance%%% chance to mini-stun and deal %bash_damage% bonus damage.\\n<h1>Passive: True Strike</h1>Prevents your attacks from missing enemy units.",
   "DisplayName": "Monkey King Bar",
   "Lore": "A powerful staff used by a master warrior."
  },
  "item_moon_shard": {
-  "Description": "Use: Consume the Moon Shard to permanently gain %consumed_bonus% attack speed and %consumed_bonus_night_vision% bonus night vision. Does not stack.\\nPassive: Shade Sight - Grants %bonus_night_vision% bonus night vision.",
+  "Description": "<h1>Use: Consume</h1> Consume the Moon Shard to permanently gain %consumed_bonus% attack speed and %consumed_bonus_night_vision% bonus night vision. Max 1 use.\\n<h1>Passive: Shade Sight</h1>Grants %bonus_night_vision% bonus night vision.",
   "DisplayName": "Moon Shard",
   "Lore": "Said to be a tear from the lunar goddess Selemene."
  },
@@ -1719,17 +1719,17 @@
   "Lore": "Enigmatic staff made of only the most expensive crystals."
  },
  "item_necronomicon": {
-  "Description": "Active: Demonic Summoning - Summons a Warrior and an Archer to fight for you for %summon_duration% seconds, whose strength and abilities increase as Necronomicon is upgraded. Warrior gains True Sight at level 3. Upgradable.",
+  "Description": "<h1>Active: Demonic Summoning</h1>Summons a Warrior and an Archer to fight for you for %summon_duration% seconds.<br><br><h1>Warrior:</h1>Burns mana every hit, and deals magical damage to whoever kills it.  Gains True Sight at level 3.<br>Health: %warrior_health_tooltip%<br>Damage: %warrior_damage_tooltip%<br>Mana Break Damage: %warrior_mana_break_tooltip%<br>Last Will Damage: %explosion%<br><br><h1>Archer:</h1>Has an activated mana burn ability, and a passive movement and attack speed aura.<br>Health: %archer_health_tooltip%<br>Damage: %archer_damage_tooltip%<br>Mana Burn Damage: %archer_mana_burn%<br>Aura Move Speed: %archer_move_speed%<br>Aura Attack Speed: %archer_attack_speed%<br>Aura Radius: %archer_aura_radius_tooltip%",
   "DisplayName": "Necronomicon",
   "Lore": "Considered the ultimate in necromancy and demonology, a powerful malefic force is locked within its pages."
  },
  "item_necronomicon_2": {
-  "Description": "Active: Demonic Summoning - Summons a Warrior and an Archer to fight for you for %summon_duration% seconds, whose strength and abilities increase as Necronomicon is upgraded. Warrior gains True Sight at level 3. Upgradable.",
+  "Description": "<h1>Active: Demonic Summoning</h1>Summons a Warrior and an Archer to fight for you for %summon_duration% seconds.<br><br><h1>Warrior:</h1>Burns mana every hit, and deals magical damage to whoever kills it.  Gains True Sight at level 3.<br>Health: %warrior_health_tooltip%<br>Damage: %warrior_damage_tooltip%<br>Mana Break Damage: %warrior_mana_break_tooltip%<br>Last Will Damage: %explosion%<br><br><h1>Archer:</h1>Has an activated mana burn ability, and a passive movement and attack speed aura.<br>Health: %archer_health_tooltip%<br>Damage: %archer_damage_tooltip%<br>Mana Burn Damage: %archer_mana_burn%<br>Aura Move Speed: %archer_move_speed%<br>Aura Attack Speed: %archer_attack_speed%<br>Aura Radius: %archer_aura_radius_tooltip%",
   "DisplayName": "Necronomicon",
   "Lore": "Considered the ultimate in necromancy and demonology, a powerful malefic force is locked within its pages."
  },
  "item_necronomicon_3": {
-  "Description": "Active: Demonic Summoning - Summons a Warrior and an Archer to fight for you for %summon_duration% seconds, whose strength and abilities increase as Necronomicon is upgraded. Warrior gains True Sight at level 3.",
+  "Description": "<h1>Active: Demonic Summoning</h1>Summons a Warrior and an Archer to fight for you for %summon_duration% seconds.<br><br><h1>Warrior:</h1>Burns mana every hit, and deals magical damage to whoever kills it.  Gains True Sight at level 3.<br>Health: %warrior_health_tooltip%<br>Damage: %warrior_damage_tooltip%<br>Mana Break Damage: %warrior_mana_break_tooltip%<br>Last Will Damage: %explosion%<br><br><h1>Archer:</h1>Has an activated mana burn ability, and a passive movement and attack speed aura.<br>Health: %archer_health_tooltip%<br>Damage: %archer_damage_tooltip%<br>Mana Burn Damage: %archer_mana_burn%<br>Aura Move Speed: %archer_move_speed%<br>Aura Attack Speed: %archer_attack_speed%<br>Aura Radius: %archer_aura_radius_tooltip%",
   "DisplayName": "Necronomicon",
   "Lore": "Considered the ultimate in necromancy and demonology, a powerful malefic force is locked within its pages."
  },
@@ -1742,7 +1742,7 @@
   "Lore": "Deceptively hidden as an ordinary quarterstaff, it is actually very powerful, much like the Eldritch who originally possessed it."
  },
  "item_octarine_core": {
-  "Description": "Passive: Cooldown Reduction - Reduces the cooldown time of all spells and items by %bonus_cooldown%%%.\\nPassive: Spell Lifesteal - A percentage of damage caused by spells is returned to the caster as health.",
+  "Description": "<h1>Passive: Cooldown Reduction</h1>Reduces the cooldown time of all spells and items by %bonus_cooldown%%%.\\n<h1>Passive: Spell Lifesteal</h1>%hero_lifesteal%%% of spell damage dealt to enemy heroes is returned to the caster as health, regardless of spell damage type.  <br><br>Lifesteal reduced to %creep_lifesteal%%% against creeps.",
   "DisplayName": "Octarine Core",
   "Lore": "At the core of spellcraft are spectrums only the very gifted can sense."
  },
@@ -1751,12 +1751,12 @@
   "Lore": "You grow stronger just by holding it."
  },
  "item_orb_of_venom": {
-  "Description": "Passive: Poison Attack - Poisons the target, dealing %poison_damage% damage per second for %poison_duration% seconds and slowing movement %poison_movement_speed_melee%%% if the equipped hero is melee or %poison_movement_speed_range%%% if they are ranged.",
+  "Description": "<h1>Passive: Poison Attack</h1>Poisons the target, dealing %poison_damage% damage per second for %poison_duration% seconds and slowing movement %poison_movement_speed_melee%%% if the equipped hero is melee, or %poison_movement_speed_range%%% if they are ranged.",
   "DisplayName": "Orb of Venom",
   "Lore": "Envenoms your veapon with the venom of a venomous viper."
  },
  "item_orchid": {
-  "Description": "Active: Soul Burn - Silences the target unit for %silence_duration% seconds. At the end of the silence, %silence_damage_percent%%% of the damage received while silenced is inflicted as bonus magical damage.",
+  "Description": "<h1>Active: Soul Burn</h1>Silences the target unit for %silence_duration% seconds. At the end of the silence, %silence_damage_percent%%% of the damage received while silenced is inflicted as bonus magical damage.<br><br>Range: %tooltip_range%",
   "DisplayName": "Orchid Malevolence",
   "Lore": "A garnet rod constructed from the essence of a fire demon."
  },
@@ -1766,12 +1766,12 @@
   "Lore": "A gem that grants heart to the bearer."
  },
  "item_phase_boots": {
-  "Description": "Active: Phase - Gives increased movement speed and lets you move through units.  The increased movement speed is based on whether the equipped hero is melee or ranged.\\n\\nFlat movement speed bonuses from multiple pairs of boots do not stack.",
+  "Description": "<h1>Active: Phase</h1> Gives %phase_movement_speed%%% increased movement speed on melee heroes, and %phase_movement_speed_range%%% on ranged heroes, and lets you move through units for %phase_duration% seconds.<br><br>Flat movement speed bonuses from multiple pairs of boots do not stack.",
   "DisplayName": "Phase Boots",
   "Lore": "Boots that allow the wearer to travel between the ether."
  },
  "item_pipe": {
-  "Description": "Active: Barrier - Gives a shield that blocks %barrier_block% spell damage to all allies in a %barrier_radius% radius.\\nPassive: Insight Aura - Gives allied units %aura_health_regen% health regeneration and %magic_resistance_aura%%% magic resistance in a %aura_radius% radius.",
+  "Description": "<h1>Active: Barrier</h1>Gives a shield that blocks %barrier_block% spell damage to all nearby allies. Lasts %barrier_duration% seconds.<br><br>Radius: %barrier_radius%\\n<h1>Passive: Insight Aura</h1> Gives allied units %aura_health_regen% health regeneration and %magic_resistance_aura%%% magic resistance.<br><br>Radius: %aura_radius%",
   "DisplayName": "Pipe of Insight",
   "Lore": "A powerful artifact of mysterious origin, it creates barriers against magical forces."
  },
@@ -1785,12 +1785,12 @@
   "Lore": "A perfectly formed amethyst that nourishes body and mind when held."
  },
  "item_poor_mans_shield": {
-  "Description": "Passive: Damage Block - Blocks physical attack damage based on whether the equipped hero is ranged or melee.  Poor Man's Shield will always block attacks from enemy Heroes, but has a %block_chance%%% chance to block damage from creeps.",
+  "Description": "<h1>Passive: Damage Block</h1>Grants a %block_chance_hero%%% chance for melee heroes to block %damage_block_melee% damage from enemy heroes.  Blocks %damage_block_ranged% damage on ranged heroes.<br><br>Has a %block_chance%%% chance to block damage from creeps.",
   "DisplayName": "Poor Man's Shield",
   "Lore": "A busted old shield that seems to block more than it should."
  },
  "item_power_treads": {
-  "Description": "Active: Switch Attribute - Changes selected attribute between Strength, Agility and Intelligence.\\n\\nPower Treads can be built using a Belt of Strength, Band of Elvenskin, or a Robe of the Magi.  Flat movement speed bonuses from multiple pairs of boots do not stack, nor does the attack speed bonus from multiple Power Treads.",
+  "Description": "<h1>Active: Switch Attribute</h1>Switches between +%bonus_stat% Strength, +%bonus_stat% Agility, or +%bonus_stat% Intelligence.<br><br>Flat movement speed bonuses from multiple pairs of boots do not stack.",
   "DisplayName": "Power Treads",
   "Lore": "A pair of tough-skinned boots that change to meet the demands of the wearer."
  },
@@ -1799,17 +1799,17 @@
   "Lore": "A basic staff that allows you to strike quickly."
  },
  "item_quelling_blade": {
-  "Description": "Active: Chop Tree/Ward - Destroy a target tree or ward. Chop cast range is increased when targetting wards.\\nPassive: Quell - Increases attack damage against non-hero units, based on whether the equipped hero is ranged or melee.",
+  "Description": "<h1>Active: Chop Tree/Ward</h1> Destroy a target tree or ward. Chop cast range is increased when targeting wards.<br><br>Tree Range: %quelling_range_tooltip%<BR>Ward Range: %cast_range_ward%\\n<h1>Passive: Quell</h1> Increases attack damage against non-hero units by %damage_bonus% for melee heroes, and %damage_bonus_ranged% for ranged.",
   "DisplayName": "Quelling Blade",
   "Lore": "The axe of a fallen gnome, it allows you to effectively maneuver the forest."
  },
  "item_radiance": {
-  "Description": "Active: Toggle Burn - When active, scorches nearby enemies for %aura_damage% damage per second and blinds them, causing them to miss %blind_pct%%% of their attacks.",
+  "Description": "<h1>Toggle: Burn</h1> When active, scorches enemies for %aura_damage% damage per second, and causes them to miss %blind_pct%%% of their attacks.<br><br>Radius: %aura_radius%",
   "DisplayName": "Radiance",
   "Lore": "A divine weapon that causes damage and a bright burning effect that lays waste to nearby enemies."
  },
  "item_rapier": {
-  "Description": "Drops on death.  Becomes unusable if picked up by an ally of its owner until it is returned to its owner. It is immediately usable by anybody if an enemy of the owner picks it up. A dropped Rapier cannot be picked up by a courier.",
+  "Description": "<h1>Passive: Everlasting</h1> <font color='#e03e2e'>Dropped on death, and cannot be destroyed.</font> <br><br>Becomes unusable if picked up by an ally of its owner until it is returned to its owner. It is immediately usable by anybody if an enemy of the owner picks it up and is killed. A dropped Rapier cannot be picked up by a courier.",
   "DisplayName": "Divine Rapier",
   "Lore": "So powerful, it cannot have a single owner."
  },
@@ -1962,7 +1962,7 @@
   "DisplayName": "Yasha Recipe"
  },
  "item_refresher": {
-  "Description": "Active: Reset Cooldowns - Resets the cooldowns of all your items and abilities.",
+  "Description": "<h1>Active: Reset Cooldowns</h1>Resets the cooldowns of all your items and abilities.",
   "DisplayName": "Refresher Orb",
   "Lore": "A powerful artifact created for wizards."
  },
@@ -1971,12 +1971,12 @@
   "Lore": "An ancient weapon that often turns the tides of war."
  },
  "item_ring_of_aquila": {
-  "Description": "Passive: Aquila Aura - Grants mana regeneration and armor in a %aura_radius% area of effect.\\nActive: Toggle whether the aura affects other non-hero units.\\n\\nMultiple instances of Aquila Aura do not stack.",
+  "Description": "<h1>Passive: Aquila Aura</h1>Grants %aura_mana_regen% mana regeneration and %aura_bonus_armor% armor to nearby allies.<br><br>Radius: %aura_radius%\\n<h1>Toggle: Aura</h1> Deactivate to stop affecting non-hero units.",
   "DisplayName": "Ring of Aquila",
   "Lore": "The ring of the fallen Warlord Aquila continues to support armies in battle."
  },
  "item_ring_of_basilius": {
-  "Description": "Passive: Basilius Aura - Grants mana regeneration and armor in a %aura_radius% area of effect.\\nActive: Toggle whether the aura affects other non-hero units.\\n\\nMultiple instances of Basilius Aura do not stack.",
+  "Description": "<h1>Passive: Basilius Aura</h1>Grants %aura_mana_regen% mana regeneration and %aura_bonus_armor% armor in a %aura_radius% radius.\\n<h1>Toggle: Aura</h1>Deactivate aura to stop effecting non-hero units.",
   "DisplayName": "Ring of Basilius",
   "Lore": "Ring given as a reward to the greatest mages."
  },
@@ -2025,47 +2025,47 @@
   "Lore": "This robe corrupts the soul of the user, but provides wisdom in return."
  },
  "item_rod_of_atos": {
-  "Description": "Active: Cripple - Roots the target for %duration% seconds.",
+  "Description": "<h1>Active: Cripple</h1>Roots the target for %duration% seconds.<br><br>Range: %tooltip_range%",
   "DisplayName": "Rod of Atos",
   "Lore": "Atos, the Lord of Blight, has his essence stored in this deceptively simple wand."
  },
  "item_sange": {
-  "Description": "Passive: Lesser Maim - Each attack has a chance to slow the enemy's movement and attack speed for %maim_duration% seconds.",
+  "Description": "<h1>Passive: Lesser Maim</h1>Each attack has a %maim_chance%%% chance to reduce enemy hero movement speed by %maim_slow_movement%%% and attack speed by %maim_slow_attack% when used by a melee hero. Reduces enemy hero movement by %maim_slow_movement_range%%% and attack speed by %maim_slow_attack_range% when used by a ranged hero. Effect lasts %maim_duration% seconds.",
   "DisplayName": "Sange",
   "Lore": "Sange is an unusually accurate weapon, seeking weak points automatically."
  },
  "item_sange_and_yasha": {
-  "Description": "Passive: Greater Maim - Each attack has a chance to slow the enemy's movement and attack speed for %maim_duration% seconds.\\n\\nYasha-based movement speed bonuses from multiple items do not stack.",
+  "Description": "<h1>Passive: Greater Maim</h1>Each attack has a %maim_chance%%% chance to reduce enemy hero movement speed by %maim_slow_movement%%% and attack speed by %maim_slow_attack% when used by a melee hero. Reduces enemy hero movement by %maim_slow_movement_range%%% and attack speed by %maim_slow_attack_range% when used by a ranged hero. Effect lasts %maim_duration% seconds.",
   "DisplayName": "Sange and Yasha",
   "Lore": "Sange and Yasha, when attuned by the moonlight and used together, become a very powerful combination."
  },
  "item_satanic": {
-  "Description": "Active: Unholy Rage - Increases Lifesteal percentage to %unholy_lifesteal_total_tooltip%%% for %unholy_duration% seconds.\\nPassive: Lifesteal - Heals the attacker for a percentage of attack damage dealt.\\n\\nSatanic is a Unique Attack Modifier, and does not stack with other Unique Attack Modifiers.",
+  "Description": "<h1>Active: Unholy Rage</h1>Increases Lifesteal percentage to %unholy_lifesteal_total_tooltip%%% for %unholy_duration% seconds. \\n<h1>Passive: Lifesteal</h1>Heals the attacker for %lifesteal_percent%%% of attack damage dealt. <br><br>Satanic is a Unique Attack Modifier, and does not stack with other Unique Attack Modifiers.",
   "DisplayName": "Satanic",
   "Lore": "Immense power at the cost of your soul."
  },
  "item_shadow_amulet": {
-  "Description": "Active: Fade - Grants invisibility to you or a target allied hero after a %fade_time% second fade time. Moving breaks the invisibility. There is no cooldown when using this item on yourself.",
+  "Description": "<h1>Active: Fade</h1>Grants invisibility to you or a target allied hero as long as target unit remains still.  <br><br>Has a %fade_time% second fade time, and breaks instantly upon moving. <br><br>There is no cooldown when using this item on yourself.",
   "DisplayName": "Shadow Amulet",
   "Lore": "A small talisman that clouds the senses of one's enemies when held perfectly still."
  },
  "item_sheepstick": {
-  "Description": "Active: Hex - Turns a target unit into a harmless critter for %sheep_duration% seconds. Instantly destroys illusions.",
+  "Description": "<h1>Active: Hex</h1>Turns a target unit into a harmless critter for %sheep_duration% seconds. The target has a base movement speed of 140 and will be silenced, muted, and disarmed.<br>Instantly destroys illusions.<br><br>Range: %tooltip_range%",
   "DisplayName": "Scythe of Vyse",
   "Lore": "The most guarded relic among the cult of Vyse, it is the most coveted weapon among magi."
  },
  "item_shivas_guard": {
-  "Description": "Active: Arctic Blast - Emits a freezing wave that deals %blast_damage% magical damage to enemies and slows their movement by %blast_movement_speed%%% for %blast_debuff_duration% seconds.\\nPassive: Freezing Aura - Reduces the attack speed of all enemies in a %aura_radius% radius.\\n\\nMultiple instances of Freezing Aura do not stack.",
+  "Description": "<h1>Active: Arctic Blast</h1> Emits a freezing wave that deals %blast_damage% magical damage to enemies and slows their movement by %blast_movement_speed%%% for %blast_debuff_duration% seconds.<br><br>Radius: %blast_radius%\\n<h1>Passive: Freezing Aura</h1> Reduces the attack speed of all enemies by %aura_attack_speed%. <br><br>Radius: %aura_radius%",
   "DisplayName": "Shiva's Guard",
   "Lore": "Said to have belonged to a goddess, today it retains much of its former power."
  },
  "item_silver_edge": {
-  "Description": "Active: Shadow Walk - Makes you invisible until the duration ends, or until you attack or cast a spell.  While invisible, you move %windwalk_movement_speed%%% faster and can move through units.  Attacking to end the invisibility will deal %windwalk_bonus_damage% bonus damage to the target, disable their passive abilities, and reduce their damage output.",
+  "Description": "<h1>Active: Shadow Walk</h1>Makes you invisible for %windwalk_duration% seconds, or until you attack or cast a spell.  While invisible, you move %windwalk_movement_speed%%% faster and can move through units.  <br><br>Attacking to end the invisibility will deal %windwalk_bonus_damage% bonus damage to the target, and for %backstab_duration% seconds, disable their passive abilities, and reduce their damage output by %backstab_reduction%%%.",
   "DisplayName": "Silver Edge",
   "Lore": "Once used to slay an unjust king, only to have the kingdom erupt into civil war in the aftermath."
  },
  "item_skadi": {
-  "Description": "Passive: Cold Attack - Each attack slows the movement and attack speed of the target. The duration of the slow is based on whether the equipped hero is melee or ranged.",
+  "Description": "<h1>Passive: Cold Attack</h1> Attacks lower enemy attack speed by %cold_attack_speed% and movement speed by %cold_movement_speed%%%. <br><br>Lasts %cold_duration_melee% seconds when used by melee heroes, and %cold_duration_ranged% seconds when used by ranged.",
   "DisplayName": "Eye of Skadi",
   "Lore": "Extremely rare artifact, guarded by the azure dragons."
  },
@@ -2074,7 +2074,7 @@
   "Lore": "Light boots made from spider skin that tingles your senses."
  },
  "item_smoke_of_deceit": {
-  "Description": "Use: Upon activation, the user and all nearby allied player-controlled units gain invisibility and bonus movement speed for a brief time.  Minimap icons will also be hidden.  Attacking, or moving within %visibility_radius% range of an enemy hero or tower, will break the invisibility.",
+  "Description": "<h1>Use: Disguise</h1> The user and all nearby allied player-controlled units in a %visibility_radius% radius gain Deceit and %bonus_movement_speed%%% bonus movement speed for %duration% seconds. <br><br>Attacking, or moving within %visibility_radius% range of an enemy hero or tower, will break the invisibility. <br><br>Disguise grants invisibility that is immune to True Sight.",
   "DisplayName": "Smoke of Deceit",
   "Lore": "The charlatan wizard Myrddin's only true contribution to the arcane arts."
  },
@@ -2083,7 +2083,7 @@
   "Lore": "A mask commonly used by mages and warlocks for various rituals."
  },
  "item_solar_crest": {
-  "Description": "Active: Shine - Temporarily removes the armor and evasion from Solar Crest. When cast on an ally it grants them %bonus_armor% armor and %bonus_evasion%%% evasion. When cast on an enemy, it removes %bonus_armor% of their armor and grants your allies to have %truestrike_chance%%% Accuracy on the target. Cannot target magic immune enemies.",
+  "Description": "<h1>Active: Shine</h1>When cast on an ally, grants them %bonus_armor% armor and %bonus_evasion%%% evasion. When cast on an enemy, removes %bonus_armor% of their armor and grants your allies %truestrike_chance%%% Accuracy on the target. <br><br>Removes the armor and evasion from the caster when used. <br><br> Cannot target magic immune enemies.<br><br>Range: %valor_cast_range_tooltip%",
   "DisplayName": "Solar Crest",
   "Lore": "A talisman forged to honor the daytime sky."
  },
@@ -2092,12 +2092,12 @@
   "Lore": "Regain lost courage."
  },
  "item_soul_ring": {
-  "Description": "Active: Sacrifice - Consume %health_sacrifice% health to temporarily gain %mana_gain% mana.  Lasts 10 seconds.",
+  "Description": "<h1>Active: Sacrifice</h1> Consume %health_sacrifice% health to temporarily gain %mana_gain% mana.  Lasts %duration% seconds.<br><br>If the mana gained cannot fit in your mana pool, it creates a buffer of mana that will be used before your mana pool.",
   "DisplayName": "Soul Ring",
   "Lore": "A ring that feeds on the souls of those who wear it."
  },
  "item_sphere": {
-  "Description": "Passive: Spellblock - Blocks most targeted spells once every %block_cooldown% seconds.\\nActive: Transfer Spellblock - Temporarily removes Spellblock from the item's owner and transfers it to an allied unit.",
+  "Description": "<h1>Passive: Spellblock</h1>Blocks most targeted spells once every %block_cooldown% seconds.\\n<h1>Active: Transfer Spellblock</h1>Temporarily removes Spellblock from the item's owner and transfers it to an allied unit for %block_cooldown% seconds.<br><br>Range: %cast_range_tooltip%",
   "DisplayName": "Linken's Sphere",
   "Lore": "This magical sphere once protected one of the most famous heroes in history."
  },
@@ -2106,47 +2106,46 @@
   "Lore": "A staff of magical powers passed down from the eldest mages."
  },
  "item_stout_shield": {
-  "Description": "Passive: Damage Block - Gives a chance to block damage based on whether the equipped hero is melee or ranged.",
+  "Description": "<h1>Passive: Damage Block</h1>Gives a %block_chance%%% chance to block %damage_block_melee% damage on melee heroes, and %damage_block_ranged% damage on ranged.",
   "DisplayName": "Stout Shield",
   "Lore": "One man's wine barrel bottom is another man's shield."
  },
  "item_talisman_of_evasion": {
-  "Description": "Stacks diminishingly with other sources of Evasion.",
   "DisplayName": "Talisman of Evasion",
   "Lore": "A necklace that allows you to anticipate enemy attacks."
  },
  "item_tango": {
-  "Description": "Use: Eat a Tree or Ward - Consume a target tree or ward to gradually restore health.\\n\\nComes with 4 charges.  Can be used on an allied hero to give them one Tango.",
+  "Description": "<h1>Use: Devour</h1> Consume a target tree to restore %total_heal% health over %buff_duration% seconds. Consuming a ward or Ironwood Tree doubles the heal amount.<br><br>Comes with %tooltip_charges% charges.  Can be used on an allied hero to give them one Tango.<br><br>Range: %tooltip_range%<br>Ward Range: %cast_range_ward%",
   "DisplayName": "Tango",
   "Lore": "Forage to survive on the battlefield."
  },
  "item_tango_single": {
-  "Description": "Use: Eat a Tree or Ward - Consume a target tree or ward to gradually restore health.",
+  "Description": "<h1>Use: Eat a Tree or Ward</h1> Consume a target tree or ward to gradually restore %total_heal% health. Heals for double when used on a ward or Ironwood Tree.",
   "DisplayName": "Tango (Shared)",
   "Lore": "Om nom nom."
  },
  "item_tome_of_knowledge": {
-  "Description": "Use: Grants you %xp_bonus% experience plus %xp_per_use% per tome consumed by your team.",
+  "Description": "<h1>Use: Enlighten</h1>Grants you %xp_bonus% experience plus %xp_per_use% per tome consumed by your team.<br><br>Tomes Used By Team: %customval_team_tomes_used%",
   "DisplayName": "Tome of Knowledge",
   "Lore": "That which raises beast to man and man to god."
  },
  "item_tpscroll": {
-  "Description": "Use: Teleport - Teleports you to a target friendly building. Double-click to teleport to your team's base fountain.",
+  "Description": "<h1>Use: Teleport</h1>After channeling for %tooltip_channel_time% seconds, teleports you to a target friendly building. <br><br>Double-click to teleport to your team's base fountain.",
   "DisplayName": "Town Portal Scroll",
   "Lore": "What a hero truly needs."
  },
  "item_tranquil_boots": {
-  "Description": "Passive: Break - Whenever you attack or are attacked, the health regeneration and 25 Movement Speed are lost for 13 seconds.",
+  "Description": "<h1>Passive: Break</h1> Whenever you attack or are attacked, the bonus %bonus_health_health% HP regen is lost and the movement speed bonus is reduced to %broken_movement_speed% for %break_time% seconds.<br><br>Flat movement speed bonuses from multiple pairs of boots do not stack.",
   "DisplayName": "Tranquil Boots",
   "Lore": "While they increase the longevity of the wearer, this boot is not particularly reliable."
  },
  "item_travel_boots": {
-  "Description": "Active: Teleport - Teleports you to an allied non-hero unit or structure. Double-click to teleport to your team's base fountain. Upgradable to allow you to teleport to allied heroes.\\n\\nFlat movement speed bonuses from multiple pairs of boots do not stack.",
+  "Description": "<h1>Active: Teleport</h1>Teleports you to an allied non-hero unit or structure. Teleporting to a unit is interrupted if the target unit dies.<br><br>Shares a cooldown with Town Portal Scroll.<br><br>Flat movement speed bonuses from multiple pairs of boots do not stack.",
   "DisplayName": "Boots of Travel",
   "Lore": "Winged boots that grant omnipresence."
  },
  "item_travel_boots_2": {
-  "Description": "Active: Teleport - Teleports you to any allied structure or unit, including heroes. Double-click to teleport to your team's base fountain.\\n\\nFlat movement speed bonuses from multiple pairs of boots do not stack.",
+  "Description": "<h1>Active: Teleport</h1> Teleports you to any allied structure or unit, including heroes. Teleporting to a unit is interrupted if the target unit dies.<br><br>Shares a cooldown with Town Portal Scroll.<br><br>Flat movement speed bonuses from multiple pairs of boots do not stack.",
   "DisplayName": "Boots of Travel",
   "Lore": "Winged boots that grant omnipresence."
  },
@@ -2155,22 +2154,22 @@
   "Lore": "A mystical orb containing the essence of life."
  },
  "item_ultimate_scepter": {
-  "Description": "Passive: Ultimate Upgrade - Upgrades the ultimate, and some abilities, of certain heroes.",
+  "Description": "<h1>Passive: Ultimate Upgrade</h1>Upgrades the ultimate, and some abilities, of certain heroes.",
   "DisplayName": "Aghanim's Scepter",
   "Lore": "The scepter of a wizard with demigod-like powers."
  },
  "item_urn_of_shadows": {
-  "Description": "Active: Soul Release - Heals health over time to friendly units, but deals pure damage over time to enemy units.  The healing effect is lost if the affected ally takes damage from an enemy hero or tower.\\nGains charges every time an enemy hero dies within %soul_radius% units.  Only the closest Urn to the dying hero will gain a charge.",
+  "Description": "<h1>Active: Soul Release</h1> Heals %soul_heal_amount% health over %soul_heal_duration% seconds when cast on allies, and deals %soul_damage_amount% pure damage over %soul_damage_duration% seconds when cast on enemies.  <br><br>The healing effect is lost if the affected ally takes damage from an enemy hero or tower. <br><br>Gains charges every time an enemy hero dies within %soul_radius% units.  Only the closest Urn to the dying hero will gain a charge.<br><br>Range: %soul_release_range_tooltip%",
   "DisplayName": "Urn of Shadows",
   "Lore": "Contains the ashes of powerful demons."
  },
  "item_vanguard": {
-  "Description": "Passive: Damage Block - Grants the wielder a %block_chance%%% chance to block damage from incoming attacks based on whether the equipped hero is melee or ranged.",
+  "Description": "<h1>Passive: Damage Block</h1> Grants a %block_chance%%% chance to block %block_damage_melee% damage from incoming attacks on melee heroes, and %block_damage_ranged% damage on ranged.",
   "DisplayName": "Vanguard",
   "Lore": "A powerful shield that defends its wielder from even the most vicious of attacks."
  },
  "item_veil_of_discord": {
-  "Description": "Active: Magic Weakness - Emits a weakening blast that increases the magic damage enemies take. Lasts %resist_debuff_duration% seconds.",
+  "Description": "<h1>Active: Magic Weakness</h1> Cast a %debuff_radius% radius blast that decreases enemy magic resistance by %resist_debuff%%%.<br><br>Range: %tooltip_range%<br>Duration: %resist_debuff_duration% seconds.",
   "DisplayName": "Veil of Discord",
   "Lore": "The headwear of corrupt magi."
  },
@@ -2179,7 +2178,7 @@
   "Lore": "A ruby gemstone that has been passed down through generations of warrior kin."
  },
  "item_vladmir": {
-  "Description": "Passive: Vladmir's Aura - Grants lifesteal, health regeneration, mana regeneration, bonus attack damage, and armor to allies in a %aura_radius% radius.  The lifesteal percentage is based on whether the hero affected by the aura is melee or ranged.\\n\\nMultiple instances of Vladmir's Aura do not stack.",
+  "Description": "<h1>Passive: Vladmir's Aura</h1>Grants lifesteal (%vampiric_aura%%% for melee heroes, %vampiric_aura_ranged%%% for ranged), %hp_regen% health regeneration, %mana_regen_aura% mana regeneration, %damage_aura%%% bonus attack damage, and %armor_aura% armor to nearby allies. <br><br>Radius: %aura_radius%",
   "DisplayName": "Vladmir's Offering",
   "Lore": "An eerie mask that is haunted with the malice of a fallen vampire."
  },
@@ -2189,22 +2188,22 @@
   "Lore": "Jewelry that was once used to channel nether realm magic, this ring pulses with energy."
  },
  "item_ward_dispenser": {
-  "Description": "Double-Click to switch the currently active ward.\\n\\nUse: Plant the currently active ward to keep watch over an area. Observer Wards reveal their surrounding area to your team. Sentry Wards grant True Sight, the ability to see invisible enemy units and wards, to any existing allied vision within its range.",
+  "Description": "<h1>Use: Plant</h1> Plant the currently active ward.  Double-Click to switch the currently active ward.<br><br>Range: %tooltip_range%",
   "DisplayName": "Observer and Sentry Wards",
   "Lore": "Advancements in stacking efficiency have made wards easier to carry than ever."
  },
  "item_ward_observer": {
-  "Description": "Use: Plants an Observer Ward, an invisible watcher that gives vision of its surrounding area to your team. Lasts %duration_minutes_tooltip% minutes.\\n\\nHold Control to give one Observer Ward to an allied hero.",
+  "Description": "<h1>Use: Plant</h1>Plants an Observer Ward, an invisible watcher that gives ground vision in a %vision_range% radius to your team. Lasts %duration_minutes_tooltip% minutes.<br><br>Hold Control to give one Observer Ward to an allied hero.<br><br>Range: %tooltip_range%",
   "DisplayName": "Observer Ward",
   "Lore": "A form of half-sentient plant, often cultivated by apprentice wizards."
  },
  "item_ward_sentry": {
-  "Description": "Use: Plants a Sentry Ward, an invisible watcher that grants True Sight, the ability to see invisible enemy units and wards, to any existing allied vision within its range. Lasts %duration_minutes_tooltip% minutes.\\n\\nHold Control to give one Sentry Ward to an allied hero.",
+  "Description": "<h1>Use: Plant</h1> Plants a Sentry Ward, an invisible watcher that grants True Sight, the ability to see invisible enemy units and wards, to any existing allied vision within a %true_sight_range% radius.<br>Duration: %duration_minutes_tooltip% minutes.<br><br>Does not grant ground vision.<br>Hold Control to give one Sentry Ward to an allied hero.<br><br>Range: %tooltip_range%",
   "DisplayName": "Sentry Ward",
   "Lore": "A form of plant originally grown in the garden of a fearful king."
  },
  "item_wind_lace": {
-  "Description": "Passive: Gives increased movement speed.",
+  "Description": "Bonuses from multiple Wind Laces do not stack.",
   "DisplayName": "Wind Lace",
   "Lore": "Hasten to battle on wind-touched heels"
  },
@@ -2213,7 +2212,6 @@
   "Lore": "A circlet with faint whispers echoing about it."
  },
  "item_yasha": {
-  "Description": "Yasha-based movement speed bonuses from multiple items do not stack.",
   "DisplayName": "Yasha",
   "Lore": "Yasha is regarded as the swiftest weapon ever created."
  },
@@ -2377,7 +2375,7 @@
   "Lore": "Twisting nature to his vile will, the shifting earth consumes those unlucky enough to cross Leshrac's path."
  },
  "lich_chain_frost": {
-  "Description": "Releases an orb of frost that bounces between nearby enemy units up to %jumps% times, slowing and damaging each time it hits.  The first target is mini-stunned.\\n\\nUpgradable by Aghanim's Scepter.",
+  "Description": "Releases an orb of frost that bounces between nearby enemy units up to %jumps% times, slowing and damaging each time it hits. \\n\\nUpgradable by Aghanim's Scepter.",
   "DisplayName": "Chain Frost",
   "Lore": "Almost universally considered the ultimate in frost magic, Ethreain's orb of frozen death strikes fear into those who dare stand against him."
  },
@@ -5585,7 +5583,7 @@
   "DisplayName": "+75 Thunder Clap Damage"
  },
  "special_bonus_unique_brewmaster_3": {
-  "DisplayName": "+2s Thunderlap Slow"
+  "DisplayName": "+2s Thunder Clap Slow"
  },
  "special_bonus_unique_bristleback": {
   "DisplayName": "+4 Max Goo Stacks"
@@ -5852,7 +5850,10 @@
   "DisplayName": "+3 Mana Drain Multi Target"
  },
  "special_bonus_unique_lion_2": {
-  "DisplayName": "+80 Earth Spike Damage "
+  "DisplayName": "+80 Earth Spike Damage"
+ },
+ "special_bonus_unique_lion_3": {
+  "DisplayName": "+300 Finger of Death Damage"
  },
  "special_bonus_unique_lone_druid_1": {
   "DisplayName": "+50 Spirit Bear Damage"
@@ -5942,7 +5943,7 @@
   "DisplayName": "-8s Crippling Fear Cooldown"
  },
  "special_bonus_unique_nyx": {
-  "DisplayName": "200% Spiked Carapace Damage"
+  "DisplayName": "+100% Spiked Carapace Damage"
  },
  "special_bonus_unique_nyx_2": {
   "DisplayName": "+50 Impale Damage"

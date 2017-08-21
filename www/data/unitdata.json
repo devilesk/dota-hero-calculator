@@ -22702,7 +22702,7 @@
   "movementturnrate": 0,
   "name": "npc_dota_unit_tombstone1",
   "projectilespeed": 900,
-  "statushealth": 6,
+  "statushealth": 8,
   "statushealthregen": 0,
   "statusmana": 0,
   "statusmanaregen": 0,
@@ -22793,7 +22793,7 @@
   "movementturnrate": 0,
   "name": "npc_dota_unit_tombstone2",
   "projectilespeed": 900,
-  "statushealth": 8,
+  "statushealth": 10,
   "statushealthregen": 0,
   "statusmana": 0,
   "statusmanaregen": 0,
@@ -22884,7 +22884,7 @@
   "movementturnrate": 0,
   "name": "npc_dota_unit_tombstone3",
   "projectilespeed": 900,
-  "statushealth": 10,
+  "statushealth": 12,
   "statushealthregen": 0,
   "statusmana": 0,
   "statusmanaregen": 0,
@@ -22975,7 +22975,7 @@
   "movementturnrate": 0,
   "name": "npc_dota_unit_tombstone4",
   "projectilespeed": 900,
-  "statushealth": 14,
+  "statushealth": 16,
   "statushealthregen": 0,
   "statusmana": 0,
   "statusmanaregen": 0,
@@ -23399,7 +23399,7 @@
   "statusmana": 0,
   "statusmanaregen": 0,
   "unitlevel": 1,
-  "visiondaytimerange": 1200,
+  "visiondaytimerange": 800,
   "visionnighttimerange": 800
  },
  "npc_dota_venomancer_plague_ward_2": {
@@ -23438,7 +23438,7 @@
   "statusmana": 0,
   "statusmanaregen": 0,
   "unitlevel": 1,
-  "visiondaytimerange": 1200,
+  "visiondaytimerange": 800,
   "visionnighttimerange": 800
  },
  "npc_dota_venomancer_plague_ward_3": {
@@ -23477,7 +23477,7 @@
   "statusmana": 0,
   "statusmanaregen": 0,
   "unitlevel": 1,
-  "visiondaytimerange": 1200,
+  "visiondaytimerange": 800,
   "visionnighttimerange": 800
  },
  "npc_dota_venomancer_plague_ward_4": {
@@ -23516,7 +23516,7 @@
   "statusmana": 0,
   "statusmanaregen": 0,
   "unitlevel": 1,
-  "visiondaytimerange": 1200,
+  "visiondaytimerange": 800,
   "visionnighttimerange": 800
  },
  "npc_dota_visage_familiar1": {

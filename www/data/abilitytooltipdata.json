@@ -1138,7 +1138,7 @@
   "lore": "Twisting nature to his vile will, the shifting earth consumes those unlucky enough to cross Leshrac's path."
  },
  "lich_chain_frost": {
-  "description": "Releases an orb of frost that bounces between nearby enemy units up to %jumps% times, slowing and damaging each time it hits.  The first target is mini-stunned.\\n\\nUpgradable by Aghanim's Scepter.",
+  "description": "Releases an orb of frost that bounces between nearby enemy units up to %jumps% times, slowing and damaging each time it hits. \\n\\nUpgradable by Aghanim's Scepter.",
   "lore": "Almost universally considered the ultimate in frost magic, Ethreain's orb of frozen death strikes fear into those who dare stand against him."
  },
  "lich_dark_ritual": {
@@ -2432,6 +2432,7 @@
  "special_bonus_unique_lina_4": {},
  "special_bonus_unique_lion": {},
  "special_bonus_unique_lion_2": {},
+ "special_bonus_unique_lion_3": {},
  "special_bonus_unique_lone_druid_1": {},
  "special_bonus_unique_lone_druid_2": {},
  "special_bonus_unique_lone_druid_3": {},

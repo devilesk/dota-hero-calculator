@@ -3218,8 +3218,6 @@
     "displayname": "Ice Blast",
     "level": 0,
     "manacost": [
-     100,
-     125,
      150
     ],
     "name": "ancient_apparition_ice_blast"
@@ -6438,12 +6436,7 @@
     "name": "bane_brain_sap"
    },
    {
-    "AbilityCastPoint": [
-     0.5,
-     0.5,
-     0.5,
-     0.5
-    ],
+    "AbilityCastPoint": 0.4,
     "AbilityCastRange": [
      500,
      550,
@@ -6679,9 +6672,9 @@
   "attackrate": 1.7,
   "attacktype": "DOTA_UNIT_CAP_RANGED_ATTACK",
   "attributeagilitygain": 2.4,
-  "attributebaseagility": 22,
-  "attributebaseintelligence": 22,
-  "attributebasestrength": 22,
+  "attributebaseagility": 23,
+  "attributebaseintelligence": 23,
+  "attributebasestrength": 23,
   "attributeintelligencegain": 2.4,
   "attributeprimary": "DOTA_ATTRIBUTE_INTELLECT",
   "attributestrengthgain": 2.4,
@@ -7531,10 +7524,7 @@
     "displayname": "Firefly",
     "level": 0,
     "manacost": [
-     100,
-     100,
-     100,
-     100
+     125
     ],
     "name": "batrider_firefly"
    },
@@ -9513,8 +9503,8 @@
     "displayname": "Rupture",
     "level": 0,
     "manacost": [
-     150,
      200,
+     225,
      250
     ],
     "name": "bloodseeker_rupture"
@@ -11566,7 +11556,7 @@
       0,
       0
      ],
-     "displayname": "+2s Thunderlap Slow",
+     "displayname": "+2s Thunder Clap Slow",
      "level": 0,
      "manacost": [
       0,
@@ -15635,9 +15625,9 @@
       "name": "heal_amount",
       "tooltip": "HEAL:",
       "value": [
-       225,
-       350,
-       475
+       250,
+       375,
+       500
       ]
      },
      {
@@ -25243,9 +25233,9 @@
      "DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
     ],
     "cooldown": [
-     15,
-     15,
-     15,
+     18,
+     17,
+     16,
      15
     ],
     "damage": [
@@ -25340,9 +25330,9 @@
     "displayname": "Enchant Totem",
     "level": 0,
     "manacost": [
-     20,
-     30,
+     35,
      40,
+     45,
      50
     ],
     "name": "earthshaker_enchant_totem"
@@ -30579,7 +30569,7 @@
      {
       "name": "vision_range",
       "value": [
-       750
+       500
       ]
      },
      {
@@ -30931,7 +30921,7 @@
   "items": [],
   "level": 0,
   "magicalresistance": 25,
-  "movementspeed": 295,
+  "movementspeed": 290,
   "movementturnrate": 0.6,
   "name": "npc_dota_hero_furion",
   "projectilespeed": 1125,
@@ -41087,9 +41077,9 @@
       "name": "slow_movement_speed",
       "tooltip": "%ENEMY MOVE SLOW:",
       "value": [
-       -30,
-       -30,
-       -30,
+       -24,
+       -26,
+       -28,
        -30
       ]
      },
@@ -41097,6 +41087,9 @@
       "name": "slow_attack_speed",
       "tooltip": "ENEMY ATTACK SLOW:",
       "value": [
+       -24,
+       -26,
+       -28,
        -30
       ]
      }
@@ -43776,9 +43769,9 @@
       "name": "duration",
       "tooltip": "STUN DURATION:",
       "value": [
-       1.1,
-       1.6,
-       2.1,
+       1.4,
+       1.8,
+       2.2,
        2.6
       ]
      },
@@ -44272,7 +44265,7 @@
       0,
       0
      ],
-     "displayname": "+80 Earth Spike Damage ",
+     "displayname": "+80 Earth Spike Damage",
      "level": 0,
      "manacost": [
       0,
@@ -44423,13 +44416,13 @@
      ],
      "AbilityModifierSupportBonus": 0,
      "AbilityModifierSupportValue": 1,
-     "ID": 5949,
+     "ID": 6600,
      "abilitytype": "DOTA_ABILITY_TYPE_ATTRIBUTES",
      "attributes": [
       {
        "name": "value",
        "value": [
-        8
+        300
        ]
       }
      ],
@@ -44448,7 +44441,7 @@
       0,
       0
      ],
-     "displayname": "+8% Spell Amplification",
+     "displayname": "+300 Finger of Death Damage",
      "level": 0,
      "manacost": [
       0,
@@ -44456,7 +44449,7 @@
       0,
       0
      ],
-     "name": "special_bonus_spell_amplify_8"
+     "name": "special_bonus_unique_lion_3"
     }
    ],
    [
@@ -51012,10 +51005,10 @@
       "name": "impact_damage_tooltip",
       "tooltip": "PRIMAL SPRING DAMAGE:",
       "value": [
-       100,
-       180,
-       260,
-       340
+       140,
+       210,
+       280,
+       350
       ]
      },
      {
@@ -54300,7 +54293,7 @@
       "name": "bonus_damage",
       "tooltip": "%INCREASED MAGIC DAMAGE:",
       "value": [
-       -20
+       -25
       ]
      }
     ],
@@ -54466,9 +54459,7 @@
      "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
     ],
     "cooldown": [
-     90,
-     80,
-     70
+     100
     ],
     "damage": [
      0,
@@ -56288,7 +56279,7 @@
       "name": "duration",
       "tooltip": "DURATION:",
       "value": [
-       50.0
+       40.0
       ]
      },
      {
@@ -57066,7 +57057,7 @@
       ]
      },
      {
-      "name": "damage_reflect_pct_tooltip",
+      "name": "damage_reflect_pct",
       "tooltip": "%DAMAGE REFLECTED:",
       "value": [
        100
@@ -57353,8 +57344,8 @@
   ],
   "abilitylayout": 4,
   "armorphysical": 1,
-  "attackdamagemax": 34,
-  "attackdamagemin": 30,
+  "attackdamagemax": 31,
+  "attackdamagemin": 27,
   "attackpoint": 0.46,
   "attackrange": 150,
   "attackrate": 1.7,
@@ -57841,7 +57832,7 @@
       0,
       0
      ],
-     "displayname": "200% Spiked Carapace Damage",
+     "displayname": "+100% Spiked Carapace Damage",
      "level": 0,
      "manacost": [
       0,
@@ -64438,7 +64429,7 @@
      {
       "name": "orb_vision",
       "value": [
-       550
+       450
       ]
      },
      {
@@ -64595,9 +64586,6 @@
      "DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES"
     ],
     "cooldown": [
-     6,
-     6,
-     6,
      6
     ],
     "damage": [
@@ -73296,13 +73284,13 @@
      ],
      "AbilityModifierSupportBonus": 0,
      "AbilityModifierSupportValue": 1,
-     "ID": 5947,
+     "ID": 6003,
      "abilitytype": "DOTA_ABILITY_TYPE_ATTRIBUTES",
      "attributes": [
       {
        "name": "value",
        "value": [
-        75
+        100
        ]
       }
      ],
@@ -73321,7 +73309,7 @@
       0,
       0
      ],
-     "displayname": "+75 Cast Range",
+     "displayname": "+100 Cast Range",
      "level": 0,
      "manacost": [
       0,
@@ -73329,7 +73317,7 @@
       0,
       0
      ],
-     "name": "special_bonus_cast_range_75"
+     "name": "special_bonus_cast_range_100"
     },
     {
      "AbilityCastPoint": [
@@ -73354,13 +73342,13 @@
      ],
      "AbilityModifierSupportBonus": 0,
      "AbilityModifierSupportValue": 1,
-     "ID": 5949,
+     "ID": 5989,
      "abilitytype": "DOTA_ABILITY_TYPE_ATTRIBUTES",
      "attributes": [
       {
        "name": "value",
        "value": [
-        8
+        10
        ]
       }
      ],
@@ -73379,7 +73367,7 @@
       0,
       0
      ],
-     "displayname": "+8% Spell Amplification",
+     "displayname": "+10% Spell Amplification",
      "level": 0,
      "manacost": [
       0,
@@ -73387,7 +73375,7 @@
       0,
       0
      ],
-     "name": "special_bonus_spell_amplify_8"
+     "name": "special_bonus_spell_amplify_10"
     }
    ],
    [
@@ -76796,8 +76784,8 @@
      "DOTA_ABILITY_BEHAVIOR_PASSIVE"
     ],
     "cooldown": [
-     240,
-     140,
+     200,
+     120,
      40
     ],
     "damage": [
@@ -76985,13 +76973,13 @@
      ],
      "AbilityModifierSupportBonus": 0,
      "AbilityModifierSupportValue": 1,
-     "ID": 5917,
+     "ID": 6141,
      "abilitytype": "DOTA_ABILITY_TYPE_ATTRIBUTES",
      "attributes": [
       {
        "name": "value",
        "value": [
-        15
+        30
        ]
       }
      ],
@@ -77010,7 +76998,7 @@
       0,
       0
      ],
-     "displayname": "+15 Movement Speed",
+     "displayname": "+30 Movement Speed",
      "level": 0,
      "manacost": [
       0,
@@ -77018,7 +77006,7 @@
       0,
       0
      ],
-     "name": "special_bonus_movement_speed_15"
+     "name": "special_bonus_movement_speed_30"
     },
     {
      "AbilityCastPoint": [
@@ -77698,8 +77686,8 @@
     "displayname": "Mystic Flare",
     "level": 0,
     "manacost": [
-     350,
-     575,
+     300,
+     550,
      800
     ],
     "name": "skywrath_mage_mystic_flare"
@@ -77876,13 +77864,13 @@
      ],
      "AbilityModifierSupportBonus": 0,
      "AbilityModifierSupportValue": 1,
-     "ID": 6564,
+     "ID": 6550,
      "abilitytype": "DOTA_ABILITY_TYPE_ATTRIBUTES",
      "attributes": [
       {
        "name": "value",
        "value": [
-        10
+        15
        ]
       }
      ],
@@ -77901,7 +77889,7 @@
       0,
       0
      ],
-     "displayname": "10% Spell Lifesteal",
+     "displayname": "15% Spell Lifesteal",
      "level": 0,
      "manacost": [
       0,
@@ -77909,7 +77897,7 @@
       0,
       0
      ],
-     "name": "special_bonus_spell_lifesteal_10"
+     "name": "special_bonus_spell_lifesteal_15"
     },
     {
      "AbilityCastPoint": [
@@ -81172,14 +81160,14 @@
      {
       "name": "illusion_damage_outgoing",
       "value": [
-       -70
+       -60
       ]
      },
      {
       "name": "tooltip_outgoing",
       "tooltip": "%HAUNT DAMAGE:",
       "value": [
-       30
+       40
       ]
      },
      {
@@ -82179,7 +82167,7 @@
   "items": [],
   "level": 0,
   "magicalresistance": 25,
-  "movementspeed": 290,
+  "movementspeed": 285,
   "movementturnrate": 0.4,
   "name": "npc_dota_hero_spirit_breaker",
   "projectilespeed": 900,
@@ -83587,7 +83575,10 @@
       "name": "bolt_stun_duration",
       "tooltip": "DURATION:",
       "value": [
-       2.0
+       1.7,
+       1.8,
+       1.9,
+       2
       ]
      },
      {
@@ -83764,10 +83755,10 @@
      "DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
     ],
     "cooldown": [
-     34,
-     28,
-     22,
-     16
+     35,
+     30,
+     25,
+     20
     ],
     "damage": [
      0,
@@ -89133,9 +89124,9 @@
     "displayname": "Toss",
     "level": 0,
     "manacost": [
-     120,
-     120,
-     120,
+     90,
+     100,
+     110,
      120
     ],
     "name": "tiny_toss"
@@ -89304,7 +89295,7 @@
       "name": "bonus_range_scepter",
       "tooltip": "SCEPTER BONUS RANGE:",
       "value": [
-       85
+       150
       ]
      },
      {
@@ -93084,20 +93075,20 @@
      {
       "name": "tombstone_health",
       "value": [
-       6,
        8,
        10,
-       14
+       12,
+       16
       ]
      },
      {
       "name": "hits_to_destroy_tooltip",
       "tooltip": "ATTACKS TO DESTROY:",
       "value": [
-       3,
        4,
        5,
-       7
+       6,
+       8
       ]
      },
      {
@@ -100005,10 +99996,10 @@
       "name": "stun_duration",
       "tooltip": "SHACKLE DURATION:",
       "value": [
-       1.5,
-       2.25,
-       3,
-       3.75
+       2,
+       2.6,
+       3.2,
+       3.8
       ]
      },
      {
@@ -100040,9 +100031,9 @@
      "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
     ],
     "cooldown": [
-     12,
-     12,
-     12,
+     18,
+     16,
+     14,
      12
     ],
     "damage": [
@@ -101427,13 +101418,13 @@
      ],
      "AbilityModifierSupportBonus": 0,
      "AbilityModifierSupportValue": 1,
-     "ID": 5918,
+     "ID": 6077,
      "abilitytype": "DOTA_ABILITY_TYPE_ATTRIBUTES",
      "attributes": [
       {
        "name": "value",
        "value": [
-        20
+        35
        ]
       }
      ],
@@ -101452,7 +101443,7 @@
       0,
       0
      ],
-     "displayname": "+20 Movement Speed",
+     "displayname": "+35 Movement Speed",
      "level": 0,
      "manacost": [
       0,
@@ -101460,7 +101451,7 @@
       0,
       0
      ],
-     "name": "special_bonus_movement_speed_20"
+     "name": "special_bonus_movement_speed_35"
     },
     {
      "AbilityCastPoint": [
@@ -101485,13 +101476,13 @@
      ],
      "AbilityModifierSupportBonus": 0,
      "AbilityModifierSupportValue": 1,
-     "ID": 5941,
+     "ID": 5942,
      "abilitytype": "DOTA_ABILITY_TYPE_ATTRIBUTES",
      "attributes": [
       {
        "name": "value",
        "value": [
-        50
+        75
        ]
       }
      ],
@@ -101510,7 +101501,7 @@
       0,
       0
      ],
-     "displayname": "+50 Damage",
+     "displayname": "+75 Damage",
      "level": 0,
      "manacost": [
       0,
@@ -101518,7 +101509,7 @@
       0,
       0
      ],
-     "name": "special_bonus_attack_damage_50"
+     "name": "special_bonus_attack_damage_75"
     }
    ],
    [
