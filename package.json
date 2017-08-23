@@ -70,7 +70,7 @@
     "jquery-ui": "^1.12.0",
     "knockout": "^3.4.0",
     "knockout-mapping": "^2.6.0",
-    "rollbar": "^2.1.0"
+    "rollbar": "^2.2.3"
   },
   "browserify": {
     "transform": [
