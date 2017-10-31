@@ -246,6 +246,18 @@ var HeroModel = function (heroData, itemData, h) {
                 + self.debuffs.getAllStatsReduction()
                ).toFixed(2);
     });
+    // + % status resistance
+    self.perkStr = ko.pureComputed(function () {
+        return self.totalStr() * 0.15;
+    });
+    // + % ms
+    self.perkAgi = ko.pureComputed(function () {
+        return self.totalAgi() * 0.06;
+    });
+    // + % magic resistance
+    self.perkInt = ko.pureComputed(function () {
+        return self.totalInt() * 0.15;
+    });
     self.health = ko.pureComputed(function () {
         return (self.heroData().statushealth + Math.floor(self.totalStr()) * 20 
                 + self.inventory.getHealth()
