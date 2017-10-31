@@ -335,10 +335,10 @@ var HeroModel = function (heroData, itemData, h) {
     self.totalArmorPhysicalReduction = ko.pureComputed(function () {
         var totalArmor = self.totalArmorPhysical();
         if (totalArmor >= 0) {
-            return ((0.06 * self.totalArmorPhysical()) / (1 + 0.06 * self.totalArmorPhysical()) * 100).toFixed(2);
+            return ((0.05 * self.totalArmorPhysical()) / (1 + 0.05 * self.totalArmorPhysical()) * 100).toFixed(2);
         }
         else {
-            return -((0.06 * -self.totalArmorPhysical()) / (1 + 0.06 * -self.totalArmorPhysical()) * 100).toFixed(2);
+            return -((0.05 * -self.totalArmorPhysical()) / (1 + 0.05 * -self.totalArmorPhysical()) * 100).toFixed(2);
         }
     });
     self.spellAmp = ko.pureComputed(function () {
