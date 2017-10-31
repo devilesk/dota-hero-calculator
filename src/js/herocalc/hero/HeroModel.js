@@ -314,7 +314,7 @@ var HeroModel = function (heroData, itemData, h) {
             obj.value += memo.value;
             return obj;
         }, {value: 0, excludeList: []});
-        return (self.enemy().ability().getArmorBaseReduction() * self.debuffs.getArmorBaseReduction() * (self.heroData().armorphysical + self.totalAgi() * .14)
+        return (self.enemy().ability().getArmorBaseReduction() * self.debuffs.getArmorBaseReduction() * (self.heroData().armorphysical + self.totalAgi() * 1/6)
                 + (self.isIllusion() ? 0 : self.inventory.getArmor()
                     //+ self.inventory.getArmorAura().value
                     //+ self.enemy().inventory.getArmorReduction()
