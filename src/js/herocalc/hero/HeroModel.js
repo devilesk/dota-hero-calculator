@@ -270,7 +270,7 @@ var HeroModel = function (heroData, itemData, h) {
     });
     self.mana = ko.pureComputed(function () {
         return (self.heroData().statusmana
-                + self.totalInt() * 11
+                + self.totalInt() * 12
                 + self.inventory.getMana()
                 + TalentController.getMana(self.selectedTalents())
                 + self.ability().getMana()).toFixed(2);
