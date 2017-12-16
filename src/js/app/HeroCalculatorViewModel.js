@@ -96,7 +96,7 @@ TabGroup.prototype.toJS = function () {
     }
 }
 
-var HeroCalculatorViewModel = function (tooltipURL) {
+var HeroCalculatorViewModel = function (tooltipURL, reportEmail) {
     var self = this;
     self.heroes = [];
     
@@ -598,15 +598,28 @@ var HeroCalculatorViewModel = function (tooltipURL) {
     
     self.sendReport = function () {
         if ($('#BugReportFormText').val()) {
-            $.post( "report.php", { name: $('#BugReportFormName').val(), email: $('#BugReportFormEmail').val(), body: $('#BugReportFormText').val() })
+            $.ajax({
+                url: "https://formspree.io/" + reportEmail, 
+                method: "POST",
+                data: {
+                    _subject: "Hero Calculator Report",
+                    name: $('#BugReportFormName').val(),
+                    email: $('#BugReportFormEmail').val(),
+                    body: $('#BugReportFormText').val()
+                },
+                dataType: "json"
+            })
             .done(function (data) {
-                if (data == 'Success') {
+                if (data && data.success == 'email sent') {
                     alert('Report successfully sent. Thanks!');
                     $('#BugReportFormText').val('');
                 }
                 else {
-                    alert('Failed to send report. Try again later or email admin@devilesk.com');
+                    alert('Failed to send report. Try again later or email ' + reportEmail);
                 }
+            })
+            .fail(function() {
+                alert('Failed to send report. Try again later or email ' + reportEmail);
             });
             $('#myModal').modal('hide');
         }

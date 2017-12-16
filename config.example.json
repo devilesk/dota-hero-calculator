@@ -14,5 +14,6 @@
     "abilityTooltipPath": "/media/js/abilitytooltipdata.json",
     "heroDataPath": "/media/js/herodata.json",
     "itemDataPath": "/media/js/itemdata.json",
-    "unitDataPath": "/media/js/unitdata.json"
+    "unitDataPath": "/media/js/unitdata.json",
+    "reportEmail": "test@example.com"
 }

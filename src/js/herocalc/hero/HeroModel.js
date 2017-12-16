@@ -265,20 +265,21 @@ var HeroModel = function (heroData, itemData, h) {
                 + TalentController.getHealth(self.selectedTalents())
                 ).toFixed(2);
     });
+    // Health Regeneration = (Base + Sum of Flat Bonuses) * (1 + strength * (5/700))
     self.healthregen = ko.pureComputed(function () {
         var healthRegenAura = [self.inventory.getHealthRegenAura, self.buffs.itemBuffs.getHealthRegenAura].reduce(function (memo, fn) {
             var obj = fn(memo.excludeList);
             obj.value += memo.value;
             return obj;
         }, {value: 0, excludeList: []});
-        return (self.heroData().statushealthregen + self.totalStr() * .06 
+        return ((self.heroData().statushealthregen
                 + (self.isIllusion() ? 0 : self.inventory.getHealthRegen() 
                     + self.ability().getHealthRegen()
                     + TalentController.getHealthRegen(self.selectedTalents())
                     + self.buffs.getHealthRegen()
                     + healthRegenAura.value
                     )
-                ).toFixed(2);
+                ) * (1 + self.totalStr() * (5/700))).toFixed(2);
     });
     self.mana = ko.pureComputed(function () {
         return (self.heroData().statusmana
@@ -287,17 +288,16 @@ var HeroModel = function (heroData, itemData, h) {
                 + TalentController.getMana(self.selectedTalents())
                 + self.ability().getMana()).toFixed(2);
     });
+    // Mana Regeneration = (Base + Sum of Flat Bonuses) * (1 + intelligence * 0.02)
     self.manaregen = ko.pureComputed(function () {
-        return ((self.heroData().statusmanaregen 
-                + self.totalInt() * .04 
+        return ((self.heroData().statusmanaregen
                 + self.ability().getManaRegen()
                 + TalentController.getManaRegen(self.selectedTalents())
-                ) 
-                * (1 + self.inventory.getManaRegenPercent()) 
                 + (self.heroId() === 'crystal_maiden' ? self.ability().getManaRegenArcaneAura() * 2 : self.buffs.getManaRegenArcaneAura())
                 + self.inventory.getManaRegenBloodstone()
                 + self.inventory.getManaRegen()
-                - self.enemy().ability().getManaRegenReduction()).toFixed(2);
+                - self.enemy().ability().getManaRegenReduction()
+                ) * (1 + self.totalInt() * 0.02)).toFixed(2);
     });
     self.totalArmorPhysical = ko.pureComputed(function () {
         var armorAura = [self.inventory.getArmorAura, self.buffs.itemBuffs.getArmorAura].reduce(function (memo, fn) {
@@ -394,11 +394,14 @@ var HeroModel = function (heroData, itemData, h) {
                 obj.value += memo.value;
                 return obj;
             }, {value:0, excludeList:[]});
+            // If agility is a hero's primary attribute, every point in agility increases their movement speed by 0.06%.
+            var agiMovementSpeedPercent = self.primaryAttribute() == 'agi' ? self.totalAgi() * (0.0006) : 0;
             return Math.max(
                 self.enemy().inventory.isSheeped() || self.debuffs.itemBuffs.isSheeped() ? 140 :
                 (self.heroData().movementspeed + movementSpeedFlat.value + self.ability().getMovementSpeedFlat() + TalentController.getMovementSpeedFlat(self.selectedTalents())) * 
                 (1 //+ self.inventory.getMovementSpeedPercent() 
                    + movementSpeedPercent.value
+                   + agiMovementSpeedPercent
                    + movementSpeedPercentReduction.value
                    + self.ability().getMovementSpeedPercent() 
                    //+ self.enemy().inventory.getMovementSpeedPercentReduction() 
@@ -480,10 +483,21 @@ var HeroModel = function (heroData, itemData, h) {
         return [self.baseDamage()[0] + self.bonusDamage(),
                 self.baseDamage()[1] + self.bonusDamage()];
     });
+    self.totalStatusResistanceProduct = ko.pureComputed(function() {
+        // If strength is a hero's primary attribute, every point in strength increases their status resistance by 0.15%.
+        var strStatusResistance = self.primaryAttribute() == 'str' ? 1 - self.totalStr() * (0.0015) : 1;
+        return strStatusResistance;
+    });
+    self.totalStatusResistance = ko.pureComputed(function () {
+        return ((1 - self.totalStatusResistanceProduct()) * 100).toFixed(2);
+    });
     self.totalMagicResistanceProduct = ko.pureComputed(function () {
+        //If intelligence is a hero's primary attribute, every point in intelligence increases their magic resistance by 0.15%.
+        var intMagicResistance = self.primaryAttribute() == 'int' ? 1 + self.totalInt() * (0.0015) : 1;
         return (1 - self.heroData().magicalresistance / 100)
                 * (self.isIllusion() ? 1 :
                     self.inventory.getMagicResist()
+                    * intMagicResistance
                     * self.ability().getMagicResist()
                     * TalentController.getMagicResist(self.selectedTalents())
                     * self.buffs.getMagicResist()

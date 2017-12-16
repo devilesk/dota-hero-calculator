@@ -25,6 +25,10 @@
             <strong style="cursor:pointer" class="pull-right shop-button" data-bind="toggle: displayShop, visible: !displayShop() && !shopPopout()">Shop</strong>
         </div>
     </header>
+    <div class="alert alert-warning alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>7.07 updates are under development</strong>
+    </div>
     <h4 id="spinner">Loading...</h4>
     <div id="hero-calc-wrapper" class="initial-hidden" style="display:none;width:100%;">
         <ul class="nav nav-tabs">
@@ -314,7 +318,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <!-- @if NODE_ENV!='production' -->
 <script>
-var appConfig = { abilityTooltipPath: "data/abilitytooltipdata.json" };
+var appConfig = { abilityTooltipPath: "data/abilitytooltipdata.json", reportEmail: "test@example.com" };
 window.HeroCalcData = {};
 $.when(
     $.getJSON("data/herodata.json", function (data) {HeroCalcData.heroData = data;}),
@@ -326,7 +330,7 @@ $.when(
 <!-- @endif -->
 <!-- @if NODE_ENV='production' !>
 <script>
-var appConfig = { abilityTooltipPath: "<!-- @echo abilityTooltipPath -->" };
+var appConfig = { abilityTooltipPath: "<!-- @echo abilityTooltipPath -->", reportEmail: "<!-- @echo reportEmail -->" };
 window.HeroCalcData = {};
 $.when(
     $.getJSON("<!-- @echo heroDataPath -->", function (data) {HeroCalcData.heroData = data;}),

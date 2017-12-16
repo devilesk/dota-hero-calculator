@@ -12,20 +12,20 @@
                 <div class="tab-pane active" id="shop_basic">
 <div class="shop-column">
   <div class="hc-shop hc-shop-consumables" id="consumables"></div>
+  <div class="img-rounded items-sprite-50x36 items-sprite-tpscroll" id="tpscroll" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-clarity" id="clarity" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-faerie_fire" id="faerie_fire" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
-  <div class="img-rounded items-sprite-50x36 items-sprite-enchanted_mango" id="enchanted_mango" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
-  <div class="img-rounded items-sprite-50x36 items-sprite-tango" id="tango" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
-  <div class="img-rounded items-sprite-50x36 items-sprite-flask" id="flask" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-smoke_of_deceit" id="smoke_of_deceit" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
-  <div class="img-rounded items-sprite-50x36 items-sprite-tpscroll" id="tpscroll" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
-  <div class="img-rounded items-sprite-50x36 items-sprite-dust" id="dust" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
-  <div class="img-rounded items-sprite-50x36 items-sprite-courier" id="courier" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
-  <div class="img-rounded items-sprite-50x36 items-sprite-flying_courier" id="flying_courier" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-ward_observer" id="ward_observer" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-ward_sentry" id="ward_sentry" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
-  <div class="img-rounded items-sprite-50x36 items-sprite-tome_of_knowledge" id="tome_of_knowledge" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
+  <div class="img-rounded items-sprite-50x36 items-sprite-enchanted_mango" id="enchanted_mango" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
+  <div class="img-rounded items-sprite-50x36 items-sprite-flask" id="flask" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
+  <div class="img-rounded items-sprite-50x36 items-sprite-tango" id="tango" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
+  <div class="img-rounded items-sprite-50x36 items-sprite-tome_of_knowledge" id="tome_of_knowledge" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>  
+  <div class="img-rounded items-sprite-50x36 items-sprite-dust" id="dust" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
+  <div class="img-rounded items-sprite-50x36 items-sprite-courier" id="courier" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-bottle" id="bottle" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
+  <div class="img-rounded items-sprite-50x36 items-sprite-emptyitembg" id="emptyitembg"></div>
 </div>
 <div class="shop-column">
   <div class="hc-shop hc-shop-attributes" id="attributes"></div>
@@ -50,23 +50,23 @@
   <div class="img-rounded items-sprite-50x36 items-sprite-stout_shield" id="stout_shield" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-quelling_blade" id="quelling_blade" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-infused_raindrop" id="infused_raindrop" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
-  <div class="img-rounded items-sprite-50x36 items-sprite-blight_stone" id="blight_stone" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-orb_of_venom" id="orb_of_venom" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
+  <div class="img-rounded items-sprite-50x36 items-sprite-blight_stone" id="blight_stone" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-blades_of_attack" id="blades_of_attack" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-chainmail" id="chainmail" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-quarterstaff" id="quarterstaff" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-helm_of_iron_will" id="helm_of_iron_will" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
+  <div class="img-rounded items-sprite-50x36 items-sprite-javelin" id="javelin" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-broadsword" id="broadsword" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-claymore" id="claymore" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
-  <div class="img-rounded items-sprite-50x36 items-sprite-javelin" id="javelin" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-mithril_hammer" id="mithril_hammer" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
 </div>
 <div class="shop-column">
   <div class="hc-shop hc-shop-arcane" id="arcane"></div>
-  <div class="img-rounded items-sprite-50x36 items-sprite-wind_lace" id="wind_lace" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-magic_stick" id="magic_stick" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
-  <div class="img-rounded items-sprite-50x36 items-sprite-sobi_mask" id="sobi_mask" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
+  <div class="img-rounded items-sprite-50x36 items-sprite-wind_lace" id="wind_lace" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-ring_of_regen" id="ring_of_regen" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
+  <div class="img-rounded items-sprite-50x36 items-sprite-sobi_mask" id="sobi_mask" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-boots" id="boots" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-gloves" id="gloves" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-cloak" id="cloak" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
@@ -87,7 +87,6 @@
   <div class="img-rounded items-sprite-50x36 items-sprite-magic_wand" id="magic_wand" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-null_talisman" id="null_talisman" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-wraith_band" id="wraith_band" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
-  <div class="img-rounded items-sprite-50x36 items-sprite-poor_mans_shield" id="poor_mans_shield" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-bracer" id="bracer" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-soul_ring" id="soul_ring" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-phase_boots" id="phase_boots" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
@@ -95,14 +94,15 @@
   <div class="img-rounded items-sprite-50x36 items-sprite-oblivion_staff" id="oblivion_staff" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-pers" id="pers" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-hand_of_midas" id="hand_of_midas" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
-  <div class="img-rounded items-sprite-50x36 items-sprite-travel_boots" id="travel_boots" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-moon_shard" id="moon_shard" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
+  <div class="img-rounded items-sprite-50x36 items-sprite-travel_boots" id="travel_boots" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
+  <div class="img-rounded items-sprite-50x36 items-sprite-emptyitembg" id="emptyitembg"></div>
+  <div class="img-rounded items-sprite-50x36 items-sprite-emptyitembg" id="emptyitembg"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-emptyitembg" id="emptyitembg"></div>
 </div>
 <div class="shop-column">
   <div class="hc-shop hc-shop-support" id="support"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-ring_of_basilius" id="ring_of_basilius" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
-  <div class="img-rounded items-sprite-50x36 items-sprite-iron_talon" id="iron_talon" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-headdress" id="headdress" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-buckler" id="buckler" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-urn_of_shadows" id="urn_of_shadows" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
@@ -111,44 +111,30 @@
   <div class="img-rounded items-sprite-50x36 items-sprite-medallion_of_courage" id="medallion_of_courage" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-arcane_boots" id="arcane_boots" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-ancient_janggo" id="ancient_janggo" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
-  <div class="img-rounded items-sprite-50x36 items-sprite-mekansm" id="mekansm" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-vladmir" id="vladmir" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
+  <div class="img-rounded items-sprite-50x36 items-sprite-mekansm" id="mekansm" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
+  <div class="img-rounded items-sprite-50x36 items-sprite-spirit_vessel" id="spirit_vessel" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-pipe" id="pipe" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-guardian_greaves" id="guardian_greaves" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
+  <div class="img-rounded items-sprite-50x36 items-sprite-emptyitembg" id="emptyitembg"></div>
 </div>
 <div class="shop-column">
   <div class="hc-shop hc-shop-caster" id="caster"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-glimmer_cape" id="glimmer_cape" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
-  <div class="img-rounded items-sprite-50x36 items-sprite-force_staff" id="force_staff" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-veil_of_discord" id="veil_of_discord" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-aether_lens" id="aether_lens" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
+  <div class="img-rounded items-sprite-50x36 items-sprite-force_staff" id="force_staff" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-necronomicon" id="necronomicon" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
+  <div class="img-rounded items-sprite-50x36 items-sprite-solar_crest" id="solar_crest" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-dagon" id="dagon" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-cyclone" id="cyclone" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
-  <div class="img-rounded items-sprite-50x36 items-sprite-solar_crest" id="solar_crest" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-rod_of_atos" id="rod_of_atos" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-orchid" id="orchid" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-ultimate_scepter" id="ultimate_scepter" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
+  <div class="img-rounded items-sprite-50x36 items-sprite-nullifier" id="nullifier" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-refresher" id="refresher" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-sheepstick" id="sheepstick" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-octarine_core" id="octarine_core" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
-</div>
-<div class="shop-column">
-  <div class="hc-shop hc-shop-weapons" id="weapons"></div>
-  <div class="img-rounded items-sprite-50x36 items-sprite-lesser_crit" id="lesser_crit" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
-  <div class="img-rounded items-sprite-50x36 items-sprite-armlet" id="armlet" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
-  <div class="img-rounded items-sprite-50x36 items-sprite-invis_sword" id="invis_sword" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
-  <div class="img-rounded items-sprite-50x36 items-sprite-basher" id="basher" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
-  <div class="img-rounded items-sprite-50x36 items-sprite-bfury" id="bfury" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
-  <div class="img-rounded items-sprite-50x36 items-sprite-ethereal_blade" id="ethereal_blade" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
-  <div class="img-rounded items-sprite-50x36 items-sprite-silver_edge" id="silver_edge" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
-  <div class="img-rounded items-sprite-50x36 items-sprite-radiance" id="radiance" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
-  <div class="img-rounded items-sprite-50x36 items-sprite-monkey_king_bar" id="monkey_king_bar" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
-  <div class="img-rounded items-sprite-50x36 items-sprite-greater_crit" id="greater_crit" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
-  <div class="img-rounded items-sprite-50x36 items-sprite-butterfly" id="butterfly" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
-  <div class="img-rounded items-sprite-50x36 items-sprite-rapier" id="rapier" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
-  <div class="img-rounded items-sprite-50x36 items-sprite-abyssal_blade" id="abyssal_blade" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
-  <div class="img-rounded items-sprite-50x36 items-sprite-bloodthorn" id="bloodthorn" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
 </div>
 <div class="shop-column">
   <div class="hc-shop hc-shop-armor" id="armor"></div>
@@ -157,32 +143,52 @@
   <div class="img-rounded items-sprite-50x36 items-sprite-blade_mail" id="blade_mail" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-soul_booster" id="soul_booster" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-crimson_guard" id="crimson_guard" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
+  <div class="img-rounded items-sprite-50x36 items-sprite-aeon_disk" id="aeon_disk" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-black_king_bar" id="black_king_bar" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-lotus_orb" id="lotus_orb" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-shivas_guard" id="shivas_guard" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
+  <div class="img-rounded items-sprite-50x36 items-sprite-hurricane_pike" id="hurricane_pike" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
+  <div class="img-rounded items-sprite-50x36 items-sprite-sphere" id="sphere" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-bloodstone" id="bloodstone" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-manta" id="manta" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
-  <div class="img-rounded items-sprite-50x36 items-sprite-sphere" id="sphere" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
-  <div class="img-rounded items-sprite-50x36 items-sprite-hurricane_pike" id="hurricane_pike" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
-  <div class="img-rounded items-sprite-50x36 items-sprite-assault" id="assault" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-heart" id="heart" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
+  <div class="img-rounded items-sprite-50x36 items-sprite-assault" id="assault" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
+</div>
+<div class="shop-column">
+  <div class="hc-shop hc-shop-weapons" id="weapons"></div>
+  <div class="img-rounded items-sprite-50x36 items-sprite-lesser_crit" id="lesser_crit" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
+  <div class="img-rounded items-sprite-50x36 items-sprite-armlet" id="armlet" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
+  <div class="img-rounded items-sprite-50x36 items-sprite-meteor_hammer" id="meteor_hammer" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
+  <div class="img-rounded items-sprite-50x36 items-sprite-invis_sword" id="invis_sword" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
+  <div class="img-rounded items-sprite-50x36 items-sprite-basher" id="basher" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
+  <div class="img-rounded items-sprite-50x36 items-sprite-bfury" id="bfury" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
+  <div class="img-rounded items-sprite-50x36 items-sprite-monkey_king_bar" id="monkey_king_bar" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
+  <div class="img-rounded items-sprite-50x36 items-sprite-ethereal_blade" id="ethereal_blade" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
+  <div class="img-rounded items-sprite-50x36 items-sprite-radiance" id="radiance" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
+  <div class="img-rounded items-sprite-50x36 items-sprite-greater_crit" id="greater_crit" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
+  <div class="img-rounded items-sprite-50x36 items-sprite-butterfly" id="butterfly" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
+  <div class="img-rounded items-sprite-50x36 items-sprite-silver_edge" id="silver_edge" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
+  <div class="img-rounded items-sprite-50x36 items-sprite-rapier" id="rapier" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
+  <div class="img-rounded items-sprite-50x36 items-sprite-abyssal_blade" id="abyssal_blade" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
+  <div class="img-rounded items-sprite-50x36 items-sprite-bloodthorn" id="bloodthorn" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
 </div>
 <div class="shop-column">
   <div class="hc-shop hc-shop-artifacts" id="artifacts"></div>
-  <div class="img-rounded items-sprite-50x36 items-sprite-mask_of_madness" id="mask_of_madness" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
-  <div class="img-rounded items-sprite-50x36 items-sprite-helm_of_the_dominator" id="helm_of_the_dominator" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-dragon_lance" id="dragon_lance" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-sange" id="sange" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-yasha" id="yasha" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
+  <div class="img-rounded items-sprite-50x36 items-sprite-kaya" id="kaya" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
+  <div class="img-rounded items-sprite-50x36 items-sprite-mask_of_madness" id="mask_of_madness" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
+  <div class="img-rounded items-sprite-50x36 items-sprite-helm_of_the_dominator" id="helm_of_the_dominator" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-echo_sabre" id="echo_sabre" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-maelstrom" id="maelstrom" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-diffusal_blade" id="diffusal_blade" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
-  <div class="img-rounded items-sprite-50x36 items-sprite-desolator" id="desolator" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-heavens_halberd" id="heavens_halberd" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
+  <div class="img-rounded items-sprite-50x36 items-sprite-desolator" id="desolator" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-sange_and_yasha" id="sange_and_yasha" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-skadi" id="skadi" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
-  <div class="img-rounded items-sprite-50x36 items-sprite-mjollnir" id="mjollnir" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
   <div class="img-rounded items-sprite-50x36 items-sprite-satanic" id="satanic" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
+  <div class="img-rounded items-sprite-50x36 items-sprite-mjollnir" id="mjollnir" data-bind="click: changeSelectedItem, event: { dblclick: addItem }"></div>
 </div>
                 </div>
                 <div class="tab-pane" id="shop_secret">

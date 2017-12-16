@@ -18,6 +18,7 @@ var diffProperties = [
     'damage',
     'totalMagicResistanceProduct',
     'totalMagicResistance',
+    'totalStatusResistance',
     'bat',
     'ias',
     'attackTime',

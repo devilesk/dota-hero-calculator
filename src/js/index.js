@@ -9,7 +9,7 @@ var App = function (appConfig) {
     
     HeroCalc.init(HeroCalcData.heroData, HeroCalcData.itemData, HeroCalcData.unitData, function () {
         HeroCalculatorViewModel = require('./app/HeroCalculatorViewModel');
-        viewModel = new HeroCalculatorViewModel(appConfig.abilityTooltipPath);
+        viewModel = new HeroCalculatorViewModel(appConfig.abilityTooltipPath, appConfig.reportEmail);
         ko.options.deferUpdates = true;
         ko.applyBindings(viewModel);
         $('#spinner').hide();
