@@ -45,8 +45,8 @@
   "abilities": [],
   "abilityunitdamagetype": "DAMAGE_TYPE_ArmorPhysical",
   "armorphysical": 0,
-  "attackdamagemax": 199,
-  "attackdamagemin": 190,
+  "attackdamagemax": 240,
+  "attackdamagemin": 220,
   "attackpoint": 0,
   "attackrange": 1200,
   "attackrate": 0.15,
@@ -406,7 +406,7 @@
    }
   ],
   "abilityunitdamagetype": "DAMAGE_TYPE_ArmorPhysical",
-  "armorphysical": 12,
+  "armorphysical": 14,
   "attackdamagemax": 0,
   "attackdamagemin": 0,
   "attackpoint": 0,
@@ -510,7 +510,7 @@
    }
   ],
   "abilityunitdamagetype": "DAMAGE_TYPE_ArmorPhysical",
-  "armorphysical": 15,
+  "armorphysical": 18,
   "attackdamagemax": 0,
   "attackdamagemin": 0,
   "attackpoint": 0,
@@ -535,7 +535,7 @@
   "name": "npc_dota_badguys_fort",
   "projectilespeed": 0,
   "statushealth": 4250,
-  "statushealthregen": 3,
+  "statushealthregen": 8,
   "statusmana": 0,
   "statusmanaregen": 0,
   "unitlevel": 1,
@@ -642,26 +642,26 @@
       "name": "hp_heal",
       "tooltip": "HEALTH REGEN:",
       "value": [
-       90
+       75
       ]
      },
      {
       "name": "mp_heal",
       "tooltip": "MANA REGEN:",
       "value": [
-       40
+       30
       ]
      },
      {
       "name": "hp_heal_growth",
       "value": [
-       2
+       0
       ]
      },
      {
       "name": "mp_heal_growth",
       "value": [
-       0.75
+       0.0
       ]
      },
      {
@@ -715,7 +715,7 @@
    }
   ],
   "abilityunitdamagetype": "DAMAGE_TYPE_ArmorPhysical",
-  "armorphysical": 20,
+  "armorphysical": 24,
   "attackdamagemax": 0,
   "attackdamagemin": 0,
   "attackpoint": 0,
@@ -819,7 +819,7 @@
    }
   ],
   "abilityunitdamagetype": "DAMAGE_TYPE_ArmorPhysical",
-  "armorphysical": 15,
+  "armorphysical": 18,
   "attackdamagemax": 0,
   "attackdamagemin": 0,
   "attackpoint": 0,
@@ -923,7 +923,7 @@
    }
   ],
   "abilityunitdamagetype": "DAMAGE_TYPE_ArmorPhysical",
-  "armorphysical": 15,
+  "armorphysical": 18,
   "attackdamagemax": 0,
   "attackdamagemin": 0,
   "attackpoint": 0,
@@ -1027,7 +1027,7 @@
    }
   ],
   "abilityunitdamagetype": "DAMAGE_TYPE_ArmorPhysical",
-  "armorphysical": 15,
+  "armorphysical": 18,
   "attackdamagemax": 0,
   "attackdamagemin": 0,
   "attackpoint": 0,
@@ -1131,7 +1131,7 @@
    }
   ],
   "abilityunitdamagetype": "DAMAGE_TYPE_ArmorPhysical",
-  "armorphysical": 10,
+  "armorphysical": 12,
   "attackdamagemax": 0,
   "attackdamagemin": 0,
   "attackpoint": 0,
@@ -1235,7 +1235,7 @@
    }
   ],
   "abilityunitdamagetype": "DAMAGE_TYPE_ArmorPhysical",
-  "armorphysical": 10,
+  "armorphysical": 12,
   "attackdamagemax": 0,
   "attackdamagemin": 0,
   "attackpoint": 0,
@@ -1339,7 +1339,7 @@
    }
   ],
   "abilityunitdamagetype": "DAMAGE_TYPE_ArmorPhysical",
-  "armorphysical": 10,
+  "armorphysical": 12,
   "attackdamagemax": 0,
   "attackdamagemin": 0,
   "attackpoint": 0,
@@ -1402,7 +1402,7 @@
   "movementturnrate": 0.5,
   "name": "npc_dota_badguys_siege",
   "projectilespeed": 1100,
-  "statushealth": 825,
+  "statushealth": 875,
   "statushealthregen": 0,
   "statusmana": 0,
   "statusmanaregen": 0,
@@ -1480,7 +1480,7 @@
   "movementturnrate": 0.5,
   "name": "npc_dota_badguys_siege_upgraded",
   "projectilespeed": 1100,
-  "statushealth": 825,
+  "statushealth": 875,
   "statushealthregen": 0,
   "statusmana": 0,
   "statusmanaregen": 0,
@@ -1519,7 +1519,7 @@
   "movementturnrate": 0.5,
   "name": "npc_dota_badguys_siege_upgraded_mega",
   "projectilespeed": 1100,
-  "statushealth": 825,
+  "statushealth": 875,
   "statushealthregen": 0,
   "statusmana": 0,
   "statusmanaregen": 0,
@@ -1534,7 +1534,7 @@
   "HasInventory": 0,
   "abilities": [],
   "abilityunitdamagetype": "DAMAGE_TYPE_ArmorPhysical",
-  "armorphysical": 14,
+  "armorphysical": 17,
   "attackdamagemax": 120,
   "attackdamagemin": 100,
   "attackpoint": 0.6,
@@ -1558,7 +1558,7 @@
   "movementturnrate": 1,
   "name": "npc_dota_badguys_tower1_bot",
   "projectilespeed": 750,
-  "statushealth": 1400,
+  "statushealth": 1600,
   "statushealthregen": 0,
   "statusmana": 0,
   "statusmanaregen": 0,
@@ -1573,7 +1573,7 @@
   "HasInventory": 0,
   "abilities": [],
   "abilityunitdamagetype": "DAMAGE_TYPE_ArmorPhysical",
-  "armorphysical": 14,
+  "armorphysical": 17,
   "attackdamagemax": 120,
   "attackdamagemin": 100,
   "attackpoint": 0.6,
@@ -1597,7 +1597,7 @@
   "movementturnrate": 1,
   "name": "npc_dota_badguys_tower1_mid",
   "projectilespeed": 750,
-  "statushealth": 1400,
+  "statushealth": 1600,
   "statushealthregen": 0,
   "statusmana": 0,
   "statusmanaregen": 0,
@@ -1612,7 +1612,7 @@
   "HasInventory": 0,
   "abilities": [],
   "abilityunitdamagetype": "DAMAGE_TYPE_ArmorPhysical",
-  "armorphysical": 14,
+  "armorphysical": 17,
   "attackdamagemax": 120,
   "attackdamagemin": 100,
   "attackpoint": 0.6,
@@ -1636,7 +1636,7 @@
   "movementturnrate": 1,
   "name": "npc_dota_badguys_tower1_top",
   "projectilespeed": 750,
-  "statushealth": 1400,
+  "statushealth": 1600,
   "statushealthregen": 0,
   "statusmana": 0,
   "statusmanaregen": 0,
@@ -1722,7 +1722,7 @@
    }
   ],
   "abilityunitdamagetype": "DAMAGE_TYPE_ArmorPhysical",
-  "armorphysical": 16,
+  "armorphysical": 19,
   "attackdamagemax": 162,
   "attackdamagemin": 142,
   "attackpoint": 0.6,
@@ -1832,7 +1832,7 @@
    }
   ],
   "abilityunitdamagetype": "DAMAGE_TYPE_ArmorPhysical",
-  "armorphysical": 16,
+  "armorphysical": 19,
   "attackdamagemax": 162,
   "attackdamagemin": 142,
   "attackpoint": 0.6,
@@ -1942,7 +1942,7 @@
    }
   ],
   "abilityunitdamagetype": "DAMAGE_TYPE_ArmorPhysical",
-  "armorphysical": 16,
+  "armorphysical": 19,
   "attackdamagemax": 162,
   "attackdamagemin": 142,
   "attackpoint": 0.6,
@@ -2046,7 +2046,7 @@
    }
   ],
   "abilityunitdamagetype": "DAMAGE_TYPE_ArmorPhysical",
-  "armorphysical": 16,
+  "armorphysical": 19,
   "attackdamagemax": 162,
   "attackdamagemin": 142,
   "attackpoint": 0.6,
@@ -2150,7 +2150,7 @@
    }
   ],
   "abilityunitdamagetype": "DAMAGE_TYPE_ArmorPhysical",
-  "armorphysical": 16,
+  "armorphysical": 19,
   "attackdamagemax": 162,
   "attackdamagemin": 142,
   "attackpoint": 0.6,
@@ -2254,7 +2254,7 @@
    }
   ],
   "abilityunitdamagetype": "DAMAGE_TYPE_ArmorPhysical",
-  "armorphysical": 16,
+  "armorphysical": 19,
   "attackdamagemax": 162,
   "attackdamagemin": 142,
   "attackpoint": 0.6,
@@ -2358,7 +2358,7 @@
    }
   ],
   "abilityunitdamagetype": "DAMAGE_TYPE_ArmorPhysical",
-  "armorphysical": 24,
+  "armorphysical": 29,
   "attackdamagemax": 162,
   "attackdamagemin": 142,
   "attackpoint": 0.6,
@@ -2383,7 +2383,7 @@
   "name": "npc_dota_badguys_tower4",
   "projectilespeed": 750,
   "statushealth": 1600,
-  "statushealthregen": 3,
+  "statushealthregen": 0,
   "statusmana": 0,
   "statusmanaregen": 0,
   "unitlevel": 4,
@@ -2639,8 +2639,8 @@
   ],
   "abilityunitdamagetype": "DAMAGE_TYPE_ArmorPhysical",
   "armorphysical": 0,
-  "attackdamagemax": 10,
-  "attackdamagemin": 10,
+  "attackdamagemax": 16,
+  "attackdamagemin": 16,
   "attackpoint": 0.5,
   "attackrange": 550,
   "attackrate": 1.25,
@@ -2662,7 +2662,7 @@
   "movementturnrate": 0.6,
   "name": "npc_dota_beastmaster_boar_1",
   "projectilespeed": 1500,
-  "statushealth": 200,
+  "statushealth": 275,
   "statushealthregen": 1.5,
   "statusmana": 0,
   "statusmanaregen": 0,
@@ -2760,8 +2760,8 @@
   ],
   "abilityunitdamagetype": "DAMAGE_TYPE_ArmorPhysical",
   "armorphysical": 0,
-  "attackdamagemax": 25,
-  "attackdamagemin": 25,
+  "attackdamagemax": 24,
+  "attackdamagemin": 24,
   "attackpoint": 0.5,
   "attackrange": 550,
   "attackrate": 1.25,
@@ -2783,7 +2783,7 @@
   "movementturnrate": 0.6,
   "name": "npc_dota_beastmaster_boar_2",
   "projectilespeed": 1500,
-  "statushealth": 300,
+  "statushealth": 350,
   "statushealthregen": 1.5,
   "statusmana": 0,
   "statusmanaregen": 0,
@@ -2881,8 +2881,8 @@
   ],
   "abilityunitdamagetype": "DAMAGE_TYPE_ArmorPhysical",
   "armorphysical": 0,
-  "attackdamagemax": 40,
-  "attackdamagemin": 40,
+  "attackdamagemax": 32,
+  "attackdamagemin": 32,
   "attackpoint": 0.5,
   "attackrange": 550,
   "attackrate": 1.25,
@@ -2904,7 +2904,7 @@
   "movementturnrate": 0.6,
   "name": "npc_dota_beastmaster_boar_3",
   "projectilespeed": 1500,
-  "statushealth": 400,
+  "statushealth": 425,
   "statushealthregen": 1.5,
   "statusmana": 0,
   "statusmanaregen": 0,
@@ -3002,8 +3002,8 @@
   ],
   "abilityunitdamagetype": "DAMAGE_TYPE_ArmorPhysical",
   "armorphysical": 0,
-  "attackdamagemax": 55,
-  "attackdamagemin": 55,
+  "attackdamagemax": 40,
+  "attackdamagemin": 40,
   "attackpoint": 0.5,
   "attackrange": 550,
   "attackrate": 1.25,
@@ -3148,6 +3148,45 @@
   "visiondaytimerange": 1400,
   "visionnighttimerange": 800
  },
+ "npc_dota_beastmaster_hawk": {
+  "AttackAcquisitionRange": 800,
+  "AttackRangeBuffer": 250,
+  "FollowRange": 100,
+  "HasInventory": 0,
+  "abilities": [],
+  "abilityunitdamagetype": "DAMAGE_TYPE_ArmorPhysical",
+  "armorphysical": 5,
+  "attackdamagemax": 1,
+  "attackdamagemin": 1,
+  "attackpoint": 0.75,
+  "attackrange": 600,
+  "attackrate": 1.7,
+  "attacktype": "DOTA_UNIT_CAP_NO_ATTACK",
+  "attributeagilitygain": 0,
+  "attributebaseagility": 0,
+  "attributebaseintelligence": 0,
+  "attributebasestrength": 0,
+  "attributeintelligencegain": 0,
+  "attributeprimary": "DOTA_ATTRIBUTE_STRENGTH",
+  "attributestrengthgain": 0,
+  "bountygoldmax": 30,
+  "bountygoldmin": 30,
+  "bountyxp": 77,
+  "displayname": "Hawk",
+  "level": 0,
+  "magicalresistance": 0,
+  "movementspeed": 430,
+  "movementturnrate": 0.6,
+  "name": "npc_dota_beastmaster_hawk",
+  "projectilespeed": 900,
+  "statushealth": 350,
+  "statushealthregen": 1.5,
+  "statusmana": 0,
+  "statusmanaregen": 0,
+  "unitlevel": 1,
+  "visiondaytimerange": 1000,
+  "visionnighttimerange": 1000
+ },
  "npc_dota_beastmaster_hawk_1": {
   "AttackAcquisitionRange": 800,
   "AttackRangeBuffer": 250,
@@ -3179,7 +3218,7 @@
   "movementturnrate": 0.6,
   "name": "npc_dota_beastmaster_hawk_1",
   "projectilespeed": 900,
-  "statushealth": 40,
+  "statushealth": 200,
   "statushealthregen": 1.5,
   "statusmana": 0,
   "statusmanaregen": 0,
@@ -3218,7 +3257,7 @@
   "movementturnrate": 0.6,
   "name": "npc_dota_beastmaster_hawk_2",
   "projectilespeed": 900,
-  "statushealth": 60,
+  "statushealth": 400,
   "statushealthregen": 1.5,
   "statusmana": 0,
   "statusmanaregen": 0,
@@ -3231,82 +3270,7 @@
   "AttackRangeBuffer": 250,
   "FollowRange": 100,
   "HasInventory": 0,
-  "abilities": [
-   {
-    "AbilityCastPoint": [
-     0,
-     0,
-     0,
-     0
-    ],
-    "AbilityCastRange": 0,
-    "AbilityCastRangeBuffer": 250,
-    "AbilityChannelTime": [
-     0,
-     0,
-     0,
-     0
-    ],
-    "AbilityDuration": [
-     0,
-     0,
-     0,
-     0
-    ],
-    "AbilityModifierSupportBonus": 0,
-    "AbilityModifierSupportValue": 1,
-    "ID": 5170,
-    "abilitytype": "DOTA_ABILITY_TYPE_BASIC",
-    "attributes": [
-     {
-      "name": "fade_time",
-      "value": [
-       1.0
-      ]
-     },
-     {
-      "name": "idle_invis_delay",
-      "value": [
-       3.0
-      ]
-     },
-     {
-      "name": "fade_tooltip",
-      "tooltip": "FADE TIME:",
-      "value": [
-       0,
-       0,
-       4,
-       4
-      ]
-     }
-    ],
-    "behavior": [
-     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
-    ],
-    "cooldown": [
-     0,
-     0,
-     0,
-     0
-    ],
-    "damage": [
-     0,
-     0,
-     0,
-     0
-    ],
-    "displayname": "Invisibility",
-    "level": 0,
-    "manacost": [
-     0,
-     0,
-     0,
-     0
-    ],
-    "name": "beastmaster_hawk_invisibility"
-   }
-  ],
+  "abilities": [],
   "abilityunitdamagetype": "DAMAGE_TYPE_ArmorPhysical",
   "armorphysical": 5,
   "attackdamagemax": 1,
@@ -3332,7 +3296,7 @@
   "movementturnrate": 0.6,
   "name": "npc_dota_beastmaster_hawk_3",
   "projectilespeed": 900,
-  "statushealth": 80,
+  "statushealth": 600,
   "statushealthregen": 1.5,
   "statusmana": 0,
   "statusmanaregen": 0,
@@ -3345,82 +3309,7 @@
   "AttackRangeBuffer": 250,
   "FollowRange": 100,
   "HasInventory": 0,
-  "abilities": [
-   {
-    "AbilityCastPoint": [
-     0,
-     0,
-     0,
-     0
-    ],
-    "AbilityCastRange": 0,
-    "AbilityCastRangeBuffer": 250,
-    "AbilityChannelTime": [
-     0,
-     0,
-     0,
-     0
-    ],
-    "AbilityDuration": [
-     0,
-     0,
-     0,
-     0
-    ],
-    "AbilityModifierSupportBonus": 0,
-    "AbilityModifierSupportValue": 1,
-    "ID": 5170,
-    "abilitytype": "DOTA_ABILITY_TYPE_BASIC",
-    "attributes": [
-     {
-      "name": "fade_time",
-      "value": [
-       1.0
-      ]
-     },
-     {
-      "name": "idle_invis_delay",
-      "value": [
-       3.0
-      ]
-     },
-     {
-      "name": "fade_tooltip",
-      "tooltip": "FADE TIME:",
-      "value": [
-       0,
-       0,
-       4,
-       4
-      ]
-     }
-    ],
-    "behavior": [
-     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
-    ],
-    "cooldown": [
-     0,
-     0,
-     0,
-     0
-    ],
-    "damage": [
-     0,
-     0,
-     0,
-     0
-    ],
-    "displayname": "Invisibility",
-    "level": 0,
-    "manacost": [
-     0,
-     0,
-     0,
-     0
-    ],
-    "name": "beastmaster_hawk_invisibility"
-   }
-  ],
+  "abilities": [],
   "abilityunitdamagetype": "DAMAGE_TYPE_ArmorPhysical",
   "armorphysical": 5,
   "attackdamagemax": 1,
@@ -3446,7 +3335,7 @@
   "movementturnrate": 0.6,
   "name": "npc_dota_beastmaster_hawk_4",
   "projectilespeed": 900,
-  "statushealth": 100,
+  "statushealth": 800,
   "statushealthregen": 1.5,
   "statusmana": 0,
   "statusmanaregen": 0,
@@ -3754,10 +3643,112 @@
      150
     ],
     "name": "brewmaster_thunder_clap"
+   },
+   {
+    "AbilityCastPoint": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "AbilityCastRange": 0,
+    "AbilityCastRangeBuffer": 250,
+    "AbilityChannelTime": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "AbilityDuration": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "AbilityModifierSupportBonus": 0,
+    "AbilityModifierSupportValue": 1,
+    "ID": 6251,
+    "abilitytype": "DOTA_ABILITY_TYPE_BASIC",
+    "attributes": [],
+    "behavior": [
+     "DOTA_ABILITY_BEHAVIOR_HIDDEN",
+     "DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    ],
+    "cooldown": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "damage": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "level": 0,
+    "manacost": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "name": "generic_hidden"
+   },
+   {
+    "AbilityCastPoint": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "AbilityCastRange": 0,
+    "AbilityCastRangeBuffer": 250,
+    "AbilityChannelTime": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "AbilityDuration": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "AbilityModifierSupportBonus": 0,
+    "AbilityModifierSupportValue": 1,
+    "ID": 6251,
+    "abilitytype": "DOTA_ABILITY_TYPE_BASIC",
+    "attributes": [],
+    "behavior": [
+     "DOTA_ABILITY_BEHAVIOR_HIDDEN",
+     "DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    ],
+    "cooldown": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "damage": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "level": 0,
+    "manacost": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "name": "generic_hidden"
    }
   ],
   "abilityunitdamagetype": "DAMAGE_TYPE_ArmorPhysical",
-  "armorphysical": 5,
+  "armorphysical": 3,
   "attackdamagemax": 35,
   "attackdamagemin": 25,
   "attackpoint": 0.3,
@@ -4089,10 +4080,112 @@
      150
     ],
     "name": "brewmaster_thunder_clap"
+   },
+   {
+    "AbilityCastPoint": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "AbilityCastRange": 0,
+    "AbilityCastRangeBuffer": 250,
+    "AbilityChannelTime": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "AbilityDuration": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "AbilityModifierSupportBonus": 0,
+    "AbilityModifierSupportValue": 1,
+    "ID": 6251,
+    "abilitytype": "DOTA_ABILITY_TYPE_BASIC",
+    "attributes": [],
+    "behavior": [
+     "DOTA_ABILITY_BEHAVIOR_HIDDEN",
+     "DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    ],
+    "cooldown": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "damage": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "level": 0,
+    "manacost": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "name": "generic_hidden"
+   },
+   {
+    "AbilityCastPoint": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "AbilityCastRange": 0,
+    "AbilityCastRangeBuffer": 250,
+    "AbilityChannelTime": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "AbilityDuration": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "AbilityModifierSupportBonus": 0,
+    "AbilityModifierSupportValue": 1,
+    "ID": 6251,
+    "abilitytype": "DOTA_ABILITY_TYPE_BASIC",
+    "attributes": [],
+    "behavior": [
+     "DOTA_ABILITY_BEHAVIOR_HIDDEN",
+     "DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    ],
+    "cooldown": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "damage": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "level": 0,
+    "manacost": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "name": "generic_hidden"
    }
   ],
   "abilityunitdamagetype": "DAMAGE_TYPE_ArmorPhysical",
-  "armorphysical": 5,
+  "armorphysical": 3,
   "attackdamagemax": 65,
   "attackdamagemin": 55,
   "attackpoint": 0.3,
@@ -4424,10 +4517,112 @@
      150
     ],
     "name": "brewmaster_thunder_clap"
+   },
+   {
+    "AbilityCastPoint": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "AbilityCastRange": 0,
+    "AbilityCastRangeBuffer": 250,
+    "AbilityChannelTime": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "AbilityDuration": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "AbilityModifierSupportBonus": 0,
+    "AbilityModifierSupportValue": 1,
+    "ID": 6251,
+    "abilitytype": "DOTA_ABILITY_TYPE_BASIC",
+    "attributes": [],
+    "behavior": [
+     "DOTA_ABILITY_BEHAVIOR_HIDDEN",
+     "DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    ],
+    "cooldown": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "damage": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "level": 0,
+    "manacost": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "name": "generic_hidden"
+   },
+   {
+    "AbilityCastPoint": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "AbilityCastRange": 0,
+    "AbilityCastRangeBuffer": 250,
+    "AbilityChannelTime": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "AbilityDuration": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "AbilityModifierSupportBonus": 0,
+    "AbilityModifierSupportValue": 1,
+    "ID": 6251,
+    "abilitytype": "DOTA_ABILITY_TYPE_BASIC",
+    "attributes": [],
+    "behavior": [
+     "DOTA_ABILITY_BEHAVIOR_HIDDEN",
+     "DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    ],
+    "cooldown": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "damage": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "level": 0,
+    "manacost": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "name": "generic_hidden"
    }
   ],
   "abilityunitdamagetype": "DAMAGE_TYPE_ArmorPhysical",
-  "armorphysical": 5,
+  "armorphysical": 3,
   "attackdamagemax": 95,
   "attackdamagemin": 85,
   "attackpoint": 0.3,
@@ -4575,7 +4770,7 @@
      },
      {
       "name": "crit_chance",
-      "tooltip": "%CRIT CHANCE:",
+      "tooltip": "%CRITICAL CHANCE:",
       "value": [
        10,
        15,
@@ -4585,7 +4780,7 @@
      },
      {
       "name": "crit_multiplier",
-      "tooltip": "%CRIT DAMAGE:",
+      "tooltip": "%CRITICAL DAMAGE:",
       "value": [
        230
       ]
@@ -4776,7 +4971,7 @@
      },
      {
       "name": "crit_chance",
-      "tooltip": "%CRIT CHANCE:",
+      "tooltip": "%CRITICAL CHANCE:",
       "value": [
        10,
        15,
@@ -4786,7 +4981,7 @@
      },
      {
       "name": "crit_multiplier",
-      "tooltip": "%CRIT DAMAGE:",
+      "tooltip": "%CRITICAL DAMAGE:",
       "value": [
        230
       ]
@@ -4977,7 +5172,7 @@
      },
      {
       "name": "crit_chance",
-      "tooltip": "%CRIT CHANCE:",
+      "tooltip": "%CRITICAL CHANCE:",
       "value": [
        10,
        15,
@@ -4987,7 +5182,7 @@
      },
      {
       "name": "crit_multiplier",
-      "tooltip": "%CRIT DAMAGE:",
+      "tooltip": "%CRITICAL DAMAGE:",
       "value": [
        230
       ]
@@ -5363,6 +5558,108 @@
      25
     ],
     "name": "brewmaster_drunken_haze"
+   },
+   {
+    "AbilityCastPoint": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "AbilityCastRange": 0,
+    "AbilityCastRangeBuffer": 250,
+    "AbilityChannelTime": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "AbilityDuration": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "AbilityModifierSupportBonus": 0,
+    "AbilityModifierSupportValue": 1,
+    "ID": 6251,
+    "abilitytype": "DOTA_ABILITY_TYPE_BASIC",
+    "attributes": [],
+    "behavior": [
+     "DOTA_ABILITY_BEHAVIOR_HIDDEN",
+     "DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    ],
+    "cooldown": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "damage": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "level": 0,
+    "manacost": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "name": "generic_hidden"
+   },
+   {
+    "AbilityCastPoint": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "AbilityCastRange": 0,
+    "AbilityCastRangeBuffer": 250,
+    "AbilityChannelTime": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "AbilityDuration": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "AbilityModifierSupportBonus": 0,
+    "AbilityModifierSupportValue": 1,
+    "ID": 6251,
+    "abilitytype": "DOTA_ABILITY_TYPE_BASIC",
+    "attributes": [],
+    "behavior": [
+     "DOTA_ABILITY_BEHAVIOR_HIDDEN",
+     "DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    ],
+    "cooldown": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "damage": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "level": 0,
+    "manacost": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "name": "generic_hidden"
    }
   ],
   "abilityunitdamagetype": "DAMAGE_TYPE_ArmorPhysical",
@@ -5699,6 +5996,108 @@
      25
     ],
     "name": "brewmaster_drunken_haze"
+   },
+   {
+    "AbilityCastPoint": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "AbilityCastRange": 0,
+    "AbilityCastRangeBuffer": 250,
+    "AbilityChannelTime": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "AbilityDuration": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "AbilityModifierSupportBonus": 0,
+    "AbilityModifierSupportValue": 1,
+    "ID": 6251,
+    "abilitytype": "DOTA_ABILITY_TYPE_BASIC",
+    "attributes": [],
+    "behavior": [
+     "DOTA_ABILITY_BEHAVIOR_HIDDEN",
+     "DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    ],
+    "cooldown": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "damage": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "level": 0,
+    "manacost": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "name": "generic_hidden"
+   },
+   {
+    "AbilityCastPoint": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "AbilityCastRange": 0,
+    "AbilityCastRangeBuffer": 250,
+    "AbilityChannelTime": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "AbilityDuration": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "AbilityModifierSupportBonus": 0,
+    "AbilityModifierSupportValue": 1,
+    "ID": 6251,
+    "abilitytype": "DOTA_ABILITY_TYPE_BASIC",
+    "attributes": [],
+    "behavior": [
+     "DOTA_ABILITY_BEHAVIOR_HIDDEN",
+     "DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    ],
+    "cooldown": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "damage": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "level": 0,
+    "manacost": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "name": "generic_hidden"
    }
   ],
   "abilityunitdamagetype": "DAMAGE_TYPE_ArmorPhysical",
@@ -6035,6 +6434,108 @@
      25
     ],
     "name": "brewmaster_drunken_haze"
+   },
+   {
+    "AbilityCastPoint": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "AbilityCastRange": 0,
+    "AbilityCastRangeBuffer": 250,
+    "AbilityChannelTime": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "AbilityDuration": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "AbilityModifierSupportBonus": 0,
+    "AbilityModifierSupportValue": 1,
+    "ID": 6251,
+    "abilitytype": "DOTA_ABILITY_TYPE_BASIC",
+    "attributes": [],
+    "behavior": [
+     "DOTA_ABILITY_BEHAVIOR_HIDDEN",
+     "DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    ],
+    "cooldown": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "damage": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "level": 0,
+    "manacost": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "name": "generic_hidden"
+   },
+   {
+    "AbilityCastPoint": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "AbilityCastRange": 0,
+    "AbilityCastRangeBuffer": 250,
+    "AbilityChannelTime": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "AbilityDuration": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "AbilityModifierSupportBonus": 0,
+    "AbilityModifierSupportValue": 1,
+    "ID": 6251,
+    "abilitytype": "DOTA_ABILITY_TYPE_BASIC",
+    "attributes": [],
+    "behavior": [
+     "DOTA_ABILITY_BEHAVIOR_HIDDEN",
+     "DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    ],
+    "cooldown": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "damage": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "level": 0,
+    "manacost": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "name": "generic_hidden"
    }
   ],
   "abilityunitdamagetype": "DAMAGE_TYPE_ArmorPhysical",
@@ -6077,7 +6578,7 @@
   "HasInventory": 0,
   "abilities": [],
   "abilityunitdamagetype": "DAMAGE_TYPE_ArmorPhysical",
-  "armorphysical": 0,
+  "armorphysical": 8,
   "attackdamagemax": 10,
   "attackdamagemin": 9,
   "attackpoint": 0.5,
@@ -6096,12 +6597,12 @@
   "bountyxp": 20,
   "displayname": "Spiderite",
   "level": 0,
-  "magicalresistance": 0,
+  "magicalresistance": 50,
   "movementspeed": 350,
   "movementturnrate": 0.5,
   "name": "npc_dota_broodmother_spiderite",
-  "statushealth": 175,
-  "statushealthregen": 0.5,
+  "statushealth": 100,
+  "statushealthregen": 2,
   "statusmana": 0,
   "statusmanaregen": 0,
   "unitlevel": 2,
@@ -6264,7 +6765,7 @@
    }
   ],
   "abilityunitdamagetype": "DAMAGE_TYPE_ArmorPhysical",
-  "armorphysical": 0,
+  "armorphysical": 8,
   "attackdamagemax": 19,
   "attackdamagemin": 18,
   "attackpoint": 0.5,
@@ -6283,12 +6784,12 @@
   "bountyxp": 31,
   "displayname": "Spiderling",
   "level": 0,
-  "magicalresistance": 0,
+  "magicalresistance": 50,
   "movementspeed": 350,
   "movementturnrate": 0.5,
   "name": "npc_dota_broodmother_spiderling",
-  "statushealth": 450,
-  "statushealthregen": 0.5,
+  "statushealth": 250,
+  "statushealthregen": 2,
   "statusmana": 0,
   "statusmanaregen": 0,
   "unitlevel": 3,
@@ -6718,37 +7219,24 @@
     ],
     "AbilityModifierSupportBonus": 0,
     "AbilityModifierSupportValue": 1,
-    "ID": 5210,
-    "abilitytype": "DOTA_ABILITY_TYPE_BASIC",
+    "ID": 5209,
+    "abilitytype": "DOTA_ABILITY_TYPE_ULTIMATE",
     "attributes": [
      {
       "name": "duration",
+      "tooltip": "DURATION:",
       "value": [
-       4.0
-      ]
-     },
-     {
-      "name": "movement_speed",
-      "tooltip": "BURST MOVE SPEED:",
-      "value": [
-       800
-      ]
-     },
-     {
-      "name": "damage_absorb",
-      "value": [
-       250.0
+       2.0
       ]
      }
     ],
     "behavior": [
      "DOTA_ABILITY_BEHAVIOR_NO_TARGET",
      "DOTA_ABILITY_BEHAVIOR_IMMEDIATE",
-     "DOTA_ABILITY_BEHAVIOR_DONT_CANCEL_MOVEMENT",
      "DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
     ],
     "cooldown": [
-     90
+     200
     ],
     "damage": [
      0,
@@ -6756,7 +7244,7 @@
      0,
      0
     ],
-    "displayname": "Speed Burst",
+    "displayname": "Shield",
     "level": 0,
     "manacost": [
      0,
@@ -6764,7 +7252,7 @@
      0,
      0
     ],
-    "name": "courier_burst"
+    "name": "courier_shield"
    },
    {
     "AbilityCastPoint": [
@@ -7114,7 +7602,7 @@
   "displayname": "Courier",
   "level": 0,
   "magicalresistance": 0,
-  "movementspeed": 350,
+  "movementspeed": 380,
   "movementturnrate": 0.5,
   "name": "npc_dota_courier",
   "projectilespeed": 900,
@@ -7147,9 +7635,9 @@
   "attributeintelligencegain": 0,
   "attributeprimary": "DOTA_ATTRIBUTE_STRENGTH",
   "attributestrengthgain": 0,
-  "bountygoldmax": 38,
-  "bountygoldmin": 34,
-  "bountyxp": 40,
+  "bountygoldmax": 44,
+  "bountygoldmin": 38,
+  "bountyxp": 57,
   "displayname": "Melee Creep",
   "level": 0,
   "magicalresistance": 0,
@@ -7223,8 +7711,8 @@
   "attributeintelligencegain": 0,
   "attributeprimary": "DOTA_ATTRIBUTE_STRENGTH",
   "attributestrengthgain": 0,
-  "bountygoldmax": 24,
-  "bountygoldmin": 16,
+  "bountygoldmax": 27,
+  "bountygoldmin": 19,
   "bountyxp": 25,
   "displayname": "Super Melee Creep",
   "level": 0,
@@ -7261,8 +7749,8 @@
   "attributeintelligencegain": 0,
   "attributeprimary": "DOTA_ATTRIBUTE_STRENGTH",
   "attributestrengthgain": 0,
-  "bountygoldmax": 24,
-  "bountygoldmin": 16,
+  "bountygoldmax": 27,
+  "bountygoldmin": 19,
   "bountyxp": 25,
   "displayname": "Mega Melee Creep",
   "level": 0,
@@ -7299,9 +7787,9 @@
   "attributeintelligencegain": 0,
   "attributeprimary": "DOTA_ATTRIBUTE_STRENGTH",
   "attributestrengthgain": 0,
-  "bountygoldmax": 48,
-  "bountygoldmin": 42,
-  "bountyxp": 90,
+  "bountygoldmax": 60,
+  "bountygoldmin": 54,
+  "bountyxp": 69,
   "displayname": "Ranged Creep",
   "level": 0,
   "magicalresistance": 0,
@@ -7377,9 +7865,9 @@
   "attributeintelligencegain": 0,
   "attributeprimary": "DOTA_ATTRIBUTE_STRENGTH",
   "attributestrengthgain": 0,
-  "bountygoldmax": 26,
-  "bountygoldmin": 18,
-  "bountyxp": 25,
+  "bountygoldmax": 29,
+  "bountygoldmin": 21,
+  "bountyxp": 22,
   "displayname": "Super Ranged Creep",
   "level": 0,
   "magicalresistance": 0,
@@ -7416,9 +7904,9 @@
   "attributeintelligencegain": 0,
   "attributeprimary": "DOTA_ATTRIBUTE_STRENGTH",
   "attributestrengthgain": 0,
-  "bountygoldmax": 26,
-  "bountygoldmin": 18,
-  "bountyxp": 25,
+  "bountygoldmax": 29,
+  "bountygoldmin": 21,
+  "bountyxp": 22,
   "displayname": "Mega Ranged Creep",
   "level": 0,
   "magicalresistance": 0,
@@ -7455,9 +7943,9 @@
   "attributeintelligencegain": 0,
   "attributeprimary": "DOTA_ATTRIBUTE_STRENGTH",
   "attributestrengthgain": 0,
-  "bountygoldmax": 38,
-  "bountygoldmin": 34,
-  "bountyxp": 40,
+  "bountygoldmax": 44,
+  "bountygoldmin": 38,
+  "bountyxp": 57,
   "displayname": "Melee Creep",
   "level": 0,
   "magicalresistance": 0,
@@ -7531,8 +8019,8 @@
   "attributeintelligencegain": 0,
   "attributeprimary": "DOTA_ATTRIBUTE_STRENGTH",
   "attributestrengthgain": 0,
-  "bountygoldmax": 24,
-  "bountygoldmin": 16,
+  "bountygoldmax": 27,
+  "bountygoldmin": 19,
   "bountyxp": 25,
   "displayname": "Super Melee Creep",
   "level": 0,
@@ -7569,8 +8057,8 @@
   "attributeintelligencegain": 0,
   "attributeprimary": "DOTA_ATTRIBUTE_STRENGTH",
   "attributestrengthgain": 0,
-  "bountygoldmax": 24,
-  "bountygoldmin": 16,
+  "bountygoldmax": 27,
+  "bountygoldmin": 19,
   "bountyxp": 25,
   "displayname": "Mega Melee Creep",
   "level": 0,
@@ -7607,9 +8095,9 @@
   "attributeintelligencegain": 0,
   "attributeprimary": "DOTA_ATTRIBUTE_STRENGTH",
   "attributestrengthgain": 0,
-  "bountygoldmax": 48,
-  "bountygoldmin": 42,
-  "bountyxp": 90,
+  "bountygoldmax": 60,
+  "bountygoldmin": 54,
+  "bountyxp": 69,
   "displayname": "Ranged Creep",
   "level": 0,
   "magicalresistance": 0,
@@ -7685,9 +8173,9 @@
   "attributeintelligencegain": 0,
   "attributeprimary": "DOTA_ATTRIBUTE_STRENGTH",
   "attributestrengthgain": 0,
-  "bountygoldmax": 26,
-  "bountygoldmin": 18,
-  "bountyxp": 25,
+  "bountygoldmax": 29,
+  "bountygoldmin": 21,
+  "bountyxp": 22,
   "displayname": "Super Ranged Creep",
   "level": 0,
   "magicalresistance": 0,
@@ -7724,9 +8212,9 @@
   "attributeintelligencegain": 0,
   "attributeprimary": "DOTA_ATTRIBUTE_STRENGTH",
   "attributestrengthgain": 0,
-  "bountygoldmax": 26,
-  "bountygoldmin": 18,
-  "bountyxp": 25,
+  "bountygoldmax": 29,
+  "bountygoldmin": 21,
+  "bountyxp": 22,
   "displayname": "Mega Ranged Creep",
   "level": 0,
   "magicalresistance": 0,
@@ -7778,6 +8266,44 @@
   "statusmanaregen": 0,
   "unitlevel": 1,
   "visiondaytimerange": 800,
+  "visionnighttimerange": 600
+ },
+ "npc_dota_dark_willow_creature": {
+  "AttackAcquisitionRange": 0,
+  "AttackRangeBuffer": 250,
+  "FollowRange": 100,
+  "HasInventory": 0,
+  "abilities": [],
+  "abilityunitdamagetype": "DAMAGE_TYPE_ArmorPhysical",
+  "armorphysical": 0,
+  "attackdamagemax": 0,
+  "attackdamagemin": 0,
+  "attackpoint": 0,
+  "attackrange": 0,
+  "attackrate": 1,
+  "attacktype": "DOTA_UNIT_CAP_NO_ATTACK",
+  "attributeagilitygain": 0,
+  "attributebaseagility": 0,
+  "attributebaseintelligence": 0,
+  "attributebasestrength": 0,
+  "attributeintelligencegain": 0,
+  "attributeprimary": "DOTA_ATTRIBUTE_STRENGTH",
+  "attributestrengthgain": 0,
+  "bountygoldmax": 150,
+  "bountygoldmin": 150,
+  "bountyxp": 0,
+  "level": 0,
+  "magicalresistance": 0,
+  "movementspeed": 0,
+  "movementturnrate": 0.5,
+  "name": "npc_dota_dark_willow_creature",
+  "projectilespeed": 0,
+  "statushealth": 100,
+  "statushealthregen": 0,
+  "statusmana": 0,
+  "statusmanaregen": 0,
+  "unitlevel": 1,
+  "visiondaytimerange": 600,
   "visionnighttimerange": 600
  },
  "npc_dota_death_prophet_torment": {
@@ -8457,6 +8983,58 @@
     ],
     "AbilityModifierSupportBonus": 0,
     "AbilityModifierSupportValue": 1,
+    "ID": 5492,
+    "abilitytype": "DOTA_ABILITY_TYPE_BASIC",
+    "attributes": [],
+    "behavior": [
+     "DOTA_ABILITY_BEHAVIOR_NO_TARGET",
+     "DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+    ],
+    "cooldown": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "damage": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "displayname": "Go To Secret Shop",
+    "level": 0,
+    "manacost": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "name": "courier_go_to_secretshop"
+   },
+   {
+    "AbilityCastPoint": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "AbilityCastRange": 0,
+    "AbilityCastRangeBuffer": 250,
+    "AbilityChannelTime": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "AbilityDuration": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "AbilityModifierSupportBonus": 0,
+    "AbilityModifierSupportValue": 1,
     "ID": 5207,
     "abilitytype": "DOTA_ABILITY_TYPE_BASIC",
     "attributes": [],
@@ -8627,89 +9205,24 @@
     ],
     "AbilityModifierSupportBonus": 0,
     "AbilityModifierSupportValue": 1,
-    "ID": 5492,
-    "abilitytype": "DOTA_ABILITY_TYPE_BASIC",
-    "attributes": [],
-    "behavior": [
-     "DOTA_ABILITY_BEHAVIOR_NO_TARGET",
-     "DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
-    ],
-    "cooldown": [
-     0,
-     0,
-     0,
-     0
-    ],
-    "damage": [
-     0,
-     0,
-     0,
-     0
-    ],
-    "displayname": "Go To Secret Shop",
-    "level": 0,
-    "manacost": [
-     0,
-     0,
-     0,
-     0
-    ],
-    "name": "courier_go_to_secretshop"
-   },
-   {
-    "AbilityCastPoint": [
-     0,
-     0,
-     0,
-     0
-    ],
-    "AbilityCastRange": 0,
-    "AbilityCastRangeBuffer": 250,
-    "AbilityChannelTime": [
-     0,
-     0,
-     0,
-     0
-    ],
-    "AbilityDuration": [
-     0,
-     0,
-     0,
-     0
-    ],
-    "AbilityModifierSupportBonus": 0,
-    "AbilityModifierSupportValue": 1,
-    "ID": 5210,
-    "abilitytype": "DOTA_ABILITY_TYPE_BASIC",
+    "ID": 5209,
+    "abilitytype": "DOTA_ABILITY_TYPE_ULTIMATE",
     "attributes": [
      {
       "name": "duration",
+      "tooltip": "DURATION:",
       "value": [
-       4.0
-      ]
-     },
-     {
-      "name": "movement_speed",
-      "tooltip": "BURST MOVE SPEED:",
-      "value": [
-       800
-      ]
-     },
-     {
-      "name": "damage_absorb",
-      "value": [
-       250.0
+       2.0
       ]
      }
     ],
     "behavior": [
      "DOTA_ABILITY_BEHAVIOR_NO_TARGET",
      "DOTA_ABILITY_BEHAVIOR_IMMEDIATE",
-     "DOTA_ABILITY_BEHAVIOR_DONT_CANCEL_MOVEMENT",
      "DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
     ],
     "cooldown": [
-     90
+     200
     ],
     "damage": [
      0,
@@ -8717,7 +9230,7 @@
      0,
      0
     ],
-    "displayname": "Speed Burst",
+    "displayname": "Shield",
     "level": 0,
     "manacost": [
      0,
@@ -8725,7 +9238,7 @@
      0,
      0
     ],
-    "name": "courier_burst"
+    "name": "courier_shield"
    }
   ],
   "abilityunitdamagetype": "DAMAGE_TYPE_ArmorPhysical",
@@ -9050,7 +9563,7 @@
    }
   ],
   "abilityunitdamagetype": "DAMAGE_TYPE_ArmorPhysical",
-  "armorphysical": 12,
+  "armorphysical": 14,
   "attackdamagemax": 0,
   "attackdamagemin": 0,
   "attackpoint": 0,
@@ -9154,7 +9667,7 @@
    }
   ],
   "abilityunitdamagetype": "DAMAGE_TYPE_ArmorPhysical",
-  "armorphysical": 15,
+  "armorphysical": 18,
   "attackdamagemax": 0,
   "attackdamagemin": 0,
   "attackpoint": 0,
@@ -9179,7 +9692,7 @@
   "name": "npc_dota_goodguys_fort",
   "projectilespeed": 0,
   "statushealth": 4250,
-  "statushealthregen": 3,
+  "statushealthregen": 8,
   "statusmana": 0,
   "statusmanaregen": 0,
   "unitlevel": 1,
@@ -9286,26 +9799,26 @@
       "name": "hp_heal",
       "tooltip": "HEALTH REGEN:",
       "value": [
-       90
+       75
       ]
      },
      {
       "name": "mp_heal",
       "tooltip": "MANA REGEN:",
       "value": [
-       40
+       30
       ]
      },
      {
       "name": "hp_heal_growth",
       "value": [
-       2
+       0
       ]
      },
      {
       "name": "mp_heal_growth",
       "value": [
-       0.75
+       0.0
       ]
      },
      {
@@ -9359,7 +9872,7 @@
    }
   ],
   "abilityunitdamagetype": "DAMAGE_TYPE_ArmorPhysical",
-  "armorphysical": 20,
+  "armorphysical": 24,
   "attackdamagemax": 0,
   "attackdamagemin": 0,
   "attackpoint": 0,
@@ -9463,7 +9976,7 @@
    }
   ],
   "abilityunitdamagetype": "DAMAGE_TYPE_ArmorPhysical",
-  "armorphysical": 15,
+  "armorphysical": 18,
   "attackdamagemax": 0,
   "attackdamagemin": 0,
   "attackpoint": 0,
@@ -9567,7 +10080,7 @@
    }
   ],
   "abilityunitdamagetype": "DAMAGE_TYPE_ArmorPhysical",
-  "armorphysical": 15,
+  "armorphysical": 18,
   "attackdamagemax": 0,
   "attackdamagemin": 0,
   "attackpoint": 0,
@@ -9671,7 +10184,7 @@
    }
   ],
   "abilityunitdamagetype": "DAMAGE_TYPE_ArmorPhysical",
-  "armorphysical": 15,
+  "armorphysical": 18,
   "attackdamagemax": 0,
   "attackdamagemin": 0,
   "attackpoint": 0,
@@ -9775,7 +10288,7 @@
    }
   ],
   "abilityunitdamagetype": "DAMAGE_TYPE_ArmorPhysical",
-  "armorphysical": 10,
+  "armorphysical": 12,
   "attackdamagemax": 0,
   "attackdamagemin": 0,
   "attackpoint": 0,
@@ -9879,7 +10392,7 @@
    }
   ],
   "abilityunitdamagetype": "DAMAGE_TYPE_ArmorPhysical",
-  "armorphysical": 10,
+  "armorphysical": 12,
   "attackdamagemax": 0,
   "attackdamagemin": 0,
   "attackpoint": 0,
@@ -9983,7 +10496,7 @@
    }
   ],
   "abilityunitdamagetype": "DAMAGE_TYPE_ArmorPhysical",
-  "armorphysical": 10,
+  "armorphysical": 12,
   "attackdamagemax": 0,
   "attackdamagemin": 0,
   "attackpoint": 0,
@@ -10046,7 +10559,7 @@
   "movementturnrate": 0.5,
   "name": "npc_dota_goodguys_siege",
   "projectilespeed": 1100,
-  "statushealth": 825,
+  "statushealth": 875,
   "statushealthregen": 0,
   "statusmana": 0,
   "statusmanaregen": 0,
@@ -10124,7 +10637,7 @@
   "movementturnrate": 0.5,
   "name": "npc_dota_goodguys_siege_upgraded",
   "projectilespeed": 1100,
-  "statushealth": 825,
+  "statushealth": 875,
   "statushealthregen": 0,
   "statusmana": 0,
   "statusmanaregen": 0,
@@ -10163,7 +10676,7 @@
   "movementturnrate": 0.5,
   "name": "npc_dota_goodguys_siege_upgraded_mega",
   "projectilespeed": 1100,
-  "statushealth": 825,
+  "statushealth": 875,
   "statushealthregen": 0,
   "statusmana": 0,
   "statusmanaregen": 0,
@@ -10178,7 +10691,7 @@
   "HasInventory": 0,
   "abilities": [],
   "abilityunitdamagetype": "DAMAGE_TYPE_ArmorPhysical",
-  "armorphysical": 14,
+  "armorphysical": 17,
   "attackdamagemax": 120,
   "attackdamagemin": 100,
   "attackpoint": 0.6,
@@ -10202,7 +10715,7 @@
   "movementturnrate": 1,
   "name": "npc_dota_goodguys_tower1_bot",
   "projectilespeed": 750,
-  "statushealth": 1400,
+  "statushealth": 1600,
   "statushealthregen": 0,
   "statusmana": 0,
   "statusmanaregen": 0,
@@ -10217,7 +10730,7 @@
   "HasInventory": 0,
   "abilities": [],
   "abilityunitdamagetype": "DAMAGE_TYPE_ArmorPhysical",
-  "armorphysical": 14,
+  "armorphysical": 17,
   "attackdamagemax": 120,
   "attackdamagemin": 100,
   "attackpoint": 0.6,
@@ -10241,7 +10754,7 @@
   "movementturnrate": 1,
   "name": "npc_dota_goodguys_tower1_mid",
   "projectilespeed": 750,
-  "statushealth": 1400,
+  "statushealth": 1600,
   "statushealthregen": 0,
   "statusmana": 0,
   "statusmanaregen": 0,
@@ -10256,7 +10769,7 @@
   "HasInventory": 0,
   "abilities": [],
   "abilityunitdamagetype": "DAMAGE_TYPE_ArmorPhysical",
-  "armorphysical": 14,
+  "armorphysical": 17,
   "attackdamagemax": 120,
   "attackdamagemin": 100,
   "attackpoint": 0.6,
@@ -10280,7 +10793,7 @@
   "movementturnrate": 1,
   "name": "npc_dota_goodguys_tower1_top",
   "projectilespeed": 750,
-  "statushealth": 1400,
+  "statushealth": 1600,
   "statushealthregen": 0,
   "statusmana": 0,
   "statusmanaregen": 0,
@@ -10366,7 +10879,7 @@
    }
   ],
   "abilityunitdamagetype": "DAMAGE_TYPE_ArmorPhysical",
-  "armorphysical": 16,
+  "armorphysical": 19,
   "attackdamagemax": 162,
   "attackdamagemin": 142,
   "attackpoint": 0.6,
@@ -10476,7 +10989,7 @@
    }
   ],
   "abilityunitdamagetype": "DAMAGE_TYPE_ArmorPhysical",
-  "armorphysical": 16,
+  "armorphysical": 19,
   "attackdamagemax": 162,
   "attackdamagemin": 142,
   "attackpoint": 0.6,
@@ -10586,7 +11099,7 @@
    }
   ],
   "abilityunitdamagetype": "DAMAGE_TYPE_ArmorPhysical",
-  "armorphysical": 16,
+  "armorphysical": 19,
   "attackdamagemax": 162,
   "attackdamagemin": 142,
   "attackpoint": 0.6,
@@ -10690,7 +11203,7 @@
    }
   ],
   "abilityunitdamagetype": "DAMAGE_TYPE_ArmorPhysical",
-  "armorphysical": 16,
+  "armorphysical": 19,
   "attackdamagemax": 162,
   "attackdamagemin": 142,
   "attackpoint": 0.6,
@@ -10794,7 +11307,7 @@
    }
   ],
   "abilityunitdamagetype": "DAMAGE_TYPE_ArmorPhysical",
-  "armorphysical": 16,
+  "armorphysical": 19,
   "attackdamagemax": 162,
   "attackdamagemin": 142,
   "attackpoint": 0.6,
@@ -10898,7 +11411,7 @@
    }
   ],
   "abilityunitdamagetype": "DAMAGE_TYPE_ArmorPhysical",
-  "armorphysical": 16,
+  "armorphysical": 19,
   "attackdamagemax": 162,
   "attackdamagemin": 142,
   "attackpoint": 0.6,
@@ -11002,7 +11515,7 @@
    }
   ],
   "abilityunitdamagetype": "DAMAGE_TYPE_ArmorPhysical",
-  "armorphysical": 24,
+  "armorphysical": 29,
   "attackdamagemax": 162,
   "attackdamagemin": 142,
   "attackpoint": 0.6,
@@ -11027,7 +11540,7 @@
   "name": "npc_dota_goodguys_tower4",
   "projectilespeed": 750,
   "statushealth": 1600,
-  "statushealthregen": 3,
+  "statushealthregen": 0,
   "statusmana": 0,
   "statusmanaregen": 0,
   "unitlevel": 4,
@@ -11247,12 +11760,6 @@
     "ID": 5536,
     "abilitytype": "DOTA_ABILITY_TYPE_BASIC",
     "attributes": [
-     {
-      "name": "nightmare_dot_interval",
-      "value": [
-       1.0
-      ]
-     },
      {
       "name": "nightmare_invuln_time",
       "value": [
@@ -13764,6 +14271,110 @@
   "HasInventory": 1,
   "abilities": [
    {
+    "AbilityCastPoint": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "AbilityCastRange": 0,
+    "AbilityCastRangeBuffer": 250,
+    "AbilityChannelTime": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "AbilityDuration": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "AbilityModifierSupportBonus": 0,
+    "AbilityModifierSupportValue": 1,
+    "ID": 82,
+    "abilitytype": "DOTA_ABILITY_TYPE_BASIC",
+    "attributes": [],
+    "behavior": [
+     "DOTA_ABILITY_BEHAVIOR_PASSIVE",
+     "DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    ],
+    "cooldown": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "damage": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "displayname": "Empty",
+    "level": 0,
+    "manacost": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "name": "bear_empty1"
+   },
+   {
+    "AbilityCastPoint": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "AbilityCastRange": 0,
+    "AbilityCastRangeBuffer": 250,
+    "AbilityChannelTime": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "AbilityDuration": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "AbilityModifierSupportBonus": 0,
+    "AbilityModifierSupportValue": 1,
+    "ID": 83,
+    "abilitytype": "DOTA_ABILITY_TYPE_BASIC",
+    "attributes": [],
+    "behavior": [
+     "DOTA_ABILITY_BEHAVIOR_PASSIVE",
+     "DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    ],
+    "cooldown": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "damage": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "displayname": "Empty",
+    "level": 0,
+    "manacost": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "name": "bear_empty2"
+   },
+   {
     "AbilityCastPoint": 0.1,
     "AbilityCastRange": 0,
     "AbilityCastRangeBuffer": 250,
@@ -13859,8 +14470,8 @@
   "movementturnrate": 0.6,
   "name": "npc_dota_lone_druid_bear1",
   "projectilespeed": 0,
-  "statushealth": 1400,
-  "statushealthregen": 2,
+  "statushealth": 1500,
+  "statushealthregen": 4,
   "statusmana": 300,
   "statusmanaregen": 0.5,
   "unitlevel": 7,
@@ -13919,6 +14530,58 @@
      0
     ],
     "name": "lone_druid_spirit_bear_return"
+   },
+   {
+    "AbilityCastPoint": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "AbilityCastRange": 0,
+    "AbilityCastRangeBuffer": 250,
+    "AbilityChannelTime": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "AbilityDuration": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "AbilityModifierSupportBonus": 0,
+    "AbilityModifierSupportValue": 1,
+    "ID": 83,
+    "abilitytype": "DOTA_ABILITY_TYPE_BASIC",
+    "attributes": [],
+    "behavior": [
+     "DOTA_ABILITY_BEHAVIOR_PASSIVE",
+     "DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    ],
+    "cooldown": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "damage": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "displayname": "Empty",
+    "level": 0,
+    "manacost": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "name": "bear_empty2"
    },
    {
     "AbilityCastPoint": 0.1,
@@ -14016,8 +14679,8 @@
   "movementturnrate": 0.6,
   "name": "npc_dota_lone_druid_bear2",
   "projectilespeed": 0,
-  "statushealth": 1800,
-  "statushealthregen": 3,
+  "statushealth": 2000,
+  "statushealthregen": 5,
   "statusmana": 300,
   "statusmanaregen": 0.5,
   "unitlevel": 7,
@@ -14240,8 +14903,8 @@
   "movementturnrate": 0.6,
   "name": "npc_dota_lone_druid_bear3",
   "projectilespeed": 0,
-  "statushealth": 2300,
-  "statushealthregen": 4,
+  "statushealth": 2500,
+  "statushealthregen": 6,
   "statusmana": 300,
   "statusmanaregen": 0.5,
   "unitlevel": 7,
@@ -14461,6 +15124,108 @@
     ],
     "AbilityModifierSupportBonus": 0,
     "AbilityModifierSupportValue": 1,
+    "ID": 6251,
+    "abilitytype": "DOTA_ABILITY_TYPE_BASIC",
+    "attributes": [],
+    "behavior": [
+     "DOTA_ABILITY_BEHAVIOR_HIDDEN",
+     "DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    ],
+    "cooldown": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "damage": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "level": 0,
+    "manacost": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "name": "generic_hidden"
+   },
+   {
+    "AbilityCastPoint": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "AbilityCastRange": 0,
+    "AbilityCastRangeBuffer": 250,
+    "AbilityChannelTime": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "AbilityDuration": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "AbilityModifierSupportBonus": 0,
+    "AbilityModifierSupportValue": 1,
+    "ID": 6251,
+    "abilitytype": "DOTA_ABILITY_TYPE_BASIC",
+    "attributes": [],
+    "behavior": [
+     "DOTA_ABILITY_BEHAVIOR_HIDDEN",
+     "DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    ],
+    "cooldown": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "damage": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "level": 0,
+    "manacost": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "name": "generic_hidden"
+   },
+   {
+    "AbilityCastPoint": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "AbilityCastRange": 0,
+    "AbilityCastRangeBuffer": 250,
+    "AbilityChannelTime": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "AbilityDuration": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "AbilityModifierSupportBonus": 0,
+    "AbilityModifierSupportValue": 1,
     "ID": 5420,
     "abilitytype": "DOTA_ABILITY_TYPE_BASIC",
     "attributes": [
@@ -14530,8 +15295,8 @@
   "movementturnrate": 0.6,
   "name": "npc_dota_lone_druid_bear4",
   "projectilespeed": 0,
-  "statushealth": 2700,
-  "statushealthregen": 5,
+  "statushealth": 3000,
+  "statushealthregen": 7,
   "statusmana": 300,
   "statusmanaregen": 0.5,
   "unitlevel": 7,
@@ -15018,77 +15783,6 @@
   "abilities": [
    {
     "AbilityCastPoint": [
-     0.5,
-     0.5,
-     0.5
-    ],
-    "AbilityCastRange": 600,
-    "AbilityCastRangeBuffer": 250,
-    "AbilityChannelTime": [
-     0,
-     0,
-     0,
-     0
-    ],
-    "AbilityDuration": [
-     0,
-     0,
-     0,
-     0
-    ],
-    "AbilityModifierSupportBonus": 0,
-    "AbilityModifierSupportValue": 1,
-    "ID": 5203,
-    "abilitytype": "DOTA_ABILITY_TYPE_BASIC",
-    "abilityunitdamagetype": "DAMAGE_TYPE_MAGICAL",
-    "attributes": [
-     {
-      "name": "burn_amount",
-      "tooltip": "MANA BURN PER HIT:",
-      "value": [
-       125,
-       175,
-       225
-      ]
-     },
-     {
-      "name": "burn_as_damage_tooltip",
-      "tooltip": "%CONVERTED TO DAMAGE:",
-      "value": [
-       100
-      ]
-     },
-     {
-      "name": "cast_range_tooltip",
-      "tooltip": "CAST RANGE:",
-      "value": [
-       600
-      ]
-     }
-    ],
-    "behavior": [
-     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
-    ],
-    "cooldown": [
-     7
-    ],
-    "damage": [
-     0,
-     0,
-     0,
-     0
-    ],
-    "displayname": "Mana Burn",
-    "level": 0,
-    "manacost": [
-     0,
-     0,
-     0
-    ],
-    "name": "necronomicon_archer_mana_burn"
-   },
-   {
-    "AbilityCastPoint": [
      0,
      0,
      0,
@@ -15204,77 +15898,6 @@
   "FollowRange": 100,
   "HasInventory": 0,
   "abilities": [
-   {
-    "AbilityCastPoint": [
-     0.5,
-     0.5,
-     0.5
-    ],
-    "AbilityCastRange": 600,
-    "AbilityCastRangeBuffer": 250,
-    "AbilityChannelTime": [
-     0,
-     0,
-     0,
-     0
-    ],
-    "AbilityDuration": [
-     0,
-     0,
-     0,
-     0
-    ],
-    "AbilityModifierSupportBonus": 0,
-    "AbilityModifierSupportValue": 1,
-    "ID": 5203,
-    "abilitytype": "DOTA_ABILITY_TYPE_BASIC",
-    "abilityunitdamagetype": "DAMAGE_TYPE_MAGICAL",
-    "attributes": [
-     {
-      "name": "burn_amount",
-      "tooltip": "MANA BURN PER HIT:",
-      "value": [
-       125,
-       175,
-       225
-      ]
-     },
-     {
-      "name": "burn_as_damage_tooltip",
-      "tooltip": "%CONVERTED TO DAMAGE:",
-      "value": [
-       100
-      ]
-     },
-     {
-      "name": "cast_range_tooltip",
-      "tooltip": "CAST RANGE:",
-      "value": [
-       600
-      ]
-     }
-    ],
-    "behavior": [
-     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
-    ],
-    "cooldown": [
-     7
-    ],
-    "damage": [
-     0,
-     0,
-     0,
-     0
-    ],
-    "displayname": "Mana Burn",
-    "level": 0,
-    "manacost": [
-     0,
-     0,
-     0
-    ],
-    "name": "necronomicon_archer_mana_burn"
-   },
    {
     "AbilityCastPoint": [
      0,
@@ -15393,11 +16016,7 @@
   "HasInventory": 0,
   "abilities": [
    {
-    "AbilityCastPoint": [
-     0.5,
-     0.5,
-     0.5
-    ],
+    "AbilityCastPoint": 0.3,
     "AbilityCastRange": 600,
     "AbilityCastRangeBuffer": 250,
     "AbilityChannelTime": [
@@ -15414,31 +16033,20 @@
     ],
     "AbilityModifierSupportBonus": 0,
     "AbilityModifierSupportValue": 1,
-    "ID": 5203,
+    "ID": 8203,
     "abilitytype": "DOTA_ABILITY_TYPE_BASIC",
-    "abilityunitdamagetype": "DAMAGE_TYPE_MAGICAL",
     "attributes": [
      {
-      "name": "burn_amount",
-      "tooltip": "MANA BURN PER HIT:",
+      "name": "purge_rate",
       "value": [
-       125,
-       175,
-       225
+       5
       ]
      },
      {
-      "name": "burn_as_damage_tooltip",
-      "tooltip": "%CONVERTED TO DAMAGE:",
+      "name": "duration",
+      "tooltip": "DURATION:",
       "value": [
-       100
-      ]
-     },
-     {
-      "name": "cast_range_tooltip",
-      "tooltip": "CAST RANGE:",
-      "value": [
-       600
+       4.0
       ]
      }
     ],
@@ -15446,7 +16054,7 @@
      "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
     ],
     "cooldown": [
-     7
+     15
     ],
     "damage": [
      0,
@@ -15454,14 +16062,15 @@
      0,
      0
     ],
-    "displayname": "Mana Burn",
+    "displayname": "Purge",
     "level": 0,
     "manacost": [
      0,
      0,
+     0,
      0
     ],
-    "name": "necronomicon_archer_mana_burn"
+    "name": "necronomicon_archer_purge"
    },
    {
     "AbilityCastPoint": [
@@ -16177,7 +16786,7 @@
     "attributes": [
      {
       "name": "crit_chance",
-      "tooltip": "%CHANCE:",
+      "tooltip": "%CRITICAL CHANCE:",
       "value": [
        20
       ]
@@ -16450,7 +17059,7 @@
     "name": "big_thunder_lizard_wardrums_aura"
    },
    {
-    "AbilityCastPoint": 0,
+    "AbilityCastPoint": 0.3,
     "AbilityCastRange": 0,
     "AbilityCastRangeBuffer": 250,
     "AbilityChannelTime": [
@@ -16878,7 +17487,7 @@
   "HasInventory": 0,
   "abilities": [
    {
-    "AbilityCastPoint": 0.5,
+    "AbilityCastPoint": 0.4,
     "AbilityCastRange": 0,
     "AbilityCastRangeBuffer": 250,
     "AbilityChannelTime": [
@@ -16931,7 +17540,7 @@
     "displayname": "War Stomp",
     "level": 0,
     "manacost": [
-     100
+     50
     ],
     "name": "centaur_khan_war_stomp"
    }
@@ -17005,7 +17614,7 @@
       "name": "bonus_magical_armor",
       "tooltip": "%MAGIC RESISTANCE HEROES:",
       "value": [
-       5
+       10
       ]
      },
      {
@@ -17070,7 +17679,7 @@
   "displayname": "Centaur Courser",
   "level": 0,
   "magicalresistance": 0,
-  "movementspeed": 350,
+  "movementspeed": 320,
   "movementturnrate": 0.5,
   "name": "npc_dota_neutral_centaur_outrunner",
   "projectilespeed": 0,
@@ -17083,7 +17692,7 @@
   "visionnighttimerange": 800
  },
  "npc_dota_neutral_dark_troll": {
-  "AttackAcquisitionRange": 300,
+  "AttackAcquisitionRange": 250,
   "AttackRangeBuffer": 250,
   "FollowRange": 100,
   "HasInventory": 0,
@@ -17093,7 +17702,7 @@
   "attackdamagemax": 27,
   "attackdamagemin": 24,
   "attackpoint": 0.3,
-  "attackrange": 350,
+  "attackrange": 250,
   "attackrate": 1.35,
   "attacktype": "DOTA_UNIT_CAP_RANGED_ATTACK",
   "attributeagilitygain": 0,
@@ -17122,13 +17731,13 @@
   "visionnighttimerange": 800
  },
  "npc_dota_neutral_dark_troll_warlord": {
-  "AttackAcquisitionRange": 300,
+  "AttackAcquisitionRange": 250,
   "AttackRangeBuffer": 250,
   "FollowRange": 100,
   "HasInventory": 0,
   "abilities": [
    {
-    "AbilityCastPoint": 0.5,
+    "AbilityCastPoint": 0.3,
     "AbilityCastRange": 550,
     "AbilityCastRangeBuffer": 250,
     "AbilityChannelTime": [
@@ -17155,6 +17764,12 @@
       "value": [
        1.75
       ]
+     },
+     {
+      "name": "net_speed",
+      "value": [
+       1500
+      ]
      }
     ],
     "behavior": [
@@ -17172,12 +17787,12 @@
     "displayname": "Ensnare",
     "level": 0,
     "manacost": [
-     150
+     75
     ],
     "name": "dark_troll_warlord_ensnare"
    },
    {
-    "AbilityCastPoint": 0.5,
+    "AbilityCastPoint": 0.3,
     "AbilityCastRange": 0,
     "AbilityCastRangeBuffer": 250,
     "AbilityChannelTime": [
@@ -17230,7 +17845,7 @@
   "attackdamagemax": 45,
   "attackdamagemin": 40,
   "attackpoint": 0.3,
-  "attackrange": 350,
+  "attackrange": 250,
   "attackrate": 1.35,
   "attacktype": "DOTA_UNIT_CAP_RANGED_ATTACK",
   "attributeagilitygain": 0,
@@ -17246,7 +17861,7 @@
   "displayname": "Dark Troll Summoner",
   "level": 0,
   "magicalresistance": 0,
-  "movementspeed": 320,
+  "movementspeed": 300,
   "movementturnrate": 0.5,
   "name": "npc_dota_neutral_dark_troll_warlord",
   "projectilespeed": 1200,
@@ -17304,7 +17919,7 @@
   "HasInventory": 0,
   "abilities": [
    {
-    "AbilityCastPoint": 0.75,
+    "AbilityCastPoint": 0.4,
     "AbilityCastRange": 500,
     "AbilityCastRangeBuffer": 250,
     "AbilityChannelTime": 40,
@@ -17612,7 +18227,7 @@
       "name": "mana_regen",
       "tooltip": "MANA REGEN:",
       "value": [
-       3
+       1.5
       ]
      },
      {
@@ -18100,7 +18715,7 @@
   "HasInventory": 0,
   "abilities": [
    {
-    "AbilityCastPoint": 0.5,
+    "AbilityCastPoint": 0.3,
     "AbilityCastRange": 900,
     "AbilityCastRangeBuffer": 250,
     "AbilityChannelTime": [
@@ -19021,7 +19636,7 @@
       "name": "bonus_magical_armor",
       "tooltip": "%MAGIC RESISTANCE HEROES:",
       "value": [
-       5
+       10
       ]
      },
      {
@@ -19105,7 +19720,7 @@
   "HasInventory": 0,
   "abilities": [
    {
-    "AbilityCastPoint": 0.5,
+    "AbilityCastPoint": 0.4,
     "AbilityCastRange": 0,
     "AbilityCastRangeBuffer": 250,
     "AbilityChannelTime": [
@@ -19165,7 +19780,7 @@
     "displayname": "Thunder Clap",
     "level": 0,
     "manacost": [
-     100
+     50
     ],
     "name": "polar_furbolg_ursa_warrior_thunder_clap"
    },
@@ -19388,7 +20003,7 @@
   "HasInventory": 0,
   "abilities": [
    {
-    "AbilityCastPoint": 0.9,
+    "AbilityCastPoint": 0.4,
     "AbilityCastRange": 0,
     "AbilityCastRangeBuffer": 250,
     "AbilityChannelTime": [
@@ -19598,7 +20213,7 @@
   "visionnighttimerange": 800
  },
  "npc_dota_neutral_satyr_hellcaller": {
-  "AttackAcquisitionRange": 500,
+  "AttackAcquisitionRange": 300,
   "AttackRangeBuffer": 250,
   "FollowRange": 100,
   "HasInventory": 0,
@@ -19696,7 +20311,7 @@
       "name": "health_regen",
       "tooltip": "HEALTH REGEN:",
       "value": [
-       6
+       5.5
       ]
      },
      {
@@ -19767,13 +20382,13 @@
   "visionnighttimerange": 800
  },
  "npc_dota_neutral_satyr_soulstealer": {
-  "AttackAcquisitionRange": 500,
+  "AttackAcquisitionRange": 300,
   "AttackRangeBuffer": 250,
   "FollowRange": 100,
   "HasInventory": 0,
   "abilities": [
    {
-    "AbilityCastPoint": 0.5,
+    "AbilityCastPoint": 0.3,
     "AbilityCastRange": 600,
     "AbilityCastRangeBuffer": 250,
     "AbilityChannelTime": [
@@ -19856,7 +20471,7 @@
   "visionnighttimerange": 800
  },
  "npc_dota_neutral_satyr_trickster": {
-  "AttackAcquisitionRange": 300,
+  "AttackAcquisitionRange": 280,
   "AttackRangeBuffer": 250,
   "FollowRange": 100,
   "HasInventory": 0,
@@ -19928,7 +20543,7 @@
   "attackdamagemax": 10,
   "attackdamagemin": 7,
   "attackpoint": 0.3,
-  "attackrange": 300,
+  "attackrange": 280,
   "attackrate": 1.7,
   "attacktype": "DOTA_UNIT_CAP_RANGED_ATTACK",
   "attributeagilitygain": 0,
@@ -19944,7 +20559,7 @@
   "displayname": "Satyr Banisher",
   "level": 0,
   "magicalresistance": 0,
-  "movementspeed": 330,
+  "movementspeed": 300,
   "movementturnrate": 0.5,
   "name": "npc_dota_neutral_satyr_trickster",
   "projectilespeed": 1500,
@@ -20057,7 +20672,7 @@
   "attributestrengthgain": 0,
   "bountygoldmax": 100,
   "bountygoldmin": 100,
-  "bountyxp": 25,
+  "bountyxp": 100,
   "displayname": "Observer Ward",
   "level": 0,
   "magicalresistance": 0,
@@ -20783,7 +21398,7 @@
    }
   ],
   "abilityunitdamagetype": "DAMAGE_TYPE_ArmorPhysical",
-  "armorphysical": 15,
+  "armorphysical": 18,
   "attackdamagemax": 65,
   "attackdamagemin": 65,
   "attackpoint": 0.6,
@@ -22044,14 +22659,14 @@
   "attributeintelligencegain": 0,
   "attributeprimary": "DOTA_ATTRIBUTE_STRENGTH",
   "attributestrengthgain": 0,
-  "bountygoldmax": 50,
-  "bountygoldmin": 50,
+  "bountygoldmax": 25,
+  "bountygoldmin": 25,
   "bountyxp": 0,
   "displayname": "Proximity Mine",
   "level": 0,
   "magicalresistance": 0,
   "movementspeed": 0,
-  "movementturnrate": 0,
+  "movementturnrate": 0.4,
   "name": "npc_dota_techies_land_mine",
   "projectilespeed": 0,
   "statushealth": 1,
@@ -22270,12 +22885,6 @@
     "abilitytype": "DOTA_ABILITY_TYPE_BASIC",
     "attributes": [
      {
-      "name": "movement_speed_bonus",
-      "value": [
-       -30
-      ]
-     },
-     {
       "name": "trap_radius",
       "value": [
        400
@@ -22288,9 +22897,29 @@
       ]
      },
      {
-      "name": "movement_speed_bonus_stage",
+      "name": "trap_bonus_damage",
       "value": [
-       5.0
+       250,
+       350,
+       450
+      ]
+     },
+     {
+      "name": "movement_speed_min",
+      "value": [
+       30
+      ]
+     },
+     {
+      "name": "movement_speed_max",
+      "value": [
+       60
+      ]
+     },
+     {
+      "name": "trap_max_charge_duration",
+      "value": [
+       4.0
       ]
      }
     ],
@@ -23622,8 +24251,8 @@
   ],
   "abilityunitdamagetype": "DAMAGE_TYPE_ArmorPhysical",
   "armorphysical": 0,
-  "attackdamagemax": 10,
-  "attackdamagemin": 10,
+  "attackdamagemax": 30,
+  "attackdamagemin": 30,
   "attackpoint": 0.33,
   "attackrange": 160,
   "attackrate": 0.4,
@@ -23756,8 +24385,8 @@
   ],
   "abilityunitdamagetype": "DAMAGE_TYPE_ArmorPhysical",
   "armorphysical": 1,
-  "attackdamagemax": 10,
-  "attackdamagemin": 10,
+  "attackdamagemax": 45,
+  "attackdamagemin": 45,
   "attackpoint": 0.33,
   "attackrange": 160,
   "attackrate": 0.4,
@@ -23890,8 +24519,8 @@
   ],
   "abilityunitdamagetype": "DAMAGE_TYPE_ArmorPhysical",
   "armorphysical": 2,
-  "attackdamagemax": 10,
-  "attackdamagemin": 10,
+  "attackdamagemax": 60,
+  "attackdamagemin": 60,
   "attackpoint": 0.33,
   "attackrange": 160,
   "attackrate": 0.4,
@@ -25234,6 +25863,44 @@
   "unitlevel": 3,
   "visiondaytimerange": 400,
   "visionnighttimerange": 400
+ },
+ "npc_dota_wraith_king_skeleton_warrior": {
+  "AttackAcquisitionRange": 300,
+  "AttackRangeBuffer": 250,
+  "FollowRange": 100,
+  "HasInventory": 0,
+  "abilities": [],
+  "abilityunitdamagetype": "DAMAGE_TYPE_ArmorPhysical",
+  "armorphysical": 1,
+  "attackdamagemax": 40,
+  "attackdamagemin": 35,
+  "attackpoint": 0.56,
+  "attackrange": 115,
+  "attackrate": 1.2,
+  "attacktype": "DOTA_UNIT_CAP_MELEE_ATTACK",
+  "attributeagilitygain": 0,
+  "attributebaseagility": 0,
+  "attributebaseintelligence": 0,
+  "attributebasestrength": 0,
+  "attributeintelligencegain": 0,
+  "attributeprimary": "DOTA_ATTRIBUTE_STRENGTH",
+  "attributestrengthgain": 0,
+  "bountygoldmax": 15,
+  "bountygoldmin": 15,
+  "bountyxp": 15,
+  "displayname": "Wraith King Skeleton",
+  "level": 0,
+  "magicalresistance": 0,
+  "movementspeed": 350,
+  "movementturnrate": 0.5,
+  "name": "npc_dota_wraith_king_skeleton_warrior",
+  "statushealth": 350,
+  "statushealthregen": 0,
+  "statusmana": 0,
+  "statusmanaregen": 0,
+  "unitlevel": 1,
+  "visiondaytimerange": 800,
+  "visionnighttimerange": 600
  },
  "npc_dota_zeus_cloud": {
   "AttackAcquisitionRange": 800,
