@@ -300,7 +300,7 @@ var InventoryViewModel = function (itemData, h) {
                         sources[item].count += 1;
                     }
                 break;
-                case 'monkey_king_bar':
+                /*case 'monkey_king_bar':
                     if (sources[item] == undefined) {
                         sources[item] = {
                             'item': item,
@@ -315,7 +315,7 @@ var InventoryViewModel = function (itemData, h) {
                     else {
                         sources[item].count += 1;
                     }
-                break;
+                break;*/
                 case 'abyssal_blade':
                 case 'basher':
                     if (!sources.hasOwnProperty('bash')) {
