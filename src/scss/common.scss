@@ -67,7 +67,6 @@ td {
     float: left;
     width: 100%;
     padding: 10px;
-    border-radius: 5px;
 }
 .hide-shop-item-details .item_field {
 	display: none;
@@ -179,6 +178,11 @@ img {
 
 .item_field {
     display: block;
+    
+    h1 {
+        font-size: 20px;
+        margin-top: 15px;
+    }
 }
 
 .item_active {
