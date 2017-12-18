@@ -30,6 +30,8 @@ var diffProperties = [
     'critChance',
     //'critDamage',
     'missChance',
+    'accuracy',
+    'hitChance',
     'totalattackrange',
     'visionrangeday',
     'visionrangenight',

@@ -1527,7 +1527,7 @@ var AbilityModel = function (a, h) {
             }
         }
         return totalAttribute;
-    });            
+    });
     
     self.getEvasion = ko.computed(function () {
         var totalAttribute = 1;
@@ -1538,6 +1538,10 @@ var AbilityModel = function (a, h) {
                     for (var j = 0; j < self._abilities[i].attributes.length; j++) {
                         var attribute = self._abilities[i].attributes[j];
                         switch(attribute.name) {
+                            // windrunner_windrun
+                            case 'evasion_pct_tooltip':
+                                totalAttribute = 0;
+                            break;
                             // phantom_assassin_blur
                             case 'bonus_evasion':
                             // brewmaster_drunken_brawler
@@ -1573,8 +1577,9 @@ var AbilityModel = function (a, h) {
         return totalAttribute;
     });
     
-    self.getMissChance = ko.computed(function () {
-        var totalAttribute = 1;
+    self.getBlindSource = ko.computed(function () {
+        var totalAttribute = 0;
+        var sources = [];
         for (var i = 0; i < self.abilities().length; i++) {
             var ability = self._abilities[i];
             if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
@@ -1586,18 +1591,28 @@ var AbilityModel = function (a, h) {
                             case 'miss_chance':
                             // riki_smoke_screen,keeper_of_the_light_blinding_light,tinker_laser
                             case 'miss_rate':
-                                totalAttribute *= (1 - self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100);
+                                var value = self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100;
+                                totalAttribute += value;
+                                sources.push({
+                                    'value': value,
+                                    'displayname': ability.displayname
+                                });
                             break;
                         }
                     }
                 }
                 else if (ability.missChance != undefined) {
                     // night_stalker_crippling_fear
-                    totalAttribute*=(1-ability.missChance()/100);
+                    var value = ability.missChance()/100;
+                    totalAttribute += value;
+                    sources.push({
+                        'value': value,
+                        'displayname': ability.displayname
+                    });
                 }
             }
         }
-        return totalAttribute;
+        return { sources: sources, total: totalAttribute };
     });
     
     self.getLifesteal = ko.computed(function () {

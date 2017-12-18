@@ -279,7 +279,38 @@ var InventoryViewModel = function (itemData, h) {
         return sources;
     };
     
-    self.getBashSource = function (attacktype) {
+    self.getAccuracyDebuffSource = function () {
+        var sources = {};
+        for (var i = 0; i < self.items().length; i++) {
+            var item = self.items()[i].item;
+            var isActive = self.activeItems.indexOf(self.items()[i]) >= 0 ? true : false;
+            if (!self.items()[i].enabled()) continue;
+            switch (item) {
+                case 'bloodthorn':
+                    if (sources[item] == undefined) {
+                        sources[item] = {
+                            'chance': 1,
+                            'count': 1,
+                            'displayname': 'Soul Rend'
+                        }
+                    }
+                break;
+                case 'solar_crest':
+                    if (sources[item] == undefined) {
+                        sources[item] = {
+                            'chance': self.getItemAttributeValue(itemData['item_' + item].attributes, 'truestrike_chance', 0) / 100,
+                            'count': 1,
+                            'displayname': 'Shine'
+                        }
+                    }
+                break;
+            }
+
+        }
+        return sources;
+    };
+    
+    self.getAccuracySource = function (attacktype) {
         var sources = {};
         for (var i = 0; i < self.items().length; i++) {
             var item = self.items()[i].item;
@@ -289,10 +320,8 @@ var InventoryViewModel = function (itemData, h) {
                 case 'javelin':
                     if (sources[item] == undefined) {
                         sources[item] = {
-                            'damage': self.getItemAttributeValue(itemData['item_' + item].attributes, 'bonus_chance_damage', 1),
-                            'damageType': 'magic',
+                            'chance': self.getItemAttributeValue(itemData['item_' + item].attributes, 'bonus_chance', 0) / 100,
                             'count': 1,
-                            'chance': self.getItemAttributeValue(itemData['item_' + item].attributes, 'bonus_chance', 1) / 100,
                             'displayname': itemData['item_' + item].displayname + ' Pierce'
                         }
                     }
@@ -300,22 +329,38 @@ var InventoryViewModel = function (itemData, h) {
                         sources[item].count += 1;
                     }
                 break;
-                /*case 'monkey_king_bar':
+                case 'monkey_king_bar':
                     if (sources[item] == undefined) {
                         sources[item] = {
-                            'item': item,
-                            'chance': self.getItemAttributeValue(itemData['item_' + item].attributes, 'bash_chance', 0) / 100,
-                            'damage': self.getItemAttributeValue(itemData['item_' + item].attributes, 'bash_damage', 0),
-                            'duration': self.getItemAttributeValue(itemData['item_' + item].attributes, 'bash_stun', 0),
+                            'chance': self.getItemAttributeValue(itemData['item_' + item].attributes, 'bonus_chance', 0) / 100,
                             'count': 1,
-                            'damageType': 'magic',
-                            'displayname': 'Mini-Bash' //itemData['item_' + item].displayname
+                            'displayname': itemData['item_' + item].displayname + ' Pierce'
                         }
                     }
-                    else {
-                        sources[item].count += 1;
+                break;
+                case 'abyssal_blade':
+                case 'basher':
+                    if (!sources.hasOwnProperty('bash')) {
+                        sources['bash'] = {
+                            'chance': self.getItemAttributeValue(itemData['item_' + item].attributes, (attacktype == 'DOTA_UNIT_CAP_MELEE_ATTACK') ?'bash_chance_melee' : 'bash_chance_ranged', 0) / 100,
+                            'count': 1,
+                            'displayname': 'Bash'
+                        }
                     }
-                break;*/
+                break;
+            }
+
+        }
+        return sources;
+    };
+    
+    self.getBashSource = function (attacktype) {
+        var sources = {};
+        for (var i = 0; i < self.items().length; i++) {
+            var item = self.items()[i].item;
+            var isActive = self.activeItems.indexOf(self.items()[i]) >= 0 ? true : false;
+            if (!self.items()[i].enabled()) continue;
+            switch (item) {
                 case 'abyssal_blade':
                 case 'basher':
                     if (!sources.hasOwnProperty('bash')) {
@@ -346,6 +391,31 @@ var InventoryViewModel = function (itemData, h) {
             var isActive = self.activeItems.indexOf(self.items()[i]) >= 0 ? true : false;
             if (!self.items()[i].enabled()) continue;
             switch (item) {
+                case 'javelin':
+                    if (sources[item] == undefined) {
+                        sources[item] = {
+                            'chance': self.getItemAttributeValue(itemData['item_' + item].attributes, 'bonus_chance', 0) / 100,
+                            'damage': self.getItemAttributeValue(itemData['item_' + item].attributes, 'bonus_chance_damage', 0),
+                            'damageType': 'magic',
+                            'count': 1,
+                            'displayname': itemData['item_' + item].displayname + ' Pierce'
+                        }
+                    }
+                    else {
+                        sources[item].count += 1;
+                    }
+                break;
+                case 'monkey_king_bar':
+                    if (sources[item] == undefined) {
+                        sources[item] = {
+                            'chance': self.getItemAttributeValue(itemData['item_' + item].attributes, 'bonus_chance', 0) / 100,
+                            'damage': self.getItemAttributeValue(itemData['item_' + item].attributes, 'bonus_chance_damage', 0),
+                            'count': 1,
+                            'damageType': 'pure',
+                            'displayname': itemData['item_' + item].displayname + ' Pierce'
+                        }
+                    }
+                break;
                 case 'maelstrom':
                 case 'mjollnir':
                     if (sources[item] == undefined) {
@@ -354,11 +424,8 @@ var InventoryViewModel = function (itemData, h) {
                             'damage': self.getItemAttributeValue(itemData['item_' + item].attributes, 'chain_damage', 0),
                             'count': 1,
                             'damageType': 'magic',
-                            'displayname': itemData['item_' + item].displayname
+                            'displayname': 'Chain Lightning'
                         }
-                    }
-                    else {
-                        sources[item].count += 1;
                     }
                 break;
             }
@@ -675,7 +742,7 @@ var InventoryViewModel = function (itemData, h) {
                 var attribute = itemData['item_' + item].attributes[j];
                 switch(attribute.name) {
                     case 'bonus_evasion':
-                        if (!isActive || (item != 'butterfly' && item != 'solar_crest')) { totalAttribute *= (1 - parseInt(attribute.value[0]) / 100); }
+                        if (!isActive || (item != 'solar_crest')) { totalAttribute *= (1 - parseInt(attribute.value[0]) / 100); }
                     break;
                 }
             }
@@ -1292,8 +1359,9 @@ var InventoryViewModel = function (itemData, h) {
         return {value: totalAttribute, attributes: attributeList};
     };
     
-    self.getMissChance = function (e) {
-        var totalAttribute = 1,
+    self.getBlindSource = function (e) {
+        var totalAttribute = 0,
+            sources = [],
             excludeList = e || [];
         for (var i = 0; i < self.items().length; i++) {
             var item = self.items()[i].item;
@@ -1303,20 +1371,19 @@ var InventoryViewModel = function (itemData, h) {
                 var attribute = itemData['item_' + item].attributes[j];
                 if (excludeList.indexOf(attribute.name) > -1) continue;
                 switch(attribute.name) {
-                    case 'miss_chance':
-                        if (item === 'solar_crest' && isActive) {
-                            totalAttribute *= (1 - parseInt(attribute.value[0]) / 100);
-                            excludeList.push(attribute.name);
-                        }
-                    break;
                     case 'blind_pct':
-                        totalAttribute *= (1 - parseInt(attribute.value[0]) / 100);
+                        var value = parseInt(attribute.value[0]) / 100;
+                        totalAttribute += value;
+                        sources.push({
+                            'value': value,
+                            'displayname': itemData['item_' + item].displayname
+                        });
                         excludeList.push(attribute.name);
                     break;
                 }
             }
         }
-        return {value: totalAttribute, excludeList: excludeList};
+        return {sources: sources, total: totalAttribute, excludeList: excludeList};
     };
     
     self.getBaseDamageReductionPct = function () {

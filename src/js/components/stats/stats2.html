@@ -1,13 +1,13 @@
 <div class="col-md-12 stats2" data-bind="css: {'col-md-12': $root.layout() == 0, 'col-md-3': $root.layout() == 1}">
     <table class="table table-condensed">
     <tbody>
-    <tr><td>%Phys Res:</td><td class="text-right" data-bind="component: { name: 'stat', params: {'hero': $data, 'stat': 'totalArmorPhysicalReduction' } }"></td></tr>
-    <tr><td>%Magic Res:</td><td class="text-right" data-bind="component: { name: 'stat', params: {'hero': $data, 'stat': 'totalMagicResistance' } }"></td></tr>
     <tr><td>%Status Res:</td><td class="text-right" data-bind="component: { name: 'stat', params: {'hero': $data, 'stat': 'totalStatusResistance' } }"></td></tr>
     <tr><td>%Lifesteal:</td><td class="text-right" data-bind="component: { name: 'stat', params: {'hero': $data, 'stat': 'lifesteal' } }"></td></tr>
-    <tr><td>%Evasion:</td><td class="text-right" data-bind="component: { name: 'stat', params: {'hero': $data, 'stat': 'evasion' } }"></td></tr>
     <tr><td>%Bash:</td><td class="text-right" data-bind="component: { name: 'stat', params: {'hero': $data, 'stat': 'bash' } }"></td></tr>
+    <tr><td>%Evasion:</td><td class="text-right" data-bind="component: { name: 'stat', params: {'hero': $data, 'stat': 'evasion' } }"></td></tr>
     <tr><td>%Miss Chance:</td><td class="text-right" data-bind="component: { name: 'stat', params: {'hero': $data, 'stat': 'missChance' } }"></td></tr>
+    <tr><td>%Accuracy:</td><td class="text-right" data-bind="component: { name: 'stat', params: {'hero': $data, 'stat': 'accuracy' } }"></td></tr>
+    <tr><td>%Hit Chance:</td><td class="text-right" data-bind="component: { name: 'stat', params: {'hero': $data, 'stat': 'hitChance' } }"></td></tr>
     <tr style="display: none"><td colspan=2><a class="btn btn-default btn-block btn-xs" data-bind="css: {disabled: critInfo().sources.length == 0 ? 'disabled' : '', 'toggled': showCriticalStrikeDetails}, toggle: showCriticalStrikeDetails">Critical Strike Details</a></td></tr>
     </tbody>
     <tbody class="tabledropdown" style="border-top:0" data-bind="visible: showCriticalStrikeDetails(),foreach: critInfo().sources">

@@ -11,6 +11,7 @@ var totalExp = require("./totalExp");
 var nextLevelExp = require("./nextLevelExp");
 var illusionData = require("../illusion/illusionData");
 var findWhere = require("../util/findWhere");
+var extend = require("../util/extend");
 
 var HeroModel = function (heroData, itemData, h) {
     var self = this;
@@ -560,25 +561,36 @@ var HeroModel = function (heroData, itemData, h) {
     self.attacksPerSecond = ko.pureComputed(function () {
         return ((1 + self.ias() / 100) / self.bat()).toFixed(2);
     });
+    self.totalAccuracyProduct = ko.pureComputed(function () {
+        var accuracySources = self.inventory.getAccuracySource(self.heroData().attacktype);
+        extend(accuracySources, self.enemy().debuffs.itemBuffs.getAccuracyDebuffSource());
+        var accuracySourcesArray = [];
+        for (var prop in accuracySources) {
+            var el = accuracySources[prop];
+            el.name = prop
+            accuracySourcesArray.push(el);
+        }
+        return accuracySourcesArray.reduce(function (memo, source) {
+            return memo * Math.pow((1 - source.chance), source.count)
+        }, 1);
+    });
+    self.accuracy = ko.pureComputed(function () {
+        return (
+            (1 - self.totalAccuracyProduct()) * 100
+        ).toFixed(2);
+    });
+    self.totalEvasionProduct = ko.pureComputed(function () {
+        return self.inventory.getEvasion()
+            * self.ability().getEvasion()
+            * self.ability().getEvasionBacktrack()
+            * TalentController.getEvasion(self.selectedTalents())
+            * self.buffs.itemBuffs.getEvasion()
+    });
     self.evasion = ko.pureComputed(function () {
         if (self.enemy().inventory.isSheeped() || self.debuffs.itemBuffs.isSheeped()) return 0;
-        var e = self.ability().setEvasion();
-        if (e) {
-            return (e * 100).toFixed(2);
-        }
-        else {
-            return (
-                (
-                    1 - (
-                        self.inventory.getEvasion()
-                        * self.ability().getEvasion()
-                        * self.ability().getEvasionBacktrack()
-                        * TalentController.getEvasion(self.selectedTalents())
-                        * self.buffs.itemBuffs.getEvasion()
-                    )
-                ) * 100
-            ).toFixed(2);
-        }
+        return (
+            (1 - self.totalEvasionProduct()) * 100
+        ).toFixed(2);
     });
     self.ehpPhysical = ko.pureComputed(function () {
         var evasion = self.enemy().inventory.isSheeped() || self.debuffs.itemBuffs.isSheeped() ? 1 : self.inventory.getEvasion() * self.ability().getEvasion() * self.buffs.itemBuffs.getEvasion();
@@ -625,12 +637,16 @@ var HeroModel = function (heroData, itemData, h) {
         return 0;
     });*/
     self.missChance = ko.pureComputed(function () {
-        var missDebuff = [self.enemy().inventory.getMissChance, self.debuffs.itemBuffs.getMissChance].reduce(function (memo, fn) {
+        var blindDebuff = [self.enemy().inventory.getBlindSource, self.debuffs.itemBuffs.getBlindSource].reduce(function (memo, fn) {
             var obj = fn(memo.excludeList);
-            obj.value *= memo.value;
+            obj.total += memo.total;
             return obj;
-        }, {value:1, excludeList:[]});
-        return ((1 - (self.enemy().ability().getMissChance() * self.debuffs.getMissChance() * missDebuff.value)) * 100).toFixed(2);
+        }, {total:0, excludeList:[]});
+        var blind = 1 - Math.min(self.enemy().ability().getBlindSource().total + self.debuffs.getBlindSource().total + blindDebuff.total, 1);
+        return ((1 - (self.enemy().totalEvasionProduct() * blind)) * 100).toFixed(2);
+    });
+    self.hitChance = ko.pureComputed(function () {
+        return ((1 - (parseFloat(self.missChance())/100) * (1 - parseFloat(self.accuracy())/100)) * 100).toFixed(2);
     });
     self.totalattackrange = ko.pureComputed(function () {
         var attacktype = self.heroData().attacktype;
@@ -658,7 +674,7 @@ var HeroModel = function (heroData, itemData, h) {
             }, {value: 0, excludeList: []});
             total += lifestealAura.value;
         }
-        return (total).toFixed(2);
+        return total.toFixed(2);
     });
     
     self.diffProperties = diffProperties;
