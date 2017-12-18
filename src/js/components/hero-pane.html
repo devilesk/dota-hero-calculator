@@ -33,7 +33,7 @@
 </div>
 
 <div class="row">
-    <div class="col-md-4" data-bind="css: {'col-md-4': $root.layout() == 0, 'col-md-12': $root.layout() == 1}">
+    <div class="col-md-4" data-bind="css: {'layout-column': $root.layout() == 0, 'col-md-4': $root.layout() == 0, 'col-md-12': $root.layout() == 1}">
         <div class="row">
             <h3 class="col-md-12">Stats <a class="btn btn-default btn-xs" data-bind="toggle: showStatDetails, text: !showStatDetails() ? 'Show more' : 'Show less', attr: {title: !showStatDetails() ? 'Click to show base stats' : 'Click to hide base stats'}"></a>
                 <div style="margin-left:15px;display:inline;" data-bind="style: {'display': $root.layout() == 1 ? 'inline' : 'none'}">
@@ -42,11 +42,7 @@
                 </div>
             </h3>
 
-            <div class="col-md-12" data-bind="visible: showStatDetails(), css: {'col-md-12': $root.layout() == 0, 'col-md-3': $root.layout() == 1}, component: {name: 'stats-additional', params: $data}"></div>
-
-            <div class="statscontainer" data-bind="foreach: $root.allItems">
-                <div data-bind="component: { name: $data.value, params: $parentContext.$data}"></div>
-            </div>
+            <div data-bind="css: { 'shop-visible': $root.displayShop() && !$root.shopPopout(), 'stats-additional': showStatDetails }, component: { name: 'stats', params: $data}"></div>
         </div>
     </div>
     <div class="col-md-8" data-bind="css: {'col-md-8': $root.layout() == 0, 'col-md-12': $root.layout() == 1}">

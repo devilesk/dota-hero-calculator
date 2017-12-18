@@ -20,6 +20,7 @@ var abilityDetail = require('../components/ability-detail');
 ko.components.register('ability-detail', abilityDetail);
 ko.components.register('shop', require('../components/shop'));
 ko.components.register('stat', { template: require('fs').readFileSync(__dirname + '/../components/stats/stat.html', 'utf8') });
+ko.components.register('stats', { template: require('fs').readFileSync(__dirname + '/../components/stats/stats.html', 'utf8') });
 ko.components.register('stats0', { template: require('fs').readFileSync(__dirname + '/../components/stats/stats0.html', 'utf8') });
 ko.components.register('stats1', { template: require('fs').readFileSync(__dirname + '/../components/stats/stats1.html', 'utf8') });
 ko.components.register('stats2', { template: require('fs').readFileSync(__dirname + '/../components/stats/stats2.html', 'utf8') });
