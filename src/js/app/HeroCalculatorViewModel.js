@@ -20,6 +20,7 @@ var abilityDetail = require('../components/ability-detail');
 ko.components.register('ability-detail', abilityDetail);
 ko.components.register('shop', require('../components/shop'));
 ko.components.register('stat', { template: require('fs').readFileSync(__dirname + '/../components/stats/stat.html', 'utf8') });
+ko.components.register('stat2', require('../components/stats/stat2'));
 ko.components.register('stats', { template: require('fs').readFileSync(__dirname + '/../components/stats/stats.html', 'utf8') });
 ko.components.register('stats0', { template: require('fs').readFileSync(__dirname + '/../components/stats/stats0.html', 'utf8') });
 ko.components.register('stats1', { template: require('fs').readFileSync(__dirname + '/../components/stats/stats1.html', 'utf8') });
@@ -246,10 +247,31 @@ var HeroCalculatorViewModel = function (tooltipURL, reportEmail) {
         /*if (event.target.id != 'settingsTab') {
             self.selectedTabId(event.target.id);
         }*/
-        self.selectedTabId(event.target.id);
-        if (self.selectedTabs()[1] != event.target.id) {
+        self._updateTabs(event.target.id);
+    };
+    self.isSecondTab = function (id) {
+        return self.selectedTabs().indexOf(id) > -1 && self.selectedTabId() != id;
+    }
+    
+    self.showSideTabId = function (id) {
+        return self.selectedTabs().indexOf(id) > -1 && self.sideView();
+    };
+    
+    self.selectTab = function (data) {
+        console.log('selectTab', data);
+        var tabId = data.hero.index();
+        self._updateTabs('heroTab' + tabId);
+        setTimeout(function () {
+            $('#heroTab' + tabId).tab('show');
+        }, 0);
+    };
+    
+    self._updateTabs = function (tabId) {
+        console.log('_updateTabs', tabId);
+        self.selectedTabId(tabId);
+        if (self.selectedTabs()[1] != tabId) {
             self.selectedTabs.shift();
-            self.selectedTabs.push(event.target.id);
+            self.selectedTabs.push(tabId);
         }
         if (self.selectedTab().data.hasOwnProperty('bound')) {
             self.selectedTab().data.bound(true);
@@ -262,14 +284,7 @@ var HeroCalculatorViewModel = function (tooltipURL, reportEmail) {
                 }, 0);
             }
         }
-        if (event.target.id === 'settingsTab') self.boundSettings(true);
-    };
-    self.isSecondTab = function (id) {
-        return self.selectedTabs().indexOf(id) > -1 && self.selectedTabId() != id;
-    }
-    
-    self.showSideTabId = function (id) {
-        return self.selectedTabs().indexOf(id) > -1 && self.sideView();
+        if (tabId === 'settingsTab') self.boundSettings(true);
     };
     
     self.removeTab = function (index, data, event, tab) {
