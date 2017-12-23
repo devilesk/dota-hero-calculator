@@ -13,22 +13,22 @@
     <div class="stats-row stats-additional"><div class="stats-cell"><abbr title="Experience required for next level">Next level exp:</abbr></div><div class="stats-cell text-right"><span data-bind="html: $data.nextLevelExp()"></span></span></div></div>
     <div class="stats-row stats-additional"><div class="stats-cell">Respawn Time:</div><div class="stats-cell text-right"><span data-bind="text: $data.respawnTime()"></span></div></div>
         
-    <div class="stats-row"><div class="stats-cell">Strength:</div><div class="stats-cell text-right" data-bind="component: { name: 'stat', params: {'hero': $data, 'stat': 'totalStr' } }"></div></div>
-    <div class="stats-row"><div class="stats-cell">Agility:</div><div class="stats-cell text-right" data-bind="component: { name: 'stat', params: {'hero': $data, 'stat': 'totalAgi' } }"></div></div>
-    <div class="stats-row"><div class="stats-cell">Intelligence:</div><div class="stats-cell text-right" data-bind="component: { name: 'stat', params: {'hero': $data, 'stat': 'totalInt' } }"></div></div>
+    <div class="stats-row"><div class="stats-cell">Strength:</div><div class="stats-cell text-right" data-bind="component: { name: 'stat2', params: {'hero': $data, 'stat': 'totalStr' } }"></div></div>
+    <div class="stats-row"><div class="stats-cell">Agility:</div><div class="stats-cell text-right" data-bind="component: { name: 'stat2', params: {'hero': $data, 'stat': 'totalAgi' } }"></div></div>
+    <div class="stats-row"><div class="stats-cell">Intelligence:</div><div class="stats-cell text-right" data-bind="component: { name: 'stat2', params: {'hero': $data, 'stat': 'totalInt' } }"></div></div>
     <div class="stats-row"><div class="stats-cell"><abbr title="Movement Speed">MS</abbr>:</div><div class="stats-cell text-right" data-bind="component: { name: 'stat', params: {'hero': $data, 'stat': 'totalMovementSpeed' } }"></div></div>
     <div class="stats-row"><div class="stats-cell">Turn Rate:</div><div class="stats-cell text-right" data-bind="component: { name: 'stat', params: {'hero': $data, 'stat': 'totalTurnRate' } }"></div></div>
     <div class="stats-row"><div class="stats-cell">Sight Range:</div><div class="stats-cell text-right"><span data-bind="html: '<abbr title=\'Day\'>' + visionrangeday() + '</abbr>/<abbr title=\'Night\'>' + visionrangenight() + '</abbr>'"></span></div></div>
-    <div class="stats-row"><div class="stats-cell">%Spell Amp:</div><div class="stats-cell text-right" data-bind="component: { name: 'stat', params: {'hero': $data, 'stat': 'spellAmp' } }"></div></div>
-    <div class="stats-row"><div class="stats-cell">Armor:</div><div class="stats-cell text-right" data-bind="component: { name: 'stat', params: {'hero': $data, 'stat': 'totalArmorPhysical' } }"></div></div>
+    <div class="stats-row"><div class="stats-cell">%Spell Amp:</div><div class="stats-cell text-right" data-bind="component: { name: 'stat2', params: {'hero': $data, 'stat': 'spellAmp' } }"></div></div>
+    <div class="stats-row"><div class="stats-cell">Armor:</div><div class="stats-cell text-right" data-bind="component: { name: 'stat2', params: {'hero': $data, 'stat': 'totalArmorPhysical' } }"></div></div>
     
-    <div class="stats-row"><div class="stats-cell">Health:</div><div class="stats-cell text-right" data-bind="component: { name: 'stat', params: {'hero': $data, 'stat': 'health' } }"></div></div>
-    <div class="stats-row"><div class="stats-cell">Health Regen:</div><div class="stats-cell text-right" data-bind="component: { name: 'stat', params: {'hero': $data, 'stat': 'healthregen' } }"></div></div>
-    <div class="stats-row"><div class="stats-cell">Mana:</div><div class="stats-cell text-right" data-bind="component: { name: 'stat', params: {'hero': $data, 'stat': 'mana' } }"></div></div>
-    <div class="stats-row"><div class="stats-cell">Mana Regen:</div><div class="stats-cell text-right" data-bind="component: { name: 'stat', params: {'hero': $data, 'stat': 'manaregen' } }"></div></div>
+    <div class="stats-row"><div class="stats-cell">Health:</div><div class="stats-cell text-right" data-bind="component: { name: 'stat2', params: {'hero': $data, 'stat': 'health' } }"></div></div>
+    <div class="stats-row"><div class="stats-cell">Health Regen:</div><div class="stats-cell text-right" data-bind="component: { name: 'stat2', params: {'hero': $data, 'stat': 'healthregen' } }"></div></div>
+    <div class="stats-row"><div class="stats-cell">Mana:</div><div class="stats-cell text-right" data-bind="component: { name: 'stat2', params: {'hero': $data, 'stat': 'mana' } }"></div></div>
+    <div class="stats-row"><div class="stats-cell">Mana Regen:</div><div class="stats-cell text-right" data-bind="component: { name: 'stat2', params: {'hero': $data, 'stat': 'manaregen' } }"></div></div>
     <div class="stats-row"><div class="stats-cell">Physical <abbr title="Effective Hit Points">EHP</abbr>:</div><div class="stats-cell text-right" data-bind="component: { name: 'stat', params: {'hero': $data, 'stat': 'ehpPhysical' } }"></div></div>
     <div class="stats-row"><div class="stats-cell">Magical <abbr title="Effective Hit Points">EHP</abbr>:</div><div class="stats-cell text-right" data-bind="component: { name: 'stat', params: {'hero': $data, 'stat': 'ehpMagical' } }"></div></div>
-    <div class="stats-row"><div class="stats-cell">%Phys Res:</div><div class="stats-cell text-right" data-bind="component: { name: 'stat', params: {'hero': $data, 'stat': 'totalArmorPhysicalReduction' } }"></div></div>
+    <div class="stats-row"><div class="stats-cell">Phys Res:</div><div class="stats-cell text-right" data-bind="component: { name: 'stat3', params: {'hero': $data, 'stat': 'totalArmorPhysicalReduction', 'formatter': 'percent' } }"></div></div>
     <div class="stats-row"><div class="stats-cell">%Magic Res:</div><div class="stats-cell text-right" data-bind="component: { name: 'stat', params: {'hero': $data, 'stat': 'totalMagicResistance' } }"></div></div>
     
     <div class="stats-row"><div class="stats-cell">%Status Res:</div><div class="stats-cell text-right" data-bind="component: { name: 'stat', params: {'hero': $data, 'stat': 'totalStatusResistance' } }"></div></div>

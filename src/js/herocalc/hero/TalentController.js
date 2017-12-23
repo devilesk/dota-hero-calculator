@@ -1,5 +1,6 @@
 var cooldownTalents = require('../talents/cooldownTalents.json');
 var talentAbilityMap = require('./talentAbilityMap');
+var StatModel = require("../StatModel");
 
 module.exports = {
     getTalentById: function (talents, talentId) {
@@ -27,64 +28,64 @@ module.exports = {
         return { sources: sources, total: totalAttribute };
     },
     getHealth: function (talents) {
-        var totalAttribute = 0;
+        var sources = new StatModel();
         for (var i = 0; i < talents.length; i++) {
             var ability = talents[i];
             if (ability.name.startsWith('special_bonus_hp_') && !ability.name.startsWith('special_bonus_hp_regen_')) {
-                totalAttribute += ability.attributes[0].value[0];
+                sources.add(ability.attributes[0].value[0], ability.displayname);
             }
         }
-        return totalAttribute;
+        return sources;
     },
     getHealthRegen: function (talents) {
-        var totalAttribute = 0;
+        var sources = new StatModel();
         for (var i = 0; i < talents.length; i++) {
             var ability = talents[i];
             if (ability.name.startsWith('special_bonus_hp_regen_')) {
-                totalAttribute += ability.attributes[0].value[0];
+                sources.add(ability.attributes[0].value[0], ability.displayname);
             }
         }
-        return totalAttribute;
+        return sources;
     },
     getMana: function (talents) {
-        var totalAttribute = 0;
+        var sources = new StatModel();
         for (var i = 0; i < talents.length; i++) {
             var ability = talents[i];
             if (ability.name.startsWith('special_bonus_mp_') && !ability.name.startsWith('special_bonus_mp_regen_')) {
-                totalAttribute += ability.attributes[0].value[0];
+                sources.add(ability.attributes[0].value[0], ability.displayname);
             }
         }
-        return totalAttribute;
+        return sources;
     },
     getManaRegen: function (talents) {
-        var totalAttribute = 0;
+        var sources = new StatModel();
         for (var i = 0; i < talents.length; i++) {
             var ability = talents[i];
             if (ability.name.startsWith('special_bonus_mp_regen_')) {
-                totalAttribute += ability.attributes[0].value[0];
+                sources.add(ability.attributes[0].value[0], ability.displayname);
             }
         }
-        return totalAttribute;
+        return sources;
     },
     getArmor: function (talents) {
-        var totalAttribute = 0;
+        var sources = new StatModel();
         for (var i = 0; i < talents.length; i++) {
             var ability = talents[i];
             if (ability.name.startsWith('special_bonus_armor_')) {
-                totalAttribute += ability.attributes[0].value[0];
+                sources.add(ability.attributes[0].value[0], ability.displayname);
             }
         }
-        return totalAttribute;
+        return sources;
     },
     getSpellAmp: function (talents) {
-        var totalAttribute = 0;
+        var sources = new StatModel();
         for (var i = 0; i < talents.length; i++) {
             var ability = talents[i];
             if (ability.name.startsWith('special_bonus_spell_amplify_')) {
-                totalAttribute += ability.attributes[0].value[0];
+                sources.add(ability.attributes[0].value[0], ability.displayname);
             }
         }
-        return totalAttribute;
+        return sources;
     },
     getUniqueCooldownReductionFlat: function (talents) {
         var totalAttribute = {};
@@ -192,42 +193,42 @@ module.exports = {
         return totalAttribute;
     },
     getStrength: function (talents) {
-        var totalAttribute = 0;
+        var sources = new StatModel();
         for (var i = 0; i < talents.length; i++) {
             var ability = talents[i];
             if (ability.name.startsWith('special_bonus_strength_')) {
-                totalAttribute += ability.attributes[0].value[0];
+                sources.add(ability.attributes[0].value[0], ability.displayname);
             }
             else if (ability.name.startsWith('special_bonus_all_stats_')) {
-                totalAttribute += ability.attributes[0].value[0];
+                sources.add(ability.attributes[0].value[0], ability.displayname);
             }
         }
-        return totalAttribute;
+        return sources;
     },
     getAgility: function (talents) {
-        var totalAttribute = 0;
+        var sources = new StatModel();
         for (var i = 0; i < talents.length; i++) {
             var ability = talents[i];
             if (ability.name.startsWith('special_bonus_agility_')) {
-                totalAttribute += ability.attributes[0].value[0];
+                sources.add(ability.attributes[0].value[0], ability.displayname);
             }
             else if (ability.name.startsWith('special_bonus_all_stats_')) {
-                totalAttribute += ability.attributes[0].value[0];
+                sources.add(ability.attributes[0].value[0], ability.displayname);
             }
         }
-        return totalAttribute;
+        return sources;
     },
     getIntelligence: function (talents) {
-        var totalAttribute = 0;
+        var sources = new StatModel();
         for (var i = 0; i < talents.length; i++) {
             var ability = talents[i];
             if (ability.name.startsWith('special_bonus_intelligence_')) {
-                totalAttribute += ability.attributes[0].value[0];
+                sources.add(ability.attributes[0].value[0], ability.displayname);
             }
             else if (ability.name.startsWith('special_bonus_all_stats_')) {
-                totalAttribute += ability.attributes[0].value[0];
+                sources.add(ability.attributes[0].value[0], ability.displayname);
             }
         }
-        return totalAttribute;
+        return sources;
     }
 }

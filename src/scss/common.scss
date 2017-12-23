@@ -355,3 +355,18 @@ img {
    border-bottom: none;
    text-decoration: underline dotted;
 }
+
+.tooltip-inner {
+    text-align: left;
+}
+
+.tooltip {
+    .table {
+        margin-bottom: 0;
+    }
+    
+    .table>tbody>tr>td {
+        border-top: none;
+        padding: 5px;
+    }
+}

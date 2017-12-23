@@ -1,6 +1,8 @@
 'use strict';
 var ko = require('../herocalc_knockout');
 
+var constants = require("../constants");
+var StatModel = require("../StatModel");
 var AbilityModel = require("../AbilityModel");
 var BuffViewModel = require("../BuffViewModel");
 var InventoryViewModel = require("../inventory/InventoryViewModel");
@@ -24,7 +26,7 @@ var HeroModel = function (heroData, itemData, h) {
     self.buffs = new BuffViewModel(itemData);
     self.buffs.hasScepter = self.inventory.hasScepter;
     self.debuffs = new BuffViewModel(itemData);
-    self.heroData = ko.computed(function () {
+    self.heroData = ko.pureComputed(function () {
       return heroData['npc_dota_hero_' + self.heroId()];
     });
     self.heroCompare = ko.observable(self);
@@ -39,7 +41,7 @@ var HeroModel = function (heroData, itemData, h) {
         ko.observable(-1)
     ];
     
-    self.selectedTalents = ko.computed(function () {
+    self.selectedTalents = ko.pureComputed(function () {
         var arr = [];
         for (var i = 0; i < 4; i++) {
             if (self.talents[i]() !== -1) {
@@ -207,148 +209,161 @@ var HeroModel = function (heroData, itemData, h) {
         }
     });
     self.totalAttribute = function (a) {
-        if (a === 'agi') return parseFloat(self.totalAgi());
-        if (a === 'int') return parseFloat(self.totalInt());
-        if (a === 'str') return parseFloat(self.totalStr());
+        if (a === 'agi') return self.totalAgi().total;
+        if (a === 'int') return self.totalInt().total;
+        if (a === 'str') return self.totalStr().total;
         return 0;
     };
     self.totalAgi = ko.pureComputed(function () {
-        return (self.heroData().attributebaseagility
-                + self.heroData().attributeagilitygain * (self.selectedHeroLevel() - 1) 
-                + self.inventory.getAttributes('agi') 
-                + self.ability().getAttributeBonusLevel() * 2
-                + self.ability().getAgility()
-                + TalentController.getAgility(self.selectedTalents())
-                + self.enemy().ability().getAllStatsReduction()
-                + self.debuffs.getAllStatsReduction()
-               ).toFixed(2);
+        var s = new StatModel(self.heroData().attributebaseagility, 'Base');
+        s.add(self.heroData().attributeagilitygain * (self.selectedHeroLevel() - 1), 'Level')
+            .concat(self.inventory.getAttributes('agi'))
+            .concat(self.ability().getAgility())
+            .concat(TalentController.getAgility(self.selectedTalents()))
+            .concat(self.enemy().ability().getAllStatsReduction())
+            .concat(self.debuffs.getAllStatsReduction())
+        return s;
     });
     self.intStolen = ko.observable(0).extend({ numeric: 0 });
     self.totalInt = ko.pureComputed(function () {
-        return (self.heroData().attributebaseintelligence 
-                + self.heroData().attributeintelligencegain * (self.selectedHeroLevel() - 1) 
-                + self.inventory.getAttributes('int') 
-                + self.ability().getAttributeBonusLevel() * 2
-                + self.ability().getIntelligence()
-                + TalentController.getIntelligence(self.selectedTalents())
-                + self.enemy().ability().getAllStatsReduction()
-                + self.debuffs.getAllStatsReduction() + self.intStolen()
-               ).toFixed(2);
+        var s = new StatModel(self.heroData().attributebaseintelligence, 'Base');
+        s.add(self.heroData().attributeintelligencegain * (self.selectedHeroLevel() - 1), 'Level')
+            .concat(self.inventory.getAttributes('int'))
+            .concat(self.ability().getIntelligence())
+            .concat(TalentController.getIntelligence(self.selectedTalents()))
+            .concat(self.enemy().ability().getAllStatsReduction())
+            .concat(self.debuffs.getAllStatsReduction())
+            .add(self.intStolen(), 'Int Stolen')
+            .add(-self.enemy().intStolen(), 'Int Stolen')
+        return s;
     });
     self.totalStr = ko.pureComputed(function () {
-        return (self.heroData().attributebasestrength 
-                + self.heroData().attributestrengthgain * (self.selectedHeroLevel() - 1) 
-                + self.inventory.getAttributes('str') 
-                + self.ability().getAttributeBonusLevel() * 2
-                + self.ability().getStrength()
-                + TalentController.getStrength(self.selectedTalents())
-                + self.enemy().ability().getStrengthReduction()
-                + self.enemy().ability().getAllStatsReduction()
-                + self.debuffs.getAllStatsReduction()
-               ).toFixed(2);
+        var s = new StatModel(self.heroData().attributebasestrength, 'Base');
+        s.add(self.heroData().attributestrengthgain * (self.selectedHeroLevel() - 1), 'Level')
+            .concat(self.inventory.getAttributes('str'))
+            .concat(self.ability().getStrength())
+            .concat(TalentController.getStrength(self.selectedTalents()))
+            .concat(self.enemy().ability().getStrengthReduction())
+            .concat(self.enemy().ability().getAllStatsReduction())
+            .concat(self.debuffs.getAllStatsReduction())
+        return s;
     });
     // + % status resistance
     self.perkStr = ko.pureComputed(function () {
-        return self.totalStr() * 0.15;
+        return self.totalStr().total * constants.statusResPerStrength;
     });
     // + % ms
     self.perkAgi = ko.pureComputed(function () {
-        return self.totalAgi() * 0.06;
+        return self.totalAgi().total * constants.moveSpeedPerAgi;
     });
     // + % magic resistance
     self.perkInt = ko.pureComputed(function () {
-        return self.totalInt() * 0.15;
+        return self.totalInt().total * constants.magicResPerInt;
     });
     self.health = ko.pureComputed(function () {
-        return (self.heroData().statushealth + Math.floor(self.totalStr()) * 20 
-                + self.inventory.getHealth()
-                + self.ability().getHealth()
-                + TalentController.getHealth(self.selectedTalents())
-                ).toFixed(2);
+        var s = new StatModel(self.heroData().statushealth, 'Base');
+        self.totalStr().components.forEach(function (component) {
+            s.add(component.value * constants.healthPerStrength, component.label == 'Base' ? 'Base Str' : component.label);
+        });
+        s.concat(self.inventory.getHealth())
+        .concat(self.ability().getHealth())
+        .concat(TalentController.getHealth(self.selectedTalents()))
+        return s;
     });
     // Health Regeneration = (Base + Sum of Flat Bonuses) * (1 + strength * (5/700))
     self.healthregen = ko.pureComputed(function () {
         var healthRegenAura = [self.inventory.getHealthRegenAura, self.buffs.itemBuffs.getHealthRegenAura].reduce(function (memo, fn) {
-            var obj = fn(memo.excludeList);
-            obj.value += memo.value;
-            return obj;
-        }, {value: 0, excludeList: []});
-        return ((self.heroData().statushealthregen
-                + (self.isIllusion() ? 0 : self.inventory.getHealthRegen() 
-                    + self.ability().getHealthRegen()
-                    + TalentController.getHealthRegen(self.selectedTalents())
-                    + self.buffs.getHealthRegen()
-                    + healthRegenAura.value
-                    )
-                ) * (1 + self.totalStr() * (5/700))).toFixed(2);
+            return fn(memo.sources, memo.excludeList);
+        }, {sources: new StatModel(), excludeList: []});
+        
+        var s = new StatModel(self.heroData().statushealthregen, 'Base');
+        if (!self.isIllusion()) {
+            s.concat(self.inventory.getHealthRegen())
+            .concat(self.ability().getHealthRegen())
+            .concat(self.buffs.getHealthRegen())
+            .concat(TalentController.getHealthRegen(self.selectedTalents()))
+            .concat(healthRegenAura.sources)
+        }
+        s.mult(1 + self.totalStr().total * constants.healthRegenPerStrength, 'Str Regen Amp %');
+        console.log('healthregen', s);
+        return s;
     });
     self.mana = ko.pureComputed(function () {
-        return (self.heroData().statusmana
-                + self.totalInt() * 12
-                + self.inventory.getMana()
-                + TalentController.getMana(self.selectedTalents())
-                + self.ability().getMana()).toFixed(2);
+        var s = new StatModel(self.heroData().statusmana, 'Base');
+        self.totalInt().components.forEach(function (component) {
+            s.add(component.value * constants.manaPerInt, component.label == 'Base' ? 'Base Int' : component.label);
+        });
+        s.concat(self.inventory.getMana())
+        .concat(self.ability().getMana())
+        .concat(TalentController.getMana(self.selectedTalents()))
+        return s;
     });
     // Mana Regeneration = (Base + Sum of Flat Bonuses) * (1 + intelligence * 0.02)
     self.manaregen = ko.pureComputed(function () {
-        return ((self.heroData().statusmanaregen
-                + self.ability().getManaRegen()
-                + TalentController.getManaRegen(self.selectedTalents())
-                + (self.heroId() === 'crystal_maiden' ? self.ability().getManaRegenArcaneAura() * 2 : self.buffs.getManaRegenArcaneAura())
-                + self.inventory.getManaRegenBloodstone()
-                + self.inventory.getManaRegen()
-                - self.enemy().ability().getManaRegenReduction()
-                ) * (1 + self.totalInt() * 0.02)).toFixed(2);
+        var s = new StatModel(self.heroData().statusmanaregen, 'Base');
+        s.concat(self.inventory.getManaRegen())
+        .concat(self.inventory.getManaRegenBloodstone())
+        .concat(self.ability().getManaRegen())
+        .concat(TalentController.getManaRegen(self.selectedTalents()))
+        if (self.heroId() == 'crystal_maiden') {
+            s.concat(self.ability().getManaRegenSelfArcaneAura())
+        }
+        else {
+            s.concat(self.buffs.getManaRegenArcaneAura())
+        }
+        s.concat(self.enemy().ability().getManaRegenReduction())
+        s.mult(1 + self.totalInt().total * constants.manaRegenPerInt, 'Mana Regen Amp %');                
+        return s;
     });
     self.totalArmorPhysical = ko.pureComputed(function () {
         var armorAura = [self.inventory.getArmorAura, self.buffs.itemBuffs.getArmorAura].reduce(function (memo, fn) {
-            var obj = fn(memo.attributes);
-            return obj;
-        }, {value:0, attributes:[]});
+            return fn(memo);
+        }, null);
+        
         var armorReduction = [self.enemy().inventory.getArmorReduction, self.debuffs.itemBuffs.getArmorReduction].reduce(function (memo, fn) {
-            var obj = fn(memo.excludeList);
-            obj.value += memo.value;
-            return obj;
-        }, {value: 0, excludeList: []});
+            return fn(memo);
+        }, null);
+        
         var armorReductionAura = [self.enemy().inventory.getArmorReductionAura, self.debuffs.itemBuffs.getArmorReductionAura].reduce(function (memo, fn) {
-            var obj = fn(memo.excludeList);
-            obj.value += memo.value;
-            return obj;
-        }, {value: 0, excludeList: []});
-        return (self.enemy().ability().getArmorBaseReduction() * self.debuffs.getArmorBaseReduction() * (self.heroData().armorphysical + self.totalAgi() * 1/6)
-                + (self.isIllusion() ? 0 : self.inventory.getArmor()
-                    //+ self.inventory.getArmorAura().value
-                    //+ self.enemy().inventory.getArmorReduction()
-                    + self.ability().getArmor()
-                    + TalentController.getArmor(self.selectedTalents())
-                    + self.buffs.getArmor()
-                    + armorAura.value
-                    + armorReductionAura.value
-                    )
-                + self.enemy().ability().getArmorReduction()
-                //+ self.buffs.itemBuffs.getArmor()
-                + self.debuffs.getArmorReduction()
-                //+ self.buffs.itemBuffs.getArmorAura().value
-                + armorReduction.value
-                //+ self.debuffs.getArmorReduction()
-                ).toFixed(2);
+            return fn(memo);
+        }, null);
+        
+        var armorBaseReduction = self.enemy().ability().getArmorBaseReduction() * self.debuffs.getArmorBaseReduction();
+        
+        var s = new StatModel(self.heroData().armorphysical, 'Base');
+        self.totalAgi().components.forEach(function (component) {
+            s.add(component.value * constants.armorPerAgi, component.label == 'Base' ? 'Base Agi' : component.label);
+        });
+        if (armorBaseReduction != 1) {
+            s.mult(self.enemy().ability().getArmorBaseReduction() * self.debuffs.getArmorBaseReduction(), 'Base Armor Reduction %');
+        }
+        if (!self.isIllusion()) {
+            s.concat(self.inventory.getArmor())
+            .concat(self.ability().getArmor())
+            .concat(TalentController.getArmor(self.selectedTalents()))
+            .concat(self.buffs.getArmor())
+            .concat(armorAura)
+            .concat(armorReductionAura)
+        }
+        s.concat(self.enemy().ability().getArmorReduction())
+        .concat(self.debuffs.getArmorReduction())
+        .concat(armorReduction)
+        return s;
     });
     self.totalArmorPhysicalReduction = ko.pureComputed(function () {
-        var totalArmor = self.totalArmorPhysical();
-        if (totalArmor >= 0) {
-            return ((0.05 * self.totalArmorPhysical()) / (1 + 0.05 * self.totalArmorPhysical()) * 100).toFixed(2);
-        }
-        else {
-            return -((0.05 * -self.totalArmorPhysical()) / (1 + 0.05 * -self.totalArmorPhysical()) * 100).toFixed(2);
-        }
+        var totalArmor = self.totalArmorPhysical().total;
+        return (constants.armorMult * totalArmor) / (1 + constants.armorMult * Math.abs(totalArmor))
     });
     self.spellAmp = ko.pureComputed(function () {
-        return (self.totalInt() / 14
-                + self.inventory.getSpellAmp()
-                + self.ability().getSpellAmp()
-                + TalentController.getSpellAmp(self.selectedTalents())
-                + self.buffs.getSpellAmp()
-                ).toFixed(2);
+        var s = new StatModel();
+        self.totalInt().components.forEach(function (component) {
+            s.add(component.value / constants.spellDmgPerInt, component.label == 'Base' ? 'Base Int' : component.label);
+        });
+        s.concat(self.inventory.getSpellAmp())
+        .concat(self.ability().getSpellAmp())
+        .concat(TalentController.getSpellAmp(self.selectedTalents()))
+        .concat(self.buffs.getSpellAmp())
+        return s;
     });
     self.cooldownReductionFlat = ko.pureComputed(function () {
         return self.inventory.getCooldownReductionFlat()
@@ -396,7 +411,7 @@ var HeroModel = function (heroData, itemData, h) {
                 return obj;
             }, {value:0, excludeList:[]});
             // If agility is a hero's primary attribute, every point in agility increases their movement speed by 0.06%.
-            var agiMovementSpeedPercent = self.primaryAttribute() == 'agi' ? self.totalAgi() * (0.0006) : 0;
+            var agiMovementSpeedPercent = self.primaryAttribute() == 'agi' ? self.totalAgi().total * (0.0006) : 0;
             return Math.max(
                 self.enemy().inventory.isSheeped() || self.debuffs.itemBuffs.isSheeped() ? 140 :
                 (self.heroData().movementspeed + movementSpeedFlat.value + self.ability().getMovementSpeedFlat() + TalentController.getMovementSpeedFlat(self.selectedTalents())) * 
@@ -458,11 +473,11 @@ var HeroModel = function (heroData, itemData, h) {
                             )
                 + Math.floor(
                     (self.heroData().attacktype == 'DOTA_UNIT_CAP_RANGED_ATTACK' 
-                        ? ((self.heroId() == 'drow_ranger') ? self.ability().getBonusDamagePrecisionAura().total[0] * self.totalAgi() : self.buffs.getBonusDamagePrecisionAura().total[1])
+                        ? ((self.heroId() == 'drow_ranger') ? self.ability().getBonusDamagePrecisionAura().total[0] * self.totalAgi().total : self.buffs.getBonusDamagePrecisionAura().total[1])
                         : 0)
                   )
                 + Math.floor(
-                    ((self.heroId() == 'riki') ? self.ability().getBonusDamageBackstab().total[0] * self.totalAgi() : 0)
+                    ((self.heroId() == 'riki') ? self.ability().getBonusDamageBackstab().total[0] * self.totalAgi().total : 0)
                   )
                 ) * self.ability().getSelfBaseDamageReductionPct()
                   * self.enemy().ability().getBaseDamageReductionPct()
@@ -486,7 +501,7 @@ var HeroModel = function (heroData, itemData, h) {
     });
     self.totalStatusResistanceProduct = ko.pureComputed(function() {
         // If strength is a hero's primary attribute, every point in strength increases their status resistance by 0.15%.
-        var strStatusResistance = self.primaryAttribute() == 'str' ? 1 - self.totalStr() * (0.0015) : 1;
+        var strStatusResistance = self.primaryAttribute() == 'str' ? 1 - self.totalStr().total * (0.0015) : 1;
         return strStatusResistance;
     });
     self.totalStatusResistance = ko.pureComputed(function () {
@@ -494,7 +509,7 @@ var HeroModel = function (heroData, itemData, h) {
     });
     self.totalMagicResistanceProduct = ko.pureComputed(function () {
         //If intelligence is a hero's primary attribute, every point in intelligence increases their magic resistance by 0.15%.
-        var intMagicResistance = self.primaryAttribute() == 'int' ? 1 + self.totalInt() * (0.0015) : 1;
+        var intMagicResistance = self.primaryAttribute() == 'int' ? 1 + self.totalInt().total * (0.0015) : 1;
         return (1 - self.heroData().magicalresistance / 100)
                 * (self.isIllusion() ? 1 :
                     self.inventory.getMagicResist()
@@ -535,7 +550,7 @@ var HeroModel = function (heroData, itemData, h) {
             obj.value += memo.value;
             return obj;
         }, {value:0, excludeList: []});
-        var val = parseFloat(self.totalAgi()) 
+        var val = self.totalAgi().total
                 //+ self.inventory.getAttackSpeed() 
                 + attackSpeed.value
                 + attackSpeedAura.value
@@ -594,12 +609,7 @@ var HeroModel = function (heroData, itemData, h) {
     });
     self.ehpPhysical = ko.pureComputed(function () {
         var evasion = self.enemy().inventory.isSheeped() || self.debuffs.itemBuffs.isSheeped() ? 1 : self.inventory.getEvasion() * self.ability().getEvasion() * self.buffs.itemBuffs.getEvasion();
-        if (self.totalArmorPhysical() >= 0) {
-            var ehp = self.health() * (1 + .06 * self.totalArmorPhysical());
-        }
-        else {
-            var ehp = self.health() * (1 - .06 * self.totalArmorPhysical()) / (1 - .12 * self.totalArmorPhysical());
-        }
+        var ehp = self.health().total / (1 - self.totalArmorPhysicalReduction());
         ehp /= (1 - (1 - (evasion * self.ability().getEvasionBacktrack())));
         ehp /= (1 - parseFloat(self.enemy().missChance()) / 100);
         ehp *= (self.inventory.activeItems().some(function (item) {return item.item == 'mask_of_madness';}) ? (1 / 1.3) : 1);
@@ -611,7 +621,7 @@ var HeroModel = function (heroData, itemData, h) {
         return ehp.toFixed(2);
     });
     self.ehpMagical = ko.pureComputed(function () {
-        var ehp = self.health() / self.totalMagicResistanceProduct();
+        var ehp = self.health().total / self.totalMagicResistanceProduct();
         ehp *= (self.inventory.activeItems().some(function (item) {return item.item == 'mask_of_madness';}) ? (1 / 1.3) : 1);
         ehp *= (1 / self.ability().getDamageReduction());
         ehp *= (1 / self.buffs.getDamageReduction());
@@ -632,10 +642,6 @@ var HeroModel = function (heroData, itemData, h) {
 
     HeroDamageMixin(self, itemData);
     
-    /*self.critDamage = ko.computed(function () {
-        self.critInfo();
-        return 0;
-    });*/
     self.missChance = ko.pureComputed(function () {
         var blindDebuff = [self.enemy().inventory.getBlindSource, self.debuffs.itemBuffs.getBlindSource].reduce(function (memo, fn) {
             var obj = fn(memo.excludeList);
@@ -679,21 +685,35 @@ var HeroModel = function (heroData, itemData, h) {
     
     self.diffProperties = diffProperties;
     self.diff = {};
+    self.diff2 = {};
 
     for (var i = 0; i < self.diffProperties.length; i++) {
         var index = i;
         self.diff[self.diffProperties[index]] = self.getDiffFunction(self.diffProperties[index]);
+        self.diff2[self.diffProperties[index]] = self.getDiffFunction2(self.diffProperties[index]);
     }
 };
 
 HeroModel.prototype.getDiffFunction = function (prop) {
     var self = this;
-    return ko.computed(function () {
+    return ko.pureComputed(function () {
         if (prop == 'baseDamage') {
             return [self[prop]()[0] - self.heroCompare()[prop]()[0], self[prop]()[1] - self.heroCompare()[prop]()[1]];
         }
         else {
             return self[prop]() - self.heroCompare()[prop]();
+        }
+    }, this, { deferEvaluation: true });
+}
+
+HeroModel.prototype.getDiffFunction2 = function (prop) {
+    var self = this;
+    return ko.pureComputed(function () {
+        if (prop == 'baseDamage') {
+            return [self[prop]()[0] - self.heroCompare()[prop]()[0], self[prop]()[1] - self.heroCompare()[prop]()[1]];
+        }
+        else {
+            return self[prop]().total - self.heroCompare()[prop]().total;
         }
     }, this, { deferEvaluation: true });
 }

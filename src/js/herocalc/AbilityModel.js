@@ -2,6 +2,7 @@
 var ko = require('./herocalc_knockout');
 var abilityData = require("./herocalc_abilitydata");
 var TalentController = require("./hero/TalentController");
+var StatModel = require("./StatModel");
 
 var AbilityModel = function (a, h) {
     var self = this;
@@ -238,7 +239,7 @@ var AbilityModel = function (a, h) {
     }
     
     self.getAllStatsReduction = ko.computed(function () {
-        var totalAttribute = 0;
+        var sources = new StatModel();
         for (var i = 0; i < self.abilities().length; i++) {
             var ability = self._abilities[i];
             if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
@@ -255,15 +256,15 @@ var AbilityModel = function (a, h) {
                 }
                 else if (ability.bonusAllStatsReduction != undefined) {
                     // slark_essence_shift
-                    totalAttribute+=ability.bonusAllStatsReduction();
+                    sources.add(ability.bonusAllStatsReduction(), ability.displayname);
                 }
             }
         }
-        return totalAttribute;
+        return sources;
     });
     
     self.getStrengthReduction = ko.computed(function () {
-        var totalAttribute = 0;
+        var sources = new StatModel();
         for (var i = 0; i < self.abilities().length; i++) {
             var ability = self._abilities[i];
             if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
@@ -280,15 +281,15 @@ var AbilityModel = function (a, h) {
                 }
                 else if (ability.bonusStrength != undefined && ability.name == 'undying_decay') {
                     // undying_decay
-                    totalAttribute-=ability.bonusStrength();
+                    sources.add(-ability.bonusStrength(), ability.displayname);
                 }
             }
         }
-        return totalAttribute;
+        return sources;
     });
     
     self.getStrength = ko.computed(function () {
-        var totalAttribute = 0;
+        var sources = new StatModel();
         for (var i = 0; i < self.abilities().length; i++) {
             var ability = self._abilities[i];
             if (ability.level() > 0) {
@@ -299,7 +300,7 @@ var AbilityModel = function (a, h) {
                             switch(attribute.name) {
                                 // sven_gods_strength
                                 case 'gods_strength_bonus_str':
-                                    totalAttribute += parseInt(attribute.value[ability.level()-1]);
+                                    sources.add(parseInt(attribute.value[ability.level()-1]), ability.displayname);
                                 break;
                             }
                         }
@@ -309,23 +310,23 @@ var AbilityModel = function (a, h) {
                     if (ability.bonusStrength != undefined) {
                         if (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1)) {
                             // pudge_flesh_heap,morphling_morph_str,morphling_morph_agi,undying_decay
-                            totalAttribute+=ability.bonusStrength();
+                            sources.add(ability.bonusStrength(), ability.displayname);
                         }
                     }
                     if (ability.bonusStrength2 != undefined) {
                         if (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1)) {
                             // morphling_morph_str
-                            totalAttribute+=ability.bonusStrength2();
+                            sources.add(ability.bonusStrength2(), ability.displayname);
                         }
                     }
                 }
             }
         }
-        return totalAttribute;
+        return sources;
     });
     
     self.getAgility = ko.computed(function () {
-        var totalAttribute = 0;
+        var sources = new StatModel();
         for (var i = 0; i < self.abilities().length; i++) {
             var ability = self._abilities[i];
             if (ability.level() > 0) {
@@ -336,7 +337,7 @@ var AbilityModel = function (a, h) {
                             switch(attribute.name) {
                                 // drow_ranger_marksmanship
                                 case 'marksmanship_agility_bonus':
-                                    totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
+                                    sources.add(self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level()), ability.displayname);
                                 break;
                             }
                         }
@@ -346,23 +347,23 @@ var AbilityModel = function (a, h) {
                     if (ability.bonusAgility != undefined) {
                         if (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1)) {
                             // morphling_morph_agi,morphling_morph_str
-                            totalAttribute+=ability.bonusAgility();
+                            sources.add(ability.bonusAgility(), ability.displayname);
                         }
                     }
                     if (ability.bonusAgility2 != undefined) {
                         if (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1)) {
                             // morphling_morph_agi,morphling_morph_str
-                            totalAttribute+=ability.bonusAgility2();
+                            sources.add(ability.bonusAgility2(), ability.displayname);
                         }
                     }
                 }
             }
         }
-        return totalAttribute;
+        return sources;
     });
 
     self.getIntelligence = ko.computed(function () {
-        var totalAttribute = 0;
+        var sources = new StatModel();
         for (var i = 0; i < self.abilities().length; i++) {
             var ability = self._abilities[i];
             if (ability.level() > 0) {
@@ -387,11 +388,11 @@ var AbilityModel = function (a, h) {
                 }*/
             }
         }
-        return totalAttribute;
+        return sources;
     });
     
     self.getArmor = ko.computed(function () {
-        var totalAttribute = 0;
+        var sources = new StatModel();
         for (var i = 0; i < self.abilities().length; i++) {
             var ability = self._abilities[i];
             if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
@@ -402,17 +403,17 @@ var AbilityModel = function (a, h) {
                             // axe_berserkers_call,dragon_knight_dragon_blood,troll_warlord_berserkers_rage,lycan_shapeshift,enraged_wildkin_toughness_aura
                             case 'bonus_armor':
                                 if (ability.name != 'templar_assassin_meld') {
-                                    totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
+                                    sources.add(self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level()), ability.displayname);
                                 }
                             break;
                             // sven_warcry
                             case 'warcry_armor':
-                                totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
+                                sources.add(self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level()), ability.displayname);
                             break;
                             // lich_frost_armor,ogre_magi_frost_armor
                             case 'armor_bonus':
                                 if (ability.name == 'lich_frost_armor' || ability.name == 'ogre_magi_frost_armor') {
-                                    totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
+                                    sources.add(self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level()), ability.displayname);
                                 }
                             break;
                         }
@@ -420,11 +421,11 @@ var AbilityModel = function (a, h) {
                 }
                 else if (ability.armor != undefined) {
                     // shredder_reactive_armor,visage_gravekeepers_cloak
-                    totalAttribute+=ability.armor();
+                    sources.add(ability.armor(), ability.displayname);
                 }
             }
         }
-        return totalAttribute;
+        return sources;
     });
 
     self.getArmorBaseReduction = ko.computed(function () {
@@ -446,7 +447,7 @@ var AbilityModel = function (a, h) {
     });
     
     self.getArmorReduction = ko.computed(function () {
-        var totalAttribute = 0;
+        var sources = new StatModel();
         for (var i = 0; i < self.abilities().length; i++) {
             var ability = self._abilities[i];
             if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
@@ -454,11 +455,11 @@ var AbilityModel = function (a, h) {
                     switch(ability.name) {
                         //templar_assassin_meld
                         case 'templar_assassin_meld':
-                            totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, 'bonus_armor', ability.level());
+                            sources.add(self.getAbilityAttributeValue(self._abilities[i].attributes, 'bonus_armor', ability.level()), ability.displayname);
                         break;
                         // tidehunter_gush
                         case 'tidehunter_gush':
-                            totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, 'armor_bonus', ability.level());
+                            sources.add(self.getAbilityAttributeValue(self._abilities[i].attributes, 'armor_bonus', ability.level()), ability.displayname);
                         break;
                         // naga_siren_rip_tide
                         case 'naga_siren_rip_tide':
@@ -466,25 +467,25 @@ var AbilityModel = function (a, h) {
                         case 'slardar_amplify_damage':
                         // vengefulspirit_wave_of_terror
                         case 'vengefulspirit_wave_of_terror':
-                            totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, 'armor_reduction', ability.level());
+                            sources.add(self.getAbilityAttributeValue(self._abilities[i].attributes, 'armor_reduction', ability.level()), ability.displayname);
                         break;
                         // nevermore_dark_lord
                         case 'nevermore_dark_lord':
-                            totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, 'presence_armor_reduction', ability.level());
+                            sources.add(self.getAbilityAttributeValue(self._abilities[i].attributes, 'presence_armor_reduction', ability.level()), ability.displayname);
                         break;
                     }
                 }
                 else if (ability.armorReduction != undefined) {
                     // alchemist_acid_spray
-                    totalAttribute+=ability.armorReduction();
+                    sources.add(ability.armorReduction(), ability.displayname);
                 }
             }
         }
-        return totalAttribute;
+        return sources;
     });
 
     self.getHealth = ko.computed(function () {
-        var totalAttribute = 0;
+        var sources = new StatModel();
         for (var i = 0; i < self.abilities().length; i++) {
             var ability = self._abilities[i];
             if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
@@ -494,12 +495,12 @@ var AbilityModel = function (a, h) {
                         switch(attribute.name) {
                             // lone_druid_true_form,lycan_shapeshift,troll_warlord_berserkers_rage
                             case 'bonus_hp':
-                                totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
+                                sources.add(self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level()), ability.displayname);
                             break;
                             // lone_druid_synergy
                             case 'true_form_hp_bonus':
                                 if (self.isTrueFormActive()) {
-                                    totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
+                                    sources.add(self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level()), ability.displayname);
                                 }
                             break;
                         }
@@ -507,11 +508,11 @@ var AbilityModel = function (a, h) {
                 }
                 else if (ability.bonusHealth != undefined) {
                     // clinkz_death_pact,lycan_howl
-                    totalAttribute+=ability.bonusHealth();
+                    sources.add(ability.bonusHealth(), ability.displayname);
                 }
             }
         }
-        return totalAttribute;
+        return sources;
     });
     
     self.isTrueFormActive = function () {
@@ -525,7 +526,7 @@ var AbilityModel = function (a, h) {
     }
 
     self.getHealthRegen = ko.computed(function () {
-        var totalAttribute = 0;
+        var sources = new StatModel();
         for (var i = 0; i < self.abilities().length; i++) {
             var ability = self._abilities[i];
             if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
@@ -543,22 +544,22 @@ var AbilityModel = function (a, h) {
                             case 'hp_regen':
                             // lycan_feral_impulse
                             case 'bonus_hp_regen':
-                                totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
+                                sources.add(self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level()), ability.displayname);
                             break;
                         }
                     }
                 }
                 else if (ability.healthregen != undefined) {
                     // shredder_reactive_armor,invoker_quas,necrolyte_sadist
-                    totalAttribute+=ability.healthregen();
+                    sources.add(ability.healthregen(), ability.displayname);
                 }
             }
         }
-        return totalAttribute;
+        return sources;
     });
 
     self.getMana = ko.computed(function () {
-        var totalAttribute = 0;
+        var sources = new StatModel();
         for (var i = 0; i < self.abilities().length; i++) {
             var ability = self._abilities[i];
             if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
@@ -568,18 +569,18 @@ var AbilityModel = function (a, h) {
                         switch(attribute.name) {
                             // obsidian_destroyer_essence_aura
                             case 'bonus_mana':
-                                totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
+                                sources.add(self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level()), ability.displayname);
                             break;
                         }
                     }
                 //}
             }
         }
-        return totalAttribute;
+        return sources;
     });
     
     self.getManaRegen = ko.computed(function () {
-        var totalAttribute = 0;
+        var sources = new StatModel();
         for (var i = 0; i < self.abilities().length; i++) {
             var ability = self._abilities[i];
             if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
@@ -589,22 +590,22 @@ var AbilityModel = function (a, h) {
                         switch(attribute.name) {
                             // alchemist_chemical_rage
                             case 'bonus_mana_regen':
-                                totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
+                                sources.add(self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level()), ability.displayname);
                             break;
                         }
                     }
                 }
                 else if (ability.manaregen != undefined) {
                     // necrolyte_sadist
-                    totalAttribute+=ability.manaregen();
+                    sources.add(ability.manaregen(), ability.displayname);
                 }
             }
         }
-        return totalAttribute;
+        return sources;
     });
     
     self.getManaRegenArcaneAura = ko.computed(function () {
-        var totalAttribute = 0;
+        var sources = new StatModel();
         for (var i = 0; i < self.abilities().length; i++) {
             var ability = self._abilities[i];
             if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
@@ -615,7 +616,7 @@ var AbilityModel = function (a, h) {
                             // crystal_maiden_brilliance_aura
                             case 'mana_regen':
                                 if (ability.name == 'crystal_maiden_brilliance_aura') {
-                                    totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
+                                    sources.add(self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level()), ability.displayname);
                                 }
                             break;
                         }
@@ -623,11 +624,34 @@ var AbilityModel = function (a, h) {
                 //}
             }
         }
-        return totalAttribute;
+        return sources;
+    });
+    
+    self.getManaRegenSelfArcaneAura = ko.computed(function () {
+        var sources = new StatModel();
+        for (var i = 0; i < self.abilities().length; i++) {
+            var ability = self._abilities[i];
+            if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
+                //if (!(ability.name in self.abilityData)) {
+                    for (var j = 0; j < self._abilities[i].attributes.length; j++) {
+                        var attribute = self._abilities[i].attributes[j];
+                        switch(attribute.name) {
+                            // crystal_maiden_brilliance_aura
+                            case 'mana_regen_self':
+                                if (ability.name == 'crystal_maiden_brilliance_aura') {
+                                    sources.add(self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level()), ability.displayname);
+                                }
+                            break;
+                        }
+                    }
+                //}
+            }
+        }
+        return sources;
     });
 
     self.getManaRegenReduction = ko.computed(function () {
-        var totalAttribute = 0;
+        var sources = new StatModel();
         for (var i = 0; i < self.abilities().length; i++) {
             var ability = self._abilities[i];
             if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
@@ -644,11 +668,11 @@ var AbilityModel = function (a, h) {
                 }
                 else*/ if (ability.manaregenreduction != undefined) {
                     // pugna_nether_ward
-                    totalAttribute+=ability.manaregenreduction();
+                    sources.add(-ability.manaregenreduction(), ability.displayname);
                 }
             }
         }
-        return totalAttribute;
+        return sources;
     });
     
     self.getAttackRange = ko.computed(function () {
@@ -1643,24 +1667,7 @@ var AbilityModel = function (a, h) {
     });
 
     self.getSpellAmp = ko.computed(function () {
-        var totalAttribute = 0;
-        /*for (var i = 0; i < self.abilities().length; i++) {
-            var ability = self._abilities[i];
-            if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
-                if (!(ability.name in self.abilityData)) {
-                    for (var j = 0; j < self._abilities[i].attributes.length; j++) {
-                        var attribute = self._abilities[i].attributes[j];
-                        switch(attribute.name) {
-                            // keeper_of_the_light_chakra_magic
-                            case 'cooldown_reduction':
-                                totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
-                            break;
-                        }
-                    }
-                }
-            }
-        }*/
-        return totalAttribute;
+        return new StatModel();
     });
     
     self.getUniqueCooldownReductionFlat = function (ability) {
@@ -2284,7 +2291,7 @@ var AbilityModel = function (a, h) {
                             case 'intellect_damage_pct':
                                 if (sources[ability.name] == undefined && ability.name == 'silencer_glaives_of_wisdom') {
                                     sources[ability.name] = {
-                                        'damage': self.getAbilityAttributeValue(ability.attributes, attribute.name, ability.level())/100 * self.hero.totalInt(),
+                                        'damage': self.getAbilityAttributeValue(ability.attributes, attribute.name, ability.level())/100 * self.hero.totalInt().total,
                                         'damageType': 'pure',
                                         'displayname': ability.displayname
                                     }

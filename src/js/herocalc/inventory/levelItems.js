@@ -1,1 +1,1 @@
-module.exports = ['necronomicon','dagon','diffusal_blade','travel_boots'];
+module.exports = ['necronomicon','dagon','travel_boots'];

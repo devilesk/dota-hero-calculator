@@ -1,6 +1,7 @@
 'use strict';
 var ko = require('../herocalc_knockout');
 
+var StatModel = require("../StatModel");
 var stackableItems = require("./stackableItems");
 var levelItems = require("./levelItems");
 var BasicInventoryViewModel = require("./BasicInventoryViewModel");
@@ -15,17 +16,16 @@ var InventoryViewModel = function (itemData, h) {
     self.hasInventory = ko.observable(true);
     self.items = ko.observableArray([]);
     self.activeItems = ko.observableArray([]);
-    self.hasScepter = ko.computed(function () {
+    self.hasScepter = ko.pureComputed(function () {
         for (var i = 0; i < self.items().length; i++) {
             var item = self.items()[i].item;
             if (item === 'ultimate_scepter' && self.items()[i].enabled()) {
                 return true;
             }
-            
         }
         return false;
     }, this);
-    self.isEthereal = ko.computed(function () {
+    self.isEthereal = ko.pureComputed(function () {
         for (var i = 0; i < self.items().length; i++) {
             var item = self.items()[i].item;
             var isActive = self.activeItems.indexOf(self.items()[i]) >= 0 ? true : false;
@@ -35,7 +35,7 @@ var InventoryViewModel = function (itemData, h) {
         }
         return false;
     }, this);
-    self.isSheeped = ko.computed(function () {
+    self.isSheeped = ko.pureComputed(function () {
         for (var i = 0; i < self.items().length; i++) {
             var item = self.items()[i].item;
             var isActive = self.activeItems.indexOf(self.items()[i]) >= 0 ? true : false;
@@ -45,7 +45,7 @@ var InventoryViewModel = function (itemData, h) {
         }
         return false;
     }, this);
-    self.totalCost = ko.computed(function () {
+    self.totalCost = ko.pureComputed(function () {
         var c = 0;
         for (var i = 0; i < self.items().length; i++) {
             var item = self.items()[i].item;
@@ -56,7 +56,6 @@ var InventoryViewModel = function (itemData, h) {
             else if (levelItems.indexOf(item) != -1) {
                 switch(item) {
                     case 'travel_boots':
-                    case 'diffusal_blade':
                     case 'necronomicon':
                     case 'dagon':
                         c += itemData['item_' + item].itemcost + (self.items()[i].size - 1) * itemData['item_recipe_' + item].itemcost;
@@ -76,10 +75,13 @@ var InventoryViewModel = function (itemData, h) {
     self.addItemBuff = function (data, event) {
         if (self.hasInventory() && self.selectedItemBuff() != undefined) {
             var new_item = {
-                item: self.selectedItemBuff(),
+                item: self.selectedItemBuff().split('|')[0],
                 state: ko.observable(0),
                 size: 1,
                 enabled: ko.observable(true)
+            }
+            if (self.selectedItemBuff().split('|').length == 2) {
+                new_item.buff = self.selectedItemBuff().split('|')[1]
             }
             self.items.push(new_item);
             if (self.selectedItemBuff() === 'ring_of_aquila' || self.selectedItemBuff() === 'ring_of_basilius') {
@@ -105,73 +107,94 @@ var InventoryViewModel = function (itemData, h) {
         }
     };
     
-    self.getAttributes = function (attributetype) {
-        var totalAttribute = 0;
+    self.getAttributes = function (attributeType) {
+        var sources = new StatModel();
         for (var i = 0; i < self.items().length; i++) {
-            var item = self.items()[i].item;
+            var itemId = self.items()[i].item;
             var isActive = self.activeItems.indexOf(self.items()[i]) >= 0 ? true : false;
             if (!self.items()[i].enabled()) continue;
             var size = self.items()[i].size;
-            for (var j = 0; j < itemData['item_' + item].attributes.length; j++) {
-                var attribute = itemData['item_' + item].attributes[j];
+            var item = itemData['item_' + itemId];
+            for (var j = 0; j < item.attributes.length; j++) {
+                var attribute = item.attributes[j];
                 switch(attribute.name) {
                     case 'bonus_all_stats':
-                        totalAttribute += parseInt(attribute.value[0]);
+                        sources.add(parseInt(attribute.value[0]), item.displayname);
                     break;
                     case 'bonus_stats':
-                        totalAttribute += parseInt(attribute.value[0]);
+                        sources.add(parseInt(attribute.value[0]), item.displayname);
                     break;
                 }
-                switch(attributetype) {
+                switch(attributeType) {
                     case 'agi':
-                        if (attribute.name == 'bonus_agility') {
-                            if (item == 'diffusal_blade') {
-                                totalAttribute += parseInt(attribute.value[size-1]);
-                            }
-                            else {
-                                totalAttribute += parseInt(attribute.value[0]);
-                            }
+                        switch(attribute.name) {
+                            case 'bonus_agility':
+                            case 'bonus_agi':
+                                sources.add(parseInt(attribute.value[0]), item.displayname);
+                            break;
+                            case 'bonus_stat':
+                                if (self.items()[i].state() == 2) {
+                                    sources.add(parseInt(attribute.value[0]), item.displayname);
+                                }
+                            break;
                         }
-                        if (attribute.name == 'bonus_stat' && self.items()[i].state() == 2) {totalAttribute += parseInt(attribute.value[0]);};
-                        if (attribute.name == 'bonus_agi') {totalAttribute += parseInt(attribute.value[0]);};
                     break;
                     case 'int':
-                        if (attribute.name == 'bonus_intellect') {
-                            if (item == 'necronomicon') {
-                                totalAttribute += parseInt(attribute.value[size-1]);
-                            }
-                            else if (item == 'diffusal_blade') {
-                                totalAttribute += parseInt(attribute.value[size-1]);
-                            }
-                            else if (item == 'dagon') {
-                                totalAttribute += parseInt(attribute.value[size-1]);
-                            }
-                            else {
-                                totalAttribute += parseInt(attribute.value[0]);
-                            }
+                        switch(attribute.name) {
+                            case 'bonus_intellect':
+                                if (itemId == 'necronomicon') {
+                                    sources.add(parseInt(attribute.value[size-1]), item.displayname);
+                                }
+                                else if (itemId == 'dagon') {
+                                    sources.add(parseInt(attribute.value[size-1]), item.displayname);
+                                }
+                                else {
+                                    sources.add(parseInt(attribute.value[0]), item.displayname);
+                                }
+                            break;
+                            case 'bonus_intelligence':
+                            case 'bonus_int':
+                                sources.add(parseInt(attribute.value[0]), item.displayname);
+                            break;
+                            case 'bonus_stat':
+                                if (self.items()[i].state() == 1) {
+                                    sources.add(parseInt(attribute.value[0]), item.displayname);
+                                }
+                            break;
                         }
-                        if (attribute.name == 'bonus_intelligence') {totalAttribute += parseInt(attribute.value[0]);};
-                        if (attribute.name == 'bonus_int') {totalAttribute += parseInt(attribute.value[0]);};
-                        if (attribute.name == 'bonus_stat' && self.items()[i].state() == 1) {totalAttribute += parseInt(attribute.value[0]);};
                     break;
                     case 'str':
-                        if (attribute.name == 'bonus_strength') {
-                            if (item == 'necronomicon') {
-                                totalAttribute += parseInt(attribute.value[size-1]);
-                            }
-                            else {
-                                totalAttribute += parseInt(attribute.value[0]);
-                            }
+                        switch(attribute.name) {
+                            case 'bonus_strength':
+                                if (itemId == 'necronomicon') {
+                                    sources.add(parseInt(attribute.value[size-1]), item.displayname);
+                                }
+                                else {
+                                    sources.add(parseInt(attribute.value[0]), item.displayname);
+                                }
+                            break;
+                            case 'bonus_str':
+                                sources.add(parseInt(attribute.value[0]), item.displayname);
+                            break;
+                            case 'bonus_stat':
+                                if (self.items()[i].state() == 0) {
+                                    sources.add(parseInt(attribute.value[0]), item.displayname);
+                                }
+                            break;
+                            case 'unholy_bonus_strength':
+                                if (isActive) {
+                                    sources.add(parseInt(attribute.value[0]), item.displayname);
+                                }
+                            break;
                         }
-                        if (attribute.name == 'bonus_stat' && self.items()[i].state() == 0) {totalAttribute += parseInt(attribute.value[0]);};
-                        if (attribute.name == 'bonus_str') {totalAttribute += parseInt(attribute.value[0]);};
-                        if (attribute.name == 'unholy_bonus_strength' && isActive) {totalAttribute += parseInt(attribute.value[0]);};
                     break;
                 }
             }
         }
-        return totalAttribute;
+        console.log('getAttributes', sources);
+        return sources;
     };
+    
     self.getBash = function (attacktype) {
         var totalAttribute = 1;
         for (var i = 0; i < self.items().length; i++) {
@@ -462,113 +485,118 @@ var InventoryViewModel = function (itemData, h) {
     };
     
     self.getHealth = function () {
-        var totalAttribute = 0;
+        var sources = new StatModel();
         for (var i = 0; i < self.items().length; i++) {
-            var item = self.items()[i].item;
+            var itemId = self.items()[i].item;
             if (!self.items()[i].enabled()) continue;
-            for (var j = 0; j < itemData['item_' + item].attributes.length; j++) {
-                var attribute = itemData['item_' + item].attributes[j];
+            var item = itemData['item_' + itemId];
+            for (var j = 0; j < item.attributes.length; j++) {
+                var attribute = item.attributes[j];
                 switch(attribute.name) {
                     case 'bonus_health':
-                        totalAttribute += parseInt(attribute.value[0]);
+                        sources.add(parseInt(attribute.value[0]), item.displayname);
                     break;
                 }
             }
         }
-        return totalAttribute;
+        return sources;
     };
     self.getHealthRegen = function () {
-        var totalAttribute = 0;
+        var sources = new StatModel();
         for (var i = 0; i < self.items().length; i++) {
-            var item = self.items()[i].item;
+            var itemId = self.items()[i].item;
             var isActive = self.activeItems.indexOf(self.items()[i]) >= 0 ? true : false;
             if (!self.items()[i].enabled()) continue;
-            for (var j = 0; j < itemData['item_' + item].attributes.length; j++) {
-                var attribute = itemData['item_' + item].attributes[j];
+            var item = itemData['item_' + itemId];
+            for (var j = 0; j < item.attributes.length; j++) {
+                var attribute = item.attributes[j];
                 switch(attribute.name) {
                     case 'health_regen':
                     case 'bonus_regen':
-                        totalAttribute += parseInt(attribute.value[0]);
+                    case 'hp_regen':
+                        sources.add(parseInt(attribute.value[0]), item.displayname);
                     break;
                     case 'bonus_health_regen':
-                        if (item == 'tranquil_boots' && !isActive) {
-                            totalAttribute += parseInt(attribute.value[0]);
+                        if (itemId == 'tranquil_boots' && !isActive) {
+                            sources.add(parseInt(attribute.value[0]), item.displayname);
                         }
-                        else if (item != 'tranquil_boots') {
-                            totalAttribute += parseInt(attribute.value[0]);
+                        else if (itemId != 'tranquil_boots') {
+                            sources.add(parseInt(attribute.value[0]), item.displayname);
                         }
-                    break;
-                    case 'hp_regen':
-                        totalAttribute += parseInt(attribute.value[0]);
                     break;
                     case 'health_regen_rate':
-                        if (item == 'heart' && isActive) {
-                            totalAttribute += (parseInt(attribute.value[0]) / 100) * self.hero.health();
+                        if (itemId == 'heart' && isActive) {
+                            sources.add((parseInt(attribute.value[0]) / 100) * self.hero.health().total, item.displayname);
                         }
                     break;
                 }
             }
         }
-        return totalAttribute;
+        return sources;
     };
-    self.getHealthRegenAura = function (e) {
-        var totalAttribute = 0,
-            excludeList = e || [];
+    self.getHealthRegenAura = function (sources, e) {
+        var excludeList = e || [];
+        sources = sources || new StatModel();
         for (var i = 0; i < self.items().length; i++) {
-            var item = self.items()[i].item;
+            var itemId = self.items()[i].item;
             var isActive = self.activeItems.indexOf(self.items()[i]) >= 0 ? true : false;
             if (!self.items()[i].enabled()) continue;
-            for (var j = 0; j < itemData['item_' + item].attributes.length; j++) {
-                var attribute = itemData['item_' + item].attributes[j];
-                if (excludeList.indexOf(item + attribute.name) > -1) continue;
+            var item = itemData['item_' + itemId];
+            for (var j = 0; j < item.attributes.length; j++) {
+                var attribute = item.attributes[j];
+                if (excludeList.indexOf(itemId + attribute.name) > -1) continue;
                 switch(attribute.name) {
                     case 'aura_health_regen':
                     case 'hp_regen_aura':
-                        totalAttribute += parseInt(attribute.value[0]);
-                        excludeList.push(item + attribute.name);
+                        sources.add(parseInt(attribute.value[0]), item.displayname);
+                        excludeList.push(itemId + attribute.name);
                     break;
                 }
             }
         }
-        return {value: totalAttribute, excludeList: excludeList};
+        return { sources: sources, excludeList: excludeList };
     };
     
     self.getMana = function () {
-        var totalAttribute = 0;
+        var sources = new StatModel();
         for (var i = 0; i < self.items().length; i++) {
-            var item = self.items()[i].item;
+            var itemId = self.items()[i].item;
             if (!self.items()[i].enabled()) continue;
-            for (var j = 0; j < itemData['item_' + item].attributes.length; j++) {
-                var attribute = itemData['item_' + item].attributes[j];
+            var item = itemData['item_' + itemId];
+            for (var j = 0; j < item.attributes.length; j++) {
+                var attribute = item.attributes[j];
                 switch(attribute.name) {
                     case 'bonus_mana':
-                        totalAttribute += parseInt(attribute.value[0]);
+                        sources.add(parseInt(attribute.value[0]), item.displayname);
                     break;
                 }
             }
         }
-        return totalAttribute;
+        return sources;
     };
     
     self.getManaRegen = function () {
-        var totalAttribute = 0;
+        var sources = new StatModel();
         for (var i = 0; i < self.items().length; i++) {
-            var item = self.items()[i].item;
+            var itemId = self.items()[i].item;
             if (!self.items()[i].enabled()) continue;
-            for (var j = 0; j < itemData['item_' + item].attributes.length; j++) {
-                var attribute = itemData['item_' + item].attributes[j];
+            var item = itemData['item_' + itemId];
+            for (var j = 0; j < item.attributes.length; j++) {
+                var attribute = item.attributes[j];
                 switch(attribute.name) {
                     case 'aura_mana_regen':
                     case 'mana_regen_aura':
-                        totalAttribute += parseFloat(attribute.value[0]);
+                        sources.add(parseInt(attribute.value[0]), item.displayname);
                     break;
                     case 'mana_regen':
-                        if (item == 'infused_raindrop') totalAttribute += parseFloat(attribute.value[0]);
+                        if (itemId == 'infused_raindrop') {
+                            sources.add(parseInt(attribute.value[0]), item.displayname);
+                        }
                     break;
                 }
             }
         }
-        return totalAttribute;    
+        return sources;
     };
     self.getManaRegenPercent = function () {
         var totalAttribute = 0;
@@ -593,144 +621,150 @@ var InventoryViewModel = function (itemData, h) {
             var item = self.items()[i].item;
             if (!self.items()[i].enabled()) continue;
             if (item.indexOf('bloodstone') != -1) {
-                return parseInt(self.items()[i].size);
+                return new StatModel(parseInt(self.items()[i].size), itemData['item_' + item].displayname);
             }
         }
-        return 0;
+        return new StatModel();
     };
     
     self.getArmor = function () {
-        var totalAttribute = 0;
+        var sources = new StatModel();
         for (var i = 0; i < self.items().length; i++) {
-            var item = self.items()[i].item;
+            var itemId = self.items()[i].item;
             var isActive = self.activeItems.indexOf(self.items()[i]) >= 0 ? true : false;
             if (!self.items()[i].enabled()) continue;
-            for (var j = 0; j < itemData['item_' + item].attributes.length; j++) {
-                var attribute = itemData['item_' + item].attributes[j];
+            var item = itemData['item_' + itemId];
+            for (var j = 0; j < item.attributes.length; j++) {
+                var attribute = item.attributes[j];
                 switch(attribute.name) {
                     case 'bonus_armor':
-                        if (!isActive || (item != 'medallion_of_courage' && item != 'solar_crest')) { totalAttribute += parseInt(attribute.value[0]); };
+                        if (!isActive || (itemId != 'medallion_of_courage' && itemId != 'solar_crest')) {
+                            sources.add(parseInt(attribute.value[0]), item.displayname, attribute.name);
+                        };
                     break;
                     case 'unholy_bonus_armor':
-                        if (isActive && item == 'armlet') { totalAttribute += parseInt(attribute.value[0]); };
+                        if (isActive && itemId == 'armlet') {
+                            sources.add(parseInt(attribute.value[0]), item.displayname, attribute.name);
+                        };
                     break;
                 }
             }
         }
-        return totalAttribute;
+        
+        return sources;
     };
     
-    self.getArmorAura = function (aList) {
-        var totalAttribute = 0,
-            attributeList = aList || [];
+    self.getArmorAura = function (sources) {     
+        sources = sources || new StatModel();
         for (var i = 0; i < self.items().length; i++) {
-            var item = self.items()[i].item;
+            var itemId = self.items()[i].item;
             var isActive = self.activeItems.indexOf(self.items()[i]) >= 0 ? true : false;
             if (!self.items()[i].enabled()) continue;
-            for (var j = 0;j < itemData['item_' + item].attributes.length; j++) {
-                var attribute = itemData['item_' + item].attributes[j];
-                if (attributeList.find(function (a) { return attribute.name == a.name; })) continue;
+            var item = itemData['item_' + itemId];
+            for (var j = 0;j < item.attributes.length; j++) {
+                var attribute = item.attributes[j];
+                if (sources.components.find(function (a) { return attribute.name == a.id; })) continue;
                 switch(attribute.name) {
                     // buckler
                     case 'bonus_aoe_armor':
                         if (isActive) {
-                            attributeList.push({'name':attribute.name, 'value': parseInt(attribute.value[0])});
+                            sources.push(parseInt(attribute.value[0]), item.displayname, attribute.name);
                         }
                     break;
                     // assault
                     case 'aura_positive_armor':
-                        attributeList.push({'name':attribute.name, 'value': parseInt(attribute.value[0])});
+                        sources.push(parseInt(attribute.value[0]), item.displayname, attribute.name);
                     break;
                     // ring_of_aquila,ring_of_basilius
                     case 'aura_bonus_armor':
                         if (isActive) {
-                            attributeList.push({'name':attribute.name, 'value': parseInt(attribute.value[0])});
+                            sources.push(parseInt(attribute.value[0]), item.displayname, attribute.name);
                         }
                     break;
                     // vladmir
                     case 'armor_aura':
-                        attributeList.push({'name':attribute.name, 'value': parseInt(attribute.value[0])});
+                        sources.push(parseInt(attribute.value[0]), item.displayname, attribute.name);
                     break;
                     // mekansm
                     case 'heal_bonus_armor':
                         if (isActive) {
-                            attributeList.push({'name':attribute.name, 'value': parseInt(attribute.value[0])});
+                            sources.push(parseInt(attribute.value[0]), item.displayname, attribute.name);
                         }
                     break;
                 }
             }
         }
         // remove buckler if there is a mekansm
-        if (attributeList.find(function (attribute) { return attribute.name == 'heal_bonus_armor'; })) {
-            attributeList = attributeList.filter(function (attribute) {
-                return attribute.name !== 'bonus_aoe_armor';
+        if (sources.components.find(function (attribute) { return attribute.id == 'heal_bonus_armor'; })) {
+            sources.components = sources.components.filter(function (attribute) {
+                return attribute.id !== 'bonus_aoe_armor';
             });
         }
         // remove ring_of_aquila,ring_of_basilius if there is a vladmir
-        if (attributeList.find(function (attribute) { return attribute.name == 'armor_aura'; })) {
-            attributeList = attributeList.filter(function (attribute) {
-                return attribute.name !== 'aura_bonus_armor';
+        if (sources.components.find(function (attribute) { return attribute.id == 'armor_aura'; })) {
+            sources.components = sources.components.filter(function (attribute) {
+                return attribute.id !== 'aura_bonus_armor';
             });
         }
         
-        totalAttribute = attributeList.reduce(function (memo, attribute) {
+        sources.total = sources.components.reduce(function (memo, attribute) {
             return memo += attribute.value;
         }, 0);
-        return {value: totalAttribute, attributes: attributeList};
+        
+        return sources;
     };
-    self.getArmorReduction = function (e) {
-        var totalAttribute = 0,
-            excludeList = e || [],
-            selfExcludeList = [];
+    self.getArmorReduction = function (sources) {
+        sources = sources || new StatModel();
         for (var i = 0; i < self.items().length; i++) {
-            var item = self.items()[i].item;
+            var itemId = self.items()[i].item;
             var isActive = self.activeItems.indexOf(self.items()[i]) >= 0 ? true : false;
             if (!self.items()[i].enabled()) continue;
-            for (var j = 0; j < itemData['item_' + item].attributes.length; j++) {
-                var attribute = itemData['item_' + item].attributes[j];
-                if (excludeList.indexOf(attribute.name) > -1 || excludeList.indexOf(item + '_' + attribute.name) > -1) continue;
-                // self exclusion check only for hero items, not buff items
-                if (self.hero && (selfExcludeList.indexOf(attribute.name) > -1 || selfExcludeList.indexOf(item + '_' + attribute.name) > -1)) continue;
+            var item = itemData['item_' + itemId];
+            for (var j = 0; j < item.attributes.length; j++) {
+                var attribute = item.attributes[j];
+                if (sources.components.find(function (component) { return component.id == attribute.name }) || sources.components.find(function (component) { return component.id == itemId + '_' + attribute.name })) continue;
                 switch(attribute.name) {
                     case 'armor_reduction':
-                        if (isActive || (item != 'medallion_of_courage' && item != 'solar_crest')) {
-                            totalAttribute += parseInt(attribute.value[0]);
-                            excludeList.push(item + '_' + attribute.name);
+                        if (isActive || (itemId != 'medallion_of_courage' && itemId != 'solar_crest')) {
+                            sources.push(parseInt(attribute.value[0]), item.displayname, itemId + '_' + attribute.name);
                         }
                     break;
                     case 'corruption_armor':
-                        totalAttribute += parseInt(attribute.value[0]);
-                        // allow blight_stone and desolator corruption_armor stacking from different sources, but not from same source
-                        excludeList.push(item + '_' + attribute.name);
-                        selfExcludeList.push(attribute.name);
+                        sources.push(parseInt(attribute.value[0]), item.displayname, itemId + '_' + attribute.name);
                     break;
                 }
             }
         }
-        return {value: totalAttribute, excludeList: excludeList};
+        
+        sources.total = sources.components.reduce(function (memo, attribute) {
+            return memo += attribute.value;
+        }, 0);
+        
+        return sources;
     };
-    self.getArmorReductionAura = function (e) {
-        var totalAttribute = 0,
-            excludeList = e || [],
-            selfExcludeList = [];
+    self.getArmorReductionAura = function (sources) {
+        sources = sources || new StatModel();
         for (var i = 0; i < self.items().length; i++) {
-            var item = self.items()[i].item;
+            var itemId = self.items()[i].item;
             var isActive = self.activeItems.indexOf(self.items()[i]) >= 0 ? true : false;
             if (!self.items()[i].enabled()) continue;
-            for (var j = 0; j < itemData['item_' + item].attributes.length; j++) {
-                var attribute = itemData['item_' + item].attributes[j];
-                if (excludeList.indexOf(attribute.name) > -1 || excludeList.indexOf(item + '_' + attribute.name) > -1) continue;
-                // self exclusion check only for hero items, not buff items
-                if (self.hero && (selfExcludeList.indexOf(attribute.name) > -1 || selfExcludeList.indexOf(item + '_' + attribute.name) > -1)) continue;
+            var item = itemData['item_' + itemId];
+            for (var j = 0; j < item.attributes.length; j++) {
+                var attribute = item.attributes[j];
+                if (sources.components.find(function (component) { return component.id == attribute.name }) || sources.components.find(function (component) { return component.id == itemId + '_' + attribute.name })) continue;
                 switch(attribute.name) {
                     case 'aura_negative_armor':
-                        totalAttribute += parseInt(attribute.value[0]);
-                        excludeList.push(attribute.name);
+                        sources.push(parseInt(attribute.value[0]), item.displayname, itemId + '_' + attribute.name);
                     break;
                 }
             }
         }
-        return {value: totalAttribute, excludeList: excludeList};
+        
+        sources.total = sources.components.reduce(function (memo, attribute) {
+            return memo += attribute.value;
+        }, 0);
+        
+        return sources;
     };
     self.getEvasion = function () {
         var totalAttribute = 1;
@@ -1176,21 +1210,22 @@ var InventoryViewModel = function (itemData, h) {
         return {value: totalAttribute, excludeList: excludeList};
     };
     self.getSpellAmp = ko.computed(function () {
-        var totalAttribute = 0;
+        var sources = new StatModel();
         for (var i = 0; i < self.items().length; i++) {
-            var item = self.items()[i].item;
+            var itemId = self.items()[i].item;
             var isActive = self.activeItems.indexOf(self.items()[i]) >= 0 ? true : false;
             if (!self.items()[i].enabled()) continue;
-            for (var j = 0; j < itemData['item_' + item].attributes.length; j++) {
-                var attribute = itemData['item_' + item].attributes[j];
+            var item = itemData['item_' + itemId];
+            for (var j = 0; j < item.attributes.length; j++) {
+                var attribute = item.attributes[j];
                 switch(attribute.name) {
                     case 'spell_amp':
-                        totalAttribute += parseInt(attribute.value[0]);
+                        sources.add(parseInt(attribute.value[0]), item.displayname);
                     break;
                 }
             }
         }
-        return totalAttribute;
+        return sources;
     });
     self.getCooldownReductionFlat = ko.computed(function () {
         var totalAttribute = 0;

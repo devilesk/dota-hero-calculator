@@ -21,6 +21,7 @@ ko.components.register('ability-detail', abilityDetail);
 ko.components.register('shop', require('../components/shop'));
 ko.components.register('stat', { template: require('fs').readFileSync(__dirname + '/../components/stats/stat.html', 'utf8') });
 ko.components.register('stat2', require('../components/stats/stat2'));
+ko.components.register('stat3', require('../components/stats/stat3'));
 ko.components.register('stats', { template: require('fs').readFileSync(__dirname + '/../components/stats/stats.html', 'utf8') });
 ko.components.register('stats0', { template: require('fs').readFileSync(__dirname + '/../components/stats/stats0.html', 'utf8') });
 ko.components.register('stats1', { template: require('fs').readFileSync(__dirname + '/../components/stats/stats1.html', 'utf8') });
@@ -375,7 +376,7 @@ var HeroCalculatorViewModel = function (tooltipURL, reportEmail) {
             self.selectedTab().data.inventory.addItem(data, event);
         }
     }
-    self.itemOptions = ko.computed(function () {
+    self.itemOptions = ko.pureComputed(function () {
         return self.selectedTab().data.inventory.itemOptions();
     });
     
@@ -384,10 +385,10 @@ var HeroCalculatorViewModel = function (tooltipURL, reportEmail) {
         self.selectedItem(event.target.id);
     }
     
-    self.getItemTooltipData = ko.computed(function () {
+    self.getItemTooltipData = ko.pureComputed(function () {
         return getItemTooltipData(itemData, self.selectedItem());
     }, this);
-    self.getItemInputLabel = ko.computed(function () {
+    self.getItemInputLabel = ko.pureComputed(function () {
         if (stackableItems.indexOf(self.selectedItem()) != -1) {
             return 'Stack Size'
         }
@@ -642,23 +643,6 @@ var HeroCalculatorViewModel = function (tooltipURL, reportEmail) {
         else {
             alert('Message is required.');
         }
-    }
-    
-    self.getProperty = function (obj, properties) {
-        var result = obj;
-        for (var i = 0; i < properties.length; i++) {
-            result = result[properties[i]];
-        }
-        return result;
-    };
-    
-    self.getDiffTextWrapper = function (hero, property) {
-        return self.getDiffText(self.getDiffMagnitude(hero, property));
-    }
-    
-    self.getDiffMagnitude = function (hero, property) {
-        var properties = property.split('.');
-        return self.getProperty(hero.damageTotalInfo(), properties).toFixed(2) - self.getProperty(hero.heroCompare().damageTotalInfo(), properties).toFixed(2);
     }
     
     self.getDiffText = function (value) {

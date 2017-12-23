@@ -21,7 +21,6 @@ var BasicInventoryViewModel = function (h) {
                 break;
                 break;
                 case 'travel_boots':
-                case 'diffusal_blade':
                     new_item.size = Math.min(new_item.size, 2);
                 break;
                 case 'necronomicon':
@@ -114,7 +113,6 @@ BasicInventoryViewModel.prototype.getItemImage = function (data) {
             }
         break;
         case 'dagon':
-        case 'diffusal_blade':
         case 'travel_boots':
         case 'necronomicon':
             if (data.size > 1) {

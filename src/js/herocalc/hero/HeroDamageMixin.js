@@ -409,7 +409,7 @@ var HeroDamageMixin = function (self, itemData) {
                     }
                     if (s[index] != undefined) {
                         if (self.heroId() === 'drow_ranger') {
-                            var d = s[index].damage * self.totalAgi();
+                            var d = s[index].damage * self.totalAgi().total;
                         }
                         else {
                             var d = s[index].damage;
@@ -438,7 +438,7 @@ var HeroDamageMixin = function (self, itemData) {
                 }
                 if (s[index] != undefined) {
                     if (self.heroId() === 'riki') {
-                        var d = s[index].damage * self.totalAgi();
+                        var d = s[index].damage * self.totalAgi().total;
                     }
                     else {
                         var d = s[index].damage;

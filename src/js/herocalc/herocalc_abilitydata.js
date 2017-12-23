@@ -894,7 +894,7 @@ var abilityData = {
             ignoreTooltip: true,
             controlType: 'text',
             fn: function (v, a, parent, index, abilityModel, ability, TalentController) {
-                return parent.health()*v/100;
+                return parent.health().total*v/100;
             }
         },
         {
@@ -2449,7 +2449,7 @@ var abilityData = {
             ignoreTooltip: true,
             controlType: 'text',
             fn: function (v, a, parent, index, abilityModel, ability, TalentController) {
-                return v*parent.health()*a/100;
+                return v*parent.health().total*a/100;
             }
         },
         {
@@ -2458,7 +2458,7 @@ var abilityData = {
             ignoreTooltip: true,
             controlType: 'text',
             fn: function (v, a, parent, index, abilityModel, ability, TalentController) {
-                return parent.health()*a/100;
+                return parent.health().total*a/100;
             },
             returnProperty: 'healthregen'
         },
