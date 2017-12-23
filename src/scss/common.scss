@@ -358,6 +358,10 @@ img {
 
 .tooltip-inner {
     text-align: left;
+
+    @media (max-width: $screen-xs-min - 1) {
+        max-width: 100% !important;
+    }
 }
 
 .tooltip {
@@ -368,5 +372,10 @@ img {
     .table>tbody>tr>td {
         border-top: none;
         padding: 5px;
+    }
+
+    @media (max-width: $screen-xs-min - 1) {
+        left: 0 !important;
+        width: 100% !important;
     }
 }
