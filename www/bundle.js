@@ -11832,7 +11832,7 @@ var self = this;
 }
 
 module.exports = BuildExplorerViewModel;
-},{"../herocalc/AbilityModel":40,"../herocalc/inventory/BasicInventoryViewModel":66,"../herocalc/main":78,"../herocalc/util/union":86,"./herocalc_knockout":34}],26:[function(require,module,exports){
+},{"../herocalc/AbilityModel":42,"../herocalc/inventory/BasicInventoryViewModel":70,"../herocalc/main":82,"../herocalc/util/union":90,"./herocalc_knockout":34}],26:[function(require,module,exports){
 (function (global){
 "use strict";
 var ko = (typeof window !== "undefined" ? window['ko'] : typeof global !== "undefined" ? global['ko'] : null);
@@ -11877,7 +11877,7 @@ CloneViewModel.prototype.constructor = CloneViewModel;
 module.exports = CloneViewModel;
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"../herocalc/main":78,"./DamageAmpViewModel":27,"./HeroDamageAmpMixin":29}],27:[function(require,module,exports){
+},{"../herocalc/main":82,"./DamageAmpViewModel":27,"./HeroDamageAmpMixin":29}],27:[function(require,module,exports){
 'use strict';
 var ko = require('./herocalc_knockout');
 
@@ -12026,14 +12026,14 @@ DamageAmpViewModel.prototype = Object.create(BuffViewModel.prototype);
 DamageAmpViewModel.prototype.constructor = DamageAmpViewModel;
 
 module.exports = DamageAmpViewModel;
-},{"../herocalc/BuffViewModel":41,"../herocalc/buffs/BuffModel":42,"../herocalc/util/findWhere":81,"./herocalc_knockout":34}],28:[function(require,module,exports){
+},{"../herocalc/BuffViewModel":43,"../herocalc/buffs/BuffModel":45,"../herocalc/util/findWhere":85,"./herocalc_knockout":34}],28:[function(require,module,exports){
 (function (global){
 'use strict';
 var ko = require('./herocalc_knockout');
 var $ = (typeof window !== "undefined" ? window['$'] : typeof global !== "undefined" ? global['$'] : null);
 require('./jquery-ui.custom');
 
-ko.components.register('hero-pane', { template: "<div class=\"row\">\n    <div class=\"col-md-3 col-sm-6\">\n        <div class=\"hero-image\" data-bind=\"css: { illusion: isIllusion }\">\n            <img class=\"img-rounded\" data-bind=\"attr:{src: '/media/images/heroes/' + selectedHero().heroName + '.png'}\"/>\n        </div>\n    </div>\n    <div class=\"col-md-9 col-sm-6\">\n        <div class=\"row form-group\">\n            <div class=\"col-md-6\">\n                <label for=\"heroselect\">Hero</label>\n                <select id=\"heroselect\" class=\"form-control\" data-bind=\"options: availableHeroes , optionsText: 'heroDisplayName', value: selectedHero\"></select>\n            </div>\n            <div class=\"col-md-6\">\n                <label for=\"herolevel\">Level</label>\n                <input id=\"herolevel\" data-bind=\"spinner: selectedHeroLevel, spinnerOptions: { min: 1, max: 25 }\">\n            </div>\n        </div>\n        <div class=\"row\">\n            <div class=\"col-md-6\">\n                <label for=\"enemyselect\">Enemy</label>\n                <select id=\"enemyselect\" class=\"form-control\" data-bind=\"css: enemy().playerColorCss, options: availableEnemies , optionsText: 'heroDisplayName', value: selectedEnemy, optionsAfterRender: setHeroOptionStyling\"></select>\n            </div>\n            <div class=\"col-md-6\">\n                <label for=\"enemyselect\">Compare to</label>\n                <select id=\"enemyselect\" class=\"form-control\" data-bind=\"css: heroCompare().playerColorCss, options: availableCompare , optionsText: 'heroDisplayName', value: selectedCompare, optionsAfterRender: setHeroOptionStyling\"></select>\n            </div>\n            <div class=\"col-md-12 checkbox\" style=\"margin-bottom:0px;padding-left:34px;\" data-bind=\"visible: $root.layout() == 0\">\n                <label><input type=\"checkbox\" style=\"float:none;margin-right:5px;\" data-bind=\"checked: showDiff\"><span style=\"font-size:12px\">Show <abbr title=\"The difference between two adjacent hero tabs shown next to each stat.\">delta values</abbr>. <span data-bind=\"visible: showDiff\">Comparing level <span data-bind=\"text: selectedHeroLevel\"></span> <span data-bind=\"text: heroData().displayname, css: playerColorCss\"></span> to level <span data-bind=\"text: heroCompare().selectedHeroLevel\"></span> <span data-bind=\"text: heroCompare().heroData().displayname, css: heroCompare().playerColorCss\"></span>.</span></span></label>\n                <label style=\"margin-left:25px;font-size:12px;\"><input type=\"checkbox\" style=\"float:none;margin-right:5px;\" data-bind=\"checked: showUnitTab\">Show unit tab</label>\n            </div>\n        </div>\n    </div>\n</div>\n\n<div class=\"row\">\n    <div class=\"col-md-4\" data-bind=\"css: {'col-md-4': $root.layout() == 0, 'col-md-12': $root.layout() == 1}\">\n        <div class=\"row\">\n            <h3 class=\"col-md-12\">Stats <a class=\"btn btn-default btn-xs\" data-bind=\"toggle: showStatDetails, text: !showStatDetails() ? 'Show more' : 'Show less', attr: {title: !showStatDetails() ? 'Click to show base stats' : 'Click to hide base stats'}\"></a>\n                <div style=\"margin-left:15px;display:inline;\" data-bind=\"style: {'display': $root.layout() == 1 ? 'inline' : 'none'}\">\n                    <label><input type=\"checkbox\" style=\"float:none;margin-right:5px;\" data-bind=\"checked: showDiff\"><span style=\"font-size:12px\">Show <abbr title=\"The difference between two adjacent hero tabs shown next to each stat.\">delta values</abbr>. <span data-bind=\"visible: showDiff\">Comparing level <span data-bind=\"text: selectedHeroLevel\"></span> <span data-bind=\"text: heroData().displayname, css: playerColorCss\"></span> to level <span data-bind=\"text: heroCompare().selectedHeroLevel\"></span> <span data-bind=\"text: heroCompare().heroData().displayname, css: heroCompare().playerColorCss\"></span>.</span></span></label>\n                    <label style=\"margin-left:25px;font-size:12px;\"><input type=\"checkbox\" style=\"float:none;margin-right:5px;\" data-bind=\"checked: showUnitTab\">Show unit tab</label>\n                </div>\n            </h3>\n\n            <div class=\"col-md-12\" data-bind=\"visible: showStatDetails(), css: {'col-md-12': $root.layout() == 0, 'col-md-3': $root.layout() == 1}, component: {name: 'stats-additional', params: $data}\"></div>\n\n            <div class=\"statscontainer\" data-bind=\"foreach: $root.allItems\">\n                <div data-bind=\"component: { name: $data.value, params: $parentContext.$data}\"></div>\n            </div>\n        </div>\n    </div>\n    <div class=\"col-md-8\" data-bind=\"css: {'col-md-8': $root.layout() == 0, 'col-md-12': $root.layout() == 1}\">\n        <div data-bind=\"component: { name: 'damage-details', params: $data}\"></div>\n    \n        <div class=\"row\">\n            <div class=\"col-md-12\" data-bind=\"itemBuildTable: $data.buildExplorer\">\n                <h3 class=\"section_header\" data-bind=\"toggle: sectionDisplay().inventory, css: { section_disabled: !sectionDisplay().inventory() }\">Inventory <small style=\"color:goldenrod\" data-bind=\"html: inventory.totalCost() ? '<img src=\\'http://cdn.dota2.com/apps/dota2/images/tooltips/gold.png\\'/> ' + inventory.totalCost() : '' \"></small></h3>\n                <div id=\"inventory\" class=\"inventory hover-cursor\" data-bind=\"click: function (data, event) { buildExplorer.selectInventory(-1); }, css: {'row-highlight': selectedInventory() == -1}, template: { name: 'item-template', foreach: inventory.items }, visible: sectionDisplay().inventory()\"></div>\n            </div>\n        </div>\n        \n        <div class=\"row\">\n            <div class=\"col-md-12\">\n                <h3 class=\"section_header\" data-bind=\"toggle: sectionDisplay().ability, css: { section_disabled: !sectionDisplay().ability() }\">Abilities <small style=\"color:inherit\" data-bind=\"text: availableSkillPoints() ? (availableSkillPoints() == 1 ? '1 unspent skillpoint' : availableSkillPoints() + ' unspent skillpoints') : ''\"></small></h3>\n                <div class=\"row\" data-bind=\"visible: sectionDisplay().ability(), foreach: ability().abilities()\">\n                    <div data-bind=\"component: { name: 'ability', params: $data }\"></div>\n                </div>\n                <div class=\"form-horizontal\" data-bind=\"if: selectedHero().heroName == 'silencer', visible: sectionDisplay().ability()\">\n                    <div class=\"form-group\">\n                        <div class=\"col-md-2 control-label\">\n                            <label for=\"intelligencestolen\">Intelligence Stolen</label>\n                        </div>\n                        <div class=\"col-md-2\">\n                            <input class=\"form-control\" id=\"intelligencestolen\" data-bind=\"value: intStolen\" />\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n        <div data-bind=\"component: { name: 'talent-section', params: $data}\"></div>\n        \n        <div data-bind=\"component: { name: 'buff-section', params: $data}\"></div>\n        \n        <div class=\"row\" data-bind=\"component: { name: 'damage-amp', params: $data}\"></div>\n\n        <div class=\"row\">\n            <div class=\"col-md-12\">\n                <h3 class=\"section_header\" data-bind=\"toggle: sectionDisplay().illusion, css: { section_disabled: !sectionDisplay().illusion() }\">Illusions</h3>\n                <div data-bind=\"visible: sectionDisplay().illusion(), lazyBinding: sectionDisplay().illusion\">\n                    <label>\n                        <input type=\"checkbox\" style=\"float:none;margin-right:5px;\" data-bind=\"checked: isIllusion\">Is Illusion?\n                    </label>\n                    <div class=\"form-horizontal\" data-bind=\"visible: isIllusion\">\n                        <div class=\"form-group\">\n                            <div class=\"col-md-2 control-label\">\n                                <label for=\"illusionSelect\">Type</label>\n                            </div>\n                            <div class=\"col-md-10\">\n                                <select id=\"illusionSelect\" class=\"form-control\" data-bind=\"options: availableIllusions , optionsText: 'illusionDisplayName', value: selectedIllusion\"></select>\n                            </div>\n                        </div>\n                        <div class=\"form-group\">\n                            <div class=\"col-md-2 control-label\">\n                                <label for=\"illusionabilitylevel\">Ability Level</label>\n                            </div>\n                            <div class=\"col-md-10\">\n                                <select id=\"illusionabilitylevel\" class=\"form-control\" data-bind=\"value: illusionAbilityLevel, foreach: new Array(illusionAbilityMaxLevel())\">\n                                    <option data-bind=\"text: $index()+1\"></option>\n                                </select>\n                            </div>\n                        </div>\n                        <div class=\"form-group\">\n                            <div class=\"col-md-12\">\n                                <table class=\"table\">\n                                    <tbody>\n                                        <tr>\n                                            <td>Damage Dealt</td>\n                                            <td class=\"text-right\" data-bind=\"text: (getOutgoingDamageMultiplier(illusionId(), false, heroData().attacktype)*100).toFixed(0)+'%'\"></td>\n                                        </tr>\n                                        <tr>\n                                            <td>Damage Taken</td>\n                                            <td class=\"text-right\" data-bind=\"text: (getIncomingDamageMultiplier(illusionId(), false, heroData().attacktype)*100).toFixed(0)+'%'\"></td>\n                                        </tr>\n                                    </tbody>\n                                </table>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n    \n    <div class=\"col-md-12\">\n        <h3 class=\"section_header\" data-bind=\"toggle: sectionDisplay().skillbuild, css: { section_disabled: !sectionDisplay().skillbuild() }\">Build Explorer</h3>\n        <div data-bind=\"visible: sectionDisplay().skillbuild(), attr: {id: 'section-build-explorer-' + index() }, lazyBinding: sectionDisplay().skillbuild\">\n            <div class=\"section-content\">    \n                <div class=\"col-md-12\">\n                    <h4 class=\"section_header\" data-bind=\"toggle: sectionDisplay()['skillbuild-skills'], css: { section_disabled: !sectionDisplay()['skillbuild-skills']() }\">Skill Build <small style=\"color:inherit\" data-bind=\"text: buildExplorer.availableSkillBuildPoints() ? (buildExplorer.availableSkillBuildPoints() == 1 ? '1 unspent skillpoint' : buildExplorer.availableSkillBuildPoints() + ' unspent skillpoints') : ''\"></small></h4>\n                        <div data-bind=\"visible: sectionDisplay()['skillbuild-skills']\">\n                        <table>\n                            <tbody data-bind=\"template: { name: 'ability-3-template', foreach: ability().abilities() }\"></tbody>\n                        </table>\n                        <div class=\"form-group\">\n                            <button class=\"btn btn-default\" data-bind=\"click: buildExplorer.resetSkillBuild\">Clear</button>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-md-12\">\n                    <h4 class=\"section_header\" data-bind=\"toggle: sectionDisplay()['skillbuild-items'], css: { section_disabled: !sectionDisplay()['skillbuild-items']() }\">Item Build</h4>\n                    <div data-bind=\"visible: sectionDisplay()['skillbuild-items']\">\n                        <table class=\"table\">\n                            <thead>\n                                <tr>\n                                    <th>Level</th>\n                                    <th class=\"text-center\">Inventory</th>\n                                    <th></th>\n                                    <th></th>\n                                    <th></th>\n                                </tr>\n                            </thead>\n                            <tbody data-bind=\"foreach: new Array(25), itemBuildTable: buildExplorer\">\n                                <tr class=\"hover-cursor\" data-bind=\"css: {'row-highlight': $parent.selectedInventory() == $index()}\">\n                                    <td class=\"carry-over\" data-bind=\"click: function (data, event) { $parent.buildExplorer.selectInventory($index()); }\">\n                                        <strong data-bind=\"text: ($index() + 1)\"></strong>\n                                        <a class=\"btn btn-default btn-xs glyphicon\" data-bind=\"visible: $index() > 0, toggle: $parent.buildExplorer.itemBuild()[$index()].carryOver, preventBubble: 'click', css: { 'glyphicon-arrow-down': $parent.buildExplorer.itemBuild()[$index()].carryOver(), 'glyphicon-stop': !$parent.buildExplorer.itemBuild()[$index()].carryOver() }\" title=\"Carry over items to next level's inventory\"></a>\n                                    </td>\n                                    <td class=\"col-md-10\" data-bind=\"click: function (data, event) { $parent.buildExplorer.selectInventory($index()); }\">\n                                        <div class=\"itemBuild-inventory\" data-bind=\"template: { name: 'itemBuild-item-template', foreach: $parent.buildExplorer.itemBuild()[$index()].items }\"></div>\n                                    </td>\n                                    <td>\n                                        <a class=\"btn btn-default btn-xs\" data-bind=\"click: function (data, event) { $parent.buildExplorer.copyInventoryToClipBoard($index()); }\" title=\"Copy items\">Copy</a>\n                                    </td>\n                                    <td>\n                                        <a class=\"btn btn-default btn-xs\" data-bind=\"click: function (data, event) { $parent.buildExplorer.pasteInventoryFromClipBoard($index()); }\" title=\"Paste items\">Paste</a>\n                                    </td>\n                                    <td>\n                                        <a class=\"btn btn-default btn-xs\" data-bind=\"click: function (data, event) { $parent.buildExplorer.resetItemBuild($index()); }\" title=\"Clear inventory\">Clear</a>\n                                    </td>\n                                </tr>\n                            </tbody>\n                        </table>\n                        <div class=\"form-group\">\n                            <button class=\"btn btn-default\" data-bind=\"click: buildExplorer.resetAllItemBuilds\">Clear</button>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"form-group\">\n                    <label>Data set header label</label>\n                    <input type=\"text\" class=\"form-control\" data-bind=\"value: buildExplorer.graphDataHeader\">\n                </div>\n                <div class=\"form-group\">\n                    <label>Data set description</label>\n                    <input type=\"text\" class=\"form-control\" data-bind=\"value: buildExplorer.graphDataDescription\">\n                </div>\n                <div class=\"form-group\">\n                    <button class=\"btn btn-default\" data-bind=\"click: buildExplorer.graph\">Add data set</button>\n                </div>\n                <div class=\"form-group\">\n                    <label>Hero Property</label>\n                    <select class=\"form-control\" data-bind=\"options: buildExplorer.graphProperties, optionsText: 'label', optionsValue: 'id', value: buildExplorer.selectedGraphProperty\"></select>\n                </div>\n                <!-- ko if: buildExplorer.graphData().length > 0 -->\n                <div class=\"form-group\" data-bind=\"chart: buildExplorer.graphChartData, chartType: 'Scatter', chartOptions: buildExplorer.graphChartOptions(), chartContext: buildExplorer.graphChartContext\"></div>\n                <div class=\"form-group\">\n                  <button class=\"btn btn-default\" data-bind=\"click: buildExplorer.exportImage\"><span class=\"glyphicon glyphicon-export\"></span> Export Image</button>\n                </div>\n                <button class=\"btn btn-default btn-xs\" data-bind=\"toggle: buildExplorer.showGraphItemBuildRows, css: {'toggled': buildExplorer.showGraphItemBuildRows}\">Show item build rows</button>\n                <button class=\"btn btn-default btn-xs\" data-bind=\"toggle: buildExplorer.showGraphSkillBuildColumns, css: {'toggled': buildExplorer.showGraphSkillBuildColumns}\">Show skill build columns</button>\n                <table class=\"table build-table\">\n                    <thead>\n                        <tr>\n                            <th class=\"right-border\">Level</th>\n                            <!-- ko foreach: buildExplorer.graphData -->\n                            <th class=\"text-center\" data-bind=\"css: { 'right-border': !$parent.buildExplorer.showGraphSkillBuildColumns() || !$data.visible() }\">\n                                <span data-bind=\"css: { 'tooltip-underline': $data.description }, tooltip: {title: $data.description, placement: 'bottom'}, visible: $data.visible(), text: $data.header, style: { color: $parent.buildExplorer.graphDistinctColor($parent.buildExplorer.graphData().length, $index(), 1) }\"></span>\n                                <span class=\"btn btn-xs glyphicon glyphicon-info-sign\" data-bind=\"visible: $data.visible(), popover: {template: 'popover-graphData-template', data: $data, options: {} }\"></span>\n                                <button class=\"btn btn-default btn-xs shop-button glyphicon glyphicon-remove pull-right\" class=\"close\" data-bind=\"visible: !$parent.buildExplorer.showGraphSkillBuildColumns() || !$data.visible(), click: function(data, event) { $parent.buildExplorer.removeGraphDataSet($data); }\"></button>\n                                <button class=\"btn btn-default btn-xs shop-button glyphicon pull-right\" data-bind=\"visible: !$parent.buildExplorer.showGraphSkillBuildColumns() || !$data.visible(), toggle: $data.visible, css: { 'glyphicon-minus': $data.visible(), 'glyphicon-plus': !$data.visible()}\"></button>\n                            </th>\n                            <th class=\"text-left right-border\" data-bind=\"visible: $data.visible() && $parent.buildExplorer.showGraphSkillBuildColumns()\"><abbr title=\"Q-W-E-R-Stats\">Skill Build</abbr>\n                                <button class=\"btn btn-default btn-xs shop-button glyphicon glyphicon-remove pull-right\" class=\"close\" data-bind=\"visible: $parent.buildExplorer.showGraphSkillBuildColumns(), click: function(data, event) { $parent.buildExplorer.removeGraphDataSet($data); }\"></button>\n                                <button class=\"btn btn-default btn-xs shop-button glyphicon pull-right\" data-bind=\"visible: $parent.buildExplorer.showGraphSkillBuildColumns(), toggle: $data.visible, css: { 'glyphicon-minus': $data.visible(), 'glyphicon-plus': !$data.visible()}\"></button>\n                            </th>\n                            <!-- /ko -->\n                        </tr>\n                    </thead>\n                    <tbody data-bind=\"foreach: new Array(buildExplorer.graphData()[0].data.length)\">\n                        <tr>\n                            <td class=\"right-border\">\n                                <strong data-bind=\"text: ($index() + 1)\"></strong>\n                            </td>\n                            <!-- ko foreach: new Array($parent.buildExplorer.graphData().length) -->\n                            <td class=\"text-right\" data-bind=\"css: { 'right-border': !$parents[1].buildExplorer.showGraphSkillBuildColumns() || !$parents[1].buildExplorer.graphData()[$index()].visible() }\">\n                                <span data-bind=\"visible: $parents[1].buildExplorer.graphData()[$index()].visible(), text: $parents[1].buildExplorer.graphData()[$index()].data[$parentContext.$index()][$parents[1].buildExplorer.selectedGraphProperty()]\"></span>\n                            </td>\n                            <td class=\"text-left right-border\" data-bind=\"visible: $parents[1].buildExplorer.graphData()[$index()].visible() && $parents[1].buildExplorer.showGraphSkillBuildColumns(), text: $parents[1].buildExplorer.graphData()[$index()].cumulativeSkillBuild[$parentContext.$index()].join('-')\"></td>\n                            <!-- /ko -->\n                        </tr>\n                        <tr class=\"itemBuild-inventory\" data-bind=\"visible: $parent.buildExplorer.showGraphItemBuildRows() && $parent.buildExplorer.graphRowHasItems($index())\">\n                            <td class=\"right-border-itemrow no-top-border\"></td>\n                            <!-- ko foreach: new Array($parent.buildExplorer.graphData().length) -->\n                            <td class=\"right-border-itemrow no-top-border\" data-bind=\"attr: { colspan: $parents[1].buildExplorer.graphData()[$index()].visible() && $parents[1].buildExplorer.showGraphSkillBuildColumns() ? 2 : 1 }\">\n                                <div data-bind=\"visible: $parents[1].buildExplorer.graphData()[$index()].visible(), foreach: $parents[1].buildExplorer.graphData()[$index()].data[$parentContext.$index()].items\">\n                                    <img class=\"itemBuild-img-sm img-rounded\" data-bind=\"css: { item_disabled: !enabled, item_active: $parents[2].inventory.getActiveBorder($data) == 1, item_inactive: $parents[2].inventory.getActiveBorder($data) == 0 }, attr:{ src: $parents[2].inventory.getItemImage($data) }\"/>\n                                    <div style=\"float:left\" data-bind=\"visible: $parents[2].inventory.getItemSizeLabel($data) != ''\">\n                                        <div data-bind=\"html: $parents[2].inventory.getItemSizeLabel($data)\" style=\"position:absolute;left:0;bottom:0;color:white;opacity:.5;background-color:black;padding:0px 2px\"></div>\n                                        <div data-bind=\"html: $parents[2].inventory.getItemSizeLabel($data)\" style=\"position:absolute;left:0;bottom:0;color:white;padding:0px 2px\"></div>\n                                    </div>\n                                </div>\n                            </td>\n                            <!-- /ko -->\n                        </tr>\n                    </tbody>\n                </table>\n                <!-- /ko -->\n            </div>\n        </div>\n    </div>\n\n</div>" });
+ko.components.register('hero-pane', { template: "<div class=\"row\">\n    <div class=\"col-md-3 col-sm-6\">\n        <div class=\"hero-image\" data-bind=\"css: { illusion: isIllusion }\">\n            <img class=\"img-rounded\" data-bind=\"attr:{src: '/media/images/heroes/' + selectedHero().heroName + '.png'}\"/>\n        </div>\n    </div>\n    <div class=\"col-md-9 col-sm-6\">\n        <div class=\"row form-group\">\n            <div class=\"col-md-6\">\n                <label for=\"heroselect\">Hero</label>\n                <select id=\"heroselect\" class=\"form-control\" data-bind=\"options: availableHeroes , optionsText: 'heroDisplayName', value: selectedHero\"></select>\n            </div>\n            <div class=\"col-md-6\">\n                <label for=\"herolevel\">Level</label>\n                <input id=\"herolevel\" data-bind=\"spinner: selectedHeroLevel, spinnerOptions: { min: 1, max: 25 }\">\n            </div>\n        </div>\n        <div class=\"row\">\n            <div class=\"col-md-6\">\n                <label for=\"enemyselect\">Enemy</label>\n                <div class=\"input-group\">\n                    <select id=\"enemyselect\" class=\"form-control\" data-bind=\"css: enemy().playerColorCss, options: availableEnemies , optionsText: 'heroDisplayName', value: selectedEnemy, optionsAfterRender: setHeroOptionStyling\"></select>\n                    <span class=\"input-group-btn\">\n                        <button type=\"button\" class=\"btn btn-default\" data-bind=\"click: function() { $root.selectTab(selectedEnemy()); }\">\n                            <span class=\"glyphicon glyphicon-transfer\"></span>\n                        </button>\n                    </span>\n                </div>\n            </div>\n            <div class=\"col-md-6\">\n                <label for=\"enemyselect\">Compare to</label>\n                <div class=\"input-group\">\n                    <select id=\"enemyselect\" class=\"form-control\" data-bind=\"css: heroCompare().playerColorCss, options: availableCompare , optionsText: 'heroDisplayName', value: selectedCompare, optionsAfterRender: setHeroOptionStyling\"></select>\n                    <span class=\"input-group-btn\">\n                        <button type=\"button\" class=\"btn btn-default\" data-bind=\"click: function() { $root.selectTab(selectedCompare()); }\">\n                            <span class=\"glyphicon glyphicon-transfer\"></span>\n                        </button>\n                    </span>\n                </div>\n            </div>\n            <div class=\"col-md-12 checkbox\" style=\"margin-bottom:0px;padding-left:34px;\" data-bind=\"visible: $root.layout() == 0\">\n                <label><input type=\"checkbox\" style=\"float:none;margin-right:5px;\" data-bind=\"checked: showDiff\"><span style=\"font-size:12px\">Show <abbr title=\"The difference between two adjacent hero tabs shown next to each stat.\">delta values</abbr>. <span data-bind=\"visible: showDiff\">Comparing level <span data-bind=\"text: selectedHeroLevel\"></span> <span data-bind=\"text: heroData().displayname, css: playerColorCss\"></span> to level <span data-bind=\"text: heroCompare().selectedHeroLevel\"></span> <span data-bind=\"text: heroCompare().heroData().displayname, css: heroCompare().playerColorCss\"></span>.</span></span></label>\n                <label style=\"margin-left:25px;font-size:12px;\"><input type=\"checkbox\" style=\"float:none;margin-right:5px;\" data-bind=\"checked: showUnitTab\">Show unit tab</label>\n            </div>\n        </div>\n    </div>\n</div>\n\n<div class=\"row\">\n    <div class=\"col-md-4\" data-bind=\"css: {'layout-column': $root.layout() == 0, 'col-md-4': $root.layout() == 0, 'col-md-12': $root.layout() == 1}\">\n        <div class=\"row\">\n            <h3 class=\"col-md-12\">Stats <a class=\"btn btn-default btn-xs\" data-bind=\"toggle: showStatDetails, text: !showStatDetails() ? 'Show more' : 'Show less', attr: {title: !showStatDetails() ? 'Click to show base stats' : 'Click to hide base stats'}\"></a>\n                <div style=\"margin-left:15px;display:inline;\" data-bind=\"style: {'display': $root.layout() == 1 ? 'inline' : 'none'}\">\n                    <label><input type=\"checkbox\" style=\"float:none;margin-right:5px;\" data-bind=\"checked: showDiff\"><span style=\"font-size:12px\">Show <abbr title=\"The difference between two adjacent hero tabs shown next to each stat.\">delta values</abbr>. <span data-bind=\"visible: showDiff\">Comparing level <span data-bind=\"text: selectedHeroLevel\"></span> <span data-bind=\"text: heroData().displayname, css: playerColorCss\"></span> to level <span data-bind=\"text: heroCompare().selectedHeroLevel\"></span> <span data-bind=\"text: heroCompare().heroData().displayname, css: heroCompare().playerColorCss\"></span>.</span></span></label>\n                    <label style=\"margin-left:25px;font-size:12px;\"><input type=\"checkbox\" style=\"float:none;margin-right:5px;\" data-bind=\"checked: showUnitTab\">Show unit tab</label>\n                </div>\n            </h3>\n\n            <div data-bind=\"css: { 'shop-visible': $root.displayShop() && !$root.shopPopout(), 'stats-additional': showStatDetails }, component: { name: 'stats', params: $data}\"></div>\n        </div>\n    </div>\n    <div class=\"col-md-8\" data-bind=\"css: {'col-md-8': $root.layout() == 0, 'col-md-12': $root.layout() == 1}\">\n        <div data-bind=\"component: { name: 'damage-details', params: $data}\"></div>\n    \n        <div class=\"row\">\n            <div class=\"col-md-12\" data-bind=\"itemBuildTable: $data.buildExplorer\">\n                <h3 class=\"section_header\" data-bind=\"toggle: sectionDisplay().inventory, css: { section_disabled: !sectionDisplay().inventory() }\">Inventory <small style=\"color:goldenrod\" data-bind=\"html: inventory.totalCost() ? '<img src=\\'http://cdn.dota2.com/apps/dota2/images/tooltips/gold.png\\'/> ' + inventory.totalCost() : '' \"></small></h3>\n                <div id=\"inventory\" class=\"inventory hover-cursor\" data-bind=\"click: function (data, event) { buildExplorer.selectInventory(-1); }, css: {'row-highlight': selectedInventory() == -1}, template: { name: 'item-template', foreach: inventory.items }, visible: sectionDisplay().inventory()\"></div>\n            </div>\n        </div>\n        \n        <div class=\"row\">\n            <div class=\"col-md-12\">\n                <h3 class=\"section_header\" data-bind=\"toggle: sectionDisplay().ability, css: { section_disabled: !sectionDisplay().ability() }\">Abilities <small style=\"color:inherit\" data-bind=\"text: availableSkillPoints() ? (availableSkillPoints() == 1 ? '1 unspent skillpoint' : availableSkillPoints() + ' unspent skillpoints') : ''\"></small></h3>\n                <div class=\"row\" data-bind=\"visible: sectionDisplay().ability(), foreach: ability().abilities()\">\n                    <div data-bind=\"component: { name: 'ability', params: $data }\"></div>\n                </div>\n                <div class=\"form-horizontal\" data-bind=\"if: selectedHero().heroName == 'silencer', visible: sectionDisplay().ability()\">\n                    <div class=\"form-group\">\n                        <div class=\"col-md-2 control-label\">\n                            <label for=\"intelligencestolen\">Intelligence Stolen</label>\n                        </div>\n                        <div class=\"col-md-2\">\n                            <input class=\"form-control\" id=\"intelligencestolen\" data-bind=\"value: intStolen\" />\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n        <div data-bind=\"component: { name: 'talent-section', params: $data}\"></div>\n        \n        <div data-bind=\"component: { name: 'buff-section', params: $data}\"></div>\n        \n        <div class=\"row\" data-bind=\"component: { name: 'damage-amp', params: $data}\"></div>\n\n        <div class=\"row\">\n            <div class=\"col-md-12\">\n                <h3 class=\"section_header\" data-bind=\"toggle: sectionDisplay().illusion, css: { section_disabled: !sectionDisplay().illusion() }\">Illusions</h3>\n                <div data-bind=\"visible: sectionDisplay().illusion(), lazyBinding: sectionDisplay().illusion\">\n                    <label>\n                        <input type=\"checkbox\" style=\"float:none;margin-right:5px;\" data-bind=\"checked: isIllusion\">Is Illusion?\n                    </label>\n                    <div class=\"form-horizontal\" data-bind=\"visible: isIllusion\">\n                        <div class=\"form-group\">\n                            <div class=\"col-md-2 control-label\">\n                                <label for=\"illusionSelect\">Type</label>\n                            </div>\n                            <div class=\"col-md-10\">\n                                <select id=\"illusionSelect\" class=\"form-control\" data-bind=\"options: availableIllusions , optionsText: 'illusionDisplayName', value: selectedIllusion\"></select>\n                            </div>\n                        </div>\n                        <div class=\"form-group\">\n                            <div class=\"col-md-2 control-label\">\n                                <label for=\"illusionabilitylevel\">Ability Level</label>\n                            </div>\n                            <div class=\"col-md-10\">\n                                <select id=\"illusionabilitylevel\" class=\"form-control\" data-bind=\"value: illusionAbilityLevel, foreach: new Array(illusionAbilityMaxLevel())\">\n                                    <option data-bind=\"text: $index()+1\"></option>\n                                </select>\n                            </div>\n                        </div>\n                        <div class=\"form-group\">\n                            <div class=\"col-md-12\">\n                                <table class=\"table\">\n                                    <tbody>\n                                        <tr>\n                                            <td>Damage Dealt</td>\n                                            <td class=\"text-right\" data-bind=\"text: (getOutgoingDamageMultiplier(illusionId(), false, heroData().attacktype)*100).toFixed(0)+'%'\"></td>\n                                        </tr>\n                                        <tr>\n                                            <td>Damage Taken</td>\n                                            <td class=\"text-right\" data-bind=\"text: (getIncomingDamageMultiplier(illusionId(), false, heroData().attacktype)*100).toFixed(0)+'%'\"></td>\n                                        </tr>\n                                    </tbody>\n                                </table>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n    \n    <div class=\"col-md-12\">\n        <h3 class=\"section_header\" data-bind=\"toggle: sectionDisplay().skillbuild, css: { section_disabled: !sectionDisplay().skillbuild() }\">Build Explorer</h3>\n        <div data-bind=\"visible: sectionDisplay().skillbuild(), attr: {id: 'section-build-explorer-' + index() }, lazyBinding: sectionDisplay().skillbuild\">\n            <div class=\"section-content\">    \n                <div class=\"col-md-12\">\n                    <h4 class=\"section_header\" data-bind=\"toggle: sectionDisplay()['skillbuild-skills'], css: { section_disabled: !sectionDisplay()['skillbuild-skills']() }\">Skill Build <small style=\"color:inherit\" data-bind=\"text: buildExplorer.availableSkillBuildPoints() ? (buildExplorer.availableSkillBuildPoints() == 1 ? '1 unspent skillpoint' : buildExplorer.availableSkillBuildPoints() + ' unspent skillpoints') : ''\"></small></h4>\n                        <div data-bind=\"visible: sectionDisplay()['skillbuild-skills']\">\n                        <table>\n                            <tbody data-bind=\"template: { name: 'ability-3-template', foreach: ability().abilities() }\"></tbody>\n                        </table>\n                        <div class=\"form-group\">\n                            <button class=\"btn btn-default\" data-bind=\"click: buildExplorer.resetSkillBuild\">Clear</button>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-md-12\">\n                    <h4 class=\"section_header\" data-bind=\"toggle: sectionDisplay()['skillbuild-items'], css: { section_disabled: !sectionDisplay()['skillbuild-items']() }\">Item Build</h4>\n                    <div data-bind=\"visible: sectionDisplay()['skillbuild-items']\">\n                        <table class=\"table\">\n                            <thead>\n                                <tr>\n                                    <th>Level</th>\n                                    <th class=\"text-center\">Inventory</th>\n                                    <th></th>\n                                    <th></th>\n                                    <th></th>\n                                </tr>\n                            </thead>\n                            <tbody data-bind=\"foreach: new Array(25), itemBuildTable: buildExplorer\">\n                                <tr class=\"hover-cursor\" data-bind=\"css: {'row-highlight': $parent.selectedInventory() == $index()}\">\n                                    <td class=\"carry-over\" data-bind=\"click: function (data, event) { $parent.buildExplorer.selectInventory($index()); }\">\n                                        <strong data-bind=\"text: ($index() + 1)\"></strong>\n                                        <a class=\"btn btn-default btn-xs glyphicon\" data-bind=\"visible: $index() > 0, toggle: $parent.buildExplorer.itemBuild()[$index()].carryOver, preventBubble: 'click', css: { 'glyphicon-arrow-down': $parent.buildExplorer.itemBuild()[$index()].carryOver(), 'glyphicon-stop': !$parent.buildExplorer.itemBuild()[$index()].carryOver() }\" title=\"Carry over items to next level's inventory\"></a>\n                                    </td>\n                                    <td class=\"col-md-10\" data-bind=\"click: function (data, event) { $parent.buildExplorer.selectInventory($index()); }\">\n                                        <div class=\"itemBuild-inventory\" data-bind=\"template: { name: 'itemBuild-item-template', foreach: $parent.buildExplorer.itemBuild()[$index()].items }\"></div>\n                                    </td>\n                                    <td>\n                                        <a class=\"btn btn-default btn-xs\" data-bind=\"click: function (data, event) { $parent.buildExplorer.copyInventoryToClipBoard($index()); }\" title=\"Copy items\">Copy</a>\n                                    </td>\n                                    <td>\n                                        <a class=\"btn btn-default btn-xs\" data-bind=\"click: function (data, event) { $parent.buildExplorer.pasteInventoryFromClipBoard($index()); }\" title=\"Paste items\">Paste</a>\n                                    </td>\n                                    <td>\n                                        <a class=\"btn btn-default btn-xs\" data-bind=\"click: function (data, event) { $parent.buildExplorer.resetItemBuild($index()); }\" title=\"Clear inventory\">Clear</a>\n                                    </td>\n                                </tr>\n                            </tbody>\n                        </table>\n                        <div class=\"form-group\">\n                            <button class=\"btn btn-default\" data-bind=\"click: buildExplorer.resetAllItemBuilds\">Clear</button>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"form-group\">\n                    <label>Data set header label</label>\n                    <input type=\"text\" class=\"form-control\" data-bind=\"value: buildExplorer.graphDataHeader\">\n                </div>\n                <div class=\"form-group\">\n                    <label>Data set description</label>\n                    <input type=\"text\" class=\"form-control\" data-bind=\"value: buildExplorer.graphDataDescription\">\n                </div>\n                <div class=\"form-group\">\n                    <button class=\"btn btn-default\" data-bind=\"click: buildExplorer.graph\">Add data set</button>\n                </div>\n                <div class=\"form-group\">\n                    <label>Hero Property</label>\n                    <select class=\"form-control\" data-bind=\"options: buildExplorer.graphProperties, optionsText: 'label', optionsValue: 'id', value: buildExplorer.selectedGraphProperty\"></select>\n                </div>\n                <!-- ko if: buildExplorer.graphData().length > 0 -->\n                <div class=\"form-group\" data-bind=\"chart: buildExplorer.graphChartData, chartType: 'Scatter', chartOptions: buildExplorer.graphChartOptions(), chartContext: buildExplorer.graphChartContext\"></div>\n                <div class=\"form-group\">\n                  <button class=\"btn btn-default\" data-bind=\"click: buildExplorer.exportImage\"><span class=\"glyphicon glyphicon-export\"></span> Export Image</button>\n                </div>\n                <button class=\"btn btn-default btn-xs\" data-bind=\"toggle: buildExplorer.showGraphItemBuildRows, css: {'toggled': buildExplorer.showGraphItemBuildRows}\">Show item build rows</button>\n                <button class=\"btn btn-default btn-xs\" data-bind=\"toggle: buildExplorer.showGraphSkillBuildColumns, css: {'toggled': buildExplorer.showGraphSkillBuildColumns}\">Show skill build columns</button>\n                <table class=\"table build-table\">\n                    <thead>\n                        <tr>\n                            <th class=\"right-border\">Level</th>\n                            <!-- ko foreach: buildExplorer.graphData -->\n                            <th class=\"text-center\" data-bind=\"css: { 'right-border': !$parent.buildExplorer.showGraphSkillBuildColumns() || !$data.visible() }\">\n                                <span data-bind=\"css: { 'tooltip-underline': $data.description }, tooltip: {title: $data.description, placement: 'bottom'}, visible: $data.visible(), text: $data.header, style: { color: $parent.buildExplorer.graphDistinctColor($parent.buildExplorer.graphData().length, $index(), 1) }\"></span>\n                                <span class=\"btn btn-xs glyphicon glyphicon-info-sign\" data-bind=\"visible: $data.visible(), popover: {template: 'popover-graphData-template', data: $data, options: {} }\"></span>\n                                <button class=\"btn btn-default btn-xs shop-button glyphicon glyphicon-remove pull-right\" class=\"close\" data-bind=\"visible: !$parent.buildExplorer.showGraphSkillBuildColumns() || !$data.visible(), click: function(data, event) { $parent.buildExplorer.removeGraphDataSet($data); }\"></button>\n                                <button class=\"btn btn-default btn-xs shop-button glyphicon pull-right\" data-bind=\"visible: !$parent.buildExplorer.showGraphSkillBuildColumns() || !$data.visible(), toggle: $data.visible, css: { 'glyphicon-minus': $data.visible(), 'glyphicon-plus': !$data.visible()}\"></button>\n                            </th>\n                            <th class=\"text-left right-border\" data-bind=\"visible: $data.visible() && $parent.buildExplorer.showGraphSkillBuildColumns()\"><abbr title=\"Q-W-E-R-Stats\">Skill Build</abbr>\n                                <button class=\"btn btn-default btn-xs shop-button glyphicon glyphicon-remove pull-right\" class=\"close\" data-bind=\"visible: $parent.buildExplorer.showGraphSkillBuildColumns(), click: function(data, event) { $parent.buildExplorer.removeGraphDataSet($data); }\"></button>\n                                <button class=\"btn btn-default btn-xs shop-button glyphicon pull-right\" data-bind=\"visible: $parent.buildExplorer.showGraphSkillBuildColumns(), toggle: $data.visible, css: { 'glyphicon-minus': $data.visible(), 'glyphicon-plus': !$data.visible()}\"></button>\n                            </th>\n                            <!-- /ko -->\n                        </tr>\n                    </thead>\n                    <tbody data-bind=\"foreach: new Array(buildExplorer.graphData()[0].data.length)\">\n                        <tr>\n                            <td class=\"right-border\">\n                                <strong data-bind=\"text: ($index() + 1)\"></strong>\n                            </td>\n                            <!-- ko foreach: new Array($parent.buildExplorer.graphData().length) -->\n                            <td class=\"text-right\" data-bind=\"css: { 'right-border': !$parents[1].buildExplorer.showGraphSkillBuildColumns() || !$parents[1].buildExplorer.graphData()[$index()].visible() }\">\n                                <span data-bind=\"visible: $parents[1].buildExplorer.graphData()[$index()].visible(), text: $parents[1].buildExplorer.graphData()[$index()].data[$parentContext.$index()][$parents[1].buildExplorer.selectedGraphProperty()]\"></span>\n                            </td>\n                            <td class=\"text-left right-border\" data-bind=\"visible: $parents[1].buildExplorer.graphData()[$index()].visible() && $parents[1].buildExplorer.showGraphSkillBuildColumns(), text: $parents[1].buildExplorer.graphData()[$index()].cumulativeSkillBuild[$parentContext.$index()].join('-')\"></td>\n                            <!-- /ko -->\n                        </tr>\n                        <tr class=\"itemBuild-inventory\" data-bind=\"visible: $parent.buildExplorer.showGraphItemBuildRows() && $parent.buildExplorer.graphRowHasItems($index())\">\n                            <td class=\"right-border-itemrow no-top-border\"></td>\n                            <!-- ko foreach: new Array($parent.buildExplorer.graphData().length) -->\n                            <td class=\"right-border-itemrow no-top-border\" data-bind=\"attr: { colspan: $parents[1].buildExplorer.graphData()[$index()].visible() && $parents[1].buildExplorer.showGraphSkillBuildColumns() ? 2 : 1 }\">\n                                <div data-bind=\"visible: $parents[1].buildExplorer.graphData()[$index()].visible(), foreach: $parents[1].buildExplorer.graphData()[$index()].data[$parentContext.$index()].items\">\n                                    <img class=\"itemBuild-img-sm img-rounded\" data-bind=\"css: { item_disabled: !enabled, item_active: $parents[2].inventory.getActiveBorder($data) == 1, item_inactive: $parents[2].inventory.getActiveBorder($data) == 0 }, attr:{ src: $parents[2].inventory.getItemImage($data) }\"/>\n                                    <div style=\"float:left\" data-bind=\"visible: $parents[2].inventory.getItemSizeLabel($data) != ''\">\n                                        <div data-bind=\"html: $parents[2].inventory.getItemSizeLabel($data)\" style=\"position:absolute;left:0;bottom:0;color:white;opacity:.5;background-color:black;padding:0px 2px\"></div>\n                                        <div data-bind=\"html: $parents[2].inventory.getItemSizeLabel($data)\" style=\"position:absolute;left:0;bottom:0;color:white;padding:0px 2px\"></div>\n                                    </div>\n                                </div>\n                            </td>\n                            <!-- /ko -->\n                        </tr>\n                    </tbody>\n                </table>\n                <!-- /ko -->\n            </div>\n        </div>\n    </div>\n\n</div>" });
 ko.components.register('unit-pane', { template: "<div class=\"row\">\n    <div class=\"col-md-4\">\n        <img class=\"img-rounded\" data-bind=\"attr:{src: selectedUnit().image}\"/>\n    </div>\n    <div class=\"col-md-4\">\n        <label for=\"unitselect\">Unit</label>\n        <select id=\"unitselect\" class=\"form-control\" data-bind=\"options: availableUnits , optionsText: 'heroDisplayName', value: selectedUnit\"></select>\n    </div>\n    <div class=\"col-md-4\">\n        <label for=\"unitlevel\">Level</label>\n        <p class=\"form-control-static\" data-bind=\"visible: selectedUnit().levels == 0, text: heroData().level\"></p>\n        <select id=\"herolevel\" class=\"form-control\" data-bind=\"visible: selectedUnit().levels > 0, value: selectedUnitLevel, foreach: new Array(selectedUnit().levels)\">\n            <option data-bind=\"text: $index()+1\"></option>\n        </select>\n    </div>\n</div>\n\n<div class=\"row\">\n    <div class=\"col-md-4\" data-bind=\"css: {'col-md-4': $root.layout() == 0, 'col-md-12': $root.layout() == 1}\">\n        <div class=\"row\">\n            <h3 class=\"col-md-12\">Stats <a class=\"btn btn-default btn-xs\" data-bind=\"toggle: showStatDetails, text: !showStatDetails() ? 'Show more' : 'Show less', attr: {title: !showStatDetails() ? 'Click to show base stats' : 'Click to hide base stats'}\"></a></h3>\n\n            <div class=\"col-md-3\" data-bind=\"visible: showStatDetails(), component: {name: 'stats-additional', params: $data}\"></div>\n            \n            <div class=\"col-md-12\" data-bind=\"css: {'col-md-12': $root.layout() == 0, 'col-md-3': $root.layout() == 1}\">\n                <table class=\"table table-condensed\">\n                <tbody>\n                <tr><td>Gold:</td><td class=\"text-right\"><span data-bind=\"text: heroData().bountygoldmin == heroData().bountygoldmax ? heroData().bountygoldmax : heroData().bountygoldmin + '-' + heroData().bountygoldmax\"></span></td></tr>\n                <tr><td>Experience:</td><td class=\"text-right\"><span data-bind=\"text: heroData().bountyxp\"></span></td></tr>\n                <tr><td>Level:</td><td class=\"text-right\"><span data-bind=\"text: heroData().level\"></span></td></tr>\n                <tr><td><abbr title=\"Movement Speed\">MS</abbr>:</td><td class=\"text-right\"><span data-bind=\"text: totalMovementSpeed\"></span></td></tr>\n                <tr><td>Turn Rate:</td><td class=\"text-right\"><span data-bind=\"text: totalTurnRate\"></span></td></tr>\n                <tr><td>Sight Range:</td><td class=\"text-right\"><span data-bind=\"html: '<abbr title=\\'Day\\'>' + visionrangeday() + '</abbr>/<abbr title=\\'Night\\'>' + visionrangenight() + '</abbr>'\"></span></td></tr>\n                </tbody>\n                </table>\n            </div>\n\n\n            <div class=\"col-md-12\" data-bind=\"css: {'col-md-12': $root.layout() == 0, 'col-md-3': $root.layout() == 1}\">\n                <table class=\"table table-condensed\">\n                <tbody>\n                <tr><td>Health:</td><td class=\"text-right\"><span data-bind=\"text: health\"></span></td></tr>\n                <tr><td>Health Regen:</td><td class=\"text-right\"><span data-bind=\"text: healthregen\"></span></td></tr>\n                <tr><td>Mana:</td><td class=\"text-right\"><span data-bind=\"text: mana\"></span></td></tr>\n                <tr><td>Mana Regen:</td><td class=\"text-right\"><span data-bind=\"text: manaregen\"></span></td></tr>\n                <tr><td>Physical <abbr title=\"Effective Hit Points\">EHP</abbr>:</td><td class=\"text-right\"><span data-bind=\"text: ehpPhysical\"></span></td></tr>\n                <tr><td>Magical <abbr title=\"Effective Hit Points\">EHP</abbr>:</td><td class=\"text-right\"><span data-bind=\"text: ehpMagical\"></span></td></tr>\n                </tbody>\n                </table>\n            </div>\n\n            <div class=\"col-md-12\" data-bind=\"css: {'col-md-12': $root.layout() == 0, 'col-md-3': $root.layout() == 1}\">\n                <table class=\"table table-condensed\">\n                <tbody>\n                <tr><td>Armor:</td><td class=\"text-right\"><span data-bind=\"text: totalArmorPhysical\"></span></td></tr>\n                <tr><td>Magic Res:</td><td class=\"text-right\"><span data-bind=\"html: totalMagicResistance().toFixed(2) + '%'\"></span></td></tr>\n                <tr><td>Lifesteal:</td><td class=\"text-right\"><span data-bind=\"text: lifesteal\"></span></td></tr>\n                <tr><td>Evasion:</td><td class=\"text-right\"><span data-bind=\"text: evasion\"></span></td></tr>\n                <tr><td>Bash:</td><td class=\"text-right\"><span data-bind=\"text: bash\"></span></td></tr>\n                <tr><td>Miss Chance:</td><td class=\"text-right\"><span data-bind=\"text: missChance\"></span></td></tr>\n                </tbody>\n                <tbody class=\"tabledropdown\" style=\"border-top:0\" data-bind=\"visible: showCriticalStrikeDetails(),foreach: critInfo().sources\">\n                <tr><td colspan=2><strong data-bind=\"text: $data.name\"></strong></td></tr>\n                <tr><td>Crit Chance:</td><td class=\"text-right\"><span data-bind=\"text: ($data.totalchance * 100).toFixed(2) + '%'\"></span></td></tr>\n                <tr><td>Crit Multiplier:</td><td class=\"text-right\"><span data-bind=\"text: ($data.multiplier * 100).toFixed(2) + '%'\"></span></td></tr>\n                </tbody>\n                </table>\n            </div>\n\n            <div class=\"col-md-12\" data-bind=\"css: {'col-md-12': $root.layout() == 0, 'col-md-3': $root.layout() == 1}\">\n                <table class=\"table table-condensed\">\n                <tbody>\n                <tr>\n                    <td>Damage:</td>\n                    <td class=\"text-right\">\n                        <span data-bind=\"html: baseDamage()[0] + '-' + baseDamage()[1]\"></span>\n                        <span style=\"color:green\" data-bind=\"visible: bonusDamage() > 0, text: ' + ' + bonusDamage()\"></span>\n                        <span style=\"color:red\" data-bind=\"visible: bonusDamageReduction() != 0, text: ' - ' + bonusDamageReduction()\"></span>\n                    </td>\n                </tr>\n                <tr><td><abbr title=\"Increased Attack Speed\">IAS</abbr>:</td><td class=\"text-right\"><span data-bind=\"text: ias\"></span></td></tr>\n                <tr><td><abbr title=\"Base Attack Time\">BAT</abbr>:</td><td class=\"text-right\"><span data-bind=\"text: bat\"></span></td></tr>\n                <tr><td>Attack Time:</td><td class=\"text-right\"><span data-bind=\"text: attackTime\"></span></td></tr>\n                <tr><td>Attack / Sec:</td><td class=\"text-right\"><span data-bind=\"text: attacksPerSecond().toFixed(2)\"></span></td></tr>\n                <tr><td>Attack Range:</td><td class=\"text-right\"><span data-bind=\"text: totalattackrange\"></span></td></tr>\n                </tbody>\n                </table>\n            </div>\n        </div>\n    </div>\n    <div class=\"col-md-8\" data-bind=\"css: {'col-md-8': $root.layout() == 0, 'col-md-12': $root.layout() == 1}\">\n        <div data-bind=\"component: { name: 'damage-details', params: $data}\"></div>\n        \n        <div class=\"row\">\n            <div class=\"col-md-12\">\n                <h3 class=\"section_header\" data-bind=\"toggle: sectionDisplay().inventory, css: { section_disabled: !sectionDisplay().inventory() }\">Inventory <small style=\"color:goldenrod\" data-bind=\"html: inventory.totalCost() ? '<img src=\\'http://cdn.dota2.com/apps/dota2/images/tooltips/gold.png\\'/> ' + inventory.totalCost() : '' \"></small></h3>\n                <div id=\"inventory\" class=\"inventory hover-cursor row-highlight\" data-bind=\"template: { name: 'item-template', foreach: inventory.items }, visible: sectionDisplay().inventory()\"></div>\n            </div>\n        </div>\n        \n        <div class=\"row\">\n            <div class=\"col-md-12\">\n                <h3 class=\"section_header\" data-bind=\"toggle: sectionDisplay().ability, css: { section_disabled: !sectionDisplay().ability() }\">Abilities</h3>\n                <div class=\"row\" data-bind=\"visible: sectionDisplay().ability(), foreach: ability().abilities()\">\n                    <div data-bind=\"component: { name: 'ability', params: $data }\"></div>\n                </div>\n            </div>\n        </div>\n\n        <div data-bind=\"component: { name: 'buff-section', params: $data}\"></div>\n    </div>\n</div>" });
 ko.components.register('clone-pane', { template: "<div class=\"row\">\n    <div class=\"col-md-4\">\n        <img class=\"img-rounded\" data-bind=\"attr:{src: '/media/images/heroes/meepo.png'}\"/>\n    </div>\n</div>\n\n<div class=\"row\">\n    <div class=\"col-md-4\" data-bind=\"css: {'col-md-4': $root.layout() == 0, 'col-md-12': $root.layout() == 1}\">\n        <div class=\"row\">\n            <h3 class=\"col-md-12\">Stats <a class=\"btn btn-default btn-xs\" data-bind=\"toggle: showStatDetails, text: !showStatDetails() ? 'Show more' : 'Show less', attr: {title: !showStatDetails() ? 'Click to show base stats' : 'Click to hide base stats'}\"></a></h3>\n\n            <div class=\"col-md-12\" data-bind=\"visible: showStatDetails(), css: {'col-md-12': $root.layout() == 0, 'col-md-3': $root.layout() == 1}, component: {name: 'stats-additional', params: $data}\"></div>\n\n            <div class=\"statscontainer\" data-bind=\"foreach: $root.allItems\">\n                <div data-bind=\"component: { name: $data.value, params: $root.heroes[$parentContext.$index()].clone()}\"></div>\n            </div>\n        </div>\n    </div>\n    <div class=\"col-md-8\" data-bind=\"css: {'col-md-8': $root.layout() == 0, 'col-md-12': $root.layout() == 1}\">\n        <div data-bind=\"component: { name: 'damage-details', params: $data}\"></div>\n        \n        <div class=\"row\">\n            <div class=\"col-md-12\">\n                <h3 class=\"section_header\" data-bind=\"toggle: sectionDisplay().inventory, css: { section_disabled: !sectionDisplay().inventory() }\">Inventory <small style=\"color:goldenrod\" data-bind=\"html: inventory.totalCost() ? '<img src=\\'http://cdn.dota2.com/apps/dota2/images/tooltips/gold.png\\'/> ' + inventory.totalCost() : '' \"></small></h3>\n                <div id=\"inventory\" class=\"inventory hover-cursor row-highlight\" data-bind=\"template: { name: 'item-template', foreach: inventory.items }, visible: sectionDisplay().inventory()\"></div>\n            </div>\n        </div>\n\n        <div class=\"row\" data-bind=\"component: { name: 'damage-amp', params: $data}\"></div>\n    </div>\n</div>" });
 ko.components.register('illusion-pane', { template: "<div class=\"row\">\n    <div class=\"col-md-4\">\n        <div class=\"img-rounded\" style=\"background-color:#428bca;display:inline-block\">\n            <img class=\"img-rounded\" style=\"opacity:.5\" data-bind=\"attr:{src: '/media/images/heroes/' + selectedHero().heroName + '.png'}\"/>\n        </div>\n    </div>\n    <div class=\"col-md-4\">\n        <label for=\"illusionlevel\" data-bind=\"text: illusionDisplayName\"></label>\n        <table class=\"table\">\n            <tbody>\n            <tr>\n                <td>Damage Dealt</td>\n                <td class=\"text-right\" data-bind=\"text: (getOutgoingDamageMultiplier(illusionType(), false, heroData().attacktype)*100).toFixed(0)+'%'\"></td>\n            </tr>\n            <tr>\n                <td>Damage Taken</td>\n                <td class=\"text-right\" data-bind=\"text: (getIncomingDamageMultiplier(illusionType(), false, heroData().attacktype)*100).toFixed(0)+'%'\"></td>\n            </tr>\n            </tbody>\n        </table>\n    </div>\n    <div class=\"col-md-4\">\n        <div data-bind=\"visible: illusionType() != 'item_manta'\">\n            <label for=\"illusionlevel\">Ability Level</label>\n            <select id=\"illusionlevel\" class=\"form-control\" data-bind=\"value: illusionAbilityLevel, foreach: new Array(illusionAbilityMaxLevel())\">\n                <option data-bind=\"text: $index()+1\"></option>\n            </select>\n        </div>\n    </div>\n</div>\n\n<div class=\"row\">\n    <div class=\"col-md-4\" data-bind=\"css: {'col-md-4': $root.layout() == 0, 'col-md-12': $root.layout() == 1}\">\n        <div class=\"row\">\n            <h3 class=\"col-md-12\">Stats <a class=\"btn btn-default btn-xs\" data-bind=\"toggle: showStatDetails, text: !showStatDetails() ? 'Show more' : 'Show less', attr: {title: !showStatDetails() ? 'Click to show base stats' : 'Click to hide base stats'}\"></a></h3>\n\n            <div class=\"col-md-12\" data-bind=\"visible: showStatDetails(), css: {'col-md-12': $root.layout() == 0, 'col-md-3': $root.layout() == 1}, component: {name: 'stats-additional', params: $data}\">\n            </div>\n            <div class=\"statscontainer\" data-bind=\"foreach: $root.allItems\">\n                <div data-bind=\"component: { name: $data.value, params: $parentContext.$data}\"></div>\n            </div>\n        </div>\n    </div>\n    <div class=\"col-md-8\" data-bind=\"css: {'col-md-4': $root.layout() == 0, 'col-md-12': $root.layout() == 1}\">\n        <div class=\"row\">\n            <div class=\"col-md-12\">\n                <h3 class=\"section_header\" data-bind=\"toggle: sectionDisplay().inventory, css: { section_disabled: !sectionDisplay().inventory() }\">Inventory <small style=\"color:goldenrod\" data-bind=\"html: inventory.totalCost() ? '<img src=\\'http://cdn.dota2.com/apps/dota2/images/tooltips/gold.png\\'/> ' + inventory.totalCost() : '' \"></small></h3>\n                <div id=\"inventory\" class=\"inventory hover-cursor\" data-bind=\"click: function (data, event) { buildExplorer.selectInventory(-1); }, css: {'row-highlight': selectedInventory() == -1}, foreach: inventory.items, visible: sectionDisplay().inventory()\">\n                    <div class=\"btn-group\">\n                        <img style=\"width:75px;\" class=\"img-rounded\" data-bind=\"css: { item_disabled: !enabled(), item_active: $parent.inventory.getActiveBorder($data) == 1, item_inactive: $parent.inventory.getActiveBorder($data) == 0 }, attr:{ src: $parent.inventory.getItemImage($data) }, click: function(data, event) { $parent.inventory.toggleItem($index, data, event); }, event: { dblclick: $parent.inventory.removeItem }\"/>\n                        <div style=\"float:left\" data-bind=\"visible: $parent.inventory.getItemSizeLabel($data) != ''\">\n                            <div data-bind=\"html: $parent.inventory.getItemSizeLabel($data)\" style=\"position:absolute;left:0;bottom:0;color:white;opacity:.5;background-color:black;padding:0px 2px\"></div>\n                            <div data-bind=\"html: $parent.inventory.getItemSizeLabel($data)\" style=\"position:absolute;left:0;bottom:0;color:white;padding:0px 2px\"></div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>" });
@@ -12041,7 +12041,7 @@ ko.components.register('buff-settings', { template: "<div class=\"form-horizonta
 ko.components.register('talent-section', { template: "<div class=\"row\">\n    <div class=\"col-md-12\">\n        <h3 class=\"section_header\" data-bind=\"toggle: sectionDisplay().talent, css: { section_disabled: !sectionDisplay().talent() }\">Talents</h3>\n        <div class=\"row\" data-bind=\"foreach: heroData().talents, visible: sectionDisplay().talent()\">\n            <div class=\"talent col-xs-12\">\n                <label class=\"talent-level\" data-bind=\"text: 'Level ' + ($index() * 5 + 10) + ':'\"></label><div class=\"talent-1 btn btn-default btn-sm\" data-bind=\"text: $data[0].displayname, click: function () { $parent.toggleTalent($index(), 0) }, css: {'toggled': $parent.talents[$index()]() == 0}\"></div><div class=\"talent-2 btn btn-default btn-sm\" data-bind=\"text: $data[1].displayname, click: function () { $parent.toggleTalent($index(), 1) }, css: {'toggled': $parent.talents[$index()]() == 1}\"></div>\n            </div>\n        </div>\n    </div>\n</div>" });
 ko.components.register('item-buff', { template: "<div class=\"btn-group\">\n    <img style=\"width:75px;\" class=\"img-rounded\" data-bind=\"css: { item_disabled: !enabled(), item_active: $parents[1].buffs.itemBuffs.getActiveBorder($data) == 1, item_inactive: $parents[1].buffs.itemBuffs.getActiveBorder($data) == 0 }, attr:{ src: $parents[1].buffs.itemBuffs.getItemImage($data) }, click: function(data, event) { $parents[1].buffs.itemBuffs.toggleItem($index, data, event); }, event: { dblclick: $parents[1].buffs.itemBuffs.removeItem }\"/>\n    <div class=\"btn-group-vertical\">\n        <button style=\"padding:3px 10px;\" class=\"btn btn-default btn-xs\" title=\"Remove Item\" data-bind=\"click: $parents[1].buffs.itemBuffs.removeItem\">&times;</button>\n        <button style=\"padding:3px 10px;\" class=\"btn btn-default btn-xs\" title=\"Disable/Enable Item\" data-bind=\"click: $parents[1].buffs.itemBuffs.toggleMuteItem, html: enabled() ? 'o' : '-', attr: {title: enabled() ? 'Disable Item' : 'Enable Item'}\">o</button>\n    </div>\n</div>" });
 ko.components.register('item-debuff', { template: "<div class=\"btn-group\">\n    <img style=\"width:75px;\" class=\"img-rounded\" data-bind=\"css: { item_disabled: !enabled(), item_active: $parents[1].debuffs.itemBuffs.getActiveBorder($data) == 1, item_inactive: $parents[1].debuffs.itemBuffs.getActiveBorder($data) == 0 }, attr:{ src: $parents[1].debuffs.itemBuffs.getItemImage($data) }, click: function(data, event) { $parents[1].debuffs.itemBuffs.toggleItem($index, data, event); }, event: { dblclick: $parents[1].debuffs.itemBuffs.removeItem }\"/>\n    <div class=\"btn-group-vertical\">\n        <button style=\"padding:3px 10px;\" class=\"btn btn-default btn-xs\" title=\"Remove Item\" data-bind=\"click: $parents[1].debuffs.itemBuffs.removeItem\">&times;</button>\n        <button style=\"padding:3px 10px;\" class=\"btn btn-default btn-xs\" title=\"Disable/Enable Item\" data-bind=\"click: $parents[1].debuffs.itemBuffs.toggleMuteItem, html: enabled() ? 'o' : '-', attr: {title: enabled() ? 'Disable Item' : 'Enable Item'}\">o</button>\n    </div>\n</div>" });
-ko.components.register('buff-section', { template: "<div class=\"row\">\n    <div class=\"col-md-12\">\n        <h3 class=\"section_header\" data-bind=\"toggle: sectionDisplay().buff, css: { section_disabled: !sectionDisplay().buff() }\">Buffs</h3>\n        <div class=\"form-horizontal\" data-bind=\"visible: sectionDisplay().buff()\">\n            <div class=\"form-group\">\n                <div class=\"col-md-6\">\n                    <select id=\"buffselect\" class=\"form-control\" data-bind=\"options: buffs.availableBuffs , optionsText: 'buffDisplayName', value: buffs.selectedBuff\"></select>\n                </div>\n                <div class=\"col-md-6\">\n                    <button class=\"btn btn-default\" data-bind=\"click: buffs.addBuff\">Add</button>\n                    <button class=\"btn btn-default\" data-bind=\"click: function(data,event) { buffs.removeBuff(data, event, buffs.selectedBuff().buffName) }\">Remove</button>\n                </div>\n            </div>\n        </div>\n        <div class=\"row\" data-bind=\"foreach: buffs.buffs, visible: sectionDisplay().buff()\">\n            <div data-bind=\"css: {row: $data.data.isDetail() || ($index() < $parent.buffs.buffs().length-1 && $parent.buffs.buffs()[$index()+1].data.isDetail()), row2: $data.data.isDetail() || ($index() < $parent.buffs.buffs().length-1 && $parent.buffs.buffs()[$index()+1].data.isDetail()) }\">\n                <div class=\"col-md-3 text-center bottom-buffer2\" data-bind=\"css: {'col-md-3': $root.layout() == 0, 'col-md-2': $root.layout() == 1}\">\n                    <img style=\"padding:0px;margin-bottom:1px;\" class=\"img-rounded ability\" data-bind=\"css: { ability_active: $data.data.isActive() || $data.data.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1, ability_inactive: !$data.data.isActive() && $data.data.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') == -1, btn: $data.data.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') == -1, 'btn-default': $data.data.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') == -1}, attr:{src: '/media/images/spellicons/' + $data.data.name + '.png'}, click: function(data, event) { $parent.buffs.toggleBuff($index, data.data, event); }, event: { dblclick: function(data,event) { $parent.buffs.removeBuff(data, event, $data.data.name) } }\"/>\n                    <div class=\"progress\" style=\"position:relative\">\n                        <div style=\"position:absolute;width:100%;color:white;\" class=\"text-center\" data-bind=\"visible: $parent.getAbilityLevelMax($data.data) > 0, text: $data.data.level() + '/' + $parent.getAbilityLevelMax($data.data)\"></div>\n                        <div class=\"progress-bar progress-bar-danger\" role=\"progressbar\" aria-valuenow=\"60\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: 60%;\" data-bind=\"attr: { 'aria-valuenow': ($parent.getAbilityLevelMax($data.data) > 0 ? $data.data.level()/$parent.getAbilityLevelMax($data.data)*100 : 0) }, style: { width: ($parent.getAbilityLevelMax($data.data) > 0 ? $data.data.level()/$parent.getAbilityLevelMax($data.data)*100 : 0) + '%' }\"></div>\n                    </div>\n                    <div class=\"btn-group btn-group-justified\" data-bind=\"if: $data.data.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE') == -1\">\n                        <a class=\"btn btn-default btn-sm\" data-bind=\"click: function(data, event) { $parent.buffs.levelDownAbility($index, data.data, event, $parent); }\">-</a>\n                        <a class=\"btn btn-default btn-sm\" data-bind=\"click: function(data, event) { $parent.buffs.levelUpAbility($index, data.data, event, $parent); }\">+</a>\n                    </div>\n                    <div class=\"btn-group btn-group-justified\">\n                        <a class=\"btn btn-default btn-sm\" data-bind=\"click: function(data, event) { $parent.buffs.toggleBuffDetail($index, data, event); }, css: {'toggled': $data.data.isDetail}\">Details</a>\n                    </div>\n                </div>\n                <div class=\"col-md-9 bottom-buffer\" data-bind=\"visible: $data.data.isDetail()\">\n                    <button type=\"button\" class=\"close\" data-bind=\"click: function(data, event) { $parent.buffs.toggleBuffDetail($index, data.data, event); }\">&times;</button>\n                    <div data-bind=\"component: { name: 'ability-detail', params: { hero: $parent, ability: $data.data } }\"></div>\n                    <div data-bind=\"if: $data.data.name in $parent.buffs.abilityData && $parent.buffs.buffs()[$index()].data.level() > 0\">\n                        <div class=\"col-md-8\">\n                            <div data-bind=\"component: { name: 'buff-settings', params: $parent.buffs.abilitySettingsData($data.data.name, $parent, $index()) }\"></div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n        \n        <div class=\"form-horizontal\" data-bind=\"visible: sectionDisplay().buff()\">\n            <div class=\"form-group\">\n                <div class=\"col-md-6\">\n                    <div class=\"input-group\">\n                        <input class=\"form-control\" id=\"auto2\" data-bind=\"attr: {id: id() + '-auto2' }, jqAuto: { autoFocus: true, html: true }, jqAutoSource: buffs.itemBuffs.itemBuffOptions, jqAutoValue: buffs.itemBuffs.selectedItemBuff, jqAutoSourceLabel: 'displayname', jqAutoSourceInputValue: 'name', jqAutoSourceValue: 'value'\" />\n                        <span class=\"input-group-btn\">\n                            <button class=\"btn btn-default\" data-bind=\"jqAutoCombo: id() + '-auto2'\"><span class=\"glyphicon glyphicon-search\"></span></button>\n                        </span>\n                    </div>\n                </div>\n                <div class=\"col-md-6\">\n                    <button class=\"btn btn-default\" data-bind=\"click: buffs.itemBuffs.addItemBuff\">Add</button>\n                </div>\n            </div>\n        </div>\n        <div data-bind=\"foreach: buffs.itemBuffs.items, visible: sectionDisplay().buff()\">\n            <div class=\"pull-left\" style=\"margin-right:10px\" data-bind=\"component: { name: 'item-buff', params: $data}\"></div>\n        </div>\n    </div>\n</div>\n\n<div class=\"row\">\n    <div class=\"col-md-12\">\n        <h3 class=\"section_header\" data-bind=\"toggle: sectionDisplay().debuff, css: { section_disabled: !sectionDisplay().debuff() }\">Debuffs</h3>\n        <div class=\"form-horizontal\" data-bind=\"visible: sectionDisplay().debuff()\">\n            <div class=\"form-group\">\n                <div class=\"col-md-6\">\n                    <select id=\"buffselect\" class=\"form-control\" data-bind=\"options: debuffs.availableDebuffs , optionsText: 'buffDisplayName', value: debuffs.selectedBuff\"></select>\n                </div>\n                <div class=\"col-md-6\">\n                    <button class=\"btn btn-default\" data-bind=\"click: debuffs.addBuff\">Add</button>\n                    <button class=\"btn btn-default\" data-bind=\"click: function(data,event) { debuffs.removeBuff(data, event, debuffs.selectedBuff().buffName) }\">Remove</button>\n                </div>\n            </div>\n        </div>\n\n        <div class=\"row\" data-bind=\"foreach: debuffs.buffs, visible: sectionDisplay().debuff()\">\n            <div data-bind=\"css: {row: $data.data.isDetail() || ($index() < $parent.debuffs.buffs().length-1 && $parent.debuffs.buffs()[$index()+1].data.isDetail()), row2: $data.data.isDetail() || ($index() < $parent.debuffs.buffs().length-1 && $parent.debuffs.buffs()[$index()+1].data.isDetail()) }\">\n                <div class=\"col-md-3 text-center bottom-buffer2\" data-bind=\"css: {'col-md-3': $root.layout() == 0, 'col-md-2': $root.layout() == 1}\">\n                    <img style=\"padding:0px;margin-bottom:1px;\" class=\"img-rounded ability\" data-bind=\"css: { ability_active: $data.data.isActive() || $data.data.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1, ability_inactive: !$data.data.isActive() && $data.data.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') == -1, btn: $data.data.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') == -1, 'btn-default': $data.data.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') == -1}, attr:{src: '/media/images/spellicons/' + $data.data.name + '.png'}, click: function(data, event) { $parent.debuffs.toggleBuff($index, data.data, event); }, event: { dblclick: function(data,event) { $parent.debuffs.removeBuff(data, event, $data.data.name) } }\"/>\n                    <div class=\"progress\" style=\"position:relative\">\n                        <div style=\"position:absolute;width:100%;color:white;\" class=\"text-center\" data-bind=\"visible: $parent.getAbilityLevelMax($data.data) > 0, text: $data.data.level() + '/' + $parent.getAbilityLevelMax($data.data)\"></div>\n                        <div class=\"progress-bar progress-bar-danger\" role=\"progressbar\" aria-valuenow=\"60\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: 60%;\" data-bind=\"attr: { 'aria-valuenow': ($parent.getAbilityLevelMax($data.data) > 0 ? $data.data.level()/$parent.getAbilityLevelMax($data.data)*100 : 0) }, style: { width: ($parent.getAbilityLevelMax($data.data) > 0 ? $data.data.level()/$parent.getAbilityLevelMax($data.data)*100 : 0) + '%' }\"></div>\n                    </div>\n                    <div class=\"btn-group btn-group-justified\" data-bind=\"if: $data.data.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE') == -1\">\n                        <a class=\"btn btn-default btn-sm\" data-bind=\"click: function(data, event) { $parent.debuffs.levelDownAbility($index, data.data, event, $parent); }\">-</a>\n                        <a class=\"btn btn-default btn-sm\" data-bind=\"click: function(data, event) { $parent.debuffs.levelUpAbility($index, data.data, event, $parent); }\">+</a>\n                    </div>\n                    <div class=\"btn-group btn-group-justified\">\n                        <a class=\"btn btn-default btn-sm\" data-bind=\"click: function(data, event) { $parent.debuffs.toggleBuffDetail($index, data, event); }, css: {'toggled': $data.data.isDetail}\">Details</a>\n                    </div>\n                </div>\n                <div class=\"col-md-9 bottom-buffer\" data-bind=\"visible: $data.data.isDetail()\">\n                    <button type=\"button\" class=\"close\" data-bind=\"click: function(data, event) { $parent.debuffs.toggleBuffDetail($index, data.data, event); }\">&times;</button>\n                    <div data-bind=\"component: { name: 'ability-detail', params: { hero: $parent, ability: $data.data } }\"></div>\n                    <div data-bind=\"if: $data.data.name in $parent.debuffs.abilityData && $parent.debuffs.buffs()[$index()].data.level() > 0\">\n                        <div class=\"col-md-8\">\n                            <div data-bind=\"component: { name: 'buff-settings', params: $parent.debuffs.abilitySettingsData($data.data.name, $parent, $index()) }\"></div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n        \n        <div class=\"form-horizontal\" data-bind=\"visible: sectionDisplay().debuff()\">\n            <div class=\"form-group\">\n                <div class=\"col-md-6\">\n                    <div class=\"input-group\">\n                        <input class=\"form-control\" id=\"auto3\" data-bind=\"attr: {id: id() + '-auto3' }, jqAuto: { autoFocus: true, html: true }, jqAutoSource: debuffs.itemBuffs.itemDebuffOptions, jqAutoValue: debuffs.itemBuffs.selectedItemDebuff, jqAutoSourceLabel: 'displayname', jqAutoSourceInputValue: 'name', jqAutoSourceValue: 'value'\" />\n                        <span class=\"input-group-btn\">\n                            <button class=\"btn btn-default\" data-bind=\"jqAutoCombo: id() + '-auto3'\"><span class=\"glyphicon glyphicon-search\"></span></button>\n                        </span>\n                    </div>\n                </div>\n                <div class=\"col-md-6\">\n                    <button class=\"btn btn-default\" data-bind=\"click: debuffs.itemBuffs.addItemDebuff\">Add</button>\n                </div>\n            </div>\n        </div>\n        <div data-bind=\"foreach: debuffs.itemBuffs.items, visible: sectionDisplay().debuff()\">\n            <div class=\"pull-left\" style=\"margin-right:10px\" data-bind=\"component: { name: 'item-debuff', params: $data}\"></div>\n        </div>\n    </div>\n</div>" });
+ko.components.register('buff-section', { template: "<div class=\"row\">\n    <div class=\"col-md-12\">\n        <h3 class=\"section_header\" data-bind=\"toggle: sectionDisplay().buff, css: { section_disabled: !sectionDisplay().buff() }\">Buffs</h3>\n        <div class=\"form-horizontal\" data-bind=\"visible: sectionDisplay().buff()\">\n            <div class=\"form-group\">\n                <div class=\"col-md-6\">\n                    <select id=\"buffselect\" class=\"form-control\" data-bind=\"options: buffs.availableBuffs , optionsText: 'buffDisplayName', value: buffs.selectedBuff\"></select>\n                </div>\n                <div class=\"col-md-6\">\n                    <button class=\"btn btn-default\" data-bind=\"click: buffs.addBuff\">Add</button>\n                    <button class=\"btn btn-default\" data-bind=\"click: function(data,event) { buffs.removeBuff(data, event, buffs.selectedBuff().buffName) }\">Remove</button>\n                </div>\n            </div>\n        </div>\n        <div class=\"row\" data-bind=\"foreach: buffs.buffs, visible: sectionDisplay().buff()\">\n            <div data-bind=\"css: {row: $data.data.isDetail() || ($index() < $parent.buffs.buffs().length-1 && $parent.buffs.buffs()[$index()+1].data.isDetail()), row2: $data.data.isDetail() || ($index() < $parent.buffs.buffs().length-1 && $parent.buffs.buffs()[$index()+1].data.isDetail()) }\">\n                <div class=\"col-md-3 text-center bottom-buffer2\" data-bind=\"css: {'col-md-3': $root.layout() == 0, 'col-md-2': $root.layout() == 1}\">\n                    <img style=\"padding:0px;margin-bottom:1px;\" class=\"img-rounded ability\" data-bind=\"css: { ability_active: $data.data.isActive() || $data.data.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1, ability_inactive: !$data.data.isActive() && $data.data.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') == -1, btn: $data.data.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') == -1, 'btn-default': $data.data.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') == -1}, attr:{src: '/media/images/spellicons/' + $data.data.name + '.png'}, click: function(data, event) { $parent.buffs.toggleBuff($index, data.data, event); }, event: { dblclick: function(data,event) { $parent.buffs.removeBuff(data, event, $data.data.name) } }\"/>\n                    <div class=\"progress\" style=\"position:relative\">\n                        <div style=\"position:absolute;width:100%;color:white;\" class=\"text-center\" data-bind=\"visible: $parent.getAbilityLevelMax($data.data) > 0, text: $data.data.level() + '/' + $parent.getAbilityLevelMax($data.data)\"></div>\n                        <div class=\"progress-bar progress-bar-danger\" role=\"progressbar\" aria-valuenow=\"60\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: 60%;\" data-bind=\"attr: { 'aria-valuenow': ($parent.getAbilityLevelMax($data.data) > 0 ? $data.data.level()/$parent.getAbilityLevelMax($data.data)*100 : 0) }, style: { width: ($parent.getAbilityLevelMax($data.data) > 0 ? $data.data.level()/$parent.getAbilityLevelMax($data.data)*100 : 0) + '%' }\"></div>\n                    </div>\n                    <div class=\"btn-group btn-group-justified\" data-bind=\"if: $data.data.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE') == -1\">\n                        <a class=\"btn btn-default btn-sm\" data-bind=\"click: function(data, event) { $parent.buffs.levelDownAbility($index, data.data, event, $parent); }\">-</a>\n                        <a class=\"btn btn-default btn-sm\" data-bind=\"click: function(data, event) { $parent.buffs.levelUpAbility($index, data.data, event, $parent); }\">+</a>\n                    </div>\n                    <div class=\"btn-group btn-group-justified\">\n                        <a class=\"btn btn-default btn-sm\" data-bind=\"click: function(data, event) { $parent.buffs.toggleBuffDetail($index, data, event); }, css: {'toggled': $data.data.isDetail}\">Details</a>\n                    </div>\n                </div>\n                <div class=\"col-md-9 bottom-buffer\" data-bind=\"visible: $data.data.isDetail()\">\n                    <button type=\"button\" class=\"close\" data-bind=\"click: function(data, event) { $parent.buffs.toggleBuffDetail($index, data.data, event); }\">&times;</button>\n                    <div data-bind=\"component: { name: 'ability-detail', params: { hero: $parent, ability: $data.data } }\"></div>\n                    <div data-bind=\"if: $data.data.name in $parent.buffs.abilityData && $parent.buffs.buffs()[$index()].data.level() > 0\">\n                        <div class=\"col-md-8\">\n                            <div data-bind=\"component: { name: 'buff-settings', params: $parent.buffs.abilitySettingsData($data.data.name, $parent, $index()) }\"></div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n        \n        <div class=\"form-horizontal\" data-bind=\"visible: sectionDisplay().buff()\">\n            <div class=\"form-group\">\n                <div class=\"col-md-6\">\n                    <div class=\"input-group\">\n                        <input class=\"form-control\" id=\"auto2\" data-bind=\"attr: {id: id() + '-auto2' }, jqAuto: { autoFocus: true, html: true }, jqAutoSource: buffs.itemBuffs.itemBuffOptions, jqAutoValue: buffs.itemBuffs.selectedItemBuff, jqAutoSourceLabel: 'displayname', jqAutoSourceInputValue: 'name', jqAutoSourceValue: 'value'\" />\n                        <span class=\"input-group-btn\">\n                            <button class=\"btn btn-default\" data-bind=\"jqAutoCombo: id() + '-auto2'\"><span class=\"glyphicon glyphicon-search\"></span></button>\n                        </span>\n                    </div>\n                </div>\n                <div class=\"col-md-6\">\n                    <button class=\"btn btn-default\" data-bind=\"click: buffs.itemBuffs.addItemBuff\">Add</button>\n                </div>\n            </div>\n        </div>\n        <div data-bind=\"foreach: buffs.itemBuffs.items, visible: sectionDisplay().buff()\">\n            <div class=\"pull-left\" style=\"margin-right:10px\" data-bind=\"component: { name: 'item-buff', params: $data}\"></div>\n        </div>\n    </div>\n</div>\n\n<div class=\"row\">\n    <div class=\"col-md-12\">\n        <h3 class=\"section_header\" data-bind=\"toggle: sectionDisplay().debuff, css: { section_disabled: !sectionDisplay().debuff() }\">Debuffs</h3>\n        <div class=\"form-horizontal\" data-bind=\"visible: sectionDisplay().debuff()\">\n            <div class=\"form-group\">\n                <div class=\"col-md-6\">\n                    <select id=\"buffselect\" class=\"form-control\" data-bind=\"options: debuffs.availableDebuffs , optionsText: 'buffDisplayName', value: debuffs.selectedBuff\"></select>\n                </div>\n                <div class=\"col-md-6\">\n                    <button class=\"btn btn-default\" data-bind=\"click: debuffs.addBuff\">Add</button>\n                    <button class=\"btn btn-default\" data-bind=\"click: function(data,event) { debuffs.removeBuff(data, event, debuffs.selectedBuff().buffName) }\">Remove</button>\n                </div>\n            </div>\n        </div>\n\n        <div class=\"row\" data-bind=\"foreach: debuffs.buffs, visible: sectionDisplay().debuff()\">\n            <div data-bind=\"css: {row: $data.data.isDetail() || ($index() < $parent.debuffs.buffs().length-1 && $parent.debuffs.buffs()[$index()+1].data.isDetail()), row2: $data.data.isDetail() || ($index() < $parent.debuffs.buffs().length-1 && $parent.debuffs.buffs()[$index()+1].data.isDetail()) }\">\n                <div class=\"col-md-3 text-center bottom-buffer2\" data-bind=\"css: {'col-md-3': $root.layout() == 0, 'col-md-2': $root.layout() == 1}\">\n                    <img style=\"padding:0px;margin-bottom:1px;\" class=\"img-rounded ability\" data-bind=\"css: { ability_active: $data.data.isActive() || $data.data.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1, ability_inactive: !$data.data.isActive() && $data.data.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') == -1, btn: $data.data.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') == -1, 'btn-default': $data.data.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') == -1}, attr:{src: '/media/images/spellicons/' + $data.data.name + '.png'}, click: function(data, event) { $parent.debuffs.toggleBuff($index, data.data, event); }, event: { dblclick: function(data,event) { $parent.debuffs.removeBuff(data, event, $data.data.name) } }\"/>\n                    <div class=\"progress\" style=\"position:relative\">\n                        <div style=\"position:absolute;width:100%;color:white;\" class=\"text-center\" data-bind=\"visible: $parent.getAbilityLevelMax($data.data) > 0, text: $data.data.level() + '/' + $parent.getAbilityLevelMax($data.data)\"></div>\n                        <div class=\"progress-bar progress-bar-danger\" role=\"progressbar\" aria-valuenow=\"60\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: 60%;\" data-bind=\"attr: { 'aria-valuenow': ($parent.getAbilityLevelMax($data.data) > 0 ? $data.data.level()/$parent.getAbilityLevelMax($data.data)*100 : 0) }, style: { width: ($parent.getAbilityLevelMax($data.data) > 0 ? $data.data.level()/$parent.getAbilityLevelMax($data.data)*100 : 0) + '%' }\"></div>\n                    </div>\n                    <div class=\"btn-group btn-group-justified\">\n                        <a class=\"btn btn-default btn-sm\" data-bind=\"click: function(data, event) { $parent.debuffs.levelDownAbility($index, data.data, event, $parent); }\">-</a>\n                        <a class=\"btn btn-default btn-sm\" data-bind=\"click: function(data, event) { $parent.debuffs.levelUpAbility($index, data.data, event, $parent); }\">+</a>\n                    </div>\n                    <div class=\"btn-group btn-group-justified\">\n                        <a class=\"btn btn-default btn-sm\" data-bind=\"click: function(data, event) { $parent.debuffs.toggleBuffDetail($index, data, event); }, css: {'toggled': $data.data.isDetail}\">Details</a>\n                    </div>\n                </div>\n                <div class=\"col-md-9 bottom-buffer\" data-bind=\"visible: $data.data.isDetail()\">\n                    <button type=\"button\" class=\"close\" data-bind=\"click: function(data, event) { $parent.debuffs.toggleBuffDetail($index, data.data, event); }\">&times;</button>\n                    <div data-bind=\"component: { name: 'ability-detail', params: { hero: $parent, ability: $data.data } }\"></div>\n                    <div data-bind=\"if: $data.data.name in $parent.debuffs.abilityData && $parent.debuffs.buffs()[$index()].data.level() > 0\">\n                        <div class=\"col-md-8\">\n                            <div data-bind=\"component: { name: 'buff-settings', params: $parent.debuffs.abilitySettingsData($data.data.name, $parent, $index()) }\"></div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n        \n        <div class=\"form-horizontal\" data-bind=\"visible: sectionDisplay().debuff()\">\n            <div class=\"form-group\">\n                <div class=\"col-md-6\">\n                    <div class=\"input-group\">\n                        <input class=\"form-control\" id=\"auto3\" data-bind=\"attr: {id: id() + '-auto3' }, jqAuto: { autoFocus: true, html: true }, jqAutoSource: debuffs.itemBuffs.itemDebuffOptions, jqAutoValue: debuffs.itemBuffs.selectedItemDebuff, jqAutoSourceLabel: 'displayname', jqAutoSourceInputValue: 'name', jqAutoSourceValue: 'value'\" />\n                        <span class=\"input-group-btn\">\n                            <button class=\"btn btn-default\" data-bind=\"jqAutoCombo: id() + '-auto3'\"><span class=\"glyphicon glyphicon-search\"></span></button>\n                        </span>\n                    </div>\n                </div>\n                <div class=\"col-md-6\">\n                    <button class=\"btn btn-default\" data-bind=\"click: debuffs.itemBuffs.addItemDebuff\">Add</button>\n                </div>\n            </div>\n        </div>\n        <div data-bind=\"foreach: debuffs.itemBuffs.items, visible: sectionDisplay().debuff()\">\n            <div class=\"pull-left\" style=\"margin-right:10px\" data-bind=\"component: { name: 'item-debuff', params: $data}\"></div>\n        </div>\n    </div>\n</div>" });
 ko.components.register('damage-details', { template: "<div class=\"row\">\n    <div class=\"col-md-12\">\n        <h3 style=\"display:block;\" class=\"section_header\" data-bind=\"toggle: showDamageDetails, css: { section_disabled: !showDamageDetails() }\">Damage Details\n            <span class=\"pull-right\" data-bind=\"visible: showDamageDetails()\">\n                <small style=\"text-align:center\" data-bind=\"style: {color: getDamageTypeColor('physical')}\">Physical</small>\n                <small style=\"text-align:center\" data-bind=\"style: {color: getDamageTypeColor('magic')}\">Magical</small>\n                <small style=\"text-align:center\" data-bind=\"style: {color: getDamageTypeColor('pure')}\">Pure</small>\n            </span>\n        </h3>\n        <table class=\"table damage-details\" data-bind=\"visible: showDamageDetails()\">\n            <thead>\n                <tr class=\"damage-details-header-row\">\n                    <td></td>\n                    <td class=\"text-center\" colspan=\"2\"><strong>Attack Damage</strong><img src=\"img/reduc_icon.png\" class=\"pull-right\" data-bind=\"attr: {title: 'After reductions from ' + enemy().heroData().displayname}\"></td>\n                    <td class=\"text-center\" colspan=\"2\"><strong>DPS</strong><img src=\"img/reduc_icon.png\" class=\"pull-right\" data-bind=\"attr: {title: 'After reductions from ' + enemy().heroData().displayname}\"></td>\n                </tr>\n                <tr class=\"damage-details-header-row-2 total-row\">\n                    <td><strong>Total</strong></td>\n                    <td class=\"text-right\" data-bind=\"text: damageTotalInfo().totalRow[0]().toFixed(2)\"></td>\n                    <td class=\"text-right\" data-bind=\"text: damageTotalInfo().totalRow[1]().toFixed(2)\"></td>\n                    <td class=\"text-right\" data-bind=\"text: damageTotalInfo().totalRow[2]().toFixed(2)\"></td>\n                    <td class=\"text-right\" data-bind=\"text: damageTotalInfo().totalRow[3]().toFixed(2)\"></td>\n                </tr>\n            </thead>\n            <!-- ko foreach: damageTotalInfo().attacks -->\n            <tbody>\n                <tr class=\"indent subtotal-row\" data-bind=\"toggle: $data.enabled, css: { 'inactive': !$data.enabled() }\">\n                    <td>\n                        <button class=\"btn btn-default btn-xs glyphicon pull-left\" data-bind=\"toggle: $data.enabled, css: {'glyphicon-eye-open': $data.enabled(), 'glyphicon-eye-close': !$data.enabled()}, preventBubble: 'click'\"></button>\n                        <button class=\"btn btn-default btn-xs glyphicon pull-right\" data-bind=\"toggle: $data.visible, css: {'glyphicon-minus': $data.visible(), 'glyphicon-plus': !$data.visible()}, preventBubble: 'click'\"></button>\n                        <strong><span data-bind=\"text: $data.name\"></span></strong>\n                    </td>\n                    <td class=\"text-right\" data-bind=\"text: $data.totalRow[0]().toFixed(2)\"></td>\n                    <td class=\"text-right\" data-bind=\"text: $data.totalRow[1]().toFixed(2)\"></td>\n                    <td class=\"text-right\" data-bind=\"text: $data.totalRow[2]().toFixed(2)\"></td>\n                    <td class=\"text-right\" data-bind=\"text: $data.totalRow[3]().toFixed(2)\"></td>\n                </tr>\n            </tbody>\n            <tbody class=\"indent\" data-bind=\"foreach: $data.sources, visible: $data.visible\">\n                <tr data-bind=\"toggle: $data.enabled, css: { 'inactive': !$data.enabled() }\">\n                    <td class=\"indent\">\n                        <span data-bind=\"text: $data.name\"></span>\n                        <button class=\"btn btn-default btn-xs glyphicon pull-left\" data-bind=\"toggle: $data.enabled, css: {'glyphicon-eye-open': $data.enabled(), 'glyphicon-eye-close': !$data.enabled()}, preventBubble: 'click'\"></button>\n                    </td>\n                    <td class=\"text-right\"><span data-bind=\"html: $data.damage.toFixed(2), style: {color: $parents[1].getDamageTypeColor($data.damageType)}\"></span></td>\n                    <td class=\"text-right\"><span data-bind=\"html: $data.damageReduced.toFixed(2), style: {color: $parents[1].getDamageTypeColor($data.damageType)}\"></span></td>\n                    <td class=\"text-right\"><span data-bind=\"html: $data.dps.toFixed(2), style: {color: $parents[1].getDamageTypeColor($data.damageType)}\"></span></td>\n                    <td class=\"text-right\"><span data-bind=\"html: $data.dpsReduced.toFixed(2), style: {color: $parents[1].getDamageTypeColor($data.damageType)}\"></span></td>\n                </tr>\n            </tbody>\n            <tr class=\"indent crit\" data-bind=\"visible: $data.visible() && $data.sourcesCrit.length > 0\">\n                <td class=\"indent\">Critical Strike Proc, <span data-bind=\"text: ($data.totalCritChance * 100).toFixed(1) + '%'\"></span></td>\n                <td class=\"text-right\" data-bind=\"text: $data.totalCritRow[0]().toFixed(2)\"></td>\n                <td class=\"text-right\" data-bind=\"text: $data.totalCritRow[1]().toFixed(2)\"></td>\n                <td class=\"text-right\" data-bind=\"text: $data.totalCritRow[2]().toFixed(2)\"></td>\n                <td class=\"text-right\" data-bind=\"text: $data.totalCritRow[3]().toFixed(2)\"></td>\n            </tr>\n            <tbody class=\"indent\" data-bind=\"visible: $data.visible, foreach: $data.sourcesCrit\">\n                <tr class=\"indent crit\" data-bind=\"toggle: $data.enabled, css: { 'inactive': !$data.enabled() }\">\n                    <td class=\"indent\">\n                        <span data-bind=\"text: $data.name\"></span>\n                        <button class=\"btn btn-default btn-xs glyphicon pull-left\" data-bind=\"toggle: $data.enabled, css: {'glyphicon-eye-open': $data.enabled(), 'glyphicon-eye-close': !$data.enabled()}, preventBubble: 'click'\"></button>\n                    </td>\n                    <td class=\"text-right\"><span data-bind=\"html: $data.damage.toFixed(2)\"></span></td>\n                    <td class=\"text-right\"><span data-bind=\"html: $data.damageReduced.toFixed(2)\"></span></td>\n                    <td class=\"text-right\"><span data-bind=\"html: $data.dps.toFixed(2)\"></span></td>\n                    <td class=\"text-right\"><span data-bind=\"html: $data.dpsReduced.toFixed(2)\"></span></td>\n                </tr>\n            </tbody>\n            <!-- /ko -->\n            <tbody>\n                <tr data-bind=\"visible: cleaveInfo().length > 0\">\n                    <td colspan=3><strong>Cleave</strong></td>\n                </tr>\n            </tbody>    \n            <tbody data-bind=\"foreach: cleaveInfo()\">\n                <tr><td>Radius:</td><td class=\"text-right\"><span data-bind=\"html: $data.radius\"></span></td></tr>\n                <tr><td>Magnitude:</td><td class=\"text-right\"><span data-bind=\"html: ($data.magnitude * 100).toFixed(2) + '%'\"></span></td></tr>\n                <tr>\n                    <td>Cleave Damage:</td>\n                    <td class=\"text-right\"><span data-bind=\"html: ($data.magnitude * $parent.damageTotalInfo().total).toFixed(2)\"></span></td>\n                </tr>\n            </tbody>\n        \n        </table>\n    </div>\n</div>" });
 ko.components.register('damage-amp', { template: "<div class=\"col-md-12\">\n    <h3 class=\"section_header\" data-bind=\"toggle: sectionDisplay().damageamp, css: { section_disabled: !sectionDisplay().damageamp() }\">Damage Amplification & Reduction</h3>\n    <div data-bind=\"visible: sectionDisplay().damageamp(), lazyBinding: sectionDisplay().damageamp\">\n        <div class=\"form-horizontal\">\n            <div class=\"form-group\">\n                    <div class=\"col-md-3 control-label\">\n                        <label for=\"damageinput\">Damage</label>\n                    </div>\n                    <div class=\"col-md-6\">\n                        <input class=\"form-control\" id=\"damageinput\" data-bind=\"value: damageInputValue\" />\n                    </div>\n            </div>\n        </div>\n        <div class=\"form-horizontal\">\n            <div class=\"form-group\">\n                    <div class=\"col-md-3 control-label\">\n                        <label for=\"buffampselect\">Amplification</label>\n                    </div>\n                    <div class=\"col-md-5\">\n                        <select id=\"buffampselect\" class=\"form-control\" data-bind=\"options: damageAmplification.availableBuffs , optionsText: 'buffDisplayName', value: damageAmplification.selectedBuff\"></select>\n                    </div>\n                    <div class=\"col-md-4\">\n                        <button class=\"btn btn-default\" data-bind=\"click: damageAmplification.addBuff\">Add</button>\n                        <button class=\"btn btn-default\" data-bind=\"click: function(data,event) { damageAmplification.removeBuff(data, event, damageAmplification.selectedBuff().buffName) }\">Remove</button>\n                    </div>\n            </div>\n        </div>\n        <div class=\"row\" data-bind=\"foreach: damageAmplification.buffs\">\n            <div data-bind=\"css: {row: $data.data.isDetail() || ($index() < $parent.damageAmplification.buffs().length-1 && $parent.damageAmplification.buffs()[$index()+1].data.isDetail()), row2: $data.data.isDetail() || ($index() < $parent.damageAmplification.buffs().length-1 && $parent.damageAmplification.buffs()[$index()+1].data.isDetail()) }\">\n                <div class=\"col-md-3 text-center bottom-buffer row2\" data-bind=\"css: {'col-md-3': $root.layout() == 0, 'col-md-2': $root.layout() == 1}\">\n                    <img style=\"padding:0px;margin-bottom:1px;\" class=\"img-rounded ability\" data-bind=\"css: { ability_active: $data.data.isActive() || $data.data.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1, ability_inactive: !$data.data.isActive() && $data.data.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') == -1, btn: $data.data.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') == -1, 'btn-default': $data.data.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') == -1}, attr:{src: '/media/images/spellicons/' + $data.data.name + '.png'}, click: function(data, event) { $parent.damageAmplification.toggleBuff($index, data.data, event); }, event: { dblclick: function(data,event) { $parent.damageAmplification.removeBuff(data, event, $data.data.name) } }\"/>\n                    <div class=\"progress\" style=\"position:relative\">\n                        <div style=\"position:absolute;width:100%;color:white;\" class=\"text-center\" data-bind=\"visible: $parent.getAbilityLevelMax($data.data) > 0, text: $data.data.level() + '/' + $parent.getAbilityLevelMax($data.data)\"></div>\n                        <div class=\"progress-bar progress-bar-danger\" role=\"progressbar\" aria-valuenow=\"60\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: 60%;\" data-bind=\"attr: { 'aria-valuenow': ($parent.getAbilityLevelMax($data.data) > 0 ? $data.data.level()/$parent.getAbilityLevelMax($data.data)*100 : 0) }, style: { width: ($parent.getAbilityLevelMax($data.data) > 0 ? $data.data.level()/$parent.getAbilityLevelMax($data.data)*100 : 0) + '%' }\"></div>\n                    </div>\n                    <div class=\"btn-group btn-group-justified\" data-bind=\"if: $data.data.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE') == -1\">\n                        <a class=\"btn btn-default btn-sm\" data-bind=\"click: function(data, event) { $parent.damageAmplification.levelDownAbility($index, data.data, event, $parent); }\">-</a>\n                        <a class=\"btn btn-default btn-sm\" data-bind=\"click: function(data, event) { $parent.damageAmplification.levelUpAbility($index, data.data, event, $parent); }\">+</a>\n                    </div>\n                    <div class=\"btn-group btn-group-justified\">\n                        <a class=\"btn btn-default btn-sm\" data-bind=\"click: function(data, event) { $parent.damageAmplification.toggleBuffDetail($index, data, event); }, css: {'toggled': $data.data.isDetail}\">Details</a>\n                    </div>\n                </div>\n                <div class=\"col-md-9 bottom-buffer\" data-bind=\"visible: $data.data.isDetail()\">\n                    <button type=\"button\" class=\"close\" data-bind=\"click: function(data, event) { $parent.damageAmplification.toggleBuffDetail($index, data.data, event); }\">&times;</button>\n                    <div data-bind=\"component: { name: 'ability-detail', params: { hero: $parent, ability: $data.data } }\"></div>\n                    <div data-bind=\"if: $data.data.name in $parent.damageAmplification.abilityData && $parent.damageAmplification.buffs()[$index()].data.level() > 0\">\n                        <div class=\"col-md-8\">\n                            <div data-bind=\"component: { name: 'buff-settings', params: $parent.damageAmplification.abilitySettingsData($data.data.name, $parent, $index()) }\"></div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n        <div class=\"form-horizontal\">\n            <div class=\"form-group\">\n                    <div class=\"col-md-3 control-label\">\n                        <label for=\"buffreductionselect\">Reduction</label>\n                    </div>\n                    <div class=\"col-md-5\">\n                        <select id=\"buffreductionselect\" class=\"form-control\" data-bind=\"options: damageReduction.availableDebuffs , optionsText: 'buffDisplayName', value: damageReduction.selectedBuff\"></select>\n                    </div>\n                    <div class=\"col-md-4\">\n                        <button class=\"btn btn-default\" data-bind=\"click: damageReduction.addBuff\">Add</button>\n                        <button class=\"btn btn-default\" data-bind=\"click: function(data,event) { damageReduction.removeBuff(data, event, damageReduction.selectedBuff().buffName) }\">Remove</button>\n                    </div>\n            </div>\n        </div>\n        <div class=\"row\" data-bind=\"foreach: damageReduction.buffs\">\n            <div data-bind=\"css: {row: $data.data.isDetail() || ($index() < $parent.damageReduction.buffs().length-1 && $parent.damageReduction.buffs()[$index()+1].data.isDetail()), row2: $data.data.isDetail() || ($index() < $parent.damageReduction.buffs().length-1 && $parent.damageReduction.buffs()[$index()+1].data.isDetail()) }\">\n                <div class=\"col-md-3 text-center bottom-buffer row2\" data-bind=\"css: {'col-md-3': $root.layout() == 0, 'col-md-2': $root.layout() == 1}\">\n                    <img style=\"padding:0px;margin-bottom:1px;\" class=\"img-rounded ability\" data-bind=\"css: { ability_active: $data.data.isActive() || $data.data.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1, ability_inactive: !$data.data.isActive() && $data.data.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') == -1, btn: $data.data.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') == -1, 'btn-default': $data.data.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') == -1}, attr:{src: '/media/images/spellicons/' + $data.data.name + '.png'}, click: function(data, event) { $parent.damageReduction.toggleBuff($index, data.data, event); }, event: { dblclick: function(data,event) { $parent.damageReduction.removeBuff(data, event, $data.data.name) } }\"/>\n                    <div class=\"progress\" style=\"position:relative\">\n                        <div style=\"position:absolute;width:100%;color:white;\" class=\"text-center\" data-bind=\"visible: $parent.getAbilityLevelMax($data.data) > 0, text: $data.data.level() + '/' + $parent.getAbilityLevelMax($data.data)\"></div>\n                        <div class=\"progress-bar progress-bar-danger\" role=\"progressbar\" aria-valuenow=\"60\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: 60%;\" data-bind=\"attr: { 'aria-valuenow': ($parent.getAbilityLevelMax($data.data) > 0 ? $data.data.level()/$parent.getAbilityLevelMax($data.data)*100 : 0) }, style: { width: ($parent.getAbilityLevelMax($data.data) > 0 ? $data.data.level()/$parent.getAbilityLevelMax($data.data)*100 : 0) + '%' }\"></div>\n                    </div>\n                    <div class=\"btn-group btn-group-justified\" data-bind=\"if: $data.data.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE') == -1\">\n                        <a class=\"btn btn-default btn-sm\" data-bind=\"click: function(data, event) { $parent.damageReduction.levelDownAbility($index, data.data, event, $parent); }\">-</a>\n                        <a class=\"btn btn-default btn-sm\" data-bind=\"click: function(data, event) { $parent.damageReduction.levelUpAbility($index, data.data, event, $parent); }\">+</a>\n                    </div>\n                    <div class=\"btn-group btn-group-justified\">\n                        <a class=\"btn btn-default btn-sm\" data-bind=\"click: function(data, event) { $parent.damageReduction.toggleBuffDetail($index, data, event); }, css: {'toggled': $data.data.isDetail}\">Details</a>\n                    </div>\n                </div>\n                <div class=\"col-md-9 bottom-buffer\" data-bind=\"visible: $data.data.isDetail()\">\n                    <button type=\"button\" class=\"close\" data-bind=\"click: function(data, event) { $parent.damageReduction.toggleBuffDetail($index, data.data, event); }\">&times;</button>\n                    <div data-bind=\"component: { name: 'ability-detail', params: { hero: $parent, ability: $data.data } }\"></div>\n                    <div data-bind=\"if: $data.data.name in $parent.damageReduction.abilityData && $parent.damageReduction.buffs()[$index()].data.level() > 0\">\n                        <div class=\"col-md-8\">\n                            <div data-bind=\"component: { name: 'buff-settings', params: $parent.damageReduction.abilitySettingsData($data.data.name, $parent, $index()) }\"></div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n        \n        <h4>Calculations <a class=\"btn btn-default btn-xs\" data-bind=\"toggle: showDamageAmpCalcDetails, text: !showDamageAmpCalcDetails() ? 'Show details' : 'Hide details'\"></a></h4>\n        <table class=\"table\">\n            <tbody>\n                <!-- ko foreach: damageInputModified().data -->\n                <tr data-bind=\"visible: $parent.showDamageAmpCalcDetails()\">\n                    <td><span style=\"text-decoration: underline;\" data-bind=\"text: $data.label + ' damage'\"></span></td>\n                    <td class=\"text-right\"><span data-bind=\"html: Math.round($data.value * 100) / 100, style: {color: $parent.getDamageTypeColor($data.damageType)}\"></span></td>\n                </tr>\n                    <!-- ko foreach: $data.data -->\n                    <tr data-bind=\"visible: $parents[1].showDamageAmpCalcDetails()\">\n                        <td><span data-bind=\"text: $data.label\"></span></td>\n                        <td class=\"text-right\"><span data-bind=\"html: Math.round($data.value * 100) / 100, diffStyle: $data.value\"></span></td>\n                    </tr>\n                    <!-- /ko -->\n                <tr data-bind=\"css: {subtotal: $parent.showDamageAmpCalcDetails()}\">\n                    <td data-bind=\"visible: $parent.showDamageAmpCalcDetails()\"><span data-bind=\"text: $data.label + ' damage subtotal'\"></span></td>\n                    <td data-bind=\"visible: !$parent.showDamageAmpCalcDetails()\"><span data-bind=\"text: $data.label + ' damage'\"></span></td>\n                    <td class=\"text-right\"><span data-bind=\"html: Math.round($data.total * 100) / 100, style: {color: $parent.getDamageTypeColor($data.damageType)}\"></span></td>\n                </tr>\n                <!-- /ko -->\n                <tr>\n                    <td><strong data-bind=\"text: damageInputModified().label + ' damage'\"></strong></td>\n                    <td class=\"text-right\"><strong data-bind=\"html: Math.round(damageInputModified().total * 100) / 100, style: {color: getDamageTypeColor(damageInputModified().damageType)}\"></strong></td>\n                </tr>\n            </tbody>\n        </table>\n    </div>\n</div>" });
 ko.components.register('ability', { template: "<div data-bind=\"if: $data.displayname != 'Empty' &&  ($data.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_HIDDEN') == -1 || $data.name.indexOf('invoker_') != -1),\nstyle: {clear: $data.name == 'invoker_cold_snap' || $data.name == 'invoker_chaos_meteor' ? 'both' : ''},\ncss: {row: $data.isDetail() || ($index() < $parents[1].ability().abilities().length-1 && $parents[1].ability().abilities()[$index()+1].isDetail()), row3: $data.isDetail() || ($index() < $parents[1].ability().abilities().length-1 && $parents[1].ability().abilities()[$index()+1].isDetail()) }\">\n    <div class=\"col-md-3 text-center bottom-buffer row2\" data-bind=\"css: {'col-md-3': $root.layout() == 0, 'col-md-2': $root.layout() == 1}\">\n        <img style=\"padding:0px;margin-bottom:1px;\" class=\"img-rounded ability\" data-bind=\"css: { ability_active: $data.isActive() || $data.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1, ability_inactive: !$data.isActive() && $data.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') == -1, btn: $data.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') == -1, 'btn-default': $data.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') == -1}, attr:{src: '/media/images/spellicons/' + $data.name + '.png'}, click: function(data, event) { $parents[1].ability().toggleAbility($index, data, event); }\"/>\n        <div class=\"progress\" style=\"position:relative\">\n            <div style=\"position:absolute;width:100%;color:white;\" class=\"text-center\" data-bind=\"visible: $parents[1].getAbilityLevelMax($data) > 0, text: $data.level() + '/' + $parents[1].getAbilityLevelMax($data)\"></div>\n            <div class=\"progress-bar progress-bar-danger\" role=\"progressbar\" aria-valuenow=\"60\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: 60%;\" data-bind=\"attr: { 'aria-valuenow': ($parents[1].getAbilityLevelMax($data) > 0 ? $data.level()/$parents[1].getAbilityLevelMax($data)*100 : 0) }, style: { width: ($parents[1].getAbilityLevelMax($data) > 0 ? $data.level()/$parents[1].getAbilityLevelMax($data)*100 : 0) + '%' }\"></div>\n        </div>\n        <div class=\"btn-group btn-group-justified\" data-bind=\"if: $data.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE') == -1\">\n            <a class=\"btn btn-default btn-sm\" data-bind=\"click: function(data, event) { $parents[1].ability().levelDownAbility($index, data, event, $parents[1]); }\">-</a>\n            <a class=\"btn btn-default btn-sm\" data-bind=\"click: function(data, event) { $parents[1].ability().levelUpAbility($index, data, event, $parents[1]); }\">+</a>\n        </div>\n        <div class=\"btn-group btn-group-justified\">\n            <a class=\"btn btn-default btn-sm\" data-bind=\"click: function(data, event) { $parents[1].ability().toggleAbilityDetail($index, data, event); }, css: {'toggled': $data.isDetail}\">Details</a>\n        </div>\n        <div class=\"btn-group btn-group-justified\" data-bind=\"if: $data.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE') != -1\">\n            <a class=\"btn btn-default btn-sm btn-block\" style=\"visibility:hidden;\">&mdash;</a>\n        </div>\n    </div>\n    <div class=\"col-md-9 bottom-buffer2\" data-bind=\"visible: $data.isDetail()\">\n        <button type=\"button\" class=\"close\" data-bind=\"click: function(data, event) { $parents[1].ability().toggleAbilityDetail($index, data, event); }\">&times;</button>\n        <div data-bind=\"component: { name: 'ability-detail', params: { hero: $parents[1], ability: $data } }\"></div>\n        <div data-bind=\"if: $data.name in $parents[1].ability().abilityData && $parents[1].ability().abilities()[$index()].level() > 0\">\n            <div class=\"col-md-12\" style=\"margin-top: 10px\" >\n                <div data-bind=\"template: { name: 'ability-settings-template', data: $parents[1].ability().abilitySettingsData($data.name, $parents[1], $index()) }\"></div>\n            </div>\n        </div>\n    </div>\n</div>" });
@@ -12050,9 +12050,12 @@ var abilityDetail = require('../components/ability-detail');
 ko.components.register('ability-detail', abilityDetail);
 ko.components.register('shop', require('../components/shop'));
 ko.components.register('stat', { template: "<span data-bind=\"text: parseFloat(hero[stat]()).toString()\"></span><span data-bind=\"html: $root.getDiffText(hero.diff[stat]()), diffCss: hero.diff[stat], diffCssStat: stat, visible: hero.showDiff\"></span>" });
-ko.components.register('stats0', { template: "<div class=\"col-md-12 stats0\" data-bind=\"css: {'col-md-12': $root.layout() == 0, 'col-md-3': $root.layout() == 1}\">\n    <table class=\"table table-condensed\">\n    <tbody>\n    <tr><td>Strength:</td><td class=\"text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'totalStr' } }\"></td></tr>\n    <tr><td>Agility:</td><td class=\"text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'totalAgi' } }\"></td></tr>\n    <tr><td>Intelligence:</td><td class=\"text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'totalInt' } }\"></td></tr>\n    <tr><td><abbr title=\"Movement Speed\">MS</abbr>:</td><td class=\"text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'totalMovementSpeed' } }\"></td></tr>\n    <tr><td>Turn Rate:</td><td class=\"text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'totalTurnRate' } }\"></td></tr>\n    <tr><td>Sight Range:</td><td class=\"text-right\"><span data-bind=\"html: '<abbr title=\\'Day\\'>' + visionrangeday() + '</abbr>/<abbr title=\\'Night\\'>' + visionrangenight() + '</abbr>'\"></span></td></tr>\n    <tr><td>%Spell Amp:</td><td class=\"text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'spellAmp' } }\"></td></tr>\n    </tbody>\n    </table>\n</div>" });
-ko.components.register('stats1', { template: "<div class=\"col-md-12 stats1\" data-bind=\"css: {'col-md-12': $root.layout() == 0, 'col-md-3': $root.layout() == 1}\">\n    <table class=\"table table-condensed\">\n    <tbody>\n    <tr><td>Armor:</td><td class=\"text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'totalArmorPhysical' } }\"></td></tr>\n    <tr><td>Health:</td><td class=\"text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'health' } }\"></td></tr>\n    <tr><td>Health Regen:</td><td class=\"text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'healthregen' } }\"></td></tr>\n    <tr><td>Mana:</td><td class=\"text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'mana' } }\"></td></tr>\n    <tr><td>Mana Regen:</td><td class=\"text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'manaregen' } }\"></td></tr>\n    <tr><td>Physical <abbr title=\"Effective Hit Points\">EHP</abbr>:</td><td class=\"text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'ehpPhysical' } }\"></td></tr>\n    <tr><td>Magical <abbr title=\"Effective Hit Points\">EHP</abbr>:</td><td class=\"text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'ehpMagical' } }\"></td></tr>\n    </tbody>\n    </table>\n</div>" });
-ko.components.register('stats2', { template: "<div class=\"col-md-12 stats2\" data-bind=\"css: {'col-md-12': $root.layout() == 0, 'col-md-3': $root.layout() == 1}\">\n    <table class=\"table table-condensed\">\n    <tbody>\n    <tr><td>%Phys Res:</td><td class=\"text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'totalArmorPhysicalReduction' } }\"></td></tr>\n    <tr><td>%Magic Res:</td><td class=\"text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'totalMagicResistance' } }\"></td></tr>\n    <tr><td>%Status Res:</td><td class=\"text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'totalStatusResistance' } }\"></td></tr>\n    <tr><td>%Lifesteal:</td><td class=\"text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'lifesteal' } }\"></td></tr>\n    <tr><td>%Evasion:</td><td class=\"text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'evasion' } }\"></td></tr>\n    <tr><td>%Bash:</td><td class=\"text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'bash' } }\"></td></tr>\n    <tr><td>%Miss Chance:</td><td class=\"text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'missChance' } }\"></td></tr>\n    <tr style=\"display: none\"><td colspan=2><a class=\"btn btn-default btn-block btn-xs\" data-bind=\"css: {disabled: critInfo().sources.length == 0 ? 'disabled' : '', 'toggled': showCriticalStrikeDetails}, toggle: showCriticalStrikeDetails\">Critical Strike Details</a></td></tr>\n    </tbody>\n    <tbody class=\"tabledropdown\" style=\"border-top:0\" data-bind=\"visible: showCriticalStrikeDetails(),foreach: critInfo().sources\">\n    <tr><td colspan=2><strong data-bind=\"text: $data.name\"></strong></td></tr>\n    <tr><td>Crit Chance:</td><td class=\"text-right\"><span data-bind=\"text: ($data.totalchance * 100).toFixed(2) + '%'\"></span></td></tr>\n    <tr><td>Crit Multiplier:</td><td class=\"text-right\"><span data-bind=\"text: ($data.multiplier * 100).toFixed(2) + '%'\"></span></td></tr>\n    </tbody>\n    </table>\n</div>" });
+ko.components.register('stat2', require('../components/stats/stat2'));
+ko.components.register('stat3', require('../components/stats/stat3'));
+ko.components.register('stats', { template: "<div class=\"col-md-12 stats\">\n    <div class=\"stats-row stats-additional\"><div class=\"stats-cell\">Base Strength:</div><div class=\"stats-cell text-right\"><span data-bind=\"text: heroData().attributebasestrength\"></span></div></div>\n    <div class=\"stats-row stats-additional\"><div class=\"stats-cell\">Strength Gain:</div><div class=\"stats-cell text-right\"><span data-bind=\"text: heroData().attributestrengthgain\"></span></div></div>\n    <div class=\"stats-row stats-additional\"><div class=\"stats-cell\">Base Agility:</div><div class=\"stats-cell text-right\"><span data-bind=\"text: heroData().attributebaseagility\"></span></div></div>\n    <div class=\"stats-row stats-additional\"><div class=\"stats-cell\">Agility Gain:</div><div class=\"stats-cell text-right\"><span data-bind=\"text: heroData().attributeagilitygain\"></span></div></div>\n    <div class=\"stats-row stats-additional\"><div class=\"stats-cell\">Base Int:</div><div class=\"stats-cell text-right\"><span data-bind=\"text: heroData().attributebaseintelligence\"></span></div></div>\n    <div class=\"stats-row stats-additional\"><div class=\"stats-cell\">Int Gain:</div><div class=\"stats-cell text-right\"><span data-bind=\"text: heroData().attributeintelligencegain\"></span></div></div>\n    <div class=\"stats-row stats-additional\"><div class=\"stats-cell\">Base Armor:</div><div class=\"stats-cell text-right\"><span data-bind=\"text: heroData().armorphysical\"></span></div></div>\n    <div class=\"stats-row stats-additional\"><div class=\"stats-cell\"><abbr title=\"Base Armor + armor from base agility\">Starting Armor:</abbr></div><div class=\"stats-cell text-right\"><span data-bind=\"text: parseFloat($data.startingArmor()).toString()\"></span></div></div>\n    <div class=\"stats-row stats-additional\"><div class=\"stats-cell\">Base Magic Res:</div><div class=\"stats-cell text-right\"><span data-bind=\"text: heroData().magicalresistance + '%'\"></span></div></div>\n    <div class=\"stats-row stats-additional\"><div class=\"stats-cell\">Base Attack Point:</div><div class=\"stats-cell text-right\"><span data-bind=\"text: heroData().attackpoint\"></span></div></div>\n    <div class=\"stats-row stats-additional\"><div class=\"stats-cell\"><abbr data-bind=\"attr: { title: 'Total experience required to reach level ' + $data.selectedHeroLevel() }\">Total Exp:</abbr></div><div class=\"stats-cell text-right\"><span data-bind=\"text: $data.totalExp()\"></span></span></div></div>\n    <div class=\"stats-row stats-additional\"><div class=\"stats-cell\"><abbr title=\"Experience required for next level\">Next level exp:</abbr></div><div class=\"stats-cell text-right\"><span data-bind=\"html: $data.nextLevelExp()\"></span></span></div></div>\n    <div class=\"stats-row stats-additional\"><div class=\"stats-cell\">Respawn Time:</div><div class=\"stats-cell text-right\"><span data-bind=\"text: $data.respawnTime()\"></span></div></div>\n        \n    <div class=\"stats-row\"><div class=\"stats-cell\">Strength:</div><div class=\"stats-cell text-right\" data-bind=\"component: { name: 'stat2', params: {'hero': $data, 'stat': 'totalStr' } }\"></div></div>\n    <div class=\"stats-row\"><div class=\"stats-cell\">Agility:</div><div class=\"stats-cell text-right\" data-bind=\"component: { name: 'stat2', params: {'hero': $data, 'stat': 'totalAgi' } }\"></div></div>\n    <div class=\"stats-row\"><div class=\"stats-cell\">Intelligence:</div><div class=\"stats-cell text-right\" data-bind=\"component: { name: 'stat2', params: {'hero': $data, 'stat': 'totalInt' } }\"></div></div>\n    <div class=\"stats-row\"><div class=\"stats-cell\"><abbr title=\"Movement Speed\">MS</abbr>:</div><div class=\"stats-cell text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'totalMovementSpeed' } }\"></div></div>\n    <div class=\"stats-row\"><div class=\"stats-cell\">Turn Rate:</div><div class=\"stats-cell text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'totalTurnRate' } }\"></div></div>\n    <div class=\"stats-row\"><div class=\"stats-cell\">Sight Range:</div><div class=\"stats-cell text-right\"><span data-bind=\"html: '<abbr title=\\'Day\\'>' + visionrangeday() + '</abbr>/<abbr title=\\'Night\\'>' + visionrangenight() + '</abbr>'\"></span></div></div>\n    <div class=\"stats-row\"><div class=\"stats-cell\">%Spell Amp:</div><div class=\"stats-cell text-right\" data-bind=\"component: { name: 'stat2', params: {'hero': $data, 'stat': 'spellAmp' } }\"></div></div>\n    <div class=\"stats-row\"><div class=\"stats-cell\">Armor:</div><div class=\"stats-cell text-right\" data-bind=\"component: { name: 'stat2', params: {'hero': $data, 'stat': 'totalArmorPhysical' } }\"></div></div>\n    \n    <div class=\"stats-row\"><div class=\"stats-cell\">Health:</div><div class=\"stats-cell text-right\" data-bind=\"component: { name: 'stat2', params: {'hero': $data, 'stat': 'health' } }\"></div></div>\n    <div class=\"stats-row\"><div class=\"stats-cell\">Health Regen:</div><div class=\"stats-cell text-right\" data-bind=\"component: { name: 'stat2', params: {'hero': $data, 'stat': 'healthregen' } }\"></div></div>\n    <div class=\"stats-row\"><div class=\"stats-cell\">Mana:</div><div class=\"stats-cell text-right\" data-bind=\"component: { name: 'stat2', params: {'hero': $data, 'stat': 'mana' } }\"></div></div>\n    <div class=\"stats-row\"><div class=\"stats-cell\">Mana Regen:</div><div class=\"stats-cell text-right\" data-bind=\"component: { name: 'stat2', params: {'hero': $data, 'stat': 'manaregen' } }\"></div></div>\n    <div class=\"stats-row\"><div class=\"stats-cell\">Physical <abbr title=\"Effective Hit Points\">EHP</abbr>:</div><div class=\"stats-cell text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'ehpPhysical' } }\"></div></div>\n    <div class=\"stats-row\"><div class=\"stats-cell\">Magical <abbr title=\"Effective Hit Points\">EHP</abbr>:</div><div class=\"stats-cell text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'ehpMagical' } }\"></div></div>\n    <div class=\"stats-row\"><div class=\"stats-cell\">Phys Res:</div><div class=\"stats-cell text-right\" data-bind=\"component: { name: 'stat3', params: {'hero': $data, 'stat': 'totalArmorPhysicalReduction', 'formatter': 'percent' } }\"></div></div>\n    <div class=\"stats-row\"><div class=\"stats-cell\">%Magic Res:</div><div class=\"stats-cell text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'totalMagicResistance' } }\"></div></div>\n    \n    <div class=\"stats-row\"><div class=\"stats-cell\">%Status Res:</div><div class=\"stats-cell text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'totalStatusResistance' } }\"></div></div>\n    <div class=\"stats-row\"><div class=\"stats-cell\">%Lifesteal:</div><div class=\"stats-cell text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'lifesteal' } }\"></div></div>\n    <div class=\"stats-row\"><div class=\"stats-cell\">%Bash:</div><div class=\"stats-cell text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'bash' } }\"></div></div>\n    <div class=\"stats-row\"><div class=\"stats-cell\">%Evasion:</div><div class=\"stats-cell text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'evasion' } }\"></div></div>\n    <div class=\"stats-row\"><div class=\"stats-cell\">%Miss Chance:</div><div class=\"stats-cell text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'missChance' } }\"></div></div>\n    <div class=\"stats-row\"><div class=\"stats-cell\">%Accuracy:</div><div class=\"stats-cell text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'accuracy' } }\"></div></div>\n    <div class=\"stats-row\"><div class=\"stats-cell\">%Hit Chance:</div><div class=\"stats-cell text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'hitChance' } }\"></div></div>\n    \n    <div class=\"stats-row\">\n        <div class=\"stats-cell\">Damage:</div><div class=\"stats-cell text-right\">\n            <span data-bind=\"html: baseDamage()[0].toFixed(0)\"></span>\n            <span data-bind=\"html: $root.getDiffText(diff['baseDamage']()[0]), css: {'diffPos': diff['baseDamage']()[0] > 0, 'diffNeg': diff['baseDamage']()[0] < 0}, visible: showDiff\"></span>\n            <span>&ndash;</span>\n            <span data-bind=\"html: baseDamage()[1].toFixed(0)\"></span>\n            <span data-bind=\"html: $root.getDiffText(diff['baseDamage']()[1]), css: {'diffPos': diff['baseDamage']()[1] > 0, 'diffNeg': diff['baseDamage']()[1] < 0}, visible: showDiff\"></span>\n            <span style=\"color:green\" data-bind=\"visible: bonusDamage() > 0, html: ' + ' + bonusDamage().toFixed(0)\"></span>\n            <span data-bind=\"html: $root.getDiffText(diff['bonusDamage']()), css: {'diffPos': diff['bonusDamage']() > 0, 'diffNeg': diff['bonusDamage']() < 0}, visible: showDiff\"></span>\n            <span style=\"color:red\" data-bind=\"visible: bonusDamageReduction() != 0, html: ' - ' + bonusDamageReduction().toFixed(0)\"></span>\n            <span data-bind=\"html: $root.getDiffText(diff['bonusDamageReduction']()), css: {'diffPos': diff['bonusDamageReduction']() > 0, 'diffNeg': diff['bonusDamageReduction']() < 0}, visible: showDiff\"></span>\n        </div>\n    </div>\n    <div class=\"stats-row\"><div class=\"stats-cell\"><abbr title=\"Increased Attack Speed\">IAS</abbr>:</div><div class=\"stats-cell text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'ias' } }\"></div></div>\n    <div class=\"stats-row\"><div class=\"stats-cell\"><abbr title=\"Base Attack Time\">BAT</abbr>:</div><div class=\"stats-cell text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'bat' } }\"></div></div>\n    <div class=\"stats-row\"><div class=\"stats-cell\">Attack Time:</div><div class=\"stats-cell text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'attackTime' } }\"></div></div>\n    <div class=\"stats-row\"><div class=\"stats-cell\">Attack &frasl; Sec:</div><div class=\"stats-cell text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'attacksPerSecond' } }\"></div></div>\n    <div class=\"stats-row\"><div class=\"stats-cell\">Attack Range:</div><div class=\"stats-cell text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'totalattackrange' } }\"></div></div>\n    <div class=\"stats-row\"><div class=\"stats-cell\"><abbr title=\"% Cooldown Reduction\">%CDR</abbr>:</div><div class=\"stats-cell text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'cooldownReductionPercent' } }\"></div></div>\n</div>" });
+ko.components.register('stats0', { template: "<div class=\"col-md-12 stats0\" data-bind=\"css: {'col-md-12': $root.layout() == 0, 'col-md-3': $root.layout() == 1}\">\n    <table class=\"table table-condensed\">\n    <tbody>\n    <tr><td>Strength:</td><td class=\"text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'totalStr' } }\"></td></tr>\n    <tr><td>Agility:</td><td class=\"text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'totalAgi' } }\"></td></tr>\n    <tr><td>Intelligence:</td><td class=\"text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'totalInt' } }\"></td></tr>\n    <tr><td><abbr title=\"Movement Speed\">MS</abbr>:</td><td class=\"text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'totalMovementSpeed' } }\"></td></tr>\n    <tr><td>Turn Rate:</td><td class=\"text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'totalTurnRate' } }\"></td></tr>\n    <tr><td>Sight Range:</td><td class=\"text-right\"><span data-bind=\"html: '<abbr title=\\'Day\\'>' + visionrangeday() + '</abbr>/<abbr title=\\'Night\\'>' + visionrangenight() + '</abbr>'\"></span></td></tr>\n    <tr><td>%Spell Amp:</td><td class=\"text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'spellAmp' } }\"></td></tr>\n    <tr><td>Armor:</td><td class=\"text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'totalArmorPhysical' } }\"></td></tr>\n    </tbody>\n    </table>\n</div>" });
+ko.components.register('stats1', { template: "<div class=\"col-md-12 stats1\" data-bind=\"css: {'col-md-12': $root.layout() == 0, 'col-md-3': $root.layout() == 1}\">\n    <table class=\"table table-condensed\">\n    <tbody>\n    <tr><td>Health:</td><td class=\"text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'health' } }\"></td></tr>\n    <tr><td>Health Regen:</td><td class=\"text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'healthregen' } }\"></td></tr>\n    <tr><td>Mana:</td><td class=\"text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'mana' } }\"></td></tr>\n    <tr><td>Mana Regen:</td><td class=\"text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'manaregen' } }\"></td></tr>\n    <tr><td>Physical <abbr title=\"Effective Hit Points\">EHP</abbr>:</td><td class=\"text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'ehpPhysical' } }\"></td></tr>\n    <tr><td>Magical <abbr title=\"Effective Hit Points\">EHP</abbr>:</td><td class=\"text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'ehpMagical' } }\"></td></tr>\n    <tr><td>%Phys Res:</td><td class=\"text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'totalArmorPhysicalReduction' } }\"></td></tr>\n    <tr><td>%Magic Res:</td><td class=\"text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'totalMagicResistance' } }\"></td></tr>\n    </tbody>\n    </table>\n</div>" });
+ko.components.register('stats2', { template: "<div class=\"col-md-12 stats2\" data-bind=\"css: {'col-md-12': $root.layout() == 0, 'col-md-3': $root.layout() == 1}\">\n    <table class=\"table table-condensed\">\n    <tbody>\n    <tr><td>%Status Res:</td><td class=\"text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'totalStatusResistance' } }\"></td></tr>\n    <tr><td>%Lifesteal:</td><td class=\"text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'lifesteal' } }\"></td></tr>\n    <tr><td>%Bash:</td><td class=\"text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'bash' } }\"></td></tr>\n    <tr><td>%Evasion:</td><td class=\"text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'evasion' } }\"></td></tr>\n    <tr><td>%Miss Chance:</td><td class=\"text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'missChance' } }\"></td></tr>\n    <tr><td>%Accuracy:</td><td class=\"text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'accuracy' } }\"></td></tr>\n    <tr><td>%Hit Chance:</td><td class=\"text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'hitChance' } }\"></td></tr>\n    <tr style=\"display: none\"><td colspan=2><a class=\"btn btn-default btn-block btn-xs\" data-bind=\"css: {disabled: critInfo().sources.length == 0 ? 'disabled' : '', 'toggled': showCriticalStrikeDetails}, toggle: showCriticalStrikeDetails\">Critical Strike Details</a></td></tr>\n    </tbody>\n    <tbody class=\"tabledropdown\" style=\"border-top:0\" data-bind=\"visible: showCriticalStrikeDetails(),foreach: critInfo().sources\">\n    <tr><td colspan=2><strong data-bind=\"text: $data.name\"></strong></td></tr>\n    <tr><td>Crit Chance:</td><td class=\"text-right\"><span data-bind=\"text: ($data.totalchance * 100).toFixed(2) + '%'\"></span></td></tr>\n    <tr><td>Crit Multiplier:</td><td class=\"text-right\"><span data-bind=\"text: ($data.multiplier * 100).toFixed(2) + '%'\"></span></td></tr>\n    </tbody>\n    </table>\n</div>" });
 ko.components.register('stats3', { template: "<div class=\"col-md-12 stats3\" data-bind=\"css: {'col-md-12': $root.layout() == 0, 'col-md-3': $root.layout() == 1}\">\n    <table class=\"table table-condensed\">\n    <tbody>\n    <tr>\n        <td>Damage:</td>\n        <td class=\"text-right\">\n            <span data-bind=\"html: baseDamage()[0].toFixed(0)\"></span>\n            <span data-bind=\"html: $root.getDiffText(diff['baseDamage']()[0]), css: {'diffPos': diff['baseDamage']()[0] > 0, 'diffNeg': diff['baseDamage']()[0] < 0}, visible: showDiff\"></span>\n            <span>&ndash;</span>\n            <span data-bind=\"html: baseDamage()[1].toFixed(0)\"></span>\n            <span data-bind=\"html: $root.getDiffText(diff['baseDamage']()[1]), css: {'diffPos': diff['baseDamage']()[1] > 0, 'diffNeg': diff['baseDamage']()[1] < 0}, visible: showDiff\"></span>\n            <span style=\"color:green\" data-bind=\"visible: bonusDamage() > 0, html: ' + ' + bonusDamage().toFixed(0)\"></span>\n            <span data-bind=\"html: $root.getDiffText(diff['bonusDamage']()), css: {'diffPos': diff['bonusDamage']() > 0, 'diffNeg': diff['bonusDamage']() < 0}, visible: showDiff\"></span>\n            <span style=\"color:red\" data-bind=\"visible: bonusDamageReduction() != 0, html: ' - ' + bonusDamageReduction().toFixed(0)\"></span>\n            <span data-bind=\"html: $root.getDiffText(diff['bonusDamageReduction']()), css: {'diffPos': diff['bonusDamageReduction']() > 0, 'diffNeg': diff['bonusDamageReduction']() < 0}, visible: showDiff\"></span>\n        </td>\n    </tr>\n    <tr><td><abbr title=\"Increased Attack Speed\">IAS</abbr>:</td><td class=\"text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'ias' } }\"></td></tr>\n    <tr><td><abbr title=\"Base Attack Time\">BAT</abbr>:</td><td class=\"text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'bat' } }\"></td></tr>\n    <tr><td>Attack Time:</td><td class=\"text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'attackTime' } }\"></td></tr>\n    <tr><td>Attack &frasl; Sec:</td><td class=\"text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'attacksPerSecond' } }\"></td></tr>\n    <tr><td>Attack Range:</td><td class=\"text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'totalattackrange' } }\"></td></tr>\n    <tr><td><abbr title=\"% Cooldown Reduction\">%CDR</abbr>:</td><td class=\"text-right\" data-bind=\"component: { name: 'stat', params: {'hero': $data, 'stat': 'cooldownReductionPercent' } }\"></td></tr>\n    </tbody>\n    </table>\n</div>" });
 ko.components.register('stats-additional', { template: "<table class=\"table table-condensed\">\n    <tbody>\n        <tr><td>Base Strength:</td><td class=\"text-right\"><span data-bind=\"text: heroData().attributebasestrength\"></span></td></tr>\n        <tr><td>Strength Gain:</td><td class=\"text-right\"><span data-bind=\"text: heroData().attributestrengthgain\"></span></td></tr>\n        <tr><td>Base Agility:</td><td class=\"text-right\"><span data-bind=\"text: heroData().attributebaseagility\"></span></td></tr>\n        <tr><td>Agility Gain:</td><td class=\"text-right\"><span data-bind=\"text: heroData().attributeagilitygain\"></span></td></tr>\n        <tr><td>Base Intelligence:</td><td class=\"text-right\"><span data-bind=\"text: heroData().attributebaseintelligence\"></span></td></tr>\n        <tr><td>Intelligence Gain:</td><td class=\"text-right\"><span data-bind=\"text: heroData().attributeintelligencegain\"></span></td></tr>\n        <tr><td>Base Armor:</td><td class=\"text-right\"><span data-bind=\"text: heroData().armorphysical\"></span></td></tr>\n        <tr><td><abbr title=\"Base Armor + armor from base agility\">Starting Armor:</abbr></td><td class=\"text-right\"><span data-bind=\"text: parseFloat($data.startingArmor()).toString()\"></span></td></tr>\n        <tr><td>Base Magic Res:</td><td class=\"text-right\"><span data-bind=\"text: heroData().magicalresistance + '%'\"></span></td></tr>\n        <tr><td>Base Attack Point:</td><td class=\"text-right\"><span data-bind=\"text: heroData().attackpoint\"></span></td></tr>\n        <tr><td><abbr data-bind=\"attr: { title: 'Total experience required to reach level ' + $data.selectedHeroLevel() }\">Total Exp:</abbr></td><td class=\"text-right\"><span data-bind=\"text: $data.totalExp()\"></span></span></td></tr>\n        <tr><td><abbr title=\"Experience required for next level\">Next level exp:</abbr></td><td class=\"text-right\"><span data-bind=\"html: $data.nextLevelExp()\"></span></span></td></tr>\n        <tr><td>Respawn Time:</td><td class=\"text-right\"><span data-bind=\"text: $data.respawnTime()\"></span></td></tr>\n    </tbody>\n</table>" });
 
@@ -12275,10 +12278,31 @@ var HeroCalculatorViewModel = function (tooltipURL, reportEmail) {
         /*if (event.target.id != 'settingsTab') {
             self.selectedTabId(event.target.id);
         }*/
-        self.selectedTabId(event.target.id);
-        if (self.selectedTabs()[1] != event.target.id) {
+        self._updateTabs(event.target.id);
+    };
+    self.isSecondTab = function (id) {
+        return self.selectedTabs().indexOf(id) > -1 && self.selectedTabId() != id;
+    }
+    
+    self.showSideTabId = function (id) {
+        return self.selectedTabs().indexOf(id) > -1 && self.sideView();
+    };
+    
+    self.selectTab = function (data) {
+        console.log('selectTab', data);
+        var tabId = data.hero.index();
+        self._updateTabs('heroTab' + tabId);
+        setTimeout(function () {
+            $('#heroTab' + tabId).tab('show');
+        }, 0);
+    };
+    
+    self._updateTabs = function (tabId) {
+        console.log('_updateTabs', tabId);
+        self.selectedTabId(tabId);
+        if (self.selectedTabs()[1] != tabId) {
             self.selectedTabs.shift();
-            self.selectedTabs.push(event.target.id);
+            self.selectedTabs.push(tabId);
         }
         if (self.selectedTab().data.hasOwnProperty('bound')) {
             self.selectedTab().data.bound(true);
@@ -12291,14 +12315,7 @@ var HeroCalculatorViewModel = function (tooltipURL, reportEmail) {
                 }, 0);
             }
         }
-        if (event.target.id === 'settingsTab') self.boundSettings(true);
-    };
-    self.isSecondTab = function (id) {
-        return self.selectedTabs().indexOf(id) > -1 && self.selectedTabId() != id;
-    }
-    
-    self.showSideTabId = function (id) {
-        return self.selectedTabs().indexOf(id) > -1 && self.sideView();
+        if (tabId === 'settingsTab') self.boundSettings(true);
     };
     
     self.removeTab = function (index, data, event, tab) {
@@ -12389,7 +12406,7 @@ var HeroCalculatorViewModel = function (tooltipURL, reportEmail) {
             self.selectedTab().data.inventory.addItem(data, event);
         }
     }
-    self.itemOptions = ko.computed(function () {
+    self.itemOptions = ko.pureComputed(function () {
         return self.selectedTab().data.inventory.itemOptions();
     });
     
@@ -12398,10 +12415,10 @@ var HeroCalculatorViewModel = function (tooltipURL, reportEmail) {
         self.selectedItem(event.target.id);
     }
     
-    self.getItemTooltipData = ko.computed(function () {
+    self.getItemTooltipData = ko.pureComputed(function () {
         return getItemTooltipData(itemData, self.selectedItem());
     }, this);
-    self.getItemInputLabel = ko.computed(function () {
+    self.getItemInputLabel = ko.pureComputed(function () {
         if (stackableItems.indexOf(self.selectedItem()) != -1) {
             return 'Stack Size'
         }
@@ -12658,23 +12675,6 @@ var HeroCalculatorViewModel = function (tooltipURL, reportEmail) {
         }
     }
     
-    self.getProperty = function (obj, properties) {
-        var result = obj;
-        for (var i = 0; i < properties.length; i++) {
-            result = result[properties[i]];
-        }
-        return result;
-    };
-    
-    self.getDiffTextWrapper = function (hero, property) {
-        return self.getDiffText(self.getDiffMagnitude(hero, property));
-    }
-    
-    self.getDiffMagnitude = function (hero, property) {
-        var properties = property.split('.');
-        return self.getProperty(hero.damageTotalInfo(), properties).toFixed(2) - self.getProperty(hero.heroCompare().damageTotalInfo(), properties).toFixed(2);
-    }
-    
     self.getDiffText = function (value) {
         if (value > 0) {
             return '+' + parseFloat(value.toFixed(2));
@@ -12701,7 +12701,7 @@ var HeroCalculatorViewModel = function (tooltipURL, reportEmail) {
 module.exports = HeroCalculatorViewModel;
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"../components/ability-detail":38,"../components/shop":39,"../herocalc/AbilityModel":40,"../herocalc/data/main":46,"../herocalc/inventory/levelItems":73,"../herocalc/inventory/stackableItems":74,"../herocalc/main":78,"../herocalc/util/findWhere":81,"../herocalc/util/uniqueId":87,"./CloneViewModel":26,"./HeroViewModel":30,"./UnitViewModel":32,"./herocalc_knockout":34,"./herocalc_tooltips_item":35,"./jquery-ui.custom":36}],29:[function(require,module,exports){
+},{"../components/ability-detail":38,"../components/shop":39,"../components/stats/stat2":40,"../components/stats/stat3":41,"../herocalc/AbilityModel":42,"../herocalc/data/main":50,"../herocalc/inventory/levelItems":77,"../herocalc/inventory/stackableItems":78,"../herocalc/main":82,"../herocalc/util/findWhere":85,"../herocalc/util/uniqueId":91,"./CloneViewModel":26,"./HeroViewModel":30,"./UnitViewModel":32,"./herocalc_knockout":34,"./herocalc_tooltips_item":35,"./jquery-ui.custom":36}],29:[function(require,module,exports){
 'use strict';
 var ko = require('./herocalc_knockout');
 var extend = require("../herocalc/util/extend");
@@ -12806,7 +12806,7 @@ var HeroDamageAmpMixin = function (self) {
 }
 
 module.exports = HeroDamageAmpMixin;
-},{"../herocalc/util/extend":80,"../herocalc/util/findWhere":81,"./herocalc_knockout":34}],30:[function(require,module,exports){
+},{"../herocalc/util/extend":84,"../herocalc/util/findWhere":85,"./herocalc_knockout":34}],30:[function(require,module,exports){
 (function (global){
 "use strict";
 var ko = (typeof window !== "undefined" ? window['ko'] : typeof global !== "undefined" ? global['ko'] : null);
@@ -12923,7 +12923,7 @@ HeroViewModel.prototype.constructor = HeroViewModel;
 module.exports = HeroViewModel;
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"../herocalc/illusion/illusionData":64,"../herocalc/illusion/illusionOptionsArray":65,"../herocalc/main":78,"./BuildExplorerViewModel":25,"./DamageAmpViewModel":27,"./HeroDamageAmpMixin":29,"./IllusionViewModel":31}],31:[function(require,module,exports){
+},{"../herocalc/illusion/illusionData":68,"../herocalc/illusion/illusionOptionsArray":69,"../herocalc/main":82,"./BuildExplorerViewModel":25,"./DamageAmpViewModel":27,"./HeroDamageAmpMixin":29,"./IllusionViewModel":31}],31:[function(require,module,exports){
 'use strict';
 var ko = require('./herocalc_knockout');
     
@@ -12987,7 +12987,7 @@ IllusionViewModel.prototype = Object.create(HeroCalc.IllusionModel.prototype);
 IllusionViewModel.prototype.constructor = IllusionViewModel;
 
 module.exports = IllusionViewModel;
-},{"../herocalc/data/main":46,"../herocalc/illusion/illusionData":64,"../herocalc/main":78,"../herocalc/util/findWhere":81,"./herocalc_knockout":34}],32:[function(require,module,exports){
+},{"../herocalc/data/main":50,"../herocalc/illusion/illusionData":68,"../herocalc/main":82,"../herocalc/util/findWhere":85,"./herocalc_knockout":34}],32:[function(require,module,exports){
 (function (global){
 "use strict";
 var ko = (typeof window !== "undefined" ? window['ko'] : typeof global !== "undefined" ? global['ko'] : null);
@@ -13064,7 +13064,7 @@ UnitViewModel.prototype.constructor = UnitViewModel;
 module.exports = UnitViewModel;
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"../herocalc/hero/UnitOption":55,"../herocalc/main":78}],33:[function(require,module,exports){
+},{"../herocalc/hero/UnitOption":59,"../herocalc/main":82}],33:[function(require,module,exports){
 "use strict";
 
 var getParameterByName = function (name) {
@@ -13588,7 +13588,7 @@ ko.bindingHandlers.jqAutoCombo = {
 module.exports = ko;
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"../lib/Chart.scatter":90,"chart.js":1}],35:[function(require,module,exports){
+},{"../lib/Chart.scatter":94,"chart.js":1}],35:[function(require,module,exports){
 (function (global){
 'use strict';
 var $ = (typeof window !== "undefined" ? window['$'] : typeof global !== "undefined" ? global['$'] : null);
@@ -13980,13 +13980,72 @@ function ViewModel(params) {
 
 module.exports = {
     viewModel: ViewModel,
-    template: "        <div id=\"shop-container\" class=\"col-md-12 col-lg-4\" data-bind=\"shopDockStyle: shopDockTrigger, visible: displayShop() || shopPopout(), css: {'col-lg-4': !shopPopout()}, style: { 'padding-top': shopPopout() ? '5px' : '0px'}\">\n              <button id=\"shop-minimize\" class=\"btn btn-default btn-xs shop-button glyphicon glyphicon-minus pull-right\" data-bind=\"toggle: displayShop, visible: displayShop()\" title=\"Minimize shop\"></button>\n              <button id=\"shop-maximize\" class=\"btn btn-default btn-xs shop-button glyphicon glyphicon-plus pull-right\" data-bind=\"toggle: displayShop, visible: !displayShop()\" title=\"Maximize shop\"></button>\n              <button class=\"btn btn-default btn-xs shop-button glyphicon glyphicon-new-window pull-right hidden-xs\" data-bind=\"click: shopPopout, visible: !shopPopout()\" title=\"Popout shop\"></button>\n              <button class=\"btn btn-default btn-xs shop-button glyphicon glyphicon-align-right pull-right hidden-xs\" data-bind=\"toggle: shopDock, attr: { title: shopDock() ? 'Undock shop to right side of screen' : 'Dock shop to right side of screen' }\" ></button>\n            <ul id=\"shoptabs\" class=\"nav nav-tabs\" data-bind=\"visible: displayShop()\">\n              <li><a href=\"#shop_basic\" data-toggle=\"tab\">Basic</a></li>\n              <li><a href=\"#shop_upgrade\" data-toggle=\"tab\">Upgrade</a></li>\n              <li><a href=\"#shop_secret\" data-toggle=\"tab\">Secret</a></li>\n            </ul>\n            <div class=\"tab-content text-center bottom-buffer2\" data-bind=\"visible: displayShop()\">\n                <div class=\"tab-pane active\" id=\"shop_basic\">\n<div class=\"shop-column\">\n  <div class=\"hc-shop hc-shop-consumables\" id=\"consumables\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-tpscroll\" id=\"tpscroll\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-clarity\" id=\"clarity\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-faerie_fire\" id=\"faerie_fire\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-smoke_of_deceit\" id=\"smoke_of_deceit\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-ward_observer\" id=\"ward_observer\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-ward_sentry\" id=\"ward_sentry\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-enchanted_mango\" id=\"enchanted_mango\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-flask\" id=\"flask\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-tango\" id=\"tango\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-tome_of_knowledge\" id=\"tome_of_knowledge\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>  \n  <div class=\"img-rounded items-sprite-50x36 items-sprite-dust\" id=\"dust\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-courier\" id=\"courier\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-bottle\" id=\"bottle\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-emptyitembg\" id=\"emptyitembg\"></div>\n</div>\n<div class=\"shop-column\">\n  <div class=\"hc-shop hc-shop-attributes\" id=\"attributes\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-branches\" id=\"branches\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-gauntlets\" id=\"gauntlets\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-slippers\" id=\"slippers\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-mantle\" id=\"mantle\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-circlet\" id=\"circlet\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-belt_of_strength\" id=\"belt_of_strength\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-boots_of_elves\" id=\"boots_of_elves\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-robe\" id=\"robe\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-ogre_axe\" id=\"ogre_axe\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-blade_of_alacrity\" id=\"blade_of_alacrity\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-staff_of_wizardry\" id=\"staff_of_wizardry\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-emptyitembg\" id=\"emptyitembg\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-emptyitembg\" id=\"emptyitembg\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-emptyitembg\" id=\"emptyitembg\"></div>\n</div>\n<div class=\"shop-column\">\n  <div class=\"hc-shop hc-shop-armaments\" id=\"armaments\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-ring_of_protection\" id=\"ring_of_protection\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-stout_shield\" id=\"stout_shield\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-quelling_blade\" id=\"quelling_blade\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-infused_raindrop\" id=\"infused_raindrop\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-orb_of_venom\" id=\"orb_of_venom\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-blight_stone\" id=\"blight_stone\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-blades_of_attack\" id=\"blades_of_attack\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-chainmail\" id=\"chainmail\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-quarterstaff\" id=\"quarterstaff\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-helm_of_iron_will\" id=\"helm_of_iron_will\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-javelin\" id=\"javelin\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-broadsword\" id=\"broadsword\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-claymore\" id=\"claymore\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-mithril_hammer\" id=\"mithril_hammer\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n</div>\n<div class=\"shop-column\">\n  <div class=\"hc-shop hc-shop-arcane\" id=\"arcane\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-magic_stick\" id=\"magic_stick\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-wind_lace\" id=\"wind_lace\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-ring_of_regen\" id=\"ring_of_regen\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-sobi_mask\" id=\"sobi_mask\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-boots\" id=\"boots\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-gloves\" id=\"gloves\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-cloak\" id=\"cloak\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-ring_of_health\" id=\"ring_of_health\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-void_stone\" id=\"void_stone\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-gem\" id=\"gem\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-lifesteal\" id=\"lifesteal\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-shadow_amulet\" id=\"shadow_amulet\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-ghost\" id=\"ghost\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-blink\" id=\"blink\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n</div>\n\n\n                </div>\n                <div class=\"tab-pane\" id=\"shop_upgrade\">\n<div class=\"shop-column\">\n  <div class=\"hc-shop hc-shop-common\" id=\"common\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-magic_wand\" id=\"magic_wand\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-null_talisman\" id=\"null_talisman\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-wraith_band\" id=\"wraith_band\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-bracer\" id=\"bracer\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-soul_ring\" id=\"soul_ring\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-phase_boots\" id=\"phase_boots\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-power_treads\" id=\"power_treads\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-oblivion_staff\" id=\"oblivion_staff\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-pers\" id=\"pers\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-hand_of_midas\" id=\"hand_of_midas\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-moon_shard\" id=\"moon_shard\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-travel_boots\" id=\"travel_boots\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-emptyitembg\" id=\"emptyitembg\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-emptyitembg\" id=\"emptyitembg\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-emptyitembg\" id=\"emptyitembg\"></div>\n</div>\n<div class=\"shop-column\">\n  <div class=\"hc-shop hc-shop-support\" id=\"support\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-ring_of_basilius\" id=\"ring_of_basilius\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-headdress\" id=\"headdress\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-buckler\" id=\"buckler\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-urn_of_shadows\" id=\"urn_of_shadows\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-tranquil_boots\" id=\"tranquil_boots\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-ring_of_aquila\" id=\"ring_of_aquila\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-medallion_of_courage\" id=\"medallion_of_courage\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-arcane_boots\" id=\"arcane_boots\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-ancient_janggo\" id=\"ancient_janggo\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-vladmir\" id=\"vladmir\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-mekansm\" id=\"mekansm\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-spirit_vessel\" id=\"spirit_vessel\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-pipe\" id=\"pipe\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-guardian_greaves\" id=\"guardian_greaves\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-emptyitembg\" id=\"emptyitembg\"></div>\n</div>\n<div class=\"shop-column\">\n  <div class=\"hc-shop hc-shop-caster\" id=\"caster\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-glimmer_cape\" id=\"glimmer_cape\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-veil_of_discord\" id=\"veil_of_discord\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-aether_lens\" id=\"aether_lens\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-force_staff\" id=\"force_staff\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-necronomicon\" id=\"necronomicon\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-solar_crest\" id=\"solar_crest\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-dagon\" id=\"dagon\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-cyclone\" id=\"cyclone\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-rod_of_atos\" id=\"rod_of_atos\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-orchid\" id=\"orchid\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-ultimate_scepter\" id=\"ultimate_scepter\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-nullifier\" id=\"nullifier\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-refresher\" id=\"refresher\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-sheepstick\" id=\"sheepstick\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-octarine_core\" id=\"octarine_core\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n</div>\n<div class=\"shop-column\">\n  <div class=\"hc-shop hc-shop-armor\" id=\"armor\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-hood_of_defiance\" id=\"hood_of_defiance\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-vanguard\" id=\"vanguard\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-blade_mail\" id=\"blade_mail\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-soul_booster\" id=\"soul_booster\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-crimson_guard\" id=\"crimson_guard\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-aeon_disk\" id=\"aeon_disk\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-black_king_bar\" id=\"black_king_bar\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-lotus_orb\" id=\"lotus_orb\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-shivas_guard\" id=\"shivas_guard\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-hurricane_pike\" id=\"hurricane_pike\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-sphere\" id=\"sphere\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-bloodstone\" id=\"bloodstone\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-manta\" id=\"manta\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-heart\" id=\"heart\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-assault\" id=\"assault\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n</div>\n<div class=\"shop-column\">\n  <div class=\"hc-shop hc-shop-weapons\" id=\"weapons\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-lesser_crit\" id=\"lesser_crit\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-armlet\" id=\"armlet\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-meteor_hammer\" id=\"meteor_hammer\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-invis_sword\" id=\"invis_sword\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-basher\" id=\"basher\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-bfury\" id=\"bfury\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-monkey_king_bar\" id=\"monkey_king_bar\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-ethereal_blade\" id=\"ethereal_blade\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-radiance\" id=\"radiance\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-greater_crit\" id=\"greater_crit\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-butterfly\" id=\"butterfly\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-silver_edge\" id=\"silver_edge\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-rapier\" id=\"rapier\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-abyssal_blade\" id=\"abyssal_blade\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-bloodthorn\" id=\"bloodthorn\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n</div>\n<div class=\"shop-column\">\n  <div class=\"hc-shop hc-shop-artifacts\" id=\"artifacts\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-dragon_lance\" id=\"dragon_lance\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-sange\" id=\"sange\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-yasha\" id=\"yasha\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-kaya\" id=\"kaya\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-mask_of_madness\" id=\"mask_of_madness\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-helm_of_the_dominator\" id=\"helm_of_the_dominator\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-echo_sabre\" id=\"echo_sabre\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-maelstrom\" id=\"maelstrom\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-diffusal_blade\" id=\"diffusal_blade\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-heavens_halberd\" id=\"heavens_halberd\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-desolator\" id=\"desolator\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-sange_and_yasha\" id=\"sange_and_yasha\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-skadi\" id=\"skadi\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-satanic\" id=\"satanic\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-mjollnir\" id=\"mjollnir\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n</div>\n                </div>\n                <div class=\"tab-pane\" id=\"shop_secret\">\n<div class=\"shop-column\">\n  <div class=\"hc-shop hc-shop-secret\" id=\"secret\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-energy_booster\" id=\"energy_booster\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-vitality_booster\" id=\"vitality_booster\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-point_booster\" id=\"point_booster\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-platemail\" id=\"platemail\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-talisman_of_evasion\" id=\"talisman_of_evasion\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-hyperstone\" id=\"hyperstone\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-ultimate_orb\" id=\"ultimate_orb\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-demon_edge\" id=\"demon_edge\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-mystic_staff\" id=\"mystic_staff\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-eagle\" id=\"eagle\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-reaver\" id=\"reaver\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-relic\" id=\"relic\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n</div>\n                </div>\n            </div>\n\n            <div class=\"form-group\" data-bind=\"visible: displayShop()\">\n                <div class=\"input-group\">\n                    <input class=\"form-control\" id=\"auto\" data-bind=\"jqAuto: { autoFocus: true, html: true }, jqAutoSource: itemOptions, jqAutoValue: selectedItem, jqAutoSourceLabel: 'displayname', jqAutoSourceInputValue: 'name', jqAutoSourceValue: 'value'\" />\n                    <span class=\"input-group-btn\">\n                        <button class=\"btn btn-default\" data-bind=\"jqAutoCombo: 'auto'\"><span class=\"glyphicon glyphicon-search\"></span></button>\n                    </span>\n                </div>\n            </div>\n\n            <div data-bind=\"visible: selectedItem() && displayShop()\">\n                <button class=\"btn btn-default btn-xs glyphicon glyphicon-minus pull-right\" data-bind=\"toggle: displayShopItemTooltip, visible: displayShopItemTooltip()\" title=\"Hide item description\"></button>\n                <button class=\"btn btn-default btn-xs glyphicon glyphicon-plus pull-right\" data-bind=\"toggle: displayShopItemTooltip, visible: !displayShopItemTooltip()\" title=\"Show item description\"></button>\n                <div data-bind=\"html: getItemTooltipData, css: { 'hide-shop-item-details': !displayShopItemTooltip() }\"></div>\n                <div style=\"margin-top:10px;margin-bottom:10px;\" class=\"form-inline\" data-bind=\"visible: getItemInputLabel() != ''\">\n                    <div class=\"form-group\">\n                        <label for=\"iteminput\" data-bind=\"text: getItemInputLabel\"></label>\n                        <input class=\"form-control\" id=\"iteminput\" data-bind=\"value: itemInputValue\" />\n                    </div>\n                </div>\n                <div class=\"form-group text-right\">\n                    <button class=\"btn btn-default\" data-bind=\"click: addItem\">Add Item</button>\n                </div>\n            </div>\n        </div>"
+    template: "        <div id=\"shop-container\" class=\"col-md-12 col-lg-4\" data-bind=\"shopDockStyle: shopDockTrigger, visible: displayShop() || shopPopout(), css: {'col-lg-4': !shopPopout()}, style: { 'padding-top': shopPopout() ? '5px' : '0px'}\">\n              <button id=\"shop-minimize\" class=\"btn btn-default btn-xs shop-button glyphicon glyphicon-minus pull-right\" data-bind=\"toggle: displayShop, visible: displayShop()\" title=\"Minimize shop\"></button>\n              <button id=\"shop-maximize\" class=\"btn btn-default btn-xs shop-button glyphicon glyphicon-plus pull-right\" data-bind=\"toggle: displayShop, visible: !displayShop()\" title=\"Maximize shop\"></button>\n              <button class=\"btn btn-default btn-xs shop-button glyphicon glyphicon-new-window pull-right hidden-xs\" data-bind=\"click: shopPopout, visible: !shopPopout()\" title=\"Popout shop\"></button>\n              <button class=\"btn btn-default btn-xs shop-button glyphicon glyphicon-align-right pull-right hidden-xs\" data-bind=\"toggle: shopDock, attr: { title: shopDock() ? 'Undock shop to right side of screen' : 'Dock shop to right side of screen' }\" ></button>\n            <ul id=\"shoptabs\" class=\"nav nav-tabs\" data-bind=\"visible: displayShop()\">\n              <li><a href=\"#shop_basic\" data-toggle=\"tab\">Basic</a></li>\n              <li><a href=\"#shop_upgrade\" data-toggle=\"tab\">Upgrade</a></li>\n              <li><a href=\"#shop_secret\" data-toggle=\"tab\">Secret</a></li>\n            </ul>\n            <div class=\"tab-content text-center bottom-buffer2\" data-bind=\"visible: displayShop()\">\n                <div class=\"tab-pane active\" id=\"shop_basic\">\n<div class=\"shop-column\">\n  <div class=\"hc-shop hc-shop-consumables\" id=\"consumables\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-tpscroll\" id=\"tpscroll\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-clarity\" id=\"clarity\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-faerie_fire\" id=\"faerie_fire\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-smoke_of_deceit\" id=\"smoke_of_deceit\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-ward_observer\" id=\"ward_observer\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-ward_sentry\" id=\"ward_sentry\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-enchanted_mango\" id=\"enchanted_mango\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-flask\" id=\"flask\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-tango\" id=\"tango\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-tome_of_knowledge\" id=\"tome_of_knowledge\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>  \n  <div class=\"img-rounded items-sprite-50x36 items-sprite-dust\" id=\"dust\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-courier\" id=\"courier\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-bottle\" id=\"bottle\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-emptyitembg\" id=\"emptyitembg\"></div>\n</div>\n<div class=\"shop-column\">\n  <div class=\"hc-shop hc-shop-attributes\" id=\"attributes\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-branches\" id=\"branches\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-gauntlets\" id=\"gauntlets\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-slippers\" id=\"slippers\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-mantle\" id=\"mantle\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-circlet\" id=\"circlet\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-belt_of_strength\" id=\"belt_of_strength\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-boots_of_elves\" id=\"boots_of_elves\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-robe\" id=\"robe\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-ogre_axe\" id=\"ogre_axe\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-blade_of_alacrity\" id=\"blade_of_alacrity\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-staff_of_wizardry\" id=\"staff_of_wizardry\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-emptyitembg\" id=\"emptyitembg\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-emptyitembg\" id=\"emptyitembg\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-emptyitembg\" id=\"emptyitembg\"></div>\n</div>\n<div class=\"shop-column\">\n  <div class=\"hc-shop hc-shop-armaments\" id=\"armaments\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-ring_of_protection\" id=\"ring_of_protection\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-stout_shield\" id=\"stout_shield\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-quelling_blade\" id=\"quelling_blade\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-infused_raindrop\" id=\"infused_raindrop\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-orb_of_venom\" id=\"orb_of_venom\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-blight_stone\" id=\"blight_stone\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-blades_of_attack\" id=\"blades_of_attack\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-chainmail\" id=\"chainmail\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-quarterstaff\" id=\"quarterstaff\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-helm_of_iron_will\" id=\"helm_of_iron_will\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-javelin\" id=\"javelin\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-broadsword\" id=\"broadsword\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-claymore\" id=\"claymore\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-mithril_hammer\" id=\"mithril_hammer\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n</div>\n<div class=\"shop-column\">\n  <div class=\"hc-shop hc-shop-arcane\" id=\"arcane\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-magic_stick\" id=\"magic_stick\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-wind_lace\" id=\"wind_lace\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-ring_of_regen\" id=\"ring_of_regen\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-sobi_mask\" id=\"sobi_mask\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-boots\" id=\"boots\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-gloves\" id=\"gloves\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-cloak\" id=\"cloak\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-ring_of_health\" id=\"ring_of_health\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-void_stone\" id=\"void_stone\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-gem\" id=\"gem\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-lifesteal\" id=\"lifesteal\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-shadow_amulet\" id=\"shadow_amulet\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-ghost\" id=\"ghost\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-blink\" id=\"blink\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n</div>\n\n\n                </div>\n                <div class=\"tab-pane\" id=\"shop_upgrade\">\n<div class=\"shop-column\">\n  <div class=\"hc-shop hc-shop-common\" id=\"common\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-magic_wand\" id=\"magic_wand\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-null_talisman\" id=\"null_talisman\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-wraith_band\" id=\"wraith_band\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-bracer\" id=\"bracer\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-soul_ring\" id=\"soul_ring\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-phase_boots\" id=\"phase_boots\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-power_treads\" id=\"power_treads\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-oblivion_staff\" id=\"oblivion_staff\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-pers\" id=\"pers\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-hand_of_midas\" id=\"hand_of_midas\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-moon_shard\" id=\"moon_shard\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-travel_boots\" id=\"travel_boots\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-emptyitembg\" id=\"emptyitembg\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-emptyitembg\" id=\"emptyitembg\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-emptyitembg\" id=\"emptyitembg\"></div>\n</div>\n<div class=\"shop-column\">\n  <div class=\"hc-shop hc-shop-support\" id=\"support\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-ring_of_basilius\" id=\"ring_of_basilius\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-headdress\" id=\"headdress\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-buckler\" id=\"buckler\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-urn_of_shadows\" id=\"urn_of_shadows\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-tranquil_boots\" id=\"tranquil_boots\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-ring_of_aquila\" id=\"ring_of_aquila\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-medallion_of_courage\" id=\"medallion_of_courage\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-arcane_boots\" id=\"arcane_boots\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-ancient_janggo\" id=\"ancient_janggo\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-vladmir\" id=\"vladmir\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-mekansm\" id=\"mekansm\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-spirit_vessel\" id=\"spirit_vessel\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-pipe\" id=\"pipe\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-guardian_greaves\" id=\"guardian_greaves\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-emptyitembg\" id=\"emptyitembg\"></div>\n</div>\n<div class=\"shop-column\">\n  <div class=\"hc-shop hc-shop-caster\" id=\"caster\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-glimmer_cape\" id=\"glimmer_cape\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-veil_of_discord\" id=\"veil_of_discord\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-aether_lens\" id=\"aether_lens\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-force_staff\" id=\"force_staff\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-necronomicon\" id=\"necronomicon\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-solar_crest\" id=\"solar_crest\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-dagon\" id=\"dagon\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-cyclone\" id=\"cyclone\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-rod_of_atos\" id=\"rod_of_atos\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-orchid\" id=\"orchid\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-ultimate_scepter\" id=\"ultimate_scepter\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-nullifier\" id=\"nullifier\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-refresher\" id=\"refresher\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-sheepstick\" id=\"sheepstick\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-octarine_core\" id=\"octarine_core\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n</div>\n<div class=\"shop-column\">\n  <div class=\"hc-shop hc-shop-armor\" id=\"armor\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-hood_of_defiance\" id=\"hood_of_defiance\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-vanguard\" id=\"vanguard\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-blade_mail\" id=\"blade_mail\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-soul_booster\" id=\"soul_booster\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-crimson_guard\" id=\"crimson_guard\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-aeon_disk\" id=\"aeon_disk\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-black_king_bar\" id=\"black_king_bar\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-lotus_orb\" id=\"lotus_orb\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-shivas_guard\" id=\"shivas_guard\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-hurricane_pike\" id=\"hurricane_pike\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-sphere\" id=\"sphere\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-bloodstone\" id=\"bloodstone\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-manta\" id=\"manta\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-heart\" id=\"heart\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-assault\" id=\"assault\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n</div>\n<div class=\"shop-column\">\n  <div class=\"hc-shop hc-shop-weapons\" id=\"weapons\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-lesser_crit\" id=\"lesser_crit\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-armlet\" id=\"armlet\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-meteor_hammer\" id=\"meteor_hammer\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-invis_sword\" id=\"invis_sword\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-basher\" id=\"basher\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-bfury\" id=\"bfury\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-monkey_king_bar\" id=\"monkey_king_bar\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-ethereal_blade\" id=\"ethereal_blade\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-radiance\" id=\"radiance\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-greater_crit\" id=\"greater_crit\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-butterfly\" id=\"butterfly\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-silver_edge\" id=\"silver_edge\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-rapier\" id=\"rapier\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-abyssal_blade\" id=\"abyssal_blade\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-bloodthorn\" id=\"bloodthorn\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n</div>\n<div class=\"shop-column\">\n  <div class=\"hc-shop hc-shop-artifacts\" id=\"artifacts\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-dragon_lance\" id=\"dragon_lance\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-sange\" id=\"sange\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-yasha\" id=\"yasha\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-kaya\" id=\"kaya\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-mask_of_madness\" id=\"mask_of_madness\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-helm_of_the_dominator\" id=\"helm_of_the_dominator\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-echo_sabre\" id=\"echo_sabre\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-maelstrom\" id=\"maelstrom\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-diffusal_blade\" id=\"diffusal_blade\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-heavens_halberd\" id=\"heavens_halberd\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-desolator\" id=\"desolator\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-sange_and_yasha\" id=\"sange_and_yasha\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-skadi\" id=\"skadi\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-satanic\" id=\"satanic\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-mjollnir\" id=\"mjollnir\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n</div>\n                </div>\n                <div class=\"tab-pane\" id=\"shop_secret\">\n<div class=\"shop-column\">\n  <div class=\"hc-shop hc-shop-secret\" id=\"secret\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-energy_booster\" id=\"energy_booster\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-vitality_booster\" id=\"vitality_booster\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-point_booster\" id=\"point_booster\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-platemail\" id=\"platemail\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-talisman_of_evasion\" id=\"talisman_of_evasion\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-hyperstone\" id=\"hyperstone\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-ultimate_orb\" id=\"ultimate_orb\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-demon_edge\" id=\"demon_edge\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-mystic_staff\" id=\"mystic_staff\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-eagle\" id=\"eagle\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-reaver\" id=\"reaver\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n  <div class=\"img-rounded items-sprite-50x36 items-sprite-relic\" id=\"relic\" data-bind=\"click: changeSelectedItem, event: { dblclick: addItem }\"></div>\n</div>\n                </div>\n            </div>\n\n            <div class=\"form-group\" data-bind=\"visible: displayShop()\">\n                <div class=\"input-group\">\n                    <input class=\"form-control\" id=\"auto\" data-bind=\"jqAuto: { autoFocus: true, html: true }, jqAutoSource: itemOptions, jqAutoValue: selectedItem, jqAutoSourceLabel: 'displayname', jqAutoSourceInputValue: 'name', jqAutoSourceValue: 'value'\" />\n                    <span class=\"input-group-btn\">\n                        <button class=\"btn btn-default\" data-bind=\"jqAutoCombo: 'auto'\"><span class=\"glyphicon glyphicon-search\"></span></button>\n                    </span>\n                </div>\n            </div>\n\n            <div data-bind=\"visible: selectedItem() && displayShop()\">\n                <button class=\"btn btn-default btn-xs glyphicon glyphicon-minus pull-right\" data-bind=\"toggle: displayShopItemTooltip, visible: displayShopItemTooltip()\" title=\"Hide item description\"></button>\n                <button class=\"btn btn-default btn-xs glyphicon glyphicon-plus pull-right\" data-bind=\"toggle: displayShopItemTooltip, visible: !displayShopItemTooltip()\" title=\"Show item description\"></button>\n                <div class=\"form-group\" data-bind=\"html: getItemTooltipData, css: { 'hide-shop-item-details': !displayShopItemTooltip() }\"></div>\n                <div class=\"form-group\" data-bind=\"visible: getItemInputLabel() != ''\">\n                    <label for=\"iteminput\" data-bind=\"text: getItemInputLabel\"></label>\n                    <input class=\"form-control\" id=\"iteminput\" data-bind=\"value: itemInputValue\" />\n                </div>\n                <div class=\"form-group text-right\">\n                    <button class=\"btn btn-default\" data-bind=\"click: addItem\">Add Item</button>\n                </div>\n            </div>\n        </div>"
 };
 },{}],40:[function(require,module,exports){
+function ViewModel(params) {
+    console.log('ViewModel stat2');
+    var self = this;
+    self.hero = params.hero;
+    self.stat = params.stat;
+    self.tooltip = ko.pureComputed(function () {
+        console.log('stat', self.stat);
+        return '<table class="table"><tbody>' + self.hero[self.stat]().components.reduce(function (memo, component) {
+            return memo += '<tr><td>' + component.label + '</td><td class="text-right">' + parseFloat(component.value.toFixed(2)) + '</td></tr>';
+        }, '') + '</tbody></table>';
+    }, this, { deferEvaluation: true });
+}
+
+module.exports = {
+    viewModel: ViewModel,
+    template: "<span data-bind=\"text: parseFloat(hero[stat]().total.toFixed(2)).toString(), tooltip: {title: tooltip, placement: 'bottom', html: true}\"></span><span data-bind=\"html: $root.getDiffText(hero.diff2[stat]()), diffCss: hero.diff2[stat], diffCssStat: stat, visible: hero.showDiff\"></span>"
+};
+},{}],41:[function(require,module,exports){
+function ViewModel(params) {
+    console.log('ViewModel stat3');
+    var self = this;
+    self.hero = params.hero;
+    self.stat = params.stat;
+    if (params.formatter instanceof Function) {
+        self.formatter = params.formatter;
+    }
+    else if (params.formatter == 'percent') {
+        self.formatter = function (value) {
+            return parseFloat((value * 100).toFixed(2)) + '%';
+        }
+    }
+    else {
+        self.formatter = function (value) {
+            return parseFloat(value.toFixed(2)).toString();
+        }
+    }
+    self.text = ko.pureComputed(function () {
+        return self.formatter(self.hero[self.stat]());
+    }, this, { deferEvaluation: true });
+    self.diffText = ko.pureComputed(function () {
+        var value = self.hero[self.stat]() - self.hero.heroCompare()[self.stat]();
+        if (value > 0) {
+            return '+' + self.formatter(value);
+        }
+        else if (value < 0) {
+            return '&minus;' + self.formatter(value*-1);
+        }
+        else {
+            return '';
+        }
+    }, this, { deferEvaluation: true });
+}
+
+module.exports = {
+    viewModel: ViewModel,
+    template: "<span data-bind=\"text: text\"></span><span data-bind=\"html: diffText, diffCss: hero.diff[stat], diffCssStat: stat, visible: hero.showDiff\"></span>"
+};
+},{}],42:[function(require,module,exports){
 'use strict';
 var ko = require('./herocalc_knockout');
 var abilityData = require("./herocalc_abilitydata");
 var TalentController = require("./hero/TalentController");
+var StatModel = require("./StatModel");
 
 var AbilityModel = function (a, h) {
     var self = this;
@@ -14223,7 +14282,7 @@ var AbilityModel = function (a, h) {
     }
     
     self.getAllStatsReduction = ko.computed(function () {
-        var totalAttribute = 0;
+        var sources = new StatModel();
         for (var i = 0; i < self.abilities().length; i++) {
             var ability = self._abilities[i];
             if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
@@ -14240,15 +14299,15 @@ var AbilityModel = function (a, h) {
                 }
                 else if (ability.bonusAllStatsReduction != undefined) {
                     // slark_essence_shift
-                    totalAttribute+=ability.bonusAllStatsReduction();
+                    sources.add(ability.bonusAllStatsReduction(), ability.displayname);
                 }
             }
         }
-        return totalAttribute;
+        return sources;
     });
     
     self.getStrengthReduction = ko.computed(function () {
-        var totalAttribute = 0;
+        var sources = new StatModel();
         for (var i = 0; i < self.abilities().length; i++) {
             var ability = self._abilities[i];
             if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
@@ -14265,15 +14324,15 @@ var AbilityModel = function (a, h) {
                 }
                 else if (ability.bonusStrength != undefined && ability.name == 'undying_decay') {
                     // undying_decay
-                    totalAttribute-=ability.bonusStrength();
+                    sources.add(-ability.bonusStrength(), ability.displayname);
                 }
             }
         }
-        return totalAttribute;
+        return sources;
     });
     
     self.getStrength = ko.computed(function () {
-        var totalAttribute = 0;
+        var sources = new StatModel();
         for (var i = 0; i < self.abilities().length; i++) {
             var ability = self._abilities[i];
             if (ability.level() > 0) {
@@ -14284,7 +14343,7 @@ var AbilityModel = function (a, h) {
                             switch(attribute.name) {
                                 // sven_gods_strength
                                 case 'gods_strength_bonus_str':
-                                    totalAttribute += parseInt(attribute.value[ability.level()-1]);
+                                    sources.add(parseInt(attribute.value[ability.level()-1]), ability.displayname);
                                 break;
                             }
                         }
@@ -14294,23 +14353,23 @@ var AbilityModel = function (a, h) {
                     if (ability.bonusStrength != undefined) {
                         if (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1)) {
                             // pudge_flesh_heap,morphling_morph_str,morphling_morph_agi,undying_decay
-                            totalAttribute+=ability.bonusStrength();
+                            sources.add(ability.bonusStrength(), ability.displayname);
                         }
                     }
                     if (ability.bonusStrength2 != undefined) {
                         if (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1)) {
                             // morphling_morph_str
-                            totalAttribute+=ability.bonusStrength2();
+                            sources.add(ability.bonusStrength2(), ability.displayname);
                         }
                     }
                 }
             }
         }
-        return totalAttribute;
+        return sources;
     });
     
     self.getAgility = ko.computed(function () {
-        var totalAttribute = 0;
+        var sources = new StatModel();
         for (var i = 0; i < self.abilities().length; i++) {
             var ability = self._abilities[i];
             if (ability.level() > 0) {
@@ -14321,7 +14380,7 @@ var AbilityModel = function (a, h) {
                             switch(attribute.name) {
                                 // drow_ranger_marksmanship
                                 case 'marksmanship_agility_bonus':
-                                    totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
+                                    sources.add(self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level()), ability.displayname);
                                 break;
                             }
                         }
@@ -14331,23 +14390,23 @@ var AbilityModel = function (a, h) {
                     if (ability.bonusAgility != undefined) {
                         if (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1)) {
                             // morphling_morph_agi,morphling_morph_str
-                            totalAttribute+=ability.bonusAgility();
+                            sources.add(ability.bonusAgility(), ability.displayname);
                         }
                     }
                     if (ability.bonusAgility2 != undefined) {
                         if (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1)) {
                             // morphling_morph_agi,morphling_morph_str
-                            totalAttribute+=ability.bonusAgility2();
+                            sources.add(ability.bonusAgility2(), ability.displayname);
                         }
                     }
                 }
             }
         }
-        return totalAttribute;
+        return sources;
     });
 
     self.getIntelligence = ko.computed(function () {
-        var totalAttribute = 0;
+        var sources = new StatModel();
         for (var i = 0; i < self.abilities().length; i++) {
             var ability = self._abilities[i];
             if (ability.level() > 0) {
@@ -14372,11 +14431,11 @@ var AbilityModel = function (a, h) {
                 }*/
             }
         }
-        return totalAttribute;
+        return sources;
     });
     
     self.getArmor = ko.computed(function () {
-        var totalAttribute = 0;
+        var sources = new StatModel();
         for (var i = 0; i < self.abilities().length; i++) {
             var ability = self._abilities[i];
             if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
@@ -14387,17 +14446,17 @@ var AbilityModel = function (a, h) {
                             // axe_berserkers_call,dragon_knight_dragon_blood,troll_warlord_berserkers_rage,lycan_shapeshift,enraged_wildkin_toughness_aura
                             case 'bonus_armor':
                                 if (ability.name != 'templar_assassin_meld') {
-                                    totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
+                                    sources.add(self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level()), ability.displayname);
                                 }
                             break;
                             // sven_warcry
                             case 'warcry_armor':
-                                totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
+                                sources.add(self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level()), ability.displayname);
                             break;
                             // lich_frost_armor,ogre_magi_frost_armor
                             case 'armor_bonus':
                                 if (ability.name == 'lich_frost_armor' || ability.name == 'ogre_magi_frost_armor') {
-                                    totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
+                                    sources.add(self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level()), ability.displayname);
                                 }
                             break;
                         }
@@ -14405,11 +14464,11 @@ var AbilityModel = function (a, h) {
                 }
                 else if (ability.armor != undefined) {
                     // shredder_reactive_armor,visage_gravekeepers_cloak
-                    totalAttribute+=ability.armor();
+                    sources.add(ability.armor(), ability.displayname);
                 }
             }
         }
-        return totalAttribute;
+        return sources;
     });
 
     self.getArmorBaseReduction = ko.computed(function () {
@@ -14431,7 +14490,7 @@ var AbilityModel = function (a, h) {
     });
     
     self.getArmorReduction = ko.computed(function () {
-        var totalAttribute = 0;
+        var sources = new StatModel();
         for (var i = 0; i < self.abilities().length; i++) {
             var ability = self._abilities[i];
             if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
@@ -14439,11 +14498,11 @@ var AbilityModel = function (a, h) {
                     switch(ability.name) {
                         //templar_assassin_meld
                         case 'templar_assassin_meld':
-                            totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, 'bonus_armor', ability.level());
+                            sources.add(self.getAbilityAttributeValue(self._abilities[i].attributes, 'bonus_armor', ability.level()), ability.displayname);
                         break;
                         // tidehunter_gush
                         case 'tidehunter_gush':
-                            totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, 'armor_bonus', ability.level());
+                            sources.add(self.getAbilityAttributeValue(self._abilities[i].attributes, 'armor_bonus', ability.level()), ability.displayname);
                         break;
                         // naga_siren_rip_tide
                         case 'naga_siren_rip_tide':
@@ -14451,25 +14510,25 @@ var AbilityModel = function (a, h) {
                         case 'slardar_amplify_damage':
                         // vengefulspirit_wave_of_terror
                         case 'vengefulspirit_wave_of_terror':
-                            totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, 'armor_reduction', ability.level());
+                            sources.add(self.getAbilityAttributeValue(self._abilities[i].attributes, 'armor_reduction', ability.level()), ability.displayname);
                         break;
                         // nevermore_dark_lord
                         case 'nevermore_dark_lord':
-                            totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, 'presence_armor_reduction', ability.level());
+                            sources.add(self.getAbilityAttributeValue(self._abilities[i].attributes, 'presence_armor_reduction', ability.level()), ability.displayname);
                         break;
                     }
                 }
                 else if (ability.armorReduction != undefined) {
                     // alchemist_acid_spray
-                    totalAttribute+=ability.armorReduction();
+                    sources.add(ability.armorReduction(), ability.displayname);
                 }
             }
         }
-        return totalAttribute;
+        return sources;
     });
 
     self.getHealth = ko.computed(function () {
-        var totalAttribute = 0;
+        var sources = new StatModel();
         for (var i = 0; i < self.abilities().length; i++) {
             var ability = self._abilities[i];
             if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
@@ -14479,12 +14538,12 @@ var AbilityModel = function (a, h) {
                         switch(attribute.name) {
                             // lone_druid_true_form,lycan_shapeshift,troll_warlord_berserkers_rage
                             case 'bonus_hp':
-                                totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
+                                sources.add(self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level()), ability.displayname);
                             break;
                             // lone_druid_synergy
                             case 'true_form_hp_bonus':
                                 if (self.isTrueFormActive()) {
-                                    totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
+                                    sources.add(self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level()), ability.displayname);
                                 }
                             break;
                         }
@@ -14492,11 +14551,11 @@ var AbilityModel = function (a, h) {
                 }
                 else if (ability.bonusHealth != undefined) {
                     // clinkz_death_pact,lycan_howl
-                    totalAttribute+=ability.bonusHealth();
+                    sources.add(ability.bonusHealth(), ability.displayname);
                 }
             }
         }
-        return totalAttribute;
+        return sources;
     });
     
     self.isTrueFormActive = function () {
@@ -14510,7 +14569,7 @@ var AbilityModel = function (a, h) {
     }
 
     self.getHealthRegen = ko.computed(function () {
-        var totalAttribute = 0;
+        var sources = new StatModel();
         for (var i = 0; i < self.abilities().length; i++) {
             var ability = self._abilities[i];
             if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
@@ -14528,22 +14587,22 @@ var AbilityModel = function (a, h) {
                             case 'hp_regen':
                             // lycan_feral_impulse
                             case 'bonus_hp_regen':
-                                totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
+                                sources.add(self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level()), ability.displayname);
                             break;
                         }
                     }
                 }
                 else if (ability.healthregen != undefined) {
                     // shredder_reactive_armor,invoker_quas,necrolyte_sadist
-                    totalAttribute+=ability.healthregen();
+                    sources.add(ability.healthregen(), ability.displayname);
                 }
             }
         }
-        return totalAttribute;
+        return sources;
     });
 
     self.getMana = ko.computed(function () {
-        var totalAttribute = 0;
+        var sources = new StatModel();
         for (var i = 0; i < self.abilities().length; i++) {
             var ability = self._abilities[i];
             if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
@@ -14553,18 +14612,18 @@ var AbilityModel = function (a, h) {
                         switch(attribute.name) {
                             // obsidian_destroyer_essence_aura
                             case 'bonus_mana':
-                                totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
+                                sources.add(self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level()), ability.displayname);
                             break;
                         }
                     }
                 //}
             }
         }
-        return totalAttribute;
+        return sources;
     });
     
     self.getManaRegen = ko.computed(function () {
-        var totalAttribute = 0;
+        var sources = new StatModel();
         for (var i = 0; i < self.abilities().length; i++) {
             var ability = self._abilities[i];
             if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
@@ -14574,22 +14633,22 @@ var AbilityModel = function (a, h) {
                         switch(attribute.name) {
                             // alchemist_chemical_rage
                             case 'bonus_mana_regen':
-                                totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
+                                sources.add(self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level()), ability.displayname);
                             break;
                         }
                     }
                 }
                 else if (ability.manaregen != undefined) {
                     // necrolyte_sadist
-                    totalAttribute+=ability.manaregen();
+                    sources.add(ability.manaregen(), ability.displayname);
                 }
             }
         }
-        return totalAttribute;
+        return sources;
     });
     
     self.getManaRegenArcaneAura = ko.computed(function () {
-        var totalAttribute = 0;
+        var sources = new StatModel();
         for (var i = 0; i < self.abilities().length; i++) {
             var ability = self._abilities[i];
             if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
@@ -14600,7 +14659,7 @@ var AbilityModel = function (a, h) {
                             // crystal_maiden_brilliance_aura
                             case 'mana_regen':
                                 if (ability.name == 'crystal_maiden_brilliance_aura') {
-                                    totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
+                                    sources.add(self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level()), ability.displayname);
                                 }
                             break;
                         }
@@ -14608,11 +14667,34 @@ var AbilityModel = function (a, h) {
                 //}
             }
         }
-        return totalAttribute;
+        return sources;
+    });
+    
+    self.getManaRegenSelfArcaneAura = ko.computed(function () {
+        var sources = new StatModel();
+        for (var i = 0; i < self.abilities().length; i++) {
+            var ability = self._abilities[i];
+            if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
+                //if (!(ability.name in self.abilityData)) {
+                    for (var j = 0; j < self._abilities[i].attributes.length; j++) {
+                        var attribute = self._abilities[i].attributes[j];
+                        switch(attribute.name) {
+                            // crystal_maiden_brilliance_aura
+                            case 'mana_regen_self':
+                                if (ability.name == 'crystal_maiden_brilliance_aura') {
+                                    sources.add(self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level()), ability.displayname);
+                                }
+                            break;
+                        }
+                    }
+                //}
+            }
+        }
+        return sources;
     });
 
     self.getManaRegenReduction = ko.computed(function () {
-        var totalAttribute = 0;
+        var sources = new StatModel();
         for (var i = 0; i < self.abilities().length; i++) {
             var ability = self._abilities[i];
             if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
@@ -14629,11 +14711,11 @@ var AbilityModel = function (a, h) {
                 }
                 else*/ if (ability.manaregenreduction != undefined) {
                     // pugna_nether_ward
-                    totalAttribute+=ability.manaregenreduction();
+                    sources.add(-ability.manaregenreduction(), ability.displayname);
                 }
             }
         }
-        return totalAttribute;
+        return sources;
     });
     
     self.getAttackRange = ko.computed(function () {
@@ -15512,7 +15594,7 @@ var AbilityModel = function (a, h) {
             }
         }
         return totalAttribute;
-    });            
+    });
     
     self.getEvasion = ko.computed(function () {
         var totalAttribute = 1;
@@ -15523,6 +15605,10 @@ var AbilityModel = function (a, h) {
                     for (var j = 0; j < self._abilities[i].attributes.length; j++) {
                         var attribute = self._abilities[i].attributes[j];
                         switch(attribute.name) {
+                            // windrunner_windrun
+                            case 'evasion_pct_tooltip':
+                                totalAttribute = 0;
+                            break;
                             // phantom_assassin_blur
                             case 'bonus_evasion':
                             // brewmaster_drunken_brawler
@@ -15558,8 +15644,9 @@ var AbilityModel = function (a, h) {
         return totalAttribute;
     });
     
-    self.getMissChance = ko.computed(function () {
-        var totalAttribute = 1;
+    self.getBlindSource = ko.computed(function () {
+        var totalAttribute = 0;
+        var sources = [];
         for (var i = 0; i < self.abilities().length; i++) {
             var ability = self._abilities[i];
             if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
@@ -15571,18 +15658,28 @@ var AbilityModel = function (a, h) {
                             case 'miss_chance':
                             // riki_smoke_screen,keeper_of_the_light_blinding_light,tinker_laser
                             case 'miss_rate':
-                                totalAttribute *= (1 - self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100);
+                                var value = self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level())/100;
+                                totalAttribute += value;
+                                sources.push({
+                                    'value': value,
+                                    'displayname': ability.displayname
+                                });
                             break;
                         }
                     }
                 }
                 else if (ability.missChance != undefined) {
                     // night_stalker_crippling_fear
-                    totalAttribute*=(1-ability.missChance()/100);
+                    var value = ability.missChance()/100;
+                    totalAttribute += value;
+                    sources.push({
+                        'value': value,
+                        'displayname': ability.displayname
+                    });
                 }
             }
         }
-        return totalAttribute;
+        return { sources: sources, total: totalAttribute };
     });
     
     self.getLifesteal = ko.computed(function () {
@@ -15613,24 +15710,7 @@ var AbilityModel = function (a, h) {
     });
 
     self.getSpellAmp = ko.computed(function () {
-        var totalAttribute = 0;
-        /*for (var i = 0; i < self.abilities().length; i++) {
-            var ability = self._abilities[i];
-            if (ability.level() > 0 && (ability.isActive() || (ability.behavior.indexOf('DOTA_ABILITY_BEHAVIOR_PASSIVE') != -1))) {
-                if (!(ability.name in self.abilityData)) {
-                    for (var j = 0; j < self._abilities[i].attributes.length; j++) {
-                        var attribute = self._abilities[i].attributes[j];
-                        switch(attribute.name) {
-                            // keeper_of_the_light_chakra_magic
-                            case 'cooldown_reduction':
-                                totalAttribute += self.getAbilityAttributeValue(self._abilities[i].attributes, attribute.name, ability.level());
-                            break;
-                        }
-                    }
-                }
-            }
-        }*/
-        return totalAttribute;
+        return new StatModel();
     });
     
     self.getUniqueCooldownReductionFlat = function (ability) {
@@ -16254,7 +16334,7 @@ var AbilityModel = function (a, h) {
                             case 'intellect_damage_pct':
                                 if (sources[ability.name] == undefined && ability.name == 'silencer_glaives_of_wisdom') {
                                     sources[ability.name] = {
-                                        'damage': self.getAbilityAttributeValue(ability.attributes, attribute.name, ability.level())/100 * self.hero.totalInt(),
+                                        'damage': self.getAbilityAttributeValue(ability.attributes, attribute.name, ability.level())/100 * self.hero.totalInt().total,
                                         'damageType': 'pure',
                                         'displayname': ability.displayname
                                     }
@@ -16459,7 +16539,7 @@ AbilityModel.prototype.getAbilityAttributeTooltip = function (attributes, attrib
 }
 
 module.exports = AbilityModel;
-},{"./hero/TalentController":53,"./herocalc_abilitydata":61,"./herocalc_knockout":62}],41:[function(require,module,exports){
+},{"./StatModel":44,"./hero/TalentController":57,"./herocalc_abilitydata":65,"./herocalc_knockout":66}],43:[function(require,module,exports){
 'use strict';
 var ko = require('./herocalc_knockout');
 
@@ -16667,7 +16747,46 @@ BuffViewModel.prototype = Object.create(AbilityModel.prototype);
 BuffViewModel.prototype.constructor = BuffViewModel;
 
 module.exports = BuffViewModel;
-},{"./AbilityModel":40,"./buffs/buffOptionsArray":43,"./buffs/debuffOptionsArray":44,"./herocalc_knockout":62,"./inventory/InventoryViewModel":67,"./util/findWhere":81}],42:[function(require,module,exports){
+},{"./AbilityModel":42,"./buffs/buffOptionsArray":46,"./buffs/debuffOptionsArray":47,"./herocalc_knockout":66,"./inventory/InventoryViewModel":71,"./util/findWhere":85}],44:[function(require,module,exports){
+var StatModel = function (value, label, id) {
+    this.components = [];
+    this.total = 0;
+    this.add(value, label, id);
+}
+
+StatModel.prototype.push = function (value, label, id) {
+    this.components.push({
+        value: value,
+        label: label,
+        id: id
+    });
+}
+
+StatModel.prototype.add = function (value, label, id) {
+    if (value) {
+        console.log('add', value, label, id);
+        this.push(value, label, id);
+        this.total += value;
+    }
+    return this;
+}
+
+StatModel.prototype.mult = function (value, label, id) {
+    if (value) {
+        this.push(value, label, id);
+        this.total *= value;
+    }
+    return this;
+}
+
+StatModel.prototype.concat = function (s) {
+    this.components = this.components.concat(s.components);
+    this.total += s.total;
+    return this;
+}
+
+module.exports = StatModel;
+},{}],45:[function(require,module,exports){
 var findWhere = require("../util/findWhere");
 
 var BuffModel = function (heroData, unitData, hero, ability) {
@@ -16689,7 +16808,7 @@ var BuffModel = function (heroData, unitData, hero, ability) {
 };
 
 module.exports = BuffModel;
-},{"../util/findWhere":81}],43:[function(require,module,exports){
+},{"../util/findWhere":85}],46:[function(require,module,exports){
 var BuffModel = require("./BuffModel");
 
 var buffOptionsArray = {};
@@ -16741,7 +16860,7 @@ var init = function (heroData, unitData) {
 buffOptionsArray.init = init;
 
 module.exports = buffOptionsArray;
-},{"./BuffModel":42}],44:[function(require,module,exports){
+},{"./BuffModel":45}],47:[function(require,module,exports){
 var BuffModel = require("./BuffModel");
 
 var debuffOptionsArray = {};
@@ -16846,7 +16965,22 @@ var init = function (heroData, unitData) {
 debuffOptionsArray.init = init;
 
 module.exports = debuffOptionsArray;
-},{"./BuffModel":42}],45:[function(require,module,exports){
+},{"./BuffModel":45}],48:[function(require,module,exports){
+var constants = {
+    healthPerStrength: 20,
+    healthRegenPerStrength: 5/700,
+    manaPerInt: 12,
+    manaRegenPerInt: 0.02,
+    spellDmgPerInt: 14,
+    magicResPerInt: 0.15,
+    statusResPerStrength: 0.15,
+    moveSpeedPerAgi: 0.06,
+    armorPerAgi: 1/6,
+    armorMult: 0.05
+};
+
+module.exports = constants;
+},{}],49:[function(require,module,exports){
 var HeroCalcData = {
     heroData: {},
     itemData: {},
@@ -16854,7 +16988,7 @@ var HeroCalcData = {
 };
 
 module.exports = HeroCalcData;
-},{}],46:[function(require,module,exports){
+},{}],50:[function(require,module,exports){
 var HeroCalcData = require('./HeroCalcData') || {};
 var getJSON = require("../util/getJSON");
 var isEmpty = require("../util/isEmpty");
@@ -16975,7 +17109,7 @@ var init = function (HERODATA_PATH, ITEMDATA_PATH, UNITDATA_PATH, callback) {
 HeroCalcData.init = init;
 
 module.exports = HeroCalcData;
-},{"../util/getJSON":82,"../util/isEmpty":83,"../util/isString":84,"./HeroCalcData":45}],47:[function(require,module,exports){
+},{"../util/getJSON":86,"../util/isEmpty":87,"../util/isString":88,"./HeroCalcData":49}],51:[function(require,module,exports){
 'use strict';
 var HeroModel = require("./HeroModel");
 
@@ -16989,7 +17123,7 @@ CloneModel.prototype = Object.create(HeroModel.prototype);
 CloneModel.prototype.constructor = CloneModel;
 
 module.exports = CloneModel;
-},{"./HeroModel":50}],48:[function(require,module,exports){
+},{"./HeroModel":54}],52:[function(require,module,exports){
 var DamageTypeColor = {
     'physical': '#979aa2',
     'pure': 'goldenrod',
@@ -16998,7 +17132,7 @@ var DamageTypeColor = {
 }
 
 module.exports = DamageTypeColor;
-},{}],49:[function(require,module,exports){
+},{}],53:[function(require,module,exports){
 'use strict';
 var ko = require('../herocalc_knockout');
     
@@ -17410,7 +17544,7 @@ var HeroDamageMixin = function (self, itemData) {
                     }
                     if (s[index] != undefined) {
                         if (self.heroId() === 'drow_ranger') {
-                            var d = s[index].damage * self.totalAgi();
+                            var d = s[index].damage * self.totalAgi().total;
                         }
                         else {
                             var d = s[index].damage;
@@ -17439,7 +17573,7 @@ var HeroDamageMixin = function (self, itemData) {
                 }
                 if (s[index] != undefined) {
                     if (self.heroId() === 'riki') {
-                        var d = s[index].damage * self.totalAgi();
+                        var d = s[index].damage * self.totalAgi().total;
                     }
                     else {
                         var d = s[index].damage;
@@ -17665,10 +17799,12 @@ var HeroDamageMixin = function (self, itemData) {
 }
 
 module.exports = HeroDamageMixin;
-},{"../herocalc_knockout":62,"../util/extend":80,"./DamageTypeColor":48,"./TalentController":53}],50:[function(require,module,exports){
+},{"../herocalc_knockout":66,"../util/extend":84,"./DamageTypeColor":52,"./TalentController":57}],54:[function(require,module,exports){
 'use strict';
 var ko = require('../herocalc_knockout');
 
+var constants = require("../constants");
+var StatModel = require("../StatModel");
 var AbilityModel = require("../AbilityModel");
 var BuffViewModel = require("../BuffViewModel");
 var InventoryViewModel = require("../inventory/InventoryViewModel");
@@ -17679,6 +17815,7 @@ var totalExp = require("./totalExp");
 var nextLevelExp = require("./nextLevelExp");
 var illusionData = require("../illusion/illusionData");
 var findWhere = require("../util/findWhere");
+var extend = require("../util/extend");
 
 var HeroModel = function (heroData, itemData, h) {
     var self = this;
@@ -17691,7 +17828,7 @@ var HeroModel = function (heroData, itemData, h) {
     self.buffs = new BuffViewModel(itemData);
     self.buffs.hasScepter = self.inventory.hasScepter;
     self.debuffs = new BuffViewModel(itemData);
-    self.heroData = ko.computed(function () {
+    self.heroData = ko.pureComputed(function () {
       return heroData['npc_dota_hero_' + self.heroId()];
     });
     self.heroCompare = ko.observable(self);
@@ -17706,7 +17843,7 @@ var HeroModel = function (heroData, itemData, h) {
         ko.observable(-1)
     ];
     
-    self.selectedTalents = ko.computed(function () {
+    self.selectedTalents = ko.pureComputed(function () {
         var arr = [];
         for (var i = 0; i < 4; i++) {
             if (self.talents[i]() !== -1) {
@@ -17874,148 +18011,161 @@ var HeroModel = function (heroData, itemData, h) {
         }
     });
     self.totalAttribute = function (a) {
-        if (a === 'agi') return parseFloat(self.totalAgi());
-        if (a === 'int') return parseFloat(self.totalInt());
-        if (a === 'str') return parseFloat(self.totalStr());
+        if (a === 'agi') return self.totalAgi().total;
+        if (a === 'int') return self.totalInt().total;
+        if (a === 'str') return self.totalStr().total;
         return 0;
     };
     self.totalAgi = ko.pureComputed(function () {
-        return (self.heroData().attributebaseagility
-                + self.heroData().attributeagilitygain * (self.selectedHeroLevel() - 1) 
-                + self.inventory.getAttributes('agi') 
-                + self.ability().getAttributeBonusLevel() * 2
-                + self.ability().getAgility()
-                + TalentController.getAgility(self.selectedTalents())
-                + self.enemy().ability().getAllStatsReduction()
-                + self.debuffs.getAllStatsReduction()
-               ).toFixed(2);
+        var s = new StatModel(self.heroData().attributebaseagility, 'Base');
+        s.add(self.heroData().attributeagilitygain * (self.selectedHeroLevel() - 1), 'Level')
+            .concat(self.inventory.getAttributes('agi'))
+            .concat(self.ability().getAgility())
+            .concat(TalentController.getAgility(self.selectedTalents()))
+            .concat(self.enemy().ability().getAllStatsReduction())
+            .concat(self.debuffs.getAllStatsReduction())
+        return s;
     });
     self.intStolen = ko.observable(0).extend({ numeric: 0 });
     self.totalInt = ko.pureComputed(function () {
-        return (self.heroData().attributebaseintelligence 
-                + self.heroData().attributeintelligencegain * (self.selectedHeroLevel() - 1) 
-                + self.inventory.getAttributes('int') 
-                + self.ability().getAttributeBonusLevel() * 2
-                + self.ability().getIntelligence()
-                + TalentController.getIntelligence(self.selectedTalents())
-                + self.enemy().ability().getAllStatsReduction()
-                + self.debuffs.getAllStatsReduction() + self.intStolen()
-               ).toFixed(2);
+        var s = new StatModel(self.heroData().attributebaseintelligence, 'Base');
+        s.add(self.heroData().attributeintelligencegain * (self.selectedHeroLevel() - 1), 'Level')
+            .concat(self.inventory.getAttributes('int'))
+            .concat(self.ability().getIntelligence())
+            .concat(TalentController.getIntelligence(self.selectedTalents()))
+            .concat(self.enemy().ability().getAllStatsReduction())
+            .concat(self.debuffs.getAllStatsReduction())
+            .add(self.intStolen(), 'Int Stolen')
+            .add(-self.enemy().intStolen(), 'Int Stolen')
+        return s;
     });
     self.totalStr = ko.pureComputed(function () {
-        return (self.heroData().attributebasestrength 
-                + self.heroData().attributestrengthgain * (self.selectedHeroLevel() - 1) 
-                + self.inventory.getAttributes('str') 
-                + self.ability().getAttributeBonusLevel() * 2
-                + self.ability().getStrength()
-                + TalentController.getStrength(self.selectedTalents())
-                + self.enemy().ability().getStrengthReduction()
-                + self.enemy().ability().getAllStatsReduction()
-                + self.debuffs.getAllStatsReduction()
-               ).toFixed(2);
+        var s = new StatModel(self.heroData().attributebasestrength, 'Base');
+        s.add(self.heroData().attributestrengthgain * (self.selectedHeroLevel() - 1), 'Level')
+            .concat(self.inventory.getAttributes('str'))
+            .concat(self.ability().getStrength())
+            .concat(TalentController.getStrength(self.selectedTalents()))
+            .concat(self.enemy().ability().getStrengthReduction())
+            .concat(self.enemy().ability().getAllStatsReduction())
+            .concat(self.debuffs.getAllStatsReduction())
+        return s;
     });
     // + % status resistance
     self.perkStr = ko.pureComputed(function () {
-        return self.totalStr() * 0.15;
+        return self.totalStr().total * constants.statusResPerStrength;
     });
     // + % ms
     self.perkAgi = ko.pureComputed(function () {
-        return self.totalAgi() * 0.06;
+        return self.totalAgi().total * constants.moveSpeedPerAgi;
     });
     // + % magic resistance
     self.perkInt = ko.pureComputed(function () {
-        return self.totalInt() * 0.15;
+        return self.totalInt().total * constants.magicResPerInt;
     });
     self.health = ko.pureComputed(function () {
-        return (self.heroData().statushealth + Math.floor(self.totalStr()) * 20 
-                + self.inventory.getHealth()
-                + self.ability().getHealth()
-                + TalentController.getHealth(self.selectedTalents())
-                ).toFixed(2);
+        var s = new StatModel(self.heroData().statushealth, 'Base');
+        self.totalStr().components.forEach(function (component) {
+            s.add(component.value * constants.healthPerStrength, component.label == 'Base' ? 'Base Str' : component.label);
+        });
+        s.concat(self.inventory.getHealth())
+        .concat(self.ability().getHealth())
+        .concat(TalentController.getHealth(self.selectedTalents()))
+        return s;
     });
     // Health Regeneration = (Base + Sum of Flat Bonuses) * (1 + strength * (5/700))
     self.healthregen = ko.pureComputed(function () {
         var healthRegenAura = [self.inventory.getHealthRegenAura, self.buffs.itemBuffs.getHealthRegenAura].reduce(function (memo, fn) {
-            var obj = fn(memo.excludeList);
-            obj.value += memo.value;
-            return obj;
-        }, {value: 0, excludeList: []});
-        return ((self.heroData().statushealthregen
-                + (self.isIllusion() ? 0 : self.inventory.getHealthRegen() 
-                    + self.ability().getHealthRegen()
-                    + TalentController.getHealthRegen(self.selectedTalents())
-                    + self.buffs.getHealthRegen()
-                    + healthRegenAura.value
-                    )
-                ) * (1 + self.totalStr() * (5/700))).toFixed(2);
+            return fn(memo.sources, memo.excludeList);
+        }, {sources: new StatModel(), excludeList: []});
+        
+        var s = new StatModel(self.heroData().statushealthregen, 'Base');
+        if (!self.isIllusion()) {
+            s.concat(self.inventory.getHealthRegen())
+            .concat(self.ability().getHealthRegen())
+            .concat(self.buffs.getHealthRegen())
+            .concat(TalentController.getHealthRegen(self.selectedTalents()))
+            .concat(healthRegenAura.sources)
+        }
+        s.mult(1 + self.totalStr().total * constants.healthRegenPerStrength, 'Str Regen Amp %');
+        console.log('healthregen', s);
+        return s;
     });
     self.mana = ko.pureComputed(function () {
-        return (self.heroData().statusmana
-                + self.totalInt() * 12
-                + self.inventory.getMana()
-                + TalentController.getMana(self.selectedTalents())
-                + self.ability().getMana()).toFixed(2);
+        var s = new StatModel(self.heroData().statusmana, 'Base');
+        self.totalInt().components.forEach(function (component) {
+            s.add(component.value * constants.manaPerInt, component.label == 'Base' ? 'Base Int' : component.label);
+        });
+        s.concat(self.inventory.getMana())
+        .concat(self.ability().getMana())
+        .concat(TalentController.getMana(self.selectedTalents()))
+        return s;
     });
     // Mana Regeneration = (Base + Sum of Flat Bonuses) * (1 + intelligence * 0.02)
     self.manaregen = ko.pureComputed(function () {
-        return ((self.heroData().statusmanaregen
-                + self.ability().getManaRegen()
-                + TalentController.getManaRegen(self.selectedTalents())
-                + (self.heroId() === 'crystal_maiden' ? self.ability().getManaRegenArcaneAura() * 2 : self.buffs.getManaRegenArcaneAura())
-                + self.inventory.getManaRegenBloodstone()
-                + self.inventory.getManaRegen()
-                - self.enemy().ability().getManaRegenReduction()
-                ) * (1 + self.totalInt() * 0.02)).toFixed(2);
+        var s = new StatModel(self.heroData().statusmanaregen, 'Base');
+        s.concat(self.inventory.getManaRegen())
+        .concat(self.inventory.getManaRegenBloodstone())
+        .concat(self.ability().getManaRegen())
+        .concat(TalentController.getManaRegen(self.selectedTalents()))
+        if (self.heroId() == 'crystal_maiden') {
+            s.concat(self.ability().getManaRegenSelfArcaneAura())
+        }
+        else {
+            s.concat(self.buffs.getManaRegenArcaneAura())
+        }
+        s.concat(self.enemy().ability().getManaRegenReduction())
+        s.mult(1 + self.totalInt().total * constants.manaRegenPerInt, 'Mana Regen Amp %');                
+        return s;
     });
     self.totalArmorPhysical = ko.pureComputed(function () {
         var armorAura = [self.inventory.getArmorAura, self.buffs.itemBuffs.getArmorAura].reduce(function (memo, fn) {
-            var obj = fn(memo.attributes);
-            return obj;
-        }, {value:0, attributes:[]});
+            return fn(memo);
+        }, null);
+        
         var armorReduction = [self.enemy().inventory.getArmorReduction, self.debuffs.itemBuffs.getArmorReduction].reduce(function (memo, fn) {
-            var obj = fn(memo.excludeList);
-            obj.value += memo.value;
-            return obj;
-        }, {value: 0, excludeList: []});
+            return fn(memo);
+        }, null);
+        
         var armorReductionAura = [self.enemy().inventory.getArmorReductionAura, self.debuffs.itemBuffs.getArmorReductionAura].reduce(function (memo, fn) {
-            var obj = fn(memo.excludeList);
-            obj.value += memo.value;
-            return obj;
-        }, {value: 0, excludeList: []});
-        return (self.enemy().ability().getArmorBaseReduction() * self.debuffs.getArmorBaseReduction() * (self.heroData().armorphysical + self.totalAgi() * 1/6)
-                + (self.isIllusion() ? 0 : self.inventory.getArmor()
-                    //+ self.inventory.getArmorAura().value
-                    //+ self.enemy().inventory.getArmorReduction()
-                    + self.ability().getArmor()
-                    + TalentController.getArmor(self.selectedTalents())
-                    + self.buffs.getArmor()
-                    + armorAura.value
-                    + armorReductionAura.value
-                    )
-                + self.enemy().ability().getArmorReduction()
-                //+ self.buffs.itemBuffs.getArmor()
-                + self.debuffs.getArmorReduction()
-                //+ self.buffs.itemBuffs.getArmorAura().value
-                + armorReduction.value
-                //+ self.debuffs.getArmorReduction()
-                ).toFixed(2);
+            return fn(memo);
+        }, null);
+        
+        var armorBaseReduction = self.enemy().ability().getArmorBaseReduction() * self.debuffs.getArmorBaseReduction();
+        
+        var s = new StatModel(self.heroData().armorphysical, 'Base');
+        self.totalAgi().components.forEach(function (component) {
+            s.add(component.value * constants.armorPerAgi, component.label == 'Base' ? 'Base Agi' : component.label);
+        });
+        if (armorBaseReduction != 1) {
+            s.mult(self.enemy().ability().getArmorBaseReduction() * self.debuffs.getArmorBaseReduction(), 'Base Armor Reduction %');
+        }
+        if (!self.isIllusion()) {
+            s.concat(self.inventory.getArmor())
+            .concat(self.ability().getArmor())
+            .concat(TalentController.getArmor(self.selectedTalents()))
+            .concat(self.buffs.getArmor())
+            .concat(armorAura)
+            .concat(armorReductionAura)
+        }
+        s.concat(self.enemy().ability().getArmorReduction())
+        .concat(self.debuffs.getArmorReduction())
+        .concat(armorReduction)
+        return s;
     });
     self.totalArmorPhysicalReduction = ko.pureComputed(function () {
-        var totalArmor = self.totalArmorPhysical();
-        if (totalArmor >= 0) {
-            return ((0.05 * self.totalArmorPhysical()) / (1 + 0.05 * self.totalArmorPhysical()) * 100).toFixed(2);
-        }
-        else {
-            return -((0.05 * -self.totalArmorPhysical()) / (1 + 0.05 * -self.totalArmorPhysical()) * 100).toFixed(2);
-        }
+        var totalArmor = self.totalArmorPhysical().total;
+        return (constants.armorMult * totalArmor) / (1 + constants.armorMult * Math.abs(totalArmor))
     });
     self.spellAmp = ko.pureComputed(function () {
-        return (self.totalInt() / 14
-                + self.inventory.getSpellAmp()
-                + self.ability().getSpellAmp()
-                + TalentController.getSpellAmp(self.selectedTalents())
-                + self.buffs.getSpellAmp()
-                ).toFixed(2);
+        var s = new StatModel();
+        self.totalInt().components.forEach(function (component) {
+            s.add(component.value / constants.spellDmgPerInt, component.label == 'Base' ? 'Base Int' : component.label);
+        });
+        s.concat(self.inventory.getSpellAmp())
+        .concat(self.ability().getSpellAmp())
+        .concat(TalentController.getSpellAmp(self.selectedTalents()))
+        .concat(self.buffs.getSpellAmp())
+        return s;
     });
     self.cooldownReductionFlat = ko.pureComputed(function () {
         return self.inventory.getCooldownReductionFlat()
@@ -18063,7 +18213,7 @@ var HeroModel = function (heroData, itemData, h) {
                 return obj;
             }, {value:0, excludeList:[]});
             // If agility is a hero's primary attribute, every point in agility increases their movement speed by 0.06%.
-            var agiMovementSpeedPercent = self.primaryAttribute() == 'agi' ? self.totalAgi() * (0.0006) : 0;
+            var agiMovementSpeedPercent = self.primaryAttribute() == 'agi' ? self.totalAgi().total * (0.0006) : 0;
             return Math.max(
                 self.enemy().inventory.isSheeped() || self.debuffs.itemBuffs.isSheeped() ? 140 :
                 (self.heroData().movementspeed + movementSpeedFlat.value + self.ability().getMovementSpeedFlat() + TalentController.getMovementSpeedFlat(self.selectedTalents())) * 
@@ -18125,11 +18275,11 @@ var HeroModel = function (heroData, itemData, h) {
                             )
                 + Math.floor(
                     (self.heroData().attacktype == 'DOTA_UNIT_CAP_RANGED_ATTACK' 
-                        ? ((self.heroId() == 'drow_ranger') ? self.ability().getBonusDamagePrecisionAura().total[0] * self.totalAgi() : self.buffs.getBonusDamagePrecisionAura().total[1])
+                        ? ((self.heroId() == 'drow_ranger') ? self.ability().getBonusDamagePrecisionAura().total[0] * self.totalAgi().total : self.buffs.getBonusDamagePrecisionAura().total[1])
                         : 0)
                   )
                 + Math.floor(
-                    ((self.heroId() == 'riki') ? self.ability().getBonusDamageBackstab().total[0] * self.totalAgi() : 0)
+                    ((self.heroId() == 'riki') ? self.ability().getBonusDamageBackstab().total[0] * self.totalAgi().total : 0)
                   )
                 ) * self.ability().getSelfBaseDamageReductionPct()
                   * self.enemy().ability().getBaseDamageReductionPct()
@@ -18153,7 +18303,7 @@ var HeroModel = function (heroData, itemData, h) {
     });
     self.totalStatusResistanceProduct = ko.pureComputed(function() {
         // If strength is a hero's primary attribute, every point in strength increases their status resistance by 0.15%.
-        var strStatusResistance = self.primaryAttribute() == 'str' ? 1 - self.totalStr() * (0.0015) : 1;
+        var strStatusResistance = self.primaryAttribute() == 'str' ? 1 - self.totalStr().total * (0.0015) : 1;
         return strStatusResistance;
     });
     self.totalStatusResistance = ko.pureComputed(function () {
@@ -18161,7 +18311,7 @@ var HeroModel = function (heroData, itemData, h) {
     });
     self.totalMagicResistanceProduct = ko.pureComputed(function () {
         //If intelligence is a hero's primary attribute, every point in intelligence increases their magic resistance by 0.15%.
-        var intMagicResistance = self.primaryAttribute() == 'int' ? 1 + self.totalInt() * (0.0015) : 1;
+        var intMagicResistance = self.primaryAttribute() == 'int' ? 1 + self.totalInt().total * (0.0015) : 1;
         return (1 - self.heroData().magicalresistance / 100)
                 * (self.isIllusion() ? 1 :
                     self.inventory.getMagicResist()
@@ -18202,7 +18352,7 @@ var HeroModel = function (heroData, itemData, h) {
             obj.value += memo.value;
             return obj;
         }, {value:0, excludeList: []});
-        var val = parseFloat(self.totalAgi()) 
+        var val = self.totalAgi().total
                 //+ self.inventory.getAttackSpeed() 
                 + attackSpeed.value
                 + attackSpeedAura.value
@@ -18228,34 +18378,40 @@ var HeroModel = function (heroData, itemData, h) {
     self.attacksPerSecond = ko.pureComputed(function () {
         return ((1 + self.ias() / 100) / self.bat()).toFixed(2);
     });
+    self.totalAccuracyProduct = ko.pureComputed(function () {
+        var accuracySources = self.inventory.getAccuracySource(self.heroData().attacktype);
+        extend(accuracySources, self.enemy().debuffs.itemBuffs.getAccuracyDebuffSource());
+        var accuracySourcesArray = [];
+        for (var prop in accuracySources) {
+            var el = accuracySources[prop];
+            el.name = prop
+            accuracySourcesArray.push(el);
+        }
+        return accuracySourcesArray.reduce(function (memo, source) {
+            return memo * Math.pow((1 - source.chance), source.count)
+        }, 1);
+    });
+    self.accuracy = ko.pureComputed(function () {
+        return (
+            (1 - self.totalAccuracyProduct()) * 100
+        ).toFixed(2);
+    });
+    self.totalEvasionProduct = ko.pureComputed(function () {
+        return self.inventory.getEvasion()
+            * self.ability().getEvasion()
+            * self.ability().getEvasionBacktrack()
+            * TalentController.getEvasion(self.selectedTalents())
+            * self.buffs.itemBuffs.getEvasion()
+    });
     self.evasion = ko.pureComputed(function () {
         if (self.enemy().inventory.isSheeped() || self.debuffs.itemBuffs.isSheeped()) return 0;
-        var e = self.ability().setEvasion();
-        if (e) {
-            return (e * 100).toFixed(2);
-        }
-        else {
-            return (
-                (
-                    1 - (
-                        self.inventory.getEvasion()
-                        * self.ability().getEvasion()
-                        * self.ability().getEvasionBacktrack()
-                        * TalentController.getEvasion(self.selectedTalents())
-                        * self.buffs.itemBuffs.getEvasion()
-                    )
-                ) * 100
-            ).toFixed(2);
-        }
+        return (
+            (1 - self.totalEvasionProduct()) * 100
+        ).toFixed(2);
     });
     self.ehpPhysical = ko.pureComputed(function () {
         var evasion = self.enemy().inventory.isSheeped() || self.debuffs.itemBuffs.isSheeped() ? 1 : self.inventory.getEvasion() * self.ability().getEvasion() * self.buffs.itemBuffs.getEvasion();
-        if (self.totalArmorPhysical() >= 0) {
-            var ehp = self.health() * (1 + .06 * self.totalArmorPhysical());
-        }
-        else {
-            var ehp = self.health() * (1 - .06 * self.totalArmorPhysical()) / (1 - .12 * self.totalArmorPhysical());
-        }
+        var ehp = self.health().total / (1 - self.totalArmorPhysicalReduction());
         ehp /= (1 - (1 - (evasion * self.ability().getEvasionBacktrack())));
         ehp /= (1 - parseFloat(self.enemy().missChance()) / 100);
         ehp *= (self.inventory.activeItems().some(function (item) {return item.item == 'mask_of_madness';}) ? (1 / 1.3) : 1);
@@ -18267,7 +18423,7 @@ var HeroModel = function (heroData, itemData, h) {
         return ehp.toFixed(2);
     });
     self.ehpMagical = ko.pureComputed(function () {
-        var ehp = self.health() / self.totalMagicResistanceProduct();
+        var ehp = self.health().total / self.totalMagicResistanceProduct();
         ehp *= (self.inventory.activeItems().some(function (item) {return item.item == 'mask_of_madness';}) ? (1 / 1.3) : 1);
         ehp *= (1 / self.ability().getDamageReduction());
         ehp *= (1 / self.buffs.getDamageReduction());
@@ -18288,17 +18444,17 @@ var HeroModel = function (heroData, itemData, h) {
 
     HeroDamageMixin(self, itemData);
     
-    /*self.critDamage = ko.computed(function () {
-        self.critInfo();
-        return 0;
-    });*/
     self.missChance = ko.pureComputed(function () {
-        var missDebuff = [self.enemy().inventory.getMissChance, self.debuffs.itemBuffs.getMissChance].reduce(function (memo, fn) {
+        var blindDebuff = [self.enemy().inventory.getBlindSource, self.debuffs.itemBuffs.getBlindSource].reduce(function (memo, fn) {
             var obj = fn(memo.excludeList);
-            obj.value *= memo.value;
+            obj.total += memo.total;
             return obj;
-        }, {value:1, excludeList:[]});
-        return ((1 - (self.enemy().ability().getMissChance() * self.debuffs.getMissChance() * missDebuff.value)) * 100).toFixed(2);
+        }, {total:0, excludeList:[]});
+        var blind = 1 - Math.min(self.enemy().ability().getBlindSource().total + self.debuffs.getBlindSource().total + blindDebuff.total, 1);
+        return ((1 - (self.enemy().totalEvasionProduct() * blind)) * 100).toFixed(2);
+    });
+    self.hitChance = ko.pureComputed(function () {
+        return ((1 - (parseFloat(self.missChance())/100) * (1 - parseFloat(self.accuracy())/100)) * 100).toFixed(2);
     });
     self.totalattackrange = ko.pureComputed(function () {
         var attacktype = self.heroData().attacktype;
@@ -18326,26 +18482,40 @@ var HeroModel = function (heroData, itemData, h) {
             }, {value: 0, excludeList: []});
             total += lifestealAura.value;
         }
-        return (total).toFixed(2);
+        return total.toFixed(2);
     });
     
     self.diffProperties = diffProperties;
     self.diff = {};
+    self.diff2 = {};
 
     for (var i = 0; i < self.diffProperties.length; i++) {
         var index = i;
         self.diff[self.diffProperties[index]] = self.getDiffFunction(self.diffProperties[index]);
+        self.diff2[self.diffProperties[index]] = self.getDiffFunction2(self.diffProperties[index]);
     }
 };
 
 HeroModel.prototype.getDiffFunction = function (prop) {
     var self = this;
-    return ko.computed(function () {
+    return ko.pureComputed(function () {
         if (prop == 'baseDamage') {
             return [self[prop]()[0] - self.heroCompare()[prop]()[0], self[prop]()[1] - self.heroCompare()[prop]()[1]];
         }
         else {
             return self[prop]() - self.heroCompare()[prop]();
+        }
+    }, this, { deferEvaluation: true });
+}
+
+HeroModel.prototype.getDiffFunction2 = function (prop) {
+    var self = this;
+    return ko.pureComputed(function () {
+        if (prop == 'baseDamage') {
+            return [self[prop]()[0] - self.heroCompare()[prop]()[0], self[prop]()[1] - self.heroCompare()[prop]()[1]];
+        }
+        else {
+            return self[prop]().total - self.heroCompare()[prop]().total;
         }
     }, this, { deferEvaluation: true });
 }
@@ -18398,7 +18568,7 @@ HeroModel.prototype.toggleTalent = function (talentTier, talentIndex) {
 }
 
 module.exports = HeroModel;
-},{"../AbilityModel":40,"../BuffViewModel":41,"../herocalc_knockout":62,"../illusion/illusionData":64,"../inventory/InventoryViewModel":67,"../util/findWhere":81,"./HeroDamageMixin":49,"./TalentController":53,"./diffProperties":56,"./nextLevelExp":58,"./totalExp":60}],51:[function(require,module,exports){
+},{"../AbilityModel":42,"../BuffViewModel":43,"../StatModel":44,"../constants":48,"../herocalc_knockout":66,"../illusion/illusionData":68,"../inventory/InventoryViewModel":71,"../util/extend":84,"../util/findWhere":85,"./HeroDamageMixin":53,"./TalentController":57,"./diffProperties":60,"./nextLevelExp":62,"./totalExp":64}],55:[function(require,module,exports){
 var HeroOption = function (name, displayname, hero) {
     this.heroName = name;
     this.heroDisplayName = displayname;
@@ -18406,7 +18576,7 @@ var HeroOption = function (name, displayname, hero) {
 };
 
 module.exports = HeroOption;
-},{}],52:[function(require,module,exports){
+},{}],56:[function(require,module,exports){
 'use strict';
 var HeroModel = require("./HeroModel");
 var illusionData = require("../illusion/illusionData");
@@ -18547,9 +18717,10 @@ IllusionModel.prototype = Object.create(HeroModel.prototype);
 IllusionModel.prototype.constructor = IllusionModel;
 
 module.exports = IllusionModel;
-},{"../illusion/illusionData":64,"../util/findWhere":81,"./HeroModel":50}],53:[function(require,module,exports){
+},{"../illusion/illusionData":68,"../util/findWhere":85,"./HeroModel":54}],57:[function(require,module,exports){
 var cooldownTalents = require('../talents/cooldownTalents.json');
 var talentAbilityMap = require('./talentAbilityMap');
+var StatModel = require("../StatModel");
 
 module.exports = {
     getTalentById: function (talents, talentId) {
@@ -18577,64 +18748,64 @@ module.exports = {
         return { sources: sources, total: totalAttribute };
     },
     getHealth: function (talents) {
-        var totalAttribute = 0;
+        var sources = new StatModel();
         for (var i = 0; i < talents.length; i++) {
             var ability = talents[i];
             if (ability.name.startsWith('special_bonus_hp_') && !ability.name.startsWith('special_bonus_hp_regen_')) {
-                totalAttribute += ability.attributes[0].value[0];
+                sources.add(ability.attributes[0].value[0], ability.displayname);
             }
         }
-        return totalAttribute;
+        return sources;
     },
     getHealthRegen: function (talents) {
-        var totalAttribute = 0;
+        var sources = new StatModel();
         for (var i = 0; i < talents.length; i++) {
             var ability = talents[i];
             if (ability.name.startsWith('special_bonus_hp_regen_')) {
-                totalAttribute += ability.attributes[0].value[0];
+                sources.add(ability.attributes[0].value[0], ability.displayname);
             }
         }
-        return totalAttribute;
+        return sources;
     },
     getMana: function (talents) {
-        var totalAttribute = 0;
+        var sources = new StatModel();
         for (var i = 0; i < talents.length; i++) {
             var ability = talents[i];
             if (ability.name.startsWith('special_bonus_mp_') && !ability.name.startsWith('special_bonus_mp_regen_')) {
-                totalAttribute += ability.attributes[0].value[0];
+                sources.add(ability.attributes[0].value[0], ability.displayname);
             }
         }
-        return totalAttribute;
+        return sources;
     },
     getManaRegen: function (talents) {
-        var totalAttribute = 0;
+        var sources = new StatModel();
         for (var i = 0; i < talents.length; i++) {
             var ability = talents[i];
             if (ability.name.startsWith('special_bonus_mp_regen_')) {
-                totalAttribute += ability.attributes[0].value[0];
+                sources.add(ability.attributes[0].value[0], ability.displayname);
             }
         }
-        return totalAttribute;
+        return sources;
     },
     getArmor: function (talents) {
-        var totalAttribute = 0;
+        var sources = new StatModel();
         for (var i = 0; i < talents.length; i++) {
             var ability = talents[i];
             if (ability.name.startsWith('special_bonus_armor_')) {
-                totalAttribute += ability.attributes[0].value[0];
+                sources.add(ability.attributes[0].value[0], ability.displayname);
             }
         }
-        return totalAttribute;
+        return sources;
     },
     getSpellAmp: function (talents) {
-        var totalAttribute = 0;
+        var sources = new StatModel();
         for (var i = 0; i < talents.length; i++) {
             var ability = talents[i];
             if (ability.name.startsWith('special_bonus_spell_amplify_')) {
-                totalAttribute += ability.attributes[0].value[0];
+                sources.add(ability.attributes[0].value[0], ability.displayname);
             }
         }
-        return totalAttribute;
+        return sources;
     },
     getUniqueCooldownReductionFlat: function (talents) {
         var totalAttribute = {};
@@ -18742,51 +18913,52 @@ module.exports = {
         return totalAttribute;
     },
     getStrength: function (talents) {
-        var totalAttribute = 0;
+        var sources = new StatModel();
         for (var i = 0; i < talents.length; i++) {
             var ability = talents[i];
             if (ability.name.startsWith('special_bonus_strength_')) {
-                totalAttribute += ability.attributes[0].value[0];
+                sources.add(ability.attributes[0].value[0], ability.displayname);
             }
             else if (ability.name.startsWith('special_bonus_all_stats_')) {
-                totalAttribute += ability.attributes[0].value[0];
+                sources.add(ability.attributes[0].value[0], ability.displayname);
             }
         }
-        return totalAttribute;
+        return sources;
     },
     getAgility: function (talents) {
-        var totalAttribute = 0;
+        var sources = new StatModel();
         for (var i = 0; i < talents.length; i++) {
             var ability = talents[i];
             if (ability.name.startsWith('special_bonus_agility_')) {
-                totalAttribute += ability.attributes[0].value[0];
+                sources.add(ability.attributes[0].value[0], ability.displayname);
             }
             else if (ability.name.startsWith('special_bonus_all_stats_')) {
-                totalAttribute += ability.attributes[0].value[0];
+                sources.add(ability.attributes[0].value[0], ability.displayname);
             }
         }
-        return totalAttribute;
+        return sources;
     },
     getIntelligence: function (talents) {
-        var totalAttribute = 0;
+        var sources = new StatModel();
         for (var i = 0; i < talents.length; i++) {
             var ability = talents[i];
             if (ability.name.startsWith('special_bonus_intelligence_')) {
-                totalAttribute += ability.attributes[0].value[0];
+                sources.add(ability.attributes[0].value[0], ability.displayname);
             }
             else if (ability.name.startsWith('special_bonus_all_stats_')) {
-                totalAttribute += ability.attributes[0].value[0];
+                sources.add(ability.attributes[0].value[0], ability.displayname);
             }
         }
-        return totalAttribute;
+        return sources;
     }
 }
-},{"../talents/cooldownTalents.json":79,"./talentAbilityMap":59}],54:[function(require,module,exports){
+},{"../StatModel":44,"../talents/cooldownTalents.json":83,"./talentAbilityMap":63}],58:[function(require,module,exports){
 'use strict';
 var ko = require('../herocalc_knockout');
 
 var AbilityModel = require("../AbilityModel");
 var HeroModel = require("./HeroModel");
+var StatModel = require("../StatModel");
 
 var UnitModel = function (heroData, itemData, unitData, h, p) {
     var self = this;
@@ -18795,7 +18967,7 @@ var UnitModel = function (heroData, itemData, unitData, h, p) {
     self.unitId = ko.observable(h);
     self.unitLevel = ko.observable(1);
 
-    self.heroData = ko.computed(function() {
+    self.heroData = ko.pureComputed(function() {
         return unitData[self.unitId()];
     });
     self.getAbilityLevelMax = function(data) {
@@ -18891,128 +19063,45 @@ var UnitModel = function (heroData, itemData, unitData, h, p) {
     });
     self.totalAttribute = function(a) {
         if (a == 'agi') {
-            return parseFloat(self.totalAgi());
+            return parseFloat(self.totalAgi().total);
         }
         if (a == 'int') {
-            return parseFloat(self.totalInt());
+            return parseFloat(self.totalInt().total);
         }
         if (a == 'str') {
-            return parseFloat(self.totalStr());
+            return parseFloat(self.totalStr().total);
         }
         return 0;
     };
     self.totalAgi = ko.computed(function() {
-        return (unitData[self.unitId()].attributebaseagility
-                + unitData[self.unitId()].attributeagilitygain * (self.selectedHeroLevel() - 1) 
-                //+ self.inventory.getAttributes('agi') 
-                + self.ability().getAttributeBonusLevel()*2
-                + self.ability().getAgility()
-                + self.enemy().ability().getAllStatsReduction()
-                + self.debuffs.getAllStatsReduction()
-               ).toFixed(2);
+        var s = new StatModel(unitData[self.unitId()].attributebaseagility, 'Base');
+        s.add(unitData[self.unitId()].attributeagilitygain * (self.selectedHeroLevel() - 1), 'Level')
+            .concat(self.ability().getAgility())
+            .concat(self.enemy().ability().getAllStatsReduction())
+            .concat(self.debuffs.getAllStatsReduction())
+        return s;
     });
     self.totalInt = ko.computed(function() {
-        return (unitData[self.unitId()].attributebaseintelligence 
-                + unitData[self.unitId()].attributeintelligencegain * (self.selectedHeroLevel() - 1) 
-                //+ self.inventory.getAttributes('int') 
-                + self.ability().getAttributeBonusLevel()*2
-                + self.ability().getIntelligence()
-                + self.enemy().ability().getAllStatsReduction()
-                + self.debuffs.getAllStatsReduction()
-               ).toFixed(2);
+        var s = new StatModel(unitData[self.unitId()].attributebaseintelligence, 'Base');
+        s.add(unitData[self.unitId()].attributeintelligencegain * (self.selectedHeroLevel() - 1), 'Level')
+            .concat(self.ability().getIntelligence())
+            .concat(self.enemy().ability().getAllStatsReduction())
+            .concat(self.debuffs.getAllStatsReduction())
+        return s;
     });
     self.totalStr = ko.computed(function() {
-        return (unitData[self.unitId()].attributebasestrength 
-                + unitData[self.unitId()].attributestrengthgain * (self.selectedHeroLevel() - 1) 
-                //+ self.inventory.getAttributes('str') 
-                + self.ability().getAttributeBonusLevel()*2
-                + self.ability().getStrength()
-                + self.enemy().ability().getAllStatsReduction()
-                + self.debuffs.getAllStatsReduction()
-               ).toFixed(2);
+        var s = new StatModel(unitData[self.unitId()].attributebasestrength, 'Base');
+        s.add(unitData[self.unitId()].attributestrengthgain * (self.selectedHeroLevel() - 1), 'Level')
+            .concat(self.ability().getStrength())
+            .concat(self.enemy().ability().getStrengthReduction())
+            .concat(self.enemy().ability().getAllStatsReduction())
+            .concat(self.debuffs.getAllStatsReduction())
+        return s;
     });
-    /*self.health = ko.computed(function() {
-        return (unitData[self.unitId()].statushealth + self.totalStr()*19 
-                + self.inventory.getHealth()
-                + self.ability().getHealth()).toFixed(2);
-    });
-    self.healthregen = ko.computed(function() {
-        return (unitData[self.unitId()].statushealthregen + self.totalStr()*.03 
-                + self.inventory.getHealthRegen() 
-                + self.ability().getHealthRegen()
-                + self.buffs.getHealthRegen()).toFixed(2);
-    });
-    self.mana = ko.computed(function() {
-        return (unitData[self.unitId()].statusmana + self.totalInt()*13 + self.inventory.getMana()).toFixed(2);
-    });
-    self.manaregen = ko.computed(function() {
-        return ((unitData[self.unitId()].statusmanaregen 
-                + self.totalInt()*.04 
-                + self.ability().getManaRegen()) 
-                * (1 + self.inventory.getManaRegenPercent()) 
-                + (self.selectedHero().heroName == 'crystal_maiden' ? self.ability().getManaRegenArcaneAura() * 2 : self.buffs.getManaRegenArcaneAura())
-                + self.inventory.getManaRegenBloodstone()
-                - self.enemy().ability().getManaRegenReduction()).toFixed(2);
-    });
-    self.totalArmorPhysical = ko.computed(function() {
-        return (self.enemy().ability().getArmorBaseReduction() * self.debuffs.getArmorBaseReduction() * (unitData[self.unitId()].armorphysical + self.totalAgi()*.14)
-                + self.inventory.getArmor() + self.ability().getArmor() + self.enemy().ability().getArmorReduction() + self.buffs.getArmor() + self.debuffs.getArmorReduction()).toFixed(2);
-    });
-    self.totalArmorPhysicalReduction = ko.computed(function() {
-        return ((0.06 * self.totalArmorPhysical()) / (1 + 0.06 * self.totalArmorPhysical()) * 100).toFixed(2);
-    });
-    self.totalMovementSpeed = ko.computed(function() {
-        if (self.parent.ability().isShapeShiftActive()) {
-            return 522;
-        }
-        var ms = (self.ability().setMovementSpeed() > 0 ? self.ability().setMovementSpeed() : self.buffs.setMovementSpeed());
-        if (ms > 0) {
-            return ms;
-        }
-        else {
-            return ((unitData[self.unitId()].movementspeed + self.inventory.getMovementSpeedFlat()+ self.ability().getMovementSpeedFlat()) * 
-                    (1 + self.inventory.getMovementSpeedPercent() 
-                       + self.ability().getMovementSpeedPercent() 
-                       + self.enemy().inventory.getMovementSpeedPercentReduction() 
-                       + self.enemy().ability().getMovementSpeedPercentReduction() 
-                       + self.buffs.getMovementSpeedPercent() 
-                       + self.debuffs.getMovementSpeedPercentReduction()
-                    )).toFixed(2);
-        }
-    });
-    self.totalTurnRate = ko.computed(function() {
-        return (unitData[self.unitId()].movementturnrate 
-                * (1 + self.enemy().ability().getTurnRateReduction()
-                     + self.debuffs.getTurnRateReduction())).toFixed(2);
-    });
-    */
     self.baseDamage = ko.computed(function() {
         return [Math.floor(unitData[self.unitId()].attackdamagemin + self.totalAttribute(self.primaryAttribute()) + self.ability().getBaseDamage().total),
                 Math.floor(unitData[self.unitId()].attackdamagemax + self.totalAttribute(self.primaryAttribute()) + self.ability().getBaseDamage().total)];
     });
-    /*self.bonusDamage = ko.computed(function() {
-        return self.inventory.getBonusDamage().total
-                + self.ability().getBonusDamage().total
-                + self.buffs.getBonusDamage().total
-                + Math.floor((self.baseDamage()[0] + self.baseDamage()[1])/2 
-                              * (self.inventory.getBonusDamagePercent().total
-                                 + self.ability().getBonusDamagePercent().total
-                                 + self.buffs.getBonusDamagePercent().total
-                                )
-                            )
-                + Math.floor(
-                    (self.hero().attacktype() == 'DOTA_UNIT_CAP_RANGED_ATTACK' 
-                        ? ((self.selectedHero().heroName == 'drow_ranger') ? self.ability().getBonusDamagePrecisionAura().total[0] * self.totalAgi() : self.buffs.getBonusDamagePrecisionAura().total[1])
-                        : 0)
-                  );
-    });*/
-    /*self.bonusDamageReduction = ko.computed(function() {
-        return Math.abs(self.enemy().ability().getBonusDamageReduction() + self.debuffs.getBonusDamageReduction());
-    });
-    self.damage = ko.computed(function() {
-        return [self.baseDamage()[0] + self.bonusDamage()[0],
-                self.baseDamage()[1] + self.bonusDamage()[1]];
-    });*/
     self.totalMagicResistanceProduct = ko.computed(function() {
         return (1 - unitData[self.unitId()].magicalresistance / 100) 
                    * (1 - self.inventory.getMagicResist() / 100) 
@@ -19032,22 +19121,6 @@ var UnitModel = function (heroData, itemData, unitData, h, p) {
         }
         return unitData[self.unitId()].attackrate;
     });
-    /*
-    self.ias = ko.computed(function() {
-        var val = parseFloat(self.totalAgi()) 
-                + self.inventory.getAttackSpeed() 
-                + self.ability().getAttackSpeed() 
-                + self.enemy().ability().getAttackSpeedReduction() 
-                + self.buffs.getAttackSpeed() 
-                + self.debuffs.getAttackSpeedReduction();
-        if (val < -80) {
-            return -80;
-        }
-        else if (val > 400) {
-            return 400;
-        }
-        return (val).toFixed(2);
-    });*/
     self.attackTime = ko.computed(function() {
         return (self.bat() / (1 + self.ias() / 100)).toFixed(2);
     });
@@ -19064,10 +19137,10 @@ var UnitModel = function (heroData, itemData, unitData, h, p) {
         }
     });
     self.ehpPhysical = ko.computed(function() {
-        return ((self.health() * (1 + .06 * self.totalArmorPhysical())) / (1-(1-(self.inventory.getEvasion() * self.ability().getEvasion())))).toFixed(2);
+        return ((self.health().total * (1 + .06 * self.totalArmorPhysical())) / (1-(1-(self.inventory.getEvasion() * self.ability().getEvasion())))).toFixed(2);
     });
     self.ehpMagical = ko.computed(function() {
-        return (self.health() / self.totalMagicResistanceProduct()).toFixed(2);
+        return (self.health().total / self.totalMagicResistanceProduct()).toFixed(2);
     });
     self.heroId(h);
     self.unitId.subscribe(function (newValue) {
@@ -19079,7 +19152,7 @@ UnitModel.prototype = Object.create(HeroModel.prototype);
 UnitModel.prototype.constructor = UnitModel;
 
 module.exports = UnitModel;
-},{"../AbilityModel":40,"../herocalc_knockout":62,"./HeroModel":50}],55:[function(require,module,exports){
+},{"../AbilityModel":42,"../StatModel":44,"../herocalc_knockout":66,"./HeroModel":54}],59:[function(require,module,exports){
 var UnitOption = function (name, displayname, levels, image, level) {
     this.heroName = ko.computed(function() {
         return (levels > 0) ? name + (level() <= levels ? level() : 1) : name;
@@ -19090,7 +19163,7 @@ var UnitOption = function (name, displayname, levels, image, level) {
 };
 
 module.exports = UnitOption;
-},{}],56:[function(require,module,exports){
+},{}],60:[function(require,module,exports){
 var diffProperties = [
     'totalAgi',
     'totalInt',
@@ -19123,6 +19196,8 @@ var diffProperties = [
     'critChance',
     //'critDamage',
     'missChance',
+    'accuracy',
+    'hitChance',
     'totalattackrange',
     'visionrangeday',
     'visionrangenight',
@@ -19130,7 +19205,7 @@ var diffProperties = [
 ];
 
 module.exports = diffProperties;
-},{}],57:[function(require,module,exports){
+},{}],61:[function(require,module,exports){
 var HeroOption = require("./HeroOption");
 
 var heroOptionsArray = {};
@@ -19146,11 +19221,11 @@ var init = function (heroData) {
 heroOptionsArray.init = init;
 
 module.exports = heroOptionsArray;
-},{"./HeroOption":51}],58:[function(require,module,exports){
+},{"./HeroOption":55}],62:[function(require,module,exports){
 var nextLevelExp = [200, 400, 480, 600, 620, 640, 660, 680, 800, 820, 840, 900, 1225, 1250, 1275, 1300, 1325, 1400, 1490, 1500, 1750, 2000, 2250, 2500, '&mdash;'];
 
 module.exports = nextLevelExp;
-},{}],59:[function(require,module,exports){
+},{}],63:[function(require,module,exports){
 module.exports = {
     "special_bonus_unique_abaddon_2": "abaddon_death_coil",
     "special_bonus_unique_abaddon": "abaddon_aphotic_shield",
@@ -19615,11 +19690,11 @@ module.exports = {
     "special_bonus_unique_weaver_4": "weaver_the_swarm",
     "special_bonus_unique_witch_doctor_3": "witch_doctor_paralyzing_cask"
 }
-},{}],60:[function(require,module,exports){
+},{}],64:[function(require,module,exports){
 var totalExp = [0, 200, 500, 900, 1400, 2000, 2615, 3425, 3890, 4550, 5225, 6000, 7175, 8375, 9600, 10850, 12125, 13500, 14900, 16325, 17925, 19825, 22025, 24525, 27500];
 
 module.exports = totalExp;
-},{}],61:[function(require,module,exports){
+},{}],65:[function(require,module,exports){
 var abilityData = {
     'alchemist_acid_spray': [
         {
@@ -20516,7 +20591,7 @@ var abilityData = {
             ignoreTooltip: true,
             controlType: 'text',
             fn: function (v, a, parent, index, abilityModel, ability, TalentController) {
-                return parent.health()*v/100;
+                return parent.health().total*v/100;
             }
         },
         {
@@ -22071,7 +22146,7 @@ var abilityData = {
             ignoreTooltip: true,
             controlType: 'text',
             fn: function (v, a, parent, index, abilityModel, ability, TalentController) {
-                return v*parent.health()*a/100;
+                return v*parent.health().total*a/100;
             }
         },
         {
@@ -22080,7 +22155,7 @@ var abilityData = {
             ignoreTooltip: true,
             controlType: 'text',
             fn: function (v, a, parent, index, abilityModel, ability, TalentController) {
-                return parent.health()*a/100;
+                return parent.health().total*a/100;
             },
             returnProperty: 'healthregen'
         },
@@ -23193,7 +23268,7 @@ var abilityData = {
 }
 
 module.exports = abilityData;
-},{}],62:[function(require,module,exports){
+},{}],66:[function(require,module,exports){
 (function (global){
 'use strict';
 var ko = (typeof window !== "undefined" ? window['ko'] : typeof global !== "undefined" ? global['ko'] : null);
@@ -23233,7 +23308,7 @@ ko.extenders.numeric = function(target, opts) {
 module.exports = ko;
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"./lib/knockout.mapping":76,"./lib/knockout.wrap":77}],63:[function(require,module,exports){
+},{"./lib/knockout.mapping":80,"./lib/knockout.wrap":81}],67:[function(require,module,exports){
 var IllusionOption = function (name, displayname, baseHero, use_selected_hero) {
     this.illusionName = name;
     this.illusionDisplayName = displayname;
@@ -23242,7 +23317,7 @@ var IllusionOption = function (name, displayname, baseHero, use_selected_hero) {
 };
 
 module.exports = IllusionOption;
-},{}],64:[function(require,module,exports){
+},{}],68:[function(require,module,exports){
 var illusionData = {
     chaos_knight_phantasm: {
         hero: 'chaos_knight',
@@ -23359,7 +23434,7 @@ var illusionData = {
 }
 
 module.exports = illusionData;
-},{}],65:[function(require,module,exports){
+},{}],69:[function(require,module,exports){
 var IllusionOption = require("./IllusionOption");
 var illusionData = require("./illusionData");
 
@@ -23369,7 +23444,7 @@ for (var h in illusionData) {
 }
 
 module.exports = illusionOptionsArray;
-},{"./IllusionOption":63,"./illusionData":64}],66:[function(require,module,exports){
+},{"./IllusionOption":67,"./illusionData":68}],70:[function(require,module,exports){
 (function (global){
 var ko = (typeof window !== "undefined" ? window['ko'] : typeof global !== "undefined" ? global['ko'] : null);
 var stackableItems = require("./stackableItems");
@@ -23394,7 +23469,6 @@ var BasicInventoryViewModel = function (h) {
                 break;
                 break;
                 case 'travel_boots':
-                case 'diffusal_blade':
                     new_item.size = Math.min(new_item.size, 2);
                 break;
                 case 'necronomicon':
@@ -23487,7 +23561,6 @@ BasicInventoryViewModel.prototype.getItemImage = function (data) {
             }
         break;
         case 'dagon':
-        case 'diffusal_blade':
         case 'travel_boots':
         case 'necronomicon':
             if (data.size > 1) {
@@ -23549,10 +23622,11 @@ BasicInventoryViewModel.prototype.getItemAttributeValue = function (attributes, 
 module.exports = BasicInventoryViewModel;
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"./itemsWithActive":72,"./levelItems":73,"./stackableItems":74}],67:[function(require,module,exports){
+},{"./itemsWithActive":76,"./levelItems":77,"./stackableItems":78}],71:[function(require,module,exports){
 'use strict';
 var ko = require('../herocalc_knockout');
 
+var StatModel = require("../StatModel");
 var stackableItems = require("./stackableItems");
 var levelItems = require("./levelItems");
 var BasicInventoryViewModel = require("./BasicInventoryViewModel");
@@ -23567,17 +23641,16 @@ var InventoryViewModel = function (itemData, h) {
     self.hasInventory = ko.observable(true);
     self.items = ko.observableArray([]);
     self.activeItems = ko.observableArray([]);
-    self.hasScepter = ko.computed(function () {
+    self.hasScepter = ko.pureComputed(function () {
         for (var i = 0; i < self.items().length; i++) {
             var item = self.items()[i].item;
             if (item === 'ultimate_scepter' && self.items()[i].enabled()) {
                 return true;
             }
-            
         }
         return false;
     }, this);
-    self.isEthereal = ko.computed(function () {
+    self.isEthereal = ko.pureComputed(function () {
         for (var i = 0; i < self.items().length; i++) {
             var item = self.items()[i].item;
             var isActive = self.activeItems.indexOf(self.items()[i]) >= 0 ? true : false;
@@ -23587,7 +23660,7 @@ var InventoryViewModel = function (itemData, h) {
         }
         return false;
     }, this);
-    self.isSheeped = ko.computed(function () {
+    self.isSheeped = ko.pureComputed(function () {
         for (var i = 0; i < self.items().length; i++) {
             var item = self.items()[i].item;
             var isActive = self.activeItems.indexOf(self.items()[i]) >= 0 ? true : false;
@@ -23597,7 +23670,7 @@ var InventoryViewModel = function (itemData, h) {
         }
         return false;
     }, this);
-    self.totalCost = ko.computed(function () {
+    self.totalCost = ko.pureComputed(function () {
         var c = 0;
         for (var i = 0; i < self.items().length; i++) {
             var item = self.items()[i].item;
@@ -23608,7 +23681,6 @@ var InventoryViewModel = function (itemData, h) {
             else if (levelItems.indexOf(item) != -1) {
                 switch(item) {
                     case 'travel_boots':
-                    case 'diffusal_blade':
                     case 'necronomicon':
                     case 'dagon':
                         c += itemData['item_' + item].itemcost + (self.items()[i].size - 1) * itemData['item_recipe_' + item].itemcost;
@@ -23628,10 +23700,13 @@ var InventoryViewModel = function (itemData, h) {
     self.addItemBuff = function (data, event) {
         if (self.hasInventory() && self.selectedItemBuff() != undefined) {
             var new_item = {
-                item: self.selectedItemBuff(),
+                item: self.selectedItemBuff().split('|')[0],
                 state: ko.observable(0),
                 size: 1,
                 enabled: ko.observable(true)
+            }
+            if (self.selectedItemBuff().split('|').length == 2) {
+                new_item.buff = self.selectedItemBuff().split('|')[1]
             }
             self.items.push(new_item);
             if (self.selectedItemBuff() === 'ring_of_aquila' || self.selectedItemBuff() === 'ring_of_basilius') {
@@ -23657,73 +23732,94 @@ var InventoryViewModel = function (itemData, h) {
         }
     };
     
-    self.getAttributes = function (attributetype) {
-        var totalAttribute = 0;
+    self.getAttributes = function (attributeType) {
+        var sources = new StatModel();
         for (var i = 0; i < self.items().length; i++) {
-            var item = self.items()[i].item;
+            var itemId = self.items()[i].item;
             var isActive = self.activeItems.indexOf(self.items()[i]) >= 0 ? true : false;
             if (!self.items()[i].enabled()) continue;
             var size = self.items()[i].size;
-            for (var j = 0; j < itemData['item_' + item].attributes.length; j++) {
-                var attribute = itemData['item_' + item].attributes[j];
+            var item = itemData['item_' + itemId];
+            for (var j = 0; j < item.attributes.length; j++) {
+                var attribute = item.attributes[j];
                 switch(attribute.name) {
                     case 'bonus_all_stats':
-                        totalAttribute += parseInt(attribute.value[0]);
+                        sources.add(parseInt(attribute.value[0]), item.displayname);
                     break;
                     case 'bonus_stats':
-                        totalAttribute += parseInt(attribute.value[0]);
+                        sources.add(parseInt(attribute.value[0]), item.displayname);
                     break;
                 }
-                switch(attributetype) {
+                switch(attributeType) {
                     case 'agi':
-                        if (attribute.name == 'bonus_agility') {
-                            if (item == 'diffusal_blade') {
-                                totalAttribute += parseInt(attribute.value[size-1]);
-                            }
-                            else {
-                                totalAttribute += parseInt(attribute.value[0]);
-                            }
+                        switch(attribute.name) {
+                            case 'bonus_agility':
+                            case 'bonus_agi':
+                                sources.add(parseInt(attribute.value[0]), item.displayname);
+                            break;
+                            case 'bonus_stat':
+                                if (self.items()[i].state() == 2) {
+                                    sources.add(parseInt(attribute.value[0]), item.displayname);
+                                }
+                            break;
                         }
-                        if (attribute.name == 'bonus_stat' && self.items()[i].state() == 2) {totalAttribute += parseInt(attribute.value[0]);};
-                        if (attribute.name == 'bonus_agi') {totalAttribute += parseInt(attribute.value[0]);};
                     break;
                     case 'int':
-                        if (attribute.name == 'bonus_intellect') {
-                            if (item == 'necronomicon') {
-                                totalAttribute += parseInt(attribute.value[size-1]);
-                            }
-                            else if (item == 'diffusal_blade') {
-                                totalAttribute += parseInt(attribute.value[size-1]);
-                            }
-                            else if (item == 'dagon') {
-                                totalAttribute += parseInt(attribute.value[size-1]);
-                            }
-                            else {
-                                totalAttribute += parseInt(attribute.value[0]);
-                            }
+                        switch(attribute.name) {
+                            case 'bonus_intellect':
+                                if (itemId == 'necronomicon') {
+                                    sources.add(parseInt(attribute.value[size-1]), item.displayname);
+                                }
+                                else if (itemId == 'dagon') {
+                                    sources.add(parseInt(attribute.value[size-1]), item.displayname);
+                                }
+                                else {
+                                    sources.add(parseInt(attribute.value[0]), item.displayname);
+                                }
+                            break;
+                            case 'bonus_intelligence':
+                            case 'bonus_int':
+                                sources.add(parseInt(attribute.value[0]), item.displayname);
+                            break;
+                            case 'bonus_stat':
+                                if (self.items()[i].state() == 1) {
+                                    sources.add(parseInt(attribute.value[0]), item.displayname);
+                                }
+                            break;
                         }
-                        if (attribute.name == 'bonus_intelligence') {totalAttribute += parseInt(attribute.value[0]);};
-                        if (attribute.name == 'bonus_int') {totalAttribute += parseInt(attribute.value[0]);};
-                        if (attribute.name == 'bonus_stat' && self.items()[i].state() == 1) {totalAttribute += parseInt(attribute.value[0]);};
                     break;
                     case 'str':
-                        if (attribute.name == 'bonus_strength') {
-                            if (item == 'necronomicon') {
-                                totalAttribute += parseInt(attribute.value[size-1]);
-                            }
-                            else {
-                                totalAttribute += parseInt(attribute.value[0]);
-                            }
+                        switch(attribute.name) {
+                            case 'bonus_strength':
+                                if (itemId == 'necronomicon') {
+                                    sources.add(parseInt(attribute.value[size-1]), item.displayname);
+                                }
+                                else {
+                                    sources.add(parseInt(attribute.value[0]), item.displayname);
+                                }
+                            break;
+                            case 'bonus_str':
+                                sources.add(parseInt(attribute.value[0]), item.displayname);
+                            break;
+                            case 'bonus_stat':
+                                if (self.items()[i].state() == 0) {
+                                    sources.add(parseInt(attribute.value[0]), item.displayname);
+                                }
+                            break;
+                            case 'unholy_bonus_strength':
+                                if (isActive) {
+                                    sources.add(parseInt(attribute.value[0]), item.displayname);
+                                }
+                            break;
                         }
-                        if (attribute.name == 'bonus_stat' && self.items()[i].state() == 0) {totalAttribute += parseInt(attribute.value[0]);};
-                        if (attribute.name == 'bonus_str') {totalAttribute += parseInt(attribute.value[0]);};
-                        if (attribute.name == 'unholy_bonus_strength' && isActive) {totalAttribute += parseInt(attribute.value[0]);};
                     break;
                 }
             }
         }
-        return totalAttribute;
+        console.log('getAttributes', sources);
+        return sources;
     };
+    
     self.getBash = function (attacktype) {
         var totalAttribute = 1;
         for (var i = 0; i < self.items().length; i++) {
@@ -23831,7 +23927,38 @@ var InventoryViewModel = function (itemData, h) {
         return sources;
     };
     
-    self.getBashSource = function (attacktype) {
+    self.getAccuracyDebuffSource = function () {
+        var sources = {};
+        for (var i = 0; i < self.items().length; i++) {
+            var item = self.items()[i].item;
+            var isActive = self.activeItems.indexOf(self.items()[i]) >= 0 ? true : false;
+            if (!self.items()[i].enabled()) continue;
+            switch (item) {
+                case 'bloodthorn':
+                    if (sources[item] == undefined) {
+                        sources[item] = {
+                            'chance': 1,
+                            'count': 1,
+                            'displayname': 'Soul Rend'
+                        }
+                    }
+                break;
+                case 'solar_crest':
+                    if (sources[item] == undefined) {
+                        sources[item] = {
+                            'chance': self.getItemAttributeValue(itemData['item_' + item].attributes, 'truestrike_chance', 0) / 100,
+                            'count': 1,
+                            'displayname': 'Shine'
+                        }
+                    }
+                break;
+            }
+
+        }
+        return sources;
+    };
+    
+    self.getAccuracySource = function (attacktype) {
         var sources = {};
         for (var i = 0; i < self.items().length; i++) {
             var item = self.items()[i].item;
@@ -23841,10 +23968,8 @@ var InventoryViewModel = function (itemData, h) {
                 case 'javelin':
                     if (sources[item] == undefined) {
                         sources[item] = {
-                            'damage': self.getItemAttributeValue(itemData['item_' + item].attributes, 'bonus_chance_damage', 1),
-                            'damageType': 'magic',
+                            'chance': self.getItemAttributeValue(itemData['item_' + item].attributes, 'bonus_chance', 0) / 100,
                             'count': 1,
-                            'chance': self.getItemAttributeValue(itemData['item_' + item].attributes, 'bonus_chance', 1) / 100,
                             'displayname': itemData['item_' + item].displayname + ' Pierce'
                         }
                     }
@@ -23855,19 +23980,35 @@ var InventoryViewModel = function (itemData, h) {
                 case 'monkey_king_bar':
                     if (sources[item] == undefined) {
                         sources[item] = {
-                            'item': item,
-                            'chance': self.getItemAttributeValue(itemData['item_' + item].attributes, 'bash_chance', 0) / 100,
-                            'damage': self.getItemAttributeValue(itemData['item_' + item].attributes, 'bash_damage', 0),
-                            'duration': self.getItemAttributeValue(itemData['item_' + item].attributes, 'bash_stun', 0),
+                            'chance': self.getItemAttributeValue(itemData['item_' + item].attributes, 'bonus_chance', 0) / 100,
                             'count': 1,
-                            'damageType': 'magic',
-                            'displayname': 'Mini-Bash' //itemData['item_' + item].displayname
+                            'displayname': itemData['item_' + item].displayname + ' Pierce'
                         }
                     }
-                    else {
-                        sources[item].count += 1;
+                break;
+                case 'abyssal_blade':
+                case 'basher':
+                    if (!sources.hasOwnProperty('bash')) {
+                        sources['bash'] = {
+                            'chance': self.getItemAttributeValue(itemData['item_' + item].attributes, (attacktype == 'DOTA_UNIT_CAP_MELEE_ATTACK') ?'bash_chance_melee' : 'bash_chance_ranged', 0) / 100,
+                            'count': 1,
+                            'displayname': 'Bash'
+                        }
                     }
                 break;
+            }
+
+        }
+        return sources;
+    };
+    
+    self.getBashSource = function (attacktype) {
+        var sources = {};
+        for (var i = 0; i < self.items().length; i++) {
+            var item = self.items()[i].item;
+            var isActive = self.activeItems.indexOf(self.items()[i]) >= 0 ? true : false;
+            if (!self.items()[i].enabled()) continue;
+            switch (item) {
                 case 'abyssal_blade':
                 case 'basher':
                     if (!sources.hasOwnProperty('bash')) {
@@ -23898,6 +24039,31 @@ var InventoryViewModel = function (itemData, h) {
             var isActive = self.activeItems.indexOf(self.items()[i]) >= 0 ? true : false;
             if (!self.items()[i].enabled()) continue;
             switch (item) {
+                case 'javelin':
+                    if (sources[item] == undefined) {
+                        sources[item] = {
+                            'chance': self.getItemAttributeValue(itemData['item_' + item].attributes, 'bonus_chance', 0) / 100,
+                            'damage': self.getItemAttributeValue(itemData['item_' + item].attributes, 'bonus_chance_damage', 0),
+                            'damageType': 'magic',
+                            'count': 1,
+                            'displayname': itemData['item_' + item].displayname + ' Pierce'
+                        }
+                    }
+                    else {
+                        sources[item].count += 1;
+                    }
+                break;
+                case 'monkey_king_bar':
+                    if (sources[item] == undefined) {
+                        sources[item] = {
+                            'chance': self.getItemAttributeValue(itemData['item_' + item].attributes, 'bonus_chance', 0) / 100,
+                            'damage': self.getItemAttributeValue(itemData['item_' + item].attributes, 'bonus_chance_damage', 0),
+                            'count': 1,
+                            'damageType': 'pure',
+                            'displayname': itemData['item_' + item].displayname + ' Pierce'
+                        }
+                    }
+                break;
                 case 'maelstrom':
                 case 'mjollnir':
                     if (sources[item] == undefined) {
@@ -23906,11 +24072,8 @@ var InventoryViewModel = function (itemData, h) {
                             'damage': self.getItemAttributeValue(itemData['item_' + item].attributes, 'chain_damage', 0),
                             'count': 1,
                             'damageType': 'magic',
-                            'displayname': itemData['item_' + item].displayname
+                            'displayname': 'Chain Lightning'
                         }
-                    }
-                    else {
-                        sources[item].count += 1;
                     }
                 break;
             }
@@ -23947,113 +24110,118 @@ var InventoryViewModel = function (itemData, h) {
     };
     
     self.getHealth = function () {
-        var totalAttribute = 0;
+        var sources = new StatModel();
         for (var i = 0; i < self.items().length; i++) {
-            var item = self.items()[i].item;
+            var itemId = self.items()[i].item;
             if (!self.items()[i].enabled()) continue;
-            for (var j = 0; j < itemData['item_' + item].attributes.length; j++) {
-                var attribute = itemData['item_' + item].attributes[j];
+            var item = itemData['item_' + itemId];
+            for (var j = 0; j < item.attributes.length; j++) {
+                var attribute = item.attributes[j];
                 switch(attribute.name) {
                     case 'bonus_health':
-                        totalAttribute += parseInt(attribute.value[0]);
+                        sources.add(parseInt(attribute.value[0]), item.displayname);
                     break;
                 }
             }
         }
-        return totalAttribute;
+        return sources;
     };
     self.getHealthRegen = function () {
-        var totalAttribute = 0;
+        var sources = new StatModel();
         for (var i = 0; i < self.items().length; i++) {
-            var item = self.items()[i].item;
+            var itemId = self.items()[i].item;
             var isActive = self.activeItems.indexOf(self.items()[i]) >= 0 ? true : false;
             if (!self.items()[i].enabled()) continue;
-            for (var j = 0; j < itemData['item_' + item].attributes.length; j++) {
-                var attribute = itemData['item_' + item].attributes[j];
+            var item = itemData['item_' + itemId];
+            for (var j = 0; j < item.attributes.length; j++) {
+                var attribute = item.attributes[j];
                 switch(attribute.name) {
                     case 'health_regen':
                     case 'bonus_regen':
-                        totalAttribute += parseInt(attribute.value[0]);
+                    case 'hp_regen':
+                        sources.add(parseInt(attribute.value[0]), item.displayname);
                     break;
                     case 'bonus_health_regen':
-                        if (item == 'tranquil_boots' && !isActive) {
-                            totalAttribute += parseInt(attribute.value[0]);
+                        if (itemId == 'tranquil_boots' && !isActive) {
+                            sources.add(parseInt(attribute.value[0]), item.displayname);
                         }
-                        else if (item != 'tranquil_boots') {
-                            totalAttribute += parseInt(attribute.value[0]);
+                        else if (itemId != 'tranquil_boots') {
+                            sources.add(parseInt(attribute.value[0]), item.displayname);
                         }
-                    break;
-                    case 'hp_regen':
-                        totalAttribute += parseInt(attribute.value[0]);
                     break;
                     case 'health_regen_rate':
-                        if (item == 'heart' && isActive) {
-                            totalAttribute += (parseInt(attribute.value[0]) / 100) * self.hero.health();
+                        if (itemId == 'heart' && isActive) {
+                            sources.add((parseInt(attribute.value[0]) / 100) * self.hero.health().total, item.displayname);
                         }
                     break;
                 }
             }
         }
-        return totalAttribute;
+        return sources;
     };
-    self.getHealthRegenAura = function (e) {
-        var totalAttribute = 0,
-            excludeList = e || [];
+    self.getHealthRegenAura = function (sources, e) {
+        var excludeList = e || [];
+        sources = sources || new StatModel();
         for (var i = 0; i < self.items().length; i++) {
-            var item = self.items()[i].item;
+            var itemId = self.items()[i].item;
             var isActive = self.activeItems.indexOf(self.items()[i]) >= 0 ? true : false;
             if (!self.items()[i].enabled()) continue;
-            for (var j = 0; j < itemData['item_' + item].attributes.length; j++) {
-                var attribute = itemData['item_' + item].attributes[j];
-                if (excludeList.indexOf(item + attribute.name) > -1) continue;
+            var item = itemData['item_' + itemId];
+            for (var j = 0; j < item.attributes.length; j++) {
+                var attribute = item.attributes[j];
+                if (excludeList.indexOf(itemId + attribute.name) > -1) continue;
                 switch(attribute.name) {
                     case 'aura_health_regen':
                     case 'hp_regen_aura':
-                        totalAttribute += parseInt(attribute.value[0]);
-                        excludeList.push(item + attribute.name);
+                        sources.add(parseInt(attribute.value[0]), item.displayname);
+                        excludeList.push(itemId + attribute.name);
                     break;
                 }
             }
         }
-        return {value: totalAttribute, excludeList: excludeList};
+        return { sources: sources, excludeList: excludeList };
     };
     
     self.getMana = function () {
-        var totalAttribute = 0;
+        var sources = new StatModel();
         for (var i = 0; i < self.items().length; i++) {
-            var item = self.items()[i].item;
+            var itemId = self.items()[i].item;
             if (!self.items()[i].enabled()) continue;
-            for (var j = 0; j < itemData['item_' + item].attributes.length; j++) {
-                var attribute = itemData['item_' + item].attributes[j];
+            var item = itemData['item_' + itemId];
+            for (var j = 0; j < item.attributes.length; j++) {
+                var attribute = item.attributes[j];
                 switch(attribute.name) {
                     case 'bonus_mana':
-                        totalAttribute += parseInt(attribute.value[0]);
+                        sources.add(parseInt(attribute.value[0]), item.displayname);
                     break;
                 }
             }
         }
-        return totalAttribute;
+        return sources;
     };
     
     self.getManaRegen = function () {
-        var totalAttribute = 0;
+        var sources = new StatModel();
         for (var i = 0; i < self.items().length; i++) {
-            var item = self.items()[i].item;
+            var itemId = self.items()[i].item;
             if (!self.items()[i].enabled()) continue;
-            for (var j = 0; j < itemData['item_' + item].attributes.length; j++) {
-                var attribute = itemData['item_' + item].attributes[j];
+            var item = itemData['item_' + itemId];
+            for (var j = 0; j < item.attributes.length; j++) {
+                var attribute = item.attributes[j];
                 switch(attribute.name) {
                     case 'aura_mana_regen':
                     case 'mana_regen_aura':
-                        totalAttribute += parseFloat(attribute.value[0]);
+                        sources.add(parseInt(attribute.value[0]), item.displayname);
                     break;
                     case 'mana_regen':
-                        if (item == 'infused_raindrop') totalAttribute += parseFloat(attribute.value[0]);
+                        if (itemId == 'infused_raindrop') {
+                            sources.add(parseInt(attribute.value[0]), item.displayname);
+                        }
                     break;
                 }
             }
         }
-        return totalAttribute;    
+        return sources;
     };
     self.getManaRegenPercent = function () {
         var totalAttribute = 0;
@@ -24078,144 +24246,150 @@ var InventoryViewModel = function (itemData, h) {
             var item = self.items()[i].item;
             if (!self.items()[i].enabled()) continue;
             if (item.indexOf('bloodstone') != -1) {
-                return parseInt(self.items()[i].size);
+                return new StatModel(parseInt(self.items()[i].size), itemData['item_' + item].displayname);
             }
         }
-        return 0;
+        return new StatModel();
     };
     
     self.getArmor = function () {
-        var totalAttribute = 0;
+        var sources = new StatModel();
         for (var i = 0; i < self.items().length; i++) {
-            var item = self.items()[i].item;
+            var itemId = self.items()[i].item;
             var isActive = self.activeItems.indexOf(self.items()[i]) >= 0 ? true : false;
             if (!self.items()[i].enabled()) continue;
-            for (var j = 0; j < itemData['item_' + item].attributes.length; j++) {
-                var attribute = itemData['item_' + item].attributes[j];
+            var item = itemData['item_' + itemId];
+            for (var j = 0; j < item.attributes.length; j++) {
+                var attribute = item.attributes[j];
                 switch(attribute.name) {
                     case 'bonus_armor':
-                        if (!isActive || (item != 'medallion_of_courage' && item != 'solar_crest')) { totalAttribute += parseInt(attribute.value[0]); };
+                        if (!isActive || (itemId != 'medallion_of_courage' && itemId != 'solar_crest')) {
+                            sources.add(parseInt(attribute.value[0]), item.displayname, attribute.name);
+                        };
                     break;
                     case 'unholy_bonus_armor':
-                        if (isActive && item == 'armlet') { totalAttribute += parseInt(attribute.value[0]); };
+                        if (isActive && itemId == 'armlet') {
+                            sources.add(parseInt(attribute.value[0]), item.displayname, attribute.name);
+                        };
                     break;
                 }
             }
         }
-        return totalAttribute;
+        
+        return sources;
     };
     
-    self.getArmorAura = function (aList) {
-        var totalAttribute = 0,
-            attributeList = aList || [];
+    self.getArmorAura = function (sources) {     
+        sources = sources || new StatModel();
         for (var i = 0; i < self.items().length; i++) {
-            var item = self.items()[i].item;
+            var itemId = self.items()[i].item;
             var isActive = self.activeItems.indexOf(self.items()[i]) >= 0 ? true : false;
             if (!self.items()[i].enabled()) continue;
-            for (var j = 0;j < itemData['item_' + item].attributes.length; j++) {
-                var attribute = itemData['item_' + item].attributes[j];
-                if (attributeList.find(function (a) { return attribute.name == a.name; })) continue;
+            var item = itemData['item_' + itemId];
+            for (var j = 0;j < item.attributes.length; j++) {
+                var attribute = item.attributes[j];
+                if (sources.components.find(function (a) { return attribute.name == a.id; })) continue;
                 switch(attribute.name) {
                     // buckler
                     case 'bonus_aoe_armor':
                         if (isActive) {
-                            attributeList.push({'name':attribute.name, 'value': parseInt(attribute.value[0])});
+                            sources.push(parseInt(attribute.value[0]), item.displayname, attribute.name);
                         }
                     break;
                     // assault
                     case 'aura_positive_armor':
-                        attributeList.push({'name':attribute.name, 'value': parseInt(attribute.value[0])});
+                        sources.push(parseInt(attribute.value[0]), item.displayname, attribute.name);
                     break;
                     // ring_of_aquila,ring_of_basilius
                     case 'aura_bonus_armor':
                         if (isActive) {
-                            attributeList.push({'name':attribute.name, 'value': parseInt(attribute.value[0])});
+                            sources.push(parseInt(attribute.value[0]), item.displayname, attribute.name);
                         }
                     break;
                     // vladmir
                     case 'armor_aura':
-                        attributeList.push({'name':attribute.name, 'value': parseInt(attribute.value[0])});
+                        sources.push(parseInt(attribute.value[0]), item.displayname, attribute.name);
                     break;
                     // mekansm
                     case 'heal_bonus_armor':
                         if (isActive) {
-                            attributeList.push({'name':attribute.name, 'value': parseInt(attribute.value[0])});
+                            sources.push(parseInt(attribute.value[0]), item.displayname, attribute.name);
                         }
                     break;
                 }
             }
         }
         // remove buckler if there is a mekansm
-        if (attributeList.find(function (attribute) { return attribute.name == 'heal_bonus_armor'; })) {
-            attributeList = attributeList.filter(function (attribute) {
-                return attribute.name !== 'bonus_aoe_armor';
+        if (sources.components.find(function (attribute) { return attribute.id == 'heal_bonus_armor'; })) {
+            sources.components = sources.components.filter(function (attribute) {
+                return attribute.id !== 'bonus_aoe_armor';
             });
         }
         // remove ring_of_aquila,ring_of_basilius if there is a vladmir
-        if (attributeList.find(function (attribute) { return attribute.name == 'armor_aura'; })) {
-            attributeList = attributeList.filter(function (attribute) {
-                return attribute.name !== 'aura_bonus_armor';
+        if (sources.components.find(function (attribute) { return attribute.id == 'armor_aura'; })) {
+            sources.components = sources.components.filter(function (attribute) {
+                return attribute.id !== 'aura_bonus_armor';
             });
         }
         
-        totalAttribute = attributeList.reduce(function (memo, attribute) {
+        sources.total = sources.components.reduce(function (memo, attribute) {
             return memo += attribute.value;
         }, 0);
-        return {value: totalAttribute, attributes: attributeList};
+        
+        return sources;
     };
-    self.getArmorReduction = function (e) {
-        var totalAttribute = 0,
-            excludeList = e || [],
-            selfExcludeList = [];
+    self.getArmorReduction = function (sources) {
+        sources = sources || new StatModel();
         for (var i = 0; i < self.items().length; i++) {
-            var item = self.items()[i].item;
+            var itemId = self.items()[i].item;
             var isActive = self.activeItems.indexOf(self.items()[i]) >= 0 ? true : false;
             if (!self.items()[i].enabled()) continue;
-            for (var j = 0; j < itemData['item_' + item].attributes.length; j++) {
-                var attribute = itemData['item_' + item].attributes[j];
-                if (excludeList.indexOf(attribute.name) > -1 || excludeList.indexOf(item + '_' + attribute.name) > -1) continue;
-                // self exclusion check only for hero items, not buff items
-                if (self.hero && (selfExcludeList.indexOf(attribute.name) > -1 || selfExcludeList.indexOf(item + '_' + attribute.name) > -1)) continue;
+            var item = itemData['item_' + itemId];
+            for (var j = 0; j < item.attributes.length; j++) {
+                var attribute = item.attributes[j];
+                if (sources.components.find(function (component) { return component.id == attribute.name }) || sources.components.find(function (component) { return component.id == itemId + '_' + attribute.name })) continue;
                 switch(attribute.name) {
                     case 'armor_reduction':
-                        if (isActive || (item != 'medallion_of_courage' && item != 'solar_crest')) {
-                            totalAttribute += parseInt(attribute.value[0]);
-                            excludeList.push(item + '_' + attribute.name);
+                        if (isActive || (itemId != 'medallion_of_courage' && itemId != 'solar_crest')) {
+                            sources.push(parseInt(attribute.value[0]), item.displayname, itemId + '_' + attribute.name);
                         }
                     break;
                     case 'corruption_armor':
-                        totalAttribute += parseInt(attribute.value[0]);
-                        // allow blight_stone and desolator corruption_armor stacking from different sources, but not from same source
-                        excludeList.push(item + '_' + attribute.name);
-                        selfExcludeList.push(attribute.name);
+                        sources.push(parseInt(attribute.value[0]), item.displayname, itemId + '_' + attribute.name);
                     break;
                 }
             }
         }
-        return {value: totalAttribute, excludeList: excludeList};
+        
+        sources.total = sources.components.reduce(function (memo, attribute) {
+            return memo += attribute.value;
+        }, 0);
+        
+        return sources;
     };
-    self.getArmorReductionAura = function (e) {
-        var totalAttribute = 0,
-            excludeList = e || [],
-            selfExcludeList = [];
+    self.getArmorReductionAura = function (sources) {
+        sources = sources || new StatModel();
         for (var i = 0; i < self.items().length; i++) {
-            var item = self.items()[i].item;
+            var itemId = self.items()[i].item;
             var isActive = self.activeItems.indexOf(self.items()[i]) >= 0 ? true : false;
             if (!self.items()[i].enabled()) continue;
-            for (var j = 0; j < itemData['item_' + item].attributes.length; j++) {
-                var attribute = itemData['item_' + item].attributes[j];
-                if (excludeList.indexOf(attribute.name) > -1 || excludeList.indexOf(item + '_' + attribute.name) > -1) continue;
-                // self exclusion check only for hero items, not buff items
-                if (self.hero && (selfExcludeList.indexOf(attribute.name) > -1 || selfExcludeList.indexOf(item + '_' + attribute.name) > -1)) continue;
+            var item = itemData['item_' + itemId];
+            for (var j = 0; j < item.attributes.length; j++) {
+                var attribute = item.attributes[j];
+                if (sources.components.find(function (component) { return component.id == attribute.name }) || sources.components.find(function (component) { return component.id == itemId + '_' + attribute.name })) continue;
                 switch(attribute.name) {
                     case 'aura_negative_armor':
-                        totalAttribute += parseInt(attribute.value[0]);
-                        excludeList.push(attribute.name);
+                        sources.push(parseInt(attribute.value[0]), item.displayname, itemId + '_' + attribute.name);
                     break;
                 }
             }
         }
-        return {value: totalAttribute, excludeList: excludeList};
+        
+        sources.total = sources.components.reduce(function (memo, attribute) {
+            return memo += attribute.value;
+        }, 0);
+        
+        return sources;
     };
     self.getEvasion = function () {
         var totalAttribute = 1;
@@ -24227,7 +24401,7 @@ var InventoryViewModel = function (itemData, h) {
                 var attribute = itemData['item_' + item].attributes[j];
                 switch(attribute.name) {
                     case 'bonus_evasion':
-                        if (!isActive || (item != 'butterfly' && item != 'solar_crest')) { totalAttribute *= (1 - parseInt(attribute.value[0]) / 100); }
+                        if (!isActive || (item != 'solar_crest')) { totalAttribute *= (1 - parseInt(attribute.value[0]) / 100); }
                     break;
                 }
             }
@@ -24661,21 +24835,22 @@ var InventoryViewModel = function (itemData, h) {
         return {value: totalAttribute, excludeList: excludeList};
     };
     self.getSpellAmp = ko.computed(function () {
-        var totalAttribute = 0;
+        var sources = new StatModel();
         for (var i = 0; i < self.items().length; i++) {
-            var item = self.items()[i].item;
+            var itemId = self.items()[i].item;
             var isActive = self.activeItems.indexOf(self.items()[i]) >= 0 ? true : false;
             if (!self.items()[i].enabled()) continue;
-            for (var j = 0; j < itemData['item_' + item].attributes.length; j++) {
-                var attribute = itemData['item_' + item].attributes[j];
+            var item = itemData['item_' + itemId];
+            for (var j = 0; j < item.attributes.length; j++) {
+                var attribute = item.attributes[j];
                 switch(attribute.name) {
                     case 'spell_amp':
-                        totalAttribute += parseInt(attribute.value[0]);
+                        sources.add(parseInt(attribute.value[0]), item.displayname);
                     break;
                 }
             }
         }
-        return totalAttribute;
+        return sources;
     });
     self.getCooldownReductionFlat = ko.computed(function () {
         var totalAttribute = 0;
@@ -24844,8 +25019,9 @@ var InventoryViewModel = function (itemData, h) {
         return {value: totalAttribute, attributes: attributeList};
     };
     
-    self.getMissChance = function (e) {
-        var totalAttribute = 1,
+    self.getBlindSource = function (e) {
+        var totalAttribute = 0,
+            sources = [],
             excludeList = e || [];
         for (var i = 0; i < self.items().length; i++) {
             var item = self.items()[i].item;
@@ -24855,20 +25031,19 @@ var InventoryViewModel = function (itemData, h) {
                 var attribute = itemData['item_' + item].attributes[j];
                 if (excludeList.indexOf(attribute.name) > -1) continue;
                 switch(attribute.name) {
-                    case 'miss_chance':
-                        if (item === 'solar_crest' && isActive) {
-                            totalAttribute *= (1 - parseInt(attribute.value[0]) / 100);
-                            excludeList.push(attribute.name);
-                        }
-                    break;
                     case 'blind_pct':
-                        totalAttribute *= (1 - parseInt(attribute.value[0]) / 100);
+                        var value = parseInt(attribute.value[0]) / 100;
+                        totalAttribute += value;
+                        sources.push({
+                            'value': value,
+                            'displayname': itemData['item_' + item].displayname
+                        });
                         excludeList.push(attribute.name);
                     break;
                 }
             }
         }
-        return {value: totalAttribute, excludeList: excludeList};
+        return {sources: sources, total: totalAttribute, excludeList: excludeList};
     };
     
     self.getBaseDamageReductionPct = function () {
@@ -24924,11 +25099,11 @@ InventoryViewModel.prototype = Object.create(BasicInventoryViewModel.prototype);
 InventoryViewModel.prototype.constructor = InventoryViewModel;
 
 module.exports = InventoryViewModel;
-},{"../herocalc_knockout":62,"./BasicInventoryViewModel":66,"./itemBuffOptions":69,"./itemDebuffOptions":70,"./itemOptionsArray":71,"./levelItems":73,"./stackableItems":74}],68:[function(require,module,exports){
+},{"../StatModel":44,"../herocalc_knockout":66,"./BasicInventoryViewModel":70,"./itemBuffOptions":73,"./itemDebuffOptions":74,"./itemOptionsArray":75,"./levelItems":77,"./stackableItems":78}],72:[function(require,module,exports){
 (function (global){
 var ko = (typeof window !== "undefined" ? window['ko'] : typeof global !== "undefined" ? global['ko'] : null);
 
-var ItemInput = function (itemData, value, name, debuff) {
+var ItemInput = function (itemData, value, name, debuff, buff) {
     if (itemData['item_' + value].ItemAliases instanceof Array) {
         var itemAlias = itemData['item_' + value].ItemAliases.join(' ');
     }
@@ -24937,10 +25112,16 @@ var ItemInput = function (itemData, value, name, debuff) {
     }
     this.value = ko.observable(value);
     this.debuff = ko.observable(debuff);
+    this.buff = ko.observable(buff);
     if (this.debuff()) {
         this.value = ko.observable(value + '|' + debuff.id);
         this.name = ko.observable(name + ' (' + debuff.name + ')');
         this.displayname = ko.observable(name + ' (' + debuff.name + ') <span style="display:none">' + ';' + itemAlias + '</span>');
+    }
+    else if (this.buff()) {
+        this.value = ko.observable(value + '|' + buff.id);
+        this.name = ko.observable(name + ' (' + buff.name + ')');
+        this.displayname = ko.observable(name + ' (' + buff.name + ') <span style="display:none">' + ';' + itemAlias + '</span>');
     }
     else {
         this.value = ko.observable(value);
@@ -24952,14 +25133,29 @@ var ItemInput = function (itemData, value, name, debuff) {
 module.exports = ItemInput;
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{}],69:[function(require,module,exports){
+},{}],73:[function(require,module,exports){
 var ItemInput = require("./ItemInput");
-var itemBuffs = ['assault', 'ancient_janggo', 'headdress', 'mekansm', 'pipe', 'ring_of_aquila', 'vladmir', 'ring_of_basilius', 'buckler', 'solar_crest', 'bottle_doubledamage', 'helm_of_the_dominator'];
+var itemBuffs = [
+    {item: 'assault', buff: null},
+    {item: 'ancient_janggo', buff: null},
+    {item: 'guardian_greaves', buff: {id: 'guardian_aura', name: 'Guardian Aura'}},
+    {item: 'headdress', buff: null},
+    {item: 'mekansm', buff: null},
+    {item: 'pipe', buff: null},
+    {item: 'ring_of_aquila', buff: null},
+    {item: 'vladmir', buff: null},
+    {item: 'ring_of_basilius', buff: null},
+    {item: 'buckler', buff: null},
+    {item: 'solar_crest', buff: null},
+    {item: 'bottle_doubledamage', buff: null},
+    {item: 'helm_of_the_dominator', buff: null}
+];
+
 var itemBuffOptions = {};
 
 var init = function (itemData) {
     itemBuffOptions.items = itemBuffs.map(function(item) {
-        return new ItemInput(itemData, item, itemData['item_' + item].displayname);
+        return new ItemInput(itemData, item.item, itemData['item_' + item.item].displayname, null, item.buff);
     }).sort(function (a, b) {
         if (a.displayname() < b.displayname()) return -1;
         if (a.displayname() > b.displayname()) return 1;
@@ -24971,7 +25167,7 @@ var init = function (itemData) {
 itemBuffOptions.init = init;
 
 module.exports = itemBuffOptions;
-},{"./ItemInput":68}],70:[function(require,module,exports){
+},{"./ItemInput":72}],74:[function(require,module,exports){
 var ItemInput = require("./ItemInput");
 var itemDebuffs = [
     {item: 'assault', debuff: null},
@@ -25002,7 +25198,7 @@ var init = function (itemData) {
 itemDebuffOptions.init = init;
 
 module.exports = itemDebuffOptions;
-},{"./ItemInput":68}],71:[function(require,module,exports){
+},{"./ItemInput":72}],75:[function(require,module,exports){
 var validItems = require("./validItems");
 var ItemInput = require("./ItemInput");
 
@@ -25011,7 +25207,6 @@ var itemOptionsArray = {};
 var init = function (itemData) {
     itemOptionsArray.items = [];
     for (var i = 0; i < validItems.length; i++) {
-        console.log('validItems', validItems[i]);
         itemOptionsArray.items.push(new ItemInput(itemData, validItems[i], itemData['item_' + validItems[i]].displayname));
     }
     return itemOptionsArray.items;
@@ -25020,15 +25215,15 @@ var init = function (itemData) {
 itemOptionsArray.init = init;
 
 module.exports = itemOptionsArray;
-},{"./ItemInput":68,"./validItems":75}],72:[function(require,module,exports){
+},{"./ItemInput":72,"./validItems":79}],76:[function(require,module,exports){
 module.exports = ['solar_crest', 'heart','smoke_of_deceit','dust','ghost','tranquil_boots','phase_boots','power_treads','buckler','medallion_of_courage','ancient_janggo','mekansm','pipe','veil_of_discord','rod_of_atos','orchid','sheepstick','armlet','invis_sword','ethereal_blade','shivas_guard','manta','mask_of_madness','diffusal_blade','mjollnir','satanic','ring_of_basilius','ring_of_aquila', 'butterfly', 'moon_shard', 'silver_edge','bloodthorn','hurricane_pike'];
-},{}],73:[function(require,module,exports){
-module.exports = ['necronomicon','dagon','diffusal_blade','travel_boots'];
-},{}],74:[function(require,module,exports){
+},{}],77:[function(require,module,exports){
+module.exports = ['necronomicon','dagon','travel_boots'];
+},{}],78:[function(require,module,exports){
 module.exports = ['clarity','flask','dust','ward_observer','ward_sentry','tango','tpscroll','smoke_of_deceit'];
-},{}],75:[function(require,module,exports){
+},{}],79:[function(require,module,exports){
 module.exports = ["abyssal_blade","ultimate_scepter","courier","arcane_boots","armlet","assault","boots_of_elves","bfury","belt_of_strength","black_king_bar","blade_mail","blade_of_alacrity","blades_of_attack","blink","bloodstone","boots","travel_boots","bottle","bracer","broadsword","buckler","butterfly","chainmail","circlet","clarity","claymore","cloak","lesser_crit","greater_crit","dagon","demon_edge","desolator","diffusal_blade","rapier","ancient_janggo","dust","eagle","energy_booster","ethereal_blade","cyclone","skadi","force_staff","gauntlets","gem","ghost","gloves","hand_of_midas","headdress","flask","heart","heavens_halberd","helm_of_iron_will","helm_of_the_dominator","hood_of_defiance","hyperstone","branches","javelin","sphere","maelstrom","magic_stick","magic_wand","manta","mantle","mask_of_madness","medallion_of_courage","mekansm","mithril_hammer","mjollnir","monkey_king_bar","lifesteal","mystic_staff","necronomicon","null_talisman","oblivion_staff","ward_observer","ogre_axe","orb_of_venom","orchid","pers","phase_boots","pipe","platemail","point_booster","power_treads","quarterstaff","quelling_blade","radiance","reaver","refresher","ring_of_aquila","ring_of_basilius","ring_of_health","ring_of_protection","ring_of_regen","robe","rod_of_atos","relic","sobi_mask","sange","sange_and_yasha","satanic","sheepstick","ward_sentry","shadow_amulet","invis_sword","shivas_guard","basher","slippers","smoke_of_deceit","soul_booster","soul_ring","staff_of_wizardry","stout_shield","talisman_of_evasion","tango","tpscroll","tranquil_boots","ultimate_orb","urn_of_shadows","vanguard","veil_of_discord","vitality_booster","vladmir","void_stone","wraith_band","yasha","crimson_guard","enchanted_mango","lotus_orb","glimmer_cape","guardian_greaves","moon_shard","silver_edge","solar_crest","octarine_core","aether_lens","faerie_fire","dragon_lance","echo_sabre","infused_raindrop","blight_stone","wind_lace","tome_of_knowledge","bloodthorn","hurricane_pike","kaya","aeon_disk","meteor_hammer","nullifier","spirit_vessel","refresher_shard"];
-},{}],76:[function(require,module,exports){
+},{}],80:[function(require,module,exports){
 (function (global){
 (function (factory) {
 	// Module systems magic dance.
@@ -25838,7 +26033,7 @@ module.exports = ["abyssal_blade","ultimate_scepter","courier","arcane_boots","a
 }));
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{}],77:[function(require,module,exports){
+},{}],81:[function(require,module,exports){
 (function (global){
 // Knockout Fast Mapping v0.1
 // License: MIT (http://www.opensource.org/licenses/mit-license.php)
@@ -26051,7 +26246,7 @@ module.exports = ["abyssal_blade","ultimate_scepter","courier","arcane_boots","a
 }));
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{}],78:[function(require,module,exports){
+},{}],82:[function(require,module,exports){
 'use strict';
 
 var core = {};
@@ -26078,7 +26273,7 @@ core.init = function (HERODATA_PATH, ITEMDATA_PATH, UNITDATA_PATH, callback) {
 }
 
 module.exports = core;
-},{"./AbilityModel":40,"./BuffViewModel":41,"./buffs/buffOptionsArray":43,"./buffs/debuffOptionsArray":44,"./data/main":46,"./hero/CloneModel":47,"./hero/HeroModel":50,"./hero/IllusionModel":52,"./hero/UnitModel":54,"./hero/heroOptionsArray":57,"./inventory/InventoryViewModel":67,"./inventory/itemBuffOptions":69,"./inventory/itemDebuffOptions":70,"./inventory/itemOptionsArray":71,"./util/main":85}],79:[function(require,module,exports){
+},{"./AbilityModel":42,"./BuffViewModel":43,"./buffs/buffOptionsArray":46,"./buffs/debuffOptionsArray":47,"./data/main":50,"./hero/CloneModel":51,"./hero/HeroModel":54,"./hero/IllusionModel":56,"./hero/UnitModel":58,"./hero/heroOptionsArray":61,"./inventory/InventoryViewModel":71,"./inventory/itemBuffOptions":73,"./inventory/itemDebuffOptions":74,"./inventory/itemOptionsArray":75,"./util/main":89}],83:[function(require,module,exports){
 module.exports=[
     "special_bonus_unique_alchemist",
     "special_bonus_unique_ancient_apparition_3",
@@ -26137,7 +26332,7 @@ module.exports=[
     "special_bonus_unique_warlock_3",
     "special_bonus_unique_winter_wyvern_2"
 ]
-},{}],80:[function(require,module,exports){
+},{}],84:[function(require,module,exports){
 var extend = function (out) {
     out = out || {};
 
@@ -26161,7 +26356,7 @@ var extend = function (out) {
 };
 
 module.exports = extend;
-},{}],81:[function(require,module,exports){
+},{}],85:[function(require,module,exports){
 var findWhere = function (arr, obj) {
     arrLoop: for (var i = 0; i < arr.length; i++) {
         objLoop: for (var key in obj) {
@@ -26174,7 +26369,7 @@ var findWhere = function (arr, obj) {
 }
 
 module.exports = findWhere;
-},{}],82:[function(require,module,exports){
+},{}],86:[function(require,module,exports){
 "use strict";
 
 var getJSON = function (url, successCallback, errorCallback) {
@@ -26201,19 +26396,19 @@ var getJSON = function (url, successCallback, errorCallback) {
 }
 
 module.exports = getJSON;
-},{}],83:[function(require,module,exports){
+},{}],87:[function(require,module,exports){
 var isEmpty = function (obj) {
     return Object.keys(obj).length === 0 && obj.constructor === Object;
 }
 
 module.exports = isEmpty;
-},{}],84:[function(require,module,exports){
+},{}],88:[function(require,module,exports){
 var isString = function (myVar) {
     return typeof myVar === 'string' || myVar instanceof String;
 }
 
 module.exports = isString;
-},{}],85:[function(require,module,exports){
+},{}],89:[function(require,module,exports){
 'use strict';
 
 var util = {};
@@ -26225,7 +26420,7 @@ util.uniqueId = require("./uniqueId");
 util.uniques = require("./uniques");
 
 module.exports = util;
-},{"./extend":80,"./findWhere":81,"./getJSON":82,"./union":86,"./uniqueId":87,"./uniques":88}],86:[function(require,module,exports){
+},{"./extend":84,"./findWhere":85,"./getJSON":86,"./union":90,"./uniqueId":91,"./uniques":92}],90:[function(require,module,exports){
 "use strict";
 var uniques = require("./uniques");
 
@@ -26235,7 +26430,7 @@ var union = function (a, b) {
 }
 
 module.exports = union;
-},{"./uniques":88}],87:[function(require,module,exports){
+},{"./uniques":92}],91:[function(require,module,exports){
 "use strict";
 
 var idCounter = 0;
@@ -26245,7 +26440,7 @@ var uniqueId = function (prefix) {
 };
 
 module.exports = uniqueId;
-},{}],88:[function(require,module,exports){
+},{}],92:[function(require,module,exports){
 "use strict";
 var uniques = function (arr) {
     var a = [];
@@ -26256,7 +26451,7 @@ var uniques = function (arr) {
 }
 
 module.exports = uniques;
-},{}],89:[function(require,module,exports){
+},{}],93:[function(require,module,exports){
 (function (global){
 require("./app/polyfill");
 var $ = (typeof window !== "undefined" ? window['$'] : typeof global !== "undefined" ? global['$'] : null);
@@ -26285,7 +26480,7 @@ var App = function (appConfig) {
         }
     });
 
-    var lastUpdate = "2017-12-16 00:08:23 UTC";
+    var lastUpdate = "2017-12-23 12:58:45 UTC";
     $('#last-update').text(lastUpdate);
 
     var rollbar = require('./rollbar');
@@ -26414,7 +26609,7 @@ var App = function (appConfig) {
 module.exports = App;
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"./app/HeroCalculatorViewModel":28,"./app/getParameterByName":33,"./app/polyfill":37,"./herocalc/main":78,"./rollbar":91}],90:[function(require,module,exports){
+},{"./app/HeroCalculatorViewModel":28,"./app/getParameterByName":33,"./app/polyfill":37,"./herocalc/main":82,"./rollbar":95}],94:[function(require,module,exports){
 var Chart = require('chart.js');
 Chart.types.Line.extend({
     // Passing in a name registers this chart in the Chart namespace in the same way
@@ -26505,7 +26700,7 @@ Chart.types.Line.extend({
             },this);
         }
 });
-},{"chart.js":1}],91:[function(require,module,exports){
+},{"chart.js":1}],95:[function(require,module,exports){
 var Rollbar = require("rollbar");
 
 var rollbarConfig = {
@@ -26516,7 +26711,7 @@ var rollbarConfig = {
         client: {
             javascript: {
                 source_map_enabled: true,
-                code_version: "8abeddb8bcccedfc014b29f8345511e0ceb3a4b4",
+                code_version: "2d7cecd262a5e32c3fb7940c45516de3234fb63a",
                 // Optionally have Rollbar guess which frames the error was thrown from
                 // when the browser does not provide line and column numbers.
                 guess_uncaught_frames: true
@@ -26528,6 +26723,6 @@ var rollbarConfig = {
 var rollbar = new Rollbar(rollbarConfig);
 
 module.exports = rollbar;
-},{"rollbar":24}]},{},[89])(89)
+},{"rollbar":24}]},{},[93])(93)
 });
 //# sourceMappingURL=bundle.js.map

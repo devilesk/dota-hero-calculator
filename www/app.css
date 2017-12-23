@@ -1439,8 +1439,7 @@ td {
   min-height: 77px;
   float: left;
   width: 100%;
-  padding: 10px;
-  border-radius: 5px; }
+  padding: 10px; }
 
 .hide-shop-item-details .item_field {
   display: none; }
@@ -1543,6 +1542,9 @@ img {
 
 .item_field {
   display: block; }
+  .item_field h1 {
+    font-size: 20px;
+    margin-top: 15px; }
 
 .item_active {
   border: 2px solid goldenrod;
@@ -1627,6 +1629,62 @@ img {
     background-color: #428bca; }
     .hero-image.illusion img {
       opacity: 0.5; }
+
+.stats {
+  column-count: 1;
+  column-gap: 25px; }
+  @media (min-width: 480px) {
+    .stats {
+      column-count: 2; } }
+  @media (min-width: 768px) {
+    .stats {
+      column-count: 3; } }
+  @media (min-width: 991px) {
+    .stats {
+      column-count: 4; } }
+  @media (min-width: 1200px) {
+    .shop-visible .stats {
+      column-count: 3; } }
+  .layout-column .stats {
+    column-count: 1; }
+    @media (min-width: 480px) {
+      .layout-column .stats {
+        column-count: 2; } }
+    @media (min-width: 768px) {
+      .layout-column .stats {
+        column-count: 3; } }
+    @media (min-width: 992px) {
+      .layout-column .stats {
+        column-count: 1; } }
+
+.stats-row.stats-additional {
+  display: none; }
+
+.stats-additional .stats-row.stats-additional {
+  display: block; }
+
+.stats-cell {
+  width: 50%;
+  display: inline-block;
+  font-family: "Calibri";
+  font-size: 15px;
+  border-bottom: 1px solid #303239;
+  padding: 8px 3px 0;
+  line-height: 25px; }
+
+abbr[title] {
+  border-bottom: none;
+  text-decoration: underline dotted; }
+
+.tooltip-inner {
+  text-align: left; }
+
+.tooltip .table {
+  margin-bottom: 0; }
+
+.tooltip .table > tbody > tr > td {
+  border-top: none;
+  padding: 5px; }
 
 .tab-content > .tab-pane,
 .pill-content > .pill-pane {
@@ -1747,7 +1805,7 @@ img {
   border-right: 1px solid #202125; }
 
 .inventory.row-highlight {
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5); }
+  box-shadow: inset 0 1px 1px 1px rgba(0, 0, 0, 0.5); }
 
 .hover-cursor:hover {
   color: #aaa;
@@ -1872,10 +1930,11 @@ img {
 
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
   color: #2C8CE0;
-  background-color: #131415;
   border: 1px solid #303239;
   border-bottom-color: transparent;
   cursor: default; }
+  #shop-container .nav-tabs > li.active > a, #shop-container .nav-tabs > li.active > a:hover, #shop-container .nav-tabs > li.active > a:focus {
+    background-color: #131415; }
 
 @media (min-width: 990px) {
   .tabledropdown {
