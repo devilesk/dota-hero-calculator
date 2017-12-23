@@ -1220,7 +1220,7 @@ var InventoryViewModel = function (itemData, h) {
                 var attribute = item.attributes[j];
                 switch(attribute.name) {
                     case 'spell_amp':
-                        sources.add(parseInt(attribute.value[0]), item.displayname);
+                        sources.add(parseInt(attribute.value[0])/100, item.displayname);
                     break;
                 }
             }

@@ -19,7 +19,7 @@
     <div class="stats-row"><div class="stats-cell"><abbr title="Movement Speed">MS</abbr>:</div><div class="stats-cell text-right" data-bind="component: { name: 'stat', params: {'hero': $data, 'stat': 'totalMovementSpeed' } }"></div></div>
     <div class="stats-row"><div class="stats-cell">Turn Rate:</div><div class="stats-cell text-right" data-bind="component: { name: 'stat', params: {'hero': $data, 'stat': 'totalTurnRate' } }"></div></div>
     <div class="stats-row"><div class="stats-cell">Sight Range:</div><div class="stats-cell text-right"><span data-bind="html: '<abbr title=\'Day\'>' + visionrangeday() + '</abbr>/<abbr title=\'Night\'>' + visionrangenight() + '</abbr>'"></span></div></div>
-    <div class="stats-row"><div class="stats-cell">%Spell Amp:</div><div class="stats-cell text-right" data-bind="component: { name: 'stat2', params: {'hero': $data, 'stat': 'spellAmp' } }"></div></div>
+    <div class="stats-row"><div class="stats-cell">Spell Amp:</div><div class="stats-cell text-right" data-bind="component: { name: 'stat2', params: {'hero': $data, 'stat': 'spellAmp', 'formatter': 'percent' } }"></div></div>
     <div class="stats-row"><div class="stats-cell">Armor:</div><div class="stats-cell text-right" data-bind="component: { name: 'stat2', params: {'hero': $data, 'stat': 'totalArmorPhysical' } }"></div></div>
     
     <div class="stats-row"><div class="stats-cell">Health:</div><div class="stats-cell text-right" data-bind="component: { name: 'stat2', params: {'hero': $data, 'stat': 'health' } }"></div></div>
@@ -29,15 +29,15 @@
     <div class="stats-row"><div class="stats-cell">Physical <abbr title="Effective Hit Points">EHP</abbr>:</div><div class="stats-cell text-right" data-bind="component: { name: 'stat', params: {'hero': $data, 'stat': 'ehpPhysical' } }"></div></div>
     <div class="stats-row"><div class="stats-cell">Magical <abbr title="Effective Hit Points">EHP</abbr>:</div><div class="stats-cell text-right" data-bind="component: { name: 'stat', params: {'hero': $data, 'stat': 'ehpMagical' } }"></div></div>
     <div class="stats-row"><div class="stats-cell">Phys Res:</div><div class="stats-cell text-right" data-bind="component: { name: 'stat3', params: {'hero': $data, 'stat': 'totalArmorPhysicalReduction', 'formatter': 'percent' } }"></div></div>
-    <div class="stats-row"><div class="stats-cell">%Magic Res:</div><div class="stats-cell text-right" data-bind="component: { name: 'stat', params: {'hero': $data, 'stat': 'totalMagicResistance' } }"></div></div>
+    <div class="stats-row"><div class="stats-cell">Magic Res:</div><div class="stats-cell text-right" data-bind="component: { name: 'stat3', params: {'hero': $data, 'stat': 'totalMagicResistance', 'formatter': 'percent' } }"></div></div>
     
-    <div class="stats-row"><div class="stats-cell">%Status Res:</div><div class="stats-cell text-right" data-bind="component: { name: 'stat', params: {'hero': $data, 'stat': 'totalStatusResistance' } }"></div></div>
-    <div class="stats-row"><div class="stats-cell">%Lifesteal:</div><div class="stats-cell text-right" data-bind="component: { name: 'stat', params: {'hero': $data, 'stat': 'lifesteal' } }"></div></div>
-    <div class="stats-row"><div class="stats-cell">%Bash:</div><div class="stats-cell text-right" data-bind="component: { name: 'stat', params: {'hero': $data, 'stat': 'bash' } }"></div></div>
-    <div class="stats-row"><div class="stats-cell">%Evasion:</div><div class="stats-cell text-right" data-bind="component: { name: 'stat', params: {'hero': $data, 'stat': 'evasion' } }"></div></div>
-    <div class="stats-row"><div class="stats-cell">%Miss Chance:</div><div class="stats-cell text-right" data-bind="component: { name: 'stat', params: {'hero': $data, 'stat': 'missChance' } }"></div></div>
-    <div class="stats-row"><div class="stats-cell">%Accuracy:</div><div class="stats-cell text-right" data-bind="component: { name: 'stat', params: {'hero': $data, 'stat': 'accuracy' } }"></div></div>
-    <div class="stats-row"><div class="stats-cell">%Hit Chance:</div><div class="stats-cell text-right" data-bind="component: { name: 'stat', params: {'hero': $data, 'stat': 'hitChance' } }"></div></div>
+    <div class="stats-row"><div class="stats-cell">Status Res:</div><div class="stats-cell text-right" data-bind="component: { name: 'stat3', params: {'hero': $data, 'stat': 'totalStatusResistance', 'formatter': 'percent' } }"></div></div>
+    <div class="stats-row"><div class="stats-cell">Lifesteal:</div><div class="stats-cell text-right" data-bind="component: { name: 'stat3', params: {'hero': $data, 'stat': 'lifesteal', 'formatter': 'percent' } }"></div></div>
+    <div class="stats-row"><div class="stats-cell">Bash:</div><div class="stats-cell text-right" data-bind="component: { name: 'stat3', params: {'hero': $data, 'stat': 'bash', 'formatter': 'percent' } }"></div></div>
+    <div class="stats-row"><div class="stats-cell">Evasion:</div><div class="stats-cell text-right" data-bind="component: { name: 'stat3', params: {'hero': $data, 'stat': 'evasion', 'formatter': 'percent' } }"></div></div>
+    <div class="stats-row"><div class="stats-cell">Miss Chance:</div><div class="stats-cell text-right" data-bind="component: { name: 'stat3', params: {'hero': $data, 'stat': 'missChance', 'formatter': 'percent' } }"></div></div>
+    <div class="stats-row"><div class="stats-cell">Accuracy:</div><div class="stats-cell text-right" data-bind="component: { name: 'stat3', params: {'hero': $data, 'stat': 'accuracy', 'formatter': 'percent' } }"></div></div>
+    <div class="stats-row"><div class="stats-cell">Hit Chance:</div><div class="stats-cell text-right" data-bind="component: { name: 'stat3', params: {'hero': $data, 'stat': 'hitChance', 'formatter': 'percent' } }"></div></div>
     
     <div class="stats-row">
         <div class="stats-cell">Damage:</div><div class="stats-cell text-right">
@@ -57,5 +57,5 @@
     <div class="stats-row"><div class="stats-cell">Attack Time:</div><div class="stats-cell text-right" data-bind="component: { name: 'stat', params: {'hero': $data, 'stat': 'attackTime' } }"></div></div>
     <div class="stats-row"><div class="stats-cell">Attack &frasl; Sec:</div><div class="stats-cell text-right" data-bind="component: { name: 'stat', params: {'hero': $data, 'stat': 'attacksPerSecond' } }"></div></div>
     <div class="stats-row"><div class="stats-cell">Attack Range:</div><div class="stats-cell text-right" data-bind="component: { name: 'stat', params: {'hero': $data, 'stat': 'totalattackrange' } }"></div></div>
-    <div class="stats-row"><div class="stats-cell"><abbr title="% Cooldown Reduction">%CDR</abbr>:</div><div class="stats-cell text-right" data-bind="component: { name: 'stat', params: {'hero': $data, 'stat': 'cooldownReductionPercent' } }"></div></div>
+    <div class="stats-row"><div class="stats-cell"><abbr title="% Cooldown Reduction">CDR</abbr>:</div><div class="stats-cell text-right" data-bind="component: { name: 'stat3', params: {'hero': $data, 'stat': 'cooldownReductionPercent', 'formatter': 'percent' } }"></div></div>
 </div>

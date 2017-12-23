@@ -82,7 +82,7 @@ module.exports = {
         for (var i = 0; i < talents.length; i++) {
             var ability = talents[i];
             if (ability.name.startsWith('special_bonus_spell_amplify_')) {
-                sources.add(ability.attributes[0].value[0], ability.displayname);
+                sources.add(ability.attributes[0].value[0]/100, ability.displayname);
             }
         }
         return sources;

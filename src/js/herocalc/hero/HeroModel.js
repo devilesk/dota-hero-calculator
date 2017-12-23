@@ -357,7 +357,7 @@ var HeroModel = function (heroData, itemData, h) {
     self.spellAmp = ko.pureComputed(function () {
         var s = new StatModel();
         self.totalInt().components.forEach(function (component) {
-            s.add(component.value / constants.spellDmgPerInt, component.label == 'Base' ? 'Base Int' : component.label);
+            s.add(component.value * constants.spellDmgPerInt, component.label == 'Base' ? 'Base Int' : component.label);
         });
         s.concat(self.inventory.getSpellAmp())
         .concat(self.ability().getSpellAmp())
@@ -386,7 +386,7 @@ var HeroModel = function (heroData, itemData, h) {
                 * self.debuffs.itemBuffs.getCooldownIncreasePercent();
     });
     self.cooldownReductionPercent = ko.pureComputed(function () {
-        return ((1 - self.cooldownReductionProduct()) * 100).toFixed(2);
+        return 1 - self.cooldownReductionProduct();
     });
     self.totalMovementSpeed = ko.pureComputed(function () {
         var MIN_MOVESPEED = 100;
@@ -505,7 +505,7 @@ var HeroModel = function (heroData, itemData, h) {
         return strStatusResistance;
     });
     self.totalStatusResistance = ko.pureComputed(function () {
-        return ((1 - self.totalStatusResistanceProduct()) * 100).toFixed(2);
+        return 1 - self.totalStatusResistanceProduct();
     });
     self.totalMagicResistanceProduct = ko.pureComputed(function () {
         //If intelligence is a hero's primary attribute, every point in intelligence increases their magic resistance by 0.15%.
@@ -525,7 +525,7 @@ var HeroModel = function (heroData, itemData, h) {
                   );
     });
     self.totalMagicResistance = ko.pureComputed(function () {
-        return ((1 - self.totalMagicResistanceProduct()) * 100).toFixed(2);
+        return 1 - self.totalMagicResistanceProduct();
     });
     self.bat = ko.pureComputed(function () {
         var abilityBAT = self.ability().getBAT();
@@ -590,9 +590,7 @@ var HeroModel = function (heroData, itemData, h) {
         }, 1);
     });
     self.accuracy = ko.pureComputed(function () {
-        return (
-            (1 - self.totalAccuracyProduct()) * 100
-        ).toFixed(2);
+        return 1 - self.totalAccuracyProduct();
     });
     self.totalEvasionProduct = ko.pureComputed(function () {
         return self.inventory.getEvasion()
@@ -603,9 +601,7 @@ var HeroModel = function (heroData, itemData, h) {
     });
     self.evasion = ko.pureComputed(function () {
         if (self.enemy().inventory.isSheeped() || self.debuffs.itemBuffs.isSheeped()) return 0;
-        return (
-            (1 - self.totalEvasionProduct()) * 100
-        ).toFixed(2);
+        return 1 - self.totalEvasionProduct();
     });
     self.ehpPhysical = ko.pureComputed(function () {
         var evasion = self.enemy().inventory.isSheeped() || self.debuffs.itemBuffs.isSheeped() ? 1 : self.inventory.getEvasion() * self.ability().getEvasion() * self.buffs.itemBuffs.getEvasion();
@@ -633,11 +629,11 @@ var HeroModel = function (heroData, itemData, h) {
     });
     self.bash = ko.pureComputed(function () {
         var attacktype = self.heroData().attacktype;
-        return ((1 - (self.inventory.getBash(attacktype) * self.ability().getBash())) * 100).toFixed(2);
+        return 1 - self.inventory.getBash(attacktype) * self.ability().getBash();
     });
     
     self.critChance = ko.pureComputed(function () {
-        return ((1 - (self.inventory.getCritChance() * self.ability().getCritChance())) * 100).toFixed(2);
+        return 1 - self.inventory.getCritChance() * self.ability().getCritChance();
     });
 
     HeroDamageMixin(self, itemData);
@@ -649,10 +645,10 @@ var HeroModel = function (heroData, itemData, h) {
             return obj;
         }, {total:0, excludeList:[]});
         var blind = 1 - Math.min(self.enemy().ability().getBlindSource().total + self.debuffs.getBlindSource().total + blindDebuff.total, 1);
-        return ((1 - (self.enemy().totalEvasionProduct() * blind)) * 100).toFixed(2);
+        return 1 - self.enemy().totalEvasionProduct() * blind;
     });
     self.hitChance = ko.pureComputed(function () {
-        return ((1 - (parseFloat(self.missChance())/100) * (1 - parseFloat(self.accuracy())/100)) * 100).toFixed(2);
+        return 1 - (parseFloat(self.missChance())/100) * (1 - parseFloat(self.accuracy())/100);
     });
     self.totalattackrange = ko.pureComputed(function () {
         var attacktype = self.heroData().attacktype;
@@ -680,7 +676,7 @@ var HeroModel = function (heroData, itemData, h) {
             }, {value: 0, excludeList: []});
             total += lifestealAura.value;
         }
-        return total.toFixed(2);
+        return total;
     });
     
     self.diffProperties = diffProperties;
