@@ -17,3 +17,9 @@
         width: calc(50% - 35px);
     }
 }
+
+.talent-2 {
+    @media (max-width: $screen-sm-min - 1) {
+        margin-bottom: 15px;
+    }
+}

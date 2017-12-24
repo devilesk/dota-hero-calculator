@@ -209,26 +209,27 @@
 </div>
                 </div>
             </div>
-
-            <div class="form-group" data-bind="visible: displayShop()">
-                <div class="input-group">
-                    <input class="form-control" id="auto" data-bind="jqAuto: { autoFocus: true, html: true }, jqAutoSource: itemOptions, jqAutoValue: selectedItem, jqAutoSourceLabel: 'displayname', jqAutoSourceInputValue: 'name', jqAutoSourceValue: 'value'" />
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" data-bind="jqAutoCombo: 'auto'"><span class="glyphicon glyphicon-search"></span></button>
-                    </span>
+            <div class="shop-controls">
+                <div class="form-group" data-bind="visible: displayShop()">
+                    <div class="input-group">
+                        <input class="form-control" id="auto" data-bind="jqAuto: { autoFocus: true, html: true }, jqAutoSource: itemOptions, jqAutoValue: selectedItem, jqAutoSourceLabel: 'displayname', jqAutoSourceInputValue: 'name', jqAutoSourceValue: 'value'" />
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" data-bind="jqAutoCombo: 'auto'"><span class="glyphicon glyphicon-search"></span></button>
+                        </span>
+                    </div>
                 </div>
-            </div>
 
-            <div data-bind="visible: selectedItem() && displayShop()">
-                <button class="btn btn-default btn-xs glyphicon glyphicon-minus pull-right" data-bind="toggle: displayShopItemTooltip, visible: displayShopItemTooltip()" title="Hide item description"></button>
-                <button class="btn btn-default btn-xs glyphicon glyphicon-plus pull-right" data-bind="toggle: displayShopItemTooltip, visible: !displayShopItemTooltip()" title="Show item description"></button>
-                <div class="form-group" data-bind="html: getItemTooltipData, css: { 'hide-shop-item-details': !displayShopItemTooltip() }"></div>
-                <div class="form-group" data-bind="visible: getItemInputLabel() != ''">
-                    <label for="iteminput" data-bind="text: getItemInputLabel"></label>
-                    <input class="form-control" id="iteminput" data-bind="value: itemInputValue" />
-                </div>
-                <div class="form-group text-right">
-                    <button class="btn btn-default" data-bind="click: addItem">Add Item</button>
+                <div data-bind="visible: selectedItem() && displayShop()">
+                    <button class="btn btn-default btn-xs glyphicon glyphicon-minus pull-right" data-bind="toggle: displayShopItemTooltip, visible: displayShopItemTooltip()" title="Hide item description"></button>
+                    <button class="btn btn-default btn-xs glyphicon glyphicon-plus pull-right" data-bind="toggle: displayShopItemTooltip, visible: !displayShopItemTooltip()" title="Show item description"></button>
+                    <div class="form-group" data-bind="html: getItemTooltipData, css: { 'hide-shop-item-details': !displayShopItemTooltip() }"></div>
+                    <div class="form-group" data-bind="visible: getItemInputLabel() != ''">
+                        <label for="iteminput" data-bind="text: getItemInputLabel"></label>
+                        <input class="form-control" id="iteminput" data-bind="value: itemInputValue" />
+                    </div>
+                    <div class="form-group text-right">
+                        <button class="btn btn-default" data-bind="click: addItem">Add Item</button>
+                    </div>
                 </div>
             </div>
         </div>
