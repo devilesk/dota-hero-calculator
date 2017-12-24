@@ -187,7 +187,7 @@
   "description": "<h1>Passive: Combo Breaker</h1> When you take damage and your health falls below %health_threshold_pct%%, a strong dispel is applied and you gain a %buff_duration% second buff that causes all damage you deal and are dealt to be reduced to zero. Only triggers on player based damage. \\n\\n<h1>Passive: Status Resistance</h1> Reduces status effect durations by %status_resistance%%. ",
   "displayname": "Aeon Disk",
   "id": 256,
-  "itemcost": 3600,
+  "itemcost": 3350,
   "level": 0,
   "lore": "A powerful artifact long ago smuggled out of the Ivory Incubarium. Or so many believe.",
   "manacost": [],
@@ -1483,7 +1483,7 @@
     "name": "bonus_damage",
     "tooltip": "+$damage",
     "value": [
-     30
+     25
     ]
    },
    {
@@ -3773,13 +3773,13 @@
     "name": "attack_speed",
     "tooltip": "+$attack",
     "value": [
-     10
+     5
     ]
    },
    {
     "name": "attack_speed_aura",
     "value": [
-     15
+     20
     ]
    },
    {
@@ -3995,7 +3995,7 @@
    }
   ],
   "cooldown": [
-   15
+   18
   ],
   "description": "<h1>Active: Hurricane Thrust</h1> Pushes you and target enemy %enemy_length% units away from each other, and for %range_duration% seconds, allows you to make %max_attacks% attacks against the target without range restrictions and with +%bonus_attack_speed% attack speed.<br><br>Works like Force Staff when used on self or allies.<br><br>Allied Range: %tooltip_range%<br>Enemy Range: %cast_range_enemy%\\n<h1>Passive:  Dragon's Reach</h1> Increases attack range of ranged heroes by %base_attack_range%.",
   "displayname": "Hurricane Pike",
@@ -4580,14 +4580,14 @@
     "name": "bonus_attack_speed",
     "tooltip": "+$attack",
     "value": [
-     15
+     10
     ]
    },
    {
     "name": "bonus_movement_speed",
     "tooltip": "%+$move_speed",
     "value": [
-     10
+     8
     ]
    },
    {
@@ -4766,13 +4766,13 @@
    {
     "name": "berserk_bonus_movement_speed",
     "value": [
-     17
+     12
     ]
    },
    {
     "name": "berserk_armor_reduction",
     "value": [
-     7
+     8
     ]
    },
    {
@@ -4940,7 +4940,7 @@
    "DOTA_ABILITY_BEHAVIOR_CHANNELLED"
   ],
   "AbilityCastRange": 600,
-  "AbilityChannelTime": 3,
+  "AbilityChannelTime": 2.5,
   "AbilityUnitDamageType": "DAMAGE_TYPE_MAGICAL",
   "ItemAliases": [
    "mh;meteor",
@@ -5021,7 +5021,7 @@
    {
     "name": "max_duration",
     "value": [
-     3
+     2.5
     ]
    },
    {
@@ -5391,17 +5391,17 @@
    {
     "name": "warrior_mana_feedback",
     "value": [
-     20,
      30,
-     40
+     40,
+     50
     ]
    },
    {
     "name": "warrior_mana_break_tooltip",
     "value": [
-     20,
      30,
-     40
+     40,
+     50
     ]
    },
    {
@@ -5540,17 +5540,17 @@
    {
     "name": "warrior_mana_feedback",
     "value": [
-     20,
      30,
-     40
+     40,
+     50
     ]
    },
    {
     "name": "warrior_mana_break_tooltip",
     "value": [
-     20,
      30,
-     40
+     40,
+     50
     ]
    },
    {
@@ -5687,17 +5687,17 @@
    {
     "name": "warrior_mana_feedback",
     "value": [
-     20,
      30,
-     40
+     40,
+     50
     ]
    },
    {
     "name": "warrior_mana_break_tooltip",
     "value": [
-     20,
      30,
-     40
+     40,
+     50
     ]
    },
    {
@@ -5875,7 +5875,7 @@
    }
   ],
   "cooldown": [
-   14
+   13
   ],
   "description": "<h1>Active: Nullify</h1> Dispels the target and mutes them for %mute_duration% seconds. Anytime the muted target is attacked, it will be slowed by %slow_pct%%% for %slow_interval_duration% seconds.",
   "displayname": "Nullifier",
@@ -5884,7 +5884,7 @@
   "level": 0,
   "lore": "A dangerous weapon pilfered from an inverse dimension.",
   "manacost": [
-   100
+   75
   ],
   "name": "item_nullifier"
  },
@@ -6702,7 +6702,7 @@
   "description": null,
   "displayname": "Aeon Disk Recipe",
   "id": 255,
-  "itemcost": 1600,
+  "itemcost": 1350,
   "level": 0,
   "lore": null,
   "manacost": [],
@@ -8171,7 +8171,7 @@
   "description": null,
   "displayname": "Linken's Sphere Recipe",
   "id": 122,
-  "itemcost": 1000,
+  "itemcost": 1200,
   "level": 0,
   "lore": null,
   "manacost": [],
@@ -9699,7 +9699,7 @@
   "description": "<h1>Passive: Spellblock</h1>Blocks most targeted spells once every %block_cooldown% seconds.\\n<h1>Active: Transfer Spellblock</h1>Temporarily removes Spellblock from the item's owner and transfers it to an allied unit for %block_cooldown% seconds.<br><br>Range: %cast_range_tooltip%",
   "displayname": "Linken's Sphere",
   "id": 123,
-  "itemcost": 4850,
+  "itemcost": 5050,
   "level": 0,
   "lore": "This magical sphere once protected one of the most famous heroes in history.",
   "manacost": [],

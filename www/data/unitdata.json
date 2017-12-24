@@ -5541,9 +5541,9 @@
      "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
     ],
     "cooldown": [
-     8,
+     11,
+     9,
      7,
-     6,
      5
     ],
     "damage": [
@@ -5979,9 +5979,9 @@
      "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
     ],
     "cooldown": [
-     8,
+     11,
+     9,
      7,
-     6,
      5
     ],
     "damage": [
@@ -6417,9 +6417,9 @@
      "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
     ],
     "cooldown": [
-     8,
+     11,
+     9,
      7,
-     6,
      5
     ],
     "damage": [
@@ -6606,8 +6606,8 @@
   "statusmana": 0,
   "statusmanaregen": 0,
   "unitlevel": 2,
-  "visiondaytimerange": 1100,
-  "visionnighttimerange": 800
+  "visiondaytimerange": 700,
+  "visionnighttimerange": 700
  },
  "npc_dota_broodmother_spiderling": {
   "AttackAcquisitionRange": 500,
@@ -6793,8 +6793,8 @@
   "statusmana": 0,
   "statusmanaregen": 0,
   "unitlevel": 3,
-  "visiondaytimerange": 1100,
-  "visionnighttimerange": 800
+  "visiondaytimerange": 700,
+  "visionnighttimerange": 700
  },
  "npc_dota_broodmother_web": {
   "AttackAcquisitionRange": 0,
@@ -8371,7 +8371,7 @@
   "displayname": "Dire Eidolon",
   "level": 0,
   "magicalresistance": 50,
-  "movementspeed": 340,
+  "movementspeed": 370,
   "movementturnrate": 0.5,
   "name": "npc_dota_dire_eidolon",
   "projectilespeed": 900,
@@ -8449,7 +8449,7 @@
   "displayname": "Eidolon",
   "level": 0,
   "magicalresistance": 50,
-  "movementspeed": 300,
+  "movementspeed": 310,
   "movementturnrate": 0.5,
   "name": "npc_dota_eidolon",
   "projectilespeed": 900,
@@ -11574,7 +11574,7 @@
   "displayname": "Greater Eidolon",
   "level": 0,
   "magicalresistance": 50,
-  "movementspeed": 320,
+  "movementspeed": 340,
   "movementturnrate": 0.5,
   "name": "npc_dota_greater_eidolon",
   "projectilespeed": 900,
@@ -16220,16 +16220,16 @@
       "name": "burn_amount",
       "tooltip": "MANA BURN PER HIT:",
       "value": [
-       20,
        30,
-       40
+       40,
+       50
       ]
      },
      {
       "name": "burn_damage_conversion",
       "tooltip": "%CONVERTED TO DAMAGE:",
       "value": [
-       60
+       50
       ]
      }
     ],
@@ -16390,16 +16390,16 @@
       "name": "burn_amount",
       "tooltip": "MANA BURN PER HIT:",
       "value": [
-       20,
        30,
-       40
+       40,
+       50
       ]
      },
      {
       "name": "burn_damage_conversion",
       "tooltip": "%CONVERTED TO DAMAGE:",
       "value": [
-       60
+       50
       ]
      }
     ],
@@ -16560,16 +16560,16 @@
       "name": "burn_amount",
       "tooltip": "MANA BURN PER HIT:",
       "value": [
-       20,
        30,
-       40
+       40,
+       50
       ]
      },
      {
       "name": "burn_damage_conversion",
       "tooltip": "%CONVERTED TO DAMAGE:",
       "value": [
-       60
+       50
       ]
      }
     ],
@@ -17146,8 +17146,8 @@
   "attributeintelligencegain": 0,
   "attributeprimary": "DOTA_ATTRIBUTE_STRENGTH",
   "attributestrengthgain": 0,
-  "bountygoldmax": 78,
-  "bountygoldmin": 71,
+  "bountygoldmax": 71,
+  "bountygoldmin": 64,
   "bountyxp": 124,
   "displayname": "Ancient Thunderhide",
   "level": 0,
@@ -17423,8 +17423,8 @@
   "attributeintelligencegain": 0,
   "attributeprimary": "DOTA_ATTRIBUTE_STRENGTH",
   "attributestrengthgain": 0,
-  "bountygoldmax": 152,
-  "bountygoldmin": 120,
+  "bountygoldmax": 137,
+  "bountygoldmin": 108,
   "bountyxp": 124,
   "displayname": "Ancient Black Dragon",
   "level": 0,
@@ -17462,8 +17462,8 @@
   "attributeintelligencegain": 0,
   "attributeprimary": "DOTA_ATTRIBUTE_STRENGTH",
   "attributestrengthgain": 0,
-  "bountygoldmax": 36,
-  "bountygoldmin": 28,
+  "bountygoldmax": 33,
+  "bountygoldmin": 26,
   "bountyxp": 50,
   "displayname": "Ancient Black Drake",
   "level": 0,
@@ -17894,8 +17894,8 @@
   "attributeintelligencegain": 0,
   "attributeprimary": "DOTA_ATTRIBUTE_STRENGTH",
   "attributestrengthgain": 0,
-  "bountygoldmax": 136,
-  "bountygoldmin": 122,
+  "bountygoldmax": 123,
+  "bountygoldmin": 110,
   "bountyxp": 124,
   "displayname": "Ancient Primal Stalker",
   "level": 0,
@@ -18651,8 +18651,8 @@
   "attributeintelligencegain": 0,
   "attributeprimary": "DOTA_ATTRIBUTE_STRENGTH",
   "attributestrengthgain": 0,
-  "bountygoldmax": 97,
-  "bountygoldmin": 86,
+  "bountygoldmax": 88,
+  "bountygoldmin": 78,
   "bountyxp": 124,
   "displayname": "Ancient Granite Golem",
   "level": 0,
@@ -18845,8 +18845,8 @@
   "attributeintelligencegain": 0,
   "attributeprimary": "DOTA_ATTRIBUTE_STRENGTH",
   "attributestrengthgain": 0,
-  "bountygoldmax": 56,
-  "bountygoldmin": 42,
+  "bountygoldmax": 51,
+  "bountygoldmin": 38,
   "bountyxp": 95,
   "displayname": "Ancient Stalker",
   "level": 0,
@@ -19978,8 +19978,8 @@
   "attributeintelligencegain": 0,
   "attributeprimary": "DOTA_ATTRIBUTE_STRENGTH",
   "attributestrengthgain": 0,
-  "bountygoldmax": 66,
-  "bountygoldmin": 59,
+  "bountygoldmax": 60,
+  "bountygoldmin": 54,
   "bountyxp": 50,
   "displayname": "Ancient Prowler Acolyte",
   "level": 0,
@@ -20155,8 +20155,8 @@
   "attributeintelligencegain": 0,
   "attributeprimary": "DOTA_ATTRIBUTE_STRENGTH",
   "attributestrengthgain": 0,
-  "bountygoldmax": 78,
-  "bountygoldmin": 69,
+  "bountygoldmax": 71,
+  "bountygoldmin": 60,
   "bountyxp": 95,
   "displayname": "Ancient Prowler Shaman",
   "level": 0,
@@ -20194,8 +20194,8 @@
   "attributeintelligencegain": 0,
   "attributeprimary": "DOTA_ATTRIBUTE_STRENGTH",
   "attributestrengthgain": 0,
-  "bountygoldmax": 50,
-  "bountygoldmin": 43,
+  "bountygoldmax": 45,
+  "bountygoldmin": 39,
   "bountyxp": 95,
   "displayname": "Ancient Rock Golem",
   "level": 0,
@@ -20592,8 +20592,8 @@
   "attributeintelligencegain": 0,
   "attributeprimary": "DOTA_ATTRIBUTE_STRENGTH",
   "attributestrengthgain": 0,
-  "bountygoldmax": 56,
-  "bountygoldmin": 48,
+  "bountygoldmax": 51,
+  "bountygoldmin": 44,
   "bountyxp": 95,
   "displayname": "Ancient Rumblehide",
   "level": 0,

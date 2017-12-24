@@ -1460,7 +1460,7 @@
   "lore": "The only way to escape the onslaught of a Slithereen is to never oppose one in the first place."
  },
  "naga_siren_mirror_image": {
-  "description": "Creates three images of Naga Siren under her control.\\n\\nDISPEL TYPE: Basic Dispel",
+  "description": "Creates multiple images of Naga Siren under her control.\\n\\nDISPEL TYPE: Basic Dispel",
   "lore": "Slithice, while being strong in her own right, is notoriously hard to track down."
  },
  "naga_siren_rip_tide": {
@@ -1847,7 +1847,7 @@
   "lore": "Since his escape during the night of his betrayal, Riki has valued the use of a simple smoke screen to confuse his opponents."
  },
  "riki_tricks_of_the_trade": {
-  "description": "CHANNELED - Phases out of the world while striking every enemy from behind in a %range% AoE once per second.\\n\\nUpgradable by Aghanim's Scepter.",
+  "description": "CHANNELED - Riki phases out of the world while striking every enemy from behind in an area around him once per second.\\n\\nUpgradable by Aghanim's Scepter.",
   "lore": "The Stealth Assassin is not afraid to fight dirty, and specializes in attacking his opponents from behind."
  },
  "roshan_bash": {
@@ -2091,7 +2091,7 @@
   "lore": "The hidden Thirteenth is a slippery foe."
  },
  "sniper_assassinate": {
-  "description": "Sniper locks onto a target enemy unit and, after %total_cast_time_tooltip% seconds, fires a devastating shot that deals damage at long range, and mini-stuns the target.\\n\\nUpgradable by Aghanim's Scepter.",
+  "description": "Sniper locks onto a target enemy unit and, after a short aiming duration, fires a devastating shot that deals damage at long range and mini-stuns the target.\\n\\nUpgradable by Aghanim's Scepter.",
   "lore": "In order to fulfill the prophecy and return to his home town, Kardel must make another shot as perfect as the one on the day of his ancient test."
  },
  "sniper_headshot": {
@@ -2734,6 +2734,7 @@
  "special_bonus_unique_shadow_demon_3": {},
  "special_bonus_unique_shadow_demon_4": {},
  "special_bonus_unique_shadow_demon_5": {},
+ "special_bonus_unique_shadow_demon_6": {},
  "special_bonus_unique_shadow_shaman_1": {},
  "special_bonus_unique_shadow_shaman_2": {},
  "special_bonus_unique_shadow_shaman_3": {},
@@ -3351,7 +3352,7 @@
   "description": "Break the link to the tethered unit."
  },
  "witch_doctor_death_ward": {
-  "description": "CHANNELED - Summons a deadly ward with true strike to attack enemy heroes within 700 range. Lasts a maximum of 8 seconds.\\n\\nUpgradable by Aghanim's Scepter.",
+  "description": "CHANNELED - Summons a deadly ward to attack enemy heroes within 700 range. Lasts a maximum of 8 seconds.\\n\\nUpgradable by Aghanim's Scepter.",
   "lore": "Witch Doctor performs a ritualistic dance, one that haunts the dreams of those who live to recount it."
  },
  "witch_doctor_maledict": {
