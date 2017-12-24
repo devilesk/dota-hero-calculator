@@ -391,3 +391,24 @@ img {
 .ui-menu-item:hover {
     background-color: $color-202123-light;
 }
+
+.stat-settings .checkbox {
+    display: inline-block;
+    font-size: 12px;
+    margin: 0;
+    vertical-align: middle;
+    margin-left: 15px;
+    
+    & label {
+        line-height: 30px;
+        font-weight: 700;
+    }
+    
+    & + .checkbox {
+        margin-top: 0;
+    }
+}
+
+h3.stat-settings {
+    margin-top: 15px;
+}

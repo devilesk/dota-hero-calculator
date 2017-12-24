@@ -3,44 +3,51 @@
         <div class="hero-image form-group" data-bind="css: { illusion: isIllusion }">
             <img class="img-rounded" data-bind="attr:{src: '/media/images/heroes/' + selectedHero().heroName + '.png'}"/>
         </div>
+        <div class="stat-settings" data-bind="visible: $root.layout() == 0">
+            <div class="checkbox">
+                <label><input type="checkbox" data-bind="checked: showDiff"><span>Show <abbr title="The difference between two adjacent hero tabs shown next to each stat.">delta values</abbr>.</span></label>
+            </div>
+            <div class="checkbox">
+                <label><input type="checkbox" data-bind="checked: showUnitTab">Show unit tab</label>
+            </div>
+        </div>
     </div>
     <div class="col-md-9 col-sm-8">
-        <div class="row form-group">
-            <div class="col-md-6">
+        <div class="row">
+            <div class="col-md-6 form-group">
                 <label for="heroselect">Hero</label>
                 <select id="heroselect" class="form-control" data-bind="options: availableHeroes , optionsText: 'heroDisplayName', value: selectedHero"></select>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 form-group">
                 <label for="herolevel">Level</label>
                 <input id="herolevel" class="form-control" data-bind="spinner: selectedHeroLevel, spinnerOptions: { min: 1, max: 25 }">
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6 form-group">
                 <label for="enemyselect">Enemy</label>
                 <div class="input-group">
                     <select id="enemyselect" class="form-control" data-bind="css: enemy().playerColorCss, options: availableEnemies , optionsText: 'heroDisplayName', value: selectedEnemy, optionsAfterRender: setHeroOptionStyling"></select>
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default" data-bind="click: function() { $root.selectTab(selectedEnemy()); }">
-                            <span class="glyphicon glyphicon-transfer"></span>
+                            <span class="glyphicon glyphicon-duplicate"></span>
                         </button>
                     </span>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 form-group">
                 <label for="enemyselect">Compare to</label>
                 <div class="input-group">
                     <select id="enemyselect" class="form-control" data-bind="css: heroCompare().playerColorCss, options: availableCompare , optionsText: 'heroDisplayName', value: selectedCompare, optionsAfterRender: setHeroOptionStyling"></select>
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default" data-bind="click: function() { $root.selectTab(selectedCompare()); }">
-                            <span class="glyphicon glyphicon-transfer"></span>
+                            <span class="glyphicon glyphicon-duplicate"></span>
                         </button>
                     </span>
                 </div>
             </div>
-            <div class="col-md-12 checkbox" style="margin-bottom:0px;padding-left:34px;" data-bind="visible: $root.layout() == 0">
-                <label><input type="checkbox" style="float:none;margin-right:5px;" data-bind="checked: showDiff"><span style="font-size:12px">Show <abbr title="The difference between two adjacent hero tabs shown next to each stat.">delta values</abbr>. <span data-bind="visible: showDiff">Comparing level <span data-bind="text: selectedHeroLevel"></span> <span data-bind="text: heroData().displayname, css: playerColorCss"></span> to level <span data-bind="text: heroCompare().selectedHeroLevel"></span> <span data-bind="text: heroCompare().heroData().displayname, css: heroCompare().playerColorCss"></span>.</span></span></label>
-                <label style="margin-left:25px;font-size:12px;"><input type="checkbox" style="float:none;margin-right:5px;" data-bind="checked: showUnitTab">Show unit tab</label>
+            <div class="col-md-12" style="margin-top: 10px" data-bind="visible: $root.layout() == 0">
+                <span data-bind="visible: showDiff">Comparing level <span data-bind="text: selectedHeroLevel"></span> <span data-bind="text: heroData().displayname, css: playerColorCss"></span> to level <span data-bind="text: heroCompare().selectedHeroLevel"></span> <span data-bind="text: heroCompare().heroData().displayname, css: heroCompare().playerColorCss"></span>.</span>
             </div>
         </div>
     </div>
@@ -49,10 +56,12 @@
 <div class="row">
     <div class="col-md-4" data-bind="css: {'layout-column': $root.layout() == 0, 'col-md-4': $root.layout() == 0, 'col-md-12': $root.layout() == 1}">
         <div class="row">
-            <h3 class="col-md-12">Stats <a class="btn btn-default btn-xs" data-bind="toggle: showStatDetails, text: !showStatDetails() ? 'Show more' : 'Show less', attr: {title: !showStatDetails() ? 'Click to show base stats' : 'Click to hide base stats'}"></a>
-                <div style="margin-left:15px;display:inline;" data-bind="style: {'display': $root.layout() == 1 ? 'inline' : 'none'}">
-                    <label><input type="checkbox" style="float:none;margin-right:5px;" data-bind="checked: showDiff"><span style="font-size:12px">Show <abbr title="The difference between two adjacent hero tabs shown next to each stat.">delta values</abbr>. <span data-bind="visible: showDiff">Comparing level <span data-bind="text: selectedHeroLevel"></span> <span data-bind="text: heroData().displayname, css: playerColorCss"></span> to level <span data-bind="text: heroCompare().selectedHeroLevel"></span> <span data-bind="text: heroCompare().heroData().displayname, css: heroCompare().playerColorCss"></span>.</span></span></label>
-                    <label style="margin-left:25px;font-size:12px;"><input type="checkbox" style="float:none;margin-right:5px;" data-bind="checked: showUnitTab">Show unit tab</label>
+            <h3 class="col-md-12 stat-settings">Stats <a class="btn btn-default btn-xs" data-bind="toggle: showStatDetails, text: !showStatDetails() ? 'Show more' : 'Show less', attr: {title: !showStatDetails() ? 'Click to show base stats' : 'Click to hide base stats'}"></a>
+                <div class="checkbox" data-bind="visible: $root.layout() == 1">
+                    <label><input type="checkbox" data-bind="checked: showDiff"><span>Show <abbr title="The difference between two adjacent hero tabs shown next to each stat.">delta values</abbr>. <span data-bind="visible: showDiff">Comparing level <span data-bind="text: selectedHeroLevel"></span> <span data-bind="text: heroData().displayname, css: playerColorCss"></span> to level <span data-bind="text: heroCompare().selectedHeroLevel"></span> <span data-bind="text: heroCompare().heroData().displayname, css: heroCompare().playerColorCss"></span>.</span></span></label>
+                </div>
+                <div class="checkbox" data-bind="visible: $root.layout() == 1">
+                    <label><input type="checkbox" data-bind="checked: showUnitTab">Show unit tab</label>
                 </div>
             </h3>
 
