@@ -101,10 +101,6 @@ color: #1c94c4;
     background-color: $color-131415;
 }
 
-#shop-dialog.popped-out div {
-    background-color: #111;
-}
-
 .close, .ui-dialog-titlebar-close {
     float: right;
     font-size: 24px;
@@ -136,7 +132,7 @@ color: #1c94c4;
 .btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open .dropdown-toggle.btn-default, .toggled {
     color: $text-color;
     background-color: $color-202123;
-    border-color: #6C707B;
+    border-color: $btn-border-color-toggle;
 }
 
 .btn-default.disabled, .btn-default[disabled], fieldset[disabled] .btn-default, .btn-default.disabled:hover, .btn-default[disabled]:hover, fieldset[disabled] .btn-default:hover, .btn-default.disabled:focus, .btn-default[disabled]:focus, fieldset[disabled] .btn-default:focus, .btn-default.disabled:active, .btn-default[disabled]:active, fieldset[disabled] .btn-default:active, .btn-default.disabled.active, .btn-default[disabled].active, fieldset[disabled] .btn-default.active {
