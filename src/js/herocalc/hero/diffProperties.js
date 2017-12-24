@@ -35,7 +35,8 @@ var diffProperties = [
     'totalattackrange',
     'visionrangeday',
     'visionrangenight',
-    'lifesteal'
+    'lifesteal',
+    'startingArmor'
 ];
 
 module.exports = diffProperties;

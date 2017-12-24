@@ -12,7 +12,7 @@ function ViewModel(params) {
     self.tooltip = ko.pureComputed(function () {
         console.log('stat', self.stat);
         return '<table class="table"><tbody>' + self.hero[self.stat]().components.reduce(function (memo, component) {
-            return memo += '<tr><td>' + component.label + '</td><td class="text-right">' + parseFloat(component.value.toFixed(2)) + '</td></tr>';
+            return memo += '<tr><td>' + component.label + '</td><td class="text-right">' + self.getFormatter(component.formatter)(component.value) + '</td></tr>';
         }, '') + '</tbody></table>';
     }, this, { deferEvaluation: true });
 }

@@ -187,7 +187,7 @@ var HeroModel = function (heroData, itemData, h) {
         return nextLevelExp[self.selectedHeroLevel() - 1];
     });
     self.startingArmor = ko.pureComputed(function () {
-        return (self.heroData().attributebaseagility * .14 + self.heroData().armorphysical).toFixed(2);
+        return self.heroData().attributebaseagility * constants.armorPerAgi + self.heroData().armorphysical;
     });
     self.respawnTime = ko.pureComputed(function () {
         var level = self.selectedHeroLevel();
@@ -284,7 +284,7 @@ var HeroModel = function (heroData, itemData, h) {
             .concat(TalentController.getHealthRegen(self.selectedTalents()))
             .concat(healthRegenAura.sources)
         }
-        s.mult(1 + self.totalStr().total * constants.healthRegenPerStrength, 'Str Regen Amp %');
+        s.mult(1 + self.totalStr().total * constants.healthRegenPerStrength, 'Str Regen Amp', null, 'percent');
         console.log('healthregen', s);
         return s;
     });
@@ -312,7 +312,7 @@ var HeroModel = function (heroData, itemData, h) {
             s.concat(self.buffs.getManaRegenArcaneAura())
         }
         s.concat(self.enemy().ability().getManaRegenReduction())
-        s.mult(1 + self.totalInt().total * constants.manaRegenPerInt, 'Mana Regen Amp %');                
+        s.mult(1 + self.totalInt().total * constants.manaRegenPerInt, 'Mana Regen Amp', null, 'percent');                
         return s;
     });
     self.totalArmorPhysical = ko.pureComputed(function () {

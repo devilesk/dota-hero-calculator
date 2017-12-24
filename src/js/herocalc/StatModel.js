@@ -1,29 +1,29 @@
-var StatModel = function (value, label, id) {
+var StatModel = function (value, label, id, formatter) {
     this.components = [];
     this.total = 0;
-    this.add(value, label, id);
+    this.add(value, label, id, formatter);
 }
 
-StatModel.prototype.push = function (value, label, id) {
+StatModel.prototype.push = function (value, label, id, formatter) {
     this.components.push({
         value: value,
         label: label,
-        id: id
+        id: id,
+        formatter: formatter
     });
 }
 
-StatModel.prototype.add = function (value, label, id) {
+StatModel.prototype.add = function (value, label, id, formatter) {
     if (value) {
-        console.log('add', value, label, id);
-        this.push(value, label, id);
+        this.push(value, label, id, formatter);
         this.total += value;
     }
     return this;
 }
 
-StatModel.prototype.mult = function (value, label, id) {
+StatModel.prototype.mult = function (value, label, id, formatter) {
     if (value) {
-        this.push(value, label, id);
+        this.push(value, label, id, formatter);
         this.total *= value;
     }
     return this;
