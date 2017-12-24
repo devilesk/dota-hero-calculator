@@ -357,7 +357,7 @@ var HeroModel = function (heroData, itemData, h) {
     self.spellAmp = ko.pureComputed(function () {
         var s = new StatModel();
         self.totalInt().components.forEach(function (component) {
-            s.add(component.value * constants.spellDmgPerInt, component.label == 'Base' ? 'Base Int' : component.label);
+            s.add(component.value * constants.spellDmgPerInt, component.label == 'Base' ? 'Base Int' : component.label, null, 'percent');
         });
         s.concat(self.inventory.getSpellAmp())
         .concat(self.ability().getSpellAmp())
@@ -676,7 +676,7 @@ var HeroModel = function (heroData, itemData, h) {
             }, {value: 0, excludeList: []});
             total += lifestealAura.value;
         }
-        return total;
+        return total/100;
     });
     
     self.diffProperties = diffProperties;
