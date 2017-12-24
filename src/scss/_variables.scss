@@ -1,0 +1,22 @@
+$imgPath: "img/";
+$screen-xs-min: 480px;
+$screen-sm-min: 768px;
+$screen-md-min: 992px;
+$screen-lg-min: 1200px;
+$screen-xs-max: ($screen-sm-min - 1) !default;
+$screen-sm-max: ($screen-md-min - 1) !default;
+
+$color-131415: #131415;
+$color-1c1d1f: #1c1d1f;
+$color-202123: #202123;
+$color-202123-light: lighten($color-202123, 6.5%);
+
+$link-color: #5a81ca;
+$link-hover-color: lighten($link-color, 5%);
+
+$text-color: #b0b2b7;
+
+$illusion-color: #428bca;
+
+$color-red: #d9534f;
+$color-green: #5cb85c;

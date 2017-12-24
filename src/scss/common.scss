@@ -5,16 +5,16 @@
     font-size: 10pt;
 }
 .damage-details tbody td:nth-child(3), .damage-details-header-row-2 td:nth-child(3) {
-    border-right: 1px solid #202125;
+    border-right: 1px solid $color-202123;
 }
 .damage-details-header-row-2 td:first-child {
     text-indent: 34px;
 }
 .damage-details-header-row td:nth-child(2) {
-    border-right: 1px solid #202125;
+    border-right: 1px solid $color-202123;
 }
 .crit {
-    color: #d9534f;
+    color: $color-red;
 }
 .damage-details input[type='checkbox'] {
     float: left;
@@ -25,7 +25,7 @@
 }
 .tooltip-underline {
 	cursor: help;
-	border-bottom: 1px dotted #999;
+	border-bottom: 1px dotted $text-color;
 }
 .itemBuild-inventory img.itemBuild-img-sm {
 	width: 40px;
@@ -90,6 +90,7 @@ td {
     overflow: hidden;
     right: 0;
     line-height: 2.5em;
+    color: $text-color;
 }
 .ui-spinner-up {
 top: 0;
@@ -133,18 +134,18 @@ img {
     text-indent: 44px;
 }
 .diffPos {
-    color: #5cb85c;
+    color: $color-green;
 }
 
 .diffNeg {
-    color: #d9534f;
+    color: $color-red;
 }
 .modal-header {
-    border-bottom: 1px solid #303239;
+    border-bottom: 1px solid $color-202123-light;
 }
 
 .modal-footer {
-    border-top: 1px solid #303239;
+    border-top: 1px solid $color-202123-light;
 }
 .popped-out {
     box-shadow: 2px 2px 2px 2px black;
@@ -239,7 +240,7 @@ img {
 }
 .close:hover,
 .close:focus, .ui-dialog-titlebar-close:hover, .ui-dialog-titlebar-close:focus {
-    color: #979aa2;
+    color: lighten($text-color, 20%);
     text-decoration: none;
     cursor: pointer;
     opacity: 1;
@@ -267,7 +268,7 @@ img {
 }
 
 .progress-bar-danger {
-    background-color: #428bca;
+    background-color: $link-color;
 }
 
 .progress {
@@ -285,7 +286,7 @@ img {
     }
     
     &.illusion {
-        background-color: #428bca;
+        background-color: $illusion-color;
         
         img {
             opacity: 0.5;
@@ -348,7 +349,7 @@ img {
     display: inline-block;
     font-family: "Calibri";
     font-size: 15px;
-    border-bottom: 1px solid #303239;
+    border-bottom: 1px solid $color-202123-light;
     padding: 8px 3px 0;
     line-height: 25px;
 }
@@ -387,5 +388,5 @@ img {
 }
 
 .ui-menu-item:hover {
-    background-color: #303239;
+    background-color: $color-202123-light;
 }
