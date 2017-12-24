@@ -381,3 +381,11 @@ img {
         width: 100% !important;
     }
 }
+
+.ui-menu .ui-menu-item a.ui-state-active {
+    margin: 0;
+}
+
+.ui-menu-item:hover {
+    background-color: #303239;
+}
