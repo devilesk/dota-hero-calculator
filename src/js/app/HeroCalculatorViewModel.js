@@ -493,6 +493,15 @@ var HeroCalculatorViewModel = function (tooltipURL, reportEmail) {
         }
         return data;
     }
+    self.resetCopyTooltip = function (data, event) {
+        $(event.currentTarget).attr('data-original-title', "Copy to clipboard");
+    }
+    self.copySave = function (data, event) {
+        var input = document.getElementById('savelink').select();
+        document.execCommand('copy');
+        console.log('event', event);
+        $(event.currentTarget).attr('data-original-title', "Copied!").tooltip('show');
+    }
     self.save = function () {
         var data = self.getSaveData();
         var serialized = JSON.stringify(data);

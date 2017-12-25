@@ -416,3 +416,11 @@ h3.stat-settings {
 .banner > h2 {
     margin-top: 0;
 }
+
+.btn-option {
+    width: 100%;
+    
+    @media (min-width: $screen-sm-min) {
+        width: 150px;
+    }
+}
