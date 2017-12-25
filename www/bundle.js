@@ -12523,6 +12523,15 @@ var HeroCalculatorViewModel = function (tooltipURL, reportEmail) {
         }
         return data;
     }
+    self.resetCopyTooltip = function (data, event) {
+        $(event.currentTarget).attr('data-original-title', "Copy to clipboard");
+    }
+    self.copySave = function (data, event) {
+        var input = document.getElementById('savelink').select();
+        document.execCommand('copy');
+        console.log('event', event);
+        $(event.currentTarget).attr('data-original-title', "Copied!").tooltip('show');
+    }
     self.save = function () {
         var data = self.getSaveData();
         var serialized = JSON.stringify(data);
@@ -26489,7 +26498,7 @@ var App = function (appConfig) {
         }
     });
 
-    var lastUpdate = "2017-12-24 23:34:05 UTC";
+    var lastUpdate = "2017-12-25 14:17:08 UTC";
     $('#last-update').text(lastUpdate);
 
     var rollbar = require('./rollbar');
@@ -26720,7 +26729,7 @@ var rollbarConfig = {
         client: {
             javascript: {
                 source_map_enabled: true,
-                code_version: "2f116c26b4ce0437a19182f599b12758b178bdf4",
+                code_version: "b6531ed2fb7675048252aa18658ba9b89b832a7f",
                 // Optionally have Rollbar guess which frames the error was thrown from
                 // when the browser does not provide line and column numbers.
                 guess_uncaught_frames: true

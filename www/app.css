@@ -1725,6 +1725,12 @@ h3.stat-settings {
 .banner > h2 {
   margin-top: 0; }
 
+.btn-option {
+  width: 100%; }
+  @media (min-width: 768px) {
+    .btn-option {
+      width: 150px; } }
+
 .tab-content > .tab-pane,
 .pill-content > .pill-pane {
   margin-top: 10px; }
