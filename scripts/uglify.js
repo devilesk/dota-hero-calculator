@@ -9,10 +9,14 @@ var srcMap = root + 'bundle-' + git.short() + '.js.map';
 var dstMap = 'bundle-' + git.short() + '.min.js.map';
 var dstMapfile = root + dstMap;
 
-var result = UglifyJS.minify(src, {
-    inSourceMap: srcMap,
-    outSourceMap: dstMapfile,
-    sourceMapUrl: dstMap,
+var code = fs.readFileSync(src, "utf8");
+var mapCode = fs.readFileSync(srcMap, "utf8");
+var result = UglifyJS.minify(code, {
+    sourceMap: {
+        filename: dst,
+        content: mapCode,
+        url: dstMap
+    },
     compress: {drop_console: true}
 });
 
@@ -21,7 +25,7 @@ fs.writeFile(dst, result.code, function(err) {
         console.log(err);
     }
     else {
-        console.log("File was successfully saved.");
+        console.log("File was successfully saved.", dst);
     }
 });
 
@@ -30,6 +34,6 @@ fs.writeFile(dstMapfile, result.map, function(err) {
         console.log(err);
     }
     else {
-        console.log("File was successfully saved.");
+        console.log("File was successfully saved.", dstMapfile);
     }
 });
